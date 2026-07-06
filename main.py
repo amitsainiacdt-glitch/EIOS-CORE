@@ -1,0 +1,6 @@
+print("Welcome to EIOS-Core")
+print("Enterprise Investment Operating System")
+print("Version 0.0.1")
+print("Welcome to EIOS-Core")
+print("Enterprise Investment Operating System")
+print("Version 0.0.1")
