@@ -1,0 +1,11 @@
+def show():
+    print("=" * 60)
+    print("COROMANDEL INTERNATIONAL - MASTER DOSSIER")
+    print("=" * 60)
+    print("Business Quality : *****")
+    print("Management       : Excellent")
+    print("Moat             : High")
+    print("Current Status   : Core Holding")
+    print("Expected 10Y CAGR: 16-20%")
+    print("Valuation        : Attractive on corrections")
+    print("=" * 60)

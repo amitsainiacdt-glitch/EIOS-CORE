@@ -1,0 +1,164 @@
+{
+  
+ "company": {
+    "name": "Coromandel International",
+    "ticker": "ANUP",
+    "sector": "Industrial Engineering",
+    "status": "Tracked Company",
+    "last_updated": "2026-07-09"
+  },
+
+  "eios_status": {
+    "conviction_level": "Pending EIOS Validation",
+    "business_quality_vote": "Pending",
+    "investment_today_vote": "Pending",
+    "portfolio_fit_vote": "Pending",
+    "correction_classification": "Pending",
+    "evidence_confidence": "Pending"
+  },
+
+  "overview": {
+    "business_summary": "Pending research integration",
+    "investment_thesis": "Pending research integration",
+    "key_products": [],
+    "key_customers": [],
+    "geographic_exposure": [],
+    "growth_drivers": []
+  },
+
+  "business_quality": {
+    "status": "Pending EIOS Validation",
+    "business_model": "Pending",
+    "industry_structure": "Pending",
+    "growth_runway": "Pending",
+    "competitive_positioning": "Pending",
+    "cyclicality": "Pending",
+    "score": null
+  },
+
+  "management": {
+    "status": "Pending EIOS Validation",
+    "promoter_assessment": "Pending",
+    "capital_allocation": "Pending",
+    "governance": "Pending",
+    "management_credibility": "Pending",
+    "succession_risk": "Pending",
+    "score": null
+  },
+
+  "moat": {
+    "status": "Pending EIOS Validation",
+    "competitive_advantages": [],
+    "barriers_to_entry": [],
+    "pricing_power": "Pending",
+    "customer_stickiness": "Pending",
+    "moat_durability": "Pending",
+    "score": null
+  },
+
+ "financial_quality": {
+    "status": "Financial data structure created — evidence integration pending",
+
+    "historical_financials": {
+    "currency": "INR crore",
+    "basis": "Standalone audited financial statements",
+    "years": ["FY2021", "FY2022", "FY2023", "FY2024", "FY2025"],
+    "revenue": [279.13, 288.24, 411.44, 550.38, 708.27],
+    "ebitda": [72.56, 74.54, 94.36, 135.81, 167.39],
+    "pat": [53.76, 62.85, 51.70, 103.48, 116.85],
+    "operating_cash_flow": [null, null, null, 169.38, -7.67],
+    "free_cash_flow": [null, null, null, 126.47, -52.14],
+    "net_debt": [-23.61, -52.76, null, -2.00, 15.96]
+},
+
+    "growth_metrics": {
+        "revenue_cagr_3y": null,
+        "revenue_cagr_5y": null,
+        "pat_cagr_3y": null,
+        "pat_cagr_5y": null
+    },
+
+    "profitability": {
+        "ebitda_margin": null,
+        "pat_margin": null,
+        "roce": null,
+        "roe": null
+    },
+
+    "cash_quality": {
+        "cfo_to_pat": null,
+        "free_cash_flow_quality": "Pending",
+        "working_capital_assessment": "Pending"
+    },
+
+    "balance_sheet_quality": {
+        "debt_to_equity": null,
+        "net_debt_to_ebitda": null,
+        "interest_coverage": null,
+        "assessment": "Pending"
+    },
+
+    "eios_financial_verdict": {
+        "score": null,
+        "confidence": "Pending evidence validation",
+        "strengths": [],
+        "weaknesses": [],
+        "red_flags": [],
+        "verdict": "Pending"
+    }
+},
+  
+
+  "valuation": {
+    "status": "Pending EIOS Valuation Committee",
+    "current_price": null,
+    "fair_value": null,
+    "margin_of_safety": null,
+    "expected_cagr": null,
+    "bear_case": null,
+    "base_case": null,
+    "bull_case": null
+  },
+
+  "risks": {
+    "business_risks": [],
+    "management_risks": [],
+    "financial_risks": [],
+    "disruption_risks": [],
+    "thesis_killers": []
+  },
+
+  "evidence_register": {
+    "annual_reports": [],
+    "conference_calls": [],
+    "investor_presentations": [],
+    "exchange_filings": [],
+    "competitor_evidence": [],
+    "external_research": []
+  },
+
+  "contradiction_engine": {
+    "supporting_evidence": [],
+    "contradictory_evidence": [],
+    "unresolved_questions": []
+  },
+
+  "assumption_register": [],
+
+  "monitoring_dashboard": {
+    "key_metrics": [],
+    "red_flags": [],
+    "next_results_date": null,
+    "next_review_date": null
+  },
+
+  "quarterly_deltas": [],
+
+  "investment_committee": {
+    "business_quality_vote": "Pending",
+    "investment_today_vote": "Pending",
+    "portfolio_fit_vote": "Pending",
+    "regret_test": "Pending",
+    "final_cio_decision": "Pending full EIOS validation"
+  }
+}

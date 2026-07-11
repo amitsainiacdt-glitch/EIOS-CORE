@@ -1,0 +1,11 @@
+def show():
+    print("=" * 60)
+    print("KPIT TECHNOLOGIES - MASTER DOSSIER")
+    print("=" * 60)
+    print("Business Quality : *****")
+    print("Management       : Excellent")
+    print("Moat             : High")
+    print("Current Status   : Watchlist")
+    print("Expected 10Y CAGR: 18-20%")
+    print("Valuation        : Fair")
+    print("=" * 60)
