@@ -1,0 +1,1690 @@
+# EIOS Constitution
+
+Version: 0.1.0
+
+Status: Active
+
+Owner: Amit Saini
+
+Architecture: Everest Investment Operating System (EIOS)
+
+Last Updated: 2026-07-16
+## Purpose
+
+The EIOS Constitution is the supreme architectural document governing the Everest Investment Operating System (EIOS).
+
+It defines the vision, engineering principles, cognitive architecture, research methodology, intelligence framework, and software design standards that every module of EIOS must follow.
+
+Whenever there is a conflict between implementation and this Constitution, the Constitution takes precedence.
+
+All future architectural decisions shall remain consistent with this document.
+
+# EVEREST INVESTMENT OPERATING SYSTEM (EIOS)
+
+**Constitution**
+
+---
+
+## Version
+
+0.1.0
+
+---
+
+## Author
+
+Amit Saini
+
+---
+
+## Chief Architect
+
+OpenAI ChatGPT
+
+---
+
+# PART I
+
+# FOUNDATIONS
+
+---
+
+# Chapter 1
+
+## Vision
+
+The Everest Investment Operating System (EIOS) is an institutional-grade investment intelligence platform designed to discover, understand, evaluate, and continuously monitor exceptional businesses.
+
+EIOS is not a stock screener.
+
+EIOS is not a chatbot.
+
+EIOS is an Investment Intelligence Operating System that combines structured knowledge, evidence-based reasoning, financial analysis, and continuous learning to assist long-term investment decision-making.
+
+Its objective is to build an artificial investment analyst capable of thinking through businesses with transparency, discipline, and evidence.
+
+---
+
+## Mission
+
+To build the world's most trusted AI Investment Intelligence Platform capable of helping investors make better long-term capital allocation decisions.
+
+---
+
+## Core Philosophy
+
+Every investment decision must be supported by:
+
+- Evidence
+- Reasoning
+- Business Quality
+- Financial Quality
+- Valuation
+- Risk Analysis
+
+No investment recommendation should rely on opinion alone.
+
+Every conclusion must be explainable, traceable, and continuously updated as new evidence becomes available.
+
+---
+
+## Long-Term Goal
+
+Create an AI capable of:
+
+- Understanding businesses
+- Connecting knowledge
+- Reasoning about investments
+- Challenging its own assumptions
+- Learning from outcomes
+- Improving over time
+
+The long-term vision of EIOS is to become an institutional investment partner rather than a traditional software application.
+---
+
+# Chapter 2
+
+# Design Principles
+
+Every engineering decision in EIOS shall follow these principles.
+
+These principles are permanent unless explicitly revised through the EIOS Constitution.
+
+---
+
+## Principle 1
+
+### Architecture Before Coding
+
+No major feature shall be implemented before its architecture is documented.
+
+Architecture defines purpose.
+
+Code implements purpose.
+
+Architecture is the North Pole.
+
+Code follows architecture.
+
+---
+
+## Principle 2
+
+### Repository is the Single Source of Truth
+
+The verified repository represents the current state of EIOS.
+
+Conversations provide guidance.
+
+The repository contains reality.
+
+All implementation decisions shall be based on the verified repository.
+
+---
+
+## Principle 3
+
+### Running Software is Reality
+
+Every sprint must end with:
+
+- Successful build
+- Repository verification
+- Sprint review
+
+A feature that does not execute successfully is not considered complete.
+
+---
+
+## Principle 4
+
+### One Engine — One Responsibility
+
+Every engine performs one primary responsibility.
+
+Examples:
+
+Observation Engine → Observe
+
+Evidence Engine → Verify
+
+Knowledge Engine → Understand
+
+Investment Knowledge Graph → Connect
+
+Reasoning Engine → Infer
+
+Question Engine → Discover missing information
+
+Valuation Engine → Estimate intrinsic value
+
+Investment Committee → Make decisions
+
+Learning Engine → Improve over time
+
+Responsibilities must never overlap unnecessarily.
+
+---
+
+## Principle 5
+
+### Evidence Before Opinion
+
+No conclusion shall exist without supporting evidence.
+
+Evidence always precedes reasoning.
+
+Reasoning always precedes decisions.
+
+---
+
+## Principle 6
+
+### Explainable Intelligence
+
+Every conclusion produced by EIOS must explain:
+
+- Why the conclusion exists
+- Which evidence supports it
+- Which assumptions were made
+- What confidence exists
+- What evidence could invalidate it
+
+Black-box reasoning is prohibited.
+
+---
+
+## Principle 7
+
+### Continuous Learning
+
+EIOS must continuously improve.
+
+Every prediction should eventually be compared with actual outcomes.
+
+Successful reasoning increases confidence.
+
+Failed reasoning creates learning opportunities.
+
+---
+
+## Principle 8
+
+### Intellectual Humility
+
+EIOS must acknowledge uncertainty.
+
+Confidence shall never exceed available evidence.
+
+When evidence is insufficient, EIOS shall explicitly state that more research is required.
+
+---
+
+## Principle 9
+
+### Long-Term Thinking
+
+Short-term market movements are observations.
+
+Business quality determines long-term value.
+
+EIOS shall prioritize durable wealth creation over short-term speculation.
+
+---
+
+## Principle 10
+
+### Institutional Quality
+
+Every output generated by EIOS should be of institutional quality.
+
+Research must be:
+
+- Structured
+- Traceable
+- Evidence-based
+- Repeatable
+- Auditable
+- Continuously improvable
+
+---
+
+## Engineering Motto
+
+Think Deeply.
+
+Reason Clearly.
+
+Challenge Assumptions.
+
+Learn Continuously.
+
+Allocate Capital Rationally.
+---
+
+# Chapter 3
+
+# Cognitive Architecture
+
+EIOS is designed as an Artificial Investment Intelligence System.
+
+Its purpose is not merely to retrieve information but to observe, understand, reason, challenge assumptions, make decisions, and continuously learn.
+
+The cognitive architecture of EIOS is organized into five layers.
+
+---
+
+# Layer 1
+
+## Knowledge Acquisition Layer
+
+Purpose
+
+Acquire information from internal and external sources.
+
+Examples include:
+
+- Annual Reports
+- Conference Calls
+- Investor Presentations
+- Exchange Filings
+- Regulatory Announcements
+- Government Notifications
+- RBI Publications
+- SEBI Circulars
+- Industry Reports
+- News
+- Commodity Prices
+- Macroeconomic Data
+
+Responsibilities
+
+- Collect
+- Normalize
+- Classify
+- Timestamp
+- Preserve Source Information
+
+This layer never performs reasoning.
+
+---
+
+# Layer 2
+
+## Memory Layer
+
+Purpose
+
+Convert observations into structured knowledge.
+
+Components
+
+Observation Engine
+
+↓
+
+Evidence Engine
+
+↓
+
+Knowledge Engine
+
+↓
+
+Investment Knowledge Graph
+
+Responsibilities
+
+Observe reality.
+
+Verify evidence.
+
+Create structured knowledge.
+
+Connect knowledge.
+
+Store institutional memory.
+
+Memory never makes investment decisions.
+
+---
+
+# Layer 3
+
+## Thinking Layer
+
+Purpose
+
+Transform knowledge into investment intelligence.
+
+Components
+
+Reasoning Engine
+
+↓
+
+Question Engine
+
+↓
+
+Hypothesis Engine
+
+↓
+
+Scenario Engine
+
+↓
+
+Contradiction Engine
+
+↓
+
+Confidence Engine
+
+Responsibilities
+
+Generate reasoning.
+
+Identify missing information.
+
+Challenge assumptions.
+
+Generate hypotheses.
+
+Estimate confidence.
+
+Simulate multiple future outcomes.
+
+Thinking produces investment ideas.
+
+Thinking does not allocate capital.
+
+---
+
+# Layer 4
+
+## Decision Layer
+
+Purpose
+
+Transform intelligence into investment decisions.
+
+Components
+
+Valuation Engine
+
+↓
+
+Investment Committee
+
+↓
+
+Master Dossier
+
+↓
+
+Portfolio Engine
+
+Responsibilities
+
+Estimate intrinsic value.
+
+Compare opportunities.
+
+Allocate capital.
+
+Monitor investments.
+
+Review decisions.
+
+Every decision must remain explainable.
+
+---
+
+# Layer 5
+
+## Learning Layer
+
+Purpose
+
+Improve EIOS continuously.
+
+Components
+
+Outcome Engine
+
+↓
+
+Learning Engine
+
+↓
+
+Knowledge Update Engine
+
+Responsibilities
+
+Compare predictions with reality.
+
+Measure success.
+
+Identify mistakes.
+
+Update confidence.
+
+Improve future reasoning.
+
+Learning never stops.
+
+---
+
+# Cognitive Flow
+
+External World
+
+↓
+
+Knowledge Acquisition
+
+↓
+
+Observation
+
+↓
+
+Evidence
+
+↓
+
+Knowledge
+
+↓
+
+Investment Knowledge Graph
+
+↓
+
+Reasoning
+
+↓
+
+Question Generation
+
+↓
+
+Hypothesis
+
+↓
+
+Scenario Analysis
+
+↓
+
+Decision
+
+↓
+
+Learning
+
+↓
+
+Updated Knowledge
+
+The cognitive loop repeats continuously.
+
+Every cycle should improve EIOS.
+---
+
+# Chapter 4
+
+# Research Philosophy
+
+Investment research is the primary function of EIOS.
+
+The objective of research is not to confirm an opinion.
+
+The objective is to discover the truth.
+
+Every company must earn conviction through evidence.
+
+---
+
+# Principle 1
+
+## Business Before Valuation
+
+A great valuation cannot compensate for a poor business.
+
+EIOS shall first determine:
+
+- Business Quality
+- Competitive Position
+- Management Quality
+- Financial Quality
+
+Only after these have been evaluated shall valuation begin.
+
+---
+
+# Principle 2
+
+## Evidence-Based Research
+
+Every research conclusion must be supported by evidence.
+
+Acceptable evidence includes:
+
+- Annual Reports
+- Conference Calls
+- Investor Presentations
+- Financial Statements
+- Regulatory Filings
+- Industry Reports
+- Verified News
+- Historical Performance
+
+Unsupported conclusions are prohibited.
+
+---
+
+# Principle 3
+
+## Multi-Level Research
+
+Research shall progress through increasing levels of conviction.
+
+### Level 1
+
+Opportunity Screening
+
+Purpose:
+
+Identify businesses worthy of deeper research.
+
+Output:
+
+Watchlist.
+
+---
+
+### Level 2
+
+Master Dossier
+
+Purpose:
+
+Develop institutional understanding of the business.
+
+Output:
+
+Complete investment thesis.
+
+---
+
+### Level 3
+
+Quarterly Delta Update
+
+Purpose:
+
+Monitor what has changed.
+
+Output:
+
+Updated conviction.
+
+Only changes are analysed.
+
+Historical work is preserved.
+
+---
+
+# Principle 4
+
+## Continuous Research
+
+Research never ends.
+
+Every company shall evolve as new evidence becomes available.
+
+Master Dossiers are living documents.
+
+---
+
+# Principle 5
+
+## Disconfirming Evidence
+
+Every investment thesis must contain evidence against itself.
+
+Questions include:
+
+- Why might we be wrong?
+
+- Which assumption is weakest?
+
+- What evidence would invalidate the thesis?
+
+- Which competitor could outperform?
+
+The objective is intellectual honesty.
+
+---
+
+# Principle 6
+
+## Investment Committee
+
+Every investment recommendation shall be reviewed through multiple perspectives.
+
+Business Quality
+
+Financial Quality
+
+Management
+
+Valuation
+
+Risk
+
+Portfolio Fit
+
+No single metric determines investment quality.
+
+---
+
+# Principle 7
+
+## Long-Term Orientation
+
+EIOS evaluates businesses over years rather than days.
+
+Temporary market volatility should not dominate research.
+
+Business quality remains the primary driver of long-term wealth creation.
+
+---
+
+# Principle 8
+
+## Learning Research System
+
+Every completed investment becomes additional knowledge.
+
+Correct decisions increase confidence.
+
+Incorrect decisions improve future research.
+
+Every mistake is preserved as institutional learning.
+---
+
+# Chapter 5
+
+# Investment Knowledge Graph (IKG)
+
+## Purpose
+
+The Investment Knowledge Graph (IKG) is the permanent memory of EIOS.
+
+Its purpose is to represent the investment world as a connected network of entities and relationships rather than isolated pieces of information.
+
+Knowledge stored inside the IKG should be reusable across every future research project.
+
+---
+
+## Philosophy
+
+Information has little value when isolated.
+
+Knowledge becomes intelligence only when relationships are understood.
+
+The IKG enables EIOS to connect facts, discover patterns, and support reasoning.
+
+---
+
+## Core Principle
+
+Everything in EIOS is represented as a Node or a Relationship.
+
+Nodes represent entities.
+
+Relationships connect entities.
+
+---
+
+## Node Types
+
+Examples include:
+
+- Company
+- Sector
+- Industry
+- Product
+- Customer
+- Supplier
+- Commodity
+- Technology
+- Government
+- Regulation
+- Country
+- Currency
+- Interest Rate
+- Financial Metric
+- Management Team
+- Competitor
+- Macro Event
+
+New node types may be added as EIOS evolves.
+
+---
+
+## Relationship Types
+
+Examples include:
+
+AFFECTS
+
+SUPPLIES
+
+CUSTOMER_OF
+
+COMPETES_WITH
+
+OWNS
+
+REGULATES
+
+USES
+
+PRODUCES
+
+DEPENDS_ON
+
+SUPPORTED_BY
+
+CONTRADICTED_BY
+
+Each relationship shall include a confidence score and supporting evidence whenever possible.
+
+---
+
+## Knowledge Structure
+
+Observation
+
+↓
+
+Evidence
+
+↓
+
+Knowledge
+
+↓
+
+Investment Knowledge Graph
+
+↓
+
+Reasoning
+
+Knowledge is progressively enriched as it moves through the system.
+
+---
+
+## Design Principles
+
+The Investment Knowledge Graph shall:
+
+- Preserve traceability.
+- Avoid duplicate knowledge.
+- Maintain source attribution.
+- Support explainable reasoning.
+- Allow confidence updates.
+- Grow continuously.
+- Remain technology independent.
+
+---
+
+## Future Evolution
+
+Future versions of the IKG may include:
+
+- Probabilistic relationships
+- Time-dependent relationships
+- Industry ontologies
+- Company ecosystems
+- Supply-chain graphs
+- Ownership graphs
+- Capital allocation graphs
+- Learning-based relationship discovery
+
+The IKG is expected to become the central knowledge repository of EIOS.
+---
+
+# Chapter 6
+
+# Reasoning Engine
+
+## Purpose
+
+The Reasoning Engine transforms connected knowledge into investment intelligence.
+
+It does not collect information.
+
+It does not verify evidence.
+
+Its responsibility is to infer logical conclusions from the Investment Knowledge Graph.
+
+---
+
+## Philosophy
+
+Knowledge answers:
+
+"What do we know?"
+
+Reasoning answers:
+
+"So what does it mean?"
+
+Every reasoning chain must be explainable.
+
+---
+
+## Responsibilities
+
+The Reasoning Engine shall:
+
+- Traverse the Investment Knowledge Graph.
+- Identify first-order effects.
+- Identify second-order effects.
+- Generate logical inference chains.
+- Estimate confidence.
+- Record assumptions.
+- Pass reasoning to downstream engines.
+
+---
+
+## Inputs
+
+The Reasoning Engine receives:
+
+- Knowledge
+- Relationships
+- Evidence
+- Confidence Scores
+- Historical Context
+
+---
+
+## Outputs
+
+The Reasoning Engine produces:
+
+- Reasoning Chains
+- Supporting Evidence
+- Assumptions
+- Confidence Levels
+- Suggested Research Questions
+
+---
+
+## Example
+
+Observation
+
+RBI reduces Repo Rate.
+
+↓
+
+Knowledge
+
+Interest rates decline.
+
+↓
+
+Relationship
+
+Lower rates affect borrowing costs.
+
+↓
+
+Reasoning
+
+Lower borrowing costs may increase:
+
+- Housing demand
+- Vehicle financing
+- Corporate borrowing
+
+↓
+
+Investment Implication
+
+Research industries likely to benefit from improved credit availability.
+
+---
+
+## Explainability
+
+Every reasoning chain must answer:
+
+Why?
+
+Which evidence supports this conclusion?
+
+Which relationships were traversed?
+
+Which assumptions were made?
+
+How confident is the conclusion?
+
+---
+
+## Constraints
+
+The Reasoning Engine shall never:
+
+- Invent facts.
+- Ignore contradictory evidence.
+- Hide assumptions.
+- Produce conclusions without evidence.
+
+---
+
+## Future Evolution
+
+Future versions may include:
+
+- Multi-step reasoning
+- Probabilistic inference
+- Bayesian reasoning
+- Scenario reasoning
+- Counterfactual reasoning
+- Causal reasoning
+- Machine-learned reasoning patterns
+
+The Reasoning Engine shall remain transparent and auditable.
+---
+
+# Chapter 7
+
+# Question Engine
+
+## Purpose
+
+The Question Engine is responsible for identifying missing knowledge.
+
+Its objective is to continuously improve research quality by generating intelligent questions.
+
+Rather than answering user questions, the Question Engine asks the questions that an exceptional investment analyst would naturally ask.
+
+---
+
+## Philosophy
+
+Good investors are distinguished not only by their answers but by the quality of their questions.
+
+Every investment thesis contains uncertainty.
+
+The Question Engine exists to reduce uncertainty.
+
+---
+
+## Responsibilities
+
+The Question Engine shall:
+
+- Detect missing evidence.
+- Challenge assumptions.
+- Identify research gaps.
+- Generate comparison questions.
+- Generate valuation questions.
+- Generate risk questions.
+- Prioritize future research.
+
+---
+
+## Inputs
+
+The Question Engine receives:
+
+- Knowledge
+- Investment Knowledge Graph
+- Reasoning Chains
+- Evidence
+- Confidence Scores
+- Master Dossier
+
+---
+
+## Outputs
+
+The Question Engine produces:
+
+- Research Questions
+- Missing Information
+- Required Evidence
+- Suggested Investigations
+- Priority Scores
+
+---
+
+## Categories of Questions
+
+### Business Questions
+
+- How does the company make money?
+- What is the competitive advantage?
+- Can margins expand?
+
+---
+
+### Management Questions
+
+- Has management allocated capital effectively?
+- Is governance improving?
+- Are incentives aligned?
+
+---
+
+### Financial Questions
+
+- Is ROCE sustainable?
+- Is ROIIC increasing?
+- Is Free Cash Flow improving?
+
+---
+
+### Valuation Questions
+
+- What assumptions justify the current valuation?
+- What Margin of Safety exists?
+- Is the market overly optimistic?
+
+---
+
+### Risk Questions
+
+- What could invalidate the thesis?
+- Which assumption is weakest?
+- What external risks exist?
+
+---
+
+### Competitive Questions
+
+- Which competitor is improving faster?
+- Is market share changing?
+- Are new entrants emerging?
+
+---
+
+## Example
+
+Observation
+
+Government announces ₹5 lakh crore power capex.
+
+↓
+
+Reasoning
+
+Transformer demand may increase.
+
+↓
+
+Question Engine
+
+Which companies have spare manufacturing capacity?
+
+Which companies can execute projects faster?
+
+Which companies currently trade below intrinsic value?
+
+Has the market already priced in this opportunity?
+
+---
+
+## Design Principles
+
+Questions shall:
+
+- Be evidence driven.
+- Be specific.
+- Reduce uncertainty.
+- Improve decision quality.
+- Never assume conclusions.
+
+---
+
+## Future Evolution
+
+Future versions may include:
+
+- Automatic research planning.
+- Dynamic question prioritization.
+- AI-generated interview questions.
+- Conference call preparation.
+- Portfolio review questions.
+- Self-questioning loops.
+
+The Question Engine shall continuously improve the quality of investment research.
+---
+
+# Chapter 8
+
+# Hypothesis Engine
+
+## Purpose
+
+The Hypothesis Engine generates possible investment theses from available evidence, knowledge, reasoning, and unanswered questions.
+
+Its objective is to transform observations into testable investment ideas.
+
+The Hypothesis Engine never assumes that a hypothesis is true.
+
+Every hypothesis must earn conviction through evidence.
+
+---
+
+## Philosophy
+
+Observations describe reality.
+
+Reasoning explains reality.
+
+Hypotheses predict future possibilities.
+
+Every investment begins as a hypothesis.
+
+---
+
+## Responsibilities
+
+The Hypothesis Engine shall:
+
+- Generate investment hypotheses.
+- Identify possible business outcomes.
+- Estimate potential opportunities.
+- Identify assumptions.
+- Recommend validation steps.
+- Forward hypotheses to the Scenario Engine.
+
+---
+
+## Inputs
+
+The Hypothesis Engine receives:
+
+- Knowledge
+- Investment Knowledge Graph
+- Reasoning Chains
+- Research Questions
+- Financial Data
+- Macroeconomic Data
+- Company Information
+
+---
+
+## Outputs
+
+The Hypothesis Engine produces:
+
+- Investment Hypotheses
+- Supporting Evidence
+- Required Validation
+- Key Assumptions
+- Initial Confidence Score
+
+---
+
+## Example
+
+Observation
+
+Government announces ₹5 lakh crore transmission investment.
+
+↓
+
+Reasoning
+
+Transformer demand is likely to increase.
+
+↓
+
+Question
+
+Which manufacturers have available capacity?
+
+↓
+
+Hypothesis
+
+Shilchar Technologies may experience above-industry revenue growth over the next three years.
+
+---
+
+## Hypothesis Structure
+
+Every hypothesis shall contain:
+
+- Title
+- Description
+- Supporting Evidence
+- Assumptions
+- Confidence Score
+- Validation Requirements
+- Potential Risks
+- Expected Time Horizon
+
+---
+
+## Validation
+
+Every hypothesis must answer:
+
+- What evidence supports it?
+- What evidence contradicts it?
+- What assumptions are required?
+- Which future events will confirm or reject it?
+
+---
+
+## Design Principles
+
+Hypotheses shall:
+
+- Be evidence-based.
+- Be testable.
+- Be measurable.
+- Be transparent.
+- Remain open to revision.
+
+---
+
+## Future Evolution
+
+Future versions may include:
+
+- AI-generated investment themes
+- Multi-company hypotheses
+- Industry-level hypotheses
+- Cross-sector hypotheses
+- Global macro hypotheses
+- Automated hypothesis ranking
+
+The Hypothesis Engine shall continuously improve as EIOS gains experience.
+---
+
+# Chapter 9
+
+# Investment Committee
+
+## Purpose
+
+The Investment Committee is the final decision-making authority within EIOS.
+
+Its responsibility is to evaluate all available evidence, reasoning, hypotheses, valuation, and risks before capital allocation.
+
+The Investment Committee shall never rely upon a single metric.
+
+Investment decisions are made through structured evaluation.
+
+---
+
+## Philosophy
+
+Great investments are rarely the result of a single observation.
+
+Exceptional investment decisions emerge from disciplined analysis, multiple perspectives, and continuous challenge.
+
+The Investment Committee represents the collective intelligence of EIOS.
+
+---
+
+## Responsibilities
+
+The Investment Committee shall:
+
+- Evaluate business quality.
+- Evaluate management quality.
+- Evaluate financial quality.
+- Evaluate valuation.
+- Evaluate risks.
+- Evaluate portfolio fit.
+- Allocate conviction levels.
+- Produce final recommendations.
+
+---
+
+## Inputs
+
+The Investment Committee receives:
+
+- Master Dossier
+- Evidence
+- Knowledge
+- Investment Knowledge Graph
+- Reasoning Chains
+- Questions
+- Hypotheses
+- Scenario Analysis
+- Intrinsic Value
+- Risk Assessment
+
+---
+
+## Outputs
+
+The Investment Committee produces:
+
+- Investment Decision
+- Conviction Score
+- Position Size Recommendation
+- Risk Rating
+- Monitoring Plan
+- Reasons Supporting Decision
+- Reasons Against Decision
+
+---
+
+## Decision Categories
+
+Every company shall be classified as one of the following:
+
+STRONG BUY
+
+BUY
+
+WATCHLIST
+
+HOLD
+
+REDUCE
+
+SELL
+
+REJECT
+
+The classification must always include written justification.
+
+---
+
+## Committee Members
+
+The committee consists of specialised engines.
+
+Business Quality Analyst
+
+Financial Analyst
+
+Management Analyst
+
+Valuation Analyst
+
+Risk Analyst
+
+Portfolio Manager
+
+Chief Investment Officer (CIO)
+
+Devil's Advocate
+
+Each member contributes independently.
+
+---
+
+## Voting Process
+
+Every committee member submits:
+
+- Recommendation
+- Confidence
+- Supporting Evidence
+- Concerns
+
+The CIO reviews all recommendations before issuing the final decision.
+
+---
+
+## Decision Principles
+
+Every decision must answer:
+
+Why invest?
+
+Why not invest?
+
+What assumptions are being made?
+
+What evidence could change this decision?
+
+How will this investment be monitored?
+
+---
+
+## Position Sizing
+
+Conviction determines research depth.
+
+Valuation determines entry price.
+
+Risk determines position size.
+
+No single factor determines allocation.
+
+---
+
+## Future Evolution
+
+Future versions may include:
+
+- AI committee debate
+- Historical decision comparison
+- Behavioural bias detection
+- Portfolio optimisation
+- Dynamic capital allocation
+- Multiple CIO strategies
+
+The Investment Committee represents the highest level of decision-making within EIOS.
+---
+
+# Chapter 10
+
+# Learning Engine
+
+## Purpose
+
+The Learning Engine is responsible for continuously improving EIOS through experience.
+
+Every investment decision shall eventually be compared against actual outcomes.
+
+The Learning Engine transforms experience into institutional knowledge.
+
+---
+
+## Philosophy
+
+Experience without reflection does not create wisdom.
+
+Every prediction made by EIOS is an opportunity to learn.
+
+Every mistake is valuable.
+
+Every success must also be examined.
+
+Learning never ends.
+
+---
+
+## Responsibilities
+
+The Learning Engine shall:
+
+- Compare predictions with reality.
+- Measure prediction accuracy.
+- Evaluate reasoning quality.
+- Update confidence scores.
+- Identify recurring mistakes.
+- Improve future decision-making.
+- Preserve institutional memory.
+
+---
+
+## Inputs
+
+The Learning Engine receives:
+
+- Investment Decisions
+- Master Dossiers
+- Reasoning Chains
+- Hypotheses
+- Valuation Models
+- Portfolio Performance
+- Market Outcomes
+- New Evidence
+
+---
+
+## Outputs
+
+The Learning Engine produces:
+
+- Updated Confidence Scores
+- Lessons Learned
+- Improved Reasoning Rules
+- Updated Knowledge
+- Historical Performance Reports
+- Research Feedback
+
+---
+
+## Learning Cycle
+
+Observation
+
+↓
+
+Decision
+
+↓
+
+Outcome
+
+↓
+
+Comparison
+
+↓
+
+Learning
+
+↓
+
+Knowledge Update
+
+↓
+
+Better Future Decisions
+
+---
+
+## Performance Evaluation
+
+Every investment shall eventually answer:
+
+Was the thesis correct?
+
+Was valuation accurate?
+
+Was timing appropriate?
+
+Were assumptions correct?
+
+Which evidence proved most valuable?
+
+Which reasoning failed?
+
+What should EIOS do differently next time?
+
+---
+
+## Confidence Updates
+
+Confidence shall never remain static.
+
+Confidence increases when:
+
+- Predictions are validated.
+- Evidence proves reliable.
+- Reasoning repeatedly succeeds.
+
+Confidence decreases when:
+
+- Predictions fail.
+- Evidence proves unreliable.
+- Assumptions repeatedly break.
+
+---
+
+## Institutional Memory
+
+Every completed investment becomes permanent institutional knowledge.
+
+Past successes and failures shall remain available for future reasoning.
+
+EIOS shall never forget previous lessons.
+
+---
+
+## Design Principles
+
+Learning shall be:
+
+Evidence Based
+
+Transparent
+
+Continuous
+
+Explainable
+
+Measurable
+
+Repeatable
+
+---
+
+## Future Evolution
+
+Future versions may include:
+
+- Reinforcement Learning
+- Bayesian Learning
+- Behavioural Bias Detection
+- Portfolio Self-Improvement
+- Automatic Strategy Evolution
+- AI Performance Benchmarking
+
+The Learning Engine ensures that EIOS becomes more intelligent with every completed investment.

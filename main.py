@@ -1,34 +1,17 @@
-from companies import anup
-from companies import kpit
-from companies import coromandel
-import research_engine
+"""
+Module: EIOS Entry Point
 
-print("=" * 60)
-print("EIOS - Everest Investment Operating System")
-print("=" * 60)
+Purpose:
+Starts the Everest Investment Operating System.
+"""
 
-print("1. ANUP Engineering")
-print("2. KPIT Technologies")
-print("3. Coromandel International")
-print("4. Research Engine")
-print("5. Exit")
+from core.application import EIOSApplication
 
-choice = input("\nSelect Option: ")
 
-if choice == "1":
-    anup.show()
+def main():
+    app = EIOSApplication()
+    app.run()
 
-elif choice == "2":
-    kpit.show()
 
-elif choice == "3":
-    coromandel.show()
-
-elif choice == "4":
-    research_engine.start()
-
-elif choice == "5":
-    print("Goodbye Amit!")
-
-else:
-    print("Invalid Selection")
+if __name__ == "__main__":
+    main()

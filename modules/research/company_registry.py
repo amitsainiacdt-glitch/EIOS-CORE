@@ -1,16 +1,24 @@
-def open_company_registry():
-    print("\n" + "=" * 50)
-    print("          COMPANY REGISTRY")
-    print("=" * 50)
+from dataclasses import dataclass
 
-    companies = [
-        "ANUP Engineering",
-        "KPIT Technologies",
-        "Coromandel International",
-        "Shakti Pumps"
-    ]
 
-    for i, company in enumerate(companies, start=1):
-        print(f"{i}. {company}")
+@dataclass
+class Company:
+    name: str
+    ticker: str
+    sector: str
+    industry: str
 
-    print("=" * 50)
+
+class CompanyRegistry:
+
+    def __init__(self):
+        self.companies = []
+
+    def add_company(self, company):
+        self.companies.append(company)
+
+    def list_companies(self):
+        return self.companies
+
+    def count(self):
+        return len(self.companies)
