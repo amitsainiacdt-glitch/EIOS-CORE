@@ -1,40 +1,46 @@
+from modules.investment_committee.committee_vote_result import (
+    CommitteeVoteResult,
+)
+
+
 class ConfidenceEngine:
+    """
+    Calculates overall confidence in the committee's
+    recommendation based on voting consensus and
+    average member confidence.
+    """
 
     def calculate(
         self,
-        committee_vote,
-        recommendation
-    ):
+        vote_result: CommitteeVoteResult,
+        recommendation: dict,
+    ) -> dict:
 
-        score = 50
+        agreement = max(
+            vote_result.pass_count,
+            vote_result.watch_count,
+            vote_result.reject_count,
+        ) / vote_result.total_members
 
-        overall_vote = committee_vote.get(
-            "Overall Vote",
-            "Watch"
+        consensus_bonus = agreement * 10
+
+        confidence_score = min(
+            100,
+            round(
+                vote_result.average_confidence +
+                consensus_bonus
+            ),
         )
 
-        if overall_vote == "Strong Buy":
-            score = 95
-
-        elif overall_vote == "Buy":
-            score = 85
-
-        elif overall_vote == "Hold":
-            score = 70
-
-        elif overall_vote == "Reduce":
-            score = 50
-
-        elif overall_vote == "Reject":
-            score = 30
-
-        else:
-            score = 60
-
         return {
-            "Confidence Score": score,
-            "Confidence Level": self._level(score),
-            "Confidence": 40
+            "Confidence Score": confidence_score,
+            "Confidence Level": self._level(confidence_score),
+            "Committee Agreement": round(
+                agreement * 100,
+                2,
+            ),
+            "Average Confidence":
+                vote_result.average_confidence,
         }
 
     def _level(self, score):

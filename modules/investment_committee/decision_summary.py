@@ -1,28 +1,45 @@
+from modules.investment_committee.committee_vote_result import (
+    CommitteeVoteResult,
+)
+
+
 class DecisionSummary:
+    """
+    Builds the final Investment Committee decision summary.
+    """
 
     def build(
         self,
-        committee_vote,
-        recommendation,
-        confidence,
-        portfolio_fit
-    ):
+        vote_result: CommitteeVoteResult,
+        recommendation: dict,
+        confidence: dict,
+        portfolio_vote: dict,
+    ) -> dict:
 
         return {
-            "Committee Vote":
-                committee_vote,
+
+            # -----------------------------
+            # Committee Decision
+            # -----------------------------
+
+            "Overall Vote":
+                vote_result.overall_vote,
 
             "Recommendation":
-                recommendation,
-
-            "Confidence":
-                confidence,
-
-            "Portfolio Fit":
-                portfolio_fit,
-
-            "Decision":
                 recommendation["Recommendation"],
+
+            "Recommendation Reason":
+                recommendation["Reason"],
+
+            # -----------------------------
+            # Scores
+            # -----------------------------
+
+            "Average Score":
+                vote_result.average_score,
+
+            "Average Confidence":
+                vote_result.average_confidence,
 
             "Confidence Score":
                 confidence["Confidence Score"],
@@ -30,9 +47,36 @@ class DecisionSummary:
             "Confidence Level":
                 confidence["Confidence Level"],
 
-            "Position Size":
-                portfolio_fit["Position Size"],
+            "Committee Agreement":
+                confidence["Committee Agreement"],
 
-            "Portfolio Priority":
-                portfolio_fit["Portfolio Priority"]
+            # -----------------------------
+            # Voting Statistics
+            # -----------------------------
+
+            "Pass Votes":
+                vote_result.pass_count,
+
+            "Watch Votes":
+                vote_result.watch_count,
+
+            "Reject Votes":
+                vote_result.reject_count,
+
+            "Member Votes":
+                vote_result.member_votes,
+
+            "Member Scores":
+                vote_result.member_scores,
+
+            "Member Confidences":
+                vote_result.member_confidences,
+
+            # -----------------------------
+            # Portfolio
+            # -----------------------------
+
+            "Portfolio Fit":
+                portfolio_vote,
+
         }

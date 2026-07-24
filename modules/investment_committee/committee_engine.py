@@ -1,104 +1,91 @@
 from modules.investment_committee.business_member import BusinessMember
+from modules.investment_committee.financial_member import FinancialMember
+from modules.investment_committee.management_member import ManagementMember
+from modules.investment_committee.risk_member import RiskMember
+from modules.investment_committee.competitive_member import CompetitiveMember
+from modules.investment_committee.valuation_member import ValuationMember
+from modules.investment_committee.thesis_member import ThesisMember
+from modules.investment_committee.portfolio_member import PortfolioMember
+
 from modules.investment_committee.committee_vote import CommitteeVote
 from modules.investment_committee.recommendation_engine import RecommendationEngine
 from modules.investment_committee.confidence_engine import ConfidenceEngine
-from modules.investment_committee.portfolio_member import PortfolioMember
 from modules.investment_committee.decision_summary import DecisionSummary
 
 
 class CommitteeEngine:
+    """
+    Orchestrates the complete Investment Committee.
+    """
 
     def __init__(self, research):
 
         self.research = research
 
-        # Committee Members
-        self.business_member = BusinessMember()
+        self.members = [
 
-        # Committee Engines
-        self.committee_vote = CommitteeVote()
+            BusinessMember(),
+            FinancialMember(),
+            ManagementMember(),
+            RiskMember(),
+            CompetitiveMember(),
+            ValuationMember(),
+            ThesisMember(),
+
+        ]
+
+        self.portfolio_member = PortfolioMember()
+
+        self.vote_engine = CommitteeVote()
         self.recommendation_engine = RecommendationEngine()
         self.confidence_engine = ConfidenceEngine()
-        self.portfolio_member = PortfolioMember()
-        self.decision_summary = DecisionSummary()
+        self.summary_engine = DecisionSummary()
 
     def analyze(self):
 
-        print("\n=====================================")
-        print("Starting Investment Committee Analysis")
-        print("=====================================")
+        print("\n===================================")
+        print("Investment Committee")
+        print("===================================")
 
-        # -------------------------------------
-        # Business Committee Vote
-        # -------------------------------------
+        responses = []
 
-        business_vote = self.business_member.evaluate(self.research)
+        for member in self.members:
 
-        print("\nBusiness Committee")
-        print("---------------------------")
-        print(f"Vote       : {business_vote['Vote']}")
-        print(f"Score      : {business_vote['Score']}")
-        print(f"Confidence : {business_vote['Confidence']}")
-        print(f"Reason     : {business_vote['Reason']}")
+            response = member.evaluate(self.research)
 
-        # -------------------------------------
-        # Build Committee Data
-        # -------------------------------------
+            responses.append(response)
 
-        committee_data = {
-            "Business": business_vote
-        }
+            print(
+                f"{response.member:20}"
+                f"{response.vote:8}"
+                f"{response.score:5}"
+                f"{response.confidence:5}"
+            )
 
-        # -------------------------------------
-        # Committee Vote
-        # -------------------------------------
-
-        vote = self.committee_vote.vote(committee_data)
-
-        # -------------------------------------
-        # Recommendation
-        # -------------------------------------
+        vote_result = self.vote_engine.vote(responses)
 
         recommendation = self.recommendation_engine.recommend(
-            vote
+            vote_result
         )
-
-        # -------------------------------------
-        # Confidence
-        # -------------------------------------
 
         confidence = self.confidence_engine.calculate(
-            vote,
-            recommendation
+            vote_result,
+            recommendation,
         )
-
-        # -------------------------------------
-        # Portfolio Fit
-        # -------------------------------------
 
         portfolio_vote = self.portfolio_member.evaluate(
-    self.research
-)
-
-        # -------------------------------------
-        # Decision Summary
-        # -------------------------------------
-
-        summary = self.decision_summary.build(
-            vote,
-            recommendation,
-            confidence,
-            portfolio_fit
+            self.research
         )
 
-        # -------------------------------------
-        # Save to Research
-        # -------------------------------------
+        summary = self.summary_engine.build(
+            vote_result,
+            recommendation,
+            confidence,
+            portfolio_vote,
+        )
 
         self.research.update_committee(summary)
 
-        print("\n=====================================")
-        print("Investment Committee Completed")
-        print("=====================================")
+        print("\nCommittee Completed")
 
         return summary
