@@ -1,65 +1,108 @@
-class BusinessMember:
-    """
-    Business Committee Member
+"""
+EIOS
+Everest Investment Operating System
 
-    Evaluates overall business quality before casting
-    the committee vote.
+Business Committee Member
+"""
+
+from core.base_committee_member import BaseCommitteeMember
+
+class BusinessMember(BaseCommitteeMember):
     """
+    Evaluates Business Quality from the Master Dossier
+    and casts the Business Committee vote.
+    """
+
+    MEMBER = "Business"
+
+    BASE_SCORE = 50
+
+    CRITERIA = {
+        "Business Model": 10,
+        "Moat": 15,
+        "Growth Drivers": 10,
+        "Market Size": 10,
+    }
+
+    RISK_WEIGHT = 5
 
     def evaluate(self, research):
 
         dossier = research.master_dossier
-
         business = dossier.business_quality
 
         if not business:
-            return {
-                "Member": "Business",
-                "Vote": "Watch",
-                "Score": 0,
-                "Confidence": 0,
-                "Reason":
-                    "Business Quality analysis unavailable."
-            }
 
-        score = 50
+            return self.build_response(
+                score=0,
+                confidence=0,
+                reason="Business Quality analysis unavailable.",
+                warnings=[
+                    "Business Quality section missing from Master Dossier."
+                ],
+            )
 
-        if business.get("Business Model"):
-            score += 10
+        score = self.BASE_SCORE
 
-        if business.get("Moat"):
-            score += 15
+        evidence = []
 
-        if business.get("Growth Drivers"):
-            score += 10
+        total_checks = len(self.CRITERIA) + 1
 
-        if business.get("Market Size"):
-            score += 10
+        # -----------------------------
+        # Evaluate Core Business Fields
+        # -----------------------------
+
+        for field, weight in self.CRITERIA.items():
+
+            if business.get(field):
+
+                score += weight
+                evidence.append(f"{field} analysed")
+
+        # -----------------------------
+        # Risk Evaluation
+        # -----------------------------
 
         risks = business.get("Key Risks", [])
 
-        if len(risks) <= 2:
-            score += 5
+        if isinstance(risks, list) and len(risks) <= 2:
 
-        if score >= 80:
-            vote = "Pass"
+            score += self.RISK_WEIGHT
+            evidence.append("Key Risks acceptable")
 
-        elif score >= 60:
-            vote = "Watch"
+        # -----------------------------
+        # Confidence
+        # -----------------------------
 
-        else:
-            vote = "Reject"
+        confidence = int((len(evidence) / total_checks) * 100)
 
-        return {
+        # -----------------------------
+        # Metrics
+        # -----------------------------
 
-            "Member": "Business",
-
-            "Vote": vote,
-
-            "Score": score,
-
-            "Confidence": 80,
-
-            "Reason":
-                f"Business quality score = {score}"
+        metrics = {
+            "Criteria Evaluated": total_checks,
+            "Criteria Passed": len(evidence),
+            "Business Score": score,
         }
+
+        # -----------------------------
+        # Reason
+        # -----------------------------
+
+        reason = (
+            f"Business quality assessment completed. "
+            f"{len(evidence)} of {total_checks} criteria satisfied."
+        )
+
+        # -----------------------------
+        # Response
+        # -----------------------------
+
+        return self.build_response(
+            score=score,
+            confidence=confidence,
+            reason=reason,
+            evidence=evidence,
+            metrics=metrics,
+        )

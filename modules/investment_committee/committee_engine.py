@@ -2,7 +2,7 @@ from modules.investment_committee.business_member import BusinessMember
 from modules.investment_committee.committee_vote import CommitteeVote
 from modules.investment_committee.recommendation_engine import RecommendationEngine
 from modules.investment_committee.confidence_engine import ConfidenceEngine
-from modules.investment_committee.portfolio_fit import PortfolioFit
+from modules.investment_committee.portfolio_member import PortfolioMember
 from modules.investment_committee.decision_summary import DecisionSummary
 
 
@@ -19,7 +19,7 @@ class CommitteeEngine:
         self.committee_vote = CommitteeVote()
         self.recommendation_engine = RecommendationEngine()
         self.confidence_engine = ConfidenceEngine()
-        self.portfolio_fit = PortfolioFit()
+        self.portfolio_member = PortfolioMember()
         self.decision_summary = DecisionSummary()
 
     def analyze(self):
@@ -76,9 +76,9 @@ class CommitteeEngine:
         # Portfolio Fit
         # -------------------------------------
 
-        portfolio_fit = self.portfolio_fit.evaluate(
-            committee_data
-        )
+        portfolio_vote = self.portfolio_member.evaluate(
+    self.research
+)
 
         # -------------------------------------
         # Decision Summary
