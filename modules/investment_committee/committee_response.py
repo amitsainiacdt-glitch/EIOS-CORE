@@ -1,32 +1,64 @@
 from dataclasses import dataclass, field
 
 
-@dataclass(slots=True)
+@dataclass
 class CommitteeResponse:
     """
-    Standard response returned by every
-    Investment Committee member.
+    Standard response returned by every Investment Committee member.
+    Compatible with both the legacy EIOS framework and the new committee
+    implementation.
     """
 
     member: str
     vote: str
     score: int
     confidence: int
-    reason: str
 
-    evidence: list[str] = field(default_factory=list)
-    warnings: list[str] = field(default_factory=list)
+    reason: str = ""
+
+    evidence: list = field(default_factory=list)
+    warnings: list = field(default_factory=list)
     metrics: dict = field(default_factory=dict)
 
-    def to_dict(self) -> dict:
+    risks: list = field(default_factory=list)
+
+    recommendation: str = ""
+
+    weight: int = 10
+
+    def to_dict(self):
 
         return {
-            "Member": self.member,
-            "Vote": self.vote,
-            "Score": self.score,
-            "Confidence": self.confidence,
-            "Reason": self.reason,
-            "Evidence": self.evidence,
-            "Warnings": self.warnings,
-            "Metrics": self.metrics,
+            "member": self.member,
+            "vote": self.vote,
+            "score": self.score,
+            "confidence": self.confidence,
+            "reason": self.reason,
+            "evidence": self.evidence,
+            "warnings": self.warnings,
+            "metrics": self.metrics,
+            "risks": self.risks,
+            "recommendation": self.recommendation,
+            "weight": self.weight,
         }
+
+    @property
+    def passed(self):
+        return self.vote == "Pass"
+
+    @property
+    def watching(self):
+        return self.vote == "Watch"
+
+    @property
+    def rejected(self):
+        return self.vote == "Reject"
+
+    def __str__(self):
+
+        return (
+            f"{self.member}: "
+            f"{self.vote} "
+            f"(Score={self.score}, "
+            f"Confidence={self.confidence})"
+        )

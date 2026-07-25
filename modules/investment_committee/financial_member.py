@@ -1,13 +1,15 @@
+from modules.investment_committee.committee_response import CommitteeResponse
+
+
 class FinancialMember:
     """
     Financial Committee Member
 
-    Reviews the Financial Analysis section of the Master Dossier
-    and casts an independent committee vote.
+    Reviews the financial quality of the business.
     """
 
     def __init__(self):
-        self.name = "Financial Committee"
+        self.name = "Financial"
 
     def evaluate(self, research):
 
@@ -15,66 +17,50 @@ class FinancialMember:
         financial = dossier.financial_analysis
 
         if not financial:
-            return {
-                "Member": "Financial",
-                "Vote": "Watch",
-                "Score": 0,
-                "Confidence": 0,
-                "Reason": "Financial Analysis not available."
-            }
+            return CommitteeResponse(
+                member="Financial",
+                vote="Watch",
+                score=0,
+                confidence=0,
+                evidence=[],
+                risks=["Financial analysis unavailable"],
+                recommendation="Complete financial analysis first.",
+                reason="Financial analysis unavailable.",
+            )
 
         score = 0
         evidence = []
         risks = []
 
-        # -----------------------------
-        # Revenue Growth
-        # -----------------------------
-        if financial.get("Revenue Growth"):
-            score += 20
-            evidence.append("Consistent revenue growth")
-        else:
-            risks.append("Revenue growth not established")
+        revenue_growth = financial.get("Revenue Growth", 0)
+        roce = financial.get("ROCE", 0)
+        roe = financial.get("ROE", 0)
+        debt = financial.get("Debt to Equity", 999)
 
-        # -----------------------------
-        # Profit Growth
-        # -----------------------------
-        if financial.get("Profit Growth"):
-            score += 20
-            evidence.append("Healthy profit growth")
+        if revenue_growth >= 15:
+            score += 25
+            evidence.append("Strong revenue growth")
         else:
-            risks.append("Weak profit growth")
+            risks.append("Weak revenue growth")
 
-        # -----------------------------
-        # ROCE
-        # -----------------------------
-        if financial.get("ROCE"):
-            score += 20
-            evidence.append("Strong ROCE")
+        if roce >= 20:
+            score += 25
+            evidence.append("High ROCE")
         else:
-            risks.append("ROCE not satisfactory")
+            risks.append("ROCE below target")
 
-        # -----------------------------
-        # Free Cash Flow
-        # -----------------------------
-        if financial.get("Free Cash Flow"):
-            score += 20
-            evidence.append("Positive free cash flow")
+        if roe >= 18:
+            score += 25
+            evidence.append("Healthy ROE")
         else:
-            risks.append("Weak free cash flow")
+            risks.append("ROE below target")
 
-        # -----------------------------
-        # Debt
-        # -----------------------------
-        if financial.get("Debt"):
-            score += 20
-            evidence.append("Comfortable debt profile")
+        if debt <= 0.5:
+            score += 25
+            evidence.append("Low leverage")
         else:
-            risks.append("Debt needs monitoring")
+            risks.append("High leverage")
 
-        # -----------------------------
-        # Final Vote
-        # -----------------------------
         if score >= 85:
             vote = "Pass"
         elif score >= 65:
@@ -82,14 +68,13 @@ class FinancialMember:
         else:
             vote = "Reject"
 
-        return {
-            "Member": "Financial",
-            "Vote": vote,
-            "Score": score,
-            "Confidence": 85,
-            "Weight": 20,
-            "Evidence": evidence,
-            "Risks": risks,
-            "Recommendation": f"Financial quality score = {score}",
-            "Reason": f"Financial quality score = {score}"
-        }
+        return CommitteeResponse(
+            member="Financial",
+            vote=vote,
+            score=score,
+            confidence=90,
+            evidence=evidence,
+            risks=risks,
+            recommendation=f"Financial Score = {score}",
+            reason=f"Financial Score = {score}",
+        )

@@ -1,100 +1,60 @@
 from collections import Counter
 
-from modules.investment_committee.committee_vote_result import (
-    CommitteeVoteResult,
-)
-from modules.investment_committee.committee_response import (
-    CommitteeResponse,
-)
-
 
 class CommitteeVote:
     """
-    Aggregates votes from all Investment Committee members.
+    Final Investment Committee Decision
+
+    Aggregates committee member responses into a
+    single committee recommendation.
     """
 
-    def vote(
-        self,
-        responses: list[CommitteeResponse],
-    ) -> CommitteeVoteResult:
+    def __init__(self, responses):
 
-        if not responses:
-            raise ValueError("No committee responses supplied.")
+        self.responses = responses
 
-        member_votes = {}
-        member_scores = {}
-        member_confidences = {}
+        self.member_votes = {
+            response.member: response.vote
+            for response in responses
+        }
 
-        vote_counter = Counter()
-
-        total_score = 0
-        total_confidence = 0
-
-        for response in responses:
-
-            member_votes[response.member] = response.vote
-            member_scores[response.member] = response.score
-            member_confidences[response.member] = response.confidence
-
-            vote_counter[response.vote] += 1
-
-            total_score += response.score
-            total_confidence += response.confidence
-
-        total_members = len(responses)
-
-        average_score = round(total_score / total_members, 2)
-        average_confidence = round(
-            total_confidence / total_members,
-            2,
+        self.average_score = (
+            sum(r.score for r in responses) / len(responses)
+            if responses else 0
         )
 
-        pass_count = vote_counter["Pass"]
-        watch_count = vote_counter["Watch"]
-        reject_count = vote_counter["Reject"]
-
-        overall_vote = self._overall_vote(
-            pass_count,
-            watch_count,
-            reject_count,
-            total_members,
+        self.average_confidence = (
+            sum(r.confidence for r in responses) / len(responses)
+            if responses else 0
         )
 
-        return CommitteeVoteResult(
-            overall_vote=overall_vote,
+        vote_counter = Counter(r.vote for r in responses)
 
-            average_score=average_score,
-            average_confidence=average_confidence,
+        if vote_counter:
+            self.final_vote = vote_counter.most_common(1)[0][0]
+        else:
+            self.final_vote = "Watch"
 
-            pass_count=pass_count,
-            watch_count=watch_count,
-            reject_count=reject_count,
+    @property
+    def passed(self):
+        return self.final_vote == "Pass"
 
-            total_members=total_members,
+    def to_dict(self):
 
-            member_votes=member_votes,
-            member_scores=member_scores,
-            member_confidences=member_confidences,
+        return {
+            "Final Vote": self.final_vote,
+            "Average Score": round(self.average_score, 1),
+            "Average Confidence": round(self.average_confidence, 1),
+            "Member Votes": self.member_votes,
+        }
+
+    def __str__(self):
+
+        return (
+            "\n"
+            "Investment Committee Summary\n"
+            "----------------------------\n"
+            f"Final Vote          : {self.final_vote}\n"
+            f"Average Score       : {self.average_score:.1f}\n"
+            f"Average Confidence  : {self.average_confidence:.1f}\n"
         )
-
-    def _overall_vote(
-        self,
-        pass_count: int,
-        watch_count: int,
-        reject_count: int,
-        total_members: int,
-    ) -> str:
-
-        if reject_count >= 3:
-            return "Reject"
-
-        if pass_count >= int(total_members * 0.75):
-            return "Strong Buy"
-
-        if pass_count > watch_count:
-            return "Buy"
-
-        if watch_count >= pass_count:
-            return "Watch"
-
-        return "Reject"

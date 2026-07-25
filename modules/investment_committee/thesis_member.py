@@ -1,13 +1,16 @@
+from modules.investment_committee.committee_response import CommitteeResponse
+
+
 class ThesisMember:
     """
-    Thesis Committee Member
+    Investment Thesis Committee Member
 
-    Reviews the complete investment thesis and determines
-    whether the evidence supports long-term investment.
+    Evaluates whether the overall investment thesis
+    remains strong and evidence-backed.
     """
 
     def __init__(self):
-        self.name = "Thesis Committee"
+        self.name = "Thesis"
 
     def evaluate(self, research):
 
@@ -15,78 +18,75 @@ class ThesisMember:
         thesis = dossier.investment_thesis
 
         if not thesis:
-            return {
-                "Member": "Thesis",
-                "Vote": "Watch",
-                "Score": 0,
-                "Confidence": 0,
-                "Weight": 25,
-                "Evidence": [],
-                "Risks": [],
-                "Recommendation": "Investment thesis unavailable.",
-                "Reason": "Investment thesis unavailable."
-            }
+            return CommitteeResponse(
+                member="Thesis",
+                vote="Watch",
+                score=0,
+                confidence=0,
+                evidence=[],
+                risks=["Investment thesis unavailable"],
+                recommendation="Complete investment thesis.",
+                reason="Investment thesis unavailable.",
+            )
 
         score = 0
         evidence = []
         risks = []
 
-        # -----------------------------------
-        # Thesis Clarity
-        # -----------------------------------
+        # ------------------------------------
+        # Thesis Strength
+        # ------------------------------------
 
-        if thesis.get("Core Thesis"):
-            score += 20
-            evidence.append("Clear investment thesis")
+        strength = thesis.get("Strength", 0)
+
+        if strength >= 85:
+            score += 35
+            evidence.append("Strong investment thesis")
+        elif strength >= 70:
+            score += 25
+            evidence.append("Reasonable investment thesis")
         else:
-            risks.append("Investment thesis not clearly defined")
+            risks.append("Weak investment thesis")
 
-        # -----------------------------------
-        # Growth Drivers
-        # -----------------------------------
+        # ------------------------------------
+        # Key Drivers
+        # ------------------------------------
 
-        if thesis.get("Growth Drivers"):
+        drivers = thesis.get("Key Drivers", [])
+
+        if drivers:
             score += 20
-            evidence.append("Long-term growth drivers identified")
+            evidence.append(f"{len(drivers)} key value drivers identified")
         else:
-            risks.append("Growth drivers weak or missing")
+            risks.append("No key value drivers identified")
 
-        # -----------------------------------
-        # Competitive Advantage
-        # -----------------------------------
-
-        if thesis.get("Competitive Advantage"):
-            score += 20
-            evidence.append("Competitive advantage supports thesis")
-        else:
-            risks.append("Competitive advantage not convincing")
-
-        # -----------------------------------
-        # Key Risks
-        # -----------------------------------
+        # ------------------------------------
+        # Risks
+        # ------------------------------------
 
         thesis_risks = thesis.get("Key Risks", [])
 
         if len(thesis_risks) <= 3:
             score += 20
-            evidence.append("Risks appear manageable")
+            evidence.append("Risk profile is manageable")
         else:
-            score += 10
-            risks.append("Multiple risks could weaken thesis")
+            risks.append("Numerous thesis risks identified")
 
-        # -----------------------------------
+        # ------------------------------------
         # Kill Switch
-        # -----------------------------------
+        # ------------------------------------
 
-        if thesis.get("Kill Switch"):
-            score += 20
-            evidence.append("Thesis invalidation criteria defined")
+        kill_switch = thesis.get("Kill Switch")
+
+        if kill_switch:
+            score += 25
+            evidence.append("Clear kill switch defined")
         else:
-            risks.append("No clear thesis invalidation criteria")
+            risks.append("Kill switch not defined")
 
-        # -----------------------------------
+        # ------------------------------------
         # Final Vote
-        # -----------------------------------
+        # ------------------------------------
 
         if score >= 85:
             vote = "Pass"
@@ -95,25 +95,13 @@ class ThesisMember:
         else:
             vote = "Reject"
 
-        return {
-
-            "Member": "Thesis",
-
-            "Vote": vote,
-
-            "Score": score,
-
-            "Confidence": 92,
-
-            "Weight": 25,
-
-            "Evidence": evidence,
-
-            "Risks": risks,
-
-            "Recommendation":
-                f"Investment Thesis Score = {score}",
-
-            "Reason":
-                f"Investment Thesis Score = {score}"
-        }
+        return CommitteeResponse(
+            member="Thesis",
+            vote=vote,
+            score=score,
+            confidence=90,
+            evidence=evidence,
+            risks=risks,
+            recommendation=f"Thesis Score = {score}",
+            reason=f"Thesis Score = {score}",
+        )

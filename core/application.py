@@ -275,7 +275,7 @@ class EIOSApplication:
             ],
         )
 
-        # ==========================================================
+               # ==========================================================
         # THESIS
         # ==========================================================
 
@@ -285,22 +285,8 @@ class EIOSApplication:
         # INVESTMENT COMMITTEE
         # ==========================================================
 
-        committee_data = {
-            "business_quality": "Pass",
-            "financial_quality": "Pass",
-            "management_quality": "Pass",
-            "risk": "Low",
-            "valuation": "Fair",
-            "portfolio_fit": "Watch",
-            "position_size": "5%",
-            "portfolio_priority": "Medium",
-            "diversification_impact": "Neutral",
-            "capital_allocation": "Wait",
-        }
+        committee_engine.analyze()
 
-        committee_engine.analyze(committee_data)
-
-       
         # ==========================================================
         # DISPLAY
         # ==========================================================

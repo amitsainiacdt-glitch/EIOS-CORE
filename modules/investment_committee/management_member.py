@@ -1,13 +1,15 @@
+from modules.investment_committee.committee_response import CommitteeResponse
+
+
 class ManagementMember:
     """
     Management Committee Member
 
-    Reviews the Management Analysis section of the Master Dossier
-    and casts an independent committee vote.
+    Evaluates management quality, governance and capital allocation.
     """
 
     def __init__(self):
-        self.name = "Management Committee"
+        self.name = "Management"
 
     def evaluate(self, research):
 
@@ -15,109 +17,83 @@ class ManagementMember:
         management = dossier.management_analysis
 
         if not management:
-            return {
-                "Member": "Management",
-                "Vote": "Watch",
-                "Score": 0,
-                "Confidence": 0,
-                "Weight": 20,
-                "Evidence": [],
-                "Risks": [],
-                "Recommendation": "Management analysis unavailable.",
-                "Reason": "Management analysis unavailable."
-            }
+            return CommitteeResponse(
+                member="Management",
+                vote="Watch",
+                score=0,
+                confidence=0,
+                evidence=[],
+                risks=["Management analysis unavailable"],
+                recommendation="Complete management analysis first.",
+                reason="Management analysis unavailable.",
+            )
 
         score = 0
         evidence = []
         risks = []
 
-        # -----------------------------------
-        # Capital Allocation
-        # -----------------------------------
-
-        if management.get("Capital Allocation"):
-            score += 20
-            evidence.append("Good capital allocation")
-
-        else:
-            risks.append("Capital allocation unclear")
-
-        # -----------------------------------
+        # -------------------------------
         # Governance
-        # -----------------------------------
+        # -------------------------------
 
-        if management.get("Governance"):
-            score += 20
-            evidence.append("Good governance")
-
+        governance = management.get("Governance", {})
+        if governance.get("Score", 0) >= 85:
+            score += 25
+            evidence.append("Strong corporate governance")
         else:
-            risks.append("Governance concerns")
+            risks.append("Governance requires monitoring")
 
-        # -----------------------------------
-        # Promoter Integrity
-        # -----------------------------------
+        # -------------------------------
+        # Capital Allocation
+        # -------------------------------
 
-        if management.get("Promoter Integrity"):
-            score += 20
-            evidence.append("Promoter integrity satisfactory")
-
+        capital = management.get("Capital Allocation", {})
+        if capital.get("Score", 0) >= 80:
+            score += 25
+            evidence.append("Disciplined capital allocation")
         else:
-            risks.append("Promoter integrity uncertain")
+            risks.append("Capital allocation needs improvement")
 
-        # -----------------------------------
-        # Shareholding
-        # -----------------------------------
+        # -------------------------------
+        # Behaviour
+        # -------------------------------
 
-        if management.get("Shareholding"):
-            score += 20
-            evidence.append("Healthy promoter holding")
-
+        behaviour = management.get("Behaviour", {})
+        if behaviour.get("Score", 0) >= 80:
+            score += 25
+            evidence.append("Management execution is consistent")
         else:
-            risks.append("Shareholding requires monitoring")
+            risks.append("Execution risk")
 
-        # -----------------------------------
-        # Execution
-        # -----------------------------------
+        # -------------------------------
+        # Communication
+        # -------------------------------
 
-        if management.get("Execution"):
-            score += 20
-            evidence.append("Strong execution history")
-
+        communication = management.get("Communication", {})
+        if communication.get("Score", 0) >= 80:
+            score += 25
+            evidence.append("Transparent communication")
         else:
-            risks.append("Execution record not established")
+            risks.append("Communication quality below expectation")
 
-        # -----------------------------------
+        # -------------------------------
         # Final Vote
-        # -----------------------------------
+        # -------------------------------
 
         if score >= 85:
             vote = "Pass"
-
         elif score >= 65:
             vote = "Watch"
-
         else:
             vote = "Reject"
 
-        return {
-
-            "Member": "Management",
-
-            "Vote": vote,
-
-            "Score": score,
-
-            "Confidence": 85,
-
-            "Weight": 20,
-
-            "Evidence": evidence,
-
-            "Risks": risks,
-
-            "Recommendation":
-                f"Management quality score = {score}",
-
-            "Reason":
-                f"Management quality score = {score}"
-        }
+        return CommitteeResponse(
+            member="Management",
+            vote=vote,
+            score=score,
+            confidence=90,
+            evidence=evidence,
+            risks=risks,
+            recommendation=f"Management Score = {score}",
+            reason=f"Management Score = {score}",
+        )

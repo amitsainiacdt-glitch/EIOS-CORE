@@ -1,132 +1,128 @@
+from modules.investment_committee.committee_response import CommitteeResponse
+
+
 class ValuationMember:
     """
     Valuation Committee Member
 
-    Reviews the Valuation Analysis section of the Master Dossier
-    and determines whether the stock offers an adequate
-    margin of safety.
+    Evaluates intrinsic value, margin of safety,
+    owner earnings and expected returns.
     """
 
     def __init__(self):
-        self.name = "Valuation Committee"
+        self.name = "Valuation"
 
     def evaluate(self, research):
 
         dossier = research.master_dossier
-        valuation = dossier.valuation
+        valuation = dossier.valuation_analysis
 
         if not valuation:
-            return {
-                "Member": "Valuation",
-                "Vote": "Watch",
-                "Score": 0,
-                "Confidence": 0,
-                "Weight": 20,
-                "Evidence": [],
-                "Risks": [],
-                "Recommendation": "Valuation unavailable.",
-                "Reason": "Valuation analysis unavailable."
-            }
+            return CommitteeResponse(
+                member="Valuation",
+                vote="Watch",
+                score=0,
+                confidence=0,
+                evidence=[],
+                risks=["Valuation analysis unavailable"],
+                recommendation="Complete valuation analysis first.",
+                reason="Valuation analysis unavailable.",
+            )
 
         score = 0
         evidence = []
         risks = []
 
-        intrinsic = valuation.get("Intrinsic Value")
-        cmp = valuation.get("Current Price")
-        mos = valuation.get("Margin of Safety")
+        # ------------------------------------
+        # Owner Earnings
+        # ------------------------------------
 
-        # -----------------------------
+        owner = valuation.get("Owner Earnings", {})
+
+        owner_earnings = owner.get("Owner Earnings", 0)
+
+        if owner_earnings > 0:
+            score += 30
+            evidence.append(
+                f"Positive Owner Earnings ({owner_earnings})"
+            )
+        else:
+            risks.append("Owner earnings unavailable")
+
+        # ------------------------------------
+        # Intrinsic Value
+        # ------------------------------------
+
+        intrinsic = valuation.get("Intrinsic Value")
+
+        if intrinsic is not None:
+            score += 25
+            evidence.append("Intrinsic value estimated")
+        else:
+            risks.append("Intrinsic value not calculated")
+
+        # ------------------------------------
         # Margin of Safety
-        # -----------------------------
+        # ------------------------------------
+
+        mos = valuation.get("Margin of Safety")
 
         if mos is not None:
 
             if mos >= 30:
-                score += 40
+                score += 25
                 evidence.append("Excellent margin of safety")
 
-            elif mos >= 20:
-                score += 30
-                evidence.append("Good margin of safety")
-
-            elif mos >= 10:
-                score += 20
-                evidence.append("Limited margin of safety")
+            elif mos >= 15:
+                score += 15
+                evidence.append("Acceptable margin of safety")
 
             else:
-                score += 5
-                risks.append("Very small margin of safety")
+                risks.append("Limited margin of safety")
 
-        # -----------------------------
-        # Intrinsic Value
-        # -----------------------------
+        else:
+            risks.append("Margin of safety unavailable")
 
-        if intrinsic is not None and cmp is not None:
-
-            if intrinsic > cmp:
-                score += 30
-                evidence.append("Trading below intrinsic value")
-
-            else:
-                score += 10
-                risks.append("Trading above intrinsic value")
-
-        # -----------------------------
+        # ------------------------------------
         # Expected CAGR
-        # -----------------------------
+        # ------------------------------------
 
-        cagr = valuation.get("Expected CAGR")
+        expected = valuation.get("Expected CAGR")
 
-        if cagr is not None:
+        if expected is not None:
 
-            if cagr >= 20:
-                score += 30
-                evidence.append("High expected CAGR")
-
-            elif cagr >= 15:
+            if expected >= 18:
                 score += 20
-                evidence.append("Good expected CAGR")
+                evidence.append("Excellent expected CAGR")
 
-            elif cagr >= 10:
+            elif expected >= 12:
                 score += 10
-                evidence.append("Moderate expected CAGR")
+                evidence.append("Reasonable expected CAGR")
 
             else:
-                risks.append("Low expected CAGR")
+                risks.append("Expected return is modest")
 
-        # -----------------------------
+        else:
+            risks.append("Expected CAGR unavailable")
+
+        # ------------------------------------
         # Final Vote
-        # -----------------------------
+        # ------------------------------------
 
         if score >= 85:
             vote = "Pass"
-
         elif score >= 65:
             vote = "Watch"
-
         else:
             vote = "Reject"
 
-        return {
-
-            "Member": "Valuation",
-
-            "Vote": vote,
-
-            "Score": score,
-
-            "Confidence": 90,
-
-            "Weight": 20,
-
-            "Evidence": evidence,
-
-            "Risks": risks,
-
-            "Recommendation":
-                f"Valuation Score = {score}",
-
-            "Reason":
-                f"Valuation Score = {score}"
-        }
+        return CommitteeResponse(
+            member="Valuation",
+            vote=vote,
+            score=score,
+            confidence=90,
+            evidence=evidence,
+            risks=risks,
+            recommendation=f"Valuation Score = {score}",
+            reason=f"Valuation Score = {score}",
+        )

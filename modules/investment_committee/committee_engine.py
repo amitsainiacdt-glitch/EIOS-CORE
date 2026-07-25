@@ -1,91 +1,157 @@
-from modules.investment_committee.business_member import BusinessMember
-from modules.investment_committee.financial_member import FinancialMember
-from modules.investment_committee.management_member import ManagementMember
-from modules.investment_committee.risk_member import RiskMember
-from modules.investment_committee.competitive_member import CompetitiveMember
-from modules.investment_committee.valuation_member import ValuationMember
-from modules.investment_committee.thesis_member import ThesisMember
-from modules.investment_committee.portfolio_member import PortfolioMember
-
 from modules.investment_committee.committee_vote import CommitteeVote
-from modules.investment_committee.recommendation_engine import RecommendationEngine
-from modules.investment_committee.confidence_engine import ConfidenceEngine
-from modules.investment_committee.decision_summary import DecisionSummary
+from modules.investment_committee.committee_response import CommitteeResponse
 
 
 class CommitteeEngine:
     """
-    Orchestrates the complete Investment Committee.
+    Investment Committee Engine
+
+    Supports both:
+
+        CommitteeEngine(research)
+
+    and
+
+        CommitteeEngine(members, research)
     """
 
-    def __init__(self, research):
+    def __init__(self, members_or_research, research=None):
 
-        self.research = research
+        # -------------------------------------------------
+        # Backward Compatibility
+        # CommitteeEngine(research)
+        # -------------------------------------------------
 
-        self.members = [
+        if research is None and not isinstance(
+            members_or_research, (list, tuple)
+        ):
 
-            BusinessMember(),
-            FinancialMember(),
-            ManagementMember(),
-            RiskMember(),
-            CompetitiveMember(),
-            ValuationMember(),
-            ThesisMember(),
+            self.research = members_or_research
 
-        ]
+            from modules.investment_committee.business_member import (
+                BusinessMember,
+            )
+            from modules.investment_committee.financial_member import (
+                FinancialMember,
+            )
+            from modules.investment_committee.management_member import (
+                ManagementMember,
+            )
+            from modules.investment_committee.risk_member import (
+                RiskMember,
+            )
+            from modules.investment_committee.competitive_member import (
+                CompetitiveMember,
+            )
+            from modules.investment_committee.valuation_member import (
+                ValuationMember,
+            )
+            from modules.investment_committee.thesis_member import (
+                ThesisMember,
+            )
+            from modules.investment_committee.portfolio_member import (
+                PortfolioMember,
+            )
 
-        self.portfolio_member = PortfolioMember()
+            self.members = [
+                BusinessMember(),
+                FinancialMember(),
+                ManagementMember(),
+                RiskMember(),
+                CompetitiveMember(),
+                ValuationMember(),
+                ThesisMember(),
+                PortfolioMember(),
+            ]
 
-        self.vote_engine = CommitteeVote()
-        self.recommendation_engine = RecommendationEngine()
-        self.confidence_engine = ConfidenceEngine()
-        self.summary_engine = DecisionSummary()
+        # -------------------------------------------------
+        # New Constructor
+        # -------------------------------------------------
 
-    def analyze(self):
+        else:
+            self.members = members_or_research
+            self.research = research
 
-        print("\n===================================")
-        print("Investment Committee")
-        print("===================================")
+    # =====================================================
+    # Backward Compatible API
+    # =====================================================
+
+    def analyze(self, research=None):
+
+        if research is None:
+            research = self.research
+
+        if research is None:
+            raise ValueError("Research object is required.")
+
+        return self.evaluate(research)
+
+    # =====================================================
+    # Main Evaluation
+    # =====================================================
+
+    def evaluate(self, research):
 
         responses = []
 
+        print()
+        print("=" * 60)
+        print("INVESTMENT COMMITTEE")
+        print("=" * 60)
+
+        print(
+            f"{'Member':15}"
+            f"{'Vote':10}"
+            f"{'Score':>10}"
+            f"{'Confidence':>14}"
+        )
+
+        print("-" * 60)
+
         for member in self.members:
 
-            response = member.evaluate(self.research)
+            response = member.evaluate(research)
+
+            # ---------------------------------------------
+            # Backward compatibility for legacy members
+            # ---------------------------------------------
+            if isinstance(response, dict):
+
+                response = CommitteeResponse(
+                    member=response.get("member", response.get("Member", "Unknown")),
+                    vote=response.get("vote", response.get("Vote", "Watch")),
+                    score=response.get("score", response.get("Score", 0)),
+                    confidence=response.get(
+                        "confidence",
+                        response.get("Confidence", 0),
+                    ),
+                    reason=response.get("reason", ""),
+                    evidence=response.get("evidence", []),
+                    warnings=response.get("warnings", []),
+                    metrics=response.get("metrics", {}),
+                    risks=response.get("risks", []),
+                    recommendation=response.get("recommendation", ""),
+                    weight=response.get("weight", 10),
+                )
 
             responses.append(response)
 
             print(
-                f"{response.member:20}"
-                f"{response.vote:8}"
-                f"{response.score:5}"
-                f"{response.confidence:5}"
+                f"{response.member:15}"
+                f"{response.vote:10}"
+                f"{response.score:>10.1f}"
+                f"{response.confidence:>14.1f}"
             )
 
-        vote_result = self.vote_engine.vote(responses)
+        print("-" * 60)
 
-        recommendation = self.recommendation_engine.recommend(
-            vote_result
+        committee_vote = CommitteeVote(responses)
+
+        research.master_dossier.committee_summary = (
+            committee_vote.to_dict()
         )
 
-        confidence = self.confidence_engine.calculate(
-            vote_result,
-            recommendation,
-        )
+        print()
+        print(committee_vote)
 
-        portfolio_vote = self.portfolio_member.evaluate(
-            self.research
-        )
-
-        summary = self.summary_engine.build(
-            vote_result,
-            recommendation,
-            confidence,
-            portfolio_vote,
-        )
-
-        self.research.update_committee(summary)
-
-        print("\nCommittee Completed")
-
-        return summary
+        return committee_vote

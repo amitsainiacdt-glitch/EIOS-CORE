@@ -1,13 +1,16 @@
+from modules.investment_committee.committee_response import CommitteeResponse
+
+
 class CompetitiveMember:
     """
     Competitive Intelligence Committee Member
 
-    Reviews competitive positioning, moat, industry dynamics,
-    and peer comparison before casting a vote.
+    Evaluates competitive positioning, peer ranking,
+    industry leadership and moat.
     """
 
     def __init__(self):
-        self.name = "Competitive Intelligence Committee"
+        self.name = "Competitive"
 
     def evaluate(self, research):
 
@@ -15,75 +18,81 @@ class CompetitiveMember:
         competitive = dossier.competitive_intelligence
 
         if not competitive:
-            return {
-                "Member": "Competitive",
-                "Vote": "Watch",
-                "Score": 0,
-                "Confidence": 0,
-                "Weight": 20,
-                "Evidence": [],
-                "Risks": [],
-                "Recommendation": "Competitive analysis unavailable.",
-                "Reason": "Competitive analysis unavailable."
-            }
+            return CommitteeResponse(
+                member="Competitive",
+                vote="Watch",
+                score=0,
+                confidence=0,
+                evidence=[],
+                risks=["Competitive intelligence unavailable"],
+                recommendation="Complete competitive analysis first.",
+                reason="Competitive analysis unavailable.",
+            )
 
         score = 0
         evidence = []
         risks = []
 
-        # -----------------------------------
-        # Competitive Moat
-        # -----------------------------------
+        leader = competitive.get("leader")
+        peer_count = competitive.get("peer_count", 0)
+        ranked = competitive.get("ranked_peers", [])
 
-        if competitive.get("Moat"):
-            score += 25
-            evidence.append("Durable competitive moat")
+        # ------------------------------------
+        # Industry Leader
+        # ------------------------------------
+
+        if leader:
+            score += 30
+            evidence.append(
+                f"Industry leader: {leader.get('Company','Unknown')}"
+            )
         else:
-            risks.append("Moat not established")
+            risks.append("Industry leader not identified")
 
-        # -----------------------------------
-        # Market Position
-        # -----------------------------------
+        # ------------------------------------
+        # Peer Ranking
+        # ------------------------------------
 
-        if competitive.get("Market Position"):
+        if ranked:
+            top = ranked[0]
+
+            if top.get("Rank") == 1:
+                score += 30
+                evidence.append("Ranked #1 among peers")
+            elif top.get("Rank") <= 3:
+                score += 20
+                evidence.append("Top-three peer ranking")
+            else:
+                risks.append("Peer ranking is weak")
+        else:
+            risks.append("Peer ranking unavailable")
+
+        # ------------------------------------
+        # Peer Coverage
+        # ------------------------------------
+
+        if peer_count >= 3:
             score += 20
-            evidence.append("Strong market position")
+            evidence.append("Adequate peer comparison")
         else:
-            risks.append("Weak market position")
+            risks.append("Limited peer coverage")
 
-        # -----------------------------------
-        # Competitive Advantage
-        # -----------------------------------
+        # ------------------------------------
+        # Benchmark Score
+        # ------------------------------------
 
-        if competitive.get("Competitive Advantage"):
-            score += 20
-            evidence.append("Clear competitive advantage")
-        else:
-            risks.append("Competitive advantage unclear")
+        if leader:
+            benchmark = leader.get("Benchmark Score", 0)
 
-        # -----------------------------------
-        # Switching Cost
-        # -----------------------------------
+            if benchmark >= 20:
+                score += 20
+                evidence.append("Strong benchmark score")
+            else:
+                risks.append("Benchmark score below target")
 
-        if competitive.get("Switching Cost"):
-            score += 15
-            evidence.append("High customer switching cost")
-        else:
-            risks.append("Low switching cost")
-
-        # -----------------------------------
-        # Entry Barrier
-        # -----------------------------------
-
-        if competitive.get("Entry Barrier"):
-            score += 20
-            evidence.append("High barriers to entry")
-        else:
-            risks.append("Industry easy to enter")
-
-        # -----------------------------------
+        # ------------------------------------
         # Final Vote
-        # -----------------------------------
+        # ------------------------------------
 
         if score >= 85:
             vote = "Pass"
@@ -92,25 +101,13 @@ class CompetitiveMember:
         else:
             vote = "Reject"
 
-        return {
-
-            "Member": "Competitive",
-
-            "Vote": vote,
-
-            "Score": score,
-
-            "Confidence": 88,
-
-            "Weight": 20,
-
-            "Evidence": evidence,
-
-            "Risks": risks,
-
-            "Recommendation":
-                f"Competitive Position Score = {score}",
-
-            "Reason":
-                f"Competitive Position Score = {score}"
-        }
+        return CommitteeResponse(
+            member="Competitive",
+            vote=vote,
+            score=score,
+            confidence=90,
+            evidence=evidence,
+            risks=risks,
+            recommendation=f"Competitive Score = {score}",
+            reason=f"Competitive Score = {score}",
+        )

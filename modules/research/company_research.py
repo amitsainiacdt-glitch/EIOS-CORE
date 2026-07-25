@@ -11,6 +11,7 @@ class CompanyResearch:
 
     def __init__(self, dossier: MasterDossier):
         self.dossier = dossier
+        self.master_dossier = dossier
 
     # ---------------------------------------------------------
     # Business Quality

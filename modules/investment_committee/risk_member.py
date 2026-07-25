@@ -1,13 +1,16 @@
+from modules.investment_committee.committee_response import CommitteeResponse
+
+
 class RiskMember:
     """
     Risk Committee Member
 
-    Reviews the Risk Analysis section of the Master Dossier
-    and evaluates downside risk.
+    Evaluates business, financial, governance,
+    industry and macro risks.
     """
 
     def __init__(self):
-        self.name = "Risk Committee"
+        self.name = "Risk"
 
     def evaluate(self, research):
 
@@ -15,106 +18,88 @@ class RiskMember:
         risk = dossier.risk_analysis
 
         if not risk:
-            return {
-                "Member": "Risk",
-                "Vote": "Watch",
-                "Score": 0,
-                "Confidence": 0,
-                "Weight": 20,
-                "Evidence": [],
-                "Risks": [],
-                "Recommendation": "Risk analysis unavailable.",
-                "Reason": "Risk analysis unavailable."
-            }
+            return CommitteeResponse(
+                member="Risk",
+                vote="Watch",
+                score=0,
+                confidence=0,
+                evidence=[],
+                risks=["Risk analysis unavailable"],
+                recommendation="Complete risk analysis first.",
+                reason="Risk analysis unavailable.",
+            )
 
-        score = 100
+        score = 0
         evidence = []
         risks = []
 
-        # -----------------------------------
-        # Business Risk
-        # -----------------------------------
+        # ------------------------------------
+        # Overall Risk
+        # ------------------------------------
 
-        if risk.get("Business Risk"):
-            score -= 10
-            risks.append("Business execution risk identified")
+        overall = risk.get("Overall Risk", {})
+        overall_score = overall.get("Overall Score", 0)
+
+        if overall_score >= 85:
+            score += 40
+            evidence.append("Overall risk profile is excellent")
+        elif overall_score >= 75:
+            score += 30
+            evidence.append("Risk profile is acceptable")
         else:
-            evidence.append("Business risk appears manageable")
+            risks.append("Overall risk profile is weak")
 
-        # -----------------------------------
+        # ------------------------------------
         # Financial Risk
-        # -----------------------------------
+        # ------------------------------------
 
-        if risk.get("Financial Risk"):
-            score -= 15
-            risks.append("Financial risk detected")
+        financial = risk.get("Financial Risk", {})
+        if financial.get("Score", 0) >= 80:
+            score += 20
+            evidence.append("Financial risk is low")
         else:
-            evidence.append("Financial risk appears low")
+            risks.append("Financial risk requires monitoring")
 
-        # -----------------------------------
+        # ------------------------------------
         # Governance Risk
-        # -----------------------------------
+        # ------------------------------------
 
-        if risk.get("Governance Risk"):
-            score -= 20
-            risks.append("Governance concern identified")
+        governance = risk.get("Governance Risk", {})
+        if governance.get("Score", 0) >= 80:
+            score += 20
+            evidence.append("Governance risk is low")
         else:
-            evidence.append("Governance appears satisfactory")
+            risks.append("Governance concerns")
 
-        # -----------------------------------
+        # ------------------------------------
         # Industry Risk
-        # -----------------------------------
+        # ------------------------------------
 
-        if risk.get("Industry Risk"):
-            score -= 15
-            risks.append("Industry headwinds present")
+        industry = risk.get("Industry Risk", {})
+        if industry.get("Score", 0) >= 80:
+            score += 20
+            evidence.append("Industry risk acceptable")
         else:
-            evidence.append("Industry outlook acceptable")
+            risks.append("Industry risk elevated")
 
-        # -----------------------------------
-        # Regulatory Risk
-        # -----------------------------------
-
-        if risk.get("Regulatory Risk"):
-            score -= 20
-            risks.append("Regulatory uncertainty")
-        else:
-            evidence.append("Regulatory environment stable")
-
-        # -----------------------------------
-        # Balance Score
-        # -----------------------------------
-
-        score = max(score, 0)
+        # ------------------------------------
+        # Final Vote
+        # ------------------------------------
 
         if score >= 85:
             vote = "Pass"
-
         elif score >= 65:
             vote = "Watch"
-
         else:
             vote = "Reject"
 
-        return {
-
-            "Member": "Risk",
-
-            "Vote": vote,
-
-            "Score": score,
-
-            "Confidence": 90,
-
-            "Weight": 20,
-
-            "Evidence": evidence,
-
-            "Risks": risks,
-
-            "Recommendation":
-                f"Overall Risk Score = {score}",
-
-            "Reason":
-                f"Overall Risk Score = {score}"
-        }
+        return CommitteeResponse(
+            member="Risk",
+            vote=vote,
+            score=score,
+            confidence=90,
+            evidence=evidence,
+            risks=risks,
+            recommendation=f"Risk Score = {score}",
+            reason=f"Risk Score = {score}",
+        )
