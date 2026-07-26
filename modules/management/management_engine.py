@@ -43,4 +43,14 @@ class ManagementEngine:
 
         self.research.update_management(management_summary)
 
+        # =====================================================
+        # MANAGEMENT OVERALL SCORE
+        # =====================================================
+
+        self.research.dossier.management["Overall Score"] = {
+            "Overall Score": overall_score["Overall Score"],
+            "Confidence": overall_score["Confidence"],
+            "Rating": overall_score["Rating"],
+        }
+
         print("Management Analysis Completed")

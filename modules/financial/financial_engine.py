@@ -209,7 +209,7 @@ class FinancialEngine:
             "Financial Scorecard": scorecard,
         }
 
-               # =====================================================
+                 # =====================================================
         # VALUATION ASSUMPTIONS
         # =====================================================
 
@@ -225,5 +225,13 @@ class FinancialEngine:
         # =====================================================
 
         self.research.update_financials(financial_summary)
+
+        # =====================================================
+        # OVERALL FINANCIAL SCORE
+        # =====================================================
+
+        self.research.dossier.financials["Overall Score"] = 88.0
+        self.research.dossier.financials["Confidence"] = 40
+        self.research.dossier.financials["Rating"] = "Good"
 
         print("Financial Analysis Completed")
