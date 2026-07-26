@@ -17,3 +17,30 @@ env/
 # OS files
 .DS_Store
 Thumbs.db
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
+
+# Archives
+*.zip
+
+# Backup files
+*.bak
+*_backup.py

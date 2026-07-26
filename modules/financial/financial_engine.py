@@ -14,6 +14,7 @@ from modules.financial.cashflow_engine import CashFlowEngine
 from modules.financial.working_capital_engine import WorkingCapitalEngine
 from modules.financial.capital_allocation import CapitalAllocationEngine
 from modules.financial.financial_scorecard import FinancialScorecard
+from modules.valuation.valuation_assumptions import ValuationAssumptionsBuilder
 
 
 class FinancialEngine:
@@ -33,6 +34,7 @@ class FinancialEngine:
         self.working_capital = WorkingCapitalEngine()
         self.capital_allocation = CapitalAllocationEngine()
         self.scorecard = FinancialScorecard()
+        self.valuation_builder = ValuationAssumptionsBuilder()
 
     def analyze(self, financial_data: dict):
 
@@ -206,6 +208,21 @@ class FinancialEngine:
             "Capital Allocation": capital_allocation,
             "Financial Scorecard": scorecard,
         }
+
+               # =====================================================
+        # VALUATION ASSUMPTIONS
+        # =====================================================
+
+        valuation_assumptions = self.valuation_builder.build(
+            financial_data,
+            financial_summary,
+        )
+
+        financial_summary["Valuation Assumptions"] = valuation_assumptions
+
+        # =====================================================
+        # UPDATE RESEARCH
+        # =====================================================
 
         self.research.update_financials(financial_summary)
 

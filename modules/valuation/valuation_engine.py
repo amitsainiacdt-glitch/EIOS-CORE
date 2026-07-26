@@ -4,32 +4,130 @@ Everest Investment Operating System
 
 Valuation Engine
 
-Coordinates all valuation methodologies and updates
-the Master Dossier through CompanyResearch.
+Coordinates all valuation models and updates CompanyResearch.
+
+Architecture:
+- Owner Earnings is executed independently.
+- Valuation methods are executed through the Valuation Registry.
+- Intrinsic Value Office consolidates intrinsic valuation outputs.
+- New valuation engines require only registration.
 """
 
 from modules.research.company_research import CompanyResearch
+
 from modules.valuation.owners_earnings import OwnerEarningsEngine
+from modules.valuation.dcf_engine import DCFEngine
+from modules.valuation.epv_engine import EPVEngine
+
+from modules.valuation.valuation_registry import ValuationRegistry
+from modules.valuation.intrinsic_value_office import IntrinsicValueOffice
 
 
 class ValuationEngine:
+    """
+    Coordinates all valuation models.
+
+    Owner Earnings is treated as an operating cash-flow analysis.
+
+    Intrinsic valuation methods execute through the
+    Valuation Registry.
+
+    The Intrinsic Value Office combines completed valuation
+    outputs into a single institutional intrinsic value estimate.
+    """
 
     def __init__(self, research: CompanyResearch):
 
         self.research = research
 
+        # -----------------------------------------------------
+        # Owner Earnings (not an intrinsic valuation method)
+        # -----------------------------------------------------
+
         self.owner_earnings = OwnerEarningsEngine()
+
+        # -----------------------------------------------------
+        # Valuation Registry
+        # -----------------------------------------------------
+
+        self.registry = ValuationRegistry()
+
+        self.registry.register(DCFEngine())
+        self.registry.register(EPVEngine())
+
+        # -----------------------------------------------------
+        # Intrinsic Value Office
+        # -----------------------------------------------------
+
+        self.intrinsic_value_office = IntrinsicValueOffice()
 
     def analyze(self, financial_data: dict):
 
         print("\nStarting Valuation Analysis...")
 
-        owner_earnings = self.owner_earnings.evaluate(financial_data)
+        valuation_summary = {}
 
-        valuation_summary = {
-            "Owner Earnings": owner_earnings
-        }
+        # =====================================================
+        # OWNER EARNINGS
+        # =====================================================
 
-        self.research.update_valuation(valuation_summary)
+        valuation_summary["Owner Earnings"] = (
+            self.owner_earnings.evaluate(financial_data)
+        )
+
+        # =====================================================
+        # FETCH VALUATION ASSUMPTIONS
+        # =====================================================
+
+        financial_summary = (
+            self.research.master_dossier.financials
+        )
+
+        valuation_assumptions = financial_summary.get(
+            "Valuation Assumptions",
+            {}
+        )
+
+        # =====================================================
+        # EXECUTE REGISTERED VALUATION ENGINES
+        # =====================================================
+
+        for engine in self.registry:
+
+            assumptions = valuation_assumptions.get(
+                engine.ASSUMPTION_KEY
+            )
+
+            if assumptions:
+
+                valuation_summary[
+                    engine.METHOD_NAME
+                ] = engine.evaluate(
+                    assumptions
+                )
+
+        # =====================================================
+        # INTRINSIC VALUE OFFICE
+        # =====================================================
+
+        intrinsic_value = (
+            self.intrinsic_value_office.evaluate(
+                valuation_summary
+            )
+        )
+
+        valuation_summary[
+            "Intrinsic Value"
+        ] = intrinsic_value
+
+        # =====================================================
+        # UPDATE MASTER DOSSIER
+        # =====================================================
+
+        self.research.update_valuation(
+            valuation_summary
+        )
 
         print("Valuation Analysis Completed")
+
+        return valuation_summary
