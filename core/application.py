@@ -143,6 +143,12 @@ class EIOSApplication:
             valuation_score=80.0,
             available_cash=1000000.0,
         )
+
+        print("\n===== DECISION OFFICE =====")
+        print(decision.summary)
+        print(f"Recommendation : {decision.recommendation.value}")
+        print(f"Confidence      : {decision.confidence:.2f}")
+
         print("Decision Office initialized successfully.")
         # ==========================================================
         # MANAGEMENT
