@@ -125,6 +125,8 @@ class EIOSApplication:
 
         valuation_engine = ValuationEngine(research)
         valuation_engine.analyze(financial_data)
+        decision_office = DecisionOffice()
+        print("Decision Office initialized successfully.")
 
         # ==========================================================
         # MANAGEMENT
