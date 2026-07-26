@@ -131,8 +131,8 @@ class EIOSApplication:
 
         valuation = dossier.valuation
         intrinsic_value = valuation["Intrinsic Value"].fair_value
-
         print(f"Intrinsic Value = {intrinsic_value}")
+
         decision = decision_office.evaluate(
             intrinsic_value=intrinsic_value,
             market_price=3200.0,
