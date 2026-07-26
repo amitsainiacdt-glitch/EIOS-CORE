@@ -125,80 +125,42 @@ class EIOSApplication:
 
         valuation_engine = ValuationEngine(research)
         valuation_engine.analyze(financial_data)
+           
 
-        decision_office = DecisionOffice()
+    # ==========================================================
+    # MANAGEMENT
+    # ==========================================================
 
-        valuation = dossier.valuation
-        intrinsic_value = valuation["Intrinsic Value"].fair_value
+    management_engine = ManagementEngine(research)
 
-        print(f"Intrinsic Value = {intrinsic_value}")
-        decision = decision_office.evaluate(
-            intrinsic_value=intrinsic_value,
-            market_price=3200.0,
-            business_score=90.0,
-            financial_score=88.0,
-            management_score=87.5,
-            competitive_score=92.0,
-            risk_score=84.17,
-            valuation_score=80.0,
-            available_cash=1000000.0,
+    management_engine.analyze(
+        {
+            "company": dossier.company_name,
+        }
+    )
+
+            committee_engine = CommitteeEngine(research)
+
+    # ==========================================================
+    # COMPETITIVE INTELLIGENCE
+    # ==========================================================
+
+    competitive_engine = CompetitiveEngine()
+
+    competitive_engine.add_peer(
+        Peer(
+            company="The Anup Engineering Limited",
+            revenue_growth=20,
+            eps_growth=25,
+            roce=25,
+            roe=22,
+            roiic=24,
+            operating_margin=18,
+            debt_to_equity=0.20,
         )
-        print("Decision Office initialized successfully.")
-        # ==========================================================
-        # MANAGEMENT
-        # ==========================================================
+    )
 
-        management_engine = ManagementEngine(research)
-
-        management_engine.analyze(
-            {
-                "company": dossier.company_name,
-            }
-        )
-
-        # ==========================================================
-        # RISK
-        # ==========================================================
-
-        risk_engine = RiskEngine(research)
-
-        risk_engine.analyze(
-            {
-                "company": dossier.company_name,
-            }
-        )
-
-        # ==========================================================
-        # THESIS ENGINE
-        # ==========================================================
-
-        thesis_engine = ThesisEngine(research)
-
-        # ==========================================================
-        # INVESTMENT COMMITTEE
-        # ==========================================================
-
-        committee_engine = CommitteeEngine(research)
-        # ==========================================================
-        # COMPETITIVE INTELLIGENCE
-        # ==========================================================
-
-        competitive_engine = CompetitiveEngine()
-
-        competitive_engine.add_peer(
-            Peer(
-                company="The Anup Engineering Limited",
-                revenue_growth=20,
-                eps_growth=25,
-                roce=25,
-                roe=22,
-                roiic=24,
-                operating_margin=18,
-                debt_to_equity=0.20,
-            )
-        )
-
-        competitive_engine.add_peer(
+    competitive_engine.add_peer(
             Peer(
                 company="Thermax",
                 revenue_growth=15,
