@@ -56,4 +56,14 @@ class RiskEngine:
 
         self.research.update_risk(risk_summary)
 
+        # =====================================================
+        # OVERALL RISK SCORE
+        # =====================================================
+
+        self.research.dossier.risks["Overall Risk"] = {
+            "Overall Score": overall["Overall Score"],
+            "Confidence": overall["Confidence"],
+            "Rating": overall["Rating"],
+        }
+
         print("Risk Analysis Completed")
