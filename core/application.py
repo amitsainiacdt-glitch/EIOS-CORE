@@ -292,7 +292,7 @@ class EIOSApplication:
             financial_score=dossier.financials["Overall Score"],
             management_score=dossier.management["Overall Score"]["Overall Score"],
             competitive_score=92.0,
-            risk_score=84.17,
+           risk_score=dossier.risks["Overall Risk"]["Overall Score"],
             valuation_score=80.0,
             available_cash=1000000.0,
         )
