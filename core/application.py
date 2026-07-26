@@ -127,30 +127,7 @@ class EIOSApplication:
         valuation_engine = ValuationEngine(research)
         valuation_engine.analyze(financial_data)
 
-        decision_office = DecisionOffice()
 
-        valuation = dossier.valuation
-        intrinsic_value = valuation["Intrinsic Value"].fair_value
-        print(f"Intrinsic Value = {intrinsic_value}")
-
-        decision = decision_office.evaluate(
-            intrinsic_value=intrinsic_value,
-            market_price=3200.0,
-            business_score=90.0,
-            financial_score=88.0,
-            management_score=87.5,
-            competitive_score=92.0,
-            risk_score=84.17,
-            valuation_score=80.0,
-            available_cash=1000000.0,
-        )
-
-        print("\n===== DECISION OFFICE =====")
-        print(decision.summary)
-        print(f"Recommendation : {decision.recommendation.value}")
-        print(f"Confidence      : {decision.confidence:.2f}")
-        research.update_decision(asdict(decision))
-        print("Decision Office initialized successfully.")
         # ==========================================================
         # MANAGEMENT
         # ==========================================================
@@ -301,12 +278,36 @@ class EIOSApplication:
             ],
         )
 
-               # ==========================================================
+        decision_office = DecisionOffice()
+
+        valuation = dossier.valuation
+        intrinsic_value = valuation["Intrinsic Value"].fair_value
+
+        print(f"Intrinsic Value = {intrinsic_value}")
+
+        decision = decision_office.evaluate(
+            intrinsic_value=intrinsic_value,
+            market_price=3200.0,
+            business_score=dossier.business_quality["Overall Score"],
+            financial_score=88.0,
+            management_score=87.5,
+            competitive_score=92.0,
+            risk_score=84.17,
+            valuation_score=80.0,
+            available_cash=1000000.0,
+        )
+
+        print("\n===== DECISION OFFICE =====")
+        print(decision.summary)
+        print(f"Recommendation : {decision.recommendation.value}")
+        print(f"Confidence      : {decision.confidence:.2f}")
+        research.update_decision(asdict(decision))
+        print("Decision Office initialized successfully.")
+        # ==========================================================
         # THESIS
         # ==========================================================
 
         thesis_engine.analyze()
-
         # ==========================================================
         # INVESTMENT COMMITTEE
         # ==========================================================
