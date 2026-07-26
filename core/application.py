@@ -21,6 +21,7 @@ from modules.risk.risk_engine import RiskEngine
 from modules.thesis.thesis_engine import ThesisEngine
 from modules.investment_committee.committee_engine import CommitteeEngine
 from modules.decision.decision_office import DecisionOffice
+from dataclasses import asdict
 
 class EIOSApplication:
 
@@ -148,7 +149,7 @@ class EIOSApplication:
         print(decision.summary)
         print(f"Recommendation : {decision.recommendation.value}")
         print(f"Confidence      : {decision.confidence:.2f}")
-
+        research.update_decision(asdict(decision))
         print("Decision Office initialized successfully.")
         # ==========================================================
         # MANAGEMENT
