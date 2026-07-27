@@ -4,6 +4,9 @@ Business Quality Engine
 
 from modules.research.company_research import CompanyResearch
 
+from modules.core.scoring.scoring_engine import ScoringEngine
+from modules.core.scoring.confidence_engine import ConfidenceEngine
+
 
 class BusinessQualityEngine:
     """
@@ -34,9 +37,19 @@ class BusinessQualityEngine:
             }
         )
 
-        # Overall Business Quality Assessment
-        self.research.dossier.business_quality["Overall Score"] = 90.0
-        self.research.dossier.business_quality["Confidence"] = 40
-        self.research.dossier.business_quality["Rating"] = "Good"
+        # --------------------------------------------------
+        # Institutional Scoring Framework
+        # --------------------------------------------------
+
+        score = ScoringEngine.calculate(90)
+
+        confidence = ConfidenceEngine.calculate(
+            evidence_items=4,
+            expected_items=10,
+        )
+
+        self.research.dossier.business_quality["Overall Score"] = score.percentage
+        self.research.dossier.business_quality["Confidence"] = confidence.confidence
+        self.research.dossier.business_quality["Rating"] = score.grade
 
         print("Business Quality Analysis Completed")
