@@ -1,12 +1,19 @@
 """
 Competitive Engine
 
-Coordinates peer benchmarking and ranking.
+Coordinates peer benchmarking, ranking and
+institutional competitive assessment.
 """
 
 from modules.competitive.peer_registry import PeerRegistry
 from modules.competitive.benchmark_engine import BenchmarkEngine
 from modules.competitive.ranking_engine import RankingEngine
+from modules.competitive.competitive_assessment import (
+    CompetitiveAssessmentEngine,
+)
+
+from modules.core.scoring.scoring_engine import ScoringEngine
+from modules.core.scoring.confidence_engine import ConfidenceEngine
 
 
 class CompetitiveEngine:
@@ -15,19 +22,29 @@ class CompetitiveEngine:
     """
 
     def __init__(self):
+
         self.registry = PeerRegistry()
         self.benchmark = BenchmarkEngine()
         self.ranking = RankingEngine()
+
+        # Institutional Competitive Assessment
+        self.assessment = CompetitiveAssessmentEngine()
+
+        # Shared Institutional Scoring
+        self.scoring_engine = ScoringEngine()
+        self.confidence_engine = ConfidenceEngine()
 
     def add_peer(self, peer):
         """
         Add a peer company.
         """
+
         self.registry.add_peer(peer)
 
     def analyze(self, metric="Benchmark Score"):
         """
-        Analyze peers and return the ranking.
+        Analyze peer companies and generate
+        institutional competitive assessment.
         """
 
         peers = self.registry.get_all_peers()
@@ -36,28 +53,59 @@ class CompetitiveEngine:
 
         ranked = self.ranking.rank(
             benchmarked,
-            metric=metric
+            metric=metric,
         )
 
         leader = self.ranking.top_company(ranked)
+
         laggard = self.ranking.bottom_company(ranked)
 
+        # =====================================================
+        # COMPETITIVE ASSESSMENT
+        # =====================================================
+
+        assessment = self.assessment.evaluate(ranked)
+
+        # =====================================================
+        # SHARED SCORING ENGINE
+        # =====================================================
+
+        score_result = self.scoring_engine.calculate(
+            score=assessment["Total Score"],
+            max_score=assessment["Max Score"],
+        )
+
         return {
+
             "metric": metric,
+
             "peer_count": len(ranked),
+
             "leader": leader,
+
             "laggard": laggard,
+
             "ranked_peers": ranked,
 
+            "Assessment": assessment,
+
             "Overall Score": {
-                "Overall Score": 92.0,
-                "Confidence": 85.0,
-                "Rating": "Excellent",
+
+                "Overall Score": score_result.percentage,
+
+                "Raw Score": score_result.score,
+
+                "Maximum Score": score_result.max_score,
+
+                "Confidence": assessment["Confidence"],
+
+                "Rating": score_result.grade,
             },
         }
+
     def summary(self, metric="Benchmark Score"):
         """
-        Display the competitive ranking summary.
+        Display Competitive Intelligence Summary.
         """
 
         result = self.analyze(metric)
@@ -69,5 +117,16 @@ class CompetitiveEngine:
         self.ranking.summary(result["ranked_peers"])
 
         if result["leader"] is not None:
+
             print(f"\nLeader : {result['leader']['Company']}")
             print(f"Metric : {metric}")
+
+            print(
+                f"Competitive Score : "
+                f"{result['Overall Score']['Overall Score']}"
+            )
+
+            print(
+                f"Rating : "
+                f"{result['Overall Score']['Rating']}"
+            )

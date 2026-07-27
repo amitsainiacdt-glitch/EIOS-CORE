@@ -6,6 +6,9 @@ from modules.risk.macro_risk import MacroRiskEngine
 from modules.risk.scenario_engine import ScenarioEngine
 from modules.risk.risk_scorecard import RiskScorecard
 
+from modules.core.scoring.scoring_engine import ScoringEngine
+from modules.core.scoring.confidence_engine import ConfidenceEngine
+
 from modules.research.company_research import CompanyResearch
 
 
@@ -24,6 +27,9 @@ class RiskEngine:
 
         self.scorecard = RiskScorecard()
 
+        self.scoring_engine = ScoringEngine()
+        self.confidence_engine = ConfidenceEngine()
+
     def analyze(self, risk_data: dict):
 
         print("\nStarting Risk Analysis...")
@@ -41,7 +47,12 @@ class RiskEngine:
             governance,
             industry,
             macro,
-            scenario
+            scenario,
+        )
+
+        score_result = self.scoring_engine.calculate(
+            score=overall["Raw Score"],
+            max_score=overall["Max Score"],
         )
 
         risk_summary = {
@@ -51,7 +62,13 @@ class RiskEngine:
             "Industry Risk": industry,
             "Macro Risk": macro,
             "Scenario Analysis": scenario,
-            "Overall Risk": overall
+            "Overall Risk": {
+                "Overall Score": score_result.percentage,
+                "Raw Score": score_result.score,
+                "Maximum Score": score_result.max_score,
+                "Confidence": overall["Confidence"],
+                "Rating": score_result.grade,
+            },
         }
 
         self.research.update_risk(risk_summary)
@@ -61,9 +78,11 @@ class RiskEngine:
         # =====================================================
 
         self.research.dossier.risks["Overall Risk"] = {
-            "Overall Score": overall["Overall Score"],
+            "Overall Score": score_result.percentage,
+            "Raw Score": score_result.score,
+            "Maximum Score": score_result.max_score,
             "Confidence": overall["Confidence"],
-            "Rating": overall["Rating"],
+            "Rating": score_result.grade,
         }
 
         print("Risk Analysis Completed")

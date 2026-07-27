@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 from typing import Dict, List
 
 from .evidence_library import EvidenceLibrary
+from .serializer import MasterDossierSerializer
 
 
 @dataclass
@@ -24,7 +25,6 @@ class MasterDossier:
     competitive: Dict = field(default_factory=dict)
     valuation: Dict = field(default_factory=dict)
 
-    # NEW
     decision: Dict = field(default_factory=dict)
 
     risks: List[str] = field(default_factory=list)
@@ -121,19 +121,25 @@ class MasterDossier:
     # ==========================================================
 
     def to_dict(self):
-        return {
-            "company_name": self.company_name,
-            "ticker": self.ticker,
-            "sector": self.sector,
-            "industry": self.industry,
-            "business_quality": self.business_quality,
-            "management": self.management,
-            "thesis": self.thesis,
-            "committee": self.committee,
-            "financials": self.financials,
-            "competitive": self.competitive,
-            "valuation": self.valuation,
-            "decision": self.decision,
-            "risks": self.risks,
-            "evidence": self.evidence.to_dict(),
-        }
+        """
+        Export the complete Master Dossier as a JSON-safe dictionary.
+        """
+
+        return MasterDossierSerializer.serialize(
+            {
+                "company_name": self.company_name,
+                "ticker": self.ticker,
+                "sector": self.sector,
+                "industry": self.industry,
+                "business_quality": self.business_quality,
+                "management": self.management,
+                "thesis": self.thesis,
+                "committee": self.committee,
+                "financials": self.financials,
+                "competitive": self.competitive,
+                "valuation": self.valuation,
+                "decision": self.decision,
+                "risks": self.risks,
+                "evidence": self.evidence.to_dict(),
+            }
+        )

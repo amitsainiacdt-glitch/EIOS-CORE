@@ -7,7 +7,7 @@ class RiskScorecard:
         governance,
         industry,
         macro,
-        scenario
+        scenario,
     ):
 
         scores = [
@@ -16,40 +16,27 @@ class RiskScorecard:
             governance["Score"],
             industry["Score"],
             macro["Score"],
-            scenario["Score"]
+            scenario["Score"],
         ]
 
-        confidence = [
+        confidences = [
             business["Confidence"],
             financial["Confidence"],
             governance["Confidence"],
             industry["Confidence"],
             macro["Confidence"],
-            scenario["Confidence"]
+            scenario["Confidence"],
         ]
 
-        overall_score = round(sum(scores) / len(scores), 2)
-        overall_confidence = round(sum(confidence) / len(confidence), 2)
+        raw_score = round(sum(scores) / len(scores), 2)
+
+        confidence = round(
+            sum(confidences) / len(confidences),
+            2,
+        )
 
         return {
-            "Overall Score": overall_score,
-            "Confidence": overall_confidence,
-            "Rating": self._rating(overall_score)
+            "Raw Score": raw_score,
+            "Max Score": 100,
+            "Confidence": confidence,
         }
-
-    def _rating(self, score):
-
-        if score >= 90:
-            return "Very Low Risk"
-
-        elif score >= 80:
-            return "Low Risk"
-
-        elif score >= 70:
-            return "Moderate Risk"
-
-        elif score >= 60:
-            return "High Risk"
-
-        else:
-            return "Very High Risk"

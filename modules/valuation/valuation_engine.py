@@ -22,6 +22,9 @@ from modules.valuation.epv_engine import EPVEngine
 from modules.valuation.valuation_registry import ValuationRegistry
 from modules.valuation.intrinsic_value_office import IntrinsicValueOffice
 
+from modules.core.scoring.scoring_engine import ScoringEngine
+from modules.core.scoring.confidence_engine import ConfidenceEngine
+
 
 class ValuationEngine:
     """
@@ -60,6 +63,13 @@ class ValuationEngine:
         # -----------------------------------------------------
 
         self.intrinsic_value_office = IntrinsicValueOffice()
+
+        # -----------------------------------------------------
+        # Shared Scoring
+        # -----------------------------------------------------
+
+        self.scoring_engine = ScoringEngine()
+        self.confidence_engine = ConfidenceEngine()
 
     def analyze(self, financial_data: dict):
 
@@ -132,10 +142,21 @@ class ValuationEngine:
         # VALUATION OVERALL SCORE
         # =====================================================
 
+        # Temporary institutional score.
+        # Sprint 18 will replace this with an evidence-driven
+        # valuation assessment engine.
+
+        score_result = self.scoring_engine.calculate(
+            score=80,
+            max_score=100,
+        )
+
         self.research.dossier.valuation["Overall Score"] = {
-            "Overall Score": 80.0,
+            "Overall Score": score_result.percentage,
+            "Raw Score": score_result.score,
+            "Maximum Score": score_result.max_score,
             "Confidence": 85.0,
-            "Rating": "Good",
+            "Rating": score_result.grade,
         }
 
         print("Valuation Analysis Completed")
