@@ -15,6 +15,8 @@ from modules.financial.working_capital_engine import WorkingCapitalEngine
 from modules.financial.capital_allocation import CapitalAllocationEngine
 from modules.financial.financial_scorecard import FinancialScorecard
 from modules.valuation.valuation_assumptions import ValuationAssumptionsBuilder
+from modules.core.scoring.scoring_engine import ScoringEngine
+from modules.core.scoring.confidence_engine import ConfidenceEngine
 
 
 class FinancialEngine:
@@ -34,6 +36,8 @@ class FinancialEngine:
         self.working_capital = WorkingCapitalEngine()
         self.capital_allocation = CapitalAllocationEngine()
         self.scorecard = FinancialScorecard()
+        self.scoring_engine = ScoringEngine()
+        self.confidence_engine = ConfidenceEngine()
         self.valuation_builder = ValuationAssumptionsBuilder()
 
     def analyze(self, financial_data: dict):
@@ -209,7 +213,7 @@ class FinancialEngine:
             "Financial Scorecard": scorecard,
         }
 
-                 # =====================================================
+        # =====================================================
         # VALUATION ASSUMPTIONS
         # =====================================================
 
@@ -226,12 +230,38 @@ class FinancialEngine:
 
         self.research.update_financials(financial_summary)
 
-        # =====================================================
+               # =====================================================
         # OVERALL FINANCIAL SCORE
         # =====================================================
 
-        self.research.dossier.financials["Overall Score"] = 88.0
-        self.research.dossier.financials["Confidence"] = 40
-        self.research.dossier.financials["Rating"] = "Good"
+        score_result = self.scoring_engine.calculate(
+            score=scorecard["Total Score"],
+            max_score=scorecard["Max Score"],
+        )
+
+        confidence_result = self.confidence_engine.calculate(
+            evidence_items=6,
+            expected_items=10,
+        )
+
+        self.research.dossier.financials["Overall Score"] = (
+            score_result.percentage
+        )
+
+        self.research.dossier.financials["Raw Score"] = (
+            score_result.score
+        )
+
+        self.research.dossier.financials["Maximum Score"] = (
+            score_result.max_score
+        )
+
+        self.research.dossier.financials["Confidence"] = (
+            confidence_result.confidence
+        )
+
+        self.research.dossier.financials["Rating"] = (
+            score_result.grade
+        )
 
         print("Financial Analysis Completed")
