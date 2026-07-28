@@ -22,6 +22,7 @@ from modules.thesis.thesis_engine import ThesisEngine
 from modules.investment_committee.committee_engine import CommitteeEngine
 from modules.decision.decision_office import DecisionOffice
 from dataclasses import asdict
+from modules.research_context.research_context import ResearchContext
 
 class EIOSApplication:
 
@@ -86,8 +87,10 @@ class EIOSApplication:
             sector="Capital Goods",
             industry="Process Equipment",
         )
+        research_context = ResearchContext()
+        research_context.set_master_dossier(dossier)
 
-        research = CompanyResearch(dossier)
+        research = CompanyResearch(research_context)
 
         # ==========================================================
         # FINANCIAL ENGINE
@@ -223,6 +226,7 @@ class EIOSApplication:
             entity="Indian Economy",
             confidence=98,
         )
+        research_context.add_observation(observation)
 
         # ==========================================================
         # EVIDENCE
@@ -233,6 +237,7 @@ class EIOSApplication:
         )
 
         research.add_evidence(evidence)
+        research_context.add_evidence(evidence)
 
         # ==========================================================
         # KNOWLEDGE
@@ -241,6 +246,7 @@ class EIOSApplication:
         knowledge = self.knowledge_engine.create_from_evidence(
             evidence
         )
+        research_context.add_knowledge(knowledge)
 
         # ==========================================================
         # REASONING

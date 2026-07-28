@@ -4,14 +4,25 @@ Company Research
 Acts as the central coordinator for all research modules.
 """
 
-from modules.master_dossier.master_dossier import MasterDossier
+from modules.research_context.research_context import ResearchContext
 
 
 class CompanyResearch:
 
-    def __init__(self, dossier: MasterDossier):
-        self.dossier = dossier
-        self.master_dossier = dossier
+    def __init__(self, context: ResearchContext):
+        self.context = context
+
+    # ---------------------------------------------------------
+    # Backward Compatibility
+    # ---------------------------------------------------------
+
+    @property
+    def dossier(self):
+        return self.context.get_master_dossier()
+
+    @property
+    def master_dossier(self):
+        return self.context.get_master_dossier()
 
     # ---------------------------------------------------------
     # Business Quality

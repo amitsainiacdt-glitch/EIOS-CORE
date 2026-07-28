@@ -4,7 +4,7 @@ Module: EIOS Entry Point
 Purpose:
 Starts the Everest Investment Operating System.
 """
-
+from modules.research_context.research_context import ResearchContext
 from core.application import EIOSApplication
 
 
