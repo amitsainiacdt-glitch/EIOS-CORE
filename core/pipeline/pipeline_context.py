@@ -19,6 +19,10 @@ class PipelineContext:
 
     def __init__(self):
 
+        # ---------------------------------------------------------------------
+        # Raw Pipeline Data
+        # ---------------------------------------------------------------------
+
         # Raw observation
         self.observation = None
 
@@ -37,17 +41,39 @@ class PipelineContext:
         # Final recommendation
         self.decision = None
 
-        # Company dossier
+        # Company Master Dossier
         self.master_dossier = None
 
-        # Intelligence engine outputs
+        # ---------------------------------------------------------------------
+        # Intelligence Engine Outputs
+        # ---------------------------------------------------------------------
+
+        # Business Intelligence
         self.business_analysis: Optional["AnalysisPack"] = None
+
+        # Financial Intelligence
         self.financial_analysis: Optional["AnalysisPack"] = None
-        self.competitive_analysis: Optional["AnalysisPack"] = None
-        self.valuation_analysis: Optional["AnalysisPack"] = None
-        self.risk_analysis: Optional["AnalysisPack"] = None
+
+        # Management Intelligence
         self.management_analysis: Optional["AnalysisPack"] = None
+
+        # Ownership Intelligence
+        self.ownership_analysis: Optional["AnalysisPack"] = None
+
+        # Competitive Intelligence
+        self.competitive_analysis: Optional["AnalysisPack"] = None
+
+        # Risk Intelligence
+        self.risk_analysis: Optional["AnalysisPack"] = None
+
+        # Valuation Intelligence
+        self.valuation_analysis: Optional["AnalysisPack"] = None
+
+        # Macro Intelligence
         self.macro_analysis: Optional["AnalysisPack"] = None
 
-        # Future support
+        # ---------------------------------------------------------------------
+        # Pipeline Metadata
+        # ---------------------------------------------------------------------
+
         self.metadata = {}

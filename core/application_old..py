@@ -20,7 +20,6 @@ from modules.management.management_engine import ManagementEngine
 from modules.risk.risk_engine import RiskEngine
 from modules.thesis.thesis_engine import ThesisEngine
 from modules.investment_committee.committee_engine import CommitteeEngine
-from modules.decision.decision_office import DecisionOffice
 
 class EIOSApplication:
 

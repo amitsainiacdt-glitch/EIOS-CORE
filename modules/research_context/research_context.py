@@ -7,10 +7,12 @@ Central shared runtime context for all analytical engines.
 The ResearchContext acts as the single source of truth for
 all shared research state during an analysis session.
 
-Release 18.0
+Release 18.3
 """
 
 from datetime import datetime
+
+from modules.intelligence.intelligence_mesh import IntelligenceMesh
 
 
 class ResearchContext:
@@ -35,6 +37,12 @@ class ResearchContext:
         self.assumptions = []
 
         # ----------------------------
+        # Intelligence Mesh
+        # ----------------------------
+
+        self.intelligence_mesh = IntelligenceMesh()
+
+        # ----------------------------
         # External Intelligence
         # ----------------------------
 
@@ -48,8 +56,8 @@ class ResearchContext:
 
         self.metadata = {
             "created_at": datetime.now().isoformat(),
-            "release": "18.0",
-            "version": "ResearchContext-1.0",
+            "release": "18.3",
+            "version": "ResearchContext-1.2",
         }
 
     # -------------------------------------------------
@@ -61,6 +69,20 @@ class ResearchContext:
 
     def get_master_dossier(self):
         return self.master_dossier
+
+    # -------------------------------------------------
+    # Intelligence Mesh
+    # -------------------------------------------------
+
+    def get_intelligence_mesh(self):
+        return self.intelligence_mesh
+
+    def publish_intelligence(self, intelligence):
+        self.intelligence_mesh.publish(intelligence)
+        print(
+            f"Published Intelligence: {intelligence.title} "
+            f"({self.intelligence_mesh.count()} total)"
+    )
 
     # -------------------------------------------------
     # Evidence

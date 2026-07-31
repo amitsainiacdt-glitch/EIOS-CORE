@@ -5,8 +5,7 @@ class RiskMember:
     """
     Risk Committee Member
 
-    Evaluates business, financial, governance,
-    industry and macro risks.
+    Evaluates overall business risk using RiskSection.
     """
 
     def __init__(self):
@@ -17,7 +16,7 @@ class RiskMember:
         dossier = research.master_dossier
         risk = dossier.risk_analysis
 
-        if not risk:
+        if risk is None:
             return CommitteeResponse(
                 member="Risk",
                 vote="Watch",
@@ -33,58 +32,70 @@ class RiskMember:
         evidence = []
         risks = []
 
-        # ------------------------------------
-        # Overall Risk
-        # ------------------------------------
+        # -------------------------------------------------
+        # Overall Risk Score
+        # -------------------------------------------------
 
-        overall = risk.get("Overall Risk", {})
-        overall_score = overall.get("Overall Score", 0)
+        overall_score = risk.overall_risk_score
 
         if overall_score >= 85:
             score += 40
-            evidence.append("Overall risk profile is excellent")
+            evidence.append(
+                f"Excellent overall risk profile ({overall_score:.2f})"
+            )
         elif overall_score >= 75:
             score += 30
-            evidence.append("Risk profile is acceptable")
+            evidence.append(
+                f"Acceptable overall risk profile ({overall_score:.2f})"
+            )
         else:
-            risks.append("Overall risk profile is weak")
+            risks.append(
+                f"Overall risk score is low ({overall_score:.2f})"
+            )
 
-        # ------------------------------------
-        # Financial Risk
-        # ------------------------------------
+        # -------------------------------------------------
+        # Financial Risks
+        # -------------------------------------------------
 
-        financial = risk.get("Financial Risk", {})
-        if financial.get("Score", 0) >= 80:
+        if len(risk.financial_risks) == 0:
             score += 20
-            evidence.append("Financial risk is low")
+            evidence.append("No major financial risks")
         else:
-            risks.append("Financial risk requires monitoring")
+            risks.extend(risk.financial_risks)
 
-        # ------------------------------------
-        # Governance Risk
-        # ------------------------------------
+        # -------------------------------------------------
+        # Management Risks
+        # -------------------------------------------------
 
-        governance = risk.get("Governance Risk", {})
-        if governance.get("Score", 0) >= 80:
-            score += 20
-            evidence.append("Governance risk is low")
+        if len(risk.management_risks) == 0:
+            score += 15
+            evidence.append("No management concerns")
         else:
-            risks.append("Governance concerns")
+            risks.extend(risk.management_risks)
 
-        # ------------------------------------
-        # Industry Risk
-        # ------------------------------------
+        # -------------------------------------------------
+        # Industry Risks
+        # -------------------------------------------------
 
-        industry = risk.get("Industry Risk", {})
-        if industry.get("Score", 0) >= 80:
-            score += 20
-            evidence.append("Industry risk acceptable")
+        if len(risk.industry_risks) == 0:
+            score += 15
+            evidence.append("Industry risks acceptable")
         else:
-            risks.append("Industry risk elevated")
+            risks.extend(risk.industry_risks)
 
-        # ------------------------------------
+        # -------------------------------------------------
+        # Red Flags
+        # -------------------------------------------------
+
+        if len(risk.red_flags) == 0:
+            score += 10
+            evidence.append("No red flags detected")
+        else:
+            risks.extend(risk.red_flags)
+
+        # -------------------------------------------------
         # Final Vote
-        # ------------------------------------
+        # -------------------------------------------------
 
         if score >= 85:
             vote = "Pass"
@@ -93,13 +104,15 @@ class RiskMember:
         else:
             vote = "Reject"
 
+        confidence = min(100, score + 10)
+
         return CommitteeResponse(
             member="Risk",
             vote=vote,
             score=score,
-            confidence=90,
+            confidence=confidence,
             evidence=evidence,
             risks=risks,
             recommendation=f"Risk Score = {score}",
-            reason=f"Risk Score = {score}",
+            reason=f"Overall Risk = {overall_score:.2f}",
         )

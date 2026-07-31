@@ -16,7 +16,7 @@ class FinancialMember:
         dossier = research.master_dossier
         financial = dossier.financial_analysis
 
-        if not financial:
+        if financial is None:
             return CommitteeResponse(
                 member="Financial",
                 vote="Watch",
@@ -32,34 +32,74 @@ class FinancialMember:
         evidence = []
         risks = []
 
-        revenue_growth = financial.get("Revenue Growth", 0)
-        roce = financial.get("ROCE", 0)
-        roe = financial.get("ROE", 0)
-        debt = financial.get("Debt to Equity", 999)
+        # ---------------------------------------------------------
+        # Read FinancialSection attributes
+        # ---------------------------------------------------------
+
+        revenue_growth = financial.revenue_growth
+        roce = financial.roce
+        roe = financial.roe
+        debt = financial.debt_to_equity
+
+        # ---------------------------------------------------------
+        # Revenue Growth
+        # ---------------------------------------------------------
 
         if revenue_growth >= 15:
             score += 25
-            evidence.append("Strong revenue growth")
+            evidence.append(
+                f"Strong revenue growth ({revenue_growth:.2f}%)"
+            )
         else:
-            risks.append("Weak revenue growth")
+            risks.append(
+                f"Weak revenue growth ({revenue_growth:.2f}%)"
+            )
+
+        # ---------------------------------------------------------
+        # ROCE
+        # ---------------------------------------------------------
 
         if roce >= 20:
             score += 25
-            evidence.append("High ROCE")
+            evidence.append(
+                f"High ROCE ({roce:.2f}%)"
+            )
         else:
-            risks.append("ROCE below target")
+            risks.append(
+                f"ROCE below target ({roce:.2f}%)"
+            )
+
+        # ---------------------------------------------------------
+        # ROE
+        # ---------------------------------------------------------
 
         if roe >= 18:
             score += 25
-            evidence.append("Healthy ROE")
+            evidence.append(
+                f"Healthy ROE ({roe:.2f}%)"
+            )
         else:
-            risks.append("ROE below target")
+            risks.append(
+                f"ROE below target ({roe:.2f}%)"
+            )
 
-        if debt <= 0.5:
+        # ---------------------------------------------------------
+        # Debt
+        # ---------------------------------------------------------
+
+        if debt <= 0.50:
             score += 25
-            evidence.append("Low leverage")
+            evidence.append(
+                f"Low leverage (D/E {debt:.2f})"
+            )
         else:
-            risks.append("High leverage")
+            risks.append(
+                f"High leverage (D/E {debt:.2f})"
+            )
+
+        # ---------------------------------------------------------
+        # Vote
+        # ---------------------------------------------------------
 
         if score >= 85:
             vote = "Pass"
@@ -68,13 +108,15 @@ class FinancialMember:
         else:
             vote = "Reject"
 
+        confidence = min(100, score + 10)
+
         return CommitteeResponse(
             member="Financial",
             vote=vote,
             score=score,
-            confidence=90,
+            confidence=confidence,
             evidence=evidence,
             risks=risks,
             recommendation=f"Financial Score = {score}",
-            reason=f"Financial Score = {score}",
+            reason=f"Revenue Growth={revenue_growth:.2f}%, ROCE={roce:.2f}%, ROE={roe:.2f}%, Debt/Equity={debt:.2f}",
         )

@@ -1,16 +1,34 @@
 """
+===============================================================================
 EIOS
 Everest Investment Operating System
 
 Valuation Engine
 
-Coordinates all valuation models and updates CompanyResearch.
+Purpose:
+    Coordinates all valuation models and updates CompanyResearch.
 
 Architecture:
-- Owner Earnings is executed independently.
-- Valuation methods are executed through the Valuation Registry.
-- Intrinsic Value Office consolidates intrinsic valuation outputs.
-- New valuation engines require only registration.
+    - Owner Earnings is executed independently.
+    - Valuation methods execute through the Valuation Registry.
+    - Intrinsic Value Office consolidates intrinsic valuation outputs.
+    - Financial inputs are consumed from MasterDossier.financial.
+    - New valuation engines require only registration.
+
+Migration Status:
+    Financial input:
+        Migrated to typed FinancialSection.
+
+    Valuation output:
+        Legacy valuation dictionary temporarily preserved until the
+        ValuationSection migration sprint.
+
+Author:
+    EIOS
+
+Release:
+    2.0
+===============================================================================
 """
 
 from modules.research.company_research import CompanyResearch
@@ -30,43 +48,41 @@ class ValuationEngine:
     """
     Coordinates all valuation models.
 
-    Owner Earnings is treated as an operating cash-flow analysis.
+    Financial intelligence is consumed from the typed
+    MasterDossier.financial section.
 
-    Intrinsic valuation methods execute through the
-    Valuation Registry.
-
-    The Intrinsic Value Office combines completed valuation
-    outputs into a single institutional intrinsic value estimate.
+    Valuation output remains on the legacy valuation interface until
+    ValuationSection receives its dedicated migration sprint.
     """
 
     def __init__(self, research: CompanyResearch):
 
         self.research = research
 
-        # -----------------------------------------------------
-        # Owner Earnings (not an intrinsic valuation method)
-        # -----------------------------------------------------
+        # ---------------------------------------------------------------------
+        # Owner Earnings
+        # ---------------------------------------------------------------------
 
         self.owner_earnings = OwnerEarningsEngine()
 
-        # -----------------------------------------------------
+        # ---------------------------------------------------------------------
         # Valuation Registry
-        # -----------------------------------------------------
+        # ---------------------------------------------------------------------
 
         self.registry = ValuationRegistry()
 
         self.registry.register(DCFEngine())
         self.registry.register(EPVEngine())
 
-        # -----------------------------------------------------
+        # ---------------------------------------------------------------------
         # Intrinsic Value Office
-        # -----------------------------------------------------
+        # ---------------------------------------------------------------------
 
         self.intrinsic_value_office = IntrinsicValueOffice()
 
-        # -----------------------------------------------------
+        # ---------------------------------------------------------------------
         # Shared Scoring
-        # -----------------------------------------------------
+        # ---------------------------------------------------------------------
 
         self.scoring_engine = ScoringEngine()
         self.confidence_engine = ConfidenceEngine()
@@ -77,30 +93,45 @@ class ValuationEngine:
 
         valuation_summary = {}
 
-        # =====================================================
+        # =====================================================================
         # OWNER EARNINGS
-        # =====================================================
+        # =====================================================================
 
         valuation_summary["Owner Earnings"] = (
             self.owner_earnings.evaluate(financial_data)
         )
 
-        # =====================================================
+        # =====================================================================
+        # FETCH TYPED FINANCIAL STATE
+        # =====================================================================
+
+        financial = self.research.master_dossier.financial
+
+        # =====================================================================
         # FETCH VALUATION ASSUMPTIONS
-        # =====================================================
+        #
+        # FinancialEngine V2 currently places valuation assumptions inside
+        # FinancialSection.metadata as a controlled migration bridge.
+        #
+        # This avoids restoring the legacy dossier.financials dictionary.
+        # The bridge will be removed when valuation assumptions receive a
+        # dedicated typed domain model.
+        # =====================================================================
 
-        financial_summary = (
-            self.research.master_dossier.financials
+        valuation_assumptions = financial.metadata.get(
+            "valuation_assumptions",
+            {},
         )
 
-        valuation_assumptions = financial_summary.get(
-            "Valuation Assumptions",
-            {}
-        )
+        if not isinstance(valuation_assumptions, dict):
+            raise TypeError(
+                "FinancialSection.metadata['valuation_assumptions'] "
+                "must contain a dictionary during the migration phase."
+            )
 
-        # =====================================================
+        # =====================================================================
         # EXECUTE REGISTERED VALUATION ENGINES
-        # =====================================================
+        # =====================================================================
 
         for engine in self.registry:
 
@@ -116,9 +147,9 @@ class ValuationEngine:
                     assumptions
                 )
 
-        # =====================================================
+        # =====================================================================
         # INTRINSIC VALUE OFFICE
-        # =====================================================
+        # =====================================================================
 
         intrinsic_value = (
             self.intrinsic_value_office.evaluate(
@@ -130,21 +161,24 @@ class ValuationEngine:
             "Intrinsic Value"
         ] = intrinsic_value
 
-        # =====================================================
+        # =====================================================================
         # UPDATE MASTER DOSSIER
-        # =====================================================
+        #
+        # Valuation remains dictionary-based during Sprint 012.2.
+        # Its typed migration will occur independently.
+        # =====================================================================
 
         self.research.update_valuation(
             valuation_summary
         )
 
-        # =====================================================
+        # =====================================================================
         # VALUATION OVERALL SCORE
-        # =====================================================
-
+        #
         # Temporary institutional score.
-        # Sprint 18 will replace this with an evidence-driven
-        # valuation assessment engine.
+        # A future evidence-driven valuation assessment engine will replace
+        # this fixed score.
+        # =====================================================================
 
         score_result = self.scoring_engine.calculate(
             score=80,

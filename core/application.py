@@ -1,3 +1,5 @@
+from dataclasses import asdict
+
 from modules.master_dossier.master_dossier import MasterDossier
 from modules.company.company import Company
 from modules.company.company_registry import CompanyRegistry
@@ -13,16 +15,20 @@ from modules.observation import ObservationEngine
 from modules.evidence import EvidenceEngine
 from modules.knowledge.knowledge_engine import KnowledgeEngine
 from modules.reasoning import ReasoningEngine
+
 from modules.competitive.competitive_engine import CompetitiveEngine
 from modules.competitive.peer import Peer
+
 from modules.valuation.valuation_engine import ValuationEngine
 from modules.management.management_engine import ManagementEngine
 from modules.risk.risk_engine import RiskEngine
 from modules.thesis.thesis_engine import ThesisEngine
+
 from modules.investment_committee.committee_engine import CommitteeEngine
 from modules.decision.decision_office import DecisionOffice
-from dataclasses import asdict
+
 from modules.research_context.research_context import ResearchContext
+
 
 class EIOSApplication:
 
@@ -41,13 +47,13 @@ class EIOSApplication:
         # ==========================================================
 
         self.registry.add_company(
-                Company(
-                    name="The Anup Engineering Limited",
-                    ticker="ANUP",
-                    sector="Capital Goods",
-                    industry="Process Equipment",
-                )
+            Company(
+                name="The Anup Engineering Limited",
+                ticker="ANUP",
+                sector="Capital Goods",
+                industry="Process Equipment",
             )
+        )
 
         print("=" * 60)
         print("EVEREST INVESTMENT OPERATING SYSTEM (EIOS)")
@@ -87,6 +93,7 @@ class EIOSApplication:
             sector="Capital Goods",
             industry="Process Equipment",
         )
+
         research_context = ResearchContext()
         research_context.set_master_dossier(dossier)
 
@@ -130,7 +137,6 @@ class EIOSApplication:
         valuation_engine = ValuationEngine(research)
         valuation_engine.analyze(financial_data)
 
-
         # ==========================================================
         # MANAGEMENT
         # ==========================================================
@@ -166,6 +172,7 @@ class EIOSApplication:
         # ==========================================================
 
         committee_engine = CommitteeEngine(research)
+
         # ==========================================================
         # COMPETITIVE INTELLIGENCE
         # ==========================================================
@@ -226,6 +233,7 @@ class EIOSApplication:
             entity="Indian Economy",
             confidence=98,
         )
+
         research_context.add_observation(observation)
 
         # ==========================================================
@@ -246,6 +254,7 @@ class EIOSApplication:
         knowledge = self.knowledge_engine.create_from_evidence(
             evidence
         )
+
         research_context.add_knowledge(knowledge)
 
         # ==========================================================
@@ -284,6 +293,10 @@ class EIOSApplication:
             ],
         )
 
+        # ==========================================================
+        # DECISION OFFICE
+        # ==========================================================
+
         decision_office = DecisionOffice()
 
         valuation = dossier.valuation
@@ -294,12 +307,25 @@ class EIOSApplication:
         decision = decision_office.evaluate(
             intrinsic_value=intrinsic_value,
             market_price=3200.0,
-            business_score=dossier.business_quality["Overall Score"],
-            financial_score=dossier.financials["Overall Score"],
-            management_score=dossier.management["Overall Score"]["Overall Score"],
-            competitive_score=dossier.competitive["Overall Score"]["Overall Score"],
-            risk_score=dossier.risks["Overall Risk"]["Overall Score"],
-           valuation_score=dossier.valuation["Overall Score"]["Overall Score"],
+            business_score=dossier.business.score,
+
+            # Financial domain is now typed.
+            # DecisionOffice requires a float, therefore the canonical
+            # financial score comes directly from FinancialSection.
+            financial_score=dossier.financial.score,
+
+            management_score=(
+                dossier.management["Overall Score"]["Overall Score"]
+            ),
+            competitive_score=(
+                dossier.competitive["Overall Score"]["Overall Score"]
+            ),
+            risk_score=(
+                dossier.risks["Overall Risk"]["Overall Score"]
+            ),
+            valuation_score=(
+                dossier.valuation["Overall Score"]["Overall Score"]
+            ),
             available_cash=1000000.0,
         )
 
@@ -307,13 +333,17 @@ class EIOSApplication:
         print(decision.summary)
         print(f"Recommendation : {decision.recommendation.value}")
         print(f"Confidence      : {decision.confidence:.2f}")
+
         research.update_decision(asdict(decision))
+
         print("Decision Office initialized successfully.")
+
         # ==========================================================
         # THESIS
         # ==========================================================
 
         thesis_engine.analyze()
+
         # ==========================================================
         # INVESTMENT COMMITTEE
         # ==========================================================
@@ -349,3 +379,5 @@ class EIOSApplication:
         print("=" * 60)
 
         print(dossier.to_dict())
+
+        return dossier

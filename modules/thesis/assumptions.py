@@ -1,62 +1,74 @@
+"""
+EIOS
+Everest Investment Operating System
+
+Thesis Assumptions Builder
+
+Builds thesis assumptions from completed Master Dossier research domains.
+
+Business and Financial intelligence are consumed from their
+typed Master Dossier sections.
+"""
+
+
 class Assumptions:
 
     def build(self, dossier):
 
         assumptions = []
 
-        # Business Quality
-        if dossier.business_quality:
+        # ---------------------------------------------------------
+        # Business
+        # ---------------------------------------------------------
+
+        business = dossier.business
+
+        business_analysis_completed = bool(
+            business.summary
+            or business.evidence
+            or business.score
+            or business.rating
+        )
+
+        if business_analysis_completed:
             assumptions.append(
-                "Business quality remains intact."
+                "Business quality remains stable."
             )
 
-        # Financials
-        if dossier.financials:
+        # ---------------------------------------------------------
+        # Financial
+        # ---------------------------------------------------------
+
+        financial = dossier.financial
+
+        financial_analysis_completed = bool(
+            financial.summary
+            or financial.evidence
+            or financial.score
+            or financial.rating
+        )
+
+        if financial_analysis_completed:
             assumptions.append(
-                "Financial performance continues to support long-term growth."
+                "Financial performance remains within expected range."
             )
 
+        # ---------------------------------------------------------
         # Management
+        # ---------------------------------------------------------
+
         if dossier.management:
             assumptions.append(
-                "Management continues disciplined capital allocation."
+                "Management continues current capital allocation discipline."
             )
 
-        # Competitive Position
+        # ---------------------------------------------------------
+        # Competitive
+        # ---------------------------------------------------------
+
         if dossier.competitive:
             assumptions.append(
-                "Competitive position remains sustainable."
+                "Competitive position remains stable."
             )
 
-        # Valuation
-        if dossier.valuation:
-            assumptions.append(
-                "Current valuation supports long-term investment returns."
-            )
-
-        return {
-
-            "Key Assumptions": assumptions,
-
-            "Business Assumptions": [
-                "Business model remains durable."
-            ],
-
-            "Financial Assumptions": [
-                "Revenue and earnings continue to grow."
-            ],
-
-            "Management Assumptions": [
-                "Governance standards remain strong."
-            ],
-
-            "Industry Assumptions": [
-                "Industry demand remains healthy."
-            ],
-
-            "Macro Assumptions": [
-                "Macroeconomic environment remains supportive."
-            ],
-
-            "Confidence": 60
-        }
+        return assumptions

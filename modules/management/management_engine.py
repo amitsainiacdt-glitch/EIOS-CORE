@@ -3,9 +3,13 @@ from modules.management.governance import GovernanceEngine
 from modules.management.behaviour import BehaviourEngine
 from modules.management.communication import CommunicationEngine
 from modules.management.management_scorecard import ManagementScorecard
+
 from modules.research.company_research import CompanyResearch
+
 from modules.core.scoring.scoring_engine import ScoringEngine
 from modules.core.scoring.confidence_engine import ConfidenceEngine
+
+from modules.intelligence.management_intelligence import ManagementIntelligence
 
 
 class ManagementEngine:
@@ -18,6 +22,7 @@ class ManagementEngine:
         self.behaviour = BehaviourEngine()
         self.communication = CommunicationEngine()
         self.scorecard = ManagementScorecard()
+
         self.scoring_engine = ScoringEngine()
         self.confidence_engine = ConfidenceEngine()
 
@@ -35,24 +40,30 @@ class ManagementEngine:
             governance,
             behaviour,
             communication,
-)
+        )
 
         score_result = self.scoring_engine.calculate(
             score=overall["Raw Score"],
             max_score=overall["Max Score"],
         )
+
+        confidence_result = self.confidence_engine.calculate(
+            evidence_items=4,
+            expected_items=10,
+        )
+
         management_summary = {
             "Capital Allocation": capital,
             "Governance": governance,
             "Behaviour": behaviour,
             "Communication": communication,
-           "Overall Score": {
-            "Overall Score": score_result.percentage,
-            "Raw Score": score_result.score,
-            "Maximum Score": score_result.max_score,
-            "Confidence": overall["Confidence"],
-            "Rating": score_result.grade,
-        }
+            "Overall Score": {
+                "Overall Score": score_result.percentage,
+                "Raw Score": score_result.score,
+                "Maximum Score": score_result.max_score,
+                "Confidence": confidence_result.confidence,
+                "Rating": score_result.grade,
+            },
         }
 
         self.research.update_management(management_summary)
@@ -62,11 +73,24 @@ class ManagementEngine:
         # =====================================================
 
         self.research.dossier.management["Overall Score"] = {
-        "Overall Score": score_result.percentage,
-        "Raw Score": score_result.score,
-        "Maximum Score": score_result.max_score,
-        "Confidence": overall["Confidence"],
-        "Rating": score_result.grade,
-    }
+            "Overall Score": score_result.percentage,
+            "Raw Score": score_result.score,
+            "Maximum Score": score_result.max_score,
+            "Confidence": confidence_result.confidence,
+            "Rating": score_result.grade,
+        }
+
+        # =====================================================
+        # PUBLISH MANAGEMENT INTELLIGENCE
+        # =====================================================
+
+        management_intelligence = ManagementIntelligence.build(
+            self.research,
+            confidence_result,
+        )
+
+        self.research.context.publish_intelligence(
+            management_intelligence
+        )
 
         print("Management Analysis Completed")

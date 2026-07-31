@@ -11,6 +11,8 @@ from modules.core.scoring.confidence_engine import ConfidenceEngine
 
 from modules.research.company_research import CompanyResearch
 
+from modules.intelligence.risk_intelligence import RiskIntelligence
+
 
 class RiskEngine:
 
@@ -55,6 +57,11 @@ class RiskEngine:
             max_score=overall["Max Score"],
         )
 
+        confidence_result = self.confidence_engine.calculate(
+            evidence_items=6,
+            expected_items=10,
+        )
+
         risk_summary = {
             "Business Risk": business,
             "Financial Risk": financial,
@@ -66,23 +73,28 @@ class RiskEngine:
                 "Overall Score": score_result.percentage,
                 "Raw Score": score_result.score,
                 "Maximum Score": score_result.max_score,
-                "Confidence": overall["Confidence"],
+                "Confidence": confidence_result.confidence,
                 "Rating": score_result.grade,
             },
         }
 
         self.research.update_risk(risk_summary)
 
-        # =====================================================
-        # OVERALL RISK SCORE
-        # =====================================================
-
         self.research.dossier.risks["Overall Risk"] = {
             "Overall Score": score_result.percentage,
             "Raw Score": score_result.score,
             "Maximum Score": score_result.max_score,
-            "Confidence": overall["Confidence"],
+            "Confidence": confidence_result.confidence,
             "Rating": score_result.grade,
         }
+
+        risk_intelligence = RiskIntelligence.build(
+            self.research,
+            confidence_result,
+        )
+
+        self.research.context.publish_intelligence(
+            risk_intelligence
+        )
 
         print("Risk Analysis Completed")

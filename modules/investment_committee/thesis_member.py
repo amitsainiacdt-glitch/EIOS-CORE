@@ -4,9 +4,6 @@ from modules.investment_committee.committee_response import CommitteeResponse
 class ThesisMember:
     """
     Investment Thesis Committee Member
-
-    Evaluates whether the overall investment thesis
-    remains strong and evidence-backed.
     """
 
     def __init__(self):
@@ -15,78 +12,74 @@ class ThesisMember:
     def evaluate(self, research):
 
         dossier = research.master_dossier
-        thesis = dossier.investment_thesis
-
-        if not thesis:
-            return CommitteeResponse(
-                member="Thesis",
-                vote="Watch",
-                score=0,
-                confidence=0,
-                evidence=[],
-                risks=["Investment thesis unavailable"],
-                recommendation="Complete investment thesis.",
-                reason="Investment thesis unavailable.",
-            )
 
         score = 0
         evidence = []
         risks = []
 
-        # ------------------------------------
-        # Thesis Strength
-        # ------------------------------------
+        # --------------------------------------------------
+        # Business Quality
+        # --------------------------------------------------
 
-        strength = thesis.get("Strength", 0)
-
-        if strength >= 85:
-            score += 35
-            evidence.append("Strong investment thesis")
-        elif strength >= 70:
+        if dossier.business:
             score += 25
-            evidence.append("Reasonable investment thesis")
+            evidence.append("Business quality analysis completed")
         else:
-            risks.append("Weak investment thesis")
+            risks.append("Business quality unavailable")
 
-        # ------------------------------------
-        # Key Drivers
-        # ------------------------------------
+        # --------------------------------------------------
+        # Financial Analysis
+        # --------------------------------------------------
 
-        drivers = thesis.get("Key Drivers", [])
-
-        if drivers:
+        if dossier.financial:
             score += 20
-            evidence.append(f"{len(drivers)} key value drivers identified")
+            evidence.append("Financial analysis completed")
         else:
-            risks.append("No key value drivers identified")
+            risks.append("Financial analysis unavailable")
 
-        # ------------------------------------
-        # Risks
-        # ------------------------------------
+        # --------------------------------------------------
+        # Valuation
+        # --------------------------------------------------
 
-        thesis_risks = thesis.get("Key Risks", [])
-
-        if len(thesis_risks) <= 3:
+        if dossier.valuation:
             score += 20
-            evidence.append("Risk profile is manageable")
+            evidence.append("Valuation completed")
         else:
-            risks.append("Numerous thesis risks identified")
+            risks.append("Valuation unavailable")
 
-        # ------------------------------------
-        # Kill Switch
-        # ------------------------------------
+        # --------------------------------------------------
+        # Management
+        # --------------------------------------------------
 
-        kill_switch = thesis.get("Kill Switch")
-
-        if kill_switch:
-            score += 25
-            evidence.append("Clear kill switch defined")
+        if dossier.management:
+            score += 15
+            evidence.append("Management analysis completed")
         else:
-            risks.append("Kill switch not defined")
+            risks.append("Management analysis unavailable")
 
-        # ------------------------------------
-        # Final Vote
-        # ------------------------------------
+        # --------------------------------------------------
+        # Risk
+        # --------------------------------------------------
+
+        if dossier.risk:
+            score += 10
+            evidence.append("Risk analysis completed")
+        else:
+            risks.append("Risk analysis unavailable")
+
+        # --------------------------------------------------
+        # Competitive
+        # --------------------------------------------------
+
+        if dossier.competitive:
+            score += 10
+            evidence.append("Competitive analysis completed")
+        else:
+            risks.append("Competitive analysis unavailable")
+
+        # --------------------------------------------------
+        # Vote
+        # --------------------------------------------------
 
         if score >= 85:
             vote = "Pass"
@@ -95,13 +88,15 @@ class ThesisMember:
         else:
             vote = "Reject"
 
+        confidence = min(score + 10, 100)
+
         return CommitteeResponse(
             member="Thesis",
             vote=vote,
             score=score,
-            confidence=90,
+            confidence=confidence,
             evidence=evidence,
             risks=risks,
-            recommendation=f"Thesis Score = {score}",
-            reason=f"Thesis Score = {score}",
+            recommendation=f"Overall Thesis Score = {score}",
+            reason="Investment thesis generated from completed research modules.",
         )

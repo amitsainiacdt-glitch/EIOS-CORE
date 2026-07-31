@@ -1,8 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Dict, List
 
+from .business_section import BusinessSection
+from .committee_section import CommitteeSection
+from .competitive_section import CompetitiveSection
 from .evidence_library import EvidenceLibrary
+from .financial_section import FinancialSection
+from .macro_section import MacroSection
+from .management_section import ManagementSection
+from .ownership_section import OwnershipSection
+from .risk_section import RiskSection
 from .serializer import MasterDossierSerializer
+from .valuation_section import ValuationSection
 
 
 @dataclass
@@ -16,31 +24,29 @@ class MasterDossier:
     # Core Research Modules
     # ==========================================================
 
-    business_quality: Dict = field(default_factory=dict)
-    management: Dict = field(default_factory=dict)
-    thesis: Dict = field(default_factory=dict)
-    committee: Dict = field(default_factory=dict)
+    business: BusinessSection = field(default_factory=BusinessSection)
+    financial: FinancialSection = field(default_factory=FinancialSection)
+    management: ManagementSection = field(default_factory=ManagementSection)
+    ownership: OwnershipSection = field(default_factory=OwnershipSection)
+    competitive: CompetitiveSection = field(default_factory=CompetitiveSection)
+    risk: RiskSection = field(default_factory=RiskSection)
+    valuation: ValuationSection = field(default_factory=ValuationSection)
+    committee: CommitteeSection = field(default_factory=CommitteeSection)
+    macro: MacroSection = field(default_factory=MacroSection)
 
-    financials: Dict = field(default_factory=dict)
-    competitive: Dict = field(default_factory=dict)
-    valuation: Dict = field(default_factory=dict)
-
-    decision: Dict = field(default_factory=dict)
-
-    risks: List[str] = field(default_factory=list)
     evidence: EvidenceLibrary = field(default_factory=EvidenceLibrary)
 
     # ==========================================================
-    # Legacy compatibility aliases
+    # Legacy Compatibility Aliases
     # ==========================================================
 
     @property
     def financial_analysis(self):
-        return self.financials
+        return self.financial
 
     @financial_analysis.setter
     def financial_analysis(self, value):
-        self.financials = value
+        self.financial = value
 
     @property
     def management_analysis(self):
@@ -52,11 +58,11 @@ class MasterDossier:
 
     @property
     def business_analysis(self):
-        return self.business_quality
+        return self.business
 
     @business_analysis.setter
     def business_analysis(self, value):
-        self.business_quality = value
+        self.business = value
 
     @property
     def valuation_analysis(self):
@@ -65,6 +71,14 @@ class MasterDossier:
     @valuation_analysis.setter
     def valuation_analysis(self, value):
         self.valuation = value
+
+    @property
+    def ownership_analysis(self):
+        return self.ownership
+
+    @ownership_analysis.setter
+    def ownership_analysis(self, value):
+        self.ownership = value
 
     @property
     def competitive_analysis(self):
@@ -84,34 +98,18 @@ class MasterDossier:
 
     @property
     def risk_analysis(self):
-        return self.risks
+        return self.risk
 
     @risk_analysis.setter
     def risk_analysis(self, value):
-        self.risks = value
-
-    @property
-    def thesis_analysis(self):
-        return self.thesis
-
-    @thesis_analysis.setter
-    def thesis_analysis(self, value):
-        self.thesis = value
-
-    @property
-    def investment_thesis(self):
-        return self.thesis
-
-    @investment_thesis.setter
-    def investment_thesis(self, value):
-        self.thesis = value
+        self.risk = value
 
     # ==========================================================
     # Utility Methods
     # ==========================================================
 
     def add_risk(self, risk: str):
-        self.risks.append(risk)
+        self.risk.business_risks.append(risk)
 
     def evidence_count(self):
         return self.evidence.count()
@@ -131,15 +129,15 @@ class MasterDossier:
                 "ticker": self.ticker,
                 "sector": self.sector,
                 "industry": self.industry,
-                "business_quality": self.business_quality,
+                "business": self.business,
+                "financial": self.financial,
                 "management": self.management,
-                "thesis": self.thesis,
-                "committee": self.committee,
-                "financials": self.financials,
+                "ownership": self.ownership,
                 "competitive": self.competitive,
+                "risk": self.risk,
                 "valuation": self.valuation,
-                "decision": self.decision,
-                "risks": self.risks,
+                "committee": self.committee,
+                "macro": self.macro,
                 "evidence": self.evidence.to_dict(),
             }
         )
