@@ -314,9 +314,7 @@ class EIOSApplication:
             # financial score comes directly from FinancialSection.
             financial_score=dossier.financial.score,
 
-            management_score=(
-                dossier.management["Overall Score"]["Overall Score"]
-            ),
+            management_score=dossier.management.score,
             competitive_score=(
                 dossier.competitive["Overall Score"]["Overall Score"]
             ),

@@ -23,6 +23,9 @@ Migration Status:
     Financial domain:
         Migrated to typed FinancialSection.
 
+    Management domain:
+        Migrated to typed ManagementSection.
+
     Other domains:
         Legacy interfaces temporarily preserved until their respective
         migration sprints are completed.
@@ -31,12 +34,13 @@ Author:
     EIOS
 
 Release:
-    2.1
+    2.2
 ===============================================================================
 """
 
 from modules.master_dossier.business_section import BusinessSection
 from modules.master_dossier.financial_section import FinancialSection
+from modules.master_dossier.management_section import ManagementSection
 from modules.research_context.research_context import ResearchContext
 
 
@@ -117,13 +121,36 @@ class CompanyResearch:
     # Management
     # =========================================================================
 
-    def update_management(self, data: dict):
+    def update_management(
+        self,
+        management: ManagementSection,
+    ) -> None:
         """
-        Legacy management update interface.
+        Store typed management intelligence in the Master Dossier.
 
-        Preserved until ManagementSection migration.
+        ManagementSection is the authoritative persistent state for the
+        Management domain. No legacy management dictionary is created
+        or persisted here.
+
+        Args:
+            management:
+                Fully populated ManagementSection produced by the
+                ManagementEngine.
+
+        Raises:
+            TypeError:
+                If a legacy dictionary or any object other than
+                ManagementSection is submitted.
         """
-        self.dossier.management = data
+
+        if not isinstance(management, ManagementSection):
+            raise TypeError(
+                "CompanyResearch.update_management() requires "
+                "ManagementSection; received "
+                f"{type(management).__name__}."
+            )
+
+        self.dossier.management = management
 
     # =========================================================================
     # Thesis

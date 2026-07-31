@@ -4,13 +4,17 @@ EIOS
 Management Section
 
 Purpose:
-    Stores Management Intelligence inside the Master Dossier.
+    Stores typed Management Intelligence inside the Master Dossier.
+
+Architecture:
+    Passive domain model only.
+    All management calculations belong inside management engines.
 
 Author:
     EIOS
 
 Release:
-    1.0
+    2.0
 ===============================================================================
 """
 
@@ -23,7 +27,7 @@ from .base_section import BaseSection
 @dataclass
 class ManagementSection(BaseSection):
     """
-    Management Intelligence stored in the Master Dossier.
+    Typed Management Intelligence stored in the Master Dossier.
     """
 
     # -------------------------------------------------------------------------
@@ -40,18 +44,21 @@ class ManagementSection(BaseSection):
 
     integrity_score: float = 0.0
     capital_allocation_score: float = 0.0
-    execution_score: float = 0.0
     governance_score: float = 0.0
+    behaviour_score: float = 0.0
+    execution_score: float = 0.0
     communication_score: float = 0.0
 
     # -------------------------------------------------------------------------
     # Capital Allocation
     # -------------------------------------------------------------------------
 
-    dividend_policy: str = ""
-    buyback_policy: str = ""
-    acquisition_quality: str = ""
+    roiic_assessment: str = ""
+    capital_allocation_assessment: str = ""
     reinvestment_quality: str = ""
+    acquisition_quality: str = ""
+    buyback_policy: str = ""
+    dividend_policy: str = ""
 
     # -------------------------------------------------------------------------
     # Governance
@@ -59,19 +66,43 @@ class ManagementSection(BaseSection):
 
     promoter_holding: float = 0.0
     promoter_pledge: float = 0.0
-    board_independence: str = ""
+
+    promoter_holding_assessment: str = ""
+    promoter_pledge_assessment: str = ""
+
+    related_party_transactions: str = ""
     auditor_quality: str = ""
+    regulatory_issues: str = ""
+    board_independence: str = ""
 
     # -------------------------------------------------------------------------
     # Behaviour Assessment
     # -------------------------------------------------------------------------
+
+    execution_assessment: str = ""
+    guidance_reliability: str = ""
+    capital_discipline: str = ""
+    transparency: str = ""
+    long_term_focus: str = ""
+    shareholder_orientation: str = ""
 
     strengths: List[str] = field(default_factory=list)
     weaknesses: List[str] = field(default_factory=list)
     red_flags: List[str] = field(default_factory=list)
 
     # -------------------------------------------------------------------------
-    # Conference Call Intelligence
+    # Communication Assessment
+    # -------------------------------------------------------------------------
+
+    conference_call_quality: str = ""
+    annual_report_quality: str = ""
+    guidance_clarity: str = ""
+    risk_disclosure: str = ""
+    shareholder_communication: str = ""
+    management_accessibility: str = ""
+
+    # -------------------------------------------------------------------------
+    # Historical Intelligence
     # -------------------------------------------------------------------------
 
     guidance_history: List[str] = field(default_factory=list)

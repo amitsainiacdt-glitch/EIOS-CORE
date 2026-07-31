@@ -1,11 +1,35 @@
+"""
+===============================================================================
+EIOS
+Everest Investment Operating System
+
+Management Committee Member
+
+Purpose:
+    Evaluates typed Management Intelligence from the Master Dossier
+    and casts the Management Committee vote.
+
+Architecture:
+    - Consumes MasterDossier.management as ManagementSection.
+    - Performs committee evaluation only.
+    - Does not mutate ManagementSection.
+    - Does not depend on legacy management dictionaries.
+
+Author:
+    EIOS
+
+Release:
+    2.0
+===============================================================================
+"""
+
 from modules.investment_committee.committee_response import CommitteeResponse
 
 
 class ManagementMember:
     """
-    Management Committee Member
-
-    Evaluates management quality, governance and capital allocation.
+    Evaluates management quality, governance, behaviour,
+    communication, and capital allocation.
     """
 
     def __init__(self):
@@ -14,9 +38,20 @@ class ManagementMember:
     def evaluate(self, research):
 
         dossier = research.master_dossier
-        management = dossier.management_analysis
+        management = dossier.management
 
-        if not management:
+        # ==========================================================
+        # Availability Check
+        # ==========================================================
+
+        management_available = bool(
+            management.summary
+            or management.evidence
+            or management.score
+            or management.rating
+        )
+
+        if not management_available:
             return CommitteeResponse(
                 member="Management",
                 vote="Watch",
@@ -32,53 +67,49 @@ class ManagementMember:
         evidence = []
         risks = []
 
-        # -------------------------------
+        # ==========================================================
         # Governance
-        # -------------------------------
+        # ==========================================================
 
-        governance = management.get("Governance", {})
-        if governance.get("Score", 0) >= 85:
+        if management.governance_score >= 85:
             score += 25
             evidence.append("Strong corporate governance")
         else:
             risks.append("Governance requires monitoring")
 
-        # -------------------------------
+        # ==========================================================
         # Capital Allocation
-        # -------------------------------
+        # ==========================================================
 
-        capital = management.get("Capital Allocation", {})
-        if capital.get("Score", 0) >= 80:
+        if management.capital_allocation_score >= 80:
             score += 25
             evidence.append("Disciplined capital allocation")
         else:
             risks.append("Capital allocation needs improvement")
 
-        # -------------------------------
+        # ==========================================================
         # Behaviour
-        # -------------------------------
+        # ==========================================================
 
-        behaviour = management.get("Behaviour", {})
-        if behaviour.get("Score", 0) >= 80:
+        if management.behaviour_score >= 80:
             score += 25
             evidence.append("Management execution is consistent")
         else:
             risks.append("Execution risk")
 
-        # -------------------------------
+        # ==========================================================
         # Communication
-        # -------------------------------
+        # ==========================================================
 
-        communication = management.get("Communication", {})
-        if communication.get("Score", 0) >= 80:
+        if management.communication_score >= 80:
             score += 25
             evidence.append("Transparent communication")
         else:
             risks.append("Communication quality below expectation")
 
-        # -------------------------------
+        # ==========================================================
         # Final Vote
-        # -------------------------------
+        # ==========================================================
 
         if score >= 85:
             vote = "Pass"
@@ -91,7 +122,7 @@ class ManagementMember:
             member="Management",
             vote=vote,
             score=score,
-            confidence=90,
+            confidence=management.confidence,
             evidence=evidence,
             risks=risks,
             recommendation=f"Management Score = {score}",
