@@ -172,13 +172,7 @@ class DashboardPage(ttk.Frame):
         self.add_row(
             details,
             "Competitive Rating",
-            self.dossier.competitive.get(
-                "Overall Score",
-                {}
-            ).get(
-                "Rating",
-                "-",
-            ),
+            self.dossier.competitive.rating or "-",
         )
 
         self.add_row(

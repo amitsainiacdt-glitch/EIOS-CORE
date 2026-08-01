@@ -29,6 +29,9 @@ Migration Status:
     Risk domain:
         Migrated to typed RiskSection.
 
+    Competitive domain:
+        Migrated to typed CompetitiveSection.
+
     Other domains:
         Legacy interfaces temporarily preserved until their respective
         migration sprints are completed.
@@ -37,7 +40,7 @@ Author:
     EIOS
 
 Release:
-    2.3
+    2.4
 ===============================================================================
 """
 
@@ -45,6 +48,8 @@ from modules.master_dossier.business_section import BusinessSection
 from modules.master_dossier.financial_section import FinancialSection
 from modules.master_dossier.management_section import ManagementSection
 from modules.master_dossier.risk_section import RiskSection
+from modules.master_dossier.competitive_section import CompetitiveSection
+
 from modules.research_context.research_context import ResearchContext
 
 
@@ -153,6 +158,24 @@ class CompanyResearch:
         self.dossier.risk = risk
 
     # =========================================================================
+    # Competitive Intelligence
+    # =========================================================================
+
+    def update_competitive(
+        self,
+        competitive: CompetitiveSection,
+    ) -> None:
+
+        if not isinstance(competitive, CompetitiveSection):
+            raise TypeError(
+                "CompanyResearch.update_competitive() requires "
+                "CompetitiveSection; received "
+                f"{type(competitive).__name__}."
+            )
+
+        self.dossier.competitive = competitive
+
+    # =========================================================================
     # Thesis
     # =========================================================================
 
@@ -171,16 +194,6 @@ class CompanyResearch:
         Legacy committee update interface.
         """
         self.dossier.committee = data
-
-    # =========================================================================
-    # Competitive Intelligence
-    # =========================================================================
-
-    def update_competitive(self, data: dict):
-        """
-        Legacy competitive update interface.
-        """
-        self.dossier.competitive = data
 
     # =========================================================================
     # Valuation

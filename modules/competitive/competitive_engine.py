@@ -14,14 +14,16 @@ from modules.competitive.competitive_assessment import (
 
 from modules.core.scoring.scoring_engine import ScoringEngine
 from modules.core.scoring.confidence_engine import ConfidenceEngine
-
+from modules.research.company_research import CompanyResearch
+from modules.master_dossier.competitive_section import CompetitiveSection
 
 class CompetitiveEngine:
     """
     Coordinates the Competitive Intelligence subsystem.
     """
 
-    def __init__(self):
+    def __init__(self, research: CompanyResearch):
+        self.research = research
 
         self.registry = PeerRegistry()
         self.benchmark = BenchmarkEngine()
@@ -74,7 +76,18 @@ class CompetitiveEngine:
             score=assessment["Total Score"],
             max_score=assessment["Max Score"],
         )
+        competitive = CompetitiveSection()
 
+        competitive.score = score_result.percentage
+        competitive.confidence = assessment["Confidence"]
+        competitive.rating = score_result.grade
+
+        competitive.peer_count = len(ranked)
+        competitive.leader = leader if leader else {}
+        competitive.laggard = laggard if laggard else {}
+        competitive.ranked_peers = ranked
+        competitive.assessment = assessment
+        self.research.update_competitive(competitive)
         return {
 
             "metric": metric,

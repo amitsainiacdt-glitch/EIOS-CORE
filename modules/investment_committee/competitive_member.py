@@ -1,3 +1,4 @@
+from modules import competitive
 from modules.investment_committee.committee_response import CommitteeResponse
 
 
@@ -33,10 +34,9 @@ class CompetitiveMember:
         evidence = []
         risks = []
 
-        leader = competitive.get("leader")
-        peer_count = competitive.get("peer_count", 0)
-        ranked = competitive.get("ranked_peers", [])
-
+        leader = competitive.leader
+        peer_count = competitive.peer_count
+        ranked = competitive.ranked_peers
         # ------------------------------------
         # Industry Leader
         # ------------------------------------
@@ -82,7 +82,7 @@ class CompetitiveMember:
         # ------------------------------------
 
         if leader:
-            benchmark = leader.get("Benchmark Score", 0)
+            benchmark = leader.get("Benchmark Score", 0) if leader else 0
 
             if benchmark >= 20:
                 score += 20

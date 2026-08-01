@@ -15,7 +15,7 @@ Release:
 """
 
 from dataclasses import dataclass, field
-from typing import List
+from typing import Any, Dict, List
 
 from .base_section import BaseSection
 

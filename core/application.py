@@ -177,7 +177,7 @@ class EIOSApplication:
         # COMPETITIVE INTELLIGENCE
         # ==========================================================
 
-        competitive_engine = CompetitiveEngine()
+        competitive_engine = CompetitiveEngine(research)
 
         competitive_engine.add_peer(
             Peer(
@@ -219,7 +219,7 @@ class EIOSApplication:
         )
 
         competitive_result = competitive_engine.analyze()
-        research.update_competitive(competitive_result)
+       
 
         # ==========================================================
         # OBSERVATION
@@ -315,9 +315,7 @@ class EIOSApplication:
             financial_score=dossier.financial.score,
 
             management_score=dossier.management.score,
-            competitive_score=(
-                dossier.competitive["Overall Score"]["Overall Score"]
-            ),
+            competitive_score=dossier.competitive.score,
             risk_score=dossier.risk.score,
 
             valuation_score=(
