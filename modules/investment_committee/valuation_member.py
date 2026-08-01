@@ -37,9 +37,7 @@ class ValuationMember:
         # Owner Earnings
         # ------------------------------------
 
-        owner = valuation.get("Owner Earnings", {})
-
-        owner_earnings = owner.get("Owner Earnings", 0)
+        owner_earnings = valuation.intrinsic_value
 
         if owner_earnings > 0:
             score += 30
@@ -53,11 +51,13 @@ class ValuationMember:
         # Intrinsic Value
         # ------------------------------------
 
-        intrinsic = valuation.get("Intrinsic Value")
+        intrinsic = valuation.fair_value
 
-        if intrinsic is not None:
+        if intrinsic > 0:
             score += 25
-            evidence.append("Intrinsic value estimated")
+            evidence.append(
+                f"Intrinsic value estimated ({intrinsic:.2f})"
+            )
         else:
             risks.append("Intrinsic value not calculated")
 
@@ -65,45 +65,35 @@ class ValuationMember:
         # Margin of Safety
         # ------------------------------------
 
-        mos = valuation.get("Margin of Safety")
+        mos = valuation.margin_of_safety
 
-        if mos is not None:
+        if mos >= 30:
+            score += 25
+            evidence.append("Excellent margin of safety")
 
-            if mos >= 30:
-                score += 25
-                evidence.append("Excellent margin of safety")
-
-            elif mos >= 15:
-                score += 15
-                evidence.append("Acceptable margin of safety")
-
-            else:
-                risks.append("Limited margin of safety")
+        elif mos >= 15:
+            score += 15
+            evidence.append("Acceptable margin of safety")
 
         else:
-            risks.append("Margin of safety unavailable")
+            risks.append("Limited margin of safety")
 
         # ------------------------------------
         # Expected CAGR
         # ------------------------------------
 
-        expected = valuation.get("Expected CAGR")
+        expected = valuation.expected_cagr
 
-        if expected is not None:
+        if expected >= 18:
+            score += 20
+            evidence.append("Excellent expected CAGR")
 
-            if expected >= 18:
-                score += 20
-                evidence.append("Excellent expected CAGR")
-
-            elif expected >= 12:
-                score += 10
-                evidence.append("Reasonable expected CAGR")
-
-            else:
-                risks.append("Expected return is modest")
+        elif expected >= 12:
+            score += 10
+            evidence.append("Reasonable expected CAGR")
 
         else:
-            risks.append("Expected CAGR unavailable")
+            risks.append("Expected return is modest")
 
         # ------------------------------------
         # Final Vote

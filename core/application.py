@@ -300,7 +300,7 @@ class EIOSApplication:
         decision_office = DecisionOffice()
 
         valuation = dossier.valuation
-        intrinsic_value = valuation["Intrinsic Value"].fair_value
+        intrinsic_value = valuation.fair_value
 
         print(f"Intrinsic Value = {intrinsic_value}")
 
@@ -318,9 +318,7 @@ class EIOSApplication:
             competitive_score=dossier.competitive.score,
             risk_score=dossier.risk.score,
 
-            valuation_score=(
-                dossier.valuation["Overall Score"]["Overall Score"]
-            ),
+           valuation_score=dossier.valuation.score,
             available_cash=1000000.0,
         )
 

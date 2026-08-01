@@ -32,6 +32,7 @@ Release:
 """
 
 from modules.research.company_research import CompanyResearch
+from modules.master_dossier.valuation_section import ValuationSection
 
 from modules.valuation.owners_earnings import OwnerEarningsEngine
 from modules.valuation.dcf_engine import DCFEngine
@@ -92,6 +93,7 @@ class ValuationEngine:
         print("\nStarting Valuation Analysis...")
 
         valuation_summary = {}
+        valuation = ValuationSection()
 
         # =====================================================================
         # OWNER EARNINGS
@@ -156,28 +158,44 @@ class ValuationEngine:
                 valuation_summary
             )
         )
+        print("\n========== INTRINSIC VALUE DEBUG ==========")
+        print(intrinsic_value)
+        print(type(intrinsic_value))
+
+        if hasattr(intrinsic_value, "__dict__"):
+            print(intrinsic_value.__dict__)
+
+        print("===========================================")
 
         valuation_summary[
             "Intrinsic Value"
         ] = intrinsic_value
+        # =====================================================
+        # BUILD TYPED VALUATION SECTION
+        # =====================================================
+
+        valuation.intrinsic_value = intrinsic_value.fair_value
+        valuation.fair_value = intrinsic_value.fair_value
+        valuation.valuation_method = "Intrinsic Value Office"
+
+        valuation.score = 80.0
+        valuation.confidence = 85.0
+        valuation.rating = "A"
 
         # =====================================================================
         # UPDATE MASTER DOSSIER
-        #
-        # Valuation remains dictionary-based during Sprint 012.2.
-        # Its typed migration will occur independently.
         # =====================================================================
 
         self.research.update_valuation(
-            valuation_summary
+            valuation
         )
+        print("\n===== DOSSIER AFTER UPDATE =====")
+        print("valuation.fair_value =", self.research.dossier.valuation.fair_value)
+        print("valuation.intrinsic_value =", self.research.dossier.valuation.intrinsic_value)
+        print("===============================")
 
         # =====================================================================
         # VALUATION OVERALL SCORE
-        #
-        # Temporary institutional score.
-        # A future evidence-driven valuation assessment engine will replace
-        # this fixed score.
         # =====================================================================
 
         score_result = self.scoring_engine.calculate(
@@ -185,14 +203,11 @@ class ValuationEngine:
             max_score=100,
         )
 
-        self.research.dossier.valuation["Overall Score"] = {
-            "Overall Score": score_result.percentage,
-            "Raw Score": score_result.score,
-            "Maximum Score": score_result.max_score,
-            "Confidence": 85.0,
-            "Rating": score_result.grade,
-        }
+        valuation.score = score_result.percentage
+        valuation.confidence = 85.0
+        valuation.rating = score_result.grade
 
+        
         print("Valuation Analysis Completed")
 
         return valuation_summary

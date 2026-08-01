@@ -45,12 +45,10 @@ class DashboardPage(ttk.Frame):
 
         intrinsic = "-"
 
-        if "Intrinsic Value" in self.dossier.valuation:
+        if self.dossier.valuation.fair_value > 0:
 
             intrinsic = (
-                self.dossier.valuation[
-                    "Intrinsic Value"
-                ].fair_value
+                self.dossier.valuation.fair_value
             )
 
         # ======================================================
@@ -178,15 +176,8 @@ class DashboardPage(ttk.Frame):
         self.add_row(
             details,
             "Valuation Rating",
-            self.dossier.valuation.get(
-                "Overall Score",
-                {}
-            ).get(
-                "Rating",
-                "-",
-            ),
+            self.dossier.valuation.rating or "-",
         )
-
         # ======================================================
         # REVENUE CHART
         # ======================================================

@@ -49,6 +49,7 @@ from modules.master_dossier.financial_section import FinancialSection
 from modules.master_dossier.management_section import ManagementSection
 from modules.master_dossier.risk_section import RiskSection
 from modules.master_dossier.competitive_section import CompetitiveSection
+from modules.master_dossier.valuation_section import ValuationSection
 
 from modules.research_context.research_context import ResearchContext
 
@@ -199,12 +200,19 @@ class CompanyResearch:
     # Valuation
     # =========================================================================
 
-    def update_valuation(self, data: dict):
-        """
-        Legacy valuation update interface.
-        """
-        self.dossier.valuation = data
+    def update_valuation(
+        self,
+        valuation: ValuationSection,
+    ) -> None:
 
+        if not isinstance(valuation, ValuationSection):
+            raise TypeError(
+                "CompanyResearch.update_valuation() requires "
+                "ValuationSection; received "
+                f"{type(valuation).__name__}."
+            )
+
+        self.dossier.valuation = valuation
     # =========================================================================
     # Decision Office
     # =========================================================================
