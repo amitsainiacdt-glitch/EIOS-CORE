@@ -318,9 +318,8 @@ class EIOSApplication:
             competitive_score=(
                 dossier.competitive["Overall Score"]["Overall Score"]
             ),
-            risk_score=(
-                dossier.risks["Overall Risk"]["Overall Score"]
-            ),
+            risk_score=dossier.risk.score,
+
             valuation_score=(
                 dossier.valuation["Overall Score"]["Overall Score"]
             ),

@@ -26,6 +26,9 @@ Migration Status:
     Management domain:
         Migrated to typed ManagementSection.
 
+    Risk domain:
+        Migrated to typed RiskSection.
+
     Other domains:
         Legacy interfaces temporarily preserved until their respective
         migration sprints are completed.
@@ -34,13 +37,14 @@ Author:
     EIOS
 
 Release:
-    2.2
+    2.3
 ===============================================================================
 """
 
 from modules.master_dossier.business_section import BusinessSection
 from modules.master_dossier.financial_section import FinancialSection
 from modules.master_dossier.management_section import ManagementSection
+from modules.master_dossier.risk_section import RiskSection
 from modules.research_context.research_context import ResearchContext
 
 
@@ -66,9 +70,6 @@ class CompanyResearch:
     def dossier(self):
         """
         Return the Master Dossier owned by the ResearchContext.
-
-        Retained as an access alias while downstream modules are migrated
-        to the typed Master Dossier architecture.
         """
         return self.context.get_master_dossier()
 
@@ -76,9 +77,6 @@ class CompanyResearch:
     def master_dossier(self):
         """
         Explicit Master Dossier accessor.
-
-        Existing EIOS modules may currently use either this property
-        or ``dossier``.
         """
         return self.context.get_master_dossier()
 
@@ -90,23 +88,6 @@ class CompanyResearch:
         self,
         business: BusinessSection,
     ) -> None:
-        """
-        Store typed business-quality intelligence in the Master Dossier.
-
-        BusinessSection is the authoritative persistent state for the
-        Business domain. No legacy business-quality dictionary is created
-        or persisted here.
-
-        Args:
-            business:
-                Fully populated BusinessSection produced by the
-                BusinessQualityEngine.
-
-        Raises:
-            TypeError:
-                If a legacy dictionary or any object other than
-                BusinessSection is submitted.
-        """
 
         if not isinstance(business, BusinessSection):
             raise TypeError(
@@ -125,23 +106,6 @@ class CompanyResearch:
         self,
         management: ManagementSection,
     ) -> None:
-        """
-        Store typed management intelligence in the Master Dossier.
-
-        ManagementSection is the authoritative persistent state for the
-        Management domain. No legacy management dictionary is created
-        or persisted here.
-
-        Args:
-            management:
-                Fully populated ManagementSection produced by the
-                ManagementEngine.
-
-        Raises:
-            TypeError:
-                If a legacy dictionary or any object other than
-                ManagementSection is submitted.
-        """
 
         if not isinstance(management, ManagementSection):
             raise TypeError(
@@ -153,31 +117,6 @@ class CompanyResearch:
         self.dossier.management = management
 
     # =========================================================================
-    # Thesis
-    # =========================================================================
-
-    def update_thesis(self, data: dict):
-        """
-        Legacy thesis update interface.
-
-        Preserved until the thesis domain is migrated.
-        """
-        self.dossier.thesis = data
-
-    # =========================================================================
-    # Investment Committee
-    # =========================================================================
-
-    def update_committee(self, data: dict):
-        """
-        Legacy Investment Committee update interface.
-
-        Preserved until CommitteeSection becomes the authoritative
-        committee domain model.
-        """
-        self.dossier.committee = data
-
-    # =========================================================================
     # Financial
     # =========================================================================
 
@@ -185,22 +124,6 @@ class CompanyResearch:
         self,
         financial: FinancialSection,
     ) -> None:
-        """
-        Store typed financial intelligence in the Master Dossier.
-
-        FinancialSection is the authoritative financial domain state.
-        No legacy financial dictionary is created or persisted here.
-
-        Args:
-            financial:
-                Fully populated FinancialSection produced by the
-                FinancialEngine.
-
-        Raises:
-            TypeError:
-                If a legacy dictionary or any object other than
-                FinancialSection is submitted.
-        """
 
         if not isinstance(financial, FinancialSection):
             raise TypeError(
@@ -212,14 +135,50 @@ class CompanyResearch:
         self.dossier.financial = financial
 
     # =========================================================================
+    # Risk
+    # =========================================================================
+
+    def update_risk(
+        self,
+        risk: RiskSection,
+    ) -> None:
+
+        if not isinstance(risk, RiskSection):
+            raise TypeError(
+                "CompanyResearch.update_risk() requires "
+                "RiskSection; received "
+                f"{type(risk).__name__}."
+            )
+
+        self.dossier.risk = risk
+
+    # =========================================================================
+    # Thesis
+    # =========================================================================
+
+    def update_thesis(self, data: dict):
+        """
+        Legacy thesis update interface.
+        """
+        self.dossier.thesis = data
+
+    # =========================================================================
+    # Investment Committee
+    # =========================================================================
+
+    def update_committee(self, data: dict):
+        """
+        Legacy committee update interface.
+        """
+        self.dossier.committee = data
+
+    # =========================================================================
     # Competitive Intelligence
     # =========================================================================
 
     def update_competitive(self, data: dict):
         """
-        Legacy competitive-intelligence update interface.
-
-        Preserved until CompetitiveSection migration.
+        Legacy competitive update interface.
         """
         self.dossier.competitive = data
 
@@ -230,8 +189,6 @@ class CompanyResearch:
     def update_valuation(self, data: dict):
         """
         Legacy valuation update interface.
-
-        Preserved until ValuationSection migration.
         """
         self.dossier.valuation = data
 
@@ -241,23 +198,9 @@ class CompanyResearch:
 
     def update_decision(self, data: dict):
         """
-        Legacy Decision Office update interface.
-
-        Preserved until Decision Intelligence migration.
+        Legacy decision update interface.
         """
         self.dossier.decision = data
-
-    # =========================================================================
-    # Risk
-    # =========================================================================
-
-    def update_risk(self, data: dict):
-        """
-        Legacy risk update interface.
-
-        Preserved until RiskSection migration.
-        """
-        self.dossier.risks = data
 
     # =========================================================================
     # Evidence
@@ -265,7 +208,7 @@ class CompanyResearch:
 
     def add_evidence(self, evidence):
         """
-        Add an evidence object to the Master Dossier evidence library.
+        Add evidence to the Master Dossier.
         """
         self.dossier.evidence.add(evidence)
 
@@ -275,6 +218,6 @@ class CompanyResearch:
 
     def summary(self):
         """
-        Return the complete serialized Master Dossier.
+        Return the serialized Master Dossier.
         """
         return self.dossier.to_dict()

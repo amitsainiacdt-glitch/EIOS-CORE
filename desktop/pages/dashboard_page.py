@@ -1,6 +1,6 @@
 """
 EIOS Dashboard Page
-Release 20.0
+Release 20.1
 
 Executive Dashboard
 """
@@ -144,6 +144,7 @@ class DashboardPage(ttk.Frame):
             "Intrinsic Value",
             intrinsic,
         )
+
         self.add_row(
             details,
             "Business Rating",
@@ -152,26 +153,20 @@ class DashboardPage(ttk.Frame):
 
         self.add_row(
             details,
-           "Financial Rating",
+            "Financial Rating",
             self.dossier.financial.rating or "-",
         )
 
         self.add_row(
             details,
-           "Management Rating",
-           self.dossier.management.rating or "-",
-       )
+            "Management Rating",
+            self.dossier.management.rating or "-",
+        )
 
         self.add_row(
             details,
             "Risk Rating",
-            self.dossier.risks.get(
-                "Overall Risk",
-                {}
-            ).get(
-                "Rating",
-                "-"
-            ),
+            self.dossier.risk.rating or "-",
         )
 
         self.add_row(
@@ -182,9 +177,10 @@ class DashboardPage(ttk.Frame):
                 {}
             ).get(
                 "Rating",
-                "-"
+                "-",
             ),
         )
+
         self.add_row(
             details,
             "Valuation Rating",
@@ -193,7 +189,7 @@ class DashboardPage(ttk.Frame):
                 {}
             ).get(
                 "Rating",
-                "-"
+                "-",
             ),
         )
 

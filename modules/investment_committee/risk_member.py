@@ -14,7 +14,7 @@ class RiskMember:
     def evaluate(self, research):
 
         dossier = research.master_dossier
-        risk = dossier.risk_analysis
+        risk = dossier.risk
 
         if risk is None:
             return CommitteeResponse(
