@@ -11,7 +11,7 @@ from .ownership_section import OwnershipSection
 from .risk_section import RiskSection
 from .serializer import MasterDossierSerializer
 from .valuation_section import ValuationSection
-
+from .decision_section import DecisionSection
 
 @dataclass
 class MasterDossier:
@@ -31,6 +31,7 @@ class MasterDossier:
     competitive: CompetitiveSection = field(default_factory=CompetitiveSection)
     risk: RiskSection = field(default_factory=RiskSection)
     valuation: ValuationSection = field(default_factory=ValuationSection)
+    decision: DecisionSection = field(default_factory=DecisionSection)
     committee: CommitteeSection = field(default_factory=CommitteeSection)
     macro: MacroSection = field(default_factory=MacroSection)
 
@@ -136,6 +137,7 @@ class MasterDossier:
                 "competitive": self.competitive,
                 "risk": self.risk,
                 "valuation": self.valuation,
+                "decision": self.decision,
                 "committee": self.committee,
                 "macro": self.macro,
                 "evidence": self.evidence.to_dict(),

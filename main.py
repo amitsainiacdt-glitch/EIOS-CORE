@@ -3,10 +3,13 @@ Module: EIOS Entry Point
 
 Purpose:
 Starts the Everest Investment Operating System.
+
+Architecture:
+- Core always runs.
+- Desktop is optional.
 """
 
 from core.application import EIOSApplication
-from desktop.app import DesktopApplication
 
 
 def main():
@@ -15,9 +18,26 @@ def main():
 
     dossier = app.run()
 
-    desktop = DesktopApplication(dossier)
+    # ---------------------------------------------------------
+    # Launch Desktop (Optional)
+    # ---------------------------------------------------------
 
-    desktop.run()
+    try:
+        from desktop.app import DesktopApplication
+
+        desktop = DesktopApplication(dossier)
+        desktop.run()
+
+    except Exception as exc:
+
+        print()
+        print("=" * 60)
+        print("DESKTOP NOT AVAILABLE")
+        print("=" * 60)
+        print(exc)
+        print()
+        print("Continuing in console mode...")
+        print("=" * 60)
 
 
 if __name__ == "__main__":

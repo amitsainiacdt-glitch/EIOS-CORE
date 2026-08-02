@@ -1,6 +1,6 @@
 """
 EIOS Dashboard Page
-Release 20.1
+Release 20.2
 
 Executive Dashboard
 """
@@ -33,23 +33,17 @@ class DashboardPage(ttk.Frame):
             style="Title.TLabel",
         ).pack(anchor="w", pady=(0, 20))
 
-        recommendation = self.dossier.decision.get(
-            "recommendation",
-            "-"
+        recommendation = (
+            self.dossier.decision.recommendation
+            or "-"
         )
 
-        confidence = self.dossier.decision.get(
-            "confidence",
-            "-"
-        )
+        confidence = self.dossier.decision.confidence
 
         intrinsic = "-"
 
         if self.dossier.valuation.fair_value > 0:
-
-            intrinsic = (
-                self.dossier.valuation.fair_value
-            )
+            intrinsic = self.dossier.valuation.fair_value
 
         # ======================================================
         # KPI CARDS
@@ -93,6 +87,33 @@ class DashboardPage(ttk.Frame):
             card_frame,
             "Confidence",
             confidence,
+        ).pack(
+            side="left",
+            padx=6,
+        )
+
+        KPICard(
+            card_frame,
+            "Committee Vote",
+            self.dossier.committee.recommendation or "-",
+        ).pack(
+            side="left",
+            padx=6,
+        )
+
+        KPICard(
+            card_frame,
+            "Committee Score",
+            f"{self.dossier.committee.overall_score:.1f}",
+        ).pack(
+            side="left",
+            padx=6,
+        )
+
+        KPICard(
+            card_frame,
+            "Committee Confidence",
+            f"{self.dossier.committee.confidence:.1f}",
         ).pack(
             side="left",
             padx=6,
@@ -178,6 +199,35 @@ class DashboardPage(ttk.Frame):
             "Valuation Rating",
             self.dossier.valuation.rating or "-",
         )
+
+        self.add_row(
+            details,
+            "Committee Recommendation",
+            self.dossier.committee.recommendation or "-",
+        )
+
+        self.add_row(
+            details,
+            "Committee Score",
+            f"{self.dossier.committee.overall_score:.1f}",
+        )
+
+        self.add_row(
+            details,
+            "Committee Confidence",
+            f"{self.dossier.committee.confidence:.1f}",
+        )
+
+        self.add_row(
+            details,
+            "Committee Votes",
+            (
+                f"Pass: {self.dossier.committee.pass_votes} | "
+                f"Watch: {self.dossier.committee.watch_votes} | "
+                f"Reject: {self.dossier.committee.reject_votes}"
+            ),
+        )
+
         # ======================================================
         # REVENUE CHART
         # ======================================================

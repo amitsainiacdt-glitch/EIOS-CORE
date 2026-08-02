@@ -1,5 +1,6 @@
 from modules.investment_committee.committee_vote import CommitteeVote
 from modules.investment_committee.committee_response import CommitteeResponse
+from modules.master_dossier.committee_section import CommitteeSection
 
 
 class CommitteeEngine:
@@ -86,7 +87,7 @@ class CommitteeEngine:
 
         return self.evaluate(research)
 
-    # =====================================================
+       # =====================================================
     # Main Evaluation
     # =====================================================
 
@@ -118,9 +119,18 @@ class CommitteeEngine:
             if isinstance(response, dict):
 
                 response = CommitteeResponse(
-                    member=response.get("member", response.get("Member", "Unknown")),
-                    vote=response.get("vote", response.get("Vote", "Watch")),
-                    score=response.get("score", response.get("Score", 0)),
+                    member=response.get(
+                        "member",
+                        response.get("Member", "Unknown"),
+                    ),
+                    vote=response.get(
+                        "vote",
+                        response.get("Vote", "Watch"),
+                    ),
+                    score=response.get(
+                        "score",
+                        response.get("Score", 0),
+                    ),
                     confidence=response.get(
                         "confidence",
                         response.get("Confidence", 0),
@@ -130,7 +140,10 @@ class CommitteeEngine:
                     warnings=response.get("warnings", []),
                     metrics=response.get("metrics", {}),
                     risks=response.get("risks", []),
-                    recommendation=response.get("recommendation", ""),
+                    recommendation=response.get(
+                        "recommendation",
+                        "",
+                    ),
                     weight=response.get("weight", 10),
                 )
 
@@ -147,9 +160,68 @@ class CommitteeEngine:
 
         committee_vote = CommitteeVote(responses)
 
-        research.master_dossier.committee_summary = (
-            committee_vote.to_dict()
+        # =====================================================
+        # Typed Committee Section
+        # =====================================================
+
+        committee = CommitteeSection()
+
+        committee.recommendation = committee_vote.final_vote
+        committee.overall_score = committee_vote.average_score
+        committee.confidence = committee_vote.average_confidence
+
+        committee.summary = (
+            f"Final Vote: {committee_vote.final_vote} | "
+            f"Average Score: {committee_vote.average_score:.1f}"
         )
+
+        committee.total_members = len(responses)
+
+        committee.pass_votes = sum(
+            1 for r in responses if r.vote == "Pass"
+        )
+
+        committee.watch_votes = sum(
+            1 for r in responses if r.vote == "Watch"
+        )
+
+        committee.reject_votes = sum(
+            1 for r in responses if r.vote == "Reject"
+        )
+
+        for response in responses:
+
+            member = response.member.lower()
+
+            if member == "business":
+                committee.business_score = response.score
+                committee.business_vote = response.vote
+
+            elif member == "financial":
+                committee.financial_score = response.score
+                committee.financial_vote = response.vote
+
+            elif member == "management":
+                committee.management_score = response.score
+                committee.management_vote = response.vote
+
+            elif member == "ownership":
+                committee.ownership_score = response.score
+                committee.ownership_vote = response.vote
+
+            elif member == "competitive":
+                committee.competitive_score = response.score
+                committee.competitive_vote = response.vote
+
+            elif member == "risk":
+                committee.risk_score = response.score
+                committee.risk_vote = response.vote
+
+            elif member == "valuation":
+                committee.valuation_score = response.score
+                committee.valuation_vote = response.vote
+
+        research.update_committee(committee)
 
         print()
         print(committee_vote)

@@ -28,6 +28,7 @@ from modules.investment_committee.committee_engine import CommitteeEngine
 from modules.decision.decision_office import DecisionOffice
 
 from modules.research_context.research_context import ResearchContext
+from modules.master_dossier.decision_section import DecisionSection
 
 
 class EIOSApplication:
@@ -327,7 +328,17 @@ class EIOSApplication:
         print(f"Recommendation : {decision.recommendation.value}")
         print(f"Confidence      : {decision.confidence:.2f}")
 
-        research.update_decision(asdict(decision))
+        decision_section = DecisionSection()
+
+        decision_section.recommendation = decision.recommendation.value
+        decision_section.confidence = decision.confidence
+        decision_section.summary = decision.summary
+        if decision.position_size is not None:
+            decision_section.target_weight = (
+                decision.position_size.target_weight
+    )
+
+        research.update_decision(decision_section)
 
         print("Decision Office initialized successfully.")
 

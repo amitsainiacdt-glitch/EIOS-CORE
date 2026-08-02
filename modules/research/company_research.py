@@ -52,7 +52,8 @@ from modules.master_dossier.competitive_section import CompetitiveSection
 from modules.master_dossier.valuation_section import ValuationSection
 
 from modules.research_context.research_context import ResearchContext
-
+from modules.master_dossier.decision_section import DecisionSection
+from modules.master_dossier.committee_section import CommitteeSection
 
 class CompanyResearch:
     """
@@ -190,11 +191,23 @@ class CompanyResearch:
     # Investment Committee
     # =========================================================================
 
-    def update_committee(self, data: dict):
-        """
-        Legacy committee update interface.
-        """
-        self.dossier.committee = data
+        # =========================================================================
+    # Investment Committee
+    # =========================================================================
+
+    def update_committee(
+        self,
+        committee: CommitteeSection,
+    ) -> None:
+
+        if not isinstance(committee, CommitteeSection):
+            raise TypeError(
+                "CompanyResearch.update_committee() requires "
+                "CommitteeSection; received "
+                f"{type(committee).__name__}."
+            )
+
+        self.dossier.committee = committee
 
     # =========================================================================
     # Valuation
@@ -217,12 +230,19 @@ class CompanyResearch:
     # Decision Office
     # =========================================================================
 
-    def update_decision(self, data: dict):
-        """
-        Legacy decision update interface.
-        """
-        self.dossier.decision = data
+    def update_decision(
+        self,
+        decision: DecisionSection,
+    ) -> None:
 
+        if not isinstance(decision, DecisionSection):
+            raise TypeError(
+                "CompanyResearch.update_decision() requires "
+                "DecisionSection; received "
+                f"{type(decision).__name__}."
+            )
+
+        self.dossier.decision = decision
     # =========================================================================
     # Evidence
     # =========================================================================
