@@ -1,44 +1,11 @@
 """
-===============================================================================
 EIOS
 Everest Investment Operating System
 
 Valuation Engine
 
-Purpose:
-    Coordinates all valuation models and produces the typed
-    ValuationSection.
-
-Architecture:
-
-FinancialSection
-        ↓
-Owner Earnings
-        ↓
-Valuation Registry
-        ↓
-Intrinsic Value Office
-        ↓
-ValuationSection
-        ↓
-AnalysisPack
-        ↓
-AnalysisPackProcessor
-        ↓
-CompanyResearch
-
-Rules:
-    - All calculations remain inside valuation engines.
-    - ValuationSection is a passive data model.
-    - No persistence occurs inside this engine.
-    - AnalysisPackProcessor is the only persistence layer.
-
-Author:
-    EIOS
-
-Release:
-    3.0
-===============================================================================
+Coordinates all valuation models and produces the typed
+ValuationSection.
 """
 
 from modules.research.company_research import CompanyResearch
@@ -48,73 +15,108 @@ from modules.valuation.owners_earnings import OwnerEarningsEngine
 from modules.valuation.dcf_engine import DCFEngine
 from modules.valuation.epv_engine import EPVEngine
 
-from modules.valuation.valuation_registry import ValuationRegistry
-from modules.valuation.intrinsic_value_office import IntrinsicValueOffice
+from modules.valuation.valuation_registry import (
+    ValuationRegistry,
+)
 
-from modules.core.scoring.scoring_engine import ScoringEngine
-from modules.core.scoring.confidence_engine import ConfidenceEngine
+from modules.valuation.intrinsic_value_office import (
+    IntrinsicValueOffice,
+)
+
+from modules.core.scoring.scoring_engine import (
+    ScoringEngine,
+)
+
+from modules.core.scoring.confidence_engine import (
+    ConfidenceEngine,
+)
 
 
 class ValuationEngine:
     """
-    Coordinates all valuation models.
+    Coordinates all institutional valuation models.
     """
 
-    def __init__(self, research: CompanyResearch):
+    def __init__(
+        self,
+        research: CompanyResearch,
+    ):
 
         self.research = research
+
+        # ======================================================
+        # Valuation Models
+        # ======================================================
 
         self.owner_earnings = OwnerEarningsEngine()
 
         self.registry = ValuationRegistry()
-
         self.registry.register(DCFEngine())
         self.registry.register(EPVEngine())
 
-        self.intrinsic_value_office = IntrinsicValueOffice()
+        # ======================================================
+        # Institutional Offices
+        # ======================================================
+
+        self.intrinsic_value_office = (
+            IntrinsicValueOffice()
+        )
+
+        # ======================================================
+        # Scoring
+        # ======================================================
 
         self.scoring_engine = ScoringEngine()
         self.confidence_engine = ConfidenceEngine()
 
-    def analyze(self, financial_data: dict) -> ValuationSection:
+    # ==========================================================
+    # Analysis
+    # ==========================================================
+
+    def analyze(
+        self,
+        financial_data: dict,
+    ) -> ValuationSection:
 
         print("\nStarting Valuation Analysis...")
 
-        valuation_summary = {}
         valuation = ValuationSection()
 
-        # ==========================================================
-        # OWNER EARNINGS
-        # ==========================================================
+        valuation_summary = {}
 
-        valuation_summary["Owner Earnings"] = (
-            self.owner_earnings.evaluate(financial_data)
+        # ======================================================
+        # Owner Earnings
+        # ======================================================
+
+        owner_result = self.owner_earnings.evaluate(
+            financial_data
         )
 
-        # ==========================================================
-        # FETCH TYPED FINANCIAL STATE
-        # ==========================================================
+        valuation_summary["Owner Earnings"] = owner_result
+
+        # ======================================================
+        # Retrieve typed financial section
+        # ======================================================
 
         financial = self.research.master_dossier.financial
 
-        # ==========================================================
-        # FETCH VALUATION ASSUMPTIONS
-        # ==========================================================
-
-        valuation_assumptions = financial.metadata.get(
-            "valuation_assumptions",
-            {},
+        valuation_assumptions = (
+            financial.metadata.get(
+                "valuation_assumptions",
+                {},
+            )
         )
 
-        if not isinstance(valuation_assumptions, dict):
+        if not isinstance(
+            valuation_assumptions,
+            dict,
+        ):
             raise TypeError(
-                "FinancialSection.metadata['valuation_assumptions'] "
-                "must contain a dictionary during migration."
+                "valuation_assumptions must be a dictionary."
             )
-
-        # ==========================================================
-        # EXECUTE REGISTERED ENGINES
-        # ==========================================================
+                    # ======================================================
+        # Execute Registered Valuation Engines
+        # ======================================================
 
         for engine in self.registry:
 
@@ -122,92 +124,92 @@ class ValuationEngine:
                 engine.ASSUMPTION_KEY
             )
 
-            if assumptions:
+            if assumptions is None:
+                continue
 
-                valuation_summary[
-                    engine.METHOD_NAME
-                ] = engine.evaluate(
-                    assumptions
-                )
+            result = engine.evaluate(
+                assumptions
+            )
 
-        # ==========================================================
-        # INTRINSIC VALUE OFFICE
-        # ==========================================================
+            valuation_summary[
+                engine.METHOD_NAME
+            ] = result
 
-        intrinsic_value = (
+        # ======================================================
+        # Intrinsic Value Office
+        # ======================================================
+
+        intrinsic = (
             self.intrinsic_value_office.evaluate(
                 valuation_summary
             )
         )
 
-        valuation_summary[
-            "Intrinsic Value"
-        ] = intrinsic_value
-
-        # ==========================================================
-        # BUILD TYPED VALUATION SECTION
-        # ==========================================================
-
-        valuation.intrinsic_value = intrinsic_value.fair_value
-        valuation.fair_value = intrinsic_value.fair_value
-
-        valuation.valuation_method = (
-            "Intrinsic Value Office"
+        valuation.intrinsic_value = (
+            intrinsic.fair_value
         )
 
-        # ==========================================================
-        # Institutional Score
-        # ==========================================================
+        valuation.fair_value = (
+            intrinsic.fair_value
+        )
 
-        score_result = self.scoring_engine.calculate(
+        valuation.valuation_method = (
+            intrinsic.primary_method
+        )
+
+        valuation.assumptions = [
+            "DCF assumptions supplied by FinancialEngine.",
+            "EPV assumptions supplied by FinancialEngine.",
+            "Owner Earnings included in weighted valuation.",
+        ]
+
+        valuation.notes = [
+            intrinsic.summary
+        ]
+
+        valuation.metadata = {
+            "valuation_summary": valuation_summary,
+            "intrinsic_value_result": intrinsic,
+        }
+
+        # ======================================================
+        # Institutional Scoring
+        # ======================================================
+
+        score = self.scoring_engine.calculate(
             score=80,
             max_score=100,
         )
 
-        confidence_result = (
+        confidence = (
             self.confidence_engine.calculate(
-                evidence_items=3,
-                expected_items=5,
+                evidence_items=len(
+                    valuation_summary
+                ),
+                expected_items=3,
             )
         )
 
-        valuation.score = score_result.percentage
-        valuation.confidence = confidence_result.confidence
-        valuation.rating = score_result.grade
-
-        valuation.summary = (
-            "Intrinsic valuation completed successfully."
+        valuation.score = score.percentage
+        valuation.rating = score.grade
+        valuation.confidence = (
+            confidence.confidence
         )
 
-        valuation.evidence = [
-            "Owner Earnings",
-            "DCF",
-            "EPV",
-            "Intrinsic Value Office",
-        ]
-
-        valuation.assumptions = [
-            "Financial assumptions remain valid."
-        ]
+        valuation.summary = (
+            "Institutional valuation completed successfully."
+        )
 
         valuation.source = "ValuationEngine"
 
-        valuation.metadata = {
-            "valuation_summary": valuation_summary,
-        }
+        valuation.evidence = list(
+            valuation_summary.keys()
+        )
 
-        # ==========================================================
-        # Release 3.0
-        #
-        # No persistence.
-        #
-        # AnalysisPackProcessor will call:
-        #
-        #     update_valuation()
-        #
-        # ==========================================================
+        print(
+            f"Intrinsic Value = {valuation.intrinsic_value}"
+        )
 
         print("Valuation Analysis Completed")
 
-        return valuationpython -m py_compile modules\valuation\valuation_engine.py
-    
+        return valuation

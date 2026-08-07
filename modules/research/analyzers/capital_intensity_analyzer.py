@@ -24,7 +24,7 @@ Release:
 
 from dataclasses import dataclass, field
 
-from ..base_analyzer import BaseAnalyzer
+from .base_analyzer import BaseAnalyzer
 
 
 @dataclass
@@ -90,3 +90,4 @@ class CapitalIntensityAnalyzer(BaseAnalyzer):
         # ------------------------------------------------------------
 
         return analysis
+

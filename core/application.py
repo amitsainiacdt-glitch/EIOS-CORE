@@ -30,6 +30,8 @@ from modules.decision.decision_office import DecisionOffice
 from modules.research_context.research_context import ResearchContext
 from modules.master_dossier.decision_section import DecisionSection
 from modules.ownership.typed_ownership_engine import TypedOwnershipEngine
+from modules.kernel.eios_kernel import EIOSKernel
+from modules.kernel.application_builder import ApplicationBuilder
 
 class EIOSApplication:
 
@@ -136,19 +138,23 @@ class EIOSApplication:
         # ==========================================================
 
         valuation_engine = ValuationEngine(research)
-        valuation_engine.analyze(financial_data)
 
+        valuation = valuation_engine.analyze(financial_data)
+
+        research.update_valuation(valuation)
         # ==========================================================
         # MANAGEMENT
         # ==========================================================
 
         management_engine = ManagementEngine(research)
 
-        management_engine.analyze(
+        management = management_engine.analyze(
             {
                 "company": dossier.company_name,
             }
         )
+
+        research.update_management(management)
 
         # ==========================================================
         # RISK
@@ -156,11 +162,13 @@ class EIOSApplication:
 
         risk_engine = RiskEngine(research)
 
-        risk_engine.analyze(
+        risk = risk_engine.analyze(
             {
                 "company": dossier.company_name,
             }
         )
+
+        research.update_risk(risk)
 
         # ==========================================================
         # THESIS ENGINE
@@ -220,7 +228,7 @@ class EIOSApplication:
         )
 
         competitive_result = competitive_engine.analyze()
-       
+        research.update_competitive(competitive_result)
 
         # ==========================================================
         # OBSERVATION
@@ -278,7 +286,9 @@ class EIOSApplication:
 
         business_engine = BusinessQualityEngine(research)
 
-        business_engine.analyze(
+        business_engine = BusinessQualityEngine(research)
+
+        business = business_engine.analyze(
             business_model="Engineering-to-order manufacturing",
             moat="High engineering expertise and long customer relationships",
             industry="Process Equipment",
@@ -293,6 +303,8 @@ class EIOSApplication:
                 "Commodity price volatility",
             ],
         )
+
+        research.update_business_quality(business)
         
         # ==========================================================
         # OWNERSHIP

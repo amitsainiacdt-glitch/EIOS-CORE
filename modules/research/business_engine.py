@@ -1,31 +1,26 @@
 """
-===============================================================================
 EIOS
 Business Engine
 
 Purpose:
-    Orchestrates all Business Analyzers and produces a consolidated
-    BusinessAnalysisResult.
+Orchestrates all Business Analyzers and produces a consolidated
+BusinessAnalysisResult.
 
 Author:
-    EIOS
-
-Release:
-    1.0
-===============================================================================
+EIOS
 """
 
 from .business_analysis_result import BusinessAnalysisResult
 
-from .analyzers.business.business_model_analyzer import BusinessModelAnalyzer
-from .analyzers.business.revenue_analyzer import RevenueAnalyzer
-from .analyzers.business.tam_analyzer import TAMAnalyzer
-from .analyzers.business.moat_analyzer import MoatAnalyzer
-from .analyzers.business.pricing_power_analyzer import PricingPowerAnalyzer
-from .analyzers.business.customer_analyzer import CustomerAnalyzer
-from .analyzers.business.scalability_analyzer import ScalabilityAnalyzer
-from .analyzers.business.capital_intensity_analyzer import CapitalIntensityAnalyzer
-from .analyzers.business.swot_analyzer import SWOTAnalyzer
+from .analyzers.business_model_analyzer import BusinessModelAnalyzer
+from .analyzers.revenue_analyzer import RevenueAnalyzer
+from .analyzers.tam_analyzer import TAMAnalyzer
+from .analyzers.moat_analyzer import MoatAnalyzer
+from .analyzers.pricing_power_analyzer import PricingPowerAnalyzer
+from .analyzers.customer_analyzer import CustomerAnalyzer
+from .analyzers.scalability_analyzer import ScalabilityAnalyzer
+from .analyzers.capital_intensity_analyzer import CapitalIntensityAnalyzer
+from .analyzers.swot_analyzer import SWOTAnalyzer
 
 
 class BusinessEngine:
@@ -117,21 +112,19 @@ class BusinessEngine:
         result.threats = swot.threats
 
         # -------------------------------------------------------------
-        # Scores
+        # Confidence
         # -------------------------------------------------------------
 
         result.confidence = (
-            business.confidence +
-            revenue.confidence +
-            tam.confidence +
-            moat.confidence +
-            pricing.confidence +
-            customer.confidence +
-            scalability.confidence +
-            capital.confidence +
-            swot.confidence
+            business.confidence
+            + revenue.confidence
+            + tam.confidence
+            + moat.confidence
+            + pricing.confidence
+            + customer.confidence
+            + scalability.confidence
+            + capital.confidence
+            + swot.confidence
         ) / 9
-
-        # Business Quality Score will be calculated in a later release.
 
         return result

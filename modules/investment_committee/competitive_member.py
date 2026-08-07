@@ -1,13 +1,12 @@
-from modules import competitive
 from modules.investment_committee.committee_response import CommitteeResponse
 
 
 class CompetitiveMember:
     """
-    Competitive Intelligence Committee Member
+    Competitive Intelligence Committee Member.
 
-    Evaluates competitive positioning, peer ranking,
-    industry leadership and moat.
+    Evaluates competitive positioning,
+    peer ranking and benchmark strength.
     """
 
     def __init__(self):
@@ -16,9 +15,9 @@ class CompetitiveMember:
     def evaluate(self, research):
 
         dossier = research.master_dossier
-        competitive = dossier.competitive_intelligence
+        competitive = dossier.competitive
 
-        if not competitive:
+        if competitive is None:
             return CommitteeResponse(
                 member="Competitive",
                 vote="Watch",
@@ -34,65 +33,70 @@ class CompetitiveMember:
         evidence = []
         risks = []
 
-        leader = competitive.leader
-        peer_count = competitive.peer_count
-        ranked = competitive.ranked_peers
-        # ------------------------------------
-        # Industry Leader
-        # ------------------------------------
+        # =====================================================
+        # Read values produced by CompetitiveEngine
+        # =====================================================
+
+        leader = competitive.metadata.get("leader", {})
+        laggard = competitive.metadata.get("laggard", {})
+
+        benchmark = leader.get("Benchmark Score", 0)
+        rank = leader.get("Rank", 999)
+
+        peer_count = (
+            len(competitive.ranked_peers)
+            if hasattr(competitive, "ranked_peers")
+            else 0
+        )
+
+        # =====================================================
+        # Leader
+        # =====================================================
 
         if leader:
             score += 30
             evidence.append(
-                f"Industry leader: {leader.get('Company','Unknown')}"
+                f"Industry leader: {leader.get('Company', 'Unknown')}"
             )
         else:
             risks.append("Industry leader not identified")
 
-        # ------------------------------------
+        # =====================================================
         # Peer Ranking
-        # ------------------------------------
+        # =====================================================
 
-        if ranked:
-            top = ranked[0]
-
-            if top.get("Rank") == 1:
-                score += 30
-                evidence.append("Ranked #1 among peers")
-            elif top.get("Rank") <= 3:
-                score += 20
-                evidence.append("Top-three peer ranking")
-            else:
-                risks.append("Peer ranking is weak")
+        if rank == 1:
+            score += 30
+            evidence.append("Ranked #1 among peers")
+        elif rank <= 3:
+            score += 20
+            evidence.append("Top-three peer ranking")
         else:
-            risks.append("Peer ranking unavailable")
+            risks.append("Weak peer ranking")
 
-        # ------------------------------------
+        # =====================================================
         # Peer Coverage
-        # ------------------------------------
+        # =====================================================
 
         if peer_count >= 3:
             score += 20
-            evidence.append("Adequate peer comparison")
+            evidence.append("Adequate peer coverage")
         else:
             risks.append("Limited peer coverage")
 
-        # ------------------------------------
+        # =====================================================
         # Benchmark Score
-        # ------------------------------------
+        # =====================================================
 
-        if leader:
-            benchmark = leader.get("Benchmark Score", 0) if leader else 0
+        if benchmark >= 20:
+            score += 20
+            evidence.append("Strong benchmark score")
+        else:
+            risks.append("Benchmark score below target")
 
-            if benchmark >= 20:
-                score += 20
-                evidence.append("Strong benchmark score")
-            else:
-                risks.append("Benchmark score below target")
-
-        # ------------------------------------
+        # =====================================================
         # Final Vote
-        # ------------------------------------
+        # =====================================================
 
         if score >= 85:
             vote = "Pass"
@@ -105,7 +109,7 @@ class CompetitiveMember:
             member="Competitive",
             vote=vote,
             score=score,
-            confidence=90,
+            confidence=competitive.confidence,
             evidence=evidence,
             risks=risks,
             recommendation=f"Competitive Score = {score}",

@@ -39,3 +39,4 @@ class BaseAnalyzer(ABC):
         Analysis Result
         """
         raise NotImplementedError
+
