@@ -1,31 +1,75 @@
-# EIOS-CORE
-Enterprise Investment Operating system 
+# Everest Investment Operating System (EIOS)
 
-# EIOS-Core
+Institutional AI Investment Operating System
 
-Enterprise Investment Operating System
+---
 
-## Status
-🟢 Active Development
+## Mission
 
-## Current Sprint
-Sprint 1 – Data Acquisition Engine
+Build the world's most advanced institutional investment intelligence platform.
 
-## Current Milestone
-Build the first automated Data Book for BLS International.
+---
 
-## Founder
-Amit Saini
+## Divisions
 
-## Chief Architect
-OpenAI ChatGPT
+### Long-Term Investing
 
-## Vision
+Research exceptional businesses capable of long-term wealth compounding.
 
-EIOS is being built as a Digital Chief Investment Officer that:
+### Alpha Intelligence
 
-- Automatically acquires financial data
-- Builds institutional Data Books
-- Preserves investment knowledge
-- Generates evidence-based recommendations
-- Continuously improves decision quality
+Detect early public signals capable of generating high-probability alpha before market consensus.
+
+---
+
+## Architecture
+
+Core
+
+Research
+
+Long-Term
+
+Alpha
+
+Knowledge Graph
+
+Investment Committee
+
+AI CIO
+
+Portfolio Engine
+
+---
+
+## Engineering Principles
+
+Typed Architecture
+
+Evidence First
+
+Explainable AI
+
+Institutional Research Workflow
+
+Continuous Learning
+
+Decision Intelligence
+
+---
+
+## Current Status
+
+Release 3
+
+In Progress
+
+Release 3 must be completed before Alpha implementation begins.
+
+---
+
+## Documentation
+
+docs/
+
+contains the complete project constitution, specifications and roadmap.

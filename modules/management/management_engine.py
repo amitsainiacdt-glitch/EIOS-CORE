@@ -329,10 +329,18 @@ class ManagementEngine:
         }
 
         # =====================================================================
-        # Persist Typed Management Intelligence
         # =====================================================================
-
-        self.research.update_management(management)
+        # Release 3.0
+        #
+        # Persistence has moved to AnalysisPackProcessor.
+        #
+        # ManagementEngine now performs analysis only.
+        #
+        # The completed ManagementSection is returned to the
+        # ResearchOrchestrator, which adds it to the AnalysisPack.
+        #
+        # AnalysisPackProcessor becomes the only component allowed
+        # to update CompanyResearch.
 
         # =====================================================================
         # Publish Management Intelligence

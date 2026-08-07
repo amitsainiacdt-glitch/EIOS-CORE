@@ -38,6 +38,9 @@ class CommitteeEngine:
             from modules.investment_committee.management_member import (
                 ManagementMember,
             )
+            from modules.investment_committee.ownership_member import (
+                OwnershipMember,
+            )
             from modules.investment_committee.risk_member import (
                 RiskMember,
             )
@@ -58,6 +61,7 @@ class CommitteeEngine:
                 BusinessMember(),
                 FinancialMember(),
                 ManagementMember(),
+                OwnershipMember(),
                 RiskMember(),
                 CompetitiveMember(),
                 ValuationMember(),
@@ -87,7 +91,7 @@ class CommitteeEngine:
 
         return self.evaluate(research)
 
-       # =====================================================
+    # =====================================================
     # Main Evaluation
     # =====================================================
 
@@ -116,6 +120,7 @@ class CommitteeEngine:
             # ---------------------------------------------
             # Backward compatibility for legacy members
             # ---------------------------------------------
+
             if isinstance(response, dict):
 
                 response = CommitteeResponse(

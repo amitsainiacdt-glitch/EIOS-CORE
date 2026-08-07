@@ -54,7 +54,7 @@ from modules.master_dossier.valuation_section import ValuationSection
 from modules.research_context.research_context import ResearchContext
 from modules.master_dossier.decision_section import DecisionSection
 from modules.master_dossier.committee_section import CommitteeSection
-
+from modules.master_dossier.ownership_section import OwnershipSection
 class CompanyResearch:
     """
     Coordinates research updates into the Master Dossier.
@@ -140,6 +140,23 @@ class CompanyResearch:
             )
 
         self.dossier.financial = financial
+        # =========================================================================
+    # Ownership
+    # =========================================================================
+
+    def update_ownership(
+        self,
+        ownership: OwnershipSection,
+    ) -> None:
+
+        if not isinstance(ownership, OwnershipSection):
+            raise TypeError(
+                "CompanyResearch.update_ownership() requires "
+                "OwnershipSection; received "
+                f"{type(ownership).__name__}."
+            )
+
+        self.dossier.ownership = ownership
 
     # =========================================================================
     # Risk

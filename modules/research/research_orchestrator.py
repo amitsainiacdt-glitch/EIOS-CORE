@@ -6,81 +6,138 @@ Research Orchestrator
 Purpose:
     Coordinates all research engines and produces a single AnalysisPack.
 
-Author:
-    EIOS
+Architecture:
+
+ResearchOrchestrator
+        ↓
+Business Engine
+Financial Engine
+Management Engine
+Ownership Engine
+Competitive Engine
+Risk Engine
+Valuation Engine
+        ↓
+AnalysisPack
 
 Release:
-    1.0
+    3.0
 ===============================================================================
 """
 
 from .analysis_pack import AnalysisPack
+
 from .business_engine import BusinessEngine
+from .business_quality import BusinessQualityEngine
+
+from modules.financial.financial_engine import FinancialEngine
+from modules.management.management_engine import ManagementEngine
+from modules.ownership.typed_ownership_engine import (
+    TypedOwnershipEngine,
+)
+from modules.competitive.competitive_engine import (
+    CompetitiveEngine,
+)
+from modules.risk.risk_engine import RiskEngine
+from modules.valuation.valuation_engine import (
+    ValuationEngine,
+)
 
 
 class ResearchOrchestrator:
     """
     Coordinates all research engines.
+
+    Produces a fully populated AnalysisPack.
+
+    Performs no persistence.
     """
 
-    def __init__(self):
+    def __init__(self, research):
+
+        self.research = research
+
+        # ==========================================================
+        # Research Engines
+        # ==========================================================
 
         self.business_engine = BusinessEngine()
+        self.business_quality = BusinessQualityEngine(research)
 
-        # Future engines
-        self.financial_engine = None
-        self.management_engine = None
-        self.ownership_engine = None
-        self.competitive_engine = None
-        self.risk_engine = None
-        self.valuation_engine = None
-        self.macro_engine = None
+        self.financial_engine = FinancialEngine(research)
+
+        self.management_engine = ManagementEngine(research)
+
+        self.ownership_engine = TypedOwnershipEngine(research)
+
+        self.competitive_engine = CompetitiveEngine(research)
+
+        self.risk_engine = RiskEngine(research)
+
+        self.valuation_engine = ValuationEngine(research)
 
     def analyze(self, company):
-        """
-        Perform complete company research.
-
-        Parameters
-        ----------
-        company
-            Company research object.
-
-        Returns
-        -------
-        AnalysisPack
-        """
 
         pack = AnalysisPack()
 
-        # ---------------------------------------------------------
-        # Business Analysis
-        # ---------------------------------------------------------
+        # ==========================================================
+        # Business
+        # ==========================================================
 
-        pack.business = self.business_engine.analyze(company)
+        business_result = self.business_engine.analyze(
+            company
+        )
 
-        # ---------------------------------------------------------
-        # Future Engines
-        # ---------------------------------------------------------
+        pack.business = self.business_quality.analyze(
+            result=business_result
+        )
 
-        if self.financial_engine:
-            pack.financial = self.financial_engine.analyze(company)
+        # ==========================================================
+        # Financial
+        # ==========================================================
 
-        if self.management_engine:
-            pack.management = self.management_engine.analyze(company)
+        pack.financial = self.financial_engine.analyze(
+            company
+        )
 
-        if self.ownership_engine:
-            pack.ownership = self.ownership_engine.analyze(company)
+        # ==========================================================
+        # Management
+        # ==========================================================
 
-        if self.competitive_engine:
-            pack.competitive = self.competitive_engine.analyze(company)
+        pack.management = self.management_engine.analyze(
+            company
+        )
 
-        if self.risk_engine:
-            pack.risk = self.risk_engine.analyze(company)
+        # ==========================================================
+        # Ownership
+        # ==========================================================
 
-        if self.valuation_engine:
-            pack.valuation = self.valuation_engine.analyze(company)
+        pack.ownership = self.ownership_engine.analyze(
+            company
+        )
 
-        if self.macro_engine:
-            pack.macro = self.macro_engine.analyze(company)
+        # ==========================================================
+        # Competitive
+        # ==========================================================
+
+        pack.competitive = self.competitive_engine.analyze(
+            company
+        )
+
+        # ==========================================================
+        # Risk
+        # ==========================================================
+
+        pack.risk = self.risk_engine.analyze(
+            company
+        )
+
+        # ==========================================================
+        # Valuation
+        # ==========================================================
+
+        pack.valuation = self.valuation_engine.analyze(
+            company
+        )
 
         return pack

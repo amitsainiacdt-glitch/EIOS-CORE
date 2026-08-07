@@ -29,7 +29,7 @@ from modules.decision.decision_office import DecisionOffice
 
 from modules.research_context.research_context import ResearchContext
 from modules.master_dossier.decision_section import DecisionSection
-
+from modules.ownership.typed_ownership_engine import TypedOwnershipEngine
 
 class EIOSApplication:
 
@@ -99,7 +99,7 @@ class EIOSApplication:
         research_context.set_master_dossier(dossier)
 
         research = CompanyResearch(research_context)
-
+        
         # ==========================================================
         # FINANCIAL ENGINE
         # ==========================================================
@@ -292,6 +292,23 @@ class EIOSApplication:
                 "Project execution delays",
                 "Commodity price volatility",
             ],
+        )
+        
+        # ==========================================================
+        # OWNERSHIP
+        # ==========================================================
+
+        ownership_engine = TypedOwnershipEngine(research)
+
+        ownership_engine.analyze(
+            promoter_holding=48.5,
+            promoter_pledge=0.0,
+            fii_holding=18.2,
+            dii_holding=16.4,
+            public_holding=16.9,
+            promoter_trend="Stable",
+            fii_trend="Increasing",
+            dii_trend="Stable",
         )
 
         # ==========================================================

@@ -7,26 +7,36 @@ Risk Engine
 
 Purpose:
     Coordinates Risk analysis and produces the typed
-    RiskSection stored in the Master Dossier.
+    RiskSection.
 
 Architecture:
-    Specialist Risk Engines
-        -> RiskScorecard
-        -> RiskSection
-        -> CompanyResearch
-        -> MasterDossier.risk
+
+Specialist Risk Engines
+        ↓
+RiskScorecard
+        ↓
+RiskSection
+        ↓
+AnalysisPack
+        ↓
+AnalysisPackProcessor
+        ↓
+CompanyResearch
+        ↓
+MasterDossier
 
 Rules:
     - Analytical calculations remain inside engines.
     - RiskSection is a passive domain model.
-    - CompanyResearch only persists completed intelligence.
+    - Engine never persists data.
+    - AnalysisPackProcessor is the only persistence layer.
     - No legacy Risk dictionary is persisted.
 
 Author:
     EIOS
 
 Release:
-    2.0
+    3.0
 ===============================================================================
 """
 
@@ -49,7 +59,7 @@ from modules.intelligence.risk_intelligence import RiskIntelligence
 
 class RiskEngine:
     """
-    Coordinates Risk analysis and publishes typed RiskSection intelligence.
+    Coordinates Risk analysis and produces typed RiskSection.
     """
 
     def __init__(self, research: CompanyResearch):
@@ -126,9 +136,9 @@ class RiskEngine:
 
         risk.source = "RiskEngine"
 
-        # ------------------------------------------------------------------
-        # Risk categories
-        # ------------------------------------------------------------------
+        # ==========================================================
+        # Risk Categories
+        # ==========================================================
 
         risk.business_risks = [
             business.get("Conclusion", "Business risk evaluated.")
@@ -154,9 +164,9 @@ class RiskEngine:
             scenario.get("Conclusion", "Scenario analysis completed.")
         ]
 
-        # ------------------------------------------------------------------
-        # Evidence / Metadata
-        # ------------------------------------------------------------------
+        # ==========================================================
+        # Evidence
+        # ==========================================================
 
         risk.evidence = [
             "Business Risk analysis completed.",
@@ -183,13 +193,14 @@ class RiskEngine:
         }
 
         # ==========================================================
-        # Persist typed Risk intelligence
-        # ==========================================================
-
-        self.research.update_risk(risk)
-
-        # ==========================================================
-        # Publish Risk intelligence
+        # Release 3.0
+        #
+        # No persistence.
+        #
+        # AnalysisPackProcessor will call:
+        #
+        #     update_risk()
+        #
         # ==========================================================
 
         risk_intelligence = RiskIntelligence.build(

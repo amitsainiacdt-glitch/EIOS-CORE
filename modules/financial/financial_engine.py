@@ -446,6 +446,24 @@ class FinancialEngine:
 
         # =====================================================================
         # UPDATE MASTER DOSSIER
+        #
+        # NOTE:
+        # Temporary direct persistence during typed migration.
+        #
+        # Future architecture:
+        #
+        # FinancialEngine
+        #        ↓
+        # FinancialSection
+        #        ↓
+        # AnalysisPack
+        #        ↓
+        # AnalysisPackProcessor
+        #        ↓
+        # CompanyResearch
+        #
+        # This call will be removed once the unified AnalysisPack pipeline
+        # becomes the sole persistence path.
         # =====================================================================
 
         self.research.update_financials(financial)
