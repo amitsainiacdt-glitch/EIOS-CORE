@@ -8,6 +8,7 @@ from modules.research.company_research import CompanyResearch
 from modules.research.stage_engine import StageEngine
 from modules.research.business_quality import BusinessQualityEngine
 from modules.research.kill_switch import KillSwitchEngine
+from modules.research.research_pipeline import ResearchPipeline
 
 from modules.financial.financial_engine import FinancialEngine
 
@@ -101,12 +102,32 @@ class EIOSApplication:
         research_context.set_master_dossier(dossier)
 
         research = CompanyResearch(research_context)
+        research_pipeline = ResearchPipeline(research)
+        ownership_data = {
+            "promoter_holding": 48.5,
+            "promoter_pledge": 0.0,
+            "fii_holding": 18.2,
+            "dii_holding": 16.4,
+            "public_holding": 16.9,
+            "promoter_trend": "Stable",
+            "fii_trend": "Increasing",
+            "dii_trend": "Stable",
+        }
         
         # ==========================================================
-        # FINANCIAL ENGINE
+        # RESEARCH INPUTS
         # ==========================================================
 
-        financial_engine = FinancialEngine(research)
+        ownership_data = {
+            "promoter_holding": 48.5,
+            "promoter_pledge": 0.0,
+            "fii_holding": 18.2,
+            "dii_holding": 16.4,
+            "public_holding": 16.9,
+            "promoter_trend": "Stable",
+            "fii_trend": "Increasing",
+            "dii_trend": "Stable",
+        }
 
         financial_data = {
             "current_revenue": 1200,
@@ -131,44 +152,29 @@ class EIOSApplication:
             "previous_invested_capital": 850,
         }
 
-        financial_engine.analyze(financial_data)
+        management_data = {
+            "company": dossier.company_name,
+        }
 
-        # ==========================================================
-        # VALUATION
-        # ==========================================================
+        risk_data = {
+            "company": dossier.company_name,
+        }
 
-        valuation_engine = ValuationEngine(research)
-
-        valuation = valuation_engine.analyze(financial_data)
-
-        research.update_valuation(valuation)
-        # ==========================================================
-        # MANAGEMENT
-        # ==========================================================
-
-        management_engine = ManagementEngine(research)
-
-        management = management_engine.analyze(
-            {
-                "company": dossier.company_name,
-            }
-        )
-
-        research.update_management(management)
-
-        # ==========================================================
-        # RISK
-        # ==========================================================
-
-        risk_engine = RiskEngine(research)
-
-        risk = risk_engine.analyze(
-            {
-                "company": dossier.company_name,
-            }
-        )
-
-        research.update_risk(risk)
+        business_data = {
+            "business_model": "Engineering-to-order manufacturing",
+            "moat": "High engineering expertise and long customer relationships",
+            "industry": "Process Equipment",
+            "market_size": "Large global process equipment market",
+            "growth_drivers": [
+                "Capex revival",
+                "Export growth",
+                "Energy transition",
+            ],
+            "risks": [
+                "Project execution delays",
+                "Commodity price volatility",
+            ],
+        }
 
         # ==========================================================
         # THESIS ENGINE
@@ -183,12 +189,10 @@ class EIOSApplication:
         committee_engine = CommitteeEngine(research)
 
         # ==========================================================
-        # COMPETITIVE INTELLIGENCE
+        # COMPETITIVE PEERS
         # ==========================================================
 
-        competitive_engine = CompetitiveEngine(research)
-
-        competitive_engine.add_peer(
+        peers = [
             Peer(
                 company="The Anup Engineering Limited",
                 revenue_growth=20,
@@ -198,10 +202,7 @@ class EIOSApplication:
                 roiic=24,
                 operating_margin=18,
                 debt_to_equity=0.20,
-            )
-        )
-
-        competitive_engine.add_peer(
+            ),
             Peer(
                 company="Thermax",
                 revenue_growth=15,
@@ -211,10 +212,7 @@ class EIOSApplication:
                 roiic=17,
                 operating_margin=14,
                 debt_to_equity=0.15,
-            )
-        )
-
-        competitive_engine.add_peer(
+            ),
             Peer(
                 company="ISGEC Heavy Engineering",
                 revenue_growth=12,
@@ -224,11 +222,22 @@ class EIOSApplication:
                 roiic=14,
                 operating_margin=10,
                 debt_to_equity=0.35,
-            )
-        )
+            ),
+        ]
 
-        competitive_result = competitive_engine.analyze()
-        research.update_competitive(competitive_result)
+        # ==========================================================
+        # RESEARCH PIPELINE
+        # ==========================================================
+
+        research_pipeline.execute(
+            company=self.registry.get_company("ANUP"),
+            financial_data=financial_data,
+            ownership_data=ownership_data,
+            management_data=management_data,
+            risk_data=risk_data,
+            business_data=business_data,
+            peers=peers,
+        )
 
         # ==========================================================
         # OBSERVATION
@@ -272,55 +281,6 @@ class EIOSApplication:
 
         reasoning = self.reasoning_engine.create_from_knowledge(
             knowledge
-        )
-
-        # ==========================================================
-        # BUSINESS QUALITY
-        # ==========================================================
-
-        print()
-        print("=" * 60)
-        print("BUSINESS QUALITY ANALYSIS")
-        print("=" * 60)
-        print()
-
-        business_engine = BusinessQualityEngine(research)
-
-        business_engine = BusinessQualityEngine(research)
-
-        business = business_engine.analyze(
-            business_model="Engineering-to-order manufacturing",
-            moat="High engineering expertise and long customer relationships",
-            industry="Process Equipment",
-            market_size="Large global process equipment market",
-            growth_drivers=[
-                "Capex revival",
-                "Export growth",
-                "Energy transition",
-            ],
-            risks=[
-                "Project execution delays",
-                "Commodity price volatility",
-            ],
-        )
-
-        research.update_business_quality(business)
-        
-        # ==========================================================
-        # OWNERSHIP
-        # ==========================================================
-
-        ownership_engine = TypedOwnershipEngine(research)
-
-        ownership_engine.analyze(
-            promoter_holding=48.5,
-            promoter_pledge=0.0,
-            fii_holding=18.2,
-            dii_holding=16.4,
-            public_holding=16.9,
-            promoter_trend="Stable",
-            fii_trend="Increasing",
-            dii_trend="Stable",
         )
 
         # ==========================================================
@@ -400,7 +360,9 @@ class EIOSApplication:
         self.reasoning_engine.show_reasoning()
 
         print()
-        competitive_engine.summary()
+        print()
+        print("Competitive Intelligence")
+        print(dossier.competitive.summary)
 
         # ==========================================================
         # MASTER DOSSIER

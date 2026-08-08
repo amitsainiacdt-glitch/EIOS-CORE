@@ -9,13 +9,13 @@ Release 3.0
 Architecture
 
 CompetitiveEngine
-        ↓
+    ↓
 CompetitiveSection
-        ↓
+    ↓
 AnalysisPack
-        ↓
+    ↓
 AnalysisPackProcessor
-        ↓
+    ↓
 CompanyResearch
 """
 
@@ -51,6 +51,10 @@ class CompetitiveEngine:
         self.scoring_engine = ScoringEngine()
         self.confidence_engine = ConfidenceEngine()
 
+    # ==========================================================
+    # PEER MANAGEMENT
+    # ==========================================================
+
     def add_peer(self, peer):
         """
         Register a peer company.
@@ -58,7 +62,14 @@ class CompetitiveEngine:
 
         self.registry.add_peer(peer)
 
-    def analyze(self, metric="Benchmark Score") -> CompetitiveSection:
+    # ==========================================================
+    # ANALYSIS
+    # ==========================================================
+
+    def analyze(
+        self,
+        metric="Benchmark Score",
+    ) -> CompetitiveSection:
         """
         Produce typed Competitive Intelligence.
 
@@ -67,59 +78,145 @@ class CompetitiveEngine:
             - Returns CompetitiveSection only
         """
 
-        # ==========================================================
-        # Peer Benchmarking
-        # ==========================================================
+        # ======================================================
+        # PEER BENCHMARKING
+        # ======================================================
 
         peers = self.registry.get_all_peers()
 
-        benchmarked = self.benchmark.evaluate(peers)
+        benchmarked = self.benchmark.evaluate(
+            peers
+        )
 
         ranked = self.ranking.rank(
             benchmarked,
             metric=metric,
         )
 
-        leader = self.ranking.top_company(ranked)
+        leader = self.ranking.top_company(
+            ranked
+        )
 
-        laggard = self.ranking.bottom_company(ranked)
+        laggard = self.ranking.bottom_company(
+            ranked
+        )
 
-        # ==========================================================
-        # Competitive Assessment
-        # ==========================================================
+        # ======================================================
+        # COMPETITIVE ASSESSMENT
+        # ======================================================
 
-        assessment = self.assessment.evaluate(ranked)
+        assessment = self.assessment.evaluate(
+            ranked
+        )
 
-        # ==========================================================
-        # Institutional Scoring
-        # ==========================================================
+        # ======================================================
+        # INSTITUTIONAL SCORING
+        # ======================================================
 
         score_result = self.scoring_engine.calculate(
             score=assessment["Total Score"],
             max_score=assessment["Max Score"],
         )
 
-        # ==========================================================
-        # Typed Competitive Section
-        # ==========================================================
+        # ======================================================
+        # TYPED COMPETITIVE SECTION
+        # ======================================================
 
         competitive = CompetitiveSection()
 
-        competitive.score = score_result.percentage
-        competitive.confidence = assessment["Confidence"]
-        competitive.rating = score_result.grade
+        competitive.score = (
+            score_result.percentage
+        )
 
-        competitive.peer_count = len(ranked)
+        competitive.confidence = (
+            assessment["Confidence"]
+        )
 
-        competitive.leader = leader if leader else {}
-        competitive.laggard = laggard if laggard else {}
+        competitive.rating = (
+            score_result.grade
+        )
+
+        competitive.peer_count = len(
+            ranked
+        )
+
+        competitive.leader = (
+            leader if leader else {}
+        )
+
+        competitive.laggard = (
+            laggard if laggard else {}
+        )
 
         competitive.ranked_peers = ranked
+
         competitive.assessment = assessment
 
-        # ==========================================================
-        # Supporting Information
-        # ==========================================================
+        # ======================================================
+        # COMPETITIVE POSITION
+        # ======================================================
+
+        if leader:
+            competitive.competitive_position = (
+                "Leader"
+            )
+
+        # ======================================================
+        # INDUSTRY RANK
+        # ======================================================
+
+        if leader:
+
+            leader_name = leader.get(
+                "Company",
+                "",
+            )
+
+            for peer in ranked:
+
+                if peer.get(
+                    "Company"
+                ) == leader_name:
+
+                    competitive.industry_rank = (
+                        peer.get(
+                            "Rank",
+                            0,
+                        )
+                    )
+
+                    break
+
+        # ======================================================
+        # MAJOR COMPETITORS
+        # ======================================================
+
+        competitive.major_competitors = [
+            peer.get(
+                "Company",
+                "",
+            )
+            for peer in ranked
+            if peer.get("Company")
+        ]
+
+        # ======================================================
+        # PEER COMPARISON
+        # ======================================================
+
+        competitive.peer_comparison = [
+            (
+                f"{peer.get('Company', 'Unknown')}: "
+                f"Rank {peer.get('Rank', 'N/A')}, "
+                f"Benchmark Score "
+                f"{peer.get('Benchmark Score', 'N/A')}"
+            )
+            for peer in ranked
+        ]
+
+        # ======================================================
+        # SUPPORTING INFORMATION
+        # ======================================================
 
         competitive.summary = (
             f"Competitive analysis completed across "
@@ -133,10 +230,13 @@ class CompetitiveEngine:
         ]
 
         competitive.assumptions = [
-            "Peer data accurately represents the competitive landscape."
+            "Peer data accurately represents "
+            "the competitive landscape."
         ]
 
-        competitive.source = "CompetitiveEngine"
+        competitive.source = (
+            "CompetitiveEngine"
+        )
 
         competitive.metadata = {
             "metric": metric,
@@ -146,8 +246,8 @@ class CompetitiveEngine:
             "maximum_score": score_result.max_score,
         }
 
-        # ==========================================================
-        # Release 3.0
+        # ======================================================
+        # RELEASE 3.0
         #
         # No persistence here.
         #
@@ -155,22 +255,41 @@ class CompetitiveEngine:
         #
         #     update_competitive()
         #
-        # ==========================================================
+        # ======================================================
 
-        print("Competitive Analysis Completed")
+        print(
+            "Competitive Analysis Completed"
+        )
 
         return competitive
 
-    def summary(self, metric="Benchmark Score"):
+    # ==========================================================
+    # SUMMARY
+    # ==========================================================
+
+    def summary(
+        self,
+        metric="Benchmark Score",
+    ):
         """
         Display Competitive Intelligence Summary.
         """
 
-        competitive = self.analyze(metric)
+        competitive = self.analyze(
+            metric
+        )
 
-        print("\n" + "=" * 60)
-        print("COMPETITIVE INTELLIGENCE")
-        print("=" * 60)
+        print(
+            "\n" + "=" * 60
+        )
+
+        print(
+            "COMPETITIVE INTELLIGENCE"
+        )
+
+        print(
+            "=" * 60
+        )
 
         self.ranking.summary(
             competitive.ranked_peers
@@ -183,7 +302,9 @@ class CompetitiveEngine:
                 f"{competitive.leader.get('Company', '')}"
             )
 
-            print(f"Metric : {metric}")
+            print(
+                f"Metric : {metric}"
+            )
 
             print(
                 f"Competitive Score : "

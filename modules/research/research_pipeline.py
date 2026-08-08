@@ -4,33 +4,25 @@ Everest Investment Operating System
 
 Research Pipeline
 
-Purpose
--------
+Purpose:
 Coordinates the complete institutional research workflow.
 
-Architecture
+Architecture:
 
 Research Pipeline
-        │
-        ▼
+        ↓
 Kill Switch
-        │
-        ▼
+        ↓
 Question Engine
-        │
-        ▼
+        ↓
 Research Orchestrator
-        │
-        ▼
+        ↓
 Analysis Pack
-        │
-        ▼
+        ↓
 Analysis Pack Processor
-        │
-        ▼
+        ↓
 Company Research
-        │
-        ▼
+        ↓
 Master Dossier
 
 The pipeline performs workflow orchestration only.
@@ -48,10 +40,27 @@ from modules.research.analysis_pack_processor import AnalysisPackProcessor
 
 
 class ResearchPipeline:
+    """
+    Coordinates the complete institutional research workflow.
+
+    Responsibilities:
+
+    - Execute Kill Switch
+    - Generate Research Questions
+    - Run ResearchOrchestrator
+    - Receive immutable AnalysisPack
+    - Pass AnalysisPack to AnalysisPackProcessor
+
+    No domain calculations or persistence are performed here.
+    """
 
     def __init__(self, research):
 
         self.research = research
+
+        # ==========================================================
+        # Core Pipeline Services
+        # ==========================================================
 
         self.kill_switch = KillSwitchEngine()
 
@@ -65,21 +74,61 @@ class ResearchPipeline:
             research
         )
 
-    # ==========================================================
-    # Execute
-    # ==========================================================
+    # ==============================================================
+    # EXECUTE
+    # ==============================================================
 
-    def execute(self, company):
+    def execute(
+        self,
+        company,
+        financial_data,
+        ownership_data,
+        management_data,
+        risk_data,
+        business_data,
+        peers=None,
+    ):
+        """
+        Execute the complete institutional research pipeline.
+
+        Parameters
+        ----------
+        company:
+            Company object being researched.
+
+        financial_data:
+            Financial inputs required by FinancialEngine
+            and ValuationEngine.
+
+        ownership_data:
+            Ownership inputs required by TypedOwnershipEngine.
+
+        management_data:
+            Management inputs required by ManagementEngine.
+
+        risk_data:
+            Risk inputs required by RiskEngine.
+
+        peers:
+            Optional list of Peer objects used by
+            CompetitiveEngine.
+
+        Returns
+        -------
+        CompanyResearch
+            Updated research object after AnalysisPack
+            processing.
+        """
 
         print()
         print("=" * 60)
         print("RESEARCH PIPELINE")
         print("=" * 60)
 
-        # ======================================================
-        # Stage 1
-        # Kill Switch
-        # ======================================================
+        # ==========================================================
+        # STAGE 1
+        # KILL SWITCH
+        # ==========================================================
 
         result = self.kill_switch.evaluate(
             tam=True,
@@ -101,10 +150,10 @@ class ResearchPipeline:
 
         print("Kill Switch : PASS")
 
-        # ======================================================
-        # Stage 2
-        # Research Questions
-        # ======================================================
+        # ==========================================================
+        # STAGE 2
+        # RESEARCH QUESTIONS
+        # ==========================================================
 
         self.question_engine.add(
             "Is the business easy to understand?",
@@ -130,10 +179,10 @@ class ResearchPipeline:
             f"{self.question_engine.total_weight()}"
         )
 
-        # ======================================================
-        # Stage 3
-        # Institutional Research
-        # ======================================================
+        # ==========================================================
+        # STAGE 3
+        # INSTITUTIONAL RESEARCH
+        # ==========================================================
 
         print()
         print("=" * 60)
@@ -141,20 +190,25 @@ class ResearchPipeline:
         print("=" * 60)
 
         analysis_pack = self.orchestrator.analyze(
-            company
+            company=company,
+            financial_data=financial_data,
+            ownership_data=ownership_data,
+            management_data=management_data,
+            risk_data=risk_data,
+            business_data=business_data,
+            peers=peers,
         )
 
-        # ======================================================
-        # Stage 4
-        # Persist Research
-        # ======================================================
+        # ==========================================================
+        # STAGE 4
+        # PERSIST RESEARCH
+        # ==========================================================
 
         self.processor.process(
             analysis_pack
         )
 
         print()
-
         print("Analysis Pack Successfully Processed.")
 
         return self.research

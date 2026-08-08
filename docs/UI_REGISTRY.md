@@ -22,4 +22,4 @@ Alpha Division
 
 Mission Control
 
-Settings
+Settingsni docs\PROJECT_STATE.md
