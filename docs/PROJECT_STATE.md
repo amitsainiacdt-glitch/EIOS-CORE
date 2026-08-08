@@ -3128,3 +3128,11 @@ The most important completed transition is:
 ```
 
 This is the current institutional architecture and should be treated as the baseline for the next development session.
+Opportunity Engine — Committee Layer
+- Opportunity Committee Engine implemented.
+- Converts Opportunity Ranking results into Committee Review, Watchlist, or Reject decisions.
+- No duplicate scoring, valuation, or ranking logic.
+- Automatic approval is explicitly prohibited.
+- Standalone Committee test: PASS.
+- Synthesis → Ranking → Committee integration test: PASS.
+- Evidence failure, permanent-loss failure, and missing kill-switch paths verified.
