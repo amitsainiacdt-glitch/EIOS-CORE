@@ -2,54 +2,63 @@
 EIOS
 Everest Investment Operating System
 
-Catalyst Intelligence Engine
+Catalyst Engine
+===============
 
-Purpose:
-Converts validated signals and causal chains into
-institutional Catalyst assessments.
+Converts validated Opportunity signals and causal chains
+into an institutional Catalyst assessment.
 
-A catalyst is not simply a news event.
+Responsibilities
+----------------
+- Classify the catalyst.
+- Determine direction.
+- Determine time horizon.
+- Estimate magnitude.
+- Estimate probability.
+- Estimate persistence.
+- Estimate market recognition.
+- Evaluate supporting evidence.
+- Evaluate contradictions.
+- Calculate catalyst score.
+- Calculate catalyst confidence.
+- Record assumptions and invalidation conditions.
 
-A catalyst requires:
-    1. A meaningful trigger
-    2. A causal transmission mechanism
-    3. A potentially material economic consequence
-    4. A defined time horizon
-    5. Evidence supporting the mechanism
+Non-responsibilities
+--------------------
+- Valuation.
+- Portfolio allocation.
+- Trade execution.
+- Opportunity ranking.
+- Mutation of source Signal objects.
 
-Architecture:
+Architecture
+------------
 
 Signals
     ↓
-Validation
+Catalyst Classifier
     ↓
-Aggregation
-    ↓
-Causal Chain
+Catalyst Classification
     ↓
 Catalyst Engine
     ↓
-Earnings Impact
+Catalyst Assessment
     ↓
 Expectation Gap
-    ↓
-Mispricing
-
-Design Principles:
-- No persistence.
-- No valuation.
-- No investment recommendation.
-- No mutation of source objects.
-- Explicit evidence and assumptions.
-- Contradictory evidence reduces confidence.
 """
 
 from dataclasses import dataclass, field
 from typing import List
 
+from modules.opportunity.catalyst.catalyst_classifier import (
+    CatalystClassifier,
+    CatalystClassification,
+)
+
 from modules.opportunity.signals.signal_model import (
     Signal,
     SignalDirection,
+    SignalStage,
     TimeHorizon,
 )
 
@@ -69,6 +78,10 @@ class Catalyst:
     Institutional Catalyst representation.
     """
 
+    # ------------------------------------------------------
+    # Identity
+    # ------------------------------------------------------
+
     catalyst_id: str = ""
 
     title: str = ""
@@ -79,6 +92,36 @@ class Catalyst:
 
     mechanism: str = ""
 
+    # ------------------------------------------------------
+    # Classification
+    # ------------------------------------------------------
+
+    primary_catalyst_id: str = ""
+
+    primary_catalyst_family: str = ""
+
+    secondary_catalyst_ids: List[str] = field(
+        default_factory=list
+    )
+
+    secondary_catalyst_families: List[str] = field(
+        default_factory=list
+    )
+
+    classification_confidence: float = 0.0
+
+    classification_reasoning: List[str] = field(
+        default_factory=list
+    )
+
+    unclassified_signals: List[str] = field(
+        default_factory=list
+    )
+
+    # ------------------------------------------------------
+    # Direction / Horizon
+    # ------------------------------------------------------
+
     direction: SignalDirection = (
         SignalDirection.UNKNOWN
     )
@@ -86,6 +129,10 @@ class Catalyst:
     horizon: TimeHorizon = (
         TimeHorizon.MEDIUM_TERM
     )
+
+    # ------------------------------------------------------
+    # Source Intelligence
+    # ------------------------------------------------------
 
     signals: List[Signal] = field(
         default_factory=list
@@ -101,11 +148,19 @@ class Catalyst:
         default_factory=list
     )
 
+    # ------------------------------------------------------
+    # Economic Impact
+    # ------------------------------------------------------
+
     economic_impact: str = ""
 
     earnings_impact: str = ""
 
     valuation_impact: str = ""
+
+    # ------------------------------------------------------
+    # Quantitative Assessment
+    # ------------------------------------------------------
 
     magnitude: float = 0.0
 
@@ -118,6 +173,10 @@ class Catalyst:
     catalyst_score: float = 0.0
 
     confidence: float = 0.0
+
+    # ------------------------------------------------------
+    # Evidence
+    # ------------------------------------------------------
 
     evidence: List[str] = field(
         default_factory=list
@@ -134,6 +193,10 @@ class Catalyst:
     invalidation_conditions: List[str] = field(
         default_factory=list
     )
+
+    # ------------------------------------------------------
+    # Reasoning
+    # ------------------------------------------------------
 
     reasons: List[str] = field(
         default_factory=list
@@ -152,11 +215,25 @@ class Catalyst:
 class CatalystEngine:
     """
     Converts validated signals and causal chains into
-    Catalyst objects.
+    institutional Catalyst assessments.
     """
 
+    # ------------------------------------------------------
+    # SCORE THRESHOLDS
+    # ------------------------------------------------------
+
+    MINIMUM_CATALYST_SCORE = 50.0
+
     # ======================================================
-    # ANALYZE
+    # INITIALIZATION
+    # ======================================================
+
+    def __init__(self) -> None:
+
+        self.classifier = CatalystClassifier()
+
+    # ======================================================
+    # PUBLIC ANALYSIS
     # ======================================================
 
     def analyze(
@@ -182,17 +259,35 @@ class CatalystEngine:
 
         catalyst = Catalyst()
 
+        # ==================================================
+        # BASIC DATA
+        # ==================================================
+
         catalyst.catalyst_id = catalyst_id
+
         catalyst.title = title
+
         catalyst.description = description
+
         catalyst.trigger = trigger
-        catalyst.signals = list(signals)
+
+        catalyst.signals = list(
+            signals
+        )
 
         catalyst.causal_chain = causal_chain
 
-        catalyst.economic_impact = economic_impact
-        catalyst.earnings_impact = earnings_impact
-        catalyst.valuation_impact = valuation_impact
+        catalyst.economic_impact = (
+            economic_impact
+        )
+
+        catalyst.earnings_impact = (
+            earnings_impact
+        )
+
+        catalyst.valuation_impact = (
+            valuation_impact
+        )
 
         catalyst.affected_sectors = list(
             affected_sectors or []
@@ -210,46 +305,87 @@ class CatalystEngine:
             invalidation_conditions or []
         )
 
-        # --------------------------------------------------
-        # Mechanism
-        # --------------------------------------------------
+        # ==================================================
+        # 1. CATALYST CLASSIFICATION
+        # ==================================================
+
+        classification = (
+            self.classifier.classify(
+                signals=signals,
+                causal_chain=causal_chain,
+            )
+        )
+
+        self._apply_classification(
+            catalyst,
+            classification,
+        )
+
+        # ==================================================
+        # 2. CAUSAL MECHANISM
+        # ==================================================
 
         if causal_chain:
-            catalyst.mechanism = self._mechanism(
-                causal_chain
+
+            catalyst.mechanism = (
+                self._mechanism(
+                    causal_chain
+                )
             )
 
-        # --------------------------------------------------
-        # Direction
-        # --------------------------------------------------
+        # ==================================================
+        # 3. DIRECTION
+        # ==================================================
 
-        catalyst.direction = self._direction(
-            signals
+        catalyst.direction = (
+            self._direction(
+                signals
+            )
         )
 
-        # --------------------------------------------------
-        # Horizon
-        # --------------------------------------------------
+        # ==================================================
+        # 4. TIME HORIZON
+        # ==================================================
 
-        catalyst.horizon = self._horizon(
-            signals
+        catalyst.horizon = (
+            self._horizon(
+                signals
+            )
         )
 
-        # --------------------------------------------------
-        # Quantitative Attributes
-        # --------------------------------------------------
+        # ==================================================
+        # 5. MAGNITUDE
+        # ==================================================
 
-        catalyst.magnitude = self._magnitude(
-            signals
+        catalyst.magnitude = (
+            self._magnitude(
+                signals
+            )
         )
 
-        catalyst.probability = self._probability(
-            signals
+        # ==================================================
+        # 6. PROBABILITY
+        # ==================================================
+
+        catalyst.probability = (
+            self._probability(
+                signals
+            )
         )
 
-        catalyst.persistence = self._persistence(
-            signals
+        # ==================================================
+        # 7. PERSISTENCE
+        # ==================================================
+
+        catalyst.persistence = (
+            self._persistence(
+                signals
+            )
         )
+
+        # ==================================================
+        # 8. MARKET RECOGNITION
+        # ==================================================
 
         catalyst.market_recognition = (
             self._market_recognition(
@@ -257,73 +393,143 @@ class CatalystEngine:
             )
         )
 
-        # --------------------------------------------------
-        # Evidence
-        # --------------------------------------------------
+        # ==================================================
+        # 9. EVIDENCE
+        # ==================================================
 
-        catalyst.evidence = self._evidence(
-            signals
+        self._collect_evidence(
+            catalyst
         )
 
-        catalyst.contradictory_evidence = (
-            self._contradictions(
-                signals
+        # ==================================================
+        # 10. CONTRADICTIONS
+        # ==================================================
+
+        self._collect_contradictions(
+            catalyst
+        )
+
+        # ==================================================
+        # 11. CATALYST SCORE
+        # ==================================================
+
+        catalyst.catalyst_score = (
+            self._calculate_score(
+                catalyst
             )
         )
 
-        # --------------------------------------------------
-        # Score
-        # --------------------------------------------------
-
-        catalyst.catalyst_score = (
-            self._score(catalyst)
-        )
-
-        # --------------------------------------------------
-        # Confidence
-        # --------------------------------------------------
+        # ==================================================
+        # 12. CONFIDENCE
+        # ==================================================
 
         catalyst.confidence = (
-            self._confidence(catalyst)
+            self._calculate_confidence(
+                catalyst
+            )
         )
 
-        # --------------------------------------------------
-        # Explanation
-        # --------------------------------------------------
+        # ==================================================
+        # 13. REASONING
+        # ==================================================
 
         self._build_reasoning(
+            catalyst
+        )
+
+        # ==================================================
+        # 14. WARNINGS
+        # ==================================================
+
+        self._build_warnings(
             catalyst
         )
 
         return catalyst
 
     # ======================================================
+    # CLASSIFICATION HAND-OFF
+    # ======================================================
+
+    @staticmethod
+    def _apply_classification(
+        catalyst: Catalyst,
+        classification: CatalystClassification,
+    ) -> None:
+        """
+        Transfer classifier output into the Catalyst object.
+
+        Classification does not alter catalyst scoring.
+        """
+
+        if classification.primary is not None:
+
+            catalyst.primary_catalyst_id = (
+                classification.primary.catalyst_id
+            )
+
+            catalyst.primary_catalyst_family = (
+                classification.primary.family.value
+            )
+
+        catalyst.secondary_catalyst_ids = [
+            item.catalyst_id
+            for item in classification.secondary
+        ]
+
+        catalyst.secondary_catalyst_families = [
+            item.family.value
+            for item in classification.secondary
+        ]
+
+        catalyst.classification_confidence = (
+            classification.confidence
+        )
+
+        catalyst.classification_reasoning = list(
+            classification.reasoning
+        )
+
+        catalyst.unclassified_signals = list(
+            classification.unclassified_signals
+        )
+
+        catalyst.warnings.extend(
+            classification.warnings
+        )
+
+    # ======================================================
     # MECHANISM
     # ======================================================
 
+    @staticmethod
     def _mechanism(
-        self,
-        chain: CausalChain,
+        causal_chain: CausalChain,
     ) -> str:
+        """
+        Convert causal-chain information into a concise
+        mechanism description.
+        """
 
-        if not chain.links:
-            return ""
-
-        return " → ".join(
-            [
-                link.effect
-                for link in chain.links
-            ]
+        return str(
+            causal_chain
         )
 
     # ======================================================
     # DIRECTION
     # ======================================================
 
+    @staticmethod
     def _direction(
-        self,
         signals: List[Signal],
     ) -> SignalDirection:
+        """
+        Determine aggregate catalyst direction.
+        """
+
+        if not signals:
+
+            return SignalDirection.UNKNOWN
 
         positive = sum(
             1
@@ -339,294 +545,587 @@ class CatalystEngine:
             == SignalDirection.NEGATIVE
         )
 
+        mixed = sum(
+            1
+            for signal in signals
+            if signal.direction
+            == SignalDirection.MIXED
+        )
+
+        if mixed > 0:
+
+            return SignalDirection.MIXED
+
         if positive > negative:
+
             return SignalDirection.POSITIVE
 
         if negative > positive:
+
             return SignalDirection.NEGATIVE
 
-        if positive and negative:
-            return SignalDirection.MIXED
-
-        return SignalDirection.UNKNOWN
+        return SignalDirection.NEUTRAL
 
     # ======================================================
     # HORIZON
     # ======================================================
 
+    @staticmethod
     def _horizon(
-        self,
         signals: List[Signal],
     ) -> TimeHorizon:
+        """
+        Determine aggregate catalyst horizon.
+        """
 
         if not signals:
+
             return TimeHorizon.MEDIUM_TERM
 
-        priority = {
-            TimeHorizon.IMMEDIATE: 1,
-            TimeHorizon.MEDIUM_TERM: 2,
-            TimeHorizon.STRUCTURAL: 3,
-            TimeHorizon.LONG_TERM: 4,
-        }
+        horizons = [
+            signal.horizon
+            for signal in signals
+        ]
+
+        counts = {}
+
+        for horizon in horizons:
+
+            counts[horizon] = (
+                counts.get(
+                    horizon,
+                    0,
+                )
+                + 1
+            )
 
         return max(
-            signals,
-            key=lambda signal:
-                priority[signal.horizon],
-        ).horizon
+            counts,
+            key=counts.get,
+        )
 
     # ======================================================
     # MAGNITUDE
     # ======================================================
 
+    @staticmethod
     def _magnitude(
-        self,
         signals: List[Signal],
     ) -> float:
+        """
+        Estimate catalyst magnitude from signal maturity
+        and direction.
 
-        values = [
-            signal.magnitude
-            for signal in signals
-            if signal.magnitude > 0
-        ]
+        This remains deliberately conservative.
+        """
 
-        if not values:
+        if not signals:
+
             return 0.0
 
-        return sum(values) / len(values)
+        values = []
+
+        stage_weights = {
+            SignalStage.NOISE: 20.0,
+            SignalStage.WEAK: 35.0,
+            SignalStage.EMERGING: 55.0,
+            SignalStage.VALIDATED: 75.0,
+            SignalStage.CATALYST: 90.0,
+            SignalStage.EARNINGS_IMPACT: 95.0,
+            SignalStage.MARKET_RECOGNIZED: 70.0,
+        }
+
+        for signal in signals:
+
+            values.append(
+                stage_weights.get(
+                    signal.stage,
+                    40.0,
+                )
+            )
+
+        return round(
+            sum(values)
+            / len(values),
+            2,
+        )
 
     # ======================================================
     # PROBABILITY
     # ======================================================
 
+    @staticmethod
     def _probability(
-        self,
         signals: List[Signal],
     ) -> float:
+        """
+        Estimate catalyst probability from signal maturity.
+        """
 
-        values = [
-            signal.probability
-            for signal in signals
-            if signal.probability > 0
-        ]
+        if not signals:
 
-        if not values:
             return 0.0
 
-        return sum(values) / len(values)
+        stage_weights = {
+            SignalStage.NOISE: 15.0,
+            SignalStage.WEAK: 30.0,
+            SignalStage.EMERGING: 50.0,
+            SignalStage.VALIDATED: 75.0,
+            SignalStage.CATALYST: 90.0,
+            SignalStage.EARNINGS_IMPACT: 95.0,
+            SignalStage.MARKET_RECOGNIZED: 85.0,
+        }
+
+        values = [
+            stage_weights.get(
+                signal.stage,
+                40.0,
+            )
+            for signal in signals
+        ]
+
+        return round(
+            sum(values)
+            / len(values),
+            2,
+        )
 
     # ======================================================
     # PERSISTENCE
     # ======================================================
 
+    @staticmethod
     def _persistence(
-        self,
         signals: List[Signal],
     ) -> float:
+        """
+        Estimate persistence from signal horizon.
+        """
 
-        values = [
-            signal.persistence
-            for signal in signals
-            if signal.persistence > 0
-        ]
+        if not signals:
 
-        if not values:
             return 0.0
 
-        return sum(values) / len(values)
+        horizon_weights = {
+            TimeHorizon.IMMEDIATE: 30.0,
+            TimeHorizon.MEDIUM_TERM: 55.0,
+            TimeHorizon.STRUCTURAL: 80.0,
+            TimeHorizon.LONG_TERM: 90.0,
+        }
+
+        values = [
+            horizon_weights.get(
+                signal.horizon,
+                50.0,
+            )
+            for signal in signals
+        ]
+
+        return round(
+            sum(values)
+            / len(values),
+            2,
+        )
 
     # ======================================================
     # MARKET RECOGNITION
     # ======================================================
 
+    @staticmethod
     def _market_recognition(
-        self,
         signals: List[Signal],
     ) -> float:
+        """
+        Estimate market recognition.
 
-        values = [
-            signal.market_recognition
-            for signal in signals
-            if signal.market_recognition > 0
-        ]
+        Lower recognition is generally more interesting
+        for Opportunity discovery because the catalyst
+        may not yet be fully priced in.
+        """
 
-        if not values:
+        if not signals:
+
             return 0.0
 
-        return sum(values) / len(values)
+        values = []
+
+        for signal in signals:
+
+            if (
+                signal.stage
+                == SignalStage.MARKET_RECOGNIZED
+            ):
+
+                values.append(90.0)
+
+            elif (
+                signal.stage
+                == SignalStage.EARNINGS_IMPACT
+            ):
+
+                values.append(75.0)
+
+            elif (
+                signal.stage
+                == SignalStage.CATALYST
+            ):
+
+                values.append(55.0)
+
+            elif (
+                signal.stage
+                == SignalStage.VALIDATED
+            ):
+
+                values.append(40.0)
+
+            elif (
+                signal.stage
+                == SignalStage.EMERGING
+            ):
+
+                values.append(25.0)
+
+            elif (
+                signal.stage
+                == SignalStage.WEAK
+            ):
+
+                values.append(15.0)
+
+            else:
+
+                values.append(10.0)
+
+        return round(
+            sum(values)
+            / len(values),
+            2,
+        )
 
     # ======================================================
     # EVIDENCE
     # ======================================================
 
-    def _evidence(
-        self,
-        signals: List[Signal],
-    ) -> List[str]:
+    @staticmethod
+    def _collect_evidence(
+        catalyst: Catalyst,
+    ) -> None:
+        """
+        Collect evidence already embedded in signals.
+        """
 
         evidence = []
 
-        for signal in signals:
+        for signal in catalyst.signals:
 
-            for item in signal.evidence:
+            if signal.source:
 
-                if item not in evidence:
-                    evidence.append(item)
+                evidence.append(
+                    signal.source
+                )
 
-            for source in signal.supporting_sources:
+            if signal.description:
 
-                if source not in evidence:
-                    evidence.append(source)
+                evidence.append(
+                    signal.description
+                )
 
-        return evidence
+        catalyst.evidence = evidence
 
     # ======================================================
     # CONTRADICTIONS
     # ======================================================
 
-    def _contradictions(
-        self,
-        signals: List[Signal],
-    ) -> List[str]:
+    @staticmethod
+    def _collect_contradictions(
+        catalyst: Catalyst,
+    ) -> None:
+        """
+        Identify obvious contradictory signal directions.
+        """
 
-        contradictions = []
+        contradictory = []
 
-        for signal in signals:
+        for signal in catalyst.signals:
 
-            for item in (
-                signal.contradictory_evidence
+            if (
+                signal.direction
+                == SignalDirection.NEGATIVE
             ):
 
-                if item not in contradictions:
-                    contradictions.append(item)
+                if signal.description:
 
-        return contradictions
+                    contradictory.append(
+                        signal.description
+                    )
+
+                elif signal.title:
+
+                    contradictory.append(
+                        signal.title
+                    )
+
+        catalyst.contradictory_evidence = (
+            contradictory
+        )
 
     # ======================================================
     # SCORE
     # ======================================================
 
-    def _score(
-        self,
+    @staticmethod
+    def _calculate_score(
         catalyst: Catalyst,
     ) -> float:
+        """
+        Calculate Catalyst Score.
 
-        score = (
+        The score rewards:
+        - magnitude
+        - probability
+        - persistence
+        - evidence confidence
+
+        It penalizes:
+        - market recognition
+        - contradictory evidence
+        """
+
+        base = (
             catalyst.magnitude * 0.25
-            + catalyst.probability * 0.20
-            + catalyst.persistence * 0.15
-            + catalyst.confidence * 0.25
-            + (
-                100.0
-                - catalyst.market_recognition
-            ) * 0.15
+            + catalyst.probability * 0.25
+            + catalyst.persistence * 0.20
+            + catalyst.confidence * 0.20
         )
 
-        return max(
-            0.0,
-            min(
-                100.0,
-                score,
+        recognition_adjustment = (
+            100.0
+            - catalyst.market_recognition
+        ) * 0.10
+
+        contradiction_penalty = min(
+            20.0,
+            len(
+                catalyst.contradictory_evidence
+            ) * 5.0,
+        )
+
+        score = (
+            base
+            + recognition_adjustment
+            - contradiction_penalty
+        )
+
+        return round(
+            max(
+                0.0,
+                min(
+                    100.0,
+                    score,
+                ),
             ),
+            2,
         )
 
     # ======================================================
     # CONFIDENCE
     # ======================================================
 
-    def _confidence(
-        self,
+    @staticmethod
+    def _calculate_confidence(
         catalyst: Catalyst,
     ) -> float:
+        """
+        Calculate Catalyst confidence.
 
-        signal_confidences = [
-            signal.confidence
+        Classification confidence contributes to the
+        analytical confidence but does not replace
+        evidence quality.
+        """
+
+        signal_confidence = (
+            catalyst.classification_confidence
+        )
+
+        if not catalyst.signals:
+
+            return 0.0
+
+        source_quality = sum(
+            100.0
+            if signal.source
+            else 40.0
             for signal in catalyst.signals
-            if signal.confidence > 0
-        ]
-
-        if signal_confidences:
-            base = (
-                sum(signal_confidences)
-                / len(signal_confidences)
-            )
-        else:
-            base = 0.0
-
-        if catalyst.causal_chain:
-
-            base = (
-                base * 0.70
-                + catalyst.causal_chain.confidence
-                * 0.30
-            )
+        ) / len(
+            catalyst.signals
+        )
 
         contradiction_penalty = min(
             30.0,
             len(
                 catalyst.contradictory_evidence
-            ) * 5.0,
+            ) * 10.0,
         )
 
-        return max(
-            0.0,
-            min(
-                100.0,
-                base
-                - contradiction_penalty,
+        confidence = (
+            signal_confidence * 0.35
+            + source_quality * 0.45
+            + (
+                catalyst.probability
+                * 0.20
+            )
+            - contradiction_penalty
+        )
+
+        return round(
+            max(
+                0.0,
+                min(
+                    100.0,
+                    confidence,
+                ),
             ),
+            2,
         )
 
     # ======================================================
     # REASONING
     # ======================================================
 
+    @staticmethod
     def _build_reasoning(
-        self,
         catalyst: Catalyst,
     ) -> None:
+        """
+        Build concise institutional reasoning.
+        """
 
-        if catalyst.trigger:
-            catalyst.reasons.append(
-                "A defined trigger has been identified."
+        reasons = []
+
+        if catalyst.primary_catalyst_family:
+
+            reasons.append(
+                (
+                    "Primary catalyst family: "
+                    f"{catalyst.primary_catalyst_family}."
+                )
             )
 
-        if catalyst.mechanism:
-            catalyst.reasons.append(
-                "A causal transmission mechanism has been identified."
+        if catalyst.direction == (
+            SignalDirection.POSITIVE
+        ):
+
+            reasons.append(
+                "Signal direction is predominantly positive."
             )
 
-        if catalyst.magnitude >= 70:
-            catalyst.reasons.append(
-                "Potential economic magnitude is material."
+        elif catalyst.direction == (
+            SignalDirection.NEGATIVE
+        ):
+
+            reasons.append(
+                "Signal direction is predominantly negative."
             )
 
-        if catalyst.persistence >= 70:
-            catalyst.reasons.append(
-                "Catalyst appears capable of persisting."
+        if catalyst.persistence >= 75.0:
+
+            reasons.append(
+                "Catalyst has a potentially durable time horizon."
             )
 
-        if catalyst.market_recognition < 40:
-            catalyst.reasons.append(
-                "Market recognition appears relatively limited."
+        if catalyst.market_recognition < 40.0:
+
+            reasons.append(
+                "Market recognition appears relatively low."
             )
 
-        if catalyst.market_recognition >= 70:
-            catalyst.warnings.append(
-                "Catalyst appears substantially recognized by the market."
+        if catalyst.affected_companies:
+
+            reasons.append(
+                "Company-level exposure has been identified."
             )
 
-        if catalyst.contradictory_evidence:
-            catalyst.warnings.append(
-                "Contradictory evidence requires investigation."
+        catalyst.reasons.extend(
+            reasons
+        )
+
+        catalyst.reasons.extend(
+            catalyst.classification_reasoning
+        )
+
+    # ======================================================
+    # WARNINGS
+    # ======================================================
+
+    @staticmethod
+    def _build_warnings(
+        catalyst: Catalyst,
+    ) -> None:
+        """
+        Build institutional warnings.
+        """
+
+        warnings = []
+
+        if not catalyst.signals:
+
+            warnings.append(
+                "No signals supplied."
+            )
+
+        if not catalyst.primary_catalyst_id:
+
+            warnings.append(
+                "Catalyst could not be classified."
+            )
+
+        if catalyst.classification_confidence < 60.0:
+
+            warnings.append(
+                "Catalyst classification confidence "
+                "is below the preferred threshold."
+            )
+
+        if not catalyst.evidence:
+
+            warnings.append(
+                "No explicit evidence source identified."
             )
 
         if not catalyst.affected_companies:
-            catalyst.warnings.append(
-                "Company-level exposure has not yet been established."
+
+            warnings.append(
+                "Company-level exposure has not been explicitly established."
             )
 
-        if not catalyst.earnings_impact:
-            catalyst.warnings.append(
-                "Earnings transmission has not yet been explicitly established."
+        if catalyst.contradictory_evidence:
+
+            warnings.append(
+                "Contradictory evidence is present."
             )
+
+        if (
+            catalyst.catalyst_score
+            < CatalystEngine.MINIMUM_CATALYST_SCORE
+        ):
+
+            warnings.append(
+                "Catalyst score is below the preferred "
+                "Opportunity threshold."
+            )
+
+        catalyst.warnings.extend(
+            warnings
+        )
+
+
+# ==========================================================
+# PUBLIC API
+# ==========================================================
+
+
+__all__ = [
+    "Catalyst",
+    "CatalystEngine",
+]
