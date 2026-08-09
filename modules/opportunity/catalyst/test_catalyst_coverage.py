@@ -5,12 +5,12 @@ Everest Investment Operating System
 Catalyst Coverage Analyzer Test
 """
 
-from modules.opportunity.catalyst.catalyst_coverage import (
-    CatalystCoverageAnalyzer,
-)
-
 from modules.opportunity.catalyst.catalyst_taxonomy import (
     CatalystFamily,
+)
+
+from modules.opportunity.catalyst.catalyst_coverage import (
+    CatalystCoverageAnalyzer,
 )
 
 
@@ -26,135 +26,181 @@ def main() -> None:
     )
 
     # ======================================================
-    # COVERED FAMILIES
+    # COVERED FAMILY COUNT
     # ======================================================
-
-    covered = (
-        CatalystCoverageAnalyzer.covered_families()
-    )
 
     assert (
         CatalystCoverageAnalyzer.covered_count()
-        == 3
+        == 4
     )
 
     # ======================================================
-    # UNCOVERED FAMILIES
+    # UNCOVERED FAMILY COUNT
     # ======================================================
-
-    uncovered = (
-        CatalystCoverageAnalyzer.uncovered_families()
-    )
 
     assert (
         CatalystCoverageAnalyzer.uncovered_count()
-        == 27
+        == 26
     )
 
     # ======================================================
-    # TOTAL CONSISTENCY
+    # COVERAGE CONSISTENCY
     # ======================================================
 
     assert (
-        len(covered)
-        + len(uncovered)
-        == 30
+        CatalystCoverageAnalyzer.covered_count()
+        + CatalystCoverageAnalyzer.uncovered_count()
+        == CatalystCoverageAnalyzer.family_count()
     )
 
     # ======================================================
-    # CAPACITY COVERAGE
+    # COVERED FAMILY LOOKUP
     # ======================================================
 
-    capacity = [
-        item
-        for item in covered
-        if item.family
-        == CatalystFamily.CAPACITY_EXPANSION
-    ]
-
-    assert len(capacity) == 1
+    covered = {
+        item.family: item.pattern_count
+        for item
+        in CatalystCoverageAnalyzer.covered_families()
+    }
 
     assert (
-        capacity[0].pattern_count
+        covered[
+            CatalystFamily.CAPACITY_EXPANSION
+        ]
         == 2
     )
 
-    # ======================================================
-    # ORDER COVERAGE
-    # ======================================================
-
-    order = [
-        item
-        for item in covered
-        if item.family
-        == CatalystFamily.ORDER_CONTRACT
-    ]
-
-    assert len(order) == 1
+    assert (
+        covered[
+            CatalystFamily.ORDER_CONTRACT
+        ]
+        == 6
+    )
 
     assert (
-        order[0].pattern_count
+        covered[
+            CatalystFamily.REGULATORY_CHANGE
+        ]
+        == 6
+    )
+
+    assert (
+        covered[
+            CatalystFamily.REVENUE_GROWTH
+        ]
         == 6
     )
 
     # ======================================================
-    # REGULATORY COVERAGE
+    # REVENUE GROWTH COVERAGE
     # ======================================================
 
-    regulatory = [
-        item
-        for item in covered
-        if item.family
-        == CatalystFamily.REGULATORY_CHANGE
-    ]
-
-    assert len(regulatory) == 1
-
     assert (
-        regulatory[0].pattern_count
-        == 6
+        CatalystFamily.REVENUE_GROWTH
+        in covered
     )
 
     # ======================================================
-    # EXAMPLE UNCOVERED FAMILY
+    # UNCOVERED FAMILY DETECTION
     # ======================================================
 
-    revenue_growth = [
-        item
-        for item in uncovered
-        if item.family
-        == CatalystFamily.REVENUE_GROWTH
-    ]
-
-    assert len(revenue_growth) == 1
+    uncovered = {
+        item.family: item.pattern_count
+        for item
+        in CatalystCoverageAnalyzer.uncovered_families()
+    }
 
     assert (
-        revenue_growth[0].pattern_count
+        CatalystFamily.REVENUE_GROWTH
+        not in uncovered
+    )
+
+    assert (
+        CatalystFamily.PRICING
+        in uncovered
+    )
+
+    assert (
+        uncovered[
+            CatalystFamily.PRICING
+        ]
         == 0
     )
 
+    # ======================================================
+    # COVERED FAMILY SET
+    # ======================================================
+
+    expected_covered = {
+        CatalystFamily.CAPACITY_EXPANSION,
+        CatalystFamily.ORDER_CONTRACT,
+        CatalystFamily.REGULATORY_CHANGE,
+        CatalystFamily.REVENUE_GROWTH,
+    }
+
     assert (
-        revenue_growth[0].covered
-        is False
+        set(covered.keys())
+        == expected_covered
     )
 
     # ======================================================
-    # IMMUTABILITY
+    # COVERED / UNCOVERED EXCLUSIVITY
     # ======================================================
 
-    first = covered[0]
-
-    assert first.family in CatalystFamily
-
-    assert isinstance(
-        first.pattern_count,
-        int,
+    assert (
+        set(covered.keys()).isdisjoint(
+            set(uncovered.keys())
+        )
     )
 
-    assert isinstance(
-        first.covered,
-        bool,
+    # ======================================================
+    # COMPLETE TAXONOMY COVERAGE
+    # ======================================================
+
+    assert (
+        set(covered.keys())
+        | set(uncovered.keys())
+        == set(CatalystFamily)
     )
+
+    # ======================================================
+    # COVERAGE RECORD INTEGRITY
+    # ======================================================
+
+    records = (
+        CatalystCoverageAnalyzer.analyze()
+    )
+
+    assert (
+        len(records)
+        == 30
+    )
+
+    for record in records:
+
+        assert (
+            record.family
+            in CatalystFamily
+        )
+
+        assert (
+            record.pattern_count
+            >= 0
+        )
+
+        if record.covered:
+
+            assert (
+                record.pattern_count
+                > 0
+            )
+
+        else:
+
+            assert (
+                record.pattern_count
+                == 0
+            )
 
     # ======================================================
     # RESULT
@@ -186,6 +232,10 @@ def main() -> None:
 
     print(
         "Regulatory Coverage          : PASS"
+    )
+
+    print(
+        "Revenue Growth Coverage      : PASS"
     )
 
     print(

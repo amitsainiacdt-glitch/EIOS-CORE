@@ -28,32 +28,44 @@ Design Principles:
     - Registry performs no valuation.
 """
 
+
 from typing import Dict, List
+
 
 from modules.opportunity.catalyst.catalyst_patterns import (
     CatalystPattern,
 )
 
+
 from modules.opportunity.catalyst.catalyst_taxonomy import (
     CatalystFamily,
 )
+
 
 from modules.opportunity.catalyst.patterns.capacity_patterns import (
     CAPACITY_PATTERNS,
 )
 
+
 from modules.opportunity.catalyst.patterns.order_patterns import (
     ORDER_PATTERNS,
 )
+
 
 from modules.opportunity.catalyst.patterns.regulatory_patterns import (
     REGULATORY_PATTERNS,
 )
 
 
+from modules.opportunity.catalyst.patterns.revenue_patterns import (
+    REVENUE_PATTERNS,
+)
+
+
 # ==========================================================
 # CANONICAL REGISTRY
 # ==========================================================
+
 
 CATALYST_PATTERNS: Dict[
     str,
@@ -93,16 +105,24 @@ def _register(
 # FAMILY REGISTRATION
 # ==========================================================
 
+
 _register(
     CAPACITY_PATTERNS
 )
+
 
 _register(
     ORDER_PATTERNS
 )
 
+
 _register(
     REGULATORY_PATTERNS
+)
+
+
+_register(
+    REVENUE_PATTERNS
 )
 
 

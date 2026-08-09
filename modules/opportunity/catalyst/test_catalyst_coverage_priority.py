@@ -5,15 +5,18 @@ Everest Investment Operating System
 Catalyst Coverage Priority Engine Test
 """
 
+
 from modules.opportunity.catalyst.catalyst_taxonomy import (
     CatalystFamily,
 )
+
 
 from modules.opportunity.catalyst.catalyst_coverage_priority import (
     CatalystCoverageEvidence,
     CoveragePriority,
     CatalystCoveragePriority,
 )
+
 
 from modules.opportunity.catalyst.catalyst_coverage_priority_engine import (
     CatalystCoveragePriorityEngine,
@@ -44,6 +47,7 @@ def main() -> None:
 
     assert low == CoveragePriority.LOW
 
+
     medium = (
         CatalystCoveragePriorityEngine
         ._priority_from_evidence(
@@ -61,6 +65,7 @@ def main() -> None:
     )
 
     assert medium == CoveragePriority.MEDIUM
+
 
     high = (
         CatalystCoveragePriorityEngine
@@ -80,6 +85,7 @@ def main() -> None:
 
     assert high == CoveragePriority.HIGH
 
+
     critical = (
         CatalystCoveragePriorityEngine
         ._priority_from_evidence(
@@ -98,6 +104,7 @@ def main() -> None:
 
     assert critical == CoveragePriority.CRITICAL
 
+
     # ======================================================
     # QUEUE SIZE
     # ======================================================
@@ -106,12 +113,13 @@ def main() -> None:
         CatalystCoveragePriorityEngine.build_queue()
     )
 
-    assert len(queue) == 27
+    assert len(queue) == 26
 
     assert (
         CatalystCoveragePriorityEngine.uncovered_count()
-        == 27
+        == 26
     )
+
 
     # ======================================================
     # ONLY UNCOVERED FAMILIES
@@ -130,6 +138,7 @@ def main() -> None:
             )
         )
 
+
     # ======================================================
     # NO COVERED FAMILIES
     # ======================================================
@@ -138,7 +147,9 @@ def main() -> None:
         CatalystFamily.CAPACITY_EXPANSION,
         CatalystFamily.ORDER_CONTRACT,
         CatalystFamily.REGULATORY_CHANGE,
+        CatalystFamily.REVENUE_GROWTH,
     }
+
 
     for item in queue:
 
@@ -147,18 +158,34 @@ def main() -> None:
             not in covered_families
         )
 
+
+    # ======================================================
+    # REVENUE GROWTH MUST BE ABSENT
+    # ======================================================
+
+    queue_families = {
+        item.family
+        for item in queue
+    }
+
+    assert (
+        CatalystFamily.REVENUE_GROWTH
+        not in queue_families
+    )
+
+
     # ======================================================
     # EVIDENCE-DRIVEN PRIORITY
     # ======================================================
 
     profiled_families = {
-        CatalystFamily.REVENUE_GROWTH,
         CatalystFamily.VOLUME_GROWTH,
         CatalystFamily.PRICING,
         CatalystFamily.MARGIN_EXPANSION,
         CatalystFamily.TECHNOLOGY_ADOPTION,
         CatalystFamily.MARKET_RECOGNITION_EXPECTATION_RESET,
     }
+
 
     for item in queue:
 
@@ -175,6 +202,7 @@ def main() -> None:
                 item.priority
                 == CoveragePriority.LOW
             )
+
 
     # ======================================================
     # EVIDENCE PROFILE
@@ -202,31 +230,10 @@ def main() -> None:
 
             assert 0 <= value <= 5
 
+
     # ======================================================
     # EXPLICIT PROFILE VALIDATION
     # ======================================================
-
-    revenue = next(
-        item
-        for item in queue
-        if item.family
-        == CatalystFamily.REVENUE_GROWTH
-    )
-
-    assert (
-        revenue.evidence.earnings_impact
-        == 5
-    )
-
-    assert (
-        revenue.evidence.detection_lead_time
-        == 4
-    )
-
-    assert (
-        revenue.priority
-        == CoveragePriority.CRITICAL
-    )
 
     product_mix = next(
         item
@@ -235,15 +242,28 @@ def main() -> None:
         == CatalystFamily.PRODUCT_MIX
     )
 
+
     assert (
         product_mix.evidence
         == CatalystCoverageEvidence()
     )
 
+
     assert (
         product_mix.priority
         == CoveragePriority.LOW
     )
+
+
+    # ======================================================
+    # REVENUE GROWTH EXCLUSION VALIDATION
+    # ======================================================
+
+    assert (
+        CatalystFamily.REVENUE_GROWTH
+        not in queue_families
+    )
+
 
     # ======================================================
     # RATIONALE
@@ -267,6 +287,7 @@ def main() -> None:
                 in item.rationale.lower()
             )
 
+
     # ======================================================
     # IMMUTABLE RECORD
     # ======================================================
@@ -278,6 +299,7 @@ def main() -> None:
         CatalystCoveragePriority,
     )
 
+
     # ======================================================
     # UNIQUE FAMILIES
     # ======================================================
@@ -287,10 +309,12 @@ def main() -> None:
         for item in queue
     ]
 
+
     assert (
         len(families)
         == len(set(families))
     )
+
 
     # ======================================================
     # RESULT
@@ -310,6 +334,10 @@ def main() -> None:
 
     print(
         "Covered Family Exclusion       : PASS"
+    )
+
+    print(
+        "Revenue Growth Exclusion       : PASS"
     )
 
     print(

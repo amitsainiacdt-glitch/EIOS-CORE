@@ -5,9 +5,11 @@ Everest Investment Operating System
 Catalyst Pattern Registry Test
 """
 
+
 from modules.opportunity.catalyst.catalyst_pattern_registry import (
     CatalystPatternRegistry,
 )
+
 
 from modules.opportunity.catalyst.catalyst_taxonomy import (
     CatalystFamily,
@@ -22,7 +24,7 @@ def main() -> None:
 
     assert (
         CatalystPatternRegistry.count()
-        == 14
+        == 20
     )
 
     # ======================================================
@@ -41,6 +43,12 @@ def main() -> None:
         )
     )
 
+    revenue_acceleration = (
+        CatalystPatternRegistry.get(
+            "PAT-REVENUE-ACCELERATION"
+        )
+    )
+
     assert (
         brownfield.name
         == "Brownfield Capacity Expansion"
@@ -49,6 +57,11 @@ def main() -> None:
     assert (
         debottleneck.name
         == "Capacity Debottlenecking"
+    )
+
+    assert (
+        revenue_acceleration.name
+        == "Revenue Growth Acceleration"
     )
 
     # ======================================================
@@ -63,6 +76,11 @@ def main() -> None:
     assert (
         debottleneck.family
         == CatalystFamily.CAPACITY_EXPANSION
+    )
+
+    assert (
+        revenue_acceleration.family
+        == CatalystFamily.REVENUE_GROWTH
     )
 
     # ======================================================
@@ -87,11 +105,19 @@ def main() -> None:
         )
     )
 
+    revenue_patterns = (
+        CatalystPatternRegistry.get_by_family(
+            CatalystFamily.REVENUE_GROWTH
+        )
+    )
+
     assert len(capacity_patterns) == 2
 
     assert len(order_patterns) == 6
 
     assert len(regulatory_patterns) == 6
+
+    assert len(revenue_patterns) == 6
 
     # ======================================================
     # ALL PATTERN INTEGRITY
@@ -101,7 +127,7 @@ def main() -> None:
         CatalystPatternRegistry.all()
     )
 
-    assert len(all_patterns) == 14
+    assert len(all_patterns) == 20
 
     for pattern in all_patterns:
 
@@ -151,10 +177,15 @@ def main() -> None:
     # FAMILY COUNT CONSISTENCY
     # ======================================================
 
-    assert (
+    covered_pattern_count = (
         len(capacity_patterns)
         + len(order_patterns)
         + len(regulatory_patterns)
+        + len(revenue_patterns)
+    )
+
+    assert (
+        covered_pattern_count
         == CatalystPatternRegistry.count()
     )
 
@@ -171,11 +202,11 @@ def main() -> None:
     )
 
     print(
-        "Family Integrity             : PASS"
+        "Family Integrity            : PASS"
     )
 
     print(
-        "Family Lookup                : PASS"
+        "Family Lookup               : PASS"
     )
 
     print(
@@ -188,6 +219,10 @@ def main() -> None:
 
     print(
         "Family Count Consistency     : PASS"
+    )
+
+    print(
+        "Revenue Growth Coverage     : PASS"
     )
 
     print()
