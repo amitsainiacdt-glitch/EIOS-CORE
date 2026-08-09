@@ -87,6 +87,7 @@ class ResearchPipeline:
         risk_data,
         business_data,
         peers=None,
+        opportunity_questions=None,
     ):
         """
         Execute the complete institutional research pipeline.
@@ -169,6 +170,16 @@ class ResearchPipeline:
             "Does it have a durable moat?",
             20,
         )
+        # ==========================================================
+        # OPPORTUNITY-SPECIFIC QUESTIONS
+        # ==========================================================
+
+        for question in opportunity_questions or []:
+
+            self.question_engine.add(
+                question.question,
+                question.weight,
+            )
 
         self.question_engine.show()
 
