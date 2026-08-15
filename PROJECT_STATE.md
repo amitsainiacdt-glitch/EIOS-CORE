@@ -714,3 +714,194 @@ Objective:
     Detect early sector/company recovery signals before
     conventional financial confirmation and allow EIOS
     to learn from subsequent outcomes.
+    ---
+
+# Current Development Transition
+
+## Catalyst Architecture Completion
+
+The Catalyst Architecture has reached a complete deterministic
+taxonomy state.
+
+| Metric | Final State |
+|---|---:|
+| Catalyst Families | 30 |
+| Covered Families | 30 |
+| Uncovered Families | 0 |
+| Registered Catalyst Patterns | 176 |
+| Priority Queue | 0 |
+| Development Queue | 0 |
+
+All Catalyst architecture validation stages have passed:
+
+- Pattern Modules
+- Pattern Tests
+- Pattern Registry
+- Catalyst Coverage
+- Coverage Priority
+- Development Queue
+- Development Selector
+
+The Development Selector correctly returns no development item
+when all Catalyst Families are covered.
+
+---
+
+# Next Major Architecture
+
+## Temporal Evidence & Learning
+
+The next major EIOS capability is the development of temporal
+intelligence and institutional learning.
+
+### Planned Engines
+
+1. Temporal Evidence Engine
+2. Catalyst Detection Engine
+3. Sector Recovery Engine
+4. Company Recovery Engine
+5. Learning Ledger
+6. Outcome Attribution Engine
+7. Signal Performance Engine
+
+### Strategic Objective
+
+Enable EIOS to detect early changes in business and sector
+conditions before conventional financial confirmation.
+
+The system should identify:
+
+- stabilization
+- bottoming
+- inflection
+- acceleration
+- recovery
+- persistence
+- breadth of recovery
+- leading versus confirming evidence
+
+The Learning Layer will subsequently compare EIOS predictions
+with actual outcomes and preserve the results as institutional
+learning.
+
+### Learning Principle
+
+EIOS must learn from outcomes without silently modifying its
+deterministic investment logic.
+
+Learning should follow:
+
+Prediction
+→ Outcome
+→ Attribution
+→ Validation
+→ Proposed Improvement
+→ Backtest
+→ Approved Evolution
+
+No uncontrolled self-modification is permitted.
+
+---
+
+# Immediate Engineering Sequence
+
+1. Git checkpoint
+2. Synchronize Project State
+3. Repository audit for existing temporal/evidence infrastructure
+4. Design Temporal Evidence Engine
+5. Implement Temporal Evidence Engine
+6. Test temporal signals
+7. Implement Catalyst Detection Engine
+8. Implement Sector Recovery Engine
+9. Implement Company Recovery Engine
+10. Implement Learning Ledger
+11. Implement Outcome Attribution
+12. Connect learning outputs to Opportunity Engine
+
+Repository-first development remains mandatory.
+## Recovery Intelligence Architecture
+
+### Status: COMPLETE — Recovery Intelligence Foundation
+
+EIOS now contains a dedicated recovery-intelligence architecture within the Opportunity Engine.
+
+The architecture is designed to detect early improvement in sectors and companies by analyzing the temporal evolution of signals and then aggregating independent recovery evidence.
+
+### Completed Components
+
+- Temporal Signal Intelligence Engine
+- Recovery Assessment Model
+- Recovery Detection Engine
+- Recovery Evidence Model
+- Multi-Signal Recovery Assessment Model
+- Multi-Signal Recovery Engine
+
+### Recovery Intelligence Flow
+
+Signal
+→ Temporal Signal Intelligence
+→ Recovery Detection
+→ Recovery Evidence
+→ Multi-Signal Recovery Engine
+→ Multi-Signal Recovery Assessment
+
+### Recovery Stages
+
+The recovery architecture distinguishes:
+
+1. Deteriorating
+2. Slowing Deterioration
+3. Stabilizing
+4. Early Inflection
+5. Early Recovery
+6. Confirmed Recovery
+
+At the multi-signal level it distinguishes:
+
+1. Insufficient Evidence
+2. Isolated Improvement
+3. Broad Stabilization
+4. Early Broad Recovery
+5. Confirmed Broad Recovery
+
+### Institutional Design Principles
+
+Recovery detection is intentionally separated from:
+
+- Valuation
+- Opportunity scoring
+- Investment decisions
+- Company-specific logic
+- Sector-specific logic
+
+The system does not treat repeated observations from the same source as independent corroboration.
+
+Independent source identity is explicitly retained through the Recovery Evidence model.
+
+Contradictory evidence reduces recovery confidence rather than being discarded.
+
+### Strategic Objective
+
+The Recovery Intelligence layer is intended to provide EIOS with an early-warning capability for identifying potential sector and company recoveries before recovery becomes fully visible in reported earnings.
+
+The architecture will eventually support:
+
+- sector recovery detection
+- industry-cycle recovery detection
+- company recovery detection
+- leading-indicator analysis
+- recovery breadth measurement
+- recovery corroboration
+- recovery persistence
+- early catalyst identification
+- outcome-based learning through the future Learning Ledger
+
+### Next Planned Layer
+
+Recovery Cluster / Theme Detection
+
+Objective:
+
+Determine whether multiple multi-signal recovery assessments represent a common recovering sector, industry, theme, macro regime, commodity cycle, or company.
+
+This layer will sit above Multi-Signal Recovery Engine and below Catalyst / Opportunity Intelligence.
