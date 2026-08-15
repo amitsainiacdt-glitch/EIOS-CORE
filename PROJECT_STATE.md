@@ -1160,3 +1160,86 @@ The Recovery adapter remains a translation boundary only.
 Valuation, mispricing, expectation-gap analysis, ranking,
 portfolio construction and investment decisions remain
 downstream responsibilities.
+---
+
+# Recovery → Opportunity Pipeline Integration — COMPLETE
+
+Status: COMPLETE
+
+The Recovery Opportunity Intelligence subsystem has now been
+successfully integrated with the existing EIOS Opportunity
+Pipeline through the canonical Opportunity Signal boundary.
+
+Verified architecture:
+
+Recovery Breadth
+→ Recovery Theme
+→ Theme → Catalyst
+→ Recovery Opportunity
+→ Recovery Opportunity Adapter
+→ Canonical Opportunity Signal
+→ Catalyst Engine
+→ Expectation Gap
+→ Mispricing
+→ Asymmetry
+→ Evidence
+→ Synthesis
+
+Integration test result:
+
+EIOS RECOVERY → OPPORTUNITY PIPELINE : PASS
+
+Validated stages:
+
+- Recovery Adapter Exists          : PASS
+- Canonical Signal Creation        : PASS
+- Recovery Input Immutability      : PASS
+- Canonical Recovery Signal        : PASS
+- Opportunity Pipeline Exists      : PASS
+- Recovery → Catalyst              : PASS
+- Signal → Catalyst                : PASS
+- Catalyst → Expectation Gap       : PASS
+- Expectation Gap → Mispricing     : PASS
+- Mispricing → Asymmetry           : PASS
+- Asymmetry → Evidence             : PASS
+- Evidence → Synthesis             : PASS
+- Evidence Handoff                 : PASS
+- Synthesis Score Range            : PASS
+- Canonical Signal Immutability    : PASS
+- Deterministic Pipeline            : PASS
+
+Architectural result:
+
+Recovery-derived intelligence can now enter the complete
+Opportunity Intelligence Pipeline through the canonical Signal
+model.
+
+The Recovery subsystem does not bypass downstream analytical
+engines.
+
+The Opportunity Pipeline remains responsible for:
+
+- Catalyst analysis
+- Expectation Gap analysis
+- Mispricing analysis
+- Asymmetry analysis
+- Evidence analysis
+- Opportunity synthesis
+
+Recovery intelligence does not perform valuation, mispricing,
+expectation-gap calculation, opportunity ranking, portfolio
+construction, or investment decisions.
+
+No modification was made to the existing Opportunity Pipeline
+for this integration.
+
+The integration has been validated for:
+
+- Correct signal translation
+- Correct downstream Catalyst consumption
+- Complete downstream pipeline propagation
+- Evidence hand-off
+- Synthesis generation
+- Numeric range protection
+- Input immutability
+- Deterministic execution
