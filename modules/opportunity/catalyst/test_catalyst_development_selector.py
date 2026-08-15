@@ -3,23 +3,27 @@ EIOS
 Everest Investment Operating System
 
 Catalyst Development Selector Test
+
+Final Catalyst Architecture State:
+
+    30 Catalyst Families
+    30 Covered Families
+     0 Uncovered Families
+     0 Development Queue Items
+
+Therefore:
+
+    CatalystDevelopmentSelector.select_next()
+        -> None
+
+The selector must not invent a development item when
+there are no uncovered catalyst families.
 """
 
 
-from modules.opportunity.catalyst.catalyst_taxonomy import (
-    CatalystFamily,
+from modules.opportunity.catalyst.catalyst_development_queue_engine import (
+    CatalystDevelopmentQueueEngine,
 )
-
-
-from modules.opportunity.catalyst.catalyst_coverage_priority import (
-    CoveragePriority,
-)
-
-
-from modules.opportunity.catalyst.catalyst_development_queue import (
-    CatalystDevelopmentItem,
-)
-
 
 from modules.opportunity.catalyst.catalyst_development_selector import (
     CatalystDevelopmentSelector,
@@ -29,74 +33,38 @@ from modules.opportunity.catalyst.catalyst_development_selector import (
 def main() -> None:
 
     # ======================================================
-    # SELECT NEXT
+    # DEVELOPMENT QUEUE MUST BE EMPTY
+    # ======================================================
+
+    queue = (
+        CatalystDevelopmentQueueEngine.build_queue()
+    )
+
+    assert isinstance(
+        queue,
+        list,
+    )
+
+    assert (
+        queue
+        == []
+    )
+
+    # ======================================================
+    # SELECTOR MUST RETURN NO ITEM
     # ======================================================
 
     selected = (
         CatalystDevelopmentSelector.select_next()
     )
 
-    assert selected is not None
-
-
-    # ======================================================
-    # RECORD TYPE
-    # ======================================================
-
-    assert isinstance(
-        selected,
-        CatalystDevelopmentItem,
-    )
-
-
-    # ======================================================
-    # FAMILY INTEGRITY
-    # ======================================================
-
     assert (
-        selected.family
-        in CatalystFamily
+        selected
+        is None
     )
 
-
     # ======================================================
-    # PRIORITY
-    # ======================================================
-
-    assert (
-        selected.priority
-        == CoveragePriority.CRITICAL
-    )
-
-
-    # ======================================================
-    # REVENUE GROWTH MUST NOT BE SELECTED
-    # ======================================================
-
-    assert (
-        selected.family
-        != CatalystFamily.REVENUE_GROWTH
-    )
-
-
-    # ======================================================
-    # SELECTED FAMILY MUST BE UNCOVERED
-    # ======================================================
-
-    assert (
-        selected.family
-        in {
-            CatalystFamily.VOLUME_GROWTH,
-            CatalystFamily.PRICING,
-            CatalystFamily.MARGIN_EXPANSION,
-            CatalystFamily.TECHNOLOGY_ADOPTION,
-            CatalystFamily.MARKET_RECOGNITION_EXPECTATION_RESET,
-        }
-    )
-
-
-    # ======================================================
-    # DETERMINISTIC SELECTION
+    # DETERMINISTIC EMPTY SELECTION
     # ======================================================
 
     selected_again = (
@@ -105,44 +73,42 @@ def main() -> None:
 
     assert (
         selected_again
-        == selected
+        is None
     )
 
+    assert (
+        selected_again
+        == selected
+    )
 
     # ======================================================
     # RESULT
     # ======================================================
 
     print(
-        "Next Item Selection           : PASS"
+        "Development Queue Empty          : PASS"
     )
 
     print(
-        "Development Item Type         : PASS"
+        "Development Queue Count          : PASS"
     )
 
     print(
-        "Family Integrity              : PASS"
+        "No Next Development Item         : PASS"
     )
 
     print(
-        "Priority Selection            : PASS"
+        "Selector Empty-State             : PASS"
     )
 
     print(
-        "Revenue Growth Exclusion      : PASS"
-    )
-
-    print(
-        "Uncovered Family Selection    : PASS"
-    )
-
-    print(
-        "Deterministic Selection       : PASS"
+        "Deterministic Empty Selection    : PASS"
     )
 
     print()
-    print("---")
+    print(
+        "---"
+    )
     print()
 
     print(

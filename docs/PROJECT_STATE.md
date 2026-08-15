@@ -3136,3 +3136,308 @@ Opportunity Engine — Committee Layer
 - Standalone Committee test: PASS.
 - Synthesis → Ranking → Committee integration test: PASS.
 - Evidence failure, permanent-loss failure, and missing kill-switch paths verified.
+# EIOS — PROJECT STATE UPDATE
+
+## Catalyst Opportunity Engine
+
+### Current Milestone
+
+**Catalyst Pattern Coverage + Autonomous Development Selection**
+
+Status: **PASS**
+
+---
+
+## Current Catalyst Architecture
+
+The Catalyst system now operates as a staged pipeline:
+
+```text
+Catalyst Taxonomy
+        ↓
+Family Pattern Modules
+        ↓
+Canonical Pattern Registry
+        ↓
+Coverage Analyzer
+        ↓
+Coverage Priority Engine
+        ↓
+Development Queue
+        ↓
+Development Selector
+        ↓
+Next Uncovered Catalyst Family
+## CATALYST ENGINE MILESTONE — CAPACITY UTILISATION COMPLETE
+
+Date: 2026-08-12
+
+### Completed
+
+Capacity Utilisation Catalyst Family has been fully implemented and integrated.
+
+Pattern family contains 6 canonical patterns:
+
+- PAT-CAPACITY-UTILISATION-UTILISATION-INFLECTION
+- PAT-CAPACITY-UTILISATION-FIXED-COST-ABSORPTION
+- PAT-CAPACITY-UTILISATION-MARGIN-INFLECTION
+- PAT-CAPACITY-UTILISATION-UNDERUTILISED-ASSET-REACTIVATION
+- PAT-CAPACITY-UTILISATION-CONSTRAINT-RELEASE
+- PAT-CAPACITY-UTILISATION-CAPITAL-EFFICIENCY-INFLECTION
+
+### Integration Status
+
+Catalyst Pattern Registry:
+- Total registered patterns: 74
+- Status: PASS
+
+Catalyst Coverage:
+- Canonical families: 30
+- Covered families: 13
+- Uncovered families: 17
+- Status: PASS
+
+Catalyst Coverage Priority:
+- Development candidates: 17
+- Covered families excluded: PASS
+- Evidence-driven priority: PASS
+- Status: PASS
+
+Catalyst Development Queue:
+- Development families: 17
+- Unique family constraint: PASS
+- Covered-family exclusion: PASS
+- Status: PASS
+
+Catalyst Development Selector:
+- Queue membership: PASS
+- Highest-priority selection: PASS
+- Deterministic tie-break: PASS
+- Deterministic selection: PASS
+
+### Validation
+
+All current Catalyst integration tests pass:
+
+- test_catalyst_pattern_registry
+- test_catalyst_coverage
+- test_catalyst_coverage_priority
+- test_catalyst_development_queue
+- test_catalyst_development_selector
+
+git diff --check: PASS
+
+### Architectural Rule
+
+Catalyst development continues through the dependency chain:
+
+Pattern Family
+→ Pattern Registry
+→ Coverage
+→ Coverage Priority
+→ Development Queue
+→ Development Selector
+
+No downstream engine is modified until the preceding layer is validated.
+
+### Next Development Target
+
+Select the next catalyst family from the uncovered development queue.
+
+Do not arbitrarily add a family.
+
+The Development Selector remains the canonical mechanism for determining the next development candidate.
+## Catalyst Architecture Checkpoint — 13 August 2026
+
+### Market Share Development — COMPLETE
+
+The Catalyst Pattern Registry has been successfully extended through the Market Share family.
+
+Current canonical registry state:
+
+- Total canonical catalyst patterns: 86
+- Covered catalyst families: 15
+- Uncovered catalyst families: 15
+- Total taxonomy families: 30
+
+### Market Share
+
+Catalyst family:
+
+`CatalystFamily.MARKET_SHARE`
+
+Canonical catalyst ID:
+
+`CAT-MARKET-SHARE`
+
+Market Share pattern module:
+
+`modules/opportunity/catalyst/patterns/market_share_patterns.py`
+
+Market Share contains exactly 6 canonical patterns:
+
+1. `PAT-MARKET-SHARE-ORGANIC-SHARE-GAIN`
+2. `PAT-MARKET-SHARE-COMPETITOR-SHARE-CAPTURE`
+3. `PAT-MARKET-SHARE-DISTRIBUTION-LED-GAIN`
+4. `PAT-MARKET-SHARE-PRODUCT-LED-GAIN`
+5. `PAT-MARKET-SHARE-CAPACITY-CONSTRAINED-GAIN`
+6. `PAT-MARKET-SHARE-SHARE-GAIN-COMPOUNDING`
+
+### Market Share Validation
+
+The following validations PASS:
+
+- Market Share standalone pattern integrity
+- Pattern count = 6
+- Pattern type integrity
+- Family integrity
+- Unique pattern IDs
+- Pattern names
+- Descriptions
+- Mechanisms
+- Trigger signals
+- Leading indicators
+- Confirmation indicators
+- Earnings channels
+- Market mistake
+- Disconfirming evidence
+- Kill switches
+- Canonical pattern IDs
+
+### Registry Validation
+
+Catalyst Pattern Registry:
+
+- Registry count = 86
+- Market Share family count = 6
+- Registry retrieval = PASS
+- Family lookup = PASS
+- Unique pattern IDs = PASS
+- Family count consistency = PASS
+
+### Coverage Validation
+
+Catalyst Coverage:
+
+- Canonical family count = 30
+- Covered family count = 15
+- Uncovered family count = 15
+- Coverage consistency = PASS
+- Market Share coverage = PASS
+- Covered/uncovered exclusivity = PASS
+- Coverage record integrity = PASS
+
+Market Share is now classified as a covered catalyst family and must not appear in the development queue.
+
+### Coverage Priority Validation
+
+Catalyst Coverage Priority:
+
+- Priority thresholds = PASS
+- Priority queue size = PASS
+- Covered family exclusion = PASS
+- Evidence-driven priority = PASS
+- Evidence profile integrity = PASS
+- Priority rationale = PASS
+- Immutable priority record = PASS
+- Unique family queue = PASS
+
+### Development Queue Validation
+
+Catalyst Development Queue:
+
+- Queue exists = PASS
+- Queue count = PASS
+- Current queue size = 15
+- Development record type = PASS
+- Family integrity = PASS
+- Priority integrity = PASS
+- Rationale integrity = PASS
+- Unique development families = PASS
+- Covered family exclusion = PASS
+- Uncovered development queue = PASS
+- Deterministic behaviour = PASS
+
+### Development Selector Validation
+
+Catalyst Development Selector:
+
+- Next item selection = PASS
+- Development item type = PASS
+- Family integrity = PASS
+- Priority integrity = PASS
+- Rationale integrity = PASS
+- Covered family exclusion = PASS
+- Queue membership = PASS
+- Highest priority selection = PASS
+- Deterministic tie break = PASS
+- Deterministic selection = PASS
+
+### Full Catalyst Validation Chain
+
+The complete Catalyst validation chain passed:
+
+1. Catalyst Pattern Integrity — PASS
+2. Catalyst Pattern Registry — PASS
+3. Catalyst Coverage — PASS
+4. Catalyst Coverage Priority — PASS
+5. Catalyst Development Queue — PASS
+6. Catalyst Development Selector — PASS
+
+### Repository Validation
+
+`git diff --check` — PASS
+
+No whitespace errors detected.
+
+---
+
+## Next Catalyst Development Target
+
+The EIOS Development Selector automatically selected:
+
+`CatalystFamily.INDUSTRY_CAPITAL_CYCLE`
+
+Priority:
+
+`CoveragePriority.LOW`
+
+Rationale:
+
+`Family is currently uncovered. No explicit evidence profile exists; priority remains neutral.`
+
+### Development Rule
+
+Do not manually select another catalyst family.
+
+Do not begin implementation until the taxonomy definition for `INDUSTRY_CAPITAL_CYCLE` has been verified.
+
+The next development cycle must follow the established staged architecture:
+
+Taxonomy
+↓
+Family Pattern Module
+↓
+Standalone Pattern Integrity Test
+↓
+Canonical Registry Integration
+↓
+Registry Test
+↓
+Coverage Update
+↓
+Coverage Priority Update
+↓
+Development Queue Update
+↓
+Development Selector Validation
+
+Do not bypass the selector.
+
+Do not introduce company-specific logic.
+
+Do not modify unrelated modules.
+
+Do not remove legacy code.
+
+Industry Capital Cycle should contain exactly 6 institutional-grade canonical catalyst patterns, conforming to the existing `CatalystPattern` schema.

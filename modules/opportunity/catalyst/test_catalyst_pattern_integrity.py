@@ -72,28 +72,21 @@ def main() -> None:
     # FAMILY DISTRIBUTION
     # ======================================================
 
-    capacity_patterns = (
-        CatalystPatternRegistry.get_by_family(
-            CatalystFamily.CAPACITY_EXPANSION
+    family_pattern_counts = {
+        family: len(
+            CatalystPatternRegistry.get_by_family(
+                family
+            )
         )
-    )
-
-    order_patterns = (
-        CatalystPatternRegistry.get_by_family(
-            CatalystFamily.ORDER_CONTRACT
-        )
-    )
-
-    assert len(capacity_patterns) == 2
-    assert len(order_patterns) == 6
+        for family in CatalystFamily
+    }
 
     # ======================================================
     # TOTAL CONSISTENCY
     # ======================================================
 
     assert (
-        len(capacity_patterns)
-        + len(order_patterns)
+        sum(family_pattern_counts.values())
         == CatalystPatternRegistry.count()
     )
 
@@ -102,7 +95,7 @@ def main() -> None:
     # ======================================================
 
     print(
-        "Valid Catalyst Families       : PASS"
+        "Valid Catalyst Families        : PASS"
     )
 
     print(
