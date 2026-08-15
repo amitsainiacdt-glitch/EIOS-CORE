@@ -998,3 +998,64 @@ mispriced investment opportunity.
 
 No valuation, portfolio decision, or investment recommendation
 is performed by the Recovery Intelligence layer.
+---
+
+# Recovery Opportunity Intelligence — COMPLETE
+
+Status: COMPLETE
+
+The EIOS Recovery Intelligence pipeline has now been extended
+through the Opportunity Engine boundary.
+
+Completed architecture:
+
+Recovery Detection
+→ Multi-Signal Recovery
+→ Recovery Cluster
+→ Recovery Breadth
+→ Recovery Theme
+→ Recovery Theme → Catalyst
+→ Recovery Opportunity Signal
+→ Recovery Opportunity Engine
+→ Opportunity Engine
+
+Completed components:
+
+- recovery_opportunity_signal.py
+- recovery_opportunity_engine.py
+- test_recovery_opportunity_signal.py
+- test_recovery_opportunity_engine.py
+
+Validation:
+
+- Recovery Opportunity Signal Model : PASS
+- Recovery Opportunity Engine       : PASS
+- Empty Theme                       : PASS
+- Recovery Without Catalyst         : PASS
+- Catalyst Support                  : PASS
+- Recovery Gates                    : PASS
+- Actionable Recovery Signal        : PASS
+- Catalyst Evidence Transfer        : PASS
+- Low Breadth Rejection             : PASS
+- Low Confirmation Rejection        : PASS
+- Weak Catalyst Rejection           : PASS
+- Contradictory Recovery            : PASS
+- Confidence Classification          : PASS
+- Input Immutability                : PASS
+- Deterministic Assessment          : PASS
+- Transparent Reasoning             : PASS
+
+Architectural boundary:
+
+Recovery Opportunity Intelligence
+does not perform valuation, intrinsic-value calculation,
+mispricing calculation, portfolio construction, or final
+investment decision-making.
+
+Its responsibility is to determine whether recovery evidence
+has sufficient breadth, confirmation, coherence and catalyst
+support to warrant downstream Opportunity Engine attention.
+
+Git Commit:
+
+2471744 — Add Recovery Opportunity Intelligence
