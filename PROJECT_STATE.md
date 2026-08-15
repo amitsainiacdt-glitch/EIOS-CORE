@@ -905,3 +905,96 @@ Objective:
 Determine whether multiple multi-signal recovery assessments represent a common recovering sector, industry, theme, macro regime, commodity cycle, or company.
 
 This layer will sit above Multi-Signal Recovery Engine and below Catalyst / Opportunity Intelligence.
+## Recovery Intelligence — Completed
+
+The EIOS Opportunity Engine now contains a staged Recovery Intelligence architecture.
+
+### Completed Components
+
+1. Temporal Signal Intelligence
+   - Temporal Signal Engine
+   - Chronological signal evolution
+   - Trend detection
+   - Acceleration / deceleration
+   - Stabilisation
+   - Inflection
+   - Bottoming
+   - Reversal
+   - Persistence
+   - Confidence and transparent reasoning
+
+2. Recovery Detection
+   - Recovery Assessment Model
+   - Recovery Detection Engine
+   - Deteriorating
+   - Slowing Deterioration
+   - Stabilizing
+   - Early Inflection
+   - Early Recovery
+   - Recovery Reversal
+   - Confirmed Recovery
+   - Temporal feature transfer
+   - Evidence transfer
+
+3. Multi-Signal Recovery Intelligence
+   - Multi-Signal Recovery Assessment
+   - Multi-Signal Recovery Engine
+   - Recovery Evidence Model
+   - Source deduplication
+   - Contradictory evidence detection
+   - Signal tracking
+   - Temporal support
+   - Broad recovery assessment
+
+4. Recovery Cluster Intelligence
+   - Recovery Cluster Assessment
+   - Recovery Cluster Engine
+   - Recovery Cluster Evidence
+   - Early clustering
+   - Stabilizing clusters
+   - Early recovery clusters
+   - Confirmed recovery clusters
+   - Cluster-level corroboration
+   - Contradiction handling
+
+5. Recovery Breadth Intelligence
+   - Recovery Breadth Assessment
+   - Recovery Breadth Engine
+   - Recovery Breadth evidence aggregation
+   - Isolated improvement
+   - Early breadth
+   - Broadening recovery
+   - Broad recovery
+   - Saturated recovery
+   - Contracting breadth
+   - Recovery leadership
+   - Deterministic classification
+   - Transparent reasoning
+
+### Recovery Intelligence Flow
+
+Signal
+    ↓
+Temporal Intelligence
+    ↓
+Recovery Detection
+    ↓
+Multi-Signal Recovery
+    ↓
+Recovery Cluster
+    ↓
+Recovery Breadth
+    ↓
+Opportunity Intelligence
+
+### Institutional Boundary
+
+Recovery Breadth does not imply investment opportunity.
+
+Recovery Intelligence identifies the evolution and breadth
+of recovery evidence. Opportunity engines remain responsible
+for determining whether the recovery creates a potentially
+mispriced investment opportunity.
+
+No valuation, portfolio decision, or investment recommendation
+is performed by the Recovery Intelligence layer.
