@@ -1059,3 +1059,57 @@ support to warrant downstream Opportunity Engine attention.
 Git Commit:
 
 2471744 — Add Recovery Opportunity Intelligence
+---
+
+# Recovery → Opportunity Signal Integration — COMPLETE
+
+Status: COMPLETE
+
+The Recovery Intelligence subsystem is now connected to the
+canonical Opportunity Intelligence Signal model through a
+dedicated translation boundary.
+
+Completed component:
+
+- recovery_opportunity_adapter.py
+- test_recovery_opportunity_adapter.py
+
+Validated:
+
+- Adapter Exists                  : PASS
+- None Input Protection           : PASS
+- Canonical Signal Creation       : PASS
+- Identity Transfer               : PASS
+- Classification Transfer         : PASS
+- Strength Transfer               : PASS
+- Evidence Transfer               : PASS
+- Catalyst Context Transfer       : PASS
+- Evidence Quality Mapping        : PASS
+- Input Immutability              : PASS
+- Deterministic Mapping           : PASS
+- Numeric Range Protection        : PASS
+- No Valuation Fabrication        : PASS
+
+Architecture:
+
+Recovery Opportunity Signal
+→ Recovery Opportunity Adapter
+→ Canonical Opportunity Signal
+→ Existing Catalyst Engine
+→ Opportunity Pipeline
+
+Architectural boundary:
+
+The adapter performs translation only.
+
+It does not calculate:
+- valuation
+- mispricing
+- expectation gap
+- asymmetry
+- portfolio allocation
+- investment decisions
+
+The canonical Opportunity Signal remains the passive
+intelligence contract, while downstream Opportunity engines
+remain responsible for analysis and decision-support calculations.
