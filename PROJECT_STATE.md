@@ -1113,3 +1113,50 @@ It does not calculate:
 The canonical Opportunity Signal remains the passive
 intelligence contract, while downstream Opportunity engines
 remain responsible for analysis and decision-support calculations.
+---
+
+# Recovery → Catalyst Engine Integration — COMPLETE
+
+Status: COMPLETE
+
+The Recovery Opportunity Intelligence subsystem has been
+successfully integrated with the existing EIOS Catalyst Engine
+through the canonical Opportunity Signal boundary.
+
+Validated integration:
+
+Recovery Opportunity Signal
+→ Recovery Opportunity Adapter
+→ Canonical Opportunity Signal
+→ CatalystEngine.analyze()
+→ Catalyst Assessment
+
+Integration validation:
+
+- Catalyst Engine Exists          : PASS
+- Recovery Adapter Exists         : PASS
+- Canonical Signal Creation       : PASS
+- Recovery Identity Transfer      : PASS
+- Recovery Classification         : PASS
+- Recovery Evidence Transfer      : PASS
+- Recovery Input Immutability     : PASS
+- Catalyst Engine Consumption     : PASS
+- Signal Preservation             : PASS
+- Catalyst Direction              : PASS
+- Catalyst Evidence Collection   : PASS
+- Contradiction Transfer          : PASS
+- Catalyst Analysis               : PASS
+- Canonical Signal Immutability   : PASS
+- Deterministic Integration       : PASS
+
+Architectural result:
+
+Recovery Intelligence can now enter the existing Opportunity
+Catalyst Engine without bypassing the canonical Signal model.
+
+No modification was made to the existing Catalyst Engine.
+
+The Recovery adapter remains a translation boundary only.
+Valuation, mispricing, expectation-gap analysis, ranking,
+portfolio construction and investment decisions remain
+downstream responsibilities.
