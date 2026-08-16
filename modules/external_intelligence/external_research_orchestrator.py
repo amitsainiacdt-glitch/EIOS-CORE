@@ -36,6 +36,7 @@ Design Principles
 - Does not perform investment analysis.
 - Uses existing EIOS external-intelligence components.
 - Preserves provenance.
+- One failed source must not terminate the entire research run.
 """
 
 from __future__ import annotations
@@ -80,6 +81,22 @@ from modules.observation.observation_engine import (
 )
 
 
+@dataclass(frozen=True)
+class RetrievalFailure:
+    """
+    Records a failed external retrieval.
+
+    This is provenance/status information only.
+    It contains no analytical interpretation.
+    """
+
+    url: str
+
+    error_type: str
+
+    error_message: str
+
+
 @dataclass
 class ExternalResearchResult:
     """
@@ -91,6 +108,7 @@ class ExternalResearchResult:
         - selected sources
         - retrieved content
         - observations
+        - retrieval failures
 
     It does not contain:
         - Evidence
@@ -119,6 +137,10 @@ class ExternalResearchResult:
     )
 
     observations: list[Observation] = field(
+        default_factory=list
+    )
+
+    retrieval_failures: list[RetrievalFailure] = field(
         default_factory=list
     )
 
@@ -203,6 +225,9 @@ class ExternalResearchOrchestrator:
             HTTP Retrieval
               ↓
             Observation
+
+        Retrieval failures are recorded and do not
+        terminate the complete research run.
         """
 
         if query is None:
@@ -243,19 +268,49 @@ class ExternalResearchOrchestrator:
             Observation
         ] = []
 
+        retrieval_failures: list[
+            RetrievalFailure
+        ] = []
+
         for selected_source in selected_sources:
 
             result = selected_source.result
 
-            retrieved = (
-                self.retriever.retrieve(
-                    result.url
+            # ----------------------------------------------
+            # RETRIEVAL
+            # ----------------------------------------------
+
+            try:
+
+                retrieved = (
+                    self.retriever.retrieve(
+                        result.url
+                    )
                 )
-            )
+
+            except Exception as exc:
+
+                retrieval_failures.append(
+                    RetrievalFailure(
+                        url=result.url,
+                        error_type=type(exc).__name__,
+                        error_message=str(exc),
+                    )
+                )
+
+                continue
+
+            # ----------------------------------------------
+            # SUCCESSFUL RETRIEVAL
+            # ----------------------------------------------
 
             retrieved_content.append(
                 retrieved
             )
+
+            # ----------------------------------------------
+            # OBSERVATION
+            # ----------------------------------------------
 
             observation = (
                 self.observation_adapter.ingest(
@@ -272,15 +327,21 @@ class ExternalResearchOrchestrator:
                 observation
             )
 
+        # --------------------------------------------------
+        # RESULT
+        # --------------------------------------------------
+
         return ExternalResearchResult(
             query=query,
             selected_sources=selected_sources,
             retrieved_content=retrieved_content,
             observations=observations,
+            retrieval_failures=retrieval_failures,
         )
 
 
 __all__ = [
+    "RetrievalFailure",
     "ExternalResearchResult",
     "ExternalResearchOrchestrator",
 ]
