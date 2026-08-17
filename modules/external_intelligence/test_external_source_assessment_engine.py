@@ -6,6 +6,12 @@ External Source Assessment Engine Test
 =======================================
 """
 
+from datetime import datetime
+
+from modules.external_intelligence.external_content_normalizer import (
+    ExternalContentNormalizer,
+)
+
 from modules.external_intelligence.external_source_assessment import (
     ExternalSourceAssessment,
 )
@@ -14,10 +20,78 @@ from modules.external_intelligence.external_source_assessment_engine import (
     ExternalSourceAssessmentEngine,
 )
 
+from modules.external_intelligence.http_retriever import (
+    RetrievedContent,
+)
+
+from modules.external_intelligence.search_result import (
+    ExternalSearchResult,
+)
+
+from modules.external_intelligence.source_selection import (
+    SelectedSource,
+)
+
+
+def make_selected_source() -> SelectedSource:
+
+    return SelectedSource(
+        result=ExternalSearchResult(
+            title="Industrial Demand Research",
+            url="https://example.com/article",
+            snippet="Industrial demand research.",
+            source="Example Publisher",
+        ),
+        selection_reason="Selected for research.",
+    )
+
+
+def make_retrieved_content() -> RetrievedContent:
+
+    return RetrievedContent(
+        url="https://example.com/article",
+        status_code=200,
+        content=(
+            "<html>"
+            "<body>"
+            "<h1>Industrial Demand</h1>"
+            "<p>Industrial demand is improving.</p>"
+            "</body>"
+            "</html>"
+        ),
+        content_type="text/html; charset=utf-8",
+        headers={
+            "Content-Type": (
+                "text/html; charset=utf-8"
+            )
+        },
+    )
+
+
+def make_normalized_content() -> object:
+
+    normalizer = ExternalContentNormalizer()
+
+    return normalizer.normalize(
+        make_retrieved_content()
+    )
+
 
 def main() -> None:
 
     engine = ExternalSourceAssessmentEngine()
+
+    selected_source = (
+        make_selected_source()
+    )
+
+    retrieved_content = (
+        make_retrieved_content()
+    )
+
+    normalized_content = (
+        make_normalized_content()
+    )
 
     # ======================================================
     # ENGINE
@@ -34,13 +108,12 @@ def main() -> None:
     # ======================================================
 
     assessment = engine.assess(
-        source_url="https://example.com/article",
-        domain="example.com",
-        publisher="Example Publisher",
+        selected_source=selected_source,
+        retrieved_content=retrieved_content,
+        normalized_content=normalized_content,
         source_type="Industry Publication",
         is_primary_source=False,
         publication_date="2026-08-17",
-        provenance_complete=True,
         notes="Source metadata.",
     )
 
@@ -102,116 +175,262 @@ def main() -> None:
     )
 
     # ======================================================
+    # URL PROVENANCE
+    # ======================================================
+
+    assert (
+        assessment.source_url
+        == selected_source.result.url
+    )
+
+    assert (
+        retrieved_content.url
+        == selected_source.result.url
+    )
+
+    assert (
+        normalized_content.url
+        == selected_source.result.url
+    )
+
+    print(
+        "URL Provenance                 : PASS"
+    )
+
+    # ======================================================
+    # DOMAIN EXTRACTION
+    # ======================================================
+
+    assert (
+        assessment.domain
+        == "example.com"
+    )
+
+    print(
+        "Domain Extraction              : PASS"
+    )
+
+    # ======================================================
+    # PUBLISHER PRESERVATION
+    # ======================================================
+
+    assert (
+        assessment.publisher
+        == selected_source.result.source
+    )
+
+    print(
+        "Publisher Preservation         : PASS"
+    )
+
+    # ======================================================
     # INPUT VALIDATION
     # ======================================================
 
-    invalid_inputs = [
-        (
-            {
-                "source_url": None,
-            },
-            "Invalid source URL type",
-        ),
-        (
-            {
-                "domain": None,
-            },
-            "Invalid domain type",
-        ),
-        (
-            {
-                "publisher": None,
-            },
-            "Invalid publisher type",
-        ),
-        (
-            {
-                "source_type": None,
-            },
-            "Invalid source type",
-        ),
-        (
-            {
-                "is_primary_source": "yes",
-            },
-            "Invalid primary-source type",
-        ),
-        (
-            {
-                "publication_date": None,
-            },
-            "Invalid publication date type",
-        ),
-        (
-            {
-                "provenance_complete": "yes",
-            },
-            "Invalid provenance type",
-        ),
-        (
-            {
-                "notes": None,
-            },
-            "Invalid notes type",
-        ),
-    ]
+    try:
 
-    for kwargs, message in invalid_inputs:
+        engine.assess(
+            selected_source=None,
+            retrieved_content=retrieved_content,
+            normalized_content=normalized_content,
+        )
 
-        try:
+        raise AssertionError(
+            "None selected source accepted"
+        )
 
-            engine.assess(**kwargs)
+    except ValueError:
 
-            raise AssertionError(
-                message
-                + " accepted"
-            )
+        pass
 
-        except ValueError:
+    try:
 
-            pass
+        engine.assess(
+            selected_source=selected_source,
+            retrieved_content=None,
+            normalized_content=normalized_content,
+        )
+
+        raise AssertionError(
+            "None retrieved content accepted"
+        )
+
+    except ValueError:
+
+        pass
+
+    try:
+
+        engine.assess(
+            selected_source=selected_source,
+            retrieved_content=retrieved_content,
+            normalized_content=None,
+        )
+
+        raise AssertionError(
+            "None normalized content accepted"
+        )
+
+    except ValueError:
+
+        pass
 
     print(
         "Input Validation               : PASS"
     )
 
     # ======================================================
+    # TYPE VALIDATION
+    # ======================================================
+
+    try:
+
+        engine.assess(
+            selected_source="invalid",
+            retrieved_content=retrieved_content,
+            normalized_content=normalized_content,
+        )
+
+        raise AssertionError(
+            "Invalid selected source accepted"
+        )
+
+    except ValueError:
+
+        pass
+
+    try:
+
+        engine.assess(
+            selected_source=selected_source,
+            retrieved_content="invalid",
+            normalized_content=normalized_content,
+        )
+
+        raise AssertionError(
+            "Invalid retrieved content accepted"
+        )
+
+    except ValueError:
+
+        pass
+
+    try:
+
+        engine.assess(
+            selected_source=selected_source,
+            retrieved_content=retrieved_content,
+            normalized_content="invalid",
+        )
+
+        raise AssertionError(
+            "Invalid normalized content accepted"
+        )
+
+    except ValueError:
+
+        pass
+
+    print(
+        "Type Validation                : PASS"
+    )
+
+    # ======================================================
+    # URL MISMATCH PROTECTION
+    # ======================================================
+
+    mismatched_retrieved = (
+        RetrievedContent(
+            url="https://different.example.com/article",
+            status_code=200,
+            content="Test content.",
+            content_type="text/plain",
+            headers={
+                "Content-Type": "text/plain"
+            },
+        )
+    )
+
+    try:
+
+        engine.assess(
+            selected_source=selected_source,
+            retrieved_content=mismatched_retrieved,
+            normalized_content=normalized_content,
+        )
+
+        raise AssertionError(
+            "Mismatched retrieved URL accepted"
+        )
+
+    except ValueError:
+
+        pass
+
+    print(
+        "Retrieved URL Protection       : PASS"
+    )
+
+    # ======================================================
+    # NORMALIZED URL MISMATCH
+    # ======================================================
+
+    mismatched_normalized = (
+        ExternalContentNormalizer().normalize(
+            RetrievedContent(
+                url="https://different.example.com/article",
+                status_code=200,
+                content="Test content.",
+                content_type="text/plain",
+                headers={
+                    "Content-Type": "text/plain"
+                },
+            )
+        )
+    )
+
+    try:
+
+        engine.assess(
+            selected_source=selected_source,
+            retrieved_content=retrieved_content,
+            normalized_content=mismatched_normalized,
+        )
+
+        raise AssertionError(
+            "Mismatched normalized URL accepted"
+        )
+
+    except ValueError:
+
+        pass
+
+    print(
+        "Normalized URL Protection      : PASS"
+    )
+
+    # ======================================================
     # INPUT IMMUTABILITY
     # ======================================================
 
-    source_url = (
-        "https://example.com/article"
-    )
-
-    domain = "example.com"
-
-    publisher = "Example Publisher"
-
-    assessment = engine.assess(
-        source_url=source_url,
-        domain=domain,
-        publisher=publisher,
-        source_type="Industry Publication",
-    )
-
     assert (
-        source_url
+        selected_source.result.url
         == "https://example.com/article"
     )
 
     assert (
-        domain
-        == "example.com"
-    )
-
-    assert (
-        publisher
+        selected_source.result.source
         == "Example Publisher"
     )
 
     assert (
-        assessment.source_url
-        == source_url
+        retrieved_content.content
+        != ""
+    )
+
+    assert (
+        normalized_content.original_content
+        == retrieved_content.content
     )
 
     print(

@@ -25,6 +25,10 @@ ExternalContentNormalizer
         ↓
 NormalizedExternalContent
         ↓
+ExternalSourceAssessmentEngine
+        ↓
+ExternalSourceAssessment
+        ↓
 ExternalObservationAdapter
         ↓
 Observation[]
@@ -55,6 +59,14 @@ from modules.external_intelligence.external_content_normalizer import (
 
 from modules.external_intelligence.external_observation_adapter import (
     ExternalObservationAdapter,
+)
+
+from modules.external_intelligence.external_source_assessment import (
+    ExternalSourceAssessment,
+)
+
+from modules.external_intelligence.external_source_assessment_engine import (
+    ExternalSourceAssessmentEngine,
 )
 
 from modules.external_intelligence.http_retriever import (
@@ -118,6 +130,7 @@ class ExternalResearchResult:
         - selected sources
         - retrieved content
         - normalized content
+        - source assessments
         - observations
         - retrieval failures
 
@@ -153,6 +166,12 @@ class ExternalResearchResult:
         default_factory=list
     )
 
+    source_assessments: list[
+        ExternalSourceAssessment
+    ] = field(
+        default_factory=list
+    )
+
     observations: list[Observation] = field(
         default_factory=list
     )
@@ -170,6 +189,10 @@ class ExternalResearchOrchestrator:
 
     Content normalization is a deterministic transformation
     performed by ExternalContentNormalizer.
+
+    Source assessment is a deterministic metadata
+    construction performed by
+    ExternalSourceAssessmentEngine.
     """
 
     def __init__(
@@ -183,6 +206,9 @@ class ExternalResearchOrchestrator:
         ) = None,
         content_normalizer: (
             ExternalContentNormalizer | None
+        ) = None,
+        source_assessment_engine: (
+            ExternalSourceAssessmentEngine | None
         ) = None,
     ) -> None:
 
@@ -213,6 +239,12 @@ class ExternalResearchOrchestrator:
             content_normalizer
             if content_normalizer is not None
             else ExternalContentNormalizer()
+        )
+
+        self.source_assessment_engine = (
+            source_assessment_engine
+            if source_assessment_engine is not None
+            else ExternalSourceAssessmentEngine()
         )
 
         self.observation_engine = (
@@ -254,6 +286,8 @@ class ExternalResearchOrchestrator:
               ↓
             Content Normalization
               ↓
+            Source Assessment
+              ↓
             Observation
 
         Retrieval failures are recorded and do not
@@ -287,7 +321,7 @@ class ExternalResearchOrchestrator:
         )
 
         # --------------------------------------------------
-        # RETRIEVE + NORMALIZE + OBSERVE
+        # RETRIEVE + NORMALIZE + ASSESS + OBSERVE
         # --------------------------------------------------
 
         retrieved_content: list[
@@ -296,6 +330,10 @@ class ExternalResearchOrchestrator:
 
         normalized_content: list[
             NormalizedExternalContent
+        ] = []
+
+        source_assessments: list[
+            ExternalSourceAssessment
         ] = []
 
         observations: list[
@@ -371,6 +409,36 @@ class ExternalResearchOrchestrator:
             )
 
             # ----------------------------------------------
+            # SOURCE ASSESSMENT
+            # ----------------------------------------------
+
+            try:
+
+                source_assessment = (
+                    self.source_assessment_engine.assess(
+                        selected_source=selected_source,
+                        retrieved_content=retrieved,
+                        normalized_content=normalized,
+                    )
+                )
+
+            except Exception as exc:
+
+                retrieval_failures.append(
+                    RetrievalFailure(
+                        url=result.url,
+                        error_type=type(exc).__name__,
+                        error_message=str(exc),
+                    )
+                )
+
+                continue
+
+            source_assessments.append(
+                source_assessment
+            )
+
+            # ----------------------------------------------
             # OBSERVATION
             # ----------------------------------------------
 
@@ -400,6 +468,7 @@ class ExternalResearchOrchestrator:
             selected_sources=selected_sources,
             retrieved_content=retrieved_content,
             normalized_content=normalized_content,
+            source_assessments=source_assessments,
             observations=observations,
             retrieval_failures=retrieval_failures,
         )

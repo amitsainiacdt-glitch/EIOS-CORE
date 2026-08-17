@@ -17,6 +17,8 @@ HTTP Retrieval
     ↓
 Content Normalization
     ↓
+Source Assessment
+    ↓
 Observation
 """
 
@@ -191,15 +193,19 @@ def main() -> None:
         result.normalized_content[0]
     )
 
-    assert normalized.url == retrieved.url
+    assert (
+        normalized.url
+        == retrieved.url
+    )
 
     assert (
         normalized.status_code
         == retrieved.status_code
     )
 
-    assert normalized.content_type == (
-        retrieved.content_type
+    assert (
+        normalized.content_type
+        == retrieved.content_type
     )
 
     assert normalized.normalized_text
@@ -219,6 +225,69 @@ def main() -> None:
 
     print(
         "Raw Content Preservation        : PASS"
+    )
+
+    # ======================================================
+    # SOURCE ASSESSMENT
+    # ======================================================
+
+    assert (
+        len(
+            result.source_assessments
+        )
+        == 1
+    )
+
+    source_assessment = (
+        result.source_assessments[0]
+    )
+
+    assert (
+        source_assessment.source_url
+        == retrieved.url
+    )
+
+    assert (
+        source_assessment.domain
+        == "example.com"
+    )
+
+    assert (
+        source_assessment.publisher
+        == "Mock Provider"
+    )
+
+    assert (
+        source_assessment.provenance_complete
+        is True
+    )
+
+    print(
+        "Source Assessment Creation     : PASS"
+    )
+
+    # ======================================================
+    # SOURCE ASSESSMENT PROVENANCE
+    # ======================================================
+
+    assert (
+        source_assessment.source_url
+        == result.selected_sources[0]
+        .result.url
+    )
+
+    assert (
+        source_assessment.source_url
+        == normalized.url
+    )
+
+    assert (
+        source_assessment.source_url
+        == retrieved.url
+    )
+
+    print(
+        "Source Assessment Provenance    : PASS"
     )
 
     # ======================================================
@@ -338,6 +407,26 @@ def main() -> None:
     )
 
     assert not hasattr(
+        source_assessment,
+        "confidence",
+    )
+
+    assert not hasattr(
+        source_assessment,
+        "evidence_score",
+    )
+
+    assert not hasattr(
+        source_assessment,
+        "source_quality",
+    )
+
+    assert not hasattr(
+        source_assessment,
+        "credibility_score",
+    )
+
+    assert not hasattr(
         observation,
         "evidence_score",
     )
@@ -366,6 +455,7 @@ def main() -> None:
         )
 
     except ValueError:
+
         pass
 
     print(
