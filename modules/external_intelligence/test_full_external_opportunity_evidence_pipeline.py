@@ -79,6 +79,14 @@ from modules.opportunity.discovery_opportunity_intake import (
     OpportunityResearchIntake,
 )
 
+from modules.discovery.discovery_candidate import (
+    DiscoveryCandidate,
+)
+
+from modules.opportunity.discovery_opportunity_adapter import (
+    DiscoveryOpportunityAdapter,
+)
+
 from modules.opportunity.evidence_engine import (
     OpportunityEvidenceEngine,
 )
@@ -176,27 +184,72 @@ def main() -> None:
     # OPPORTUNITY INTAKE
     # ======================================================
 
-    intake = OpportunityResearchIntake(
-        company="Tata Motors",
+    candidate = DiscoveryCandidate(
+        company_name="Tata Motors",
         ticker="TATAMOTORS",
         sector="Automobile",
         industry="Automotive",
-        catalysts=[
-            "EV adoption"
-        ],
-        concerns=[
-            "Demand slowdown"
-        ],
-        risks=[
-            "Margin pressure"
-        ],
+
+        quality_score=90.0,
+        growth_score=85.0,
+        financial_score=88.0,
+        management_score=82.0,
+        capital_allocation_score=80.0,
+        moat_score=86.0,
+        risk_score=75.0,
+        tailwind_score=90.0,
+        valuation_score=70.0,
+
+        overall_score=84.0,
+
+        status="Passed",
+
         strengths=[
-            "Market leadership"
+            "Market leadership",
         ],
+
+        concerns=[
+            "Demand slowdown",
+        ],
+
+        catalysts=[
+            "EV adoption",
+        ],
+
+        risks=[
+            "Margin pressure",
+        ],
+
+        discovery_notes=[
+            "Candidate identified during Discovery screening.",
+        ],
+
+        confidence=82.0,
+
+        source="EIOS Discovery Office",
     )
 
+    adapter = DiscoveryOpportunityAdapter()
+
+    intake = adapter.create_intake(
+        candidate
+    )
+
+    assert intake.company == "Tata Motors"
+    assert intake.ticker == "TATAMOTORS"
+
+    assert intake.discovery_score == 84.0
+    assert intake.discovery_confidence == 82.0
+
+    assert intake.research_status == "NOT_STARTED"
+
+    assert candidate.company_name == "Tata Motors"
+    assert candidate.ticker == "TATAMOTORS"
+    assert candidate.overall_score == 84.0
+    assert candidate.confidence == 82.0
+
     print(
-        "Opportunity Intake                 : PASS"
+        "Discovery → Opportunity Intake   : PASS"
     )
 
     # ======================================================
