@@ -21,6 +21,10 @@ HTTPExternalRetriever
         ↓
 RetrievedContent
         ↓
+ExternalContentNormalizer
+        ↓
+NormalizedExternalContent
+        ↓
 ExternalObservationAdapter
         ↓
 Observation[]
@@ -36,12 +40,18 @@ Design Principles
 - Does not perform investment analysis.
 - Uses existing EIOS external-intelligence components.
 - Preserves provenance.
+- Preserves original retrieved content.
 - One failed source must not terminate the entire research run.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+
+from modules.external_intelligence.external_content_normalizer import (
+    ExternalContentNormalizer,
+    NormalizedExternalContent,
+)
 
 from modules.external_intelligence.external_observation_adapter import (
     ExternalObservationAdapter,
@@ -107,6 +117,7 @@ class ExternalResearchResult:
     It contains:
         - selected sources
         - retrieved content
+        - normalized content
         - observations
         - retrieval failures
 
@@ -136,6 +147,12 @@ class ExternalResearchResult:
         default_factory=list
     )
 
+    normalized_content: list[
+        NormalizedExternalContent
+    ] = field(
+        default_factory=list
+    )
+
     observations: list[Observation] = field(
         default_factory=list
     )
@@ -149,8 +166,10 @@ class ExternalResearchOrchestrator:
     """
     Coordinates external research retrieval.
 
-    The orchestrator does not perform any analytical
-    transformation of external information.
+    The orchestrator performs no investment analysis.
+
+    Content normalization is a deterministic transformation
+    performed by ExternalContentNormalizer.
     """
 
     def __init__(
@@ -161,6 +180,9 @@ class ExternalResearchOrchestrator:
         retriever: HTTPExternalRetriever | None = None,
         source_selection_engine: (
             ExternalSourceSelectionEngine | None
+        ) = None,
+        content_normalizer: (
+            ExternalContentNormalizer | None
         ) = None,
     ) -> None:
 
@@ -185,6 +207,12 @@ class ExternalResearchOrchestrator:
             retriever
             if retriever is not None
             else HTTPExternalRetriever()
+        )
+
+        self.content_normalizer = (
+            content_normalizer
+            if content_normalizer is not None
+            else ExternalContentNormalizer()
         )
 
         self.observation_engine = (
@@ -224,6 +252,8 @@ class ExternalResearchOrchestrator:
               ↓
             HTTP Retrieval
               ↓
+            Content Normalization
+              ↓
             Observation
 
         Retrieval failures are recorded and do not
@@ -257,11 +287,15 @@ class ExternalResearchOrchestrator:
         )
 
         # --------------------------------------------------
-        # RETRIEVE + OBSERVE
+        # RETRIEVE + NORMALIZE + OBSERVE
         # --------------------------------------------------
 
         retrieved_content: list[
             RetrievedContent
+        ] = []
+
+        normalized_content: list[
+            NormalizedExternalContent
         ] = []
 
         observations: list[
@@ -309,13 +343,43 @@ class ExternalResearchOrchestrator:
             )
 
             # ----------------------------------------------
+            # NORMALIZATION
+            # ----------------------------------------------
+
+            try:
+
+                normalized = (
+                    self.content_normalizer.normalize(
+                        retrieved
+                    )
+                )
+
+            except Exception as exc:
+
+                retrieval_failures.append(
+                    RetrievalFailure(
+                        url=result.url,
+                        error_type=type(exc).__name__,
+                        error_message=str(exc),
+                    )
+                )
+
+                continue
+
+            normalized_content.append(
+                normalized
+            )
+
+            # ----------------------------------------------
             # OBSERVATION
             # ----------------------------------------------
 
             observation = (
                 self.observation_adapter.ingest(
                     title=result.title,
-                    description=retrieved.content,
+                    description=(
+                        normalized.normalized_text
+                    ),
                     source=result.url,
                     category=observation_category,
                     entity=query.company,
@@ -335,6 +399,7 @@ class ExternalResearchOrchestrator:
             query=query,
             selected_sources=selected_sources,
             retrieved_content=retrieved_content,
+            normalized_content=normalized_content,
             observations=observations,
             retrieval_failures=retrieval_failures,
         )

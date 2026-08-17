@@ -15,15 +15,13 @@ Source Selection
     ↓
 HTTP Retrieval
     ↓
+Content Normalization
+    ↓
 Observation
 """
 
 from modules.external_intelligence.external_research_orchestrator import (
     ExternalResearchOrchestrator,
-)
-
-from modules.external_intelligence.http_retriever import (
-    HTTPExternalRetriever,
 )
 
 from modules.external_intelligence.research_query import (
@@ -153,7 +151,7 @@ def main() -> None:
     )
 
     # ======================================================
-    # RETRIEVAL
+    # RAW RETRIEVAL
     # ======================================================
 
     assert (
@@ -176,6 +174,51 @@ def main() -> None:
 
     print(
         "HTTP Retrieval                   : PASS"
+    )
+
+    # ======================================================
+    # NORMALIZED CONTENT
+    # ======================================================
+
+    assert (
+        len(
+            result.normalized_content
+        )
+        == 1
+    )
+
+    normalized = (
+        result.normalized_content[0]
+    )
+
+    assert normalized.url == retrieved.url
+
+    assert (
+        normalized.status_code
+        == retrieved.status_code
+    )
+
+    assert normalized.content_type == (
+        retrieved.content_type
+    )
+
+    assert normalized.normalized_text
+
+    print(
+        "Normalized Content Creation     : PASS"
+    )
+
+    # ======================================================
+    # RAW CONTENT PRESERVATION
+    # ======================================================
+
+    assert (
+        normalized.original_content
+        == retrieved.content
+    )
+
+    print(
+        "Raw Content Preservation        : PASS"
     )
 
     # ======================================================
@@ -213,16 +256,34 @@ def main() -> None:
     )
 
     # ======================================================
-    # PROVENANCE
+    # NORMALIZED CONTENT → OBSERVATION
     # ======================================================
 
     assert (
         observation.description
-        == retrieved.content
+        == normalized.normalized_text
     )
 
     print(
-        "Content Provenance               : PASS"
+        "Observation Uses Normalized Text: PASS"
+    )
+
+    # ======================================================
+    # NORMALIZED CONTENT PROVENANCE
+    # ======================================================
+
+    assert (
+        normalized.original_content
+        == retrieved.content
+    )
+
+    assert (
+        normalized.url
+        == observation.source
+    )
+
+    print(
+        "Normalized Content Provenance    : PASS"
     )
 
     # ======================================================
@@ -259,7 +320,7 @@ def main() -> None:
     )
 
     print(
-        "Input Immutability                : PASS"
+        "Input Immutability               : PASS"
     )
 
     # ======================================================
@@ -287,7 +348,7 @@ def main() -> None:
     )
 
     print(
-        "Analytical Boundary               : PASS"
+        "Analytical Boundary              : PASS"
     )
 
     # ======================================================
@@ -308,7 +369,7 @@ def main() -> None:
         pass
 
     print(
-        "Invalid Input Protection          : PASS"
+        "Invalid Input Protection         : PASS"
     )
 
     # ======================================================
