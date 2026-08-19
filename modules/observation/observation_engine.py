@@ -1,20 +1,95 @@
 """
-Observation Engine
+EIOS
+Everest Investment Operating System
 
-Creates and manages observations.
+Observation Engine
+==================
+
+Creates, validates, registers and persists observations.
+
+The Observation Engine is responsible for ingestion
+of observations into the EIOS observation registry.
+
+It does not perform:
+    - valuation
+    - opportunity scoring
+    - signal generation
+    - investment analysis
+
+Novelty detection is delegated to ObservationNoveltyEngine.
+
+Persistence is delegated to ObservationPersistence.
 """
+
+from __future__ import annotations
 
 from datetime import datetime
 
 from .observation import Observation
+from .observation_novelty_engine import (
+    ObservationNoveltyEngine,
+)
+from .observation_persistence import (
+    ObservationPersistence,
+)
 from .observation_registry import ObservationRegistry
 
 
 class ObservationEngine:
+    """
+    Creates and manages observations.
 
-    def __init__(self):
+    Existing observations are loaded from persistent state
+    when the engine starts.
 
-        self.registry = ObservationRegistry()
+    New observations are registered and persisted.
+
+    Duplicate observations are rejected deterministically
+    by ObservationNoveltyEngine.
+    """
+
+    def __init__(
+        self,
+        registry: ObservationRegistry | None = None,
+        novelty_engine: ObservationNoveltyEngine | None = None,
+        persistence: ObservationPersistence | None = None,
+    ):
+
+        self.registry = (
+            registry
+            if registry is not None
+            else ObservationRegistry()
+        )
+
+        self.novelty_engine = (
+            novelty_engine
+            if novelty_engine is not None
+            else ObservationNoveltyEngine()
+        )
+
+        self.persistence = (
+            persistence
+            if persistence is not None
+            else ObservationPersistence()
+        )
+
+        # --------------------------------------------------
+        # LOAD EXISTING STATE
+        # --------------------------------------------------
+
+        existing_observations = (
+            self.persistence.load()
+        )
+
+        for observation in existing_observations:
+
+            self.registry.add(
+                observation
+            )
+
+    # ======================================================
+    # OBSERVE
+    # ======================================================
 
     def observe(
         self,
@@ -23,8 +98,21 @@ class ObservationEngine:
         source,
         category,
         entity,
-        confidence
+        confidence,
     ):
+        """
+        Create an observation and register it only when
+        the information is new.
+
+        New observations are immediately persisted.
+
+        Returns:
+            Observation
+                when the observation is new.
+
+            None
+                when the observation is a duplicate.
+        """
 
         observation = Observation(
             title=title,
@@ -33,12 +121,84 @@ class ObservationEngine:
             category=category,
             entity=entity,
             confidence=confidence,
-            timestamp=datetime.now()
+            timestamp=datetime.now(),
         )
 
-        self.registry.add(observation)
+        novelty = self.novelty_engine.assess(
+            observation,
+            self.registry.all(),
+        )
+
+        if not novelty.is_new:
+
+            return None
+
+        self.registry.add(
+            observation
+        )
+
+        self.persistence.save(
+            self.registry.all()
+        )
 
         return observation
+
+    # ======================================================
+    # NOVELTY ASSESSMENT
+    # ======================================================
+
+    def assess_novelty(
+        self,
+        observation: Observation,
+    ):
+        """
+        Assess an observation without registering it.
+        """
+
+        return self.novelty_engine.assess(
+            observation,
+            self.registry.all(),
+        )
+
+    # ======================================================
+    # RELOAD
+    # ======================================================
+
+    def reload(self) -> None:
+        """
+        Reload persistent observation state.
+
+        Existing in-memory observations are cleared first.
+        """
+
+        self.registry.clear()
+
+        existing_observations = (
+            self.persistence.load()
+        )
+
+        for observation in existing_observations:
+
+            self.registry.add(
+                observation
+            )
+
+    # ======================================================
+    # SAVE
+    # ======================================================
+
+    def save(self) -> None:
+        """
+        Explicitly persist the current observation state.
+        """
+
+        self.persistence.save(
+            self.registry.all()
+        )
+
+    # ======================================================
+    # OBSERVATION DISPLAY
+    # ======================================================
 
     def show_observations(self):
 
@@ -47,7 +207,19 @@ class ObservationEngine:
         print("=" * 60)
 
         for observation in self.registry.all():
-            print(observation.summary())
+
+            print(
+                observation.summary()
+            )
 
         print()
-        print(f"Total Observations : {self.registry.count()}")
+
+        print(
+            f"Total Observations : "
+            f"{self.registry.count()}"
+        )
+
+
+__all__ = [
+    "ObservationEngine",
+]

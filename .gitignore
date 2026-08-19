@@ -44,3 +44,6 @@ Thumbs.db
 # Backup files
 *.bak
 *_backup.py
+# EIOS runtime observation data
+data/observations.json
+data/test_external_research_orchestrator_observations.json

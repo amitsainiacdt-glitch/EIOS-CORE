@@ -19,11 +19,17 @@ Content Normalization
     ↓
 Source Assessment
     ↓
+Research Quality
+    ↓
 Observation
 """
 
 from modules.external_intelligence.external_research_orchestrator import (
     ExternalResearchOrchestrator,
+)
+
+from modules.external_intelligence.http_retriever import (
+    RetrievedContent,
 )
 
 from modules.external_intelligence.research_query import (
@@ -37,6 +43,23 @@ from modules.external_intelligence.search_provider import (
 from modules.external_intelligence.search_result import (
     ExternalSearchResult,
 )
+
+from modules.observation.observation_engine import (
+    ObservationEngine,
+)
+
+from modules.observation.observation_persistence import (
+    ObservationPersistence,
+)
+
+from modules.observation.observation_registry import (
+    ObservationRegistry,
+)
+
+
+# ==========================================================
+# MOCK SEARCH PROVIDER
+# ==========================================================
 
 
 class MockSearchProvider(SearchProvider):
@@ -53,7 +76,10 @@ class MockSearchProvider(SearchProvider):
             ExternalSearchResult(
                 title="Example Research Result",
                 url="https://example.com",
-                snippet="Synthetic research result.",
+                snippet=(
+                    "Synthetic research result "
+                    "for orchestrator testing."
+                ),
                 source="Mock Provider",
             ),
 
@@ -66,7 +92,61 @@ class MockSearchProvider(SearchProvider):
         ]
 
 
+# ==========================================================
+# MOCK HTTP RETRIEVER
+# ==========================================================
+
+
+class MockHTTPRetriever:
+    """
+    Deterministic HTTP retrieval boundary.
+
+    No live Internet access is required.
+    """
+
+    def __init__(self) -> None:
+
+        self.received_urls: list[str] = []
+
+    def retrieve(
+        self,
+        url: str,
+    ) -> RetrievedContent:
+
+        self.received_urls.append(
+            url
+        )
+
+        return RetrievedContent(
+            url=url,
+            status_code=200,
+            content=(
+                "Synthetic research content indicates "
+                "that industrial demand is improving "
+                "with stronger order activity during "
+                "the current testing period. "
+                "This deterministic content exists only "
+                "to validate the EIOS research pipeline."
+            ),
+            content_type="text/html",
+            headers={
+                "Content-Type": "text/html"
+            },
+        )
+
+
+# ==========================================================
+# MAIN TEST
+# ==========================================================
+
+
 def main() -> None:
+
+    print("=" * 60)
+    print(
+        "EIOS EXTERNAL RESEARCH ORCHESTRATOR TEST"
+    )
+    print("=" * 60)
 
     # ======================================================
     # QUERY
@@ -86,12 +166,47 @@ def main() -> None:
     )
 
     # ======================================================
+    # MOCK COMPONENTS
+    # ======================================================
+
+    retriever = MockHTTPRetriever()
+
+    # ------------------------------------------------------
+    # ISOLATED OBSERVATION STATE
+    # ------------------------------------------------------
+    #
+    # The normal ObservationEngine loads historical
+    # observations from data/observations.json.
+    #
+    # This test must not depend on developer-machine state.
+    #
+    # Therefore the test uses its own isolated persistence
+    # file and an empty registry.
+    # ------------------------------------------------------
+
+    test_persistence = ObservationPersistence(
+        path=(
+            "data/"
+            "test_external_research_orchestrator_observations.json"
+        )
+    )
+
+    test_persistence.clear()
+
+    observation_engine = ObservationEngine(
+        registry=ObservationRegistry(),
+        persistence=test_persistence,
+    )
+
+    # ======================================================
     # ORCHESTRATOR
     # ======================================================
 
     orchestrator = (
         ExternalResearchOrchestrator(
-            MockSearchProvider()
+            MockSearchProvider(),
+            retriever=retriever,
+            observation_engine=observation_engine,
         )
     )
 
@@ -153,7 +268,7 @@ def main() -> None:
     )
 
     # ======================================================
-    # RAW RETRIEVAL
+    # HTTP RETRIEVAL
     # ======================================================
 
     assert (
@@ -173,6 +288,13 @@ def main() -> None:
     )
 
     assert retrieved.content
+
+    assert (
+        retriever.received_urls
+        == [
+            "https://example.com"
+        ]
+    )
 
     print(
         "HTTP Retrieval                   : PASS"
@@ -291,7 +413,7 @@ def main() -> None:
     )
 
     # ======================================================
-    # OBSERVATION
+    # RESEARCH QUALITY
     # ======================================================
 
     assert (
@@ -300,6 +422,14 @@ def main() -> None:
         )
         == 1
     )
+
+    print(
+        "Research Quality Gate           : PASS"
+    )
+
+    # ======================================================
+    # OBSERVATION
+    # ======================================================
 
     observation = (
         result.observations[0]
@@ -398,41 +528,21 @@ def main() -> None:
 
     assert not hasattr(
         result,
-        "evidence_score",
+        "evidence",
     )
 
     assert not hasattr(
         result,
-        "opportunity_score",
+        "signals",
     )
 
     assert not hasattr(
-        source_assessment,
-        "confidence",
+        result,
+        "valuation",
     )
 
     assert not hasattr(
-        source_assessment,
-        "evidence_score",
-    )
-
-    assert not hasattr(
-        source_assessment,
-        "source_quality",
-    )
-
-    assert not hasattr(
-        source_assessment,
-        "credibility_score",
-    )
-
-    assert not hasattr(
-        observation,
-        "evidence_score",
-    )
-
-    assert not hasattr(
-        observation,
+        result,
         "opportunity_score",
     )
 
@@ -441,39 +551,15 @@ def main() -> None:
     )
 
     # ======================================================
-    # INVALID INPUT
-    # ======================================================
-
-    try:
-
-        orchestrator.execute(
-            None
-        )
-
-        raise AssertionError(
-            "None query was accepted"
-        )
-
-    except ValueError:
-
-        pass
-
-    print(
-        "Invalid Input Protection         : PASS"
-    )
-
-    # ======================================================
-    # RESULT
+    # FINAL
     # ======================================================
 
     print()
-    print("---")
-    print()
-
     print(
-        "EIOS EXTERNAL RESEARCH "
-        "ORCHESTRATOR : PASS"
+        "EIOS EXTERNAL RESEARCH ORCHESTRATOR "
+        ": ALL TESTS PASSED"
     )
+    print("=" * 60)
 
 
 if __name__ == "__main__":

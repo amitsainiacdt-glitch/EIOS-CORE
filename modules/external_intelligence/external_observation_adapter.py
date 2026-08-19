@@ -11,7 +11,6 @@ Provides the controlled boundary between externally obtained
 information and the existing EIOS Observation layer.
 
 Architecture
-------------
 
 External Information
         ↓
@@ -37,8 +36,13 @@ Design Principles
 
 from __future__ import annotations
 
-from modules.observation.observation import Observation
-from modules.observation.observation_engine import ObservationEngine
+from modules.observation.observation import (
+    Observation,
+)
+
+from modules.observation.observation_engine import (
+    ObservationEngine,
+)
 
 
 class ExternalObservationAdapter:
@@ -46,15 +50,8 @@ class ExternalObservationAdapter:
     Controlled boundary for converting externally obtained
     information into an EIOS Observation.
 
-    The adapter deliberately does not perform:
-        - web retrieval
-        - HTTP requests
-        - API authentication
-        - signal generation
-        - evidence verification
-        - catalyst analysis
-        - valuation
-        - opportunity scoring
+    Duplicate information may legitimately return None
+    because ObservationEngine owns novelty protection.
     """
 
     def __init__(
@@ -81,10 +78,18 @@ class ExternalObservationAdapter:
         category: str,
         entity: str,
         confidence: float,
-    ) -> Observation:
+    ) -> Observation | None:
         """
         Convert externally obtained information into an
         EIOS Observation.
+
+        Returns:
+            Observation
+                when the information is new.
+
+            None
+                when ObservationEngine rejects the
+                information as a duplicate.
 
         No analytical transformation is performed.
         """
@@ -117,10 +122,12 @@ class ExternalObservationAdapter:
 
         try:
             value = float(confidence)
+
         except (
             TypeError,
             ValueError,
         ):
+
             return 0.0
 
         return max(

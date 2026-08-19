@@ -1,4 +1,4 @@
-# PROJECT_STATE.md
+﻿# PROJECT_STATE.md
 
 # Everest Investment Operating System (EIOS)
 
@@ -6,7 +6,7 @@
 
 Status: Active Development
 
-Current Phase: Phase 2 – Execution
+Current Phase: Phase 2 â€“ Execution
 
 Current Release: 18.3
 
@@ -25,12 +25,12 @@ Last Updated:
 |------|-------|
 | Project Name | Everest Investment Operating System (EIOS) |
 | Mission | Build the world's first Institutional Intelligence Platform for Business Science, Capital Allocation, and Long-Term Wealth Creation |
-| Development Phase | Phase 2 – Execution |
+| Development Phase | Phase 2 â€“ Execution |
 | Current Release | Release 18.3 |
-| Development Status | 🟡 Active Development |
-| Architecture Status | 🟢 Stable |
-| Repository Status | 🟡 Active Refactoring |
-| Documentation Status | 🟡 In Progress |
+| Development Status | ðŸŸ¡ Active Development |
+| Architecture Status | ðŸŸ¢ Stable |
+| Repository Status | ðŸŸ¡ Active Refactoring |
+| Documentation Status | ðŸŸ¡ In Progress |
 | Last Updated | 04 August 2026 |
 
 ---
@@ -124,7 +124,7 @@ The following rules must not be violated without an approved architectural decis
 1. UI must never contain business logic.
 2. Engines must never directly manipulate UI.
 3. Master Dossier remains the single source of truth for company intelligence.
-4. Business knowledge belongs in engines and knowledge models—not orchestration code.
+4. Business knowledge belongs in engines and knowledge modelsâ€”not orchestration code.
 5. main.py remains a minimal bootstrap file.
 6. Repository layer is responsible for persistence.
 7. Cross-engine communication should occur through ResearchContext and the Intelligence Mesh wherever practical.
@@ -136,12 +136,12 @@ The following rules must not be violated without an approved architectural decis
 
 | Capability | Status | Notes |
 |------------|--------|-------|
-| Repository Architecture | ✅ Complete | Repository-first architecture established |
-| EIOSApplication | ✅ Complete | Composition Root implemented |
-| ResearchContext | 🟡 In Progress | Becoming the central intelligence bus |
-| Intelligence Mesh | 🟡 In Progress | Integration underway |
-| Typed Master Dossier | 🟡 In Progress | Legacy migration ongoing |
-| Repository Layer | ✅ Complete | Persistence abstraction available |
+| Repository Architecture | âœ… Complete | Repository-first architecture established |
+| EIOSApplication | âœ… Complete | Composition Root implemented |
+| ResearchContext | ðŸŸ¡ In Progress | Becoming the central intelligence bus |
+| Intelligence Mesh | ðŸŸ¡ In Progress | Integration underway |
+| Typed Master Dossier | ðŸŸ¡ In Progress | Legacy migration ongoing |
+| Repository Layer | âœ… Complete | Persistence abstraction available |
 
 ---
 ---
@@ -160,47 +160,47 @@ Validation Pipeline
 
 Observation
 
-↓
+â†“
 
 Evidence
 
-↓
+â†“
 
 Concept
 
-↓
+â†“
 
 Business Law
 
-↓
+â†“
 
 Knowledge
 
-↓
+â†“
 
 Reasoning
 
-↓
+â†“
 
 Master Dossier
 
-↓
+â†“
 
 Investment Committee
 
 Current Status
 
-🟡 Preparing Initial Validation
+ðŸŸ¡ Preparing Initial Validation
 
 ## Knowledge Layer
 
 | Capability | Status | Notes |
 |------------|--------|-------|
-| Knowledge Objects | ⬜ Planned | Formal framework pending |
-| Knowledge Engine | 🟢 Available | Initial implementation exists |
-| Knowledge Registry | 🟢 Available | Exists, requires evolution |
-| Business Laws | ⬜ Planned | Academy phase |
-| Mental Models | ⬜ Planned | Academy phase |
+| Knowledge Objects | â¬œ Planned | Formal framework pending |
+| Knowledge Engine | ðŸŸ¢ Available | Initial implementation exists |
+| Knowledge Registry | ðŸŸ¢ Available | Exists, requires evolution |
+| Business Laws | â¬œ Planned | Academy phase |
+| Mental Models | â¬œ Planned | Academy phase |
 
 ---
 
@@ -208,10 +208,10 @@ Current Status
 
 | Capability | Status | Notes |
 |------------|--------|-------|
-| Evidence Engine | 🟢 Available | Initial implementation exists |
-| Evidence Registry | 🟢 Available | Operational |
-| Observation Engine | 🟢 Available | Operational |
-| Pipeline Framework | 🟢 Available | Observation → Evidence → Knowledge |
+| Evidence Engine | ðŸŸ¢ Available | Initial implementation exists |
+| Evidence Registry | ðŸŸ¢ Available | Operational |
+| Observation Engine | ðŸŸ¢ Available | Operational |
+| Pipeline Framework | ðŸŸ¢ Available | Observation â†’ Evidence â†’ Knowledge |
 
 ---
 
@@ -219,11 +219,11 @@ Current Status
 
 | Capability | Status | Notes |
 |------------|--------|-------|
-| Discovery Engine | 🟢 Available | Initial version operational |
-| Business Research | 🟢 Available | Existing implementation |
-| Company Research | 🟢 Available | Existing implementation |
-| Research Pipeline | 🟢 Available | Active |
-| Question Engine | 🟢 Available | Initial implementation |
+| Discovery Engine | ðŸŸ¢ Available | Initial version operational |
+| Business Research | ðŸŸ¢ Available | Existing implementation |
+| Company Research | ðŸŸ¢ Available | Existing implementation |
+| Research Pipeline | ðŸŸ¢ Available | Active |
+| Question Engine | ðŸŸ¢ Available | Initial implementation |
 
 ---
 
@@ -231,14 +231,14 @@ Current Status
 
 | Capability | Status | Notes |
 |------------|--------|-------|
-| Business Engine | 🟢 Available | Existing |
-| Financial Engine | 🟢 Available | Existing |
-| Management Engine | 🟢 Available | Existing |
-| Risk Engine | 🟢 Available | Existing |
-| Ownership Engine | 🟢 Available | Existing |
-| Valuation Engine | 🟢 Available | Existing |
-| Competitive Engine | 🟢 Available | Existing |
-| Reasoning Engine | 🟢 Available | Existing |
+| Business Engine | ðŸŸ¢ Available | Existing |
+| Financial Engine | ðŸŸ¢ Available | Existing |
+| Management Engine | ðŸŸ¢ Available | Existing |
+| Risk Engine | ðŸŸ¢ Available | Existing |
+| Ownership Engine | ðŸŸ¢ Available | Existing |
+| Valuation Engine | ðŸŸ¢ Available | Existing |
+| Competitive Engine | ðŸŸ¢ Available | Existing |
+| Reasoning Engine | ðŸŸ¢ Available | Existing |
 
 ---
 
@@ -246,11 +246,11 @@ Current Status
 
 | Capability | Status | Notes |
 |------------|--------|-------|
-| Investment Committee | 🟢 Available | Operational |
-| AI CIO | 🟢 Available | Initial implementation |
-| Decision Engine | 🟢 Available | Existing |
-| Position Sizing | 🟢 Available | Existing |
-| Margin of Safety | 🟢 Available | Existing |
+| Investment Committee | ðŸŸ¢ Available | Operational |
+| AI CIO | ðŸŸ¢ Available | Initial implementation |
+| Decision Engine | ðŸŸ¢ Available | Existing |
+| Position Sizing | ðŸŸ¢ Available | Existing |
+| Margin of Safety | ðŸŸ¢ Available | Existing |
 
 ---
 
@@ -258,10 +258,10 @@ Current Status
 
 | Capability | Status | Notes |
 |------------|--------|-------|
-| Outcome Tracking | ⬜ Planned | Future release |
-| Theory Evolution | ⬜ Planned | Future release |
-| Prediction Tracker | ⬜ Planned | Future release |
-| Discovery Learning | ⬜ Planned | Future release |
+| Outcome Tracking | â¬œ Planned | Future release |
+| Theory Evolution | â¬œ Planned | Future release |
+| Prediction Tracker | â¬œ Planned | Future release |
+| Discovery Learning | â¬œ Planned | Future release |
 
 ---
 
@@ -269,10 +269,10 @@ Current Status
 
 | Capability | Status | Notes |
 |------------|--------|-------|
-| Desktop UI | 🟢 Available | Operational |
-| Dashboard | 🟢 Available | Existing |
-| Charts | 🟢 Available | Revenue, ROE, ROCE, EPS, Valuation |
-| Widgets | 🟢 Available | Existing |
+| Desktop UI | ðŸŸ¢ Available | Operational |
+| Dashboard | ðŸŸ¢ Available | Existing |
+| Charts | ðŸŸ¢ Available | Revenue, ROE, ROCE, EPS, Valuation |
+| Widgets | ðŸŸ¢ Available | Existing |
 
 ---
 
@@ -417,7 +417,7 @@ This sprint is complete only when:
 
 ## Vision Phase
 
-Status: ✅ Complete
+Status: âœ… Complete
 
 Major Achievements
 
@@ -431,7 +431,7 @@ Major Achievements
 
 ## Architecture Phase
 
-Status: ✅ Complete
+Status: âœ… Complete
 
 Major Achievements
 
@@ -450,7 +450,7 @@ Major Achievements
 
 ## Research Methodology
 
-Status: ✅ Complete
+Status: âœ… Complete
 
 Major Achievements
 
@@ -465,7 +465,7 @@ Major Achievements
 
 ## Platform Foundation
 
-Status: 🟡 In Progress
+Status: ðŸŸ¡ In Progress
 
 Completed
 
@@ -493,7 +493,7 @@ Remaining
 
 ## Documentation
 
-Status: 🟡 In Progress
+Status: ðŸŸ¡ In Progress
 
 Completed
 
@@ -792,12 +792,12 @@ deterministic investment logic.
 Learning should follow:
 
 Prediction
-→ Outcome
-→ Attribution
-→ Validation
-→ Proposed Improvement
-→ Backtest
-→ Approved Evolution
+â†’ Outcome
+â†’ Attribution
+â†’ Validation
+â†’ Proposed Improvement
+â†’ Backtest
+â†’ Approved Evolution
 
 No uncontrolled self-modification is permitted.
 
@@ -821,7 +821,7 @@ No uncontrolled self-modification is permitted.
 Repository-first development remains mandatory.
 ## Recovery Intelligence Architecture
 
-### Status: COMPLETE — Recovery Intelligence Foundation
+### Status: COMPLETE â€” Recovery Intelligence Foundation
 
 EIOS now contains a dedicated recovery-intelligence architecture within the Opportunity Engine.
 
@@ -839,11 +839,11 @@ The architecture is designed to detect early improvement in sectors and companie
 ### Recovery Intelligence Flow
 
 Signal
-→ Temporal Signal Intelligence
-→ Recovery Detection
-→ Recovery Evidence
-→ Multi-Signal Recovery Engine
-→ Multi-Signal Recovery Assessment
+â†’ Temporal Signal Intelligence
+â†’ Recovery Detection
+â†’ Recovery Evidence
+â†’ Multi-Signal Recovery Engine
+â†’ Multi-Signal Recovery Assessment
 
 ### Recovery Stages
 
@@ -905,7 +905,7 @@ Objective:
 Determine whether multiple multi-signal recovery assessments represent a common recovering sector, industry, theme, macro regime, commodity cycle, or company.
 
 This layer will sit above Multi-Signal Recovery Engine and below Catalyst / Opportunity Intelligence.
-## Recovery Intelligence — Completed
+## Recovery Intelligence â€” Completed
 
 The EIOS Opportunity Engine now contains a staged Recovery Intelligence architecture.
 
@@ -974,17 +974,17 @@ The EIOS Opportunity Engine now contains a staged Recovery Intelligence architec
 ### Recovery Intelligence Flow
 
 Signal
-    ↓
+    â†“
 Temporal Intelligence
-    ↓
+    â†“
 Recovery Detection
-    ↓
+    â†“
 Multi-Signal Recovery
-    ↓
+    â†“
 Recovery Cluster
-    ↓
+    â†“
 Recovery Breadth
-    ↓
+    â†“
 Opportunity Intelligence
 
 ### Institutional Boundary
@@ -1000,7 +1000,7 @@ No valuation, portfolio decision, or investment recommendation
 is performed by the Recovery Intelligence layer.
 ---
 
-# Recovery Opportunity Intelligence — COMPLETE
+# Recovery Opportunity Intelligence â€” COMPLETE
 
 Status: COMPLETE
 
@@ -1010,14 +1010,14 @@ through the Opportunity Engine boundary.
 Completed architecture:
 
 Recovery Detection
-→ Multi-Signal Recovery
-→ Recovery Cluster
-→ Recovery Breadth
-→ Recovery Theme
-→ Recovery Theme → Catalyst
-→ Recovery Opportunity Signal
-→ Recovery Opportunity Engine
-→ Opportunity Engine
+â†’ Multi-Signal Recovery
+â†’ Recovery Cluster
+â†’ Recovery Breadth
+â†’ Recovery Theme
+â†’ Recovery Theme â†’ Catalyst
+â†’ Recovery Opportunity Signal
+â†’ Recovery Opportunity Engine
+â†’ Opportunity Engine
 
 Completed components:
 
@@ -1058,10 +1058,10 @@ support to warrant downstream Opportunity Engine attention.
 
 Git Commit:
 
-2471744 — Add Recovery Opportunity Intelligence
+2471744 â€” Add Recovery Opportunity Intelligence
 ---
 
-# Recovery → Opportunity Signal Integration — COMPLETE
+# Recovery â†’ Opportunity Signal Integration â€” COMPLETE
 
 Status: COMPLETE
 
@@ -1093,10 +1093,10 @@ Validated:
 Architecture:
 
 Recovery Opportunity Signal
-→ Recovery Opportunity Adapter
-→ Canonical Opportunity Signal
-→ Existing Catalyst Engine
-→ Opportunity Pipeline
+â†’ Recovery Opportunity Adapter
+â†’ Canonical Opportunity Signal
+â†’ Existing Catalyst Engine
+â†’ Opportunity Pipeline
 
 Architectural boundary:
 
@@ -1115,7 +1115,7 @@ intelligence contract, while downstream Opportunity engines
 remain responsible for analysis and decision-support calculations.
 ---
 
-# Recovery → Catalyst Engine Integration — COMPLETE
+# Recovery â†’ Catalyst Engine Integration â€” COMPLETE
 
 Status: COMPLETE
 
@@ -1126,10 +1126,10 @@ through the canonical Opportunity Signal boundary.
 Validated integration:
 
 Recovery Opportunity Signal
-→ Recovery Opportunity Adapter
-→ Canonical Opportunity Signal
-→ CatalystEngine.analyze()
-→ Catalyst Assessment
+â†’ Recovery Opportunity Adapter
+â†’ Canonical Opportunity Signal
+â†’ CatalystEngine.analyze()
+â†’ Catalyst Assessment
 
 Integration validation:
 
@@ -1162,7 +1162,7 @@ portfolio construction and investment decisions remain
 downstream responsibilities.
 ---
 
-# Recovery → Opportunity Pipeline Integration — COMPLETE
+# Recovery â†’ Opportunity Pipeline Integration â€” COMPLETE
 
 Status: COMPLETE
 
@@ -1173,21 +1173,21 @@ Pipeline through the canonical Opportunity Signal boundary.
 Verified architecture:
 
 Recovery Breadth
-→ Recovery Theme
-→ Theme → Catalyst
-→ Recovery Opportunity
-→ Recovery Opportunity Adapter
-→ Canonical Opportunity Signal
-→ Catalyst Engine
-→ Expectation Gap
-→ Mispricing
-→ Asymmetry
-→ Evidence
-→ Synthesis
+â†’ Recovery Theme
+â†’ Theme â†’ Catalyst
+â†’ Recovery Opportunity
+â†’ Recovery Opportunity Adapter
+â†’ Canonical Opportunity Signal
+â†’ Catalyst Engine
+â†’ Expectation Gap
+â†’ Mispricing
+â†’ Asymmetry
+â†’ Evidence
+â†’ Synthesis
 
 Integration test result:
 
-EIOS RECOVERY → OPPORTUNITY PIPELINE : PASS
+EIOS RECOVERY â†’ OPPORTUNITY PIPELINE : PASS
 
 Validated stages:
 
@@ -1196,13 +1196,13 @@ Validated stages:
 - Recovery Input Immutability      : PASS
 - Canonical Recovery Signal        : PASS
 - Opportunity Pipeline Exists      : PASS
-- Recovery → Catalyst              : PASS
-- Signal → Catalyst                : PASS
-- Catalyst → Expectation Gap       : PASS
-- Expectation Gap → Mispricing     : PASS
-- Mispricing → Asymmetry           : PASS
-- Asymmetry → Evidence             : PASS
-- Evidence → Synthesis             : PASS
+- Recovery â†’ Catalyst              : PASS
+- Signal â†’ Catalyst                : PASS
+- Catalyst â†’ Expectation Gap       : PASS
+- Expectation Gap â†’ Mispricing     : PASS
+- Mispricing â†’ Asymmetry           : PASS
+- Asymmetry â†’ Evidence             : PASS
+- Evidence â†’ Synthesis             : PASS
 - Evidence Handoff                 : PASS
 - Synthesis Score Range            : PASS
 - Canonical Signal Immutability    : PASS
@@ -1243,3 +1243,1869 @@ The integration has been validated for:
 - Numeric range protection
 - Input immutability
 - Deterministic execution
+# EIOS â€” PROJECT STATE
+
+## Everest Investment Operating System
+
+**State:** ACTIVE DEVELOPMENT
+**Branch:** `main`
+**Repository:** `EIOS-CORE`
+**Last Verified:** 2026-08-17
+
+---
+
+# 1. CURRENT SYSTEM POSITION
+
+EIOS has progressed from a collection of research engines into an integrated
+Opportunity Intelligence architecture.
+
+The current Opportunity Engine can:
+
+- discover opportunity candidates
+- preserve Discovery intelligence
+- generate external research queries
+- execute external research
+- retrieve external information
+- normalize external content
+- assess source quality
+- create observations
+- create evidence
+- evaluate evidence quality
+- generate canonical signals
+- identify catalysts
+- measure expectation gaps
+- evaluate potential mispricing
+- evaluate asymmetry
+- synthesize opportunity intelligence
+- apply evidence and kill-switch gates
+- route qualified opportunities toward Committee Review
+
+The system is currently **research-oriented and deterministic**.
+
+It is not yet a continuously operating intelligence system.
+
+---
+
+# 2. VERIFIED OPPORTUNITY ARCHITECTURE
+
+Current high-level flow:
+
+Discovery
+    â†“
+Opportunity Intake
+    â†“
+External Query Generation
+    â†“
+External Research
+    â†“
+Search / Retrieval
+    â†“
+Content Normalization
+    â†“
+Source Assessment
+    â†“
+Observation
+    â†“
+Evidence
+    â†“
+Opportunity Evidence Engine
+    â†“
+Canonical Signal
+    â†“
+Catalyst
+    â†“
+Expectation Gap
+    â†“
+Mispricing
+    â†“
+Asymmetry
+    â†“
+Opportunity Synthesis
+    â†“
+Investment Committee
+
+---
+
+# 3. EXTERNAL INTELLIGENCE PIPELINE
+
+The following end-to-end pipeline has been implemented and verified:
+
+Discovery
+â†’ Opportunity Intake
+â†’ External Query
+â†’ External Orchestrator
+â†’ External Research
+â†’ Search Delegation
+â†’ Source Selection
+â†’ HTTP Retrieval
+â†’ Content Normalization
+â†’ Source Assessment
+â†’ Observation Creation
+â†’ External Provenance Chain
+â†’ Evidence Assessment Metadata
+â†’ Observation â†’ EvidenceItem
+â†’ Opportunity Evidence Engine
+â†’ Evidence â†’ Opportunity Handoff
+â†’ Downstream Evidence Scoring
+â†’ Final Provenance Preservation
+
+Verified result:
+
+EIOS FULL EXTERNAL â†’ OPPORTUNITY EVIDENCE PIPELINE : PASS
+
+---
+
+# 4. DISCOVERY â†’ OPPORTUNITY INTAKE
+
+DiscoveryOpportunityAdapter is implemented and verified.
+
+Verified properties:
+
+- Company identity preserved
+- Ticker preserved
+- Sector preserved
+- Industry preserved
+- Discovery score preserved
+- Discovery confidence preserved
+- Catalysts preserved
+- Risks preserved
+- Strengths preserved
+- No Opportunity analysis invented
+- Source DiscoveryCandidate remains unchanged
+
+Verified result:
+
+EIOS DISCOVERY â†’ OPPORTUNITY INTAKE : PASS
+
+---
+
+# 5. OPPORTUNITY EXTERNAL QUERY ENGINE
+
+OpportunityExternalQueryEngine is implemented and verified.
+
+Verified properties:
+
+- Engine construction
+- External query generation
+- Company preservation
+- Ticker preservation
+- Question preservation
+- Opportunity research intent
+- Deterministic output
+- Intake immutability
+- No analytical fabrication
+- Invalid input protection
+
+Verified result:
+
+EIOS OPPORTUNITY â†’ EXTERNAL QUERY ENGINE : PASS
+
+---
+
+# 6. CATALYST ARCHITECTURE
+
+Catalyst architecture is substantially developed.
+
+Current architecture includes:
+
+- Catalyst Engine
+- Catalyst Classification
+- Catalyst Families
+- Catalyst Patterns
+- Catalyst Registry
+- Catalyst Coverage
+- Catalyst Coverage Evidence Registry
+- Catalyst Priority
+- Catalyst Development Queue
+- Catalyst Development Selector
+
+Current known architecture state:
+
+- 30 Catalyst Families
+- 21 covered families
+- 9 uncovered families
+- 122 registered Catalyst Patterns
+
+Completed catalyst families include areas such as:
+
+- Capacity Expansion
+- Order / Contract
+- Regulatory Change
+- Revenue Growth
+- Volume Growth
+- Pricing
+- Margin Expansion
+- Technology Adoption
+- Market Recognition / Expectation Reset
+
+The Catalyst Development architecture is deterministic and test-covered.
+
+---
+
+# 7. EXPECTATION GAP ENGINE
+
+Expectation Gap Engine is implemented and tested.
+
+It evaluates:
+
+- Market expectation
+- EIOS expectation
+- Market earnings expectation
+- EIOS earnings expectation
+- Expectation difference
+- Earnings gap
+- Unrecognized potential
+- Gap score
+- Confidence
+- Positive / negative gap
+
+Verified result:
+
+EXPECTATION GAP : ALL TESTS PASSED
+
+---
+
+# 8. MISPRICING ENGINE
+
+Mispricing Engine is implemented.
+
+Important architectural rule:
+
+The Mispricing Engine does NOT calculate intrinsic value.
+
+Authoritative valuation remains with the existing EIOS valuation architecture.
+
+Mispricing combines:
+
+- valuation support
+- catalyst support
+- expectation-gap support
+- mispricing score
+- confidence
+
+Institutional threshold:
+
+MINIMUM_MISPRICING_SCORE = 60.0
+
+The production threshold was NOT lowered.
+
+The positive-path test fixture was strengthened instead.
+
+Latest verified positive-path result:
+
+Current Price      : 3500.00
+Intrinsic Value    : 5250.00
+Fair Value         : 5250.00
+Valuation Upside   : 50.00%
+Valuation Support  : True
+
+Catalyst Score     : 60.50
+Expectation Gap    : 35.00
+Earnings Gap       : 35.00
+Market Recognition : 55.00
+Mispricing Score   : 64.65
+Confidence         : 52.99
+Potential Mispricing : True
+
+MISPRICING ENGINE : ALL TESTS PASSED
+
+Commit:
+
+e6f376e â€” Strengthen mispricing positive-path test
+
+---
+
+# 9. ASYMMETRY ENGINE
+
+Asymmetry Engine is implemented and tested.
+
+Verified:
+
+- Expected return
+- Upside probability
+- Permanent loss probability
+- Expected time
+- Asymmetry ratio
+- Asymmetry score
+- Attractive / non-attractive classification
+- Probability validation
+
+Verified result:
+
+ASYMMETRY ENGINE : ALL TESTS PASSED
+
+---
+
+# 10. OPPORTUNITY EVIDENCE ENGINE
+
+Opportunity Evidence Engine is implemented and tested.
+
+Verified scenarios include:
+
+- Strong evidence
+- Weak evidence
+- Serious contradiction
+- No primary source
+- No kill switch
+
+The engine provides evidence qualification before downstream
+Opportunity Synthesis.
+
+Verified result:
+
+OPPORTUNITY EVIDENCE ENGINE : ALL TESTS PASSED
+
+---
+
+# 11. OPPORTUNITY PIPELINE
+
+OpportunityPipeline integrates:
+
+- Canonical Signal
+- Catalyst
+- Expectation Gap
+- Mispricing
+- Asymmetry
+- Evidence
+- Synthesis
+- Evidence â†’ Synthesis handoff
+- Score / Confidence
+- Decision
+
+Latest verified synthetic pipeline:
+
+Catalyst Score          : 54.50
+Expectation Gap         : 43.90
+Mispricing Score        : 54.06
+Asymmetry Score         : 92.05
+Evidence Score          : 65.95
+Evidence Confidence     : 75.00
+Evidence Sufficient     : True
+Opportunity Score       : 63.51
+Opportunity Confidence  : 73.90
+Decision                : Research
+
+Verified result:
+
+EIOS OPPORTUNITY PIPELINE : PASS
+
+---
+
+# 12. NEGATIVE-PATH PROTECTION
+
+Negative-path tests are implemented and passing.
+
+Verified:
+
+- Strong Opportunity
+- No Evidence Gate
+- No Kill Switch
+- Permanent Loss
+- Weak Valuation
+
+Verified result:
+
+EIOS OPPORTUNITY PIPELINE NEGATIVE-PATH TEST : PASS
+
+The system therefore does not simply reward high scores.
+
+Evidence and risk gates can block an opportunity.
+
+---
+
+# 13. OPPORTUNITY COMMITTEE
+
+Committee routing is implemented and tested.
+
+Verified:
+
+- Tier 1 â†’ Committee Review
+- Tier 2 â†’ Committee Review
+- Tier 3 â†’ Watchlist
+- Excluded â†’ Reject
+- No Automatic Approval
+- Ranking Immutability
+
+Verified result:
+
+EIOS OPPORTUNITY COMMITTEE : PASS
+
+Important principle:
+
+Opportunity Engine output is not automatic investment approval.
+
+---
+
+# 14. FULL VERIFIED OPPORTUNITY TEST SET
+
+The following major Opportunity tests have passed:
+
+- test_asymmetry
+- test_expectation_gap
+- test_mispricing
+- test_evidence_engine
+- test_pipeline
+- test_pipeline_negative
+- test_committee_engine
+- test_discovery_opportunity_adapter
+- test_opportunity_external_query_engine
+- test_full_external_opportunity_evidence_pipeline
+
+The repository currently contains approximately:
+
+91 `test_*.py` files
+
+across the modules tree.
+
+---
+
+# 15. CURRENT REPOSITORY STATE
+
+Latest verified Git state after the Mispricing test update:
+
+Branch:
+
+main
+
+Remote:
+
+origin/main
+
+Latest important commit:
+
+e6f376e
+Strengthen mispricing positive-path test
+
+The repository was pushed successfully.
+
+Working tree was clean after the push.
+
+---
+
+# 16. EXISTING TEMPORAL ARCHITECTURE
+
+EIOS already contains temporal information in multiple existing layers.
+
+Signal model contains:
+
+- source_date
+- detected_date
+
+Observation contains timestamp information.
+
+Evidence contains timestamp information.
+
+Decision models contain creation timestamps.
+
+There is also an existing:
+
+modules/opportunity/signals/temporal_signal_engine.py
+
+Therefore:
+
+DO NOT introduce an unrelated global timestamp abstraction.
+
+Future monitoring and learning components must reuse existing EIOS
+chronology concepts where appropriate.
+
+---
+
+# 17. IMPORTANT ARCHITECTURAL DECISION
+
+The next generation of EIOS must evolve from:
+
+"Run research when requested"
+
+toward:
+
+"Continuously acquire, process and update investment intelligence."
+
+The target architecture is:
+
+Internet / External Sources
+        â†“
+Data Acquisition
+        â†“
+News / Results / Events / Filings
+        â†“
+External Intelligence
+        â†“
+Observation
+        â†“
+Evidence
+        â†“
+Signal
+        â†“
+Catalyst
+        â†“
+Expectation Gap
+        â†“
+Mispricing
+        â†“
+Asymmetry
+        â†“
+Opportunity Synthesis
+        â†“
+Monitoring
+        â†“
+Learning
+
+---
+
+# 18. CONTINUOUS INTELLIGENCE OBJECTIVE
+
+EIOS should eventually automatically collect and process:
+
+- Company quarterly results
+- Annual results
+- Earnings releases
+- Company announcements
+- Conference-call information
+- Order wins
+- Capacity expansion
+- Management changes
+- M&A
+- Regulatory developments
+- Government policy
+- Commodity movements
+- Sector developments
+- Competitor developments
+- Important news
+- Macro events
+- Market-moving events
+
+The objective is NOT merely to store news.
+
+The objective is to determine:
+
+"What changed?"
+
+"What does it mean?"
+
+"Which existing thesis does it affect?"
+
+"Does it create a new signal?"
+
+"Does it strengthen or weaken a catalyst?"
+
+"Does it change market expectations?"
+
+"Does it change the mispricing assessment?"
+
+"Does it change opportunity conviction?"
+
+---
+
+# 19. TARGET AUTOMATIC INTELLIGENCE FLOW
+
+New information:
+
+    â†“
+
+Source Acquisition
+
+    â†“
+
+Source Assessment
+
+    â†“
+
+Observation
+
+    â†“
+
+Evidence
+
+    â†“
+
+Entity Mapping
+
+    â†“
+
+Event Classification
+
+    â†“
+
+Signal Detection
+
+    â†“
+
+Existing Signal Update / New Signal
+
+    â†“
+
+Catalyst Update
+
+    â†“
+
+Expectation Gap Update
+
+    â†“
+
+Mispricing Update
+
+    â†“
+
+Asymmetry Update
+
+    â†“
+
+Opportunity Reassessment
+
+    â†“
+
+Monitoring State
+
+---
+
+# 20. EVENT CLASSIFICATION TARGET
+
+Incoming information should eventually be classified into controlled event
+families such as:
+
+- NEWS
+- RESULT
+- EARNINGS
+- FILING
+- ORDER
+- CAPACITY
+- MANAGEMENT
+- M&A
+- REGULATORY
+- POLICY
+- MACRO
+- SECTOR
+- COMPETITOR
+- COMMODITY
+- TECHNOLOGY
+- OTHER
+
+Classification must remain deterministic and provenance-preserving.
+
+---
+
+# 21. MONITORING OBJECTIVE
+
+For an existing opportunity:
+
+Existing Opportunity
+        â†“
+New Information
+        â†“
+Compare With Previous State
+        â†“
+Identify Change
+        â†“
+Assess Thesis Impact
+        â†“
+Assess Conviction Change
+
+Possible states:
+
+- Conviction Increased
+- Conviction Unchanged
+- Conviction Decreased
+- Thesis Invalidated
+- New Research Required
+
+No automatic BUY/SELL action should be introduced at this stage.
+
+---
+
+# 22. LEARNING ARCHITECTURE
+
+EIOS will eventually require a Learning Ledger.
+
+However, Learning must preserve the distinction between:
+
+PREDICTION
+
+and
+
+OUTCOME.
+
+Target architecture:
+
+Opportunity Synthesis
+        â†“
+Opportunity Prediction Record
+        â†“
+TIME
+        â†“
+Actual Outcome
+        â†“
+Prediction vs Reality
+        â†“
+Attribution
+        â†“
+Learning Ledger
+
+The original prediction must never be overwritten by hindsight.
+
+---
+
+# 23. OPPORTUNITY PREDICTION
+
+A future passive `OpportunityPrediction` model is planned.
+
+It should capture the state of EIOS at the time of prediction, including:
+
+- company
+- sector
+- prediction timestamp
+- market price
+- intrinsic value
+- fair value
+- catalyst score
+- expectation gap score
+- mispricing score
+- asymmetry score
+- opportunity score
+- confidence
+- decision
+- expected return
+- expected duration
+- downside / permanent-loss assumptions
+- evidence state
+- assumptions
+- disconfirming evidence
+- invalidation conditions
+- provenance
+
+It must NOT contain hindsight outcome fields.
+
+---
+
+# 24. OUTCOME / LEARNING PRINCIPLE
+
+Future outcome records should remain separate.
+
+They may eventually capture:
+
+- subsequent market price
+- realized return
+- realized time
+- business outcome
+- earnings outcome
+- catalyst outcome
+- expectation outcome
+- thesis validity
+- prediction accuracy
+
+But these fields must never be inserted into the original prediction record.
+
+---
+
+# 25. NEXT DEVELOPMENT PRIORITY
+
+The immediate next major development is NOT another scoring engine.
+
+Priority:
+
+## EIOS CONTINUOUS EXTERNAL INTELLIGENCE
+
+First build the infrastructure required for EIOS to periodically acquire
+new information.
+
+Initial components should include:
+
+1. Source Registry
+2. Data Acquisition Layer
+3. Scheduled Ingestion
+4. Event Classification
+5. Entity Mapping
+6. Duplicate Detection
+7. Observation Creation
+8. Evidence Creation
+9. Provenance Preservation
+10. Opportunity Update Trigger
+
+Only after this foundation is stable should we build the Learning Ledger.
+
+---
+
+# 26. SCHEDULING TARGET
+
+EIOS should eventually support periodic updates rather than requiring manual
+execution.
+
+Target concept:
+
+    Scheduler
+        â†“
+    Source Registry
+        â†“
+    Fetch New Information
+        â†“
+    Detect New / Changed Items
+        â†“
+    Process Intelligence
+        â†“
+    Update EIOS State
+
+Initial scheduling frequency can be configurable.
+
+Examples:
+
+- Hourly
+- Every 4 hours
+- Daily
+
+Different source classes may eventually use different frequencies.
+
+---
+
+# 27. AUTOMATIC REPOSITORY / PUBLISHING
+
+Automatic GitHub publishing is NOT yet part of the production pipeline.
+
+The preferred sequence is:
+
+External Intelligence
+        â†“
+Validated EIOS State
+        â†“
+Tests
+        â†“
+Generated Research Artifacts
+        â†“
+Optional Repository Publication
+
+Automatic repository writes should NOT be introduced before the ingestion
+and validation layers are stable.
+
+---
+
+# 28. ARCHITECTURAL RULES
+
+Continue following the EIOS Engineering Charter.
+
+Important rules:
+
+- Repository first
+- Do not redesign existing architecture unnecessarily
+- Prefer staged refactoring
+- Passive data models
+- Engines perform calculations
+- Preserve provenance
+- Preserve source evidence
+- No analytical fabrication
+- No automatic investment approval
+- No hidden mutation
+- Deterministic behavior where appropriate
+- Evidence before conviction
+- Kill switches remain authoritative
+- Do not lower institutional thresholds merely to make tests pass
+- Never overwrite historical predictions with hindsight
+- Preserve backward compatibility during migrations
+
+---
+
+# 29. CURRENT DEVELOPMENT PHASE
+
+## PHASE
+
+Opportunity Intelligence â†’ Continuous Intelligence Transition
+
+### Completed
+
+Discovery â†’ Opportunity Intake
+External Query Generation
+External Research
+External Retrieval
+Observation
+Evidence
+Signal
+Catalyst
+Expectation Gap
+Mispricing
+Asymmetry
+Evidence Qualification
+Opportunity Synthesis
+Opportunity Committee Routing
+Negative-path protection
+External â†’ Opportunity end-to-end integration
+
+### In Progress
+
+Continuous External Intelligence Architecture
+
+### Planned
+
+Scheduled Intelligence Ingestion
+Automatic Event Processing
+Opportunity Monitoring
+Prediction Records
+Outcome Records
+Attribution Engine
+Learning Ledger
+Adaptive Intelligence
+
+---
+
+# 30. NEXT SESSION â€” EXACT STARTING POINT
+
+Do NOT modify the existing Opportunity scoring engines yet.
+
+Start with repository inspection and design of:
+
+    modules/external_intelligence/
+
+for:
+
+    Source Registry
+    Scheduled Acquisition
+    New-Information Detection
+    Event Classification
+
+Then integrate the validated information into the existing:
+
+    Observation
+        â†“
+    Evidence
+        â†“
+    Signal
+        â†“
+    Opportunity
+
+architecture.
+
+The objective is to transform EIOS from a system that can perform research
+into a system that can continuously maintain current investment intelligence.
+
+---
+
+# END OF PROJECT STATE
+# EIOS â€” PROJECT STATE
+
+## Everest Investment Operating System
+
+**State:** ACTIVE DEVELOPMENT
+**Branch:** `main`
+**Repository:** `EIOS-CORE`
+**Last Verified:** 2026-08-17
+
+---
+
+# 1. CURRENT SYSTEM POSITION
+
+EIOS has progressed from a collection of research engines into an integrated
+Opportunity Intelligence architecture.
+
+The current Opportunity Engine can:
+
+- discover opportunity candidates
+- preserve Discovery intelligence
+- generate external research queries
+- execute external research
+- retrieve external information
+- normalize external content
+- assess source quality
+- create observations
+- create evidence
+- evaluate evidence quality
+- generate canonical signals
+- identify catalysts
+- measure expectation gaps
+- evaluate potential mispricing
+- evaluate asymmetry
+- synthesize opportunity intelligence
+- apply evidence and kill-switch gates
+- route qualified opportunities toward Committee Review
+
+The system is currently **research-oriented and deterministic**.
+
+It is not yet a continuously operating intelligence system.
+
+---
+
+# 2. VERIFIED OPPORTUNITY ARCHITECTURE
+
+Current high-level flow:
+
+Discovery
+    â†“
+Opportunity Intake
+    â†“
+External Query Generation
+    â†“
+External Research
+    â†“
+Search / Retrieval
+    â†“
+Content Normalization
+    â†“
+Source Assessment
+    â†“
+Observation
+    â†“
+Evidence
+    â†“
+Opportunity Evidence Engine
+    â†“
+Canonical Signal
+    â†“
+Catalyst
+    â†“
+Expectation Gap
+    â†“
+Mispricing
+    â†“
+Asymmetry
+    â†“
+Opportunity Synthesis
+    â†“
+Investment Committee
+
+---
+
+# 3. EXTERNAL INTELLIGENCE PIPELINE
+
+The following end-to-end pipeline has been implemented and verified:
+
+Discovery
+â†’ Opportunity Intake
+â†’ External Query
+â†’ External Orchestrator
+â†’ External Research
+â†’ Search Delegation
+â†’ Source Selection
+â†’ HTTP Retrieval
+â†’ Content Normalization
+â†’ Source Assessment
+â†’ Observation Creation
+â†’ External Provenance Chain
+â†’ Evidence Assessment Metadata
+â†’ Observation â†’ EvidenceItem
+â†’ Opportunity Evidence Engine
+â†’ Evidence â†’ Opportunity Handoff
+â†’ Downstream Evidence Scoring
+â†’ Final Provenance Preservation
+
+Verified result:
+
+EIOS FULL EXTERNAL â†’ OPPORTUNITY EVIDENCE PIPELINE : PASS
+
+---
+
+# 4. DISCOVERY â†’ OPPORTUNITY INTAKE
+
+DiscoveryOpportunityAdapter is implemented and verified.
+
+Verified properties:
+
+- Company identity preserved
+- Ticker preserved
+- Sector preserved
+- Industry preserved
+- Discovery score preserved
+- Discovery confidence preserved
+- Catalysts preserved
+- Risks preserved
+- Strengths preserved
+- No Opportunity analysis invented
+- Source DiscoveryCandidate remains unchanged
+
+Verified result:
+
+EIOS DISCOVERY â†’ OPPORTUNITY INTAKE : PASS
+
+---
+
+# 5. OPPORTUNITY EXTERNAL QUERY ENGINE
+
+OpportunityExternalQueryEngine is implemented and verified.
+
+Verified properties:
+
+- Engine construction
+- External query generation
+- Company preservation
+- Ticker preservation
+- Question preservation
+- Opportunity research intent
+- Deterministic output
+- Intake immutability
+- No analytical fabrication
+- Invalid input protection
+
+Verified result:
+
+EIOS OPPORTUNITY â†’ EXTERNAL QUERY ENGINE : PASS
+
+---
+
+# 6. CATALYST ARCHITECTURE
+
+Catalyst architecture is substantially developed.
+
+Current architecture includes:
+
+- Catalyst Engine
+- Catalyst Classification
+- Catalyst Families
+- Catalyst Patterns
+- Catalyst Registry
+- Catalyst Coverage
+- Catalyst Coverage Evidence Registry
+- Catalyst Priority
+- Catalyst Development Queue
+- Catalyst Development Selector
+
+Current known architecture state:
+
+- 30 Catalyst Families
+- 21 covered families
+- 9 uncovered families
+- 122 registered Catalyst Patterns
+
+Completed catalyst families include areas such as:
+
+- Capacity Expansion
+- Order / Contract
+- Regulatory Change
+- Revenue Growth
+- Volume Growth
+- Pricing
+- Margin Expansion
+- Technology Adoption
+- Market Recognition / Expectation Reset
+
+The Catalyst Development architecture is deterministic and test-covered.
+
+---
+
+# 7. EXPECTATION GAP ENGINE
+
+Expectation Gap Engine is implemented and tested.
+
+It evaluates:
+
+- Market expectation
+- EIOS expectation
+- Market earnings expectation
+- EIOS earnings expectation
+- Expectation difference
+- Earnings gap
+- Unrecognized potential
+- Gap score
+- Confidence
+- Positive / negative gap
+
+Verified result:
+
+EXPECTATION GAP : ALL TESTS PASSED
+
+---
+
+# 8. MISPRICING ENGINE
+
+Mispricing Engine is implemented.
+
+Important architectural rule:
+
+The Mispricing Engine does NOT calculate intrinsic value.
+
+Authoritative valuation remains with the existing EIOS valuation architecture.
+
+Mispricing combines:
+
+- valuation support
+- catalyst support
+- expectation-gap support
+- mispricing score
+- confidence
+
+Institutional threshold:
+
+MINIMUM_MISPRICING_SCORE = 60.0
+
+The production threshold was NOT lowered.
+
+The positive-path test fixture was strengthened instead.
+
+Latest verified positive-path result:
+
+Current Price      : 3500.00
+Intrinsic Value    : 5250.00
+Fair Value         : 5250.00
+Valuation Upside   : 50.00%
+Valuation Support  : True
+
+Catalyst Score     : 60.50
+Expectation Gap    : 35.00
+Earnings Gap       : 35.00
+Market Recognition : 55.00
+Mispricing Score   : 64.65
+Confidence         : 52.99
+Potential Mispricing : True
+
+MISPRICING ENGINE : ALL TESTS PASSED
+
+Commit:
+
+e6f376e â€” Strengthen mispricing positive-path test
+
+---
+
+# 9. ASYMMETRY ENGINE
+
+Asymmetry Engine is implemented and tested.
+
+Verified:
+
+- Expected return
+- Upside probability
+- Permanent loss probability
+- Expected time
+- Asymmetry ratio
+- Asymmetry score
+- Attractive / non-attractive classification
+- Probability validation
+
+Verified result:
+
+ASYMMETRY ENGINE : ALL TESTS PASSED
+
+---
+
+# 10. OPPORTUNITY EVIDENCE ENGINE
+
+Opportunity Evidence Engine is implemented and tested.
+
+Verified scenarios include:
+
+- Strong evidence
+- Weak evidence
+- Serious contradiction
+- No primary source
+- No kill switch
+
+The engine provides evidence qualification before downstream
+Opportunity Synthesis.
+
+Verified result:
+
+OPPORTUNITY EVIDENCE ENGINE : ALL TESTS PASSED
+
+---
+
+# 11. OPPORTUNITY PIPELINE
+
+OpportunityPipeline integrates:
+
+- Canonical Signal
+- Catalyst
+- Expectation Gap
+- Mispricing
+- Asymmetry
+- Evidence
+- Synthesis
+- Evidence â†’ Synthesis handoff
+- Score / Confidence
+- Decision
+
+Latest verified synthetic pipeline:
+
+Catalyst Score          : 54.50
+Expectation Gap         : 43.90
+Mispricing Score        : 54.06
+Asymmetry Score         : 92.05
+Evidence Score          : 65.95
+Evidence Confidence     : 75.00
+Evidence Sufficient     : True
+Opportunity Score       : 63.51
+Opportunity Confidence  : 73.90
+Decision                : Research
+
+Verified result:
+
+EIOS OPPORTUNITY PIPELINE : PASS
+
+---
+
+# 12. NEGATIVE-PATH PROTECTION
+
+Negative-path tests are implemented and passing.
+
+Verified:
+
+- Strong Opportunity
+- No Evidence Gate
+- No Kill Switch
+- Permanent Loss
+- Weak Valuation
+
+Verified result:
+
+EIOS OPPORTUNITY PIPELINE NEGATIVE-PATH TEST : PASS
+
+The system therefore does not simply reward high scores.
+
+Evidence and risk gates can block an opportunity.
+
+---
+
+# 13. OPPORTUNITY COMMITTEE
+
+Committee routing is implemented and tested.
+
+Verified:
+
+- Tier 1 â†’ Committee Review
+- Tier 2 â†’ Committee Review
+- Tier 3 â†’ Watchlist
+- Excluded â†’ Reject
+- No Automatic Approval
+- Ranking Immutability
+
+Verified result:
+
+EIOS OPPORTUNITY COMMITTEE : PASS
+
+Important principle:
+
+Opportunity Engine output is not automatic investment approval.
+
+---
+
+# 14. FULL VERIFIED OPPORTUNITY TEST SET
+
+The following major Opportunity tests have passed:
+
+- test_asymmetry
+- test_expectation_gap
+- test_mispricing
+- test_evidence_engine
+- test_pipeline
+- test_pipeline_negative
+- test_committee_engine
+- test_discovery_opportunity_adapter
+- test_opportunity_external_query_engine
+- test_full_external_opportunity_evidence_pipeline
+
+The repository currently contains approximately:
+
+91 `test_*.py` files
+
+across the modules tree.
+
+---
+
+# 15. CURRENT REPOSITORY STATE
+
+Latest verified Git state after the Mispricing test update:
+
+Branch:
+
+main
+
+Remote:
+
+origin/main
+
+Latest important commit:
+
+e6f376e
+Strengthen mispricing positive-path test
+
+The repository was pushed successfully.
+
+Working tree was clean after the push.
+
+---
+
+# 16. EXISTING TEMPORAL ARCHITECTURE
+
+EIOS already contains temporal information in multiple existing layers.
+
+Signal model contains:
+
+- source_date
+- detected_date
+
+Observation contains timestamp information.
+
+Evidence contains timestamp information.
+
+Decision models contain creation timestamps.
+
+There is also an existing:
+
+modules/opportunity/signals/temporal_signal_engine.py
+
+Therefore:
+
+DO NOT introduce an unrelated global timestamp abstraction.
+
+Future monitoring and learning components must reuse existing EIOS
+chronology concepts where appropriate.
+
+---
+
+# 17. IMPORTANT ARCHITECTURAL DECISION
+
+The next generation of EIOS must evolve from:
+
+"Run research when requested"
+
+toward:
+
+"Continuously acquire, process and update investment intelligence."
+
+The target architecture is:
+
+Internet / External Sources
+        â†“
+Data Acquisition
+        â†“
+News / Results / Events / Filings
+        â†“
+External Intelligence
+        â†“
+Observation
+        â†“
+Evidence
+        â†“
+Signal
+        â†“
+Catalyst
+        â†“
+Expectation Gap
+        â†“
+Mispricing
+        â†“
+Asymmetry
+        â†“
+Opportunity Synthesis
+        â†“
+Monitoring
+        â†“
+Learning
+
+---
+
+# 18. CONTINUOUS INTELLIGENCE OBJECTIVE
+
+EIOS should eventually automatically collect and process:
+
+- Company quarterly results
+- Annual results
+- Earnings releases
+- Company announcements
+- Conference-call information
+- Order wins
+- Capacity expansion
+- Management changes
+- M&A
+- Regulatory developments
+- Government policy
+- Commodity movements
+- Sector developments
+- Competitor developments
+- Important news
+- Macro events
+- Market-moving events
+
+The objective is NOT merely to store news.
+
+The objective is to determine:
+
+"What changed?"
+
+"What does it mean?"
+
+"Which existing thesis does it affect?"
+
+"Does it create a new signal?"
+
+"Does it strengthen or weaken a catalyst?"
+
+"Does it change market expectations?"
+
+"Does it change the mispricing assessment?"
+
+"Does it change opportunity conviction?"
+
+---
+
+# 19. TARGET AUTOMATIC INTELLIGENCE FLOW
+
+New information:
+
+    â†“
+
+Source Acquisition
+
+    â†“
+
+Source Assessment
+
+    â†“
+
+Observation
+
+    â†“
+
+Evidence
+
+    â†“
+
+Entity Mapping
+
+    â†“
+
+Event Classification
+
+    â†“
+
+Signal Detection
+
+    â†“
+
+Existing Signal Update / New Signal
+
+    â†“
+
+Catalyst Update
+
+    â†“
+
+Expectation Gap Update
+
+    â†“
+
+Mispricing Update
+
+    â†“
+
+Asymmetry Update
+
+    â†“
+
+Opportunity Reassessment
+
+    â†“
+
+Monitoring State
+
+---
+
+# 20. EVENT CLASSIFICATION TARGET
+
+Incoming information should eventually be classified into controlled event
+families such as:
+
+- NEWS
+- RESULT
+- EARNINGS
+- FILING
+- ORDER
+- CAPACITY
+- MANAGEMENT
+- M&A
+- REGULATORY
+- POLICY
+- MACRO
+- SECTOR
+- COMPETITOR
+- COMMODITY
+- TECHNOLOGY
+- OTHER
+
+Classification must remain deterministic and provenance-preserving.
+
+---
+
+# 21. MONITORING OBJECTIVE
+
+For an existing opportunity:
+
+Existing Opportunity
+        â†“
+New Information
+        â†“
+Compare With Previous State
+        â†“
+Identify Change
+        â†“
+Assess Thesis Impact
+        â†“
+Assess Conviction Change
+
+Possible states:
+
+- Conviction Increased
+- Conviction Unchanged
+- Conviction Decreased
+- Thesis Invalidated
+- New Research Required
+
+No automatic BUY/SELL action should be introduced at this stage.
+
+---
+
+# 22. LEARNING ARCHITECTURE
+
+EIOS will eventually require a Learning Ledger.
+
+However, Learning must preserve the distinction between:
+
+PREDICTION
+
+and
+
+OUTCOME.
+
+Target architecture:
+
+Opportunity Synthesis
+        â†“
+Opportunity Prediction Record
+        â†“
+TIME
+        â†“
+Actual Outcome
+        â†“
+Prediction vs Reality
+        â†“
+Attribution
+        â†“
+Learning Ledger
+
+The original prediction must never be overwritten by hindsight.
+
+---
+
+# 23. OPPORTUNITY PREDICTION
+
+A future passive `OpportunityPrediction` model is planned.
+
+It should capture the state of EIOS at the time of prediction, including:
+
+- company
+- sector
+- prediction timestamp
+- market price
+- intrinsic value
+- fair value
+- catalyst score
+- expectation gap score
+- mispricing score
+- asymmetry score
+- opportunity score
+- confidence
+- decision
+- expected return
+- expected duration
+- downside / permanent-loss assumptions
+- evidence state
+- assumptions
+- disconfirming evidence
+- invalidation conditions
+- provenance
+
+It must NOT contain hindsight outcome fields.
+
+---
+
+# 24. OUTCOME / LEARNING PRINCIPLE
+
+Future outcome records should remain separate.
+
+They may eventually capture:
+
+- subsequent market price
+- realized return
+- realized time
+- business outcome
+- earnings outcome
+- catalyst outcome
+- expectation outcome
+- thesis validity
+- prediction accuracy
+
+But these fields must never be inserted into the original prediction record.
+
+---
+
+# 25. NEXT DEVELOPMENT PRIORITY
+
+The immediate next major development is NOT another scoring engine.
+
+Priority:
+
+## EIOS CONTINUOUS EXTERNAL INTELLIGENCE
+
+First build the infrastructure required for EIOS to periodically acquire
+new information.
+
+Initial components should include:
+
+1. Source Registry
+2. Data Acquisition Layer
+3. Scheduled Ingestion
+4. Event Classification
+5. Entity Mapping
+6. Duplicate Detection
+7. Observation Creation
+8. Evidence Creation
+9. Provenance Preservation
+10. Opportunity Update Trigger
+
+Only after this foundation is stable should we build the Learning Ledger.
+
+---
+
+# 26. SCHEDULING TARGET
+
+EIOS should eventually support periodic updates rather than requiring manual
+execution.
+
+Target concept:
+
+    Scheduler
+        â†“
+    Source Registry
+        â†“
+    Fetch New Information
+        â†“
+    Detect New / Changed Items
+        â†“
+    Process Intelligence
+        â†“
+    Update EIOS State
+
+Initial scheduling frequency can be configurable.
+
+Examples:
+
+- Hourly
+- Every 4 hours
+- Daily
+
+Different source classes may eventually use different frequencies.
+
+---
+
+# 27. AUTOMATIC REPOSITORY / PUBLISHING
+
+Automatic GitHub publishing is NOT yet part of the production pipeline.
+
+The preferred sequence is:
+
+External Intelligence
+        â†“
+Validated EIOS State
+        â†“
+Tests
+        â†“
+Generated Research Artifacts
+        â†“
+Optional Repository Publication
+
+Automatic repository writes should NOT be introduced before the ingestion
+and validation layers are stable.
+
+---
+
+# 28. ARCHITECTURAL RULES
+
+Continue following the EIOS Engineering Charter.
+
+Important rules:
+
+- Repository first
+- Do not redesign existing architecture unnecessarily
+- Prefer staged refactoring
+- Passive data models
+- Engines perform calculations
+- Preserve provenance
+- Preserve source evidence
+- No analytical fabrication
+- No automatic investment approval
+- No hidden mutation
+- Deterministic behavior where appropriate
+- Evidence before conviction
+- Kill switches remain authoritative
+- Do not lower institutional thresholds merely to make tests pass
+- Never overwrite historical predictions with hindsight
+- Preserve backward compatibility during migrations
+
+---
+
+# 29. CURRENT DEVELOPMENT PHASE
+
+## PHASE
+
+Opportunity Intelligence â†’ Continuous Intelligence Transition
+
+### Completed
+
+Discovery â†’ Opportunity Intake
+External Query Generation
+External Research
+External Retrieval
+Observation
+Evidence
+Signal
+Catalyst
+Expectation Gap
+Mispricing
+Asymmetry
+Evidence Qualification
+Opportunity Synthesis
+Opportunity Committee Routing
+Negative-path protection
+External â†’ Opportunity end-to-end integration
+
+### In Progress
+
+Continuous External Intelligence Architecture
+
+### Planned
+
+Scheduled Intelligence Ingestion
+Automatic Event Processing
+Opportunity Monitoring
+Prediction Records
+Outcome Records
+Attribution Engine
+Learning Ledger
+Adaptive Intelligence
+
+---
+
+# 30. NEXT SESSION â€” EXACT STARTING POINT
+
+Do NOT modify the existing Opportunity scoring engines yet.
+
+Start with repository inspection and design of:
+
+    modules/external_intelligence/
+
+for:
+
+    Source Registry
+    Scheduled Acquisition
+    New-Information Detection
+    Event Classification
+
+Then integrate the validated information into the existing:
+
+    Observation
+        â†“
+    Evidence
+        â†“
+    Signal
+        â†“
+    Opportunity
+
+architecture.
+
+The objective is to transform EIOS from a system that can perform research
+into a system that can continuously maintain current investment intelligence.
+
+---
+
+# END OF PROJECT STATE

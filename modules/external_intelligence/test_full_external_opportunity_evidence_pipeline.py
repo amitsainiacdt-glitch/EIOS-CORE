@@ -91,6 +91,14 @@ from modules.opportunity.evidence_engine import (
     OpportunityEvidenceEngine,
 )
 
+from modules.observation.observation_engine import (
+    ObservationEngine,
+)
+
+from modules.observation.observation_registry import (
+    ObservationRegistry,
+)
+
 
 # ==========================================================
 # MOCK SEARCH PROVIDER
@@ -171,6 +179,33 @@ class MockHTTPRetriever:
                 "Content-Type": "text/html"
             },
         )
+
+
+# ==========================================================
+# ISOLATED OBSERVATION PERSISTENCE
+# ==========================================================
+
+
+class InMemoryObservationPersistence:
+    """
+    Deterministic persistence boundary used by this integration test.
+
+    The production ObservationEngine deliberately loads historical
+    observations and rejects duplicates. The full integration test
+    must use isolated state so previous test runs cannot suppress
+    the synthetic observation required by this test.
+
+    No production persistence behavior is changed.
+    """
+
+    def __init__(self) -> None:
+        self._observations = []
+
+    def load(self):
+        return list(self._observations)
+
+    def save(self, observations) -> None:
+        self._observations = list(observations)
 
 
 # ==========================================================
@@ -297,10 +332,34 @@ def main() -> None:
 
     retriever = MockHTTPRetriever()
 
+    # ======================================================
+    # ISOLATED OBSERVATION STATE
+    # ======================================================
+    #
+    # ObservationEngine intentionally loads historical
+    # observations and rejects exact duplicates.
+    #
+    # This integration test must therefore use a fresh,
+    # deterministic observation boundary. We do NOT weaken
+    # production duplicate detection.
+    #
+
+    observation_registry = ObservationRegistry()
+
+    observation_persistence = (
+        InMemoryObservationPersistence()
+    )
+
+    observation_engine = ObservationEngine(
+        registry=observation_registry,
+        persistence=observation_persistence,
+    )
+
     orchestrator = (
         ExternalResearchOrchestrator(
             provider,
             retriever=retriever,
+            observation_engine=observation_engine,
         )
     )
 
@@ -810,7 +869,7 @@ def main() -> None:
 
     print(
         "EIOS FULL EXTERNAL → OPPORTUNITY "
-        "EVIDENCE PIPELINE : PASS"
+        "EVIDENCE PIPELINE : ALL TESTS PASSED"
     )
 
 

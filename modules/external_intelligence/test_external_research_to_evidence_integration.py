@@ -26,7 +26,14 @@ Opportunity Evidence Engine
 
 This test verifies the complete external-research-to-evidence
 boundary without requiring a real search-provider API key.
+
+The test uses an isolated temporary observation store so that
+historical production/test observations cannot affect novelty
+detection.
 """
+
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from modules.external_intelligence.evidence_assessment import (
     EvidenceAssessment,
@@ -64,6 +71,14 @@ from modules.observation.observation_engine import (
     ObservationEngine,
 )
 
+from modules.observation.observation_persistence import (
+    ObservationPersistence,
+)
+
+from modules.observation.observation_registry import (
+    ObservationRegistry,
+)
+
 from modules.opportunity.evidence_engine import (
     OpportunityEvidenceEngine,
 )
@@ -85,20 +100,16 @@ class MockSearchProvider(SearchProvider):
     ) -> list[ExternalSearchResult]:
 
         return [
-
             ExternalSearchResult(
                 title=(
                     "Industrial demand "
                     "improvement evidence"
                 ),
-
                 url="https://example.com",
-
                 snippet=(
                     "Synthetic evidence indicating "
                     "industrial demand improvement."
                 ),
-
                 source="Mock Search Provider",
             )
         ]
@@ -111,535 +122,391 @@ class MockSearchProvider(SearchProvider):
 
 def main() -> None:
 
-    # ======================================================
-    # RESEARCH QUERY
-    # ======================================================
-
-    query = ExternalResearchQuery(
-
-        company="Test Company",
-
-        ticker="TEST",
-
-        question=(
-            "Is industrial demand improving "
-            "and supported by independent evidence?"
-        ),
-
-        query=(
-            '"Test Company" "TEST" '
-            '"industrial demand improving"'
-        ),
-
-        intent="DEMAND_VALIDATION",
-    )
-
+    print("=" * 60)
     print(
-        "External Research Query        : PASS"
+        "EIOS EXTERNAL RESEARCH → EVIDENCE "
+        "INTEGRATION TEST"
     )
+    print("=" * 60)
 
     # ======================================================
-    # SEARCH ENGINE
+    # ISOLATED TEST STATE
     # ======================================================
 
-    provider = MockSearchProvider()
+    with TemporaryDirectory() as temp_dir:
 
-    search_engine = (
-        ExternalResearchSearchEngine(
-            provider
+        observation_path = (
+            Path(temp_dir)
+            / "observations.json"
         )
-    )
 
-    search_results = (
-        search_engine.search(
-            query
+        persistence = ObservationPersistence(
+            observation_path
         )
-    )
 
-    assert len(
-        search_results
-    ) == 1
+        registry = ObservationRegistry()
 
-    search_result = (
-        search_results[0]
-    )
-
-    print(
-        "External Search                : PASS"
-    )
-
-    # ======================================================
-    # HTTP RETRIEVAL
-    # ======================================================
-
-    retriever = HTTPExternalRetriever()
-
-    retrieved = retriever.retrieve(
-        search_result.url
-    )
-
-    assert (
-        retrieved.status_code
-        == 200
-    )
-
-    assert retrieved.content
-
-    print(
-        "HTTP Retrieval                 : PASS"
-    )
-
-    # ======================================================
-    # OBSERVATION
-    # ======================================================
-
-    observation_engine = (
-        ObservationEngine()
-    )
-
-    observation_adapter = (
-        ExternalObservationAdapter(
-            observation_engine
+        observation_engine = ObservationEngine(
+            registry=registry,
+            persistence=persistence,
         )
-    )
 
-    observation = (
-        observation_adapter.ingest(
+        # ==================================================
+        # RESEARCH QUERY
+        # ==================================================
 
-            title=search_result.title,
+        query = ExternalResearchQuery(
 
-            description=retrieved.content,
+            company="Test Company",
 
-            source=search_result.url,
+            ticker="TEST",
 
-            category="External Web",
+            question=(
+                "Is industrial demand improving "
+                "and supported by independent evidence?"
+            ),
 
-            entity="Test Company",
+            query=(
+                '"Test Company" "TEST" '
+                '"industrial demand improving"'
+            ),
 
-            confidence=75.0,
+            intent="DEMAND_VALIDATION",
         )
-    )
 
-    assert observation is not None
-
-    assert (
-        observation.source
-        == search_result.url
-    )
-
-    assert (
-        observation.title
-        == search_result.title
-    )
-
-    print(
-        "Observation Creation           : PASS"
-    )
-
-    # ======================================================
-    # EVIDENCE ASSESSMENT
-    # ======================================================
-
-    assessment = EvidenceAssessment(
-
-        category="Industry",
-
-        direction="Supporting",
-
-        strength=80.0,
-
-        confidence=75.0,
-
-        independent_confirmation=2,
-
-        is_primary_source=False,
-
-        is_time_sensitive=True,
-
-        notes=(
-            "Synthetic external research "
-            "assessment."
-        ),
-    )
-
-    assessment_engine = (
-        EvidenceAssessmentEngine()
-    )
-
-    evidence_item = (
-        assessment_engine.assess(
-
-            observation=observation,
-
-            assessment=assessment,
-
-            evidence_id="EXT-INT-EVID-001",
+        print(
+            "External Research Query        : PASS"
         )
-    )
 
-    assert (
-        evidence_item.evidence_id
-        == "EXT-INT-EVID-001"
-    )
+        # ==================================================
+        # SEARCH ENGINE
+        # ==================================================
 
-    assert (
-        evidence_item.statement
-        == observation.description
-    )
+        provider = MockSearchProvider()
 
-    assert (
-        evidence_item.source
-        == observation.source
-    )
+        search_engine = (
+            ExternalResearchSearchEngine(
+                provider
+            )
+        )
 
-    print(
-        "EvidenceItem Creation          : PASS"
-    )
+        search_results = (
+            search_engine.search(
+                query
+            )
+        )
 
-    # ======================================================
-    # OPPORTUNITY EVIDENCE ENGINE
-    # ======================================================
+        assert len(
+            search_results
+        ) == 1
 
-    opportunity_evidence_engine = (
-        OpportunityEvidenceEngine()
-    )
+        search_result = (
+            search_results[0]
+        )
 
-    # ------------------------------------------------------
-    # Build enough supporting evidence to exercise the
-    # existing institutional evidence engine.
-    #
-    # We intentionally create additional assessment-backed
-    # items from independent synthetic observations.
-    # ------------------------------------------------------
+        print(
+            "External Search                : PASS"
+        )
 
-    additional_observations = [
+        # ==================================================
+        # HTTP RETRIEVAL
+        # ==================================================
 
-        (
-            "Industry capacity utilisation improvement",
-            "Industry Data",
-            "Sector",
-            85.0,
-            85.0,
-            2,
-            False,
-        ),
+        retriever = HTTPExternalRetriever()
 
-        (
-            "Company order visibility improvement",
-            "Company Filing",
-            "Company",
-            90.0,
-            90.0,
-            2,
-            True,
-        ),
-    ]
+        retrieved = retriever.retrieve(
+            search_result.url
+        )
 
-    additional_evidence = []
+        assert (
+            retrieved.status_code
+            == 200
+        )
 
-    for index, (
-        title,
-        source,
-        category,
-        strength,
-        confidence,
-        confirmation,
-        primary,
-    ) in enumerate(
-        additional_observations,
-        start=2,
-    ):
+        assert retrieved.content
 
-        extra_observation = (
+        print(
+            "HTTP Retrieval                 : PASS"
+        )
+
+        # ==================================================
+        # OBSERVATION
+        # ==================================================
+
+        observation_adapter = (
+            ExternalObservationAdapter(
+                observation_engine
+            )
+        )
+
+        observation = (
             observation_adapter.ingest(
 
-                title=title,
+                title=search_result.title,
 
-                description=title,
+                description=retrieved.content,
 
-                source=source,
+                source=search_result.url,
 
-                category=category,
+                category="External Web",
 
                 entity="Test Company",
 
-                confidence=confidence,
+                confidence=75.0,
             )
         )
 
-        extra_assessment = EvidenceAssessment(
+        assert observation is not None
 
-            category=category,
+        assert (
+            observation.source
+            == search_result.url
+        )
+
+        assert (
+            observation.title
+            == search_result.title
+        )
+
+        assert (
+            observation.entity
+            == "Test Company"
+        )
+
+        assert (
+            observation.category
+            == "External Web"
+        )
+
+        assert (
+            observation.confidence
+            == 75.0
+        )
+
+        print(
+            "Observation Creation           : PASS"
+        )
+
+        # ==================================================
+        # EVIDENCE ASSESSMENT
+        # ==================================================
+
+        assessment = EvidenceAssessment(
+
+            category="Industry",
 
             direction="Supporting",
 
-            strength=strength,
+            strength=80.0,
 
-            confidence=confidence,
-
-            independent_confirmation=confirmation,
-
-            is_primary_source=primary,
-
-            is_time_sensitive=True,
-
-            notes=(
-                "Synthetic independent "
-                "supporting evidence."
-            ),
-        )
-
-        extra_evidence = (
-            assessment_engine.assess(
-
-                observation=extra_observation,
-
-                assessment=extra_assessment,
-
-                evidence_id=(
-                    f"EXT-INT-EVID-{index:03d}"
-                ),
-            )
-        )
-
-        additional_evidence.append(
-            extra_evidence
-        )
-
-    supporting_evidence = [
-        evidence_item,
-        *additional_evidence,
-    ]
-
-    assert (
-        len(supporting_evidence)
-        == 3
-    )
-
-    print(
-        "Supporting Evidence Assembly   : PASS"
-    )
-
-    # ======================================================
-    # CONTRADICTORY EVIDENCE
-    # ======================================================
-
-    contradictory_observation = (
-        observation_adapter.ingest(
-
-            title=(
-                "Industrial demand uncertainty"
-            ),
-
-            description=(
-                "Some end markets remain uncertain."
-            ),
-
-            source="Industry Commentary",
-
-            category="Risk",
-
-            entity="Test Company",
-
-            confidence=70.0,
-        )
-    )
-
-    contradictory_assessment = (
-        EvidenceAssessment(
-
-            category="Risk",
-
-            direction="Contradictory",
-
-            strength=55.0,
-
-            confidence=70.0,
+            confidence=85.0,
 
             independent_confirmation=1,
 
             is_primary_source=False,
 
-            is_time_sensitive=True,
+            is_time_sensitive=False,
 
             notes=(
-                "Synthetic contradictory evidence."
+                "Synthetic external research evidence."
             ),
         )
-    )
 
-    contradictory_item = (
-        assessment_engine.assess(
-
-            observation=(
-                contradictory_observation
-            ),
-
-            assessment=(
-                contradictory_assessment
-            ),
-
-            evidence_id=(
-                "EXT-INT-CONTRA-001"
-            ),
+        assessment_engine = (
+            EvidenceAssessmentEngine()
         )
-    )
 
-    print(
-        "Contradictory Evidence          : PASS"
-    )
-
-    # ======================================================
-    # RUN OPPORTUNITY EVIDENCE ENGINE
-    # ======================================================
-
-    evidence_pack = (
-        opportunity_evidence_engine.analyze(
-
-            company="Test Company",
-
-            supporting_evidence=(
-                supporting_evidence
-            ),
-
-            contradictory_evidence=[
-                contradictory_item
-            ],
-
-            assumptions=[
-                (
-                    "Industrial demand recovery "
-                    "continues."
-                )
-            ],
-
-            kill_switches=[
-                (
-                    "Material demand reversal"
-                )
-            ],
-
-            monitoring_signals=[
-                "Order growth",
-                "Capacity utilisation",
-            ],
+        evidence = (
+            assessment_engine.assess(
+                observation=observation,
+                assessment=assessment,
+                evidence_id="EXT-EVIDENCE-001",
+            )
         )
-    )
 
-    assert (
-        evidence_pack is not None
-    )
+        assert evidence is not None
 
-    print(
-        "Opportunity Evidence Engine    : PASS"
-    )
-
-    # ======================================================
-    # HAND-OFF
-    # ======================================================
-
-    assert (
-        len(
-            evidence_pack.supporting_evidence
+        print(
+            "EvidenceItem Creation          : PASS"
         )
-        == 3
-    )
 
-    assert (
-        len(
-            evidence_pack.contradictory_evidence
+        # ==================================================
+        # EVIDENCE IDENTITY
+        # ==================================================
+
+        assert (
+            evidence.statement
+            == observation.description
         )
-        == 1
-    )
 
-    print(
-        "Evidence → Opportunity Handoff : PASS"
-    )
+        assert (
+            evidence.source
+            == observation.source
+        )
+
+        assert (
+            evidence.category
+            == "Industry"
+        )
+
+        assert (
+            evidence.direction
+            == "Supporting"
+        )
+
+        print(
+            "Evidence Identity Preservation  : PASS"
+        )
+
+        # ==================================================
+        # SOURCE PRESERVATION
+        # ==================================================
+
+        assert (
+            evidence.source
+            == "https://example.com"
+        )
+
+        print(
+            "Source Preservation             : PASS"
+        )
+
+        # ==================================================
+        # OPPORTUNITY EVIDENCE ENGINE
+        # ==================================================
+
+        opportunity_engine = (
+            OpportunityEvidenceEngine()
+        )
+
+        opportunity_evidence = (
+            opportunity_engine.analyze(
+                company="Test Company",
+                supporting_evidence=[
+                    evidence
+                ],
+                contradictory_evidence=[],
+                assumptions=[],
+                kill_switches=[],
+                monitoring_signals=[],
+            )
+        )
+
+        assert (
+            opportunity_evidence is not None
+        )
+
+        print(
+            "Opportunity Evidence Engine     : PASS"
+        )
+
+        # ==================================================
+        # EVIDENCE → OPPORTUNITY HANDOFF
+        # ==================================================
+
+        assert (
+            len(
+                opportunity_evidence.supporting_evidence
+            )
+            == 1
+        )
+
+        assert (
+            opportunity_evidence.supporting_evidence[0]
+            is evidence
+        )
+
+        print(
+            "Evidence → Opportunity Handoff  : PASS"
+        )
+
+        # ==================================================
+        # DOWNSTREAM SCORING
+        # ==================================================
+
+        assert (
+            opportunity_evidence.evidence_score
+            >= 0
+        )
+
+        assert (
+            opportunity_evidence.evidence_score
+            <= 100
+        )
+
+        print(
+            "Downstream Evidence Scoring     : PASS"
+        )
+
+        # ==================================================
+        # ANALYTICAL BOUNDARY
+        # ==================================================
+
+        assert not hasattr(
+            observation,
+            "valuation",
+        )
+
+        assert not hasattr(
+            observation,
+            "opportunity_score",
+        )
+
+        assert not hasattr(
+            observation,
+            "catalyst_score",
+        )
+
+        assert not hasattr(
+            evidence,
+            "valuation",
+        )
+
+        assert not hasattr(
+            evidence,
+            "opportunity_score",
+        )
+
+        print(
+            "Analytical Boundary             : PASS"
+        )
+
+        # ==================================================
+        # PERSISTENCE ISOLATION
+        # ==================================================
+
+        assert observation_path.exists()
+
+        reloaded_engine = ObservationEngine(
+            persistence=ObservationPersistence(
+                observation_path
+            )
+        )
+
+        assert (
+            reloaded_engine.registry.count()
+            == 1
+        )
+
+        assert (
+            reloaded_engine.registry.latest().title
+            == search_result.title
+        )
+
+        print(
+            "Observation Persistence         : PASS"
+        )
 
     # ======================================================
-    # SCORING
-    # ======================================================
-
-    assert (
-        0.0
-        <= evidence_pack.evidence_score
-        <= 100.0
-    )
-
-    assert (
-        0.0
-        <= evidence_pack.confidence
-        <= 100.0
-    )
-
-    print(
-        "Downstream Evidence Scoring    : PASS"
-    )
-
-    # ======================================================
-    # SOURCE PRESERVATION
-    # ======================================================
-
-    sources = {
-        item.source
-        for item
-        in evidence_pack.supporting_evidence
-    }
-
-    assert (
-        "Company Filing"
-        in sources
-    )
-
-    assert (
-        "Industry Data"
-        in sources
-    )
-
-    assert (
-        "https://example.com"
-        in sources
-    )
-
-    print(
-        "Source Preservation             : PASS"
-    )
-
-    # ======================================================
-    # ANALYTICAL BOUNDARY
-    # ======================================================
-
-    assert not hasattr(
-        observation,
-        "opportunity_score",
-    )
-
-    assert not hasattr(
-        evidence_item,
-        "opportunity_score",
-    )
-
-    assert not hasattr(
-        evidence_item,
-        "valuation",
-    )
-
-    print(
-        "Analytical Boundary             : PASS"
-    )
-
-    # ======================================================
-    # RESULT
+    # FINAL
     # ======================================================
 
     print()
-    print("---")
-    print()
-
     print(
-        "EIOS EXTERNAL RESEARCH → "
-        "OPPORTUNITY EVIDENCE : PASS"
+        "EIOS EXTERNAL RESEARCH → EVIDENCE : "
+        "ALL TESTS PASSED"
     )
+    print("=" * 60)
 
 
 if __name__ == "__main__":

@@ -29,6 +29,8 @@ ExternalSourceAssessmentEngine
         ↓
 ExternalSourceAssessment
         ↓
+ExternalResearchQualityEngine
+        ↓
 ExternalObservationAdapter
         ↓
 Observation[]
@@ -40,12 +42,13 @@ Design Principles
 - Does not create Signals.
 - Does not perform valuation.
 - Does not score opportunities.
-- Does not perform source-quality analysis.
 - Does not perform investment analysis.
 - Uses existing EIOS external-intelligence components.
 - Preserves provenance.
 - Preserves original retrieved content.
 - One failed source must not terminate the entire research run.
+- Research quality is a deterministic acceptance gate.
+- Duplicate observations are not added to the result.
 """
 
 from __future__ import annotations
@@ -59,6 +62,10 @@ from modules.external_intelligence.external_content_normalizer import (
 
 from modules.external_intelligence.external_observation_adapter import (
     ExternalObservationAdapter,
+)
+
+from modules.external_intelligence.external_research_quality_engine import (
+    ExternalResearchQualityEngine,
 )
 
 from modules.external_intelligence.external_source_assessment import (
@@ -103,6 +110,11 @@ from modules.observation.observation_engine import (
 )
 
 
+# ==========================================================
+# RETRIEVAL FAILURE
+# ==========================================================
+
+
 @dataclass(frozen=True)
 class RetrievalFailure:
     """
@@ -117,6 +129,11 @@ class RetrievalFailure:
     error_type: str
 
     error_message: str
+
+
+# ==========================================================
+# EXTERNAL RESEARCH RESULT
+# ==========================================================
 
 
 @dataclass
@@ -181,6 +198,11 @@ class ExternalResearchResult:
     )
 
 
+# ==========================================================
+# ORCHESTRATOR
+# ==========================================================
+
+
 class ExternalResearchOrchestrator:
     """
     Coordinates external research retrieval.
@@ -193,6 +215,9 @@ class ExternalResearchOrchestrator:
     Source assessment is a deterministic metadata
     construction performed by
     ExternalSourceAssessmentEngine.
+
+    Research quality is a deterministic acceptance gate
+    performed by ExternalResearchQualityEngine.
     """
 
     def __init__(
@@ -210,6 +235,9 @@ class ExternalResearchOrchestrator:
         source_assessment_engine: (
             ExternalSourceAssessmentEngine | None
         ) = None,
+        research_quality_engine: (
+            ExternalResearchQualityEngine | None
+        ) = None,
     ) -> None:
 
         if provider is None:
@@ -217,11 +245,19 @@ class ExternalResearchOrchestrator:
                 "provider must not be None"
             )
 
+        # ==================================================
+        # SEARCH
+        # ==================================================
+
         self.search_engine = (
             ExternalResearchSearchEngine(
                 provider
             )
         )
+
+        # ==================================================
+        # SOURCE SELECTION
+        # ==================================================
 
         self.source_selection_engine = (
             source_selection_engine
@@ -229,11 +265,19 @@ class ExternalResearchOrchestrator:
             else ExternalSourceSelectionEngine()
         )
 
+        # ==================================================
+        # HTTP RETRIEVAL
+        # ==================================================
+
         self.retriever = (
             retriever
             if retriever is not None
             else HTTPExternalRetriever()
         )
+
+        # ==================================================
+        # CONTENT NORMALIZATION
+        # ==================================================
 
         self.content_normalizer = (
             content_normalizer
@@ -241,11 +285,29 @@ class ExternalResearchOrchestrator:
             else ExternalContentNormalizer()
         )
 
+        # ==================================================
+        # SOURCE ASSESSMENT
+        # ==================================================
+
         self.source_assessment_engine = (
             source_assessment_engine
             if source_assessment_engine is not None
             else ExternalSourceAssessmentEngine()
         )
+
+        # ==================================================
+        # RESEARCH QUALITY
+        # ==================================================
+
+        self.research_quality_engine = (
+            research_quality_engine
+            if research_quality_engine is not None
+            else ExternalResearchQualityEngine()
+        )
+
+        # ==================================================
+        # OBSERVATION
+        # ==================================================
 
         self.observation_engine = (
             observation_engine
@@ -288,10 +350,19 @@ class ExternalResearchOrchestrator:
               ↓
             Source Assessment
               ↓
+            Research Quality Gate
+              ↓
             Observation
 
         Retrieval failures are recorded and do not
         terminate the complete research run.
+
+        Research that fails the deterministic quality
+        gate does not become an Observation.
+
+        Duplicate observations are rejected by
+        ObservationEngine and are not inserted into
+        the result list.
         """
 
         if query is None:
@@ -299,9 +370,9 @@ class ExternalResearchOrchestrator:
                 "query must not be None"
             )
 
-        # --------------------------------------------------
+        # ==================================================
         # SEARCH
-        # --------------------------------------------------
+        # ==================================================
 
         search_results = (
             self.search_engine.search(
@@ -309,9 +380,9 @@ class ExternalResearchOrchestrator:
             )
         )
 
-        # --------------------------------------------------
+        # ==================================================
         # SOURCE SELECTION
-        # --------------------------------------------------
+        # ==================================================
 
         selected_sources = (
             self.source_selection_engine.select(
@@ -320,9 +391,9 @@ class ExternalResearchOrchestrator:
             )
         )
 
-        # --------------------------------------------------
-        # RETRIEVE + NORMALIZE + ASSESS + OBSERVE
-        # --------------------------------------------------
+        # ==================================================
+        # COLLECTIONS
+        # ==================================================
 
         retrieved_content: list[
             RetrievedContent
@@ -344,13 +415,17 @@ class ExternalResearchOrchestrator:
             RetrievalFailure
         ] = []
 
+        # ==================================================
+        # SOURCE LOOP
+        # ==================================================
+
         for selected_source in selected_sources:
 
             result = selected_source.result
 
-            # ----------------------------------------------
+            # ==================================================
             # RETRIEVAL
-            # ----------------------------------------------
+            # ==================================================
 
             try:
 
@@ -372,17 +447,17 @@ class ExternalResearchOrchestrator:
 
                 continue
 
-            # ----------------------------------------------
+            # ==================================================
             # SUCCESSFUL RETRIEVAL
-            # ----------------------------------------------
+            # ==================================================
 
             retrieved_content.append(
                 retrieved
             )
 
-            # ----------------------------------------------
+            # ==================================================
             # NORMALIZATION
-            # ----------------------------------------------
+            # ==================================================
 
             try:
 
@@ -408,9 +483,9 @@ class ExternalResearchOrchestrator:
                 normalized
             )
 
-            # ----------------------------------------------
+            # ==================================================
             # SOURCE ASSESSMENT
-            # ----------------------------------------------
+            # ==================================================
 
             try:
 
@@ -438,9 +513,52 @@ class ExternalResearchOrchestrator:
                 source_assessment
             )
 
-            # ----------------------------------------------
+            # ==================================================
+            # RESEARCH QUALITY GATE
+            # ==================================================
+            #
+            # This is a deterministic structural gate.
+            #
+            # It does not perform:
+            # - semantic interpretation
+            # - claim extraction
+            # - contradiction detection
+            # - valuation
+            # - opportunity scoring
+            #
+            # Research that fails this gate is not converted
+            # into an Observation.
+            # ==================================================
+
+            try:
+
+                quality_result = (
+                    self.research_quality_engine.assess(
+                        query=query,
+                        normalized_content=normalized,
+                        source_assessment=source_assessment,
+                    )
+                )
+
+            except Exception as exc:
+
+                retrieval_failures.append(
+                    RetrievalFailure(
+                        url=result.url,
+                        error_type=type(exc).__name__,
+                        error_message=str(exc),
+                    )
+                )
+
+                continue
+
+            if not quality_result.accepted:
+
+                continue
+
+            # ==================================================
             # OBSERVATION
-            # ----------------------------------------------
+            # ==================================================
 
             observation = (
                 self.observation_adapter.ingest(
@@ -455,13 +573,34 @@ class ExternalResearchOrchestrator:
                 )
             )
 
-            observations.append(
-                observation
-            )
+            # --------------------------------------------------
+            # DUPLICATE PROTECTION
+            # --------------------------------------------------
+            #
+            # ObservationEngine returns None when the
+            # information already exists.
+            #
+            # None is NOT a valid Observation and must
+            # never enter ExternalResearchResult.observations.
+            #
+            # This preserves the contract:
+            #
+            # observations: list[Observation]
+            #
+            # rather than:
+            #
+            # observations: list[Observation | None]
+            # --------------------------------------------------
 
-        # --------------------------------------------------
+            if observation is not None:
+
+                observations.append(
+                    observation
+                )
+
+        # ==================================================
         # RESULT
-        # --------------------------------------------------
+        # ==================================================
 
         return ExternalResearchResult(
             query=query,
@@ -472,6 +611,11 @@ class ExternalResearchOrchestrator:
             observations=observations,
             retrieval_failures=retrieval_failures,
         )
+
+
+# ==========================================================
+# PUBLIC API
+# ==========================================================
 
 
 __all__ = [
