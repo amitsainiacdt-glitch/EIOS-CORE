@@ -3496,3 +3496,28 @@ Audit records remain passive operational output. They are not written into the
 observation store or published into Evidence, Assumptions, Knowledge, Signals,
 Catalysts, Expectation Gaps, Mispricing, or Opportunities. Deterministic test
 coverage uses temporary paths, a fake controller, and a hard HTTP request guard.
+
+---
+
+# 45. HISTORICAL COMPARISON AUDIT READER AND CYCLE SUMMARY
+
+Historical comparison audit records can now be read through a strict,
+schema-version-aware, read-only parser. Parsed records use immutable typed
+models for observation references, selection facts, and conservative comparison
+fields. Invalid JSON, missing required fields, invalid enum values, and
+unsupported schema versions fail with the source line number.
+
+HistoricalComparisonCycleSummarizer produces count-only facts for one exact
+runtime timestamp: selected, no-match, ambiguous, comparison, detected-change,
+selection-basis, and comparison-type counts. Ambiguity is identified from the
+recorded candidate count, not inferred from financial or unstructured content.
+
+A read-only command summarizes an explicitly selected cycle or the latest
+appended cycle:
+
+    python -m scripts.summarize_historical_comparison_audit
+
+The command uses EIOS_HISTORICAL_COMPARISON_AUDIT_PATH by default and accepts
+--path and --recorded-at overrides. It does not modify the audit report,
+observation store, ResearchContext, IntelligenceMesh, Evidence, Signals,
+Catalysts, Expectation Gaps, Mispricing, Opportunities, or investment decisions.
