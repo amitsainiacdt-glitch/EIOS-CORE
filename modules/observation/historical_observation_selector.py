@@ -12,6 +12,10 @@ Selection Policy
 ----------------
 - Entity and category must match after conservative normalization.
 - A candidate must have a timestamp strictly earlier than current.
+- Exact provenance job ID matches are preferred.
+- Matching research intent is used when no job ID match exists.
+- Provenance-free legacy candidates are the final fallback.
+- Conflicting populated job IDs are never comparable.
 - The uniquely most recent eligible observation is selected.
 - A tie at the most recent timestamp is treated as ambiguous.
 - Title, description, source, confidence, and financial meaning are
@@ -23,9 +27,18 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 from datetime import datetime
+from enum import Enum
 from typing import Iterable
 
 from .observation import Observation
+
+
+class HistoricalSelectionBasis(str, Enum):
+    """Provenance boundary used to select historical candidates."""
+
+    JOB_ID = "JOB_ID"
+    RESEARCH_INTENT = "RESEARCH_INTENT"
+    LEGACY_ENTITY_CATEGORY = "LEGACY_ENTITY_CATEGORY"
 
 
 @dataclass(frozen=True)
@@ -36,6 +49,7 @@ class HistoricalObservationSelection:
     selected_observation: Observation | None
     eligible_count: int
     reason: str
+    selection_basis: HistoricalSelectionBasis | None = None
 
 
 class HistoricalObservationSelector:
@@ -82,7 +96,18 @@ class HistoricalObservationSelector:
                 ),
             )
 
-        eligible = []
+        job_matches = []
+        intent_matches = []
+        legacy_matches = []
+
+        current_job_id = self._provenance_value(
+            current_observation,
+            "job_id",
+        )
+        current_intent = self._provenance_value(
+            current_observation,
+            "research_intent",
+        )
 
         for candidate in observations:
             if candidate is None or candidate is current_observation:
@@ -108,7 +133,44 @@ class HistoricalObservationSelector:
             if self._normalize(candidate.category) != current_category:
                 continue
 
-            eligible.append(candidate)
+            candidate_job_id = self._provenance_value(
+                candidate,
+                "job_id",
+            )
+            candidate_intent = self._provenance_value(
+                candidate,
+                "research_intent",
+            )
+
+            if (
+                current_job_id
+                and candidate_job_id
+                and current_job_id != candidate_job_id
+            ):
+                continue
+
+            if (
+                current_job_id
+                and candidate_job_id == current_job_id
+            ):
+                job_matches.append(candidate)
+                continue
+
+            if (
+                current_intent
+                and candidate_intent == current_intent
+            ):
+                intent_matches.append(candidate)
+                continue
+
+            if candidate.provenance is None:
+                legacy_matches.append(candidate)
+
+        eligible, selection_basis = self._preferred_candidates(
+            job_matches=job_matches,
+            intent_matches=intent_matches,
+            legacy_matches=legacy_matches,
+        )
 
         if not eligible:
             return HistoricalObservationSelection(
@@ -117,7 +179,8 @@ class HistoricalObservationSelector:
                 eligible_count=0,
                 reason=(
                     "No strictly earlier observation matches "
-                    "the current entity and category."
+                    "the current entity, category, and provenance "
+                    "selection policy."
                 ),
             )
 
@@ -141,6 +204,7 @@ class HistoricalObservationSelector:
                     "Historical selection is ambiguous because "
                     "multiple latest candidates share a timestamp."
                 ),
+                selection_basis=selection_basis,
             )
 
         return HistoricalObservationSelection(
@@ -149,8 +213,51 @@ class HistoricalObservationSelector:
             eligible_count=len(eligible),
             reason=(
                 "Selected the uniquely most recent strictly earlier "
-                "observation with matching entity and category."
+                "observation from the preferred provenance boundary."
             ),
+            selection_basis=selection_basis,
+        )
+
+    @staticmethod
+    def _preferred_candidates(
+        *,
+        job_matches: list[Observation],
+        intent_matches: list[Observation],
+        legacy_matches: list[Observation],
+    ) -> tuple[
+        list[Observation],
+        HistoricalSelectionBasis | None,
+    ]:
+        if job_matches:
+            return job_matches, HistoricalSelectionBasis.JOB_ID
+
+        if intent_matches:
+            return (
+                intent_matches,
+                HistoricalSelectionBasis.RESEARCH_INTENT,
+            )
+
+        if legacy_matches:
+            return (
+                legacy_matches,
+                HistoricalSelectionBasis.LEGACY_ENTITY_CATEGORY,
+            )
+
+        return [], None
+
+    @classmethod
+    def _provenance_value(
+        cls,
+        observation: Observation,
+        field: str,
+    ) -> str:
+        provenance = observation.provenance
+
+        if provenance is None:
+            return ""
+
+        return cls._normalize(
+            getattr(provenance, field, None)
         )
 
     @staticmethod
@@ -168,4 +275,5 @@ class HistoricalObservationSelector:
 __all__ = [
     "HistoricalObservationSelection",
     "HistoricalObservationSelector",
+    "HistoricalSelectionBasis",
 ]

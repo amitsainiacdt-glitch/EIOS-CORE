@@ -3432,3 +3432,24 @@ network retrieval. The checkpoint test places the orchestrator behind a hard
 HTTP request guard, uses fake search/retrieval services, and verifies that a
 sentinel production store remains byte-for-byte unchanged while the isolated
 test store is written.
+
+---
+
+# 42. PROVENANCE-AWARE HISTORICAL CANDIDATE SELECTION
+
+HistoricalObservationSelector now ranks comparable history using passive
+ObservationProvenance when available:
+
+1. Exact normalized job ID.
+2. Exact normalized research intent when no job match exists.
+3. Entity/category fallback using provenance-free legacy observations only.
+
+Populated conflicting job IDs are never comparable, even when research intent
+matches. Provenance priority takes precedence over recency; recency selects only
+within the preferred candidate boundary. Existing timestamp, entity/category,
+and ambiguity protections remain unchanged.
+
+HistoricalObservationSelection preserves the selected boundary as
+HistoricalSelectionBasis. Legacy observations remain supported without
+migration. No Evidence, Signal, Catalyst, Expectation Gap, Mispricing, or
+Opportunity behavior is changed.
