@@ -3376,3 +3376,34 @@ The default remains disabled, preserving existing runtime behavior.
 The integration does not publish comparisons to ResearchContext or
 IntelligenceMesh and does not create Evidence, Signals, Catalysts,
 Expectation Gaps, Mispricing, or Opportunities.
+
+---
+
+# 40. RESEARCH RUNTIME OPERATIONAL BOOTSTRAP
+
+External research now has a safety-first one-cycle launcher:
+
+    python -m scripts.run_external_research_once
+
+The default command performs configuration validation only and makes no
+external API calls. Live execution requires the explicit flag:
+
+    --execute
+
+Configuration is provided through:
+
+    TAVILY_API_KEY
+    EIOS_OBSERVATION_PATH
+    EIOS_ENABLE_HISTORICAL_COMPARISON
+
+The bootstrap validates API configuration, the requests dependency,
+observation storage path, production research jobs, and unique job IDs before
+constructing ResearchRuntime. Runtime imports remain lazy so validation can
+report missing dependencies without failing at module import time.
+
+Validation inspects observation-path safety without creating directories or
+files. Runtime construction registers the same immutable job snapshot that
+passed validation, so a stateful provider cannot substitute unvalidated jobs.
+
+Historical comparison remains default-off. The launcher does not modify
+Evidence, Signals, Catalysts, Expectation Gaps, Mispricing, or Opportunities.
