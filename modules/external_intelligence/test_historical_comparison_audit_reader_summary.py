@@ -3,7 +3,8 @@
 import io
 import json
 from contextlib import redirect_stdout
-from datetime import datetime
+from dataclasses import replace
+from datetime import datetime, timezone
 from hashlib import sha256
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -13,6 +14,9 @@ from modules.external_intelligence.historical_comparison_audit_reader import (
 )
 from modules.external_intelligence.historical_comparison_cycle_summarizer import (
     HistoricalComparisonCycleSummarizer,
+)
+from modules.external_intelligence.historical_comparison_audit_timeline_builder import (
+    HistoricalComparisonAuditTimelineBuilder,
 )
 from modules.observation.historical_comparison import ComparisonType
 from modules.observation.historical_observation_selector import (
@@ -168,7 +172,53 @@ def validate_command(path: Path) -> None:
     assert "Records: 1" in rendered
     assert "Legacy selections: 1" in rendered
     assert "No financial interpretation was performed." in rendered
+
+    output = io.StringIO()
+    with redirect_stdout(output):
+        result = summary_main(
+            ["--path", str(path), "--all-cycles", "--json"]
+        )
+
+    assert result == 0
+    timeline = json.loads(output.getvalue())
+    assert timeline["schema_version"] == 1
+    assert timeline["cycle_count"] == 2
+    assert timeline["record_count"] == 4
+    assert timeline["financial_interpretation_performed"] is False
+    assert [
+        cycle["recorded_at"]
+        for cycle in timeline["cycles"]
+    ] == [CYCLE_ONE.isoformat(), CYCLE_TWO.isoformat()]
+    assert timeline["cycles"][0]["record_count"] == 3
+    assert timeline["cycles"][1]["legacy_selection_count"] == 1
     assert path.read_bytes() == before
+
+
+def validate_timeline(records) -> None:
+    timeline = HistoricalComparisonAuditTimelineBuilder().build(
+        reversed(records)
+    )
+    assert timeline.cycle_count == 2
+    assert timeline.record_count == 4
+    assert [cycle.recorded_at for cycle in timeline.cycles] == [
+        CYCLE_ONE,
+        CYCLE_TWO,
+    ]
+
+    assert HistoricalComparisonAuditTimelineBuilder().build([]).cycles == ()
+
+    mixed = [
+        records[0],
+        replace(
+            records[-1],
+            recorded_at=CYCLE_TWO.replace(tzinfo=timezone.utc),
+        ),
+    ]
+    try:
+        HistoricalComparisonAuditTimelineBuilder().build(mixed)
+        raise AssertionError("Mixed timezone-awareness was accepted")
+    except ValueError as exc:
+        assert "timezone" in str(exc).casefold()
 
 
 def validate_failures(root: Path) -> None:
@@ -219,6 +269,9 @@ def main() -> None:
         path = root / "historical.jsonl"
         write_records(path)
         validate_reading_and_summary(path)
+        validate_timeline(
+            HistoricalComparisonAuditReader(path).read_all()
+        )
         validate_command(path)
         validate_failures(root)
 

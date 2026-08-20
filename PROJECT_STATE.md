@@ -3521,3 +3521,27 @@ The command uses EIOS_HISTORICAL_COMPARISON_AUDIT_PATH by default and accepts
 --path and --recorded-at overrides. It does not modify the audit report,
 observation store, ResearchContext, IntelligenceMesh, Evidence, Signals,
 Catalysts, Expectation Gaps, Mispricing, Opportunities, or investment decisions.
+
+---
+
+# 46. READ-ONLY MULTI-CYCLE HISTORICAL COMPARISON TIMELINE
+
+Historical comparison cycle summaries can now be grouped into an immutable,
+chronologically ordered audit timeline. Exact recorded-at timestamps remain the
+cycle boundary. The timeline exposes cycle and record totals while preserving
+the existing count-only summary for every cycle.
+
+The audit summary command now supports:
+
+    --all-cycles
+    --json
+
+All-cycle output is ordered chronologically. JSON output uses a stable
+schema-version-one envelope and explicitly records that no financial
+interpretation was performed. Existing latest-cycle and --recorded-at behavior
+remains unchanged.
+
+The timeline rejects mixed naive and timezone-aware cycle timestamps rather
+than assuming a timezone policy. It does not modify the audit report,
+observation store, ResearchContext, IntelligenceMesh, Evidence, Signals,
+Catalysts, Expectation Gaps, Mispricing, Opportunities, or investment decisions.
