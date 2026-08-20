@@ -3109,3 +3109,192 @@ into a system that can continuously maintain current investment intelligence.
 ---
 
 # END OF PROJECT STATE
+@'
+
+---
+
+# 31. HISTORICAL COMPARISON FOUNDATION
+
+A Historical Comparison foundation has now been implemented under:
+
+    modules/observation/
+
+Components:
+
+    historical_comparison.py
+    historical_comparison_engine.py
+    test_historical_comparison_engine.py
+
+The purpose is to distinguish historical comparison from observation novelty.
+
+ObservationNoveltyEngine answers:
+
+    "Have I seen this observation before?"
+
+HistoricalComparisonEngine answers:
+
+    "How does the current observation differ from the historical observation?"
+
+The HistoricalComparison model preserves:
+
+- Current observation
+- Historical observation
+- Comparison type
+- Change detection status
+- Change direction
+- Materiality
+- Optional quantitative delta
+- Provenance
+
+The current foundation deliberately does NOT infer:
+
+- Positive or negative direction from arbitrary prose
+- Financial materiality from arbitrary prose
+- Quantitative deltas where structured numeric data does not exist
+
+The existing Observation model remains unchanged.
+
+---
+
+# 32. HISTORICAL COMPARISON VALIDATION
+
+HistoricalComparisonEngine has been independently validated.
+
+Latest test result:
+
+    EIOS HISTORICAL COMPARISON ENGINE TEST
+
+    Test 1  — Identical Observations       : PASS
+    Test 2  — Timestamp Only               : PASS
+    Test 3  — Changed Information          : PASS
+    Test 4  — Independent Source            : PASS
+    Test 5  — No Fabricated Direction       : PASS
+    Test 6  — Historical Preservation       : PASS
+    Test 7  — Current Preservation           : PASS
+    Test 8  — Observation Immutability      : PASS
+    Test 9  — Deterministic Comparison      : PASS
+    Test 10 — Invalid Input Protection      : PASS
+    Test 11 — Provenance Preservation        : PASS
+    Test 12 — Materiality Not Fabricated    : PASS
+
+    HISTORICAL COMPARISON ENGINE :
+    ALL TESTS PASSED
+
+Total:
+
+    12 / 12 PASS
+
+---
+
+# 33. HISTORICAL COMPARISON ARCHITECTURAL STATUS
+
+HistoricalComparisonEngine is currently a foundation component.
+
+It has NOT yet been connected to:
+
+    Evidence
+    Signal
+    Catalyst
+    Expectation Gap
+    Mispricing
+    Opportunity
+
+This is intentional.
+
+The next architectural decision is to determine where historical comparison
+belongs in the existing EIOS intelligence flow.
+
+Candidate boundary:
+
+    External Research
+            ↓
+        Observation
+            ↓
+        Novelty
+            ↓
+    Historical Comparison
+            ↓
+         Evidence
+            ↓
+          Signal
+            ↓
+        Catalyst
+            ↓
+    Expectation Gap
+            ↓
+       Mispricing
+            ↓
+       Opportunity
+
+This flow must NOT be adopted automatically.
+
+The existing Continuous External Intelligence architecture must first be
+audited to determine whether historical comparison functionality already
+exists elsewhere and whether integration would duplicate existing
+responsibilities.
+
+---
+
+# 34. NEXT DEVELOPMENT STEP
+
+Before creating additional production intelligence components:
+
+1. Audit existing Historical Novelty functionality.
+2. Audit ResearchRuntime and its supporting infrastructure.
+3. Audit Observation → Evidence integration.
+4. Audit ResearchContext / Intelligence Mesh integration.
+5. Determine whether HistoricalComparisonEngine belongs:
+       - at Observation level,
+       - at Evidence level,
+       - or at another existing intelligence boundary.
+6. Identify any overlapping architecture before extending the system.
+7. Only then implement the smallest required integration.
+
+Do NOT create another generic novelty, change-detection, or delta engine
+without first proving that an existing component cannot perform the required
+responsibility.
+
+---
+
+# 35. GIT CHECKPOINT STATUS
+
+Previous synchronized repository checkpoint:
+
+    Commit: 0c3693d
+    Message: Checkpoint continuous intelligence and discovery architecture
+
+Historical Comparison work is currently uncommitted.
+
+Current uncommitted files:
+
+    modules/observation/historical_comparison.py
+    modules/observation/historical_comparison_engine.py
+    modules/observation/test_historical_comparison_engine.py
+
+The working tree was clean before this Historical Comparison work began.
+
+The Historical Comparison files must be validated and reviewed before
+creating the next Git checkpoint.
+
+---
+
+# 36. ENGINEERING GUARDRAIL
+
+Historical comparison must remain evidence-preserving and conservative.
+
+Do not:
+
+- Modify the Observation model unnecessarily.
+- Infer financial meaning from unstructured text.
+- Invent numerical deltas.
+- Invent positive or negative direction.
+- Infer materiality without supporting evidence.
+- Bypass ObservationNoveltyEngine.
+- Duplicate existing external intelligence functionality.
+- Connect directly to Opportunity scoring.
+- Automatically change investment decisions.
+
+The objective is to add intelligence through the smallest defensible
+architectural extension.
+
+'@ | Add-Content ".\PROJECT_STATE.md"
