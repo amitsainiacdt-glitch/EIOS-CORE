@@ -3453,3 +3453,21 @@ HistoricalObservationSelection preserves the selected boundary as
 HistoricalSelectionBasis. Legacy observations remain supported without
 migration. No Evidence, Signal, Catalyst, Expectation Gap, Mispricing, or
 Opportunity behavior is changed.
+
+---
+
+# 43. PROVENANCE-AWARE RUNTIME INTEGRATION VALIDATION
+
+ResearchRuntime provenance-aware historical comparison is now covered by a
+deterministic end-to-end validation checkpoint. With historical comparison
+explicitly enabled, the runtime is verified to preserve job-ID priority,
+research-intent fallback, conflicting-job exclusion, provenance-free legacy
+fallback, and pre-cycle history isolation.
+
+The validation uses temporary observation storage, a fake runtime controller,
+and a hard HTTP request guard. It makes no live API calls and does not read or
+write the production observation store. Historical comparison results remain
+passive runtime records: they are not published into Evidence, Assumptions,
+Knowledge, Signals, Catalysts, Expectation Gaps, Mispricing, or Opportunities.
+
+No production runtime behavior is changed by this checkpoint.
