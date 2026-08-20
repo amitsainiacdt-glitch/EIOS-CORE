@@ -26,6 +26,10 @@ from __future__ import annotations
 from datetime import datetime
 
 from .observation import Observation
+from .historical_comparison import HistoricalComparison
+from .historical_comparison_engine import (
+    HistoricalComparisonEngine,
+)
 from .observation_novelty_engine import (
     ObservationNoveltyEngine,
 )
@@ -53,6 +57,9 @@ class ObservationEngine:
         registry: ObservationRegistry | None = None,
         novelty_engine: ObservationNoveltyEngine | None = None,
         persistence: ObservationPersistence | None = None,
+        historical_comparison_engine: (
+            HistoricalComparisonEngine | None
+        ) = None,
     ):
 
         self.registry = (
@@ -71,6 +78,12 @@ class ObservationEngine:
             persistence
             if persistence is not None
             else ObservationPersistence()
+        )
+
+        self.historical_comparison_engine = (
+            historical_comparison_engine
+            if historical_comparison_engine is not None
+            else HistoricalComparisonEngine()
         )
 
         # --------------------------------------------------
@@ -158,6 +171,29 @@ class ObservationEngine:
         return self.novelty_engine.assess(
             observation,
             self.registry.all(),
+        )
+
+    # ======================================================
+    # HISTORICAL COMPARISON
+    # ======================================================
+
+    def compare_historical(
+        self,
+        current_observation: Observation,
+        historical_observation: Observation,
+    ) -> HistoricalComparison:
+        """
+        Compare two explicitly selected observations.
+
+        Historical candidate selection remains the caller's
+        responsibility. The Observation Engine does not infer
+        which prior observation is comparable and does not
+        register, persist, or publish the comparison result.
+        """
+
+        return self.historical_comparison_engine.compare(
+            current_observation=current_observation,
+            historical_observation=historical_observation,
         )
 
     # ======================================================

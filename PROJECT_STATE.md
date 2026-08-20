@@ -3258,23 +3258,20 @@ responsibility.
 
 # 35. GIT CHECKPOINT STATUS
 
-Previous synchronized repository checkpoint:
+Current synchronized repository checkpoint:
 
-    Commit: 0c3693d
-    Message: Checkpoint continuous intelligence and discovery architecture
+    Commit: abb8daf
+    Message: Add historical observation comparison foundation
 
-Historical Comparison work is currently uncommitted.
+The Historical Comparison foundation is committed.
 
-Current uncommitted files:
+Committed Historical Comparison files:
 
     modules/observation/historical_comparison.py
     modules/observation/historical_comparison_engine.py
     modules/observation/test_historical_comparison_engine.py
 
-The working tree was clean before this Historical Comparison work began.
-
-The Historical Comparison files must be validated and reviewed before
-creating the next Git checkpoint.
+The working tree was clean at this checkpoint.
 
 ---
 
@@ -3297,4 +3294,37 @@ Do not:
 The objective is to add intelligence through the smallest defensible
 architectural extension.
 
-'@ | Add-Content ".\PROJECT_STATE.md"
+---
+
+# 37. HISTORICAL COMPARISON BOUNDARY DECISION
+
+Repository audit determined that HistoricalComparisonEngine belongs at the
+Observation layer because both of its inputs and its output provenance are
+owned by that layer.
+
+The Evidence boundary remains unchanged. ExternalEvidenceIntake continues to
+require an explicit EvidenceAssessment and does not infer evidence meaning
+from a historical difference.
+
+ObservationEngine now provides an opt-in compare_historical method. The caller
+must explicitly supply both the current and historical observations.
+
+The integration deliberately does NOT:
+
+- Automatically select a historical observation.
+- Change novelty assessment or observation ingestion.
+- Register or persist comparison results.
+- Publish comparisons to ResearchContext or IntelligenceMesh.
+- Create Evidence, Signals, Catalysts, or Opportunities.
+
+This is the smallest integration that establishes ownership without inventing
+comparison relevance or downstream financial meaning.
+
+Validation coverage:
+
+    modules/observation/
+        test_observation_historical_comparison_integration.py
+
+The validation confirms that comparison is available through
+ObservationEngine and does not mutate the ObservationRegistry or persistent
+observation state.
