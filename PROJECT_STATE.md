@@ -3572,3 +3572,36 @@ timezone-awareness are rejected rather than corrected implicitly. Filtering
 does not modify audit records, observation state, ResearchContext,
 IntelligenceMesh, Evidence, Signals, Catalysts, Expectation Gaps, Mispricing,
 Opportunities, or investment decisions.
+
+---
+
+# 48. HISTORICAL COMPARISON HUMAN-REVIEW CANDIDATES
+
+Validated audit records with an explicit comparison and change_detected=True
+can now become immutable human-review candidates. Candidate identity is a
+deterministic SHA-256 digest of preserved runtime, observation, provenance,
+selection, and comparison facts. Duplicate identities fail closed.
+
+Review candidates preserve current and historical observation references,
+content fingerprints, job ID, research intent, selection basis, comparison
+type, direction, materiality, delta, and comparison provenance. Candidate
+states are explicit:
+
+    PENDING
+    REVIEWED
+    ACCEPTED
+    REJECTED
+    DEFERRED
+
+HistoricalComparisonReviewService returns a new immutable candidate for an
+explicit human disposition and rejects repeat review. Decisions require a
+reviewer, reason, and non-preceding review timestamp. They remain in memory;
+this checkpoint does not persist review decisions.
+
+A read-only command lists pending candidates:
+
+    python -m scripts.list_historical_comparison_review_candidates
+
+The command does not modify the audit report. No candidate status creates
+Evidence, publishes intelligence, scores an Opportunity, infers financial
+importance, or changes an investment decision.
