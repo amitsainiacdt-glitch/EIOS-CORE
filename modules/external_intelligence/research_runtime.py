@@ -16,6 +16,7 @@ Responsibilities:
     - Execute one scheduled research cycle.
     - Persist observations after execution.
     - Record execution telemetry.
+    - Optionally compare new observations with pre-cycle history.
 
 Does NOT:
     - implement scheduling logic.
@@ -26,6 +27,7 @@ Does NOT:
     - score Opportunities.
     - perform investment analysis.
     - run infinite loops.
+    - publish historical comparisons downstream.
 """
 
 from __future__ import annotations
@@ -64,6 +66,10 @@ from modules.external_intelligence.research_scheduler import (
 
 from modules.external_intelligence.research_runtime_controller import (
     ResearchRuntimeController,
+)
+
+from modules.external_intelligence.runtime_historical_comparison import (
+    RuntimeHistoricalComparison,
 )
 
 from modules.external_intelligence.scheduled_research_runner import (
@@ -107,7 +113,16 @@ class ResearchRuntime:
         observation_path: str | Path = "data/observations.json",
         tavily_api_key: str | None = None,
         context: ResearchContext | None = None,
+        enable_historical_comparison: bool = False,
     ) -> None:
+
+        self.historical_comparison_enabled = bool(
+            enable_historical_comparison
+        )
+
+        self._historical_comparison_results: list[
+            RuntimeHistoricalComparison
+        ] = []
 
         # ==================================================
         # RESEARCH CONTEXT
@@ -272,6 +287,10 @@ class ResearchRuntime:
             self.observation_registry.count()
         )
 
+        historical_observations = tuple(
+            self.observation_registry.all()
+        )
+
         failures = 0
 
         result = None
@@ -315,6 +334,14 @@ class ResearchRuntime:
 
                     if observation is None:
                         continue
+
+                    if self.historical_comparison_enabled:
+                        self._historical_comparison_results.append(
+                            self._compare_with_history(
+                                observation,
+                                historical_observations,
+                            )
+                        )
 
                     self.external_intelligence_adapter.publish(
                         observation
@@ -442,6 +469,64 @@ class ResearchRuntime:
         # ------------------------------------------------------
 
         return result
+
+    # ======================================================
+    # HISTORICAL COMPARISON
+    # ======================================================
+
+    def _compare_with_history(
+        self,
+        current_observation,
+        historical_observations,
+    ) -> RuntimeHistoricalComparison:
+        """
+        Select and compare against the pre-cycle history snapshot.
+        """
+
+        selection = (
+            self.observation_engine
+            .historical_observation_selector
+            .select(
+                current_observation=current_observation,
+                observations=historical_observations,
+            )
+        )
+
+        comparison = None
+
+        if selection.selected_observation is not None:
+            comparison = self.observation_engine.compare_historical(
+                current_observation=current_observation,
+                historical_observation=(
+                    selection.selected_observation
+                ),
+            )
+
+        return RuntimeHistoricalComparison(
+            current_observation=current_observation,
+            selection=selection,
+            comparison=comparison,
+        )
+
+    def historical_comparisons(
+        self,
+    ) -> list[RuntimeHistoricalComparison]:
+        """
+        Return a copy of all opt-in runtime comparison results.
+        """
+
+        return list(
+            self._historical_comparison_results
+        )
+
+    def historical_comparison_count(
+        self,
+    ) -> int:
+        """Return the number of preserved runtime comparison results."""
+
+        return len(
+            self._historical_comparison_results
+        )
 
     # ======================================================
     # OBSERVATIONS

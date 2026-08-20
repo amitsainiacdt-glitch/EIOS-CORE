@@ -3352,3 +3352,27 @@ HistoricalComparisonEngine automatically.
 
 ResearchRuntime remains unchanged. Runtime integration must not occur until the
 selection policy and its ambiguity behavior are validated independently.
+
+---
+
+# 39. OPT-IN RUNTIME HISTORICAL COMPARISON
+
+ResearchRuntime now supports historical comparison only when constructed with:
+
+    enable_historical_comparison=True
+
+For every new observation returned by a research cycle, the runtime:
+
+1. Selects a candidate only from the observation history that existed before
+   the cycle began.
+2. Preserves the HistoricalObservationSelection result, including no-match and
+   ambiguity reasons.
+3. Creates HistoricalComparison only when selection is unambiguous.
+4. Preserves the combined result as RuntimeHistoricalComparison.
+
+Same-cycle observations cannot become historical candidates for one another.
+The default remains disabled, preserving existing runtime behavior.
+
+The integration does not publish comparisons to ResearchContext or
+IntelligenceMesh and does not create Evidence, Signals, Catalysts,
+Expectation Gaps, Mispricing, or Opportunities.
