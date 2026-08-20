@@ -36,8 +36,13 @@ Design Principles
 
 from __future__ import annotations
 
+from datetime import datetime
+from hashlib import sha256
+from urllib.parse import urlparse
+
 from modules.observation.observation import (
     Observation,
+    ObservationProvenance,
 )
 
 from modules.observation.observation_engine import (
@@ -78,6 +83,11 @@ class ExternalObservationAdapter:
         category: str,
         entity: str,
         confidence: float,
+        cycle_id: str | None = None,
+        job_id: str | None = None,
+        research_intent: str | None = None,
+        retrieved_at: datetime | None = None,
+        source_type: str | None = None,
     ) -> Observation | None:
         """
         Convert externally obtained information into an
@@ -103,6 +113,54 @@ class ExternalObservationAdapter:
             confidence=self._clamp_confidence(
                 confidence
             ),
+            provenance=self._build_provenance(
+                cycle_id=cycle_id,
+                job_id=job_id,
+                research_intent=research_intent,
+                retrieved_at=retrieved_at,
+                source=source,
+                source_type=source_type,
+                content=description,
+            ),
+        )
+
+    @staticmethod
+    def _build_provenance(
+        *,
+        cycle_id,
+        job_id,
+        research_intent,
+        retrieved_at,
+        source,
+        source_type,
+        content,
+    ) -> ObservationProvenance | None:
+        """Build deterministic lineage only when runtime context is supplied."""
+
+        if all(
+            value is None
+            for value in (
+                cycle_id,
+                job_id,
+                research_intent,
+                retrieved_at,
+                source_type,
+            )
+        ):
+            return None
+
+        parsed = urlparse(source)
+        return ObservationProvenance(
+            cycle_id=cycle_id,
+            job_id=job_id,
+            research_intent=research_intent,
+            retrieved_at=retrieved_at,
+            source_url=source,
+            source_domain=parsed.hostname,
+            source_type=source_type,
+            content_fingerprint=sha256(
+                content.encode("utf-8")
+            ).hexdigest(),
         )
 
     # ======================================================

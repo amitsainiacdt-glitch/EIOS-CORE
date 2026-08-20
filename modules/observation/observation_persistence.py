@@ -32,7 +32,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import List
 
-from .observation import Observation
+from .observation import Observation, ObservationProvenance
 
 
 class ObservationPersistence:
@@ -79,6 +79,15 @@ class ObservationPersistence:
                 observation.timestamp.isoformat()
             )
 
+            if observation.provenance is not None:
+                retrieved_at = item["provenance"].get(
+                    "retrieved_at"
+                )
+                if retrieved_at is not None:
+                    item["provenance"]["retrieved_at"] = (
+                        retrieved_at.isoformat()
+                    )
+
             payload.append(item)
 
         self.path.write_text(
@@ -115,11 +124,25 @@ class ObservationPersistence:
 
         for item in raw:
 
+            item = dict(item)
+
             item["timestamp"] = (
                 datetime.fromisoformat(
                     item["timestamp"]
                 )
             )
+
+            provenance = item.get("provenance")
+            if provenance is not None:
+                provenance = dict(provenance)
+                retrieved_at = provenance.get("retrieved_at")
+                if retrieved_at is not None:
+                    provenance["retrieved_at"] = datetime.fromisoformat(
+                        retrieved_at
+                    )
+                item["provenance"] = ObservationProvenance(
+                    **provenance
+                )
 
             observations.append(
                 Observation(**item)

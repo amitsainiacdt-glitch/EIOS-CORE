@@ -133,11 +133,14 @@ class ScheduledResearchRunner:
 
         results = []
 
+        cycle_id = now.isoformat()
+
         for job in due_jobs:
 
             result = self.execution_service.execute(
                 job,
                 run_time=now,
+                cycle_id=cycle_id,
             )
 
             executed_jobs.append(

@@ -3407,3 +3407,28 @@ passed validation, so a stateful provider cannot substitute unvalidated jobs.
 
 Historical comparison remains default-off. The launcher does not modify
 Evidence, Signals, Catalysts, Expectation Gaps, Mispricing, or Opportunities.
+
+---
+
+# 41. RUNTIME OBSERVATION PROVENANCE AND STORE ISOLATION
+
+Runtime-created external observations may now carry an optional passive
+ObservationProvenance record containing cycle ID, job ID, research intent,
+retrieval time, source URL/domain/type, and a SHA-256 content fingerprint.
+Legacy observations without provenance continue to deserialize with
+`provenance=None`.
+
+Provenance construction remains at the external observation adapter boundary;
+the Observation model performs no parsing, hashing, policy, or analysis.
+ResearchExecutionService supplies job and cycle context, while
+ExternalResearchResult records job identity plus execution and observation
+counts. Historical comparison remains disabled by default and was not enabled
+by this checkpoint.
+
+Observation-related tests now inject persistence backed by temporary paths.
+No test in this checkpoint reads, rewrites, migrates, cleans, or deletes
+`data/observations.json`, and deterministic checkpoint coverage performs no
+network retrieval. The checkpoint test places the orchestrator behind a hard
+HTTP request guard, uses fake search/retrieval services, and verifies that a
+sentinel production store remains byte-for-byte unchanged while the isolated
+test store is written.

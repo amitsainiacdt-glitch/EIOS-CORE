@@ -125,6 +125,7 @@ class ResearchExecutionService:
         job: ResearchJob,
         *,
         run_time: datetime,
+        cycle_id: str | None = None,
     ) -> ExternalResearchResult:
         """
         Execute one research job.
@@ -172,6 +173,9 @@ class ResearchExecutionService:
             observation_confidence=(
                 job.observation_confidence
             ),
+            cycle_id=cycle_id,
+            job_id=job.job_id,
+            retrieved_at=run_time,
         )
 
         self.scheduler.mark_run(

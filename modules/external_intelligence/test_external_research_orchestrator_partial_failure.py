@@ -6,6 +6,9 @@ External Research Orchestrator
 Partial Retrieval Failure Test
 """
 
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
 from modules.external_intelligence.external_research_orchestrator import (
     ExternalResearchOrchestrator,
 )
@@ -25,6 +28,8 @@ from modules.external_intelligence.search_provider import (
 from modules.external_intelligence.search_result import (
     ExternalSearchResult,
 )
+from modules.observation.observation_engine import ObservationEngine
+from modules.observation.observation_persistence import ObservationPersistence
 
 
 class FakeSearchProvider(SearchProvider):
@@ -83,7 +88,7 @@ class FakeRetriever:
             status_code=200,
             content=(
                 "Synthetic successful content "
-                "for EIOS testing."
+                "for deterministic EIOS partial-failure testing."
             ),
             content_type="text/html",
             headers={
@@ -110,9 +115,16 @@ def main() -> None:
     # ORCHESTRATOR
     # ======================================================
 
+    temp_dir = TemporaryDirectory()
+    observation_engine = ObservationEngine(
+        persistence=ObservationPersistence(
+            Path(temp_dir.name) / "observations.json"
+        )
+    )
     orchestrator = ExternalResearchOrchestrator(
         FakeSearchProvider(),
         retriever=FakeRetriever(),
+        observation_engine=observation_engine,
     )
 
     # ======================================================

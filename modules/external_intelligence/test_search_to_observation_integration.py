@@ -5,6 +5,9 @@ Everest Investment Operating System
 Search → HTTP → Observation Integration Test
 """
 
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
 from modules.external_intelligence.external_observation_adapter import (
     ExternalObservationAdapter,
 )
@@ -32,6 +35,7 @@ from modules.external_intelligence.search_result import (
 from modules.observation.observation_engine import (
     ObservationEngine,
 )
+from modules.observation.observation_persistence import ObservationPersistence
 
 
 class MockSearchProvider(SearchProvider):
@@ -80,7 +84,12 @@ def main() -> None:
 
     retriever = HTTPExternalRetriever()
 
-    observation_engine = ObservationEngine()
+    temp_dir = TemporaryDirectory()
+    observation_engine = ObservationEngine(
+        persistence=ObservationPersistence(
+            Path(temp_dir.name) / "observations.json"
+        )
+    )
 
     adapter = ExternalObservationAdapter(
         observation_engine

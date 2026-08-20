@@ -51,6 +51,9 @@ class FakeOrchestrator:
         max_sources,
         observation_category,
         observation_confidence,
+        cycle_id=None,
+        job_id=None,
+        retrieved_at=None,
     ):
 
         self.last_query = query
@@ -63,6 +66,9 @@ class FakeOrchestrator:
             "observation_confidence": (
                 observation_confidence
             ),
+            "cycle_id": cycle_id,
+            "job_id": job_id,
+            "retrieved_at": retrieved_at,
         }
 
         return self.result
@@ -270,6 +276,9 @@ def main():
         "max_sources": 7,
         "observation_category": "External Web",
         "observation_confidence": 85.0,
+        "cycle_id": None,
+        "job_id": "JOB-001",
+        "retrieved_at": run_time,
     }
 
     print(

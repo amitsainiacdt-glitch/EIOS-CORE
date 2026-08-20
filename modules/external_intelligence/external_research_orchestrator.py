@@ -54,6 +54,7 @@ Design Principles
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from datetime import datetime
 
 from modules.external_intelligence.external_content_normalizer import (
     ExternalContentNormalizer,
@@ -197,6 +198,10 @@ class ExternalResearchResult:
         default_factory=list
     )
 
+    job_id: str | None = None
+    execution_count: int = 0
+    observation_count: int = 0
+
 
 # ==========================================================
 # ORCHESTRATOR
@@ -332,6 +337,9 @@ class ExternalResearchOrchestrator:
         max_sources: int = 5,
         observation_category: str = "External Web",
         observation_confidence: float = 70.0,
+        cycle_id: str | None = None,
+        job_id: str | None = None,
+        retrieved_at: datetime | None = None,
     ) -> ExternalResearchResult:
         """
         Execute external research retrieval.
@@ -570,6 +578,11 @@ class ExternalResearchOrchestrator:
                     category=observation_category,
                     entity=query.company,
                     confidence=observation_confidence,
+                    cycle_id=cycle_id,
+                    job_id=job_id,
+                    research_intent=query.intent,
+                    retrieved_at=retrieved_at,
+                    source_type=normalized.content_type,
                 )
             )
 
@@ -610,6 +623,9 @@ class ExternalResearchOrchestrator:
             source_assessments=source_assessments,
             observations=observations,
             retrieval_failures=retrieval_failures,
+            job_id=job_id,
+            execution_count=1 if job_id is not None else 0,
+            observation_count=len(observations),
         )
 
 

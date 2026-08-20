@@ -38,6 +38,8 @@ This test does not modify production orchestration.
 """
 
 from datetime import datetime
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from modules.evidence.evidence_engine import (
     EvidenceEngine,
@@ -58,6 +60,7 @@ from modules.external_intelligence.evidence_intelligence_adapter import (
 from modules.observation.observation_engine import (
     ObservationEngine,
 )
+from modules.observation.observation_persistence import ObservationPersistence
 
 from modules.opportunity.evidence_engine import (
     OpportunityEvidenceEngine,
@@ -93,7 +96,12 @@ def main() -> None:
     # EXTERNAL OBSERVATION
     # ======================================================
 
-    observation_engine = ObservationEngine()
+    temp_dir = TemporaryDirectory()
+    observation_engine = ObservationEngine(
+        persistence=ObservationPersistence(
+            Path(temp_dir.name) / "observations.json"
+        )
+    )
 
     observation = observation_engine.observe(
         title="Industrial demand improvement",

@@ -6,6 +6,7 @@ Observation Engine Integration Test
 """
 
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from modules.observation.observation_engine import (
     ObservationEngine,
@@ -26,9 +27,8 @@ def main():
     # TEST ISOLATED PERSISTENCE
     # ======================================================
 
-    test_path = Path(
-        "data/test_observation_engine_observations.json"
-    )
+    temp_dir = TemporaryDirectory()
+    test_path = Path(temp_dir.name) / "observations.json"
 
     test_persistence = ObservationPersistence(
         path=test_path
@@ -238,6 +238,7 @@ def main():
         # ==================================================
 
         test_persistence.clear()
+        temp_dir.cleanup()
 
 
 if __name__ == "__main__":

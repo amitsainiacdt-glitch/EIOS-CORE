@@ -23,6 +23,9 @@ Tests:
 4. Duplicate protection remains active.
 """
 
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
 from modules.external_intelligence.external_research_orchestrator import (
     ExternalResearchOrchestrator,
 )
@@ -147,19 +150,19 @@ def make_query() -> ExternalResearchQuery:
 
 def make_observation_engine() -> ObservationEngine:
 
+    temp_dir = TemporaryDirectory()
     persistence = ObservationPersistence(
-        path=(
-            "data/"
-            "test_external_research_quality_integration.json"
-        )
+        path=Path(temp_dir.name) / "observations.json"
     )
 
     persistence.clear()
 
-    return ObservationEngine(
+    engine = ObservationEngine(
         registry=ObservationRegistry(),
         persistence=persistence,
     )
+    engine._test_temp_dir = temp_dir
+    return engine
 
 
 # ==========================================================

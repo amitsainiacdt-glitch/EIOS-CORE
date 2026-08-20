@@ -12,6 +12,8 @@ The test intentionally does NOT access the internet.
 """
 
 from copy import deepcopy
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from modules.external_intelligence.external_observation_adapter import (
     ExternalObservationAdapter,
@@ -20,6 +22,7 @@ from modules.external_intelligence.external_observation_adapter import (
 from modules.observation.observation_engine import (
     ObservationEngine,
 )
+from modules.observation.observation_persistence import ObservationPersistence
 
 
 def main() -> None:
@@ -28,7 +31,12 @@ def main() -> None:
     # ENGINE / ADAPTER EXISTS
     # ======================================================
 
-    observation_engine = ObservationEngine()
+    temp_dir = TemporaryDirectory()
+    observation_engine = ObservationEngine(
+        persistence=ObservationPersistence(
+            Path(temp_dir.name) / "observations.json"
+        )
+    )
 
     adapter = ExternalObservationAdapter(
         observation_engine

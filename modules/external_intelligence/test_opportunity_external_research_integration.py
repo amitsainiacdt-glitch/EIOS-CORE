@@ -29,6 +29,9 @@ and HTTP retriever implementations.
 No live Internet access is required.
 """
 
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
 from modules.external_intelligence.external_research_orchestrator import (
     ExternalResearchOrchestrator,
 )
@@ -36,6 +39,8 @@ from modules.external_intelligence.external_research_orchestrator import (
 from modules.external_intelligence.http_retriever import (
     RetrievedContent,
 )
+from modules.observation.observation_engine import ObservationEngine
+from modules.observation.observation_persistence import ObservationPersistence
 
 from modules.external_intelligence.opportunity_external_query_engine import (
     OpportunityExternalQueryEngine,
@@ -196,10 +201,17 @@ def main() -> None:
 
     retriever = MockHTTPRetriever()
 
+    temp_dir = TemporaryDirectory()
+    observation_engine = ObservationEngine(
+        persistence=ObservationPersistence(
+            Path(temp_dir.name) / "observations.json"
+        )
+    )
     orchestrator = (
         ExternalResearchOrchestrator(
             provider,
             retriever=retriever,
+            observation_engine=observation_engine,
         )
     )
 

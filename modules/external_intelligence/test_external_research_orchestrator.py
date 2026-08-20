@@ -24,6 +24,10 @@ Research Quality
 Observation
 """
 
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from datetime import datetime
+
 from modules.external_intelligence.external_research_orchestrator import (
     ExternalResearchOrchestrator,
 )
@@ -184,11 +188,9 @@ def main() -> None:
     # file and an empty registry.
     # ------------------------------------------------------
 
+    temp_dir = TemporaryDirectory()
     test_persistence = ObservationPersistence(
-        path=(
-            "data/"
-            "test_external_research_orchestrator_observations.json"
-        )
+        Path(temp_dir.name) / "observations.json"
     )
 
     test_persistence.clear()
@@ -220,11 +222,15 @@ def main() -> None:
     # EXECUTE
     # ======================================================
 
+    retrieved_at = datetime(2026, 8, 20, 9, 30, 0)
     result = orchestrator.execute(
         query,
         max_sources=5,
         observation_category="External Web",
         observation_confidence=70.0,
+        cycle_id="2026-08-20T09:30:00",
+        job_id="JOB-001",
+        retrieved_at=retrieved_at,
     )
 
     assert result is not None
@@ -449,6 +455,19 @@ def main() -> None:
         observation.confidence
         == 70.0
     )
+
+    assert observation.provenance is not None
+    assert observation.provenance.cycle_id == "2026-08-20T09:30:00"
+    assert observation.provenance.job_id == "JOB-001"
+    assert observation.provenance.research_intent == "DEMAND_VALIDATION"
+    assert observation.provenance.retrieved_at == retrieved_at
+    assert observation.provenance.source_url == "https://example.com"
+    assert observation.provenance.source_domain == "example.com"
+    assert observation.provenance.source_type == "text/html"
+    assert len(observation.provenance.content_fingerprint) == 64
+    assert result.job_id == "JOB-001"
+    assert result.execution_count == 1
+    assert result.observation_count == 1
 
     print(
         "Observation Creation             : PASS"

@@ -125,6 +125,7 @@ class ObservationEngine:
         category,
         entity,
         confidence,
+        provenance=None,
     ):
         """
         Create an observation and register it only when
@@ -148,6 +149,7 @@ class ObservationEngine:
             entity=entity,
             confidence=confidence,
             timestamp=datetime.now(),
+            provenance=provenance,
         )
 
         novelty = self.novelty_engine.assess(

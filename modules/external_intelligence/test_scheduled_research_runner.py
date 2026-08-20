@@ -59,6 +59,7 @@ class FakeExecutionService:
         job,
         *,
         run_time,
+        cycle_id=None,
     ):
 
         self.executed_jobs.append(
