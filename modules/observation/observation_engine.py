@@ -30,6 +30,10 @@ from .historical_comparison import HistoricalComparison
 from .historical_comparison_engine import (
     HistoricalComparisonEngine,
 )
+from .historical_observation_selector import (
+    HistoricalObservationSelection,
+    HistoricalObservationSelector,
+)
 from .observation_novelty_engine import (
     ObservationNoveltyEngine,
 )
@@ -60,6 +64,9 @@ class ObservationEngine:
         historical_comparison_engine: (
             HistoricalComparisonEngine | None
         ) = None,
+        historical_observation_selector: (
+            HistoricalObservationSelector | None
+        ) = None,
     ):
 
         self.registry = (
@@ -84,6 +91,12 @@ class ObservationEngine:
             historical_comparison_engine
             if historical_comparison_engine is not None
             else HistoricalComparisonEngine()
+        )
+
+        self.historical_observation_selector = (
+            historical_observation_selector
+            if historical_observation_selector is not None
+            else HistoricalObservationSelector()
         )
 
         # --------------------------------------------------
@@ -176,6 +189,20 @@ class ObservationEngine:
     # ======================================================
     # HISTORICAL COMPARISON
     # ======================================================
+
+    def select_historical(
+        self,
+        current_observation: Observation,
+    ) -> HistoricalObservationSelection:
+        """
+        Select an unambiguous historical candidate from the
+        existing observation registry without mutating state.
+        """
+
+        return self.historical_observation_selector.select(
+            current_observation=current_observation,
+            observations=self.registry.all(),
+        )
 
     def compare_historical(
         self,

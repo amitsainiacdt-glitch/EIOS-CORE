@@ -3328,3 +3328,27 @@ Validation coverage:
 The validation confirms that comparison is available through
 ObservationEngine and does not mutate the ObservationRegistry or persistent
 observation state.
+
+---
+
+# 38. HISTORICAL CANDIDATE SELECTION
+
+Historical candidate selection is implemented at the Observation layer under:
+
+    modules/observation/historical_observation_selector.py
+
+Selection is deliberately conservative:
+
+- Entity and category must match after text normalization.
+- The candidate timestamp must be strictly earlier than the current timestamp.
+- The uniquely most recent eligible observation is selected.
+- Tied latest candidates produce no selection because the choice is ambiguous.
+- Title, description, source, confidence, and financial meaning do not determine
+  comparability.
+
+ObservationEngine exposes opt-in selection through select_historical. Selection
+does not mutate the registry, persist results, publish intelligence, or invoke
+HistoricalComparisonEngine automatically.
+
+ResearchRuntime remains unchanged. Runtime integration must not occur until the
+selection policy and its ambiguity behavior are validated independently.
