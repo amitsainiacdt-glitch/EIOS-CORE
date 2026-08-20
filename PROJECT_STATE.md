@@ -3605,3 +3605,27 @@ A read-only command lists pending candidates:
 The command does not modify the audit report. No candidate status creates
 Evidence, publishes intelligence, scores an Opportunity, infers financial
 importance, or changes an investment decision.
+
+---
+
+# 49. OPT-IN HISTORICAL COMPARISON REVIEW DECISION LEDGER
+
+Explicit human-review dispositions can now be persisted in a separate
+append-only JSON Lines ledger. The ledger preserves candidate ID, disposition,
+reviewer, reason, and review timestamp under a strict schema-version-one record.
+It accepts only reviewed candidates and permits at most one decision per
+candidate ID; repeat or conflicting decisions fail before any write.
+
+The explicit recording command uses a separately configured path:
+
+    EIOS_HISTORICAL_COMPARISON_REVIEW_LEDGER_PATH
+
+    python -m scripts.record_historical_comparison_review_decision
+
+The comparison audit path and decision-ledger path must remain separate. The
+command requires candidate ID, status, reviewer, reason, and review timestamp.
+It does not run automatically as part of ResearchRuntime.
+
+Decision persistence does not modify the comparison audit or observation store,
+create Evidence, publish intelligence, score an Opportunity, infer financial
+importance, or change an investment decision.
