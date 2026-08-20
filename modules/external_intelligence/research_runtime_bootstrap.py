@@ -27,6 +27,7 @@ class ResearchRuntimeBootstrapConfig:
     tavily_api_key: str
     observation_path: Path
     enable_historical_comparison: bool = False
+    historical_comparison_audit_path: Path | None = None
 
     @classmethod
     def from_environment(
@@ -39,6 +40,11 @@ class ResearchRuntimeBootstrapConfig:
             "EIOS_ENABLE_HISTORICAL_COMPARISON",
             "false",
         )
+
+        audit_value = values.get(
+            "EIOS_HISTORICAL_COMPARISON_AUDIT_PATH",
+            "",
+        ).strip()
 
         return cls(
             tavily_api_key=values.get(
@@ -58,6 +64,9 @@ class ResearchRuntimeBootstrapConfig:
                         "EIOS_ENABLE_HISTORICAL_COMPARISON"
                     ),
                 )
+            ),
+            historical_comparison_audit_path=(
+                Path(audit_value) if audit_value else None
             ),
         )
 
@@ -89,6 +98,8 @@ class ResearchRuntimeBootstrapValidation:
     job_count: int
     observation_path: Path
     historical_comparison_enabled: bool
+    historical_comparison_audit_path: Path | None = None
+    historical_comparison_audit_enabled: bool = False
 
 
 class ResearchRuntimeBootstrap:
@@ -140,6 +151,7 @@ class ResearchRuntimeBootstrap:
             )
 
         self._validate_observation_path(errors)
+        self._validate_historical_comparison_audit(errors)
 
         if not self.dependency_checker("requests"):
             errors.append(
@@ -180,6 +192,13 @@ class ResearchRuntimeBootstrap:
             historical_comparison_enabled=(
                 self.config.enable_historical_comparison
             ),
+            historical_comparison_audit_path=(
+                self.config.historical_comparison_audit_path
+            ),
+            historical_comparison_audit_enabled=(
+                self.config.historical_comparison_audit_path
+                is not None
+            ),
         )
         return validation, jobs
 
@@ -203,13 +222,20 @@ class ResearchRuntimeBootstrap:
 
             runtime_factory = ResearchRuntime
 
-        runtime = runtime_factory(
+        runtime_options = dict(
             observation_path=self.config.observation_path,
             tavily_api_key=self.config.tavily_api_key,
             enable_historical_comparison=(
                 self.config.enable_historical_comparison
             ),
         )
+
+        if self.config.historical_comparison_audit_path is not None:
+            runtime_options[
+                "historical_comparison_audit_path"
+            ] = self.config.historical_comparison_audit_path
+
+        runtime = runtime_factory(**runtime_options)
 
         for job in jobs:
             runtime.register_job(job)
@@ -275,6 +301,61 @@ class ResearchRuntimeBootstrap:
         elif not os.access(ancestor, os.W_OK):
             errors.append(
                 "EIOS_OBSERVATION_PATH parent must be writable."
+            )
+
+    def _validate_historical_comparison_audit(
+        self,
+        errors: list[str],
+    ) -> None:
+        path = self.config.historical_comparison_audit_path
+
+        if path is None:
+            return
+
+        if not self.config.enable_historical_comparison:
+            errors.append(
+                "Historical comparison audit reporting requires "
+                "EIOS_ENABLE_HISTORICAL_COMPARISON=true."
+            )
+
+        if path.resolve() == self.config.observation_path.resolve():
+            errors.append(
+                "Historical comparison audit path must be separate "
+                "from EIOS_OBSERVATION_PATH."
+            )
+            return
+
+        if str(path).strip() in {"", "."}:
+            errors.append(
+                "EIOS_HISTORICAL_COMPARISON_AUDIT_PATH must "
+                "identify a file."
+            )
+            return
+
+        if path.exists():
+            if not path.is_file():
+                errors.append(
+                    "EIOS_HISTORICAL_COMPARISON_AUDIT_PATH must "
+                    "identify a file, not a directory."
+                )
+            elif not os.access(path, os.R_OK | os.W_OK):
+                errors.append(
+                    "Historical comparison audit file must be "
+                    "readable and writable."
+                )
+            return
+
+        ancestor = path.parent
+        while not ancestor.exists() and ancestor != ancestor.parent:
+            ancestor = ancestor.parent
+
+        if not ancestor.is_dir():
+            errors.append(
+                "Historical comparison audit parent must be a directory."
+            )
+        elif not os.access(ancestor, os.W_OK):
+            errors.append(
+                "Historical comparison audit parent must be writable."
             )
 
     @staticmethod

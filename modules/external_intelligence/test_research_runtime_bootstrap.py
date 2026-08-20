@@ -59,6 +59,8 @@ class FakeBootstrap:
             historical_comparison_enabled=(
                 self.config.enable_historical_comparison
             ),
+            historical_comparison_audit_enabled=False,
+            historical_comparison_audit_path=None,
         )
 
     def run_once(self):

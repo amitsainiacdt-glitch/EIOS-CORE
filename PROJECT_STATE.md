@@ -3471,3 +3471,28 @@ passive runtime records: they are not published into Evidence, Assumptions,
 Knowledge, Signals, Catalysts, Expectation Gaps, Mispricing, or Opportunities.
 
 No production runtime behavior is changed by this checkpoint.
+
+---
+
+# 44. OPT-IN HISTORICAL COMPARISON AUDIT REPORTING
+
+ResearchRuntime can now preserve historical comparison results in a separate
+append-only JSON Lines audit report. Reporting is enabled only when historical
+comparison is enabled and an explicit audit path is configured through:
+
+    EIOS_HISTORICAL_COMPARISON_AUDIT_PATH
+
+Each audit record includes the runtime timestamp, current and selected
+historical observation references, provenance identifiers and fingerprints,
+selection basis and reason, eligible candidate count, and the conservative
+comparison result. No-match and ambiguous selections are also recorded.
+
+The audit path must remain separate from EIOS_OBSERVATION_PATH. Bootstrap
+validation checks path safety without creating or modifying the report. With no
+audit path configured, runtime behavior is unchanged and no audit file is
+created.
+
+Audit records remain passive operational output. They are not written into the
+observation store or published into Evidence, Assumptions, Knowledge, Signals,
+Catalysts, Expectation Gaps, Mispricing, or Opportunities. Deterministic test
+coverage uses temporary paths, a fake controller, and a hard HTTP request guard.

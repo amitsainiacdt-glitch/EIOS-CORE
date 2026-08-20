@@ -46,6 +46,15 @@ def main(
         "Historical comparison: "
         f"{validation.historical_comparison_enabled}"
     )
+    print(
+        "Historical comparison audit: "
+        f"{validation.historical_comparison_audit_enabled}"
+    )
+    if validation.historical_comparison_audit_path is not None:
+        print(
+            "Historical comparison audit path: "
+            f"{validation.historical_comparison_audit_path}"
+        )
 
     if validation.errors:
         for error in validation.errors:

@@ -17,6 +17,7 @@ Responsibilities:
     - Persist observations after execution.
     - Record execution telemetry.
     - Optionally compare new observations with pre-cycle history.
+    - Optionally append historical comparison audit records.
 
 Does NOT:
     - implement scheduling logic.
@@ -38,6 +39,10 @@ from time import perf_counter
 
 from modules.external_intelligence.external_research_orchestrator import (
     ExternalResearchOrchestrator,
+)
+
+from modules.external_intelligence.historical_comparison_audit_reporter import (
+    HistoricalComparisonAuditReporter,
 )
 
 from modules.external_intelligence.external_intelligence_adapter import (
@@ -114,6 +119,7 @@ class ResearchRuntime:
         tavily_api_key: str | None = None,
         context: ResearchContext | None = None,
         enable_historical_comparison: bool = False,
+        historical_comparison_audit_path: str | Path | None = None,
     ) -> None:
 
         self.historical_comparison_enabled = bool(
@@ -123,6 +129,30 @@ class ResearchRuntime:
         self._historical_comparison_results: list[
             RuntimeHistoricalComparison
         ] = []
+
+        self.historical_comparison_audit_reporter = None
+
+        if historical_comparison_audit_path is not None:
+            if not self.historical_comparison_enabled:
+                raise ValueError(
+                    "Historical comparison audit reporting requires "
+                    "historical comparison to be enabled."
+                )
+
+            observation_target = Path(observation_path).resolve()
+            audit_target = Path(
+                historical_comparison_audit_path
+            ).resolve()
+
+            if observation_target == audit_target:
+                raise ValueError(
+                    "Historical comparison audit path must be "
+                    "separate from the observation path."
+                )
+
+            self.historical_comparison_audit_reporter = (
+                HistoricalComparisonAuditReporter(audit_target)
+            )
 
         # ==================================================
         # RESEARCH CONTEXT
@@ -336,12 +366,22 @@ class ResearchRuntime:
                         continue
 
                     if self.historical_comparison_enabled:
-                        self._historical_comparison_results.append(
-                            self._compare_with_history(
-                                observation,
-                                historical_observations,
-                            )
+                        historical_record = self._compare_with_history(
+                            observation,
+                            historical_observations,
                         )
+                        self._historical_comparison_results.append(
+                            historical_record
+                        )
+
+                        if (
+                            self.historical_comparison_audit_reporter
+                            is not None
+                        ):
+                            self.historical_comparison_audit_reporter.report(
+                                historical_record,
+                                recorded_at=now,
+                            )
 
                     self.external_intelligence_adapter.publish(
                         observation
