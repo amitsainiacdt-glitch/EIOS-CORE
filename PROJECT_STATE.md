@@ -3545,3 +3545,30 @@ The timeline rejects mixed naive and timezone-aware cycle timestamps rather
 than assuming a timezone policy. It does not modify the audit report,
 observation store, ResearchContext, IntelligenceMesh, Evidence, Signals,
 Catalysts, Expectation Gaps, Mispricing, Opportunities, or investment decisions.
+
+---
+
+# 47. PROVENANCE-SCOPED HISTORICAL COMPARISON TIMELINE FILTERS
+
+Historical comparison audit records can now be filtered before single-cycle or
+multi-cycle summarization by current-observation entity, category, job ID,
+research intent, selection basis, comparison type, and inclusive runtime bounds.
+Text filters use conservative whitespace normalization and case-insensitive
+exact matching; they do not use substring, fuzzy, or semantic inference.
+
+The read-only audit command exposes:
+
+    --entity
+    --category
+    --job-id
+    --research-intent
+    --selection-basis
+    --comparison-type
+    --from
+    --to
+
+JSON output preserves the applied filter criteria. Reversed bounds and mixed
+timezone-awareness are rejected rather than corrected implicitly. Filtering
+does not modify audit records, observation state, ResearchContext,
+IntelligenceMesh, Evidence, Signals, Catalysts, Expectation Gaps, Mispricing,
+Opportunities, or investment decisions.

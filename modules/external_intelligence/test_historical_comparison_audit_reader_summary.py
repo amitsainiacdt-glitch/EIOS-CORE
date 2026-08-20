@@ -12,6 +12,12 @@ from tempfile import TemporaryDirectory
 from modules.external_intelligence.historical_comparison_audit_reader import (
     HistoricalComparisonAuditReader,
 )
+from modules.external_intelligence.historical_comparison_audit_filter import (
+    HistoricalComparisonAuditFilter,
+)
+from modules.external_intelligence.historical_comparison_audit_filter_engine import (
+    HistoricalComparisonAuditFilterEngine,
+)
 from modules.external_intelligence.historical_comparison_cycle_summarizer import (
     HistoricalComparisonCycleSummarizer,
 )
@@ -53,11 +59,15 @@ def payload(
     historical,
     comparison,
     reason,
+    current_job_id="JOB-ORDERS",
 ) -> dict:
     return {
         "schema_version": 1,
         "recorded_at": recorded_at.isoformat(),
-        "current_observation": observation(title),
+        "current_observation": observation(
+            title,
+            job_id=current_job_id,
+        ),
         "historical_observation": historical,
         "selection": {
             "basis": basis,
@@ -98,6 +108,7 @@ def write_records(path: Path) -> None:
             historical=None,
             comparison=None,
             reason="No matching history.",
+            current_job_id="JOB-OTHER",
         ),
         payload(
             recorded_at=CYCLE_ONE,
@@ -191,6 +202,30 @@ def validate_command(path: Path) -> None:
     ] == [CYCLE_ONE.isoformat(), CYCLE_TWO.isoformat()]
     assert timeline["cycles"][0]["record_count"] == 3
     assert timeline["cycles"][1]["legacy_selection_count"] == 1
+
+    output = io.StringIO()
+    with redirect_stdout(output):
+        result = summary_main(
+            [
+                "--path",
+                str(path),
+                "--all-cycles",
+                "--json",
+                "--job-id",
+                " job-other ",
+                "--from",
+                CYCLE_ONE.isoformat(),
+                "--to",
+                CYCLE_ONE.isoformat(),
+            ]
+        )
+
+    assert result == 0
+    filtered = json.loads(output.getvalue())
+    assert filtered["cycle_count"] == 1
+    assert filtered["record_count"] == 1
+    assert filtered["filters"]["job_id"] == " job-other "
+    assert filtered["cycles"][0]["no_match_count"] == 1
     assert path.read_bytes() == before
 
 
@@ -219,6 +254,69 @@ def validate_timeline(records) -> None:
         raise AssertionError("Mixed timezone-awareness was accepted")
     except ValueError as exc:
         assert "timezone" in str(exc).casefold()
+
+
+def validate_filters(records) -> None:
+    engine = HistoricalComparisonAuditFilterEngine()
+
+    job_records = engine.filter(
+        records,
+        HistoricalComparisonAuditFilter(job_id=" job-orders "),
+    )
+    assert len(job_records) == 3
+
+    intent_records = engine.filter(
+        records,
+        HistoricalComparisonAuditFilter(
+            selection_basis=(
+                HistoricalSelectionBasis.RESEARCH_INTENT
+            )
+        ),
+    )
+    assert len(intent_records) == 1
+    assert intent_records[0].eligible_count == 2
+
+    changed_records = engine.filter(
+        records,
+        HistoricalComparisonAuditFilter(
+            comparison_type=ComparisonType.INFORMATION_CHANGE
+        ),
+    )
+    assert len(changed_records) == 1
+    assert changed_records[0].change_detected is True
+
+    latest_records = engine.filter(
+        records,
+        HistoricalComparisonAuditFilter(
+            entity=" example   limited ",
+            category="external web",
+            recorded_from=CYCLE_TWO,
+            recorded_to=CYCLE_TWO,
+        ),
+    )
+    assert len(latest_records) == 1
+    assert latest_records[0].recorded_at == CYCLE_TWO
+
+    try:
+        engine.filter(
+            records,
+            HistoricalComparisonAuditFilter(
+                recorded_from=CYCLE_TWO,
+                recorded_to=CYCLE_ONE,
+            ),
+        )
+        raise AssertionError("Reversed runtime bounds were accepted")
+    except ValueError as exc:
+        assert "later" in str(exc).casefold()
+
+    try:
+        engine.filter(
+            records,
+            HistoricalComparisonAuditFilter(job_id=123),
+        )
+        raise AssertionError("Non-string job filter was accepted")
+    except ValueError as exc:
+        assert "string" in str(exc).casefold()
 
 
 def validate_failures(root: Path) -> None:
@@ -269,9 +367,9 @@ def main() -> None:
         path = root / "historical.jsonl"
         write_records(path)
         validate_reading_and_summary(path)
-        validate_timeline(
-            HistoricalComparisonAuditReader(path).read_all()
-        )
+        records = HistoricalComparisonAuditReader(path).read_all()
+        validate_timeline(records)
+        validate_filters(records)
         validate_command(path)
         validate_failures(root)
 

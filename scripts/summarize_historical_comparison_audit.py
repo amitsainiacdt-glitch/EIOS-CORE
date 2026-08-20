@@ -11,11 +11,21 @@ from pathlib import Path
 from modules.external_intelligence.historical_comparison_audit_reader import (
     HistoricalComparisonAuditReader,
 )
+from modules.external_intelligence.historical_comparison_audit_filter import (
+    HistoricalComparisonAuditFilter,
+)
+from modules.external_intelligence.historical_comparison_audit_filter_engine import (
+    HistoricalComparisonAuditFilterEngine,
+)
 from modules.external_intelligence.historical_comparison_cycle_summarizer import (
     HistoricalComparisonCycleSummarizer,
 )
 from modules.external_intelligence.historical_comparison_audit_timeline_builder import (
     HistoricalComparisonAuditTimelineBuilder,
+)
+from modules.observation.historical_comparison import ComparisonType
+from modules.observation.historical_observation_selector import (
+    HistoricalSelectionBasis,
 )
 
 
@@ -49,6 +59,36 @@ def build_parser() -> argparse.ArgumentParser:
         "--json",
         action="store_true",
         help="Emit stable machine-readable JSON.",
+    )
+    parser.add_argument("--entity", help="Exact normalized entity filter.")
+    parser.add_argument(
+        "--category",
+        help="Exact normalized observation-category filter.",
+    )
+    parser.add_argument("--job-id", help="Exact normalized job-ID filter.")
+    parser.add_argument(
+        "--research-intent",
+        help="Exact normalized research-intent filter.",
+    )
+    parser.add_argument(
+        "--selection-basis",
+        choices=[item.value for item in HistoricalSelectionBasis],
+        help="Historical selection-basis filter.",
+    )
+    parser.add_argument(
+        "--comparison-type",
+        choices=[item.value for item in ComparisonType],
+        help="Historical comparison-type filter.",
+    )
+    parser.add_argument(
+        "--from",
+        dest="recorded_from",
+        help="Inclusive ISO runtime lower bound.",
+    )
+    parser.add_argument(
+        "--to",
+        dest="recorded_to",
+        help="Inclusive ISO runtime upper bound.",
     )
     return parser
 
@@ -85,6 +125,16 @@ def main(argv=None) -> int:
         print(f"Audit read error: {exc}")
         return 1
 
+    try:
+        criteria = _filter_from_args(args)
+        records = HistoricalComparisonAuditFilterEngine().filter(
+            records,
+            criteria,
+        )
+    except ValueError as exc:
+        print(f"Audit filter error: {exc}")
+        return 1
+
     if not records:
         if args.json:
             print(
@@ -94,6 +144,7 @@ def main(argv=None) -> int:
                         "cycle_count": 0,
                         "record_count": 0,
                         "cycles": [],
+                        "filters": _filter_payload(criteria),
                         "financial_interpretation_performed": False,
                     },
                     sort_keys=True,
@@ -113,7 +164,9 @@ def main(argv=None) -> int:
             return 1
 
         if args.json:
-            print(json.dumps(_timeline_payload(timeline), sort_keys=True))
+            payload = _timeline_payload(timeline)
+            payload["filters"] = _filter_payload(criteria)
+            print(json.dumps(payload, sort_keys=True))
         else:
             _print_timeline(timeline)
         return 0
@@ -138,6 +191,7 @@ def main(argv=None) -> int:
                 {
                     "schema_version": 1,
                     "cycle": _summary_payload(summary),
+                    "filters": _filter_payload(criteria),
                     "financial_interpretation_performed": False,
                 },
                 sort_keys=True,
@@ -147,6 +201,65 @@ def main(argv=None) -> int:
 
     _print_summary(summary)
     return 0
+
+
+def _filter_from_args(args) -> HistoricalComparisonAuditFilter:
+    return HistoricalComparisonAuditFilter(
+        entity=args.entity,
+        category=args.category,
+        job_id=args.job_id,
+        research_intent=args.research_intent,
+        selection_basis=(
+            HistoricalSelectionBasis(args.selection_basis)
+            if args.selection_basis
+            else None
+        ),
+        comparison_type=(
+            ComparisonType(args.comparison_type)
+            if args.comparison_type
+            else None
+        ),
+        recorded_from=_optional_datetime(args.recorded_from, "--from"),
+        recorded_to=_optional_datetime(args.recorded_to, "--to"),
+    )
+
+
+def _optional_datetime(value, name):
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value)
+    except ValueError as exc:
+        raise ValueError(f"{name} must be ISO format") from exc
+
+
+def _filter_payload(criteria) -> dict:
+    return {
+        "entity": criteria.entity,
+        "category": criteria.category,
+        "job_id": criteria.job_id,
+        "research_intent": criteria.research_intent,
+        "selection_basis": (
+            criteria.selection_basis.value
+            if criteria.selection_basis is not None
+            else None
+        ),
+        "comparison_type": (
+            criteria.comparison_type.value
+            if criteria.comparison_type is not None
+            else None
+        ),
+        "recorded_from": (
+            criteria.recorded_from.isoformat()
+            if criteria.recorded_from is not None
+            else None
+        ),
+        "recorded_to": (
+            criteria.recorded_to.isoformat()
+            if criteria.recorded_to is not None
+            else None
+        ),
+    }
 
 
 def _summary_payload(summary) -> dict:
