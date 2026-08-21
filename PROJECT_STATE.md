@@ -3890,6 +3890,26 @@ performed.
 
 ---
 
+# 70. READ-ONLY PROMOTED-STAGE CATALYST PREVIEW
+
+Approved Emerging-to-Validated stage reviews can now be applied only to fresh
+in-memory reconstructions of their exact Signals. The builder first recreates
+the unchanged baseline multi-Signal support fingerprint, then verifies every
+stage review and produces a before/after Catalyst Engine comparison.
+
+The immutable preview preserves original and effective stages, promoted Signal
+IDs, baseline and promoted scores and confidence, score change, minimum-score
+status, taxonomy classification, reasoning, and warnings. Canonical Signal
+receipts and interpretations are never changed.
+
+    python -m scripts.preview_historical_comparison_promoted_stage_catalyst
+
+All input ledgers remain byte-for-byte unchanged. No promoted Signal, cluster,
+or Catalyst is persisted; no Intelligence, Expectation Gap, Opportunity
+scoring, valuation, portfolio action, or investment decision is performed.
+
+---
+
 # 69. HUMAN SIGNAL STAGE REVIEW LEDGER
 
 One Signal inside an exact strong multi-Signal support preview can now receive
