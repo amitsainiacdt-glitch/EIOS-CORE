@@ -3906,3 +3906,25 @@ All input receipts remain byte-for-byte unchanged. This checkpoint records
 human meaning only: it does not invoke the Signal Interpretation Engine,
 create a Signal or Catalyst, publish Intelligence, perform valuation, or make
 an investment decision.
+
+---
+
+# 61. EXPLICIT SIGNAL MATERIALIZATION WITH CREATION RECEIPTS
+
+One approved historical-comparison Signal interpretation can now explicitly
+create one canonical in-memory Signal through the existing
+`SignalInterpretationEngine`. The exact governed input, pack, EvidenceItem,
+Signal ID, canonical Signal fingerprint, classification, creator, and timestamp
+are preserved in a separate append-only creation receipt.
+
+Materialization fails before the engine runs when the interpretation and
+Evidence conversion do not bind the same EvidenceItem, the timestamp precedes
+an approved input, the Signal ID already exists, or the same approved
+interpretation was already materialized.
+
+    python -m scripts.materialize_historical_comparison_signal
+
+Only the creation receipt is persisted. Source ledgers remain byte-for-byte
+unchanged, the Signal Registry is not mutated, and no Catalyst is created. No
+Intelligence is published, and no valuation, opportunity score, portfolio
+action, or investment decision is performed.
