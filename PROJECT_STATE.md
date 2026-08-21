@@ -3698,3 +3698,31 @@ It verifies the comparison audit, review decision ledger, and Observation
 store remain byte-for-byte unchanged. No EvidenceAssessment is supplied and no
 Evidence, Intelligence, Signal, Catalyst, Opportunity, score, valuation, or
 investment decision is created.
+
+---
+
+# 53. OPT-IN HUMAN EVIDENCE ASSESSMENT LEDGER
+
+An explicitly ACCEPTED historical comparison review can now receive one
+separate, append-only human Evidence assessment after exact source Observation
+resolution. Each schema-version-one record binds the candidate ID to the
+resolved Observation fingerprint and preserves category, Supporting or
+Contradictory direction, strength, confidence, independent-confirmation count,
+primary-source and time-sensitive flags, assessor, rationale, and assessment
+timestamp.
+
+Assessment values are explicit human inputs. Strength and confidence must be
+finite values from zero through 100, independent confirmation must be a
+non-negative integer, flags must be booleans, and the assessment cannot precede
+the accepted review. Duplicate or conflicting assessments for a candidate fail
+before any write.
+
+The recording command requires the audit, review ledger, Observation store,
+and assessment ledger to use four separate paths:
+
+    python -m scripts.record_historical_comparison_evidence_assessment
+
+It resolves the ACCEPTED candidate and exact Observation before appending only
+the assessment ledger, then verifies the three source files remain unchanged.
+No EvidenceItem, Evidence, Intelligence, Signal, Catalyst, Opportunity, score,
+valuation, or investment decision is created.
