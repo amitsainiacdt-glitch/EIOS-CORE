@@ -3648,3 +3648,27 @@ EIOS_HISTORICAL_COMPARISON_REVIEW_LEDGER_PATH and reports pending and decided
 counts. It verifies both input files remain byte-for-byte unchanged. This
 checkpoint does not create Evidence, publish intelligence, score Opportunities,
 infer financial importance, or change investment decisions.
+
+---
+
+# 51. READ-ONLY HISTORICAL COMPARISON REVIEW DECISION SUMMARY
+
+Reconciled historical comparison review candidates can now be aggregated into
+an immutable, count-only operational summary. The summary reports pending and
+decided totals, explicit REVIEWED, ACCEPTED, REJECTED, and DEFERRED counts,
+counts by entity, category, comparison type, reviewer, and calendar review
+date, unresolved candidate identities, and the earliest and latest explicit
+review timestamps.
+
+A separate read-only command accepts the audit and decision-ledger paths from
+arguments or their existing EIOS environment variables:
+
+    python -m scripts.summarize_historical_comparison_review_decisions
+
+Text and stable schema-version-one JSON output are supported. The command
+requires the audit and ledger to remain separate, validates reconciliation and
+review metadata, and verifies that both source files remain byte-for-byte
+unchanged. Mixed timezone-awareness in review timestamps fails closed.
+
+This summary does not create Evidence, publish intelligence, score an
+Opportunity, infer financial importance, or change an investment decision.
