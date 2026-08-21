@@ -137,8 +137,8 @@ class HistoricalComparisonSignalInterpretationLedger:
             values[name] = list(cls._texts(values[name], name, allow_empty=True))
         for name in cls.FLOAT_FIELDS:
             value = values[name]
-            if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0.0 <= float(value) <= 1.0:
-                raise ValueError(f"interpretation {name} must be between 0 and 1")
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0.0 <= float(value) <= 100.0:
+                raise ValueError(f"interpretation {name} must be between 0 and 100")
             values[name] = float(value)
         for name in ("title", "description", "detected_date", "economic_mechanism", "supply_demand_impact", "earnings_impact", "valuation_impact", "market_expectation", "price_reaction", "historical_precedent"):
             values[name] = cls._text(values[name], name)

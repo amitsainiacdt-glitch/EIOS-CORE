@@ -3928,3 +3928,29 @@ Only the creation receipt is persisted. Source ledgers remain byte-for-byte
 unchanged, the Signal Registry is not mutated, and no Catalyst is created. No
 Intelligence is published, and no valuation, opportunity score, portfolio
 action, or investment decision is performed.
+
+---
+
+# 62. READ-ONLY SIGNAL VALIDATION PREVIEW
+
+An exact historical-comparison Signal creation can now be reconstructed from
+its approved interpretation and Evidence conversion, checked against its
+creation-time canonical Signal fingerprint, and evaluated by the existing
+`SignalValidationEngine` without persistence.
+
+The immutable preview exposes validity, validation score and confidence,
+source and Evidence quality, relevance, recency, persistence, corroboration,
+contradiction penalty, independent confirmation, reasons, warnings, and
+invalidation reasons. Any provenance or fingerprint mismatch fails before
+validation.
+
+The interpretation ledger now enforces the canonical Signal model's 0-100
+scale for magnitude, probability, persistence, relevance, and market
+recognition, matching the existing interpretation and validation engines.
+
+    python -m scripts.preview_historical_comparison_signal_validation
+
+The command reads three distinct ledgers and verifies all remain byte-for-byte
+unchanged. It does not append a receipt, alter the Signal Registry, classify a
+Catalyst, publish Intelligence, score an Opportunity, perform valuation, or
+make a portfolio action or investment decision.
