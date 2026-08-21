@@ -3781,3 +3781,29 @@ Observation store, and assessment ledger remain unchanged. Materialization is
 never invoked automatically by ResearchRuntime. No Intelligence is published,
 no Signal or Catalyst is generated, no Opportunity is scored, and no valuation
 or investment decision is performed.
+
+---
+
+# 56. READ-ONLY MATERIALIZED EVIDENCE RECEIPT RECONCILIATION
+
+Materialized historical comparison EvidenceItem receipts can now be reconciled
+back through the accepted review, exact persisted Observation, and explicit
+human assessment chain. Every receipt field, deterministic Evidence ID,
+Observation fingerprint, reviewer, assessor, and chronology must match the
+current validated source records.
+
+Verified receipts are grouped by exact entity into immutable pack previews with
+Supporting and Contradictory Evidence IDs. Operational workflow gaps are
+reported separately for accepted candidates missing an assessment and assessed
+candidates missing a materialization receipt. These are pipeline-state facts,
+not financial or investment interpretations.
+
+The read-only command requires five distinct source paths and supports text and
+stable schema-version-one JSON output:
+
+    python -m scripts.preview_historical_comparison_entity_evidence_packs
+
+Orphaned, altered, duplicate, stale, or mismatched receipts fail closed. All
+five source files remain byte-for-byte unchanged. No new EvidenceItem is
+created, no Intelligence is published, no Signal or Catalyst is generated, no
+Opportunity is scored, and no valuation or investment decision is performed.
