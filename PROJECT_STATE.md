@@ -3997,3 +3997,26 @@ The command reads four distinct ledgers and verifies all remain byte-for-byte
 unchanged. It performs no Catalyst taxonomy matching or classification,
 creates no Catalyst, publishes no Intelligence, scores no Opportunity,
 performs no valuation, and makes no portfolio action or investment decision.
+
+---
+
+# 65. EXPLICIT CATALYST TAXONOMY CLASSIFICATION RECEIPTS
+
+One eligible governed Signal can now be explicitly passed to the existing
+deterministic `CatalystClassifier`. The resulting primary and secondary
+taxonomy definitions, confidence, reasoning, matched and unclassified Signals,
+warnings, analyst, rationale, and timestamp are preserved in an append-only
+classification receipt.
+
+Every receipt binds deterministic eligibility and classification fingerprints
+to the exact Signal and human-approved validation result. Ineligible or stale
+inputs fail before classification, and duplicate classification of the same
+exact eligible Signal fails before the classifier runs.
+
+    python -m scripts.classify_historical_comparison_catalyst
+
+Only taxonomy classification occurs. The command verifies four source ledgers
+remain byte-for-byte unchanged and appends only the classification receipt. It
+does not invoke the analytical Catalyst Engine, create a Catalyst object,
+publish Intelligence, score an Opportunity, perform valuation, or make a
+portfolio action or investment decision.
