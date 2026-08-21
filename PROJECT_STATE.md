@@ -3910,6 +3910,28 @@ scoring, valuation, portfolio action, or investment decision is performed.
 
 ---
 
+# 71. HUMAN PROMOTED-STAGE CATALYST ASSESSMENT LEDGER
+
+One exact promoted-stage Catalyst preview can now receive an append-only human
+disposition of Approved, Rejected, or Deferred. Each record binds a
+deterministic fingerprint of the complete before/after preview to its promotion
+and support fingerprints, Catalyst, full Signal set, promoted Signal set,
+reviewer, rationale, conditions, monitoring requirements, and timestamp.
+
+Approval fails closed unless the promoted Catalyst meets the existing engine
+minimum score. Duplicate decisions for the same exact preview fail before any
+write; below-threshold previews may still be explicitly Deferred or Rejected.
+
+    python -m scripts.record_historical_comparison_promoted_catalyst_assessment
+
+The command reconstructs the exact preview from its source ledgers, verifies
+those inputs remain byte-for-byte unchanged, and appends only the human
+decision. It persists no Signal or Catalyst, publishes no Intelligence, runs
+no Expectation Gap or Opportunity scoring, performs no valuation, and makes no
+portfolio action or investment decision.
+
+---
+
 # 69. HUMAN SIGNAL STAGE REVIEW LEDGER
 
 One Signal inside an exact strong multi-Signal support preview can now receive
