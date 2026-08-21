@@ -3979,6 +3979,28 @@ portfolio action or investment decision.
 
 ---
 
+# 66. READ-ONLY CATALYST ENGINE ANALYSIS PREVIEW
+
+One classified governed Signal can now be reconstructed and analyzed in memory
+by the existing `CatalystEngine`. Before analysis, the current eligibility and
+taxonomy classification are recomputed and required to match their exact
+stored fingerprints. The engine receives the verified classification rather
+than independently changing the taxonomy result.
+
+The immutable preview exposes classification, direction, horizon, magnitude,
+probability, persistence, market recognition, Catalyst score and confidence,
+minimum-score status, Evidence, assumptions, contradictions, invalidation
+conditions, reasoning, and warnings. The in-memory Catalyst object is discarded.
+
+    python -m scripts.preview_historical_comparison_catalyst_analysis
+
+The command reads five distinct ledgers and verifies each remains byte-for-byte
+unchanged. It appends no receipt, persists no Catalyst, publishes no
+Intelligence, runs no Expectation Gap or Opportunity scoring, performs no
+valuation, and makes no portfolio action or investment decision.
+
+---
+
 # 64. READ-ONLY CATALYST REVIEW ELIGIBILITY PREVIEW
 
 An exact governed Signal can now be checked for permission to enter Catalyst

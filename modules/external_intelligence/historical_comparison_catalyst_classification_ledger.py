@@ -34,8 +34,8 @@ class HistoricalComparisonCatalystClassificationLedger:
   classification=(classifier or CatalystClassifier()).classify(signals=[signal],causal_chain=signal.causal_chain)
   primary_id=classification.primary.catalyst_id if classification.primary else ""
   primary_family=classification.primary.family.value if classification.primary else ""
-  payload={"primary_catalyst_id":primary_id,"primary_family":primary_family,"secondary_catalyst_ids":[x.catalyst_id for x in classification.secondary],"secondary_families":[x.family.value for x in classification.secondary],"confidence":classification.confidence,"reasoning":list(classification.reasoning),"matched_signals":list(classification.matched_signals),"unclassified_signals":list(classification.unclassified_signals),"warnings":list(classification.warnings)}
-  classification_fingerprint=hashlib.sha256(json.dumps(payload,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode()).hexdigest()
+  payload=self.classification_payload(classification)
+  classification_fingerprint=self.classification_fingerprint(classification)
   receipt=HistoricalComparisonCatalystClassificationReceipt(1,eligibility_fingerprint,classification_fingerprint,creation.signal_id,creation.signal_fingerprint,decision.validation_fingerprint,primary_id,primary_family,tuple(payload["secondary_catalyst_ids"]),tuple(payload["secondary_families"]),float(classification.confidence),tuple(classification.reasoning),tuple(classification.matched_signals),tuple(classification.unclassified_signals),tuple(classification.warnings),self._text(analyst,"analyst"),self._text(rationale,"rationale"),classified_at)
   receipt=self._parse(self._payload(receipt));self.path.parent.mkdir(parents=True,exist_ok=True)
   with self.path.open("a",encoding="utf-8") as ledger:ledger.write(json.dumps(self._payload(receipt),sort_keys=True,separators=(",",":"))+"\n")
@@ -56,6 +56,15 @@ class HistoricalComparisonCatalystClassificationLedger:
  def eligibility_fingerprint(preview):
   if not isinstance(preview,HistoricalComparisonCatalystEligibilityPreview):raise ValueError("preview must be a Catalyst eligibility preview")
   payload={**preview.__dict__,"blockers":list(preview.blockers),"conditions":list(preview.conditions),"monitoring_requirements":list(preview.monitoring_requirements)}
+  return hashlib.sha256(json.dumps(payload,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode()).hexdigest()
+ @staticmethod
+ def classification_payload(classification):
+  primary_id=classification.primary.catalyst_id if classification.primary else ""
+  primary_family=classification.primary.family.value if classification.primary else ""
+  return {"primary_catalyst_id":primary_id,"primary_family":primary_family,"secondary_catalyst_ids":[x.catalyst_id for x in classification.secondary],"secondary_families":[x.family.value for x in classification.secondary],"confidence":classification.confidence,"reasoning":list(classification.reasoning),"matched_signals":list(classification.matched_signals),"unclassified_signals":list(classification.unclassified_signals),"warnings":list(classification.warnings)}
+ @classmethod
+ def classification_fingerprint(cls,classification):
+  payload=cls.classification_payload(classification)
   return hashlib.sha256(json.dumps(payload,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode()).hexdigest()
  @classmethod
  def _parse(cls,p):
