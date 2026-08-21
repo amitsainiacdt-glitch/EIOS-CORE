@@ -3954,6 +3954,28 @@ perform valuation, or make a portfolio action or investment decision.
 
 ---
 
+# 73. READ-ONLY EXPECTATION GAP ELIGIBILITY PREVIEW
+
+One exact materialized governed Catalyst can now be checked for permission to
+enter Expectation Gap analysis without invoking the `ExpectationGapEngine`.
+The gate reconstructs the canonical Catalyst, verifies its full fingerprint,
+and requires exact bindings across the promoted preview, approved human
+assessment, and append-only Catalyst creation receipt.
+
+The immutable preview exposes eligibility, explicit blockers, Catalyst score
+and confidence, complete provenance fingerprints, and the seven inputs that a
+later Expectation Gap analysis must provide. Stale or mismatched receipts fail
+closed before an eligibility result is produced.
+
+    python -m scripts.preview_historical_comparison_expectation_gap_eligibility
+
+Every source ledger remains byte-for-byte unchanged. The command does not run
+Expectation Gap or Opportunity scoring, modify Signals, persist another
+Catalyst, publish Intelligence, perform valuation, or make a portfolio action
+or investment decision.
+
+---
+
 # 69. HUMAN SIGNAL STAGE REVIEW LEDGER
 
 One Signal inside an exact strong multi-Signal support preview can now receive
