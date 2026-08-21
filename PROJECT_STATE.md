@@ -3629,3 +3629,22 @@ It does not run automatically as part of ResearchRuntime.
 Decision persistence does not modify the comparison audit or observation store,
 create Evidence, publish intelligence, score an Opportunity, infer financial
 importance, or change an investment decision.
+
+---
+
+# 50. READ-ONLY REVIEW CANDIDATE DECISION RECONCILIATION
+
+Historical comparison review candidates can now be reconciled with the
+separate decision ledger without modifying either source. Pending candidates
+remain unchanged; decided candidates are returned as new immutable values with
+their persisted status, reviewer, reason, and review timestamp.
+
+Reconciliation fails closed for unknown candidate references, multiple
+decisions, duplicate candidate identities, non-pending source candidates,
+timestamps preceding the audit record, and inconsistent timezone awareness.
+
+The review-candidate listing command accepts --ledger-path or
+EIOS_HISTORICAL_COMPARISON_REVIEW_LEDGER_PATH and reports pending and decided
+counts. It verifies both input files remain byte-for-byte unchanged. This
+checkpoint does not create Evidence, publish intelligence, score Opportunities,
+infer financial importance, or change investment decisions.
