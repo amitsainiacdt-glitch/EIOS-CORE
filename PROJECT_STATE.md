@@ -3672,3 +3672,29 @@ unchanged. Mixed timezone-awareness in review timestamps fails closed.
 
 This summary does not create Evidence, publish intelligence, score an
 Opportunity, infer financial importance, or change an investment decision.
+
+---
+
+# 52. READ-ONLY ACCEPTED-REVIEW OBSERVATION RESOLUTION PREVIEW
+
+Explicitly ACCEPTED historical comparison review candidates can now be
+resolved to their full persisted current Observations without modifying any
+source. Resolution first matches the exact SHA-256 content fingerprint and
+then requires the audited title, entity, category, timestamp, source, job ID,
+and research intent to match the persisted Observation and its provenance.
+
+Missing source Observations, duplicate fingerprint matches, provenance-free
+Observations, identity mismatches, malformed fingerprints, and non-ACCEPTED
+candidates fail closed. The immutable preview preserves the resolved content,
+confidence, source metadata, provenance, reviewer, reason, and review time but
+does not return or mutate the source Observation object.
+
+The read-only command requires three separate source paths and supports text
+and stable schema-version-one JSON output:
+
+    python -m scripts.preview_historical_comparison_accepted_observations
+
+It verifies the comparison audit, review decision ledger, and Observation
+store remain byte-for-byte unchanged. No EvidenceAssessment is supplied and no
+Evidence, Intelligence, Signal, Catalyst, Opportunity, score, valuation, or
+investment decision is created.
