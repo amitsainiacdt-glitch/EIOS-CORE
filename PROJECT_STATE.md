@@ -3890,6 +3890,28 @@ performed.
 
 ---
 
+# 69. HUMAN SIGNAL STAGE REVIEW LEDGER
+
+One Signal inside an exact strong multi-Signal support preview can now receive
+an append-only human maturity review. This checkpoint supports only the narrow
+transition from Emerging Signal to Validated Signal and binds the exact support,
+Signal, validation, reviewer, rationale, optional conditions and monitoring
+requirements, and timestamp.
+
+Approval requires unique independently supported Signals, an emerging cluster,
+an explicit promotion-required result, and an already Approved Signal
+validation decision. Later maturity stages cannot be assigned here. Duplicate
+reviews for the same support, Signal, and target fail before any write.
+
+    python -m scripts.record_historical_comparison_signal_stage_review
+
+Only the review ledger is appended. Canonical Signals remain unchanged and no
+Catalyst is recalculated or persisted. No Intelligence, Expectation Gap,
+Opportunity scoring, valuation, portfolio action, or investment decision is
+performed.
+
+---
+
 # 59. EXPLICIT GOVERNED ENTITY EVIDENCE PACK RESCORING
 
 One exact entity Evidence pack and its fingerprint-bound human governance can
