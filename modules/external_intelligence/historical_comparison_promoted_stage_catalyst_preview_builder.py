@@ -17,6 +17,9 @@ class _FixedClassifier:
 
 class HistoricalComparisonPromotedStageCatalystPreviewBuilder:
  def build(self,inputs,reviews,*,theme,cluster_id,catalyst_id,trigger,description,economic_impact,earnings_impact,valuation_impact):
+  preview,_=self.build_with_catalyst(inputs,reviews,theme=theme,cluster_id=cluster_id,catalyst_id=catalyst_id,trigger=trigger,description=description,economic_impact=economic_impact,earnings_impact=earnings_impact,valuation_impact=valuation_impact)
+  return preview
+ def build_with_catalyst(self,inputs,reviews,*,theme,cluster_id,catalyst_id,trigger,description,economic_impact,earnings_impact,valuation_impact):
   baseline=HistoricalComparisonMultiSignalCatalystSupportPreviewBuilder().build(inputs,theme=theme,cluster_id=cluster_id,catalyst_id=catalyst_id,trigger=trigger,description=description,economic_impact=economic_impact,earnings_impact=earnings_impact,valuation_impact=valuation_impact)
   if not isinstance(reviews,(list,tuple)) or not reviews:raise ValueError("at least one approved stage review is required")
   review_by_signal={}
@@ -48,6 +51,7 @@ class HistoricalComparisonPromotedStageCatalystPreviewBuilder:
   catalyst=engine.analyze(catalyst_id=catalyst_id,title=theme,trigger=trigger,signals=list(cluster.signals),description=description,economic_impact=economic_impact,earnings_impact=earnings_impact,valuation_impact=valuation_impact,affected_sectors=cluster.sectors,affected_companies=cluster.companies,assumptions=list(dict.fromkeys(assumptions)),invalidation_conditions=list(dict.fromkeys(invalidations)))
   identity={"support_fingerprint":baseline.support_fingerprint,"reviews":[{"signal_id":x.signal_id,"signal_fingerprint":x.signal_fingerprint,"target_stage":x.target_stage.value,"reviewed_at":x.reviewed_at.isoformat()} for x in sorted(reviews,key=lambda x:x.signal_id)]}
   fingerprint=hashlib.sha256(json.dumps(identity,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode()).hexdigest()
-  return HistoricalComparisonPromotedStageCatalystPreview(fingerprint,baseline.support_fingerprint,cluster_id,catalyst_id,tuple(x.signal_id for x in signals),tuple(promoted),tuple(original),tuple(effective),baseline.catalyst_score,catalyst.catalyst_score,round(catalyst.catalyst_score-baseline.catalyst_score,2),baseline.catalyst_confidence,catalyst.confidence,baseline.meets_minimum_catalyst_score,catalyst.catalyst_score>=CatalystEngine.MINIMUM_CATALYST_SCORE,catalyst.primary_catalyst_id,catalyst.primary_catalyst_family,catalyst.classification_confidence,tuple(catalyst.reasons),tuple(catalyst.warnings))
+  preview=HistoricalComparisonPromotedStageCatalystPreview(fingerprint,baseline.support_fingerprint,cluster_id,catalyst_id,tuple(x.signal_id for x in signals),tuple(promoted),tuple(original),tuple(effective),baseline.catalyst_score,catalyst.catalyst_score,round(catalyst.catalyst_score-baseline.catalyst_score,2),baseline.catalyst_confidence,catalyst.confidence,baseline.meets_minimum_catalyst_score,catalyst.catalyst_score>=CatalystEngine.MINIMUM_CATALYST_SCORE,catalyst.primary_catalyst_id,catalyst.primary_catalyst_family,catalyst.classification_confidence,tuple(catalyst.reasons),tuple(catalyst.warnings))
+  return preview,catalyst
 
 __all__=["HistoricalComparisonPromotedStageCatalystPreviewBuilder"]

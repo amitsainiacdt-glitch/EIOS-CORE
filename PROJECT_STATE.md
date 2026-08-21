@@ -3932,6 +3932,28 @@ portfolio action or investment decision.
 
 ---
 
+# 72. EXPLICIT GOVERNED CATALYST MATERIALIZATION
+
+One exact human-approved promoted-stage Catalyst can now be explicitly
+reconstructed as the canonical `Catalyst` model and recorded with an
+append-only creation receipt. The receipt binds the complete preview,
+assessment, promotion, support, Catalyst, and Signal fingerprints to the
+creator, rationale, and timestamp.
+
+Materialization fails closed unless the assessment is Approved, the exact
+preview can be reproduced, and the promoted Catalyst still meets the existing
+minimum score. Duplicate Catalyst IDs and repeat materialization of the same
+assessment fail before the Catalyst Engine runs.
+
+    python -m scripts.materialize_historical_comparison_catalyst
+
+The command verifies every source ledger remains byte-for-byte unchanged and
+appends only the Catalyst creation receipt. It does not modify or persist any
+Signal, publish Intelligence, run Expectation Gap or Opportunity scoring,
+perform valuation, or make a portfolio action or investment decision.
+
+---
+
 # 69. HUMAN SIGNAL STAGE REVIEW LEDGER
 
 One Signal inside an exact strong multi-Signal support preview can now receive
