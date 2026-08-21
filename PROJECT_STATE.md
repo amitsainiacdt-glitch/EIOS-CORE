@@ -3858,3 +3858,27 @@ It verifies the scoring receipt source remains byte-for-byte unchanged. The
 governance checkpoint does not rescore the pack, publish Intelligence, create
 Signals or Catalysts, perform valuation, or make a portfolio action or
 investment decision.
+
+---
+
+# 59. EXPLICIT GOVERNED ENTITY EVIDENCE PACK RESCORING
+
+One exact entity Evidence pack and its fingerprint-bound human governance can
+now be explicitly rescored through the existing OpportunityEvidenceEngine.
+Only recorded assumptions, kill switches, and monitoring signals are supplied;
+no analytical inputs are inferred or fabricated.
+
+The governed input receives a deterministic fingerprint covering the pack
+fingerprint and complete governance record. An append-only scoring receipt
+preserves the resulting evidence score, confidence, support sufficiency,
+remaining evidence gaps, diagnostics, analyst, and timestamp. Duplicate
+rescoring of unchanged governed inputs fails before the engine runs.
+
+The explicit command requires eight distinct configured paths:
+
+    python -m scripts.rescore_historical_comparison_governed_evidence_pack
+
+Only the governed scoring receipt is appended. All audit, review, Observation,
+assessment, conversion, initial scoring, and governance sources remain
+unchanged. No Intelligence, Signal, or Catalyst is created, and no valuation,
+portfolio action, or investment decision is performed.
