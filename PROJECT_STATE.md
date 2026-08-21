@@ -3882,3 +3882,27 @@ Only the governed scoring receipt is appended. All audit, review, Observation,
 assessment, conversion, initial scoring, and governance sources remain
 unchanged. No Intelligence, Signal, or Catalyst is created, and no valuation,
 portfolio action, or investment decision is performed.
+
+---
+
+# 60. OPT-IN HUMAN SIGNAL INTERPRETATION LEDGER
+
+A sufficiently supported governed Evidence pack can now receive an explicit,
+append-only human Signal interpretation for one materialized EvidenceItem. The
+record binds the exact governed-input fingerprint, original pack fingerprint,
+entity, Evidence ID, full canonical `SignalInterpretation`, named analyst,
+rationale, and non-preceding timestamp.
+
+The boundary fails closed for insufficient governed support, a mismatched pack
+or entity chain, an Evidence ID outside the original scored pack, an incomplete
+canonical interpretation, or a duplicate governed-pack/Evidence pair.
+
+The explicit command reads three receipt ledgers and appends only the separate
+interpretation ledger:
+
+    python -m scripts.record_historical_comparison_signal_interpretation
+
+All input receipts remain byte-for-byte unchanged. This checkpoint records
+human meaning only: it does not invoke the Signal Interpretation Engine,
+create a Signal or Catalyst, publish Intelligence, perform valuation, or make
+an investment decision.
