@@ -3754,3 +3754,30 @@ assessment ledger remain byte-for-byte unchanged. The preview layer does not
 import or invoke Evidence creation. No EvidenceItem, Evidence, Intelligence,
 Signal, Catalyst, Opportunity, score, valuation, or investment decision is
 created.
+
+---
+
+# 55. EXPLICIT OPT-IN EVIDENCEITEM MATERIALIZATION
+
+One eligible historical comparison can now be explicitly materialized as a
+canonical Opportunity EvidenceItem through the existing ExternalEvidenceIntake
+boundary. Materialization requires an ACCEPTED human review, exact persisted
+Observation resolution, one matching human Evidence assessment, a named
+converter, and a non-preceding conversion timestamp.
+
+The Evidence ID is deterministic from the review candidate identity. Before
+creating the in-memory EvidenceItem, an append-only schema-version-one receipt
+ledger rejects any prior conversion for that candidate. The receipt preserves
+the exact EvidenceItem fields, Observation fingerprint, reviewer, assessor,
+converter, and their timestamps. Duplicate candidate or Evidence identities,
+invalid schemas, identity mismatches, and inconsistent chronology fail closed.
+
+The explicit command requires five distinct configured paths:
+
+    python -m scripts.materialize_historical_comparison_evidence
+
+Only the conversion receipt is appended. The comparison audit, review ledger,
+Observation store, and assessment ledger remain unchanged. Materialization is
+never invoked automatically by ResearchRuntime. No Intelligence is published,
+no Signal or Catalyst is generated, no Opportunity is scored, and no valuation
+or investment decision is performed.
