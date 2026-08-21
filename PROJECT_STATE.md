@@ -3954,3 +3954,25 @@ The command reads three distinct ledgers and verifies all remain byte-for-byte
 unchanged. It does not append a receipt, alter the Signal Registry, classify a
 Catalyst, publish Intelligence, score an Opportunity, perform valuation, or
 make a portfolio action or investment decision.
+
+---
+
+# 63. HUMAN SIGNAL VALIDATION DECISION LEDGER
+
+One exact read-only Signal validation result can now receive an append-only
+human disposition of Approved, Rejected, or Deferred. Each record binds a
+deterministic fingerprint of the complete validation preview to the canonical
+Signal fingerprint, Signal ID, governed input, EvidenceItem, reviewer,
+rationale, optional conditions and monitoring requirements, and timestamp.
+
+Approval fails closed unless the exact preview is valid and contains no
+invalidation reasons. Duplicate decisions for the same exact validation result
+fail before any write.
+
+    python -m scripts.record_historical_comparison_signal_validation_decision
+
+The command reconstructs the preview from three distinct source ledgers,
+verifies those inputs remain byte-for-byte unchanged, and appends only the
+decision ledger. It does not classify a Catalyst, alter the Signal Registry,
+publish Intelligence, score an Opportunity, perform valuation, or make a
+portfolio action or investment decision.
