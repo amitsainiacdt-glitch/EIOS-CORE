@@ -3833,3 +3833,28 @@ Only the scoring receipt is appended. All audit, review, Observation,
 assessment, and conversion sources remain unchanged. No Intelligence is
 published, no Signal or Catalyst is created, no valuation is performed, and no
 portfolio action or investment decision is made.
+
+---
+
+# 58. OPT-IN HUMAN OPPORTUNITY EVIDENCE GOVERNANCE LEDGER
+
+One exact scored entity Evidence pack fingerprint can now receive a separate,
+append-only human governance record. Governance requires at least one explicit
+assumption, one fully specified kill switch, and one monitoring signal, plus a
+named analyst, rationale, and non-preceding governance timestamp.
+
+Kill switches preserve name, condition, Low/Medium/High/Critical severity,
+measurability, threshold, monitoring frequency, rationale, and explicit
+triggered state. Assumptions, monitoring signals, and kill-switch names must be
+non-empty and unique. Duplicate governance for the same pack fingerprint fails
+before any write.
+
+The explicit recording command reads one scoring receipt ledger and appends
+only a separate governance ledger:
+
+    python -m scripts.record_historical_comparison_evidence_governance
+
+It verifies the scoring receipt source remains byte-for-byte unchanged. The
+governance checkpoint does not rescore the pack, publish Intelligence, create
+Signals or Catalysts, perform valuation, or make a portfolio action or
+investment decision.
