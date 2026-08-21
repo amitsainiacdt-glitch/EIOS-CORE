@@ -3861,6 +3861,35 @@ investment decision.
 
 ---
 
+# 68. READ-ONLY MULTI-SIGNAL CATALYST SUPPORT PREVIEW
+
+Two or more individually approved, fingerprint-verified Signals can now be
+combined by the existing `SignalAggregationEngine`, classified through the
+existing Signal-cluster bridge, and analyzed in memory by the existing
+`CatalystEngine`. Signal fingerprints and EvidenceItem identities must be
+unique, preventing duplicated Evidence from masquerading as corroboration.
+
+The immutable preview preserves the complete supporting identity set and
+reports independent sources, average strength and confidence, contradictions,
+cluster score and emergence, taxonomy classification, Catalyst score and
+confidence, the unchanged 50.0 minimum-score result, reasoning, and warnings.
+
+The preview explicitly reports when independent multi-Signal support is strong
+but the canonical Signal stages still keep the Catalyst below threshold. It
+does not silently promote stages or let corroboration bypass the existing
+Catalyst scoring contract. Historical Signal-chain tests now use the canonical
+0-100 Evidence confidence scale expected by the Evidence and aggregation
+engines.
+
+    python -m scripts.preview_historical_comparison_multi_signal_catalyst_support
+
+All source ledgers remain byte-for-byte unchanged. No Signal, cluster, or
+Catalyst is persisted; no Intelligence is published; no Expectation Gap,
+Opportunity scoring, valuation, portfolio action, or investment decision is
+performed.
+
+---
+
 # 59. EXPLICIT GOVERNED ENTITY EVIDENCE PACK RESCORING
 
 One exact entity Evidence pack and its fingerprint-bound human governance can
