@@ -4001,6 +4001,29 @@ valuation, and makes no portfolio action or investment decision.
 
 ---
 
+# 67. HUMAN CATALYST ASSESSMENT DECISION LEDGER
+
+One exact read-only Catalyst analysis can now receive an append-only human
+disposition of Approved, Rejected, or Deferred. Each decision binds a
+deterministic fingerprint of the complete analysis preview to its Catalyst,
+Signal, classification, reviewer, rationale, optional conditions and
+monitoring requirements, and timestamp.
+
+Approval fails closed when the Catalyst analysis does not meet the existing
+engine minimum score. Duplicate decisions on the same exact preview fail
+before any write; below-threshold analyses may still be explicitly Deferred or
+Rejected.
+
+    python -m scripts.record_historical_comparison_catalyst_assessment_decision
+
+The command reconstructs the preview from five source ledgers, verifies those
+inputs remain byte-for-byte unchanged, and appends only the human decision. It
+persists no Catalyst, publishes no Intelligence, runs no Expectation Gap or
+Opportunity scoring, performs no valuation, and makes no portfolio action or
+investment decision.
+
+---
+
 # 64. READ-ONLY CATALYST REVIEW ELIGIBILITY PREVIEW
 
 An exact governed Signal can now be checked for permission to enter Catalyst
