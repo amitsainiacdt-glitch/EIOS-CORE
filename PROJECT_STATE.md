@@ -3807,3 +3807,29 @@ Orphaned, altered, duplicate, stale, or mismatched receipts fail closed. All
 five source files remain byte-for-byte unchanged. No new EvidenceItem is
 created, no Intelligence is published, no Signal or Catalyst is generated, no
 Opportunity is scored, and no valuation or investment decision is performed.
+
+---
+
+# 57. EXPLICIT OPT-IN ENTITY EVIDENCE PACK SCORING
+
+A fully reconciled, gap-free materialization workflow for one exact entity can
+now be explicitly analyzed by the existing OpportunityEvidenceEngine. Verified
+conversion receipts are reconstructed as Supporting and Contradictory
+EvidenceItems. No assumptions, kill switches, or monitoring signals are
+fabricated; the engine reports their absence through its normal evidence gaps.
+
+Each exact input pack version receives a deterministic SHA-256 fingerprint. An
+append-only schema-version-one scoring receipt preserves the entity, input
+Evidence IDs, evidence score, confidence, support sufficiency, gaps, strengths,
+weaknesses, warnings, analyst, and analysis timestamp. Repeating an unchanged
+pack fails before the scoring engine runs; a genuinely changed receipt set has
+a new fingerprint and may be analyzed separately.
+
+The explicit command requires six distinct configured paths:
+
+    python -m scripts.analyze_historical_comparison_entity_evidence_pack
+
+Only the scoring receipt is appended. All audit, review, Observation,
+assessment, and conversion sources remain unchanged. No Intelligence is
+published, no Signal or Catalyst is created, no valuation is performed, and no
+portfolio action or investment decision is made.
