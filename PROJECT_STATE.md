@@ -3726,3 +3726,31 @@ It resolves the ACCEPTED candidate and exact Observation before appending only
 the assessment ledger, then verifies the three source files remain unchanged.
 No EvidenceItem, Evidence, Intelligence, Signal, Catalyst, Opportunity, score,
 valuation, or investment decision is created.
+
+---
+
+# 54. READ-ONLY EVIDENCE CONVERSION ELIGIBILITY PREVIEW
+
+Accepted historical comparison reviews, exactly resolved Observations, and
+human Evidence assessments can now be reconciled into immutable conversion
+eligibility previews. Each eligible preview shows the precise statement,
+source, category, direction, strength, confidence, confirmation count, source
+flags, notes, and deterministic proposed Evidence ID that a later, separately
+approved conversion would receive.
+
+Accepted candidates without assessments are reported as ineligible and remain
+unchanged. Orphan or duplicate assessments, unknown candidate references,
+fingerprint mismatches, duplicate accepted Observation fingerprints, invalid
+chronology, and inconsistent timezone awareness fail closed. Reviewer and
+assessor lineage remains attached to every projection.
+
+The read-only command requires four distinct input paths and supports text and
+stable schema-version-one JSON output:
+
+    python -m scripts.preview_historical_comparison_evidence_conversion
+
+It verifies the comparison audit, review ledger, Observation store, and human
+assessment ledger remain byte-for-byte unchanged. The preview layer does not
+import or invoke Evidence creation. No EvidenceItem, Evidence, Intelligence,
+Signal, Catalyst, Opportunity, score, valuation, or investment decision is
+created.
