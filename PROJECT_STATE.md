@@ -3976,3 +3976,24 @@ verifies those inputs remain byte-for-byte unchanged, and appends only the
 decision ledger. It does not classify a Catalyst, alter the Signal Registry,
 publish Intelligence, score an Opportunity, perform valuation, or make a
 portfolio action or investment decision.
+
+---
+
+# 64. READ-ONLY CATALYST REVIEW ELIGIBILITY PREVIEW
+
+An exact governed Signal can now be checked for permission to enter Catalyst
+review without invoking the Catalyst classifier. The gate reconstructs and
+fingerprint-verifies the Signal and current validation result, requires that
+the human decision binds that exact validation fingerprint, and permits review
+only when validation remains valid and the human disposition is Approved.
+
+The immutable preview preserves the Signal, validation, governed-input, and
+Evidence identities plus human conditions, monitoring requirements, and
+explicit blockers. A stale or mismatched validation decision fails closed.
+
+    python -m scripts.preview_historical_comparison_catalyst_eligibility
+
+The command reads four distinct ledgers and verifies all remain byte-for-byte
+unchanged. It performs no Catalyst taxonomy matching or classification,
+creates no Catalyst, publishes no Intelligence, scores no Opportunity,
+performs no valuation, and makes no portfolio action or investment decision.
