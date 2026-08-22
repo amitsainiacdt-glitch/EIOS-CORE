@@ -4322,3 +4322,25 @@ calculate or fabricate valuation.
 Stale or mismatched receipts fail closed. Every source ledger remains
 byte-for-byte unchanged. No Mispricing or Opportunity analysis, valuation,
 portfolio action, or investment decision is performed.
+
+---
+
+# 78. GOVERNED AUTHORITATIVE VALUATION SNAPSHOT RECEIPTS
+
+One typed `ValuationSection` can now be captured as an append-only valuation
+snapshot receipt before Mispricing analysis. Intake fails closed unless the
+section identifies `ValuationEngine` as its source, names its valuation method,
+contains positive finite intrinsic and fair values, and has confidence on the
+canonical 0-100 scale.
+
+A deterministic fingerprint covers the complete canonical ValuationSection,
+including its Evidence, assumptions, warnings, metadata, method, confidence,
+and values. The receipt preserves the exact fingerprint and summary fields,
+entity, human recorder, rationale, and timestamp. Duplicate snapshots fail
+before any write.
+
+    python -m scripts.record_historical_comparison_valuation_snapshot
+
+Only the separate receipt ledger is appended; the source valuation JSON stays
+byte-for-byte unchanged. Neither `ValuationEngine` nor `MispricingEngine` is
+invoked, and no Opportunity, portfolio action, or investment decision is made.
