@@ -122,15 +122,9 @@ def main():
         # TEST 5 — TIMESTAMP PRESERVATION
         # ==================================================
 
-        assert (
-            loaded[0].timestamp
-            == timestamp
-        )
+        assert loaded[0].timestamp == timestamp
 
-        assert (
-            loaded[1].timestamp
-            == timestamp
-        )
+        assert loaded[1].timestamp == timestamp
 
         print(
             "Test 4 — Timestamp Preservation: PASS"

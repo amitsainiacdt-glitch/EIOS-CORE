@@ -49,6 +49,9 @@ def test_runtime_observation_provenance_and_legacy_loading():
         assert observation is not None
         assert observation.provenance is not None
         assert observation.provenance.source_domain == "research.example.com"
+        assert observation.provenance.source_type == "WEB"
+        assert observation.provenance.source_quality_tier == "TIER_3"
+        assert observation.provenance.content_type == "text/html; charset=utf-8"
         assert observation.provenance.content_fingerprint == sha256(
             content.encode("utf-8")
         ).hexdigest()
@@ -71,6 +74,8 @@ def test_runtime_observation_provenance_and_legacy_loading():
         )
         legacy = ObservationPersistence(legacy_path).load()[0]
         assert legacy.provenance is None
+        assert legacy.timestamp == datetime(2025, 1, 1, 0, 0, 0)
+        assert legacy.timestamp.tzinfo is None
 
 
 class NoNetworkSearchProvider(SearchProvider):

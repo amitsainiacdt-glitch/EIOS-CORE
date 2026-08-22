@@ -4202,3 +4202,36 @@ remain byte-for-byte unchanged and appends only the classification receipt. It
 does not invoke the analytical Catalyst Engine, create a Catalyst object,
 publish Intelligence, score an Opportunity, perform valuation, or make a
 portfolio action or investment decision.
+
+---
+
+# 68. SOURCE QUALITY AND WITHIN-CYCLE DEDUPLICATION
+
+External Observation provenance now carries backward-compatible semantic
+source classification (`REGULATORY`, `COMPANY_PRIMARY`, `RESEARCH`, `NEWS`, or
+`WEB`) and deterministic quality tiers. MIME content type is preserved in the
+separate `content_type` field; legacy records that stored MIME data in
+`source_type` continue to load unchanged.
+
+URL identity policy lives in services, not models. Canonicalization normalizes
+scheme and host, removes default ports, fragments and tracking parameters,
+normalizes trailing slashes, and sorts query parameters. A SHA-256 fingerprint
+binds that canonical URL to whitespace-normalized content. Within one research
+cycle, matching fingerprints produce one Observation while ordered, unique
+contributing job IDs and research intents are merged into its provenance.
+Existing scalar job and intent fields remain available for compatibility.
+
+New Observation and retrieval timestamps are timezone-aware UTC. Persistence
+preserves legacy naive timestamps exactly as loaded. Engines that need to
+order mixed legacy and new timestamps normalize transient values internally
+without mutating Observation models. Historical comparison remains disabled
+by default and this checkpoint does not enable or invoke it. The existing 45
+production Observations and `data/observations.json` remain unchanged.
+
+Offline verification:
+
+    python -m modules.external_intelligence.test_source_quality_and_cycle_deduplication
+    SOURCE QUALITY AND CYCLE DEDUPLICATION : ALL TESTS PASSED
+
+The related broad offline module suite completed 11/11 successfully, and all
+changed Python files passed `py_compile`. No external calls were made.

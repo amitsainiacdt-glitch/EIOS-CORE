@@ -23,7 +23,7 @@ Persistence is delegated to ObservationPersistence.
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from .observation import Observation
 from .historical_comparison import HistoricalComparison
@@ -148,7 +148,7 @@ class ObservationEngine:
             category=category,
             entity=entity,
             confidence=confidence,
-            timestamp=datetime.now(),
+            timestamp=datetime.now(timezone.utc),
             provenance=provenance,
         )
 

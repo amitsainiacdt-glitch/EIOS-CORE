@@ -26,7 +26,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Iterable
 
@@ -119,12 +119,9 @@ class HistoricalObservationSelector:
             if not isinstance(candidate.timestamp, datetime):
                 continue
 
-            try:
-                if candidate.timestamp >= current_observation.timestamp:
-                    continue
-            except TypeError:
-                # Naive and timezone-aware timestamps cannot be
-                # ordered safely without an explicit timezone policy.
+            if self._as_utc(candidate.timestamp) >= self._as_utc(
+                current_observation.timestamp
+            ):
                 continue
 
             if self._normalize(candidate.entity) != current_entity:
@@ -185,14 +182,14 @@ class HistoricalObservationSelector:
             )
 
         latest_timestamp = max(
-            candidate.timestamp
+            self._as_utc(candidate.timestamp)
             for candidate in eligible
         )
 
         latest_candidates = [
             candidate
             for candidate in eligible
-            if candidate.timestamp == latest_timestamp
+            if self._as_utc(candidate.timestamp) == latest_timestamp
         ]
 
         if len(latest_candidates) != 1:
@@ -270,6 +267,13 @@ class HistoricalObservationSelector:
             " ",
             str(value).strip(),
         ).casefold()
+
+    @staticmethod
+    def _as_utc(value: datetime) -> datetime:
+        """Normalize for ordering without mutating persisted models."""
+        if value.tzinfo is None:
+            return value.replace(tzinfo=timezone.utc)
+        return value.astimezone(timezone.utc)
 
 
 __all__ = [

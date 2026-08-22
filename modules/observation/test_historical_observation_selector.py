@@ -1,6 +1,6 @@
 """Historical Observation Selector validation."""
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -97,6 +97,19 @@ def main() -> None:
     )
     assert excluded.selected_observation is None
     assert excluded.eligible_count == 0
+
+    legacy_naive = make_observation(
+        title="Legacy naive",
+        timestamp=BASE_TIME - timedelta(hours=2),
+    )
+    aware_current = make_observation(
+        title="Aware current",
+        timestamp=BASE_TIME.replace(tzinfo=timezone.utc),
+    )
+    mixed = selector.select(aware_current, [legacy_naive])
+    assert mixed.selected_observation is legacy_naive
+    assert legacy_naive.timestamp == BASE_TIME - timedelta(hours=2)
+    assert legacy_naive.timestamp.tzinfo is None
 
     tied_time = BASE_TIME - timedelta(hours=1)
     ambiguous = selector.select(

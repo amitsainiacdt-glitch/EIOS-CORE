@@ -28,13 +28,33 @@ It validates:
     Duplicate rejected
 """
 
-from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
 from modules.external_intelligence.research_runtime import (
     ResearchRuntime,
 )
+
+
+class FakeSearchProvider:
+    """Configured provider fake; this test never executes research."""
+
+    configured = True
+
+    def __init__(self, api_key=None):
+        self.api_key = api_key
+
+    def search(self, query):
+        raise AssertionError("Search is outside this test's scope")
+
+
+def make_runtime(observation_path):
+    with patch(
+        "modules.external_intelligence.research_runtime.TavilySearchProvider",
+        FakeSearchProvider,
+    ):
+        return ResearchRuntime(observation_path=observation_path)
 
 
 def main():
@@ -54,9 +74,7 @@ def main():
         # RUNTIME 1
         # ==================================================
 
-        runtime_1 = ResearchRuntime(
-            observation_path=observation_path
-        )
+        runtime_1 = make_runtime(observation_path)
 
         observation_1 = (
             runtime_1.observation_engine.observe(
@@ -96,9 +114,7 @@ def main():
         # RUNTIME 2 — RESTART
         # ==================================================
 
-        runtime_2 = ResearchRuntime(
-            observation_path=observation_path
-        )
+        runtime_2 = make_runtime(observation_path)
 
         assert (
             runtime_2.observation_count()
@@ -208,9 +224,7 @@ def main():
         # RUNTIME 3 — FINAL RELOAD
         # ==================================================
 
-        runtime_3 = ResearchRuntime(
-            observation_path=observation_path
-        )
+        runtime_3 = make_runtime(observation_path)
 
         assert (
             runtime_3.observation_count()
@@ -234,4 +248,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    with patch(
+        "socket.create_connection",
+        side_effect=AssertionError("Network access is forbidden in this test"),
+    ):
+        main()

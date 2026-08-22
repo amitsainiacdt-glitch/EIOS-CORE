@@ -126,10 +126,8 @@ class ObservationPersistence:
 
             item = dict(item)
 
-            item["timestamp"] = (
-                datetime.fromisoformat(
-                    item["timestamp"]
-                )
+            item["timestamp"] = datetime.fromisoformat(
+                item["timestamp"]
             )
 
             provenance = item.get("provenance")
@@ -140,6 +138,9 @@ class ObservationPersistence:
                     provenance["retrieved_at"] = datetime.fromisoformat(
                         retrieved_at
                     )
+                for field in ("contributing_job_ids", "contributing_research_intents"):
+                    if field in provenance:
+                        provenance[field] = tuple(provenance[field])
                 item["provenance"] = ObservationProvenance(
                     **provenance
                 )

@@ -21,6 +21,13 @@ class ObservationProvenance:
     source_domain: Optional[str] = None
     source_type: Optional[str] = None
     content_fingerprint: Optional[str] = None
+    # Additive metadata.  Older persisted observations remain loadable.
+    content_type: Optional[str] = None
+    source_quality_tier: Optional[str] = None
+    canonical_url: Optional[str] = None
+    observation_fingerprint: Optional[str] = None
+    contributing_job_ids: tuple[str, ...] = ()
+    contributing_research_intents: tuple[str, ...] = ()
 
 
 @dataclass

@@ -36,7 +36,7 @@ Design Principles
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from hashlib import sha256
 from urllib.parse import urlparse
 
@@ -47,6 +47,12 @@ from modules.observation.observation import (
 
 from modules.observation.observation_engine import (
     ObservationEngine,
+)
+from modules.external_intelligence.observation_deduplication_service import (
+    ObservationDeduplicationService,
+)
+from modules.external_intelligence.source_quality_service import (
+    SourceQualityService,
 )
 
 
@@ -88,6 +94,7 @@ class ExternalObservationAdapter:
         research_intent: str | None = None,
         retrieved_at: datetime | None = None,
         source_type: str | None = None,
+        content_type: str | None = None,
     ) -> Observation | None:
         """
         Convert externally obtained information into an
@@ -104,6 +111,32 @@ class ExternalObservationAdapter:
         No analytical transformation is performed.
         """
 
+        provenance = self._build_provenance(
+            cycle_id=cycle_id,
+            job_id=job_id,
+            research_intent=research_intent,
+            retrieved_at=retrieved_at,
+            source=source,
+            content_type=content_type or source_type,
+            content=description,
+        )
+
+        duplicate = (
+            ObservationDeduplicationService().find_within_cycle(
+                self.observation_engine.registry.all(), provenance
+            )
+            if provenance is not None
+            else None
+        )
+        if duplicate is not None:
+            duplicate.provenance = ObservationDeduplicationService.merge_contributor(
+                duplicate.provenance,
+                job_id=job_id,
+                research_intent=research_intent,
+            )
+            self.observation_engine.save()
+            return None
+
         return self.observation_engine.observe(
             title=title,
             description=description,
@@ -113,15 +146,7 @@ class ExternalObservationAdapter:
             confidence=self._clamp_confidence(
                 confidence
             ),
-            provenance=self._build_provenance(
-                cycle_id=cycle_id,
-                job_id=job_id,
-                research_intent=research_intent,
-                retrieved_at=retrieved_at,
-                source=source,
-                source_type=source_type,
-                content=description,
-            ),
+            provenance=provenance,
         )
 
     @staticmethod
@@ -132,7 +157,7 @@ class ExternalObservationAdapter:
         research_intent,
         retrieved_at,
         source,
-        source_type,
+        content_type,
         content,
     ) -> ObservationProvenance | None:
         """Build deterministic lineage only when runtime context is supplied."""
@@ -144,23 +169,38 @@ class ExternalObservationAdapter:
                 job_id,
                 research_intent,
                 retrieved_at,
-                source_type,
+                content_type,
             )
         ):
             return None
 
         parsed = urlparse(source)
+        classification = SourceQualityService().classify(source)
+        canonical_url = ObservationDeduplicationService.canonicalize_url(source)
+        observation_fingerprint = ObservationDeduplicationService.fingerprint(source, content)
+        aware_retrieved_at = retrieved_at
+        if aware_retrieved_at is not None:
+            if aware_retrieved_at.tzinfo is None:
+                aware_retrieved_at = aware_retrieved_at.replace(tzinfo=timezone.utc)
+            else:
+                aware_retrieved_at = aware_retrieved_at.astimezone(timezone.utc)
         return ObservationProvenance(
             cycle_id=cycle_id,
             job_id=job_id,
             research_intent=research_intent,
-            retrieved_at=retrieved_at,
+            retrieved_at=aware_retrieved_at,
             source_url=source,
             source_domain=parsed.hostname,
-            source_type=source_type,
+            source_type=classification.source_type,
             content_fingerprint=sha256(
                 content.encode("utf-8")
             ).hexdigest(),
+            content_type=content_type,
+            source_quality_tier=classification.quality_tier,
+            canonical_url=canonical_url,
+            observation_fingerprint=observation_fingerprint,
+            contributing_job_ids=((job_id,) if job_id else ()),
+            contributing_research_intents=((research_intent,) if research_intent else ()),
         )
 
     # ======================================================

@@ -582,7 +582,7 @@ class ExternalResearchOrchestrator:
                     job_id=job_id,
                     research_intent=query.intent,
                     retrieved_at=retrieved_at,
-                    source_type=normalized.content_type,
+                    content_type=normalized.content_type,
                 )
             )
 

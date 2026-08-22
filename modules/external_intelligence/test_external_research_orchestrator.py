@@ -26,7 +26,7 @@ Observation
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from datetime import datetime
+from datetime import datetime, timezone
 
 from modules.external_intelligence.external_research_orchestrator import (
     ExternalResearchOrchestrator,
@@ -460,10 +460,14 @@ def main() -> None:
     assert observation.provenance.cycle_id == "2026-08-20T09:30:00"
     assert observation.provenance.job_id == "JOB-001"
     assert observation.provenance.research_intent == "DEMAND_VALIDATION"
-    assert observation.provenance.retrieved_at == retrieved_at
+    assert observation.provenance.retrieved_at == retrieved_at.replace(
+        tzinfo=timezone.utc
+    )
     assert observation.provenance.source_url == "https://example.com"
     assert observation.provenance.source_domain == "example.com"
-    assert observation.provenance.source_type == "text/html"
+    assert observation.provenance.source_type == "WEB"
+    assert observation.provenance.content_type == "text/html"
+    assert observation.provenance.source_quality_tier == "TIER_3"
     assert len(observation.provenance.content_fingerprint) == 64
     assert result.job_id == "JOB-001"
     assert result.execution_count == 1
