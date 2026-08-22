@@ -4235,3 +4235,25 @@ Offline verification:
 
 The related broad offline module suite completed 11/11 successfully, and all
 changed Python files passed `py_compile`. No external calls were made.
+
+---
+
+# 74. READ-ONLY EXPECTATION GAP ANALYSIS PREVIEW
+
+One eligible materialized governed Catalyst can now be passed explicitly to
+the existing `ExpectationGapEngine` without persistence. Before the engine is
+invoked, the complete promoted-preview, human-assessment, and Catalyst-creation
+chain is reconstructed and fingerprint-verified. The seven required analysis
+inputs are validated, including the engine's 0-100 analytical scale.
+
+The immutable result binds a deterministic fingerprint to the exact
+eligibility result and exposes expectation and earnings differences, market
+recognition, positive or negative materiality, gap score, confidence, Evidence,
+assumptions, disconfirming Evidence, invalidation conditions, reasons, and
+warnings. Ineligible or stale provenance fails before engine invocation.
+
+    python -m scripts.preview_historical_comparison_expectation_gap_analysis
+
+Every source ledger remains byte-for-byte unchanged. No receipt or Expectation
+Gap is persisted, and no Mispricing, Opportunity, valuation, portfolio action,
+or investment decision is produced.
