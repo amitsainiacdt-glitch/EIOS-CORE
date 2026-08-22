@@ -4344,3 +4344,26 @@ before any write.
 Only the separate receipt ledger is appended; the source valuation JSON stays
 byte-for-byte unchanged. Neither `ValuationEngine` nor `MispricingEngine` is
 invoked, and no Opportunity, portfolio action, or investment decision is made.
+
+---
+
+# 79. READ-ONLY GOVERNED MISPRICING ANALYSIS PREVIEW
+
+One eligible materialized Expectation Gap and one exact governed valuation
+snapshot can now be analyzed in memory by the existing `MispricingEngine`.
+Before analysis, the complete Catalyst and Expectation Gap chain is rebuilt,
+the canonical Gap fingerprint is verified, and the typed `ValuationSection`
+must match its authoritative snapshot receipt and company exactly. Current
+market price must be positive and finite.
+
+The immutable preview binds a deterministic fingerprint to the eligibility,
+valuation, Catalyst, and Gap provenance and exposes valuation upside and
+discount, support gates, Mispricing score and confidence, potential-Mispricing
+status, Evidence, assumptions, disconfirming Evidence, invalidation conditions,
+reasons, and warnings.
+
+    python -m scripts.preview_historical_comparison_mispricing_analysis
+
+All source ledgers and valuation JSON remain byte-for-byte unchanged. No
+Mispricing result is persisted, no Opportunity is scored, and no valuation,
+portfolio action, or investment decision is performed.
