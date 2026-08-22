@@ -39,7 +39,7 @@ def one(items, predicate, name):
     return matches[0]
 
 
-def build_preview_from_args(args):
+def build_preview_from_args(args, include_context=False):
     paths, chains = [], []
     review_path = Path(args.stage_review_ledger_path)
     assessment_path = Path(args.assessment_ledger_path)
@@ -72,6 +72,19 @@ def build_preview_from_args(args):
         eios_earnings_expectation=args.eios_earnings_expectation,
         assumptions=args.assumption, invalidation_conditions=args.invalidation_condition,
     )
+    if include_context:
+        return preview, before, dict(
+            inputs=chains, reviews=reviews, catalyst_assessment=assessment,
+            catalyst_creation=creation, analysis_kwargs={
+                **catalyst_kwargs, "gap_id": args.gap_id, "company": args.company,
+                "sector": args.sector, "market_expectation": args.market_expectation,
+                "eios_expectation": args.eios_expectation,
+                "market_earnings_expectation": args.market_earnings_expectation,
+                "eios_earnings_expectation": args.eios_earnings_expectation,
+                "assumptions": args.assumption,
+                "invalidation_conditions": args.invalidation_condition,
+            },
+        )
     return preview, before
 
 

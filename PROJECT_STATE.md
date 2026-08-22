@@ -4279,3 +4279,24 @@ The command reconstructs the complete governed analysis and verifies every
 source ledger remains byte-for-byte unchanged. Only the separate assessment
 ledger is appended. It performs no Mispricing or Opportunity analysis,
 valuation, portfolio action, or investment decision.
+
+---
+
+# 76. EXPLICIT EXPECTATION GAP MATERIALIZATION RECEIPTS
+
+One human-approved governed Expectation Gap analysis can now explicitly create
+one canonical in-memory `ExpectationGap` through the existing engine. The
+exact analysis, assessment, eligibility, Catalyst, gap identity, canonical
+Expectation Gap fingerprint, direction, score, confidence, creator, and
+timestamp are preserved in a separate append-only creation receipt.
+
+Materialization fails before engine execution when the assessment is not
+Approved, a timestamp precedes review, the exact assessment was already used,
+or the Gap ID already has a receipt. Reconstructed analysis must match the
+human-approved fingerprint and complete summary exactly.
+
+    python -m scripts.materialize_historical_comparison_expectation_gap
+
+Only the creation receipt is persisted; the in-memory Expectation Gap is
+discarded. No Mispricing or Opportunity analysis, valuation, portfolio action,
+or investment decision is performed.
