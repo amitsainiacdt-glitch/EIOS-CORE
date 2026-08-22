@@ -4446,3 +4446,29 @@ Offline verification:
 
     python -m modules.external_intelligence.test_historical_comparison_opportunity_eligibility_preview
     HISTORICAL OPPORTUNITY ELIGIBILITY PREVIEW: ALL TESTS PASSED
+
+---
+
+# 83. GOVERNED ASYMMETRY ELIGIBILITY PREVIEW
+
+One exact materialized governed Mispricing result can now be checked for
+permission to enter Asymmetry analysis without invoking `AsymmetryEngine`. The
+gate reconstructs and fingerprint-verifies the complete governed chain through
+the approved Mispricing assessment and creation receipt.
+
+The immutable preview binds its deterministic eligibility fingerprint to the
+canonical Mispricing identity and complete upstream provenance. It explicitly
+exposes the five later analysis inputs required by the existing engine:
+company, scenarios, assumptions, invalidation conditions, and disconfirming
+Evidence. These inputs are not inferred or fabricated by the eligibility gate.
+
+    python -m scripts.preview_historical_comparison_asymmetry_eligibility
+
+Every source ledger and valuation input remains byte-for-byte unchanged. No
+Asymmetry or Opportunity analysis, ranking, committee review, valuation,
+portfolio action, execution, or investment decision is performed.
+
+Offline verification:
+
+    python -m modules.external_intelligence.test_historical_comparison_asymmetry_eligibility_preview
+    HISTORICAL ASYMMETRY ELIGIBILITY PREVIEW: ALL TESTS PASSED

@@ -24,8 +24,7 @@ def one(items, predicate, name):
     return matches[0]
 
 
-def main(argv=None):
-    args = parser().parse_args(argv)
+def build_opportunity_eligibility_from_args(args):
     assessment_path = Path(args.mispricing_assessment_ledger_path)
     creation_path = Path(args.mispricing_creation_ledger_path)
     try:
@@ -52,6 +51,18 @@ def main(argv=None):
             mispricing_invalidation_conditions=args.mispricing_invalidation_condition,
             **context["analysis_kwargs"],
         )
+        return preview, before, {
+            **context, "mispricing_assessment": assessment,
+            "mispricing_creation": creation,
+        }
+    except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError):
+        raise
+
+
+def main(argv=None):
+    args = parser().parse_args(argv)
+    try:
+        preview, before, _ = build_opportunity_eligibility_from_args(args)
     except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
         print(f"Opportunity eligibility error: {exc}")
         return 1
