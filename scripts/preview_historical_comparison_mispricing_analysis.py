@@ -17,7 +17,7 @@ def one(items,predicate,name):
  matches=[item for item in items if predicate(item)]
  if len(matches)!=1:raise ValueError(f"{name} was not found uniquely")
  return matches[0]
-def build_mispricing_preview_from_args(args):
+def build_mispricing_preview_from_args(args, include_context=False):
  gap_assessment_path=Path(args.gap_assessment_ledger_path);gap_creation_path=Path(args.gap_creation_ledger_path);valuation_path=Path(args.valuation_json_path);valuation_receipt_path=Path(args.valuation_receipt_ledger_path)
  analysis,before,context=build_preview_from_args(args,include_context=True)
  for path in (gap_assessment_path,gap_creation_path,valuation_path,valuation_receipt_path):before[path]=path.read_bytes()
@@ -31,6 +31,8 @@ def build_mispricing_preview_from_args(args):
  valuation=ValuationSection(**valuation_payload);valuation_fingerprint=HistoricalComparisonValuationSnapshotLedger.valuation_fingerprint(valuation)
  valuation_receipt=one(HistoricalComparisonValuationSnapshotLedger(valuation_receipt_path).read_all(),lambda item:item.valuation_fingerprint==valuation_fingerprint,"valuation snapshot receipt")
  preview=HistoricalComparisonMispricingAnalysisPreviewBuilder().build(context["inputs"],context["reviews"],context["catalyst_assessment"],context["catalyst_creation"],gap_assessment,gap_creation,valuation,valuation_receipt,cmp=args.cmp,mispricing_assumptions=args.mispricing_assumption,mispricing_invalidation_conditions=args.mispricing_invalidation_condition,**context["analysis_kwargs"])
+ if include_context:
+  return preview,before,{"inputs":context["inputs"],"reviews":context["reviews"],"catalyst_assessment":context["catalyst_assessment"],"catalyst_creation":context["catalyst_creation"],"gap_assessment":gap_assessment,"gap_creation":gap_creation,"valuation":valuation,"valuation_receipt":valuation_receipt,"analysis_kwargs":context["analysis_kwargs"]}
  return preview,before
 def main(argv=None):
  args=parser().parse_args(argv)

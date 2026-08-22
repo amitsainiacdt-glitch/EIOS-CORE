@@ -4388,3 +4388,32 @@ The command reconstructs every governed input and verifies all source files
 remain byte-for-byte unchanged. Only the assessment ledger is appended. No
 Opportunity synthesis, valuation, portfolio action, or investment decision is
 performed.
+
+---
+
+# 81. EXPLICIT GOVERNED MISPRICING MATERIALIZATION RECEIPTS
+
+One exact human-approved governed Mispricing analysis can now explicitly
+materialize one canonical in-memory `MispricingAssessment` through the existing
+`MispricingEngine`. The complete governed Signal, Catalyst, Expectation Gap,
+authoritative valuation, eligibility, analysis, and human-assessment chain is
+reconstructed and fingerprint-verified before materialization.
+
+The append-only creation receipt binds the approved assessment, analysis,
+eligibility, valuation snapshot, Expectation Gap, Catalyst, company, current
+market price, Signal set, score, confidence, potential-Mispricing status, and
+canonical Mispricing fingerprint. Rejected or Deferred decisions, stale
+inputs, timestamps preceding review, reused assessments, and duplicate
+Mispricing identities fail closed before any write.
+
+    python -m scripts.materialize_historical_comparison_mispricing
+
+Only the creation receipt is persisted; the in-memory Mispricing result is
+discarded. The command verifies every source file remains byte-for-byte
+unchanged. No Opportunity synthesis or scoring, valuation, ranking, committee
+review, portfolio action, execution, or investment decision is performed.
+
+Offline verification:
+
+    python -m modules.external_intelligence.test_historical_comparison_mispricing_creation
+    HISTORICAL MISPRICING CREATION: ALL TESTS PASSED
