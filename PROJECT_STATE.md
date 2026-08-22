@@ -4367,3 +4367,24 @@ reasons, and warnings.
 All source ledgers and valuation JSON remain byte-for-byte unchanged. No
 Mispricing result is persisted, no Opportunity is scored, and no valuation,
 portfolio action, or investment decision is performed.
+
+---
+
+# 80. HUMAN GOVERNED MISPRICING ASSESSMENT LEDGER
+
+One exact governed Mispricing analysis can now receive an append-only human
+disposition of Approved, Rejected, or Deferred. The decision binds the full
+analysis fingerprint to its eligibility, authoritative valuation receipt,
+Expectation Gap, Catalyst, company, Signal set, score, confidence, reviewer,
+rationale, optional conditions and monitoring requirements, and timestamp.
+
+Approval fails closed unless the exact engine result identifies potential
+mispricing. Duplicate decisions on the same analysis fail before any write;
+non-qualifying analyses may still be explicitly Deferred or Rejected.
+
+    python -m scripts.record_historical_comparison_mispricing_assessment
+
+The command reconstructs every governed input and verifies all source files
+remain byte-for-byte unchanged. Only the assessment ledger is appended. No
+Opportunity synthesis, valuation, portfolio action, or investment decision is
+performed.
