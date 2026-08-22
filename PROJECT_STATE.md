@@ -4300,3 +4300,25 @@ human-approved fingerprint and complete summary exactly.
 Only the creation receipt is persisted; the in-memory Expectation Gap is
 discarded. No Mispricing or Opportunity analysis, valuation, portfolio action,
 or investment decision is performed.
+
+---
+
+# 77. READ-ONLY MISPRICING ELIGIBILITY PREVIEW
+
+One exact materialized governed Expectation Gap can now be checked for
+permission to enter Mispricing analysis without invoking the
+`MispricingEngine`. The gate reconstructs and fingerprint-verifies the full
+Expectation Gap analysis, human assessment, canonical in-memory Gap, and
+append-only creation receipt.
+
+The immutable result exposes eligibility, explicit blockers, direction, Gap
+score and confidence, complete Catalyst, Signal, analysis, assessment, and
+creation provenance, and the three later inputs: company, current market
+price, and an authoritative existing valuation result. The gate does not
+calculate or fabricate valuation.
+
+    python -m scripts.preview_historical_comparison_mispricing_eligibility
+
+Stale or mismatched receipts fail closed. Every source ledger remains
+byte-for-byte unchanged. No Mispricing or Opportunity analysis, valuation,
+portfolio action, or investment decision is performed.
