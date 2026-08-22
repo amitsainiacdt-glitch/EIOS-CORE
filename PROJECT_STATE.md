@@ -4417,3 +4417,32 @@ Offline verification:
 
     python -m modules.external_intelligence.test_historical_comparison_mispricing_creation
     HISTORICAL MISPRICING CREATION: ALL TESTS PASSED
+
+---
+
+# 82. GOVERNED OPPORTUNITY SYNTHESIS ELIGIBILITY PREVIEW
+
+One exact materialized governed Mispricing result can now be checked for
+permission to enter the existing `OpportunitySynthesisEngine` without invoking
+that engine. The gate reconstructs and fingerprint-verifies the full Signal,
+Catalyst, Expectation Gap, valuation, Mispricing analysis, human assessment,
+and Mispricing creation-receipt chain.
+
+The immutable preview binds a deterministic eligibility fingerprint to all
+available provenance and enumerates every synthesis input. It currently fails
+closed, as intended, because governed Asymmetry, governed Opportunity Evidence
+Pack provenance, and explicit governed synthesis assumptions, invalidation
+conditions, and kill switches do not yet exist at this boundary. This makes
+the required sequence explicit: Asymmetry governance must precede Opportunity
+synthesis analysis.
+
+    python -m scripts.preview_historical_comparison_opportunity_eligibility
+
+Every source ledger and valuation input remains byte-for-byte unchanged. No
+Opportunity synthesis or scoring, ranking, committee review, portfolio action,
+execution, valuation, or investment decision is performed.
+
+Offline verification:
+
+    python -m modules.external_intelligence.test_historical_comparison_opportunity_eligibility_preview
+    HISTORICAL OPPORTUNITY ELIGIBILITY PREVIEW: ALL TESTS PASSED
