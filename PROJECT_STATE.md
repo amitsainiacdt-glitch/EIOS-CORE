@@ -4257,3 +4257,25 @@ warnings. Ineligible or stale provenance fails before engine invocation.
 Every source ledger remains byte-for-byte unchanged. No receipt or Expectation
 Gap is persisted, and no Mispricing, Opportunity, valuation, portfolio action,
 or investment decision is produced.
+
+---
+
+# 75. HUMAN EXPECTATION GAP ASSESSMENT LEDGER
+
+One exact governed Expectation Gap analysis can now receive an append-only
+human disposition of Approved, Rejected, or Deferred. The decision binds the
+complete analysis fingerprint to its eligibility, materialized Catalyst,
+creation receipt, Signal set, direction, score, confidence, reviewer,
+rationale, optional conditions and monitoring requirements, and timestamp.
+
+Approval fails closed unless the exact analysis establishes a material
+positive or negative gap. Duplicate decisions for the same analysis fail
+before any write; a non-material result may still be explicitly Deferred or
+Rejected.
+
+    python -m scripts.record_historical_comparison_expectation_gap_assessment
+
+The command reconstructs the complete governed analysis and verifies every
+source ledger remains byte-for-byte unchanged. Only the separate assessment
+ledger is appended. It performs no Mispricing or Opportunity analysis,
+valuation, portfolio action, or investment decision.
