@@ -4472,3 +4472,447 @@ Offline verification:
 
     python -m modules.external_intelligence.test_historical_comparison_asymmetry_eligibility_preview
     HISTORICAL ASYMMETRY ELIGIBILITY PREVIEW: ALL TESTS PASSED
+
+---
+
+# 84. PRIMARY-SOURCE-READY OBSERVATION PROVENANCE AND IDENTITY
+
+The existing `ObservationProvenance` boundary now accepts optional,
+source-neutral publication time, formal filing time, source-native document
+ID, SHA-256 document hash, and descriptive extraction method. These fields
+preserve the difference between when information was published, formally
+filed, retrieved by EIOS, and represented as an Observation.
+
+Persistence round-trips the new datetime fields without changing legacy naive
+timestamps or requiring the new keys. Existing observations with no provenance
+or older provenance continue to load unchanged. No production Observation data
+was migrated or rewritten.
+
+Within one research cycle, a supplied valid document hash now takes precedence
+for identity, followed by a source-domain-scoped native document ID. When
+neither exists, the existing canonical-URL plus normalized-content identity is
+unchanged. Cross-job lineage still merges, and identical material in a later
+cycle remains outside this deduplication checkpoint.
+
+The approved Pre-Inflection and Earliest Investable Point integration
+architecture is documented at:
+
+    docs/architecture/PRE_INFLECTION_EARLIEST_INVESTABLE_POINT.md
+
+Thirteen focused and broader offline module suites passed, along with syntax
+checks for every changed Python file. No network calls, connectors, Signals,
+Catalysts, Opportunities, valuation, portfolio actions, or investment
+decisions were introduced.
+
+---
+
+# 85. READ-ONLY CROSS-CYCLE DOCUMENT RECONCILIATION
+
+Persisted Observations can now be inspected for repeated strong document
+identity across research cycles without changing runtime deduplication. The
+read-only service groups only validated document hashes or source-domain-scoped
+native document IDs that occur in at least two distinct cycles.
+
+The immutable preview exposes deterministic group identity, participating
+cycles, Observation fingerprints, source URLs, and earliest publication,
+filing, and retrieval timing. It separately reports Observations missing strong
+identity and strong identities currently seen in only one cycle, making source
+coverage gaps explicit rather than silently treating them as unique documents.
+
+    python -m scripts.preview_cross_cycle_document_reconciliation \
+        --observation-path data/observations.json
+
+Input ordering does not change the preview fingerprint. The command verifies
+Observation storage remains byte-for-byte unchanged. It does not merge, delete,
+reject, or rewrite Observations and does not change the existing deliberate
+acceptance of repeated material in later research cycles.
+
+Offline verification:
+
+    python -m modules.external_intelligence.test_cross_cycle_document_reconciliation
+    CROSS-CYCLE DOCUMENT RECONCILIATION: ALL TESTS PASSED
+
+No Event, Evidence, Signal, Catalyst, Meta-Analysis, Opportunity, valuation,
+portfolio action, or investment decision is created.
+
+---
+
+# 86. PUBLIC-SOURCE ACQUISITION AND EXTRACTION RECEIPTS
+
+EIOS now has source-neutral, append-only audit contracts for public document
+acquisition and extraction without adding a live connector. Every acquisition
+records the cycle, job, research intent, canonical URL and domain, request and
+completion time, outcome, HTTP/content metadata, document identity, byte count,
+error details, and recorder.
+
+The acquisition boundary fails closed unless access is explicitly classified
+as `PUBLIC`. Successful retrieval requires a validated SHA-256 document hash
+and positive byte count; failed retrieval requires an explicit error and cannot
+claim document identity. Confidential, leaked, credential-gated, or UPSI input
+is outside this boundary and is rejected.
+
+Extraction receipts bind the exact acquisition fingerprint and document hash.
+They distinguish `SUCCEEDED`, `PARTIAL`, and `FAILED`; partial extraction must
+preserve warnings, and failed extraction cannot claim extracted content. A
+read-only coverage preview reports failed acquisitions, partial or failed
+extractions, and retrieved documents missing extraction receipts so downstream
+Meta-Analysis cannot interpret missing data as negative evidence.
+
+    python -m scripts.preview_public_intake_coverage \
+        --acquisition-ledger-path acquisitions.jsonl \
+        --extraction-ledger-path extractions.jsonl
+
+All receipt parsing fails closed on stale bindings, duplicate identities,
+tampered URL identity, invalid chronology, or malformed state. Focused public
+intake, cross-cycle reconciliation, source-quality/deduplication, orchestration,
+and runtime-bootstrap suites passed offline, and all changed files compiled.
+
+No connector, HTTP request, document parser, Meta-Analysis, Observation,
+Evidence, Signal, Catalyst, Opportunity, valuation, portfolio action, or
+investment decision is created by this checkpoint.
+## Checkpoint 87 — Trusted public-source acquisition boundary
+
+- Added a passive trusted-source registry for approved public HTTPS sources, initially covering NSE, BSE, SEBI, and RBI.
+- Added a guarded acquisition adapter that validates the requested address, DNS resolution, and every redirect before downloading.
+- Blocks credentials in URLs, non-HTTPS access, non-public/private network destinations, unknown domains, and redirects outside the approved source definition.
+- Records immutable acquisition outcomes, including the requested and final URL, retrieval status, document hash, byte count, and errors.
+- Added offline tests for successful retrieval, same-source redirects, unknown domains, private DNS targets, untrusted redirects, and HTTP failures.
+- Completed a live public-source smoke test against `https://www.rbi.org.in/`: retrieval succeeded with 176,713 bytes and SHA-256 `e9459d75492311603cb03f1a8b90fe76db6a5757bf359f6ef9ae2094e0ace458`.
+- The live receipt was written only to a temporary audit ledger. It did not create an Observation, Evidence item, Signal, Meta conclusion, or modify production data.
+
+## Checkpoint 88 — Guarded public-document extraction boundary
+
+- Added an extraction adapter that accepts only a successfully retrieved, PUBLIC acquisition result.
+- Recomputes the SHA-256 hash from the original document bytes before extraction; altered bytes produce an audited failure.
+- Routes HTML and plain structured text through deterministic normalization without summarisation, scoring, or investment analysis.
+- Marks unusually short but non-empty text as PARTIAL so downstream coverage treats it as incomplete rather than complete evidence.
+- Rejects unsupported formats explicitly. PDFs currently produce `PDF_EXTRACTOR_UNAVAILABLE` instead of unsafe binary decoding or false success.
+- Added an acquire-and-extract smoke command that writes only acquisition and extraction audit receipts and cannot create Observations, Evidence, Signals, or Meta conclusions.
+- Added offline tests for successful HTML extraction, partial short text, PDF refusal, content-hash mismatch, and unsupported formats.
+- Completed a live end-to-end smoke test against `https://www.rbi.org.in/`: acquisition was `RETRIEVED`, hash verification passed, and extraction `SUCCEEDED` with 17,669 normalized characters using `deterministic_html_text_v1`.
+- Both live receipts were written to temporary audit ledgers only; production observations remained unchanged.
+
+## Checkpoint 89 — Read-only public Observation admission gate
+
+- Added a passive admission preview with explicit `ADMIT`, `DEFER`, and `REJECT` decisions; it cannot create or persist an Observation.
+- Requires a successful PUBLIC acquisition from the trusted registry, an exact acquisition-to-extraction fingerprint binding, matching document hashes, and matching extracted-text fingerprints.
+- Applies minimum source-quality and content-completeness checks before admission.
+- Defers partial or insufficient extraction so missing content cannot be interpreted as negative evidence.
+- Rejects failed extraction, untrusted/non-public sources, broken lineage, altered extracted text, and documents already represented in existing Observations.
+- Returns deterministic reason codes, duplicate Observation indexes, source identity, source-quality tier, fingerprints, and proposed non-analytical metadata for review.
+- Added offline tests covering admission, duplicate rejection, partial deferral, and broken-lineage rejection without registry or persistence mutation.
+
+## Checkpoint 90 — Controlled public Observation commit service
+
+- Added the only controlled bridge from a verified public acquisition/extraction pair into the existing Observation layer.
+- Re-runs the admission gate against the current Observation registry immediately before every write; it does not trust a stale earlier preview.
+- Commits only an `ADMIT` result and returns explicit non-commit statuses for deferred, rejected, or final novelty-rejected content.
+- Preserves acquisition cycle, job, research intent, retrieval time, publication/filing times, source document ID, document hash, extraction method, content type, and source-quality lineage in Observation provenance.
+- Uses the existing Observation Engine as the final novelty and persistence boundary; it creates no Evidence, Signal, Catalyst, Opportunity, valuation, or Meta conclusion.
+- Added temporary-store tests proving exactly-one commit, repeated-document rejection, deferred-content refusal, provenance persistence, and byte-for-byte isolation of a simulated production store.
+
+## Checkpoint 91 — Durable public Observation commit audit trail
+
+- Added an append-only audit ledger for every controlled public Observation commit decision.
+- Admissible commits record `AUTHORIZED` before the Observation write and then `COMMITTED` or `FINAL_NOVELTY_REJECTION` afterward.
+- Deferred and rejected attempts record `BLOCKED` without creating an Observation.
+- Audit events bind the commit ID to acquisition/extraction IDs, admission decision and reasons, document/content fingerprints, final Observation fingerprint, timestamp, and recorder.
+- Duplicate commit IDs and invalid event sequences are rejected.
+- Exposes unresolved authorized commit IDs, making an interrupted write window visible for operator reconciliation rather than silently losing audit state.
+- Added temporary-store tests for committed, duplicate-blocked, partial-blocked, and interrupted authorization histories; production data remains outside the test path.
+
+## Checkpoint 92 — Live read-only public Observation admission canary
+
+- Added a canary command that performs guarded acquisition, deterministic extraction, and admission preview against an explicitly selected Observation store.
+- The command has no commit-service path and cannot create an Observation or downstream analytical object.
+- Completed a live canary against `https://www.rbi.org.in/`: acquisition `RETRIEVED`, extraction `SUCCEEDED` with 17,669 characters, admission decision `ADMIT`, no reason codes, and zero existing duplicates among 46 production Observations.
+- The live acquisition and extraction receipts were written only to temporary audit ledgers. The admissible canary was deliberately not committed.
+
+## Checkpoint 93 — Source-grounded public factual-candidate extraction
+
+- Added a passive factual-candidate model and deterministic extractor upstream of Observation commitment and all Catalyst/Meta analysis.
+- Detects review candidates for orders/contracts, tenders, regulatory approvals, capacity changes, policy/regulation, supplier/customer changes, and execution updates using explicit inspectable trigger rules.
+- Every candidate carries an exact source passage and character offsets, document/content fingerprints, source URL, acquisition/extraction IDs, extraction method, matched trigger text, subject entity, transparently detected company names, and explicitly written amounts/dates.
+- Classifies statement posture as asserted, uncertain, or negated without deciding whether the event is true, material, causal, or investable.
+- Candidate IDs are deterministic from document identity, passage offsets, and event type.
+- Empty candidate results explicitly warn that no configured trigger is not negative evidence.
+- Bounded each source passage to at most 600 exact source characters around the trigger so punctuation-light web pages cannot contaminate posture with distant text.
+- Added date-aware uncertainty handling so calendar text such as `May 20` is not treated as the modal word `may`.
+- Integrated candidate display into the read-only live canary; it remains incapable of Observation, Evidence, Signal, Catalyst, Opportunity, or Meta creation.
+- Offline tests cover exact passage offsets, amount/date capture, asserted/uncertain/negated posture, long-text isolation, provenance binding, deterministic event order, and no-trigger coverage gaps.
+
+## Checkpoint 94 — Event-specific factual-candidate validation
+
+- Added a passive validator that returns `VALIDATED`, `DEFER`, or `REJECT` without creating an Observation or downstream analytical object.
+- Revalidates candidate ID, exact source offsets/passage, acquisition and extraction IDs, document/content fingerprints, and matched trigger presence.
+- Requires the named subject and event-specific mechanics to appear in the same bounded passage; it does not infer pronoun resolution or page-level context.
+- Defers uncertain statements for corroboration and candidates whose subject or event mechanics are insufficiently grounded.
+- Allows an explicit negated statement to validate as a factual contradiction while preserving its `NEGATED` posture.
+- Rejects altered passages, broken lineage, fingerprint mismatches, invalid deterministic IDs, and triggers absent from the cited passage.
+- Integrated validation decisions and reason codes into the read-only canary display.
+- Live RBI homepage canary: document admission remained `ADMIT`, but the sole policy-keyword candidate became `DEFER` with `SUBJECT_NOT_IN_PASSAGE`; nothing was promoted or persisted.
+- Offline tests cover grounded order validation, uncertain/pronoun-only capacity deferral, explicit negative approval validation, and tampered-passage rejection.
+
+## Checkpoint 95 — Candidate-specific Observation proposals and human review
+
+- Added a passive Observation proposal built only from a currently revalidated `VALIDATED` factual candidate.
+- Proposal description is the exact bounded source passage, not the whole source page; category is namespaced as `PUBLIC_FACT_<EVENT_TYPE>`.
+- Preserves candidate, acquisition, extraction, document/content fingerprints, source URL, extraction method, statement posture, and explicitly written dates/amounts.
+- Proposal titles are deterministic unless explicitly supplied, and every proposal is content-fingerprinted.
+- Proposals deliberately contain no confidence value; they require human review before any commit can be attempted.
+- Added an append-only human-review ledger with `APPROVE`, `DEFER`, and `REJECT` decisions, reviewer identity, timestamp, mandatory notes, and one final review per proposal fingerprint.
+- Approval requires an explicit reviewer-supplied confidence; deferred/rejected proposals cannot carry an approved confidence.
+- The review ledger independently recomputes proposal fingerprints and rejects altered proposal content.
+- This checkpoint creates no Observation and does not call the commit service or any Evidence, Signal, Catalyst, Opportunity, or Meta layer.
+- Temporary-ledger tests cover exact-passage proposals, absent automatic confidence, approval, duplicate-review refusal, stale validation refusal, missing-confidence refusal, and tampered-proposal rejection.
+
+## Checkpoint 96 — Reviewed factual-proposal Observation commit boundary
+
+- Added a dedicated commit service for candidate-specific factual Observation proposals.
+- Requires a fingerprint-valid proposal, an exactly bound human `APPROVE` receipt with reviewer-supplied confidence, and the original candidate/acquisition/extraction chain.
+- Re-runs factual-candidate validation, reconstructs and compares the complete proposal, and re-runs document admission against the current Observation registry immediately before writing.
+- Commits only the exact reviewed source passage with its event-specific category and complete public provenance; it never substitutes the whole webpage.
+- Extended commit audit events with optional proposal ID, proposal fingerprint, and review ID, and requires identical review identity between authorization and terminal events.
+- Non-approved or mismatched reviews fail before any commit authorization or Observation write.
+- Uses the existing Observation Engine for final novelty and persistence, and creates no Evidence, Signal, Catalyst, Opportunity, valuation, or Meta conclusion.
+- Temporary-store tests prove exact-passage commitment, reviewer confidence preservation, proposal/review audit binding, persistence of exactly one Observation, and refusal of deferred or mismatched reviews.
+
+## Checkpoint 97 — Reviewed-fact Temporal Evidence foundation
+
+- Extended Observation provenance additively with optional factual candidate ID, event type, statement posture, proposal ID, and human review ID; legacy observations remain loadable.
+- The reviewed-proposal commit boundary now persists this exact reviewed-fact lineage into the committed Observation.
+- Added a passive Temporal Evidence record for one reviewed factual Observation, preserving event/known times, time basis, event posture, source/document identity, candidate/proposal/review lineage, and exact Observation text.
+- Event time uses filing time first, then publication time, then an explicit known-at fallback; all derived times normalize to UTC.
+- Added deterministic Temporal Evidence identity based on Observation fingerprint, event time, and event type.
+- Added a series builder that accepts exactly one entity and event type, orders records deterministically, counts asserted/negated/uncertain records separately, rejects duplicate Observation evidence, and reports missing-time or future-time warnings.
+- Added an append-only Temporal Evidence repository with schema validation and duplicate protection by Temporal Evidence ID and Observation fingerprint.
+- This foundation performs no trend, persistence, causal, materiality, Catalyst, Opportunity, or Meta interpretation.
+- Offline tests cover out-of-order input, publication-time ordering, known-at fallback, contradiction preservation, repository round-trip, duplicate refusal, legacy-observation exclusion, and reviewed provenance persistence.
+
+## Checkpoint 98 — Mandatory Meta-Analysis contract and fail-closed gate
+
+- Made Meta-Analysis a mandatory read-only stage between reviewed Temporal Evidence and Pre-Inflection/Catalyst/EIP/Opportunity work.
+- Added a passive Meta assessment contract bound to exact Temporal Evidence IDs and Observation fingerprints across explicit entity and sector scopes.
+- Requires explicit causal hypotheses, source-independence groups, contradictions, missing expected evidence, coverage gaps, uncertainty, public-information-only status, and a non-authority statement.
+- Added mandatory completion flags for independence, contradiction, missing-evidence, and coverage checks.
+- Added conclusion states `INSUFFICIENT`, `EMERGING`, `COHERENT`, and `CONTRADICTED`, with separate contradiction-burden states.
+- Added a fail-closed gate with `BLOCKED`, `HOLD_FOR_RESEARCH`, and `READY_FOR_PRE_INFLECTION` decisions.
+- Missing Meta, wrong/stale evidence bindings, incomplete governance checks, duplicate inputs, non-public information, missing scope, or missing uncertainty/non-authority statements are blocked.
+- Complete but insufficient, contradicted, high-contradiction, single-independence-group, or causally empty assessments are held for research.
+- Readiness requires at least two independence groups and only authorizes the next governed Pre-Inflection review; it creates no Signal, Catalyst, Opportunity, recommendation, or trade.
+- Updated the approved architecture to state that Meta cannot be skipped.
+- Offline tests prove missing-Meta blocking, complete readiness, incomplete-check blocking, single-source hold, contradicted hold, wrong-input blocking, and non-public-information blocking.
+
+## Checkpoint 99 — Sector causal-indicator knowledge contract
+
+- Added a passive, versioned causal-indicator definition contract that supports any sector without embedding conclusions in engine logic.
+- Each definition specifies sector/event applicability, economic variable, expected direction, lead-time range, causal mechanism, earnings channels, company archetypes, primary/corroborating source types, independence grouping, persistence requirements, known false positives, contradictions, and kill tests.
+- Added a validated registry with unique IDs, enabled-state filtering, sector/event lookup, lead-time and minimum-support validation, and deterministic ordering.
+- Added an initial seed library for industrial tender-to-order conversion, lender early credit stress, chemical spread recovery, and building-material utilization/realization breadth.
+- Extended mandatory Meta assessments with causal-indicator IDs.
+- Mandatory Meta now blocks missing, unknown, or sector-mismatched causal indicators; sector matching is case-insensitive while indicator identity remains explicit.
+- Updated the approved architecture so every Meta causal hypothesis must reference enabled registry knowledge.
+- Offline tests cover the seed library, applicability lookup, invalid definitions, unknown indicators, Meta readiness with a registered indicator, and wrong-sector/unknown-indicator blocking.
+
+## Checkpoint 100 — Temporal leading-indicator interpretation preview
+
+- Added explicit evidence-to-indicator links that bind each Temporal Evidence record to one registered causal indicator, one independence group, a `SUPPORTS`/`CONTRADICTS`/`CONTEXT_ONLY` relationship, and a written rationale.
+- Added a passive structural preview that validates entity, sector, event applicability, complete one-to-one evidence linking, indicator identity, and relationship vocabulary.
+- Measures supporting, contradicting, and context-only evidence separately; context evidence is excluded from support and contradiction counts.
+- Computes independent supporting-group breadth, supporting-observation persistence count, observed persistence span, configured required duration, chronological range, and expected earnings lead-time range.
+- Produces `INSUFFICIENT`, `FORMING`, `STRUCTURALLY_READY_FOR_META`, or `CONTRADICTED` without making a causal, materiality, Pre-Inflection, Catalyst, Opportunity, or investment conclusion.
+- Every preview is deterministically fingerprinted from indicator version, entity/sector, exact Temporal Evidence/Observation identities, evidence relationships, independence groups, rationales, and structural requirements.
+- Mandatory Meta assessments now bind to exact indicator-preview fingerprints as well as raw Temporal Evidence and Observation fingerprints.
+- Meta blocks missing/stale preview bindings, preview evidence outside the supplied Temporal Evidence set, or mismatch between cited causal indicators and supplied previews; non-ready structural previews hold downstream readiness.
+- Offline tests cover structural readiness, insufficient persistence/independence, contradiction handling, wrong-sector refusal, incomplete linking refusal, and Meta preview-fingerprint integration.
+
+## Checkpoint 101 — Governed mandatory Meta-Analysis service
+
+- Added the actual read-only Meta assessment builder above the existing mandatory contract and gate.
+- The service derives exact Temporal Evidence, Observation, indicator-preview, causal-indicator, and supporting independence-group bindings from supplied governed inputs instead of accepting caller-retyped identities.
+- Carries explicit causal hypotheses, contradictions, missing expected evidence, acquisition/extraction coverage gaps, syndication findings, cross-company/cross-sector transmission findings, open research gaps, uncertainty, and assessor identity.
+- Added typed kill-test results with `NOT_TRIGGERED`, `TRIGGERED`, and `UNKNOWN` states, exact indicator/test identity, supporting evidence IDs, and rationale.
+- Every kill test configured by every cited causal indicator must have exactly one result; missing coverage or evidence outside the assessment inputs blocks Meta.
+- Triggered or unresolved kill tests hold the case for research and cannot produce Pre-Inflection readiness.
+- The service automatically marks all mandatory governance checks as completed only because the controlled builder receives every required research field, enforces public-only processing, and injects a fixed non-authority statement.
+- Meta remains read-only and produces only an assessment plus the fail-closed gate result; it creates no Observation, Evidence, Signal, Catalyst, Opportunity, recommendation, or trade.
+- Offline end-to-end tests cover ready Meta assessment construction, exact preview binding, fixed non-authority, triggered-kill hold, and incomplete-kill blocking.
+
+## Checkpoint 102 — Durable Meta repository and human review boundary
+
+- Added an append-only Meta assessment repository with deterministic fingerprints over the full assessment, including nested kill-test results, enums, timestamps, evidence bindings, and research findings.
+- Repository reads independently recompute fingerprints and reject altered, duplicate, or unsupported assessment records.
+- Added append-only human Meta review decisions: `AUTHORIZE_PRE_INFLECTION_REVIEW`, `HOLD_FOR_RESEARCH`, and `REJECT_ASSESSMENT`.
+- Human review re-runs the mandatory Meta gate against the current Temporal Evidence and indicator previews before recording any decision.
+- Authorization is allowed only for `READY_FOR_PRE_INFLECTION`; held or blocked assessments cannot be human-overridden into readiness.
+- A technically blocked assessment cannot be marked as an ordinary research hold; it must be rejected and rebuilt with complete governed inputs.
+- Review receipts bind assessment ID/fingerprint, current gate decision/reasons, reviewer, timestamp, and mandatory notes, with one final review per assessment fingerprint.
+- The review ledger independently recomputes the stored assessment fingerprint and rejects forged in-memory records.
+- Human authorization permits only the next governed Pre-Inflection review and does not create a Pre-Inflection state or any downstream analytical/action object.
+- Temporary-ledger tests cover repository round-trip, ready authorization, triggered-kill hold, blocked-assessment override refusal, and forged-fingerprint rejection.
+
+## Checkpoint 103 — Governed Pre-Inflection assessment preview
+
+- Added a passive Pre-Inflection assessment preview that can be built only from a fingerprint-valid stored Meta assessment and an exactly bound human `AUTHORIZE_PRE_INFLECTION_REVIEW` receipt.
+- Re-runs the current mandatory Meta gate against current Temporal Evidence and indicator previews; stale or no-longer-ready Meta cannot proceed.
+- Preserves entity/sector scope, causal indicators, Meta/review identity, independence breadth, structural readiness, expected earnings lead-time range, contradiction burden, contradictions, missing evidence, coverage/research gaps, and uncertainty as separate dimensions.
+- Requires explicit plain-language statements for what is changing, why now, confirmation requirements, invalidation conditions, and balance-sheet/governance risks.
+- Uses ordinal `WEAK`, `EMERGING`, `CREDIBLE`, and `STRONG` strength only; no fabricated numerical probability is introduced.
+- `EMERGING` Meta remains emerging. `STRONG` requires coherent Meta, all structural previews ready, low/zero contradiction burden, and no missing-evidence or coverage gaps; otherwise coherent cases remain credible.
+- Market recognition is explicitly `NOT_ASSESSED`, preventing this preview from becoming an EIP classification before the Price Recognition Gate exists.
+- Output is eligible only for a future human Pre-Inflection review and creates no Signal, EIP state, Catalyst, Opportunity, recommendation, or trade.
+- Offline tests cover authorized emerging preview, lead-time preservation, mismatched-review refusal, and transparent strong-strength requirements.
+
+## Checkpoint 104 — Durable Pre-Inflection repository and human review
+
+- Added append-only Pre-Inflection preview storage with deterministic full-content fingerprints and schema-validated round-trip loading.
+- Repository reads reject altered, duplicate, or unsupported previews.
+- Added human review decisions: `AUTHORIZE_PRICE_RECOGNITION_REVIEW`, `HOLD_FOR_RESEARCH`, and `REJECT_ASSESSMENT`.
+- Human review independently recomputes the stored preview fingerprint and rebuilds the entire Pre-Inflection preview from current stored Meta, Meta authorization, Temporal Evidence, and indicator previews.
+- Any change in current Meta readiness, source bindings, indicator structure, strength dimensions, narratives, confirmation/invalidation conditions, or risks makes the stored preview stale and prevents review.
+- Authorization permits only the Price Recognition review and requires an eligible preview whose market-recognition status is still `NOT_ASSESSED`.
+- Review receipts bind preview ID/fingerprint, decision, reviewer, timestamp, and mandatory notes, with one final review per preview fingerprint.
+- This checkpoint creates no Price Recognition result, EIP state, Signal, Catalyst, Opportunity, recommendation, or trade.
+- Temporary-ledger tests cover repository round-trip, Price Recognition authorization, review round-trip, and forged-fingerprint rejection.
+
+## Checkpoint 105 — Multi-dimensional Price Recognition Gate preview
+
+- Added a public-market recognition snapshot contract bound to an entity, observation time, public source IDs, pre-inflection anchor/current prices, 1/3/6/12-month returns, sector-relative return, 52-week range, abnormal volume, valuation rerating, analyst revision breadth, and media-attention change.
+- Price Recognition requires a fingerprint-valid stored Pre-Inflection assessment, an identical current rebuilt assessment, and an exactly bound human `AUTHORIZE_PRICE_RECOGNITION_REVIEW` receipt.
+- Rejects non-public inputs, out-of-scope entities, missing source identity, non-positive prices, invalid 52-week ranges, negative volume ratios, and analyst breadth outside -1 to 1.
+- Computes price change since the Pre-Inflection anchor and normalized 52-week position.
+- Uses independent recognition dimensions for anchor price change, multi-horizon momentum, sector-relative performance, 52-week position, abnormal volume, valuation rerating, analyst revisions, and media attention.
+- Recognition states are `INSUFFICIENT_DATA`, `UNRECOGNIZED`, `EARLY_RECOGNITION`, `PARTIALLY_RECOGNIZED`, and `FULLY_RECOGNIZED_POTENTIALLY_LATE`.
+- A single price move cannot produce full recognition; classification requires breadth across several available dimensions, and missing dimensions remain explicit.
+- EIP review eligibility is false for insufficient data and fully recognized/potentially late cases; no EIP state is created.
+- Thresholds are held in an explicit policy object rather than hidden in the model and can later be calibrated through outcome history.
+- Offline tests cover unrecognized, fully recognized, insufficient-data, public/binding enforcement, and authorization continuity through the complete Meta/Pre-Inflection chain.
+
+## Checkpoint 106 — Durable Price Recognition repository and human review
+
+- Added append-only Price Recognition preview storage with deterministic full-content fingerprints and validated round-trip loading.
+- Repository reads reject altered, duplicate, or malformed recognition previews.
+- Added human review decisions: `AUTHORIZE_EIP_REVIEW`, `HOLD_FOR_MARKET_DATA`, and `REJECT_RECOGNITION_ASSESSMENT`.
+- Review independently recomputes the stored fingerprint and rebuilds recognition from the current authorized Pre-Inflection chain and current public-market snapshot.
+- Changed prices, market dimensions, upstream evidence, Pre-Inflection state, or authorization make the stored recognition preview stale and prevent review.
+- EIP review authorization is permitted only when recognition is `UNRECOGNIZED`, `EARLY_RECOGNITION`, or `PARTIALLY_RECOGNIZED` and the preview is otherwise eligible.
+- `INSUFFICIENT_DATA` cannot authorize EIP review, and `FULLY_RECOGNIZED_POTENTIALLY_LATE` cannot be authorized or disguised as a temporary data hold.
+- Review receipts bind snapshot ID, recognition fingerprint/state, decision, reviewer, timestamp, and mandatory notes, with one final review per recognition fingerprint.
+- This checkpoint authorizes only a future governed EIP review and creates no EIP state, Signal, Catalyst, Opportunity, recommendation, or trade.
+- Temporary-ledger tests cover repository round-trip, unrecognized EIP authorization, fully recognized authorization refusal, and forged-fingerprint rejection.
+
+## Checkpoint 107 — Governed Earliest Investable Point classification preview
+
+- Added passive EIP classification stages including `NOT_CLASSIFIABLE`, Stage 1 Possible Bottoming, Stage 2 Pre-Inflection, Stage 3 Earliest Investable Point, Stage 4 Early Confirmation, and Stage 5 Consensus Recovery/Potentially Late. Stage 0 remains reserved for a future governed deterioration path because contradicted Meta is held upstream.
+- Classification requires fingerprint-valid, identical current/stored Pre-Inflection and Price Recognition assessments plus an exactly bound Price Recognition human review.
+- Added explicit balance-sheet/governance risk disposition (`CLEAR`, `CONTAINED`, `UNRESOLVED`) and remaining valuation-room status (`SUFFICIENT`, `UNCERTAIN`, `INSUFFICIENT`) with mandatory rationales.
+- Stage 3 requires credible/strong Pre-Inflection evidence, unrecognized/early market recognition, resolved or contained risks, sufficient valuation room, and human EIP-review authorization.
+- Emerging evidence remains Stage 2; strong/credible evidence with partial recognition becomes Stage 4; fully recognized/potentially late evidence becomes Stage 5; insufficient market data is not classifiable.
+- Unresolved risks or unestablished valuation room prevent Stage 3 and retain the case at Stage 2.
+- Carries confirmation and invalidation conditions forward from the governed Pre-Inflection assessment.
+- Output remains eligible only for future human EIP review and explicitly has no recommendation, approval, position, or trade authority.
+- Offline end-to-end tests cover Stage 2 emerging evidence, Stage 3 EIP, Stage 4 partial recognition, Stage 5 potentially late, stale/binding continuity, risk/valuation requirements, and human authorization boundaries.
+
+## Checkpoint 108 — Durable EIP repository and final human review boundary
+
+- Added append-only EIP classification storage with deterministic full-content fingerprints and validated round-trip loading.
+- Repository reads reject altered, duplicate, malformed, or unsupported EIP records.
+- Added final EIP review decisions: `AUTHORIZE_DOWNSTREAM_EVIDENCE_REVIEW`, `HOLD_EIP_RESEARCH`, and `REJECT_EIP_CLASSIFICATION`.
+- Human review independently verifies the stored fingerprint and rebuilds the EIP classification from the current authorized Pre-Inflection and Price Recognition chain before recording a decision.
+- Any upstream evidence, recognition, risk, valuation, or authorization change makes the stored EIP stale and prevents review.
+- Only eligible Stage 3 Earliest Investable Point or Stage 4 Early Confirmation classifications may be authorized for the existing downstream Evidence review.
+- Stage 2 remains a research hold. Stage 5 Consensus Recovery/Potentially Late must be rejected and cannot be disguised as a temporary hold.
+- Review receipts bind classification ID/fingerprint, EIP stage, decision, reviewer, timestamp, and mandatory notes, with one final review per classification fingerprint.
+- Authorization creates no Evidence, Signal, Catalyst, Opportunity, recommendation, position, or trade; it permits only the next governed review step.
+- Temporary-ledger tests cover repository round-trip, Stage 3 authorization, Stage 2 authorization refusal and hold, Stage 5 hold refusal and rejection, review round-trip, and forged-fingerprint rejection.
+
+## Checkpoint 109 — Authorized EIP to existing Evidence-review manifest
+
+- Added a read-only adapter that turns an exactly authorized EIP into a candidate manifest for the existing Observation-plus-EvidenceAssessment intake path.
+- The aggregate EIP conclusion is deliberately not materialized as an EvidenceItem; the manifest exposes the exact underlying reviewed factual Observations for individual Evidence assessment.
+- Requires a fingerprint-valid stored EIP, an exactly bound `AUTHORIZE_DOWNSTREAM_EVIDENCE_REVIEW` receipt, the exact stored Pre-Inflection assessment, and its exact stored mandatory Meta assessment.
+- Reconciles supplied Temporal Evidence IDs and Observation fingerprints against the authorized Meta inputs and fails closed for omissions, additions, duplicates, forged bindings, or non-authorized EIP decisions.
+- Preserves entity and sector scope, causal-indicator IDs, EIP stage, complete Meta/Pre-Inflection/EIP lineage, exact source text and timing, confirmation requirements, and invalidation conditions.
+- Candidate fingerprints are deterministic regardless of input ordering.
+- The manifest contains no fabricated Evidence strength, confidence, direction, or score and explicitly requires a separate human EvidenceAssessment for each Observation.
+- It does not call ExternalEvidenceIntake and creates no EvidenceItem, Signal, Catalyst, Opportunity, recommendation, position, or trade.
+- Offline tests cover authorized Stage 3 manifest construction, deterministic ordering, complete-input enforcement, and refusal of a held Stage 2 case.
+
+## Checkpoint 110 — Complete agriculture-climate causal transmission library
+
+- Expanded the governed causal library from four to seventeen indicators by adding thirteen research-grounded agriculture-climate mechanisms.
+- Added the agricultural-drought composite, crop-stage water stress, irrigation shield, rabi water carryover, fertilizer application timing, nutrient substitution, nonlinear rainfall-to-fertilizer response, crop switching, satellite crop-health divergence, government intervention suppressor, agricultural supply-chain amplification, rural-demand transmission, and global fertilizer-input stress.
+- Each definition carries sector/event applicability, economic mechanism, earnings channels, company archetypes, preferred and corroborating public sources, persistence requirements, false positives, contradictions, and explicit kill tests.
+- Added acyclic prerequisite relationships and transitive dependency validation. Mandatory Meta now blocks a downstream causal indicator when its required upstream mechanisms are absent.
+- Rainfall alone therefore cannot support a fertilizer-response conclusion; that conclusion requires drought, crop-stage, irrigation, application-timing, and nutrient-mix analysis.
+- Expanded the factual-event vocabulary to detect weather anomalies, hydrology, crop progress, satellite crop condition, fertilizer markets, food-stock policy, agricultural price/supply-chain changes, rural demand, and global input costs while preserving exact source passages.
+- Expanded the trusted public registry with IMD, NRSC, ISRO, Ministry of Agriculture, CWC, CGWB, Department of Fertilizers, Department of Food and Public Distribution, AGMARKNET, and DGFT. The existing HTTPS, public-network, redirect, and public-information controls remain mandatory.
+- Added a public, dated company-exposure registry for crops, states, districts, fertilizer/products, customer types, irrigation dependence, disclosed revenue exposure, source IDs, and explicit uncertainty.
+- Company exposure percentages cannot be inferred when undisclosed; non-public, sourceless, duplicate, or invalid exposure records fail closed.
+- This checkpoint adds research knowledge and guarded intake capability only. It creates no Evidence, Signal, Catalyst, Opportunity, recommendation, position, or trade.
+- Offline tests cover all definitions, dependency closure, rainfall-only Meta refusal, new factual-event vocabulary, institutional source resolution, company exposure validation, and legacy registry behavior.
+
+## Checkpoint 111 — Target-driven agriculture-climate research coverage planner
+
+- Added explicit research targets for fertilizer earnings, food-company earnings, food stocks/prices, and rural demand/credit.
+- Each question automatically expands into the full transitive causal-indicator prerequisite set instead of relying on an analyst to remember every dependency.
+- Added institutional source-coverage requirements per indicator across IMD, NRSC, ISRO, Ministry of Agriculture, CWC, CGWB, Department of Fertilizers, Department of Food and Public Distribution, AGMARKNET, DGFT, and RBI.
+- The read-only coverage preview separately reports covered and missing causal indicators, covered and missing institutional sources, and applicable public company-exposure records.
+- Company targets require at least one governed public exposure record; the national food-stock/price target does not fabricate a company requirement.
+- `ready_for_mandatory_meta` is false for any missing indicator, source family, or required company exposure.
+- A rainfall-only fertilizer case is explicitly blocked even when IMD coverage exists.
+- The planner creates no Observation, Evidence, Meta conclusion, Signal, Catalyst, Opportunity, recommendation, position, or trade.
+- Offline tests cover complete fertilizer research, rainfall-only refusal, national food-stock readiness, and rural-company exposure refusal.
+
+## Checkpoint 112 — First live India Kharif 2026 guarded source case
+
+- Opened the read-only `INDIA-KHARIF-2026` agriculture-climate monitoring cycle without creating or modifying production Observations.
+- Successfully retrieved and deterministically extracted the current IMD monsoon page, ISRO agriculture/crop-forecasting page, Ministry of Agriculture page, CWC reservoir application shell, and Department of Food and Public Distribution food-stock page.
+- IMD extraction produced 3,959 characters, ISRO 2,614, Ministry of Agriculture 4,795, CWC only 24, and food-stock material 454.
+- The DGFT landing page produced only a 10-character partial extraction and is unusable for policy coverage.
+- NRSC returned HTTP 404, CGWB failed certificate verification, and the Department of Fertilizers host failed name resolution. These failures are preserved in the append-only acquisition ledger.
+- Intake coverage currently reports ten acquisition attempts, six retrieved documents, four failed acquisitions, six extraction receipts, five technically successful extractions, and one partial extraction.
+- Technically successful does not automatically mean analytically adequate: the CWC shell remains insufficient for reservoir evidence and will not be counted as completed causal-indicator coverage.
+- The official IMD material justifies opening research: the May 2026 updated seasonal forecast indicated approximately 90% of LPA nationally with greater downside risk across central, southern-peninsular, and northwestern India, while current late-August material reports subdued peninsular rainfall. Forecast and current-weather statements remain distinct from observed crop damage.
+- The fertilizer plan remains blocked for missing causal-indicator work, unusable or missing source coverage, and missing governed company-exposure records.
+- Live receipts are isolated under `data/live_cases/india_kharif_2026/`; no Observation, Temporal Evidence, Meta conclusion, EIP, EvidenceItem, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 113 — Live agriculture source repair and extraction audit
+
+- Replaced the broken NRSC descriptive endpoint with the official Bhuvan data catalogue. Guarded acquisition and deterministic extraction succeeded with 12,723 characters.
+- The Bhuvan catalogue reports two-day India surface-soil-moisture product availability through 25 August 2026, establishing a current official data source without yet claiming a crop-stress result.
+- Retried the CGWB publications repository and Department of Fertilizers monthly-bulletin endpoint. CGWB still fails certificate-chain verification and fertilizer access still fails DNS resolution; TLS verification was not disabled and the failures remain audited.
+- Located the CGWB public catalogue externally, including January 2026 and post-monsoon 2025 groundwater bulletins, but did not bypass the guarded acquisition boundary to ingest them.
+- Added reverse-order weather phrasing so expressions such as `subdued rainfall` are recognized alongside `rainfall ... subdued`; offline source-grounded extraction tests pass.
+- Two live read-only IMD canaries successfully retrieved and extracted the page and received `ADMIT` with zero production duplicates, but produced no factual candidates because the downloaded HTML did not contain the dynamically displayed press-release wording.
+- The dynamic-page gap is explicit. EIOS did not copy browser/search text into source-grounded evidence and did not fabricate a candidate.
+- The Kharif case therefore remains active but blocked pending static official IMD documents or a governed dynamic-page adapter, usable current reservoir/groundwater documents, fertilizer sales data, and company exposure.
+
+## Checkpoint 114 — Guarded PDF extraction and live hydrology facts
+
+- Added `pypdf` as the bounded PDF text-layer dependency and replaced the previous unconditional PDF refusal with guarded extraction.
+- PDF bytes remain bound to the acquisition SHA-256 hash before parsing. Encrypted, zero-page, over-limit, malformed, and image-only/no-text PDFs fail with explicit audit codes; OCR is not silently attempted.
+- Successful receipts preserve `pypdf_text_layer_v1`, page count, extracted-text fingerprint, character count, and blank-page warnings. Short or partly blank results remain partial.
+- Offline tests construct a deterministic text-layer PDF, prove successful page/text extraction, and prove image-only refusal while retaining hash-mismatch and unsupported-format controls.
+- Successfully retrieved and extracted the verified CWC reservoir bulletin dated 9 April 2026: 60,825 normalized characters through the guarded PDF path.
+- The April bulletin is retained only as a pre-monsoon water baseline. It is not mislabeled as current August reservoir status.
+- Added institutional macro validation for weather, hydrology, crop, satellite, fertilizer, food-stock, agricultural-price, rural-demand, and global-input events from the corresponding trusted authority source types.
+- Authority scoping is limited to controlled India/India Agriculture cases and configured institutional event types. Company-style events continue to require the company subject in the exact passage.
+- A live read-only CWC canary extracted twelve exact hydrology candidates; after the authority-scoping correction all twelve passed lineage, exact-passage, trigger, mechanics, and source validation.
+- No candidate was committed. Table-derived candidates and aggregate statements still require proposal and human review before an Observation can exist.
+- The bulletin indicates 9 April storage above both the corresponding prior year and normal, so it is a possible irrigation-shield contradiction to a simple drought thesis, not proof of current crop protection.
+
+## Checkpoint 115 — Governed current-document discovery and live IMD forecast
+
+- Added a read-only discovery service that parses links only from the original hash-verified HTML of a successfully acquired trusted landing page and requires its exact audited extraction receipt.
+- Relative links are resolved deterministically. HTTPS registry approval and same-authority identity are mandatory; external authorities, unapproved paths, fragments, scripts, email, telephone, and data links are rejected.
+- Candidate records bind the landing acquisition fingerprint and document hash and preserve URL, link text, document type, detected date tokens, matched research topics, transparent discovery reasons, relevance tier, and a deterministic fingerprint.
+- Ranking is research-oriented only: topic-relevant direct documents lead, dated documents outrank undated documents, and newer detected dates lead older dates. It is not an investment score.
+- Discovery performs no download and creates no Observation, Evidence, Meta conclusion, Signal, Catalyst, Opportunity, recommendation, position, or trade. A selected candidate must re-enter the existing guarded acquisition and extraction path.
+- Offline tests prove same-authority relative-PDF acceptance, deterministic ranking, external/script/email/path rejection, altered-byte refusal, stale extraction-fingerprint refusal, and absence of production writes.
+- Live inspection of the dynamically rendered official IMD monsoon page located the static IMD extended-range forecast for 27 August to 9 September 2026 and the 30 August 2026 official press release.
+- The extended-range forecast then entered through guarded acquisition, not through copied browser text. PDF text-layer extraction succeeded with 18,404 characters.
+- A read-only live canary admitted the document for factual review and produced six initial candidates. Five weather statements validated, including forecast below-normal rainfall nationally and over Peninsular India for relevant forecast periods.
+- The canary exposed an agronomic-advice false positive: an instruction mentioning fertilizer was incorrectly labelled as a fertilizer-market event. `application` was removed from the market trigger, and a regression test now prevents application advice from masquerading as sales, availability, inventory, allocation, shortage, or subsidy evidence.
+- Windows terminal preview output now replaces unsupported decorative characters instead of terminating the audit display.
+- Production Observations remain exactly 46. No live forecast candidate has been proposed, human-reviewed, committed, joined into Temporal Evidence, or supplied to mandatory Meta.

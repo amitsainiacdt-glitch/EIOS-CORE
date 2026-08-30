@@ -26,6 +26,18 @@ class ObservationProvenance:
     source_quality_tier: Optional[str] = None
     canonical_url: Optional[str] = None
     observation_fingerprint: Optional[str] = None
+    # Source-neutral document timing and identity. These remain optional so
+    # observations persisted before primary-source ingestion still load.
+    published_at: Optional[datetime] = None
+    filing_at: Optional[datetime] = None
+    source_document_id: Optional[str] = None
+    document_hash: Optional[str] = None
+    extraction_method: Optional[str] = None
+    public_fact_candidate_id: Optional[str] = None
+    public_fact_event_type: Optional[str] = None
+    public_fact_statement_posture: Optional[str] = None
+    public_fact_proposal_id: Optional[str] = None
+    public_fact_review_id: Optional[str] = None
     contributing_job_ids: tuple[str, ...] = ()
     contributing_research_intents: tuple[str, ...] = ()
 

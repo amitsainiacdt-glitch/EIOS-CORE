@@ -93,8 +93,18 @@ class ExternalObservationAdapter:
         job_id: str | None = None,
         research_intent: str | None = None,
         retrieved_at: datetime | None = None,
+        published_at: datetime | None = None,
+        filing_at: datetime | None = None,
         source_type: str | None = None,
         content_type: str | None = None,
+        source_document_id: str | None = None,
+        document_hash: str | None = None,
+        extraction_method: str | None = None,
+        public_fact_candidate_id: str | None = None,
+        public_fact_event_type: str | None = None,
+        public_fact_statement_posture: str | None = None,
+        public_fact_proposal_id: str | None = None,
+        public_fact_review_id: str | None = None,
     ) -> Observation | None:
         """
         Convert externally obtained information into an
@@ -116,8 +126,18 @@ class ExternalObservationAdapter:
             job_id=job_id,
             research_intent=research_intent,
             retrieved_at=retrieved_at,
+            published_at=published_at,
+            filing_at=filing_at,
             source=source,
             content_type=content_type or source_type,
+            source_document_id=source_document_id,
+            document_hash=document_hash,
+            extraction_method=extraction_method,
+            public_fact_candidate_id=public_fact_candidate_id,
+            public_fact_event_type=public_fact_event_type,
+            public_fact_statement_posture=public_fact_statement_posture,
+            public_fact_proposal_id=public_fact_proposal_id,
+            public_fact_review_id=public_fact_review_id,
             content=description,
         )
 
@@ -156,8 +176,18 @@ class ExternalObservationAdapter:
         job_id,
         research_intent,
         retrieved_at,
+        published_at,
+        filing_at,
         source,
         content_type,
+        source_document_id,
+        document_hash,
+        extraction_method,
+        public_fact_candidate_id,
+        public_fact_event_type,
+        public_fact_statement_posture,
+        public_fact_proposal_id,
+        public_fact_review_id,
         content,
     ) -> ObservationProvenance | None:
         """Build deterministic lineage only when runtime context is supplied."""
@@ -169,7 +199,17 @@ class ExternalObservationAdapter:
                 job_id,
                 research_intent,
                 retrieved_at,
+                published_at,
+                filing_at,
                 content_type,
+                source_document_id,
+                document_hash,
+                extraction_method,
+                public_fact_candidate_id,
+                public_fact_event_type,
+                public_fact_statement_posture,
+                public_fact_proposal_id,
+                public_fact_review_id,
             )
         ):
             return None
@@ -177,18 +217,33 @@ class ExternalObservationAdapter:
         parsed = urlparse(source)
         classification = SourceQualityService().classify(source)
         canonical_url = ObservationDeduplicationService.canonicalize_url(source)
-        observation_fingerprint = ObservationDeduplicationService.fingerprint(source, content)
-        aware_retrieved_at = retrieved_at
-        if aware_retrieved_at is not None:
-            if aware_retrieved_at.tzinfo is None:
-                aware_retrieved_at = aware_retrieved_at.replace(tzinfo=timezone.utc)
-            else:
-                aware_retrieved_at = aware_retrieved_at.astimezone(timezone.utc)
+        normalized_document_hash = (
+            ObservationDeduplicationService.normalize_document_hash(
+                document_hash
+            )
+        )
+        normalized_document_id = (
+            source_document_id.strip()
+            if isinstance(source_document_id, str) and source_document_id.strip()
+            else None
+        )
+        normalized_extraction_method = (
+            extraction_method.strip()
+            if isinstance(extraction_method, str) and extraction_method.strip()
+            else None
+        )
+        observation_fingerprint = ObservationDeduplicationService.fingerprint(
+            source,
+            content,
+            source_document_id=normalized_document_id,
+            document_hash=normalized_document_hash,
+            source_domain=parsed.hostname,
+        )
         return ObservationProvenance(
             cycle_id=cycle_id,
             job_id=job_id,
             research_intent=research_intent,
-            retrieved_at=aware_retrieved_at,
+            retrieved_at=ExternalObservationAdapter._utc(retrieved_at),
             source_url=source,
             source_domain=parsed.hostname,
             source_type=classification.source_type,
@@ -199,9 +254,33 @@ class ExternalObservationAdapter:
             source_quality_tier=classification.quality_tier,
             canonical_url=canonical_url,
             observation_fingerprint=observation_fingerprint,
+            published_at=ExternalObservationAdapter._utc(published_at),
+            filing_at=ExternalObservationAdapter._utc(filing_at),
+            source_document_id=normalized_document_id,
+            document_hash=normalized_document_hash,
+            extraction_method=normalized_extraction_method,
+            public_fact_candidate_id=ExternalObservationAdapter._optional_text(public_fact_candidate_id),
+            public_fact_event_type=ExternalObservationAdapter._optional_text(public_fact_event_type),
+            public_fact_statement_posture=ExternalObservationAdapter._optional_text(public_fact_statement_posture),
+            public_fact_proposal_id=ExternalObservationAdapter._optional_text(public_fact_proposal_id),
+            public_fact_review_id=ExternalObservationAdapter._optional_text(public_fact_review_id),
             contributing_job_ids=((job_id,) if job_id else ()),
             contributing_research_intents=((research_intent,) if research_intent else ()),
         )
+
+    @staticmethod
+    def _utc(value: datetime | None) -> datetime | None:
+        """Normalize new runtime timestamps without changing legacy loads."""
+
+        if value is None:
+            return None
+        if value.tzinfo is None:
+            return value.replace(tzinfo=timezone.utc)
+        return value.astimezone(timezone.utc)
+
+    @staticmethod
+    def _optional_text(value):
+        return value.strip() if isinstance(value, str) and value.strip() else None
 
     # ======================================================
     # CONFIDENCE PROTECTION

@@ -80,13 +80,14 @@ class ObservationPersistence:
             )
 
             if observation.provenance is not None:
-                retrieved_at = item["provenance"].get(
-                    "retrieved_at"
-                )
-                if retrieved_at is not None:
-                    item["provenance"]["retrieved_at"] = (
-                        retrieved_at.isoformat()
-                    )
+                for field in (
+                    "retrieved_at",
+                    "published_at",
+                    "filing_at",
+                ):
+                    value = item["provenance"].get(field)
+                    if value is not None:
+                        item["provenance"][field] = value.isoformat()
 
             payload.append(item)
 
@@ -133,11 +134,14 @@ class ObservationPersistence:
             provenance = item.get("provenance")
             if provenance is not None:
                 provenance = dict(provenance)
-                retrieved_at = provenance.get("retrieved_at")
-                if retrieved_at is not None:
-                    provenance["retrieved_at"] = datetime.fromisoformat(
-                        retrieved_at
-                    )
+                for field in (
+                    "retrieved_at",
+                    "published_at",
+                    "filing_at",
+                ):
+                    value = provenance.get(field)
+                    if value is not None:
+                        provenance[field] = datetime.fromisoformat(value)
                 for field in ("contributing_job_ids", "contributing_research_intents"):
                     if field in provenance:
                         provenance[field] = tuple(provenance[field])

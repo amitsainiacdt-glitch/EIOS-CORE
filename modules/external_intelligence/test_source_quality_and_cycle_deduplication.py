@@ -1,7 +1,8 @@
 """Offline tests for semantic source quality and within-cycle deduplication."""
 
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+from hashlib import sha256
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -80,12 +81,117 @@ def test_legacy_timestamp_and_provenance_loading():
         assert observation.provenance.retrieved_at.tzinfo is None
         assert observation.provenance.source_type == "text/html"
         assert observation.provenance.content_type is None
+        assert observation.provenance.published_at is None
+        assert observation.provenance.filing_at is None
+        assert observation.provenance.source_document_id is None
+        assert observation.provenance.document_hash is None
+        assert observation.provenance.extraction_method is None
+
+
+def test_primary_source_provenance_round_trip_and_document_identity():
+    with TemporaryDirectory() as directory:
+        path = Path(directory) / "observations.json"
+        engine = ObservationEngine(persistence=ObservationPersistence(path))
+        adapter = ExternalObservationAdapter(engine)
+        document_hash = sha256(b"canonical filing bytes").hexdigest()
+        india = timezone(timedelta(hours=5, minutes=30))
+
+        first = adapter.ingest(
+            title="Exchange filing",
+            description="Normalized filing text from the first URL.",
+            source="https://www.nseindia.com/filing/download?id=123",
+            category="External Web",
+            entity="Issuer",
+            confidence=90,
+            cycle_id="cycle-primary-1",
+            job_id="nse-job",
+            research_intent="REGULATORY_FILING",
+            retrieved_at=datetime(2026, 8, 29, 12, tzinfo=india),
+            published_at=datetime(2026, 8, 29, 9, 15, tzinfo=india),
+            filing_at=datetime(2026, 8, 29, 9, tzinfo=india),
+            source_document_id="NSE-ANN-123",
+            document_hash=document_hash.upper(),
+            extraction_method="pdf_text",
+            content_type="application/pdf",
+        )
+        duplicate = adapter.ingest(
+            title="Company IR copy",
+            description="Text extracted differently from the same PDF.",
+            source="https://issuer.example.com/investors/announcement.pdf",
+            category="External Web",
+            entity="Issuer",
+            confidence=90,
+            cycle_id="cycle-primary-1",
+            job_id="ir-job",
+            research_intent="COMPANY_FILING",
+            document_hash=document_hash,
+            extraction_method="pdf_text",
+        )
+
+        assert first is not None and duplicate is None
+        assert engine.registry.count() == 1
+        provenance = first.provenance
+        assert provenance.published_at == datetime(2026, 8, 29, 3, 45, tzinfo=timezone.utc)
+        assert provenance.filing_at == datetime(2026, 8, 29, 3, 30, tzinfo=timezone.utc)
+        assert provenance.retrieved_at == datetime(2026, 8, 29, 6, 30, tzinfo=timezone.utc)
+        assert provenance.source_document_id == "NSE-ANN-123"
+        assert provenance.document_hash == document_hash
+        assert provenance.extraction_method == "pdf_text"
+        assert provenance.contributing_job_ids == ("nse-job", "ir-job")
+
+        loaded = ObservationPersistence(path).load()[0]
+        assert loaded.provenance == provenance
+
+        later = adapter.ingest(
+            title="Later retrieval",
+            description="Same source document in a later cycle.",
+            source="https://archive.example.com/announcement.pdf",
+            category="External Web",
+            entity="Issuer",
+            confidence=90,
+            cycle_id="cycle-primary-2",
+            job_id="archive-job",
+            research_intent="HISTORICAL_RETRIEVAL",
+            document_hash=document_hash,
+        )
+        assert later is not None
+        assert engine.registry.count() == 2
+
+
+def test_source_native_document_id_is_scoped_to_source_domain():
+    service = ObservationDeduplicationService
+    same_domain_first = service.fingerprint(
+        "https://exchange.example.com/a",
+        "first extraction",
+        source_document_id="ANN-42",
+    )
+    same_domain_second = service.fingerprint(
+        "https://exchange.example.com/b",
+        "second extraction",
+        source_document_id="ANN-42",
+    )
+    other_domain = service.fingerprint(
+        "https://other.example.com/a",
+        "first extraction",
+        source_document_id="ANN-42",
+    )
+    assert same_domain_first == same_domain_second
+    assert other_domain != same_domain_first
+
+    try:
+        service.normalize_document_hash("not-a-sha256")
+    except ValueError as exc:
+        assert "SHA-256" in str(exc)
+    else:
+        raise AssertionError("invalid document hash accepted")
 
 
 def main():
     test_semantic_source_classification_and_mime_are_separate()
     test_canonical_url_fingerprint_and_cross_job_lineage_merge()
     test_legacy_timestamp_and_provenance_loading()
+    test_primary_source_provenance_round_trip_and_document_identity()
+    test_source_native_document_id_is_scoped_to_source_domain()
     print("SOURCE QUALITY AND CYCLE DEDUPLICATION : ALL TESTS PASSED")
 
 

@@ -32,10 +32,50 @@ class ObservationDeduplicationService:
         return urlunsplit((scheme, host, path, urlencode(query, doseq=True), ""))
 
     @classmethod
-    def fingerprint(cls, url: str, content: str) -> str:
+    def fingerprint(
+        cls,
+        url: str,
+        content: str,
+        *,
+        source_document_id: str | None = None,
+        document_hash: str | None = None,
+        source_domain: str | None = None,
+    ) -> str:
+        """Build identity using supplied document evidence when available."""
+
+        normalized_hash = cls.normalize_document_hash(document_hash)
+        if normalized_hash is not None:
+            identity = f"document-hash\n{normalized_hash}"
+            return sha256(identity.encode("utf-8")).hexdigest()
+
+        normalized_document_id = (source_document_id or "").strip()
+        if normalized_document_id:
+            domain = (source_domain or urlsplit(url).hostname or "").lower().rstrip(".")
+            identity = f"source-document-id\n{domain}\n{normalized_document_id}"
+            return sha256(identity.encode("utf-8")).hexdigest()
+
         normalized_content = " ".join((content or "").split())
         identity = f"{cls.canonicalize_url(url)}\n{normalized_content}"
         return sha256(identity.encode("utf-8")).hexdigest()
+
+    @staticmethod
+    def normalize_document_hash(value: str | None) -> str | None:
+        """Validate an optional caller-supplied SHA-256 document identity."""
+
+        if value is None:
+            return None
+        normalized = value.strip().casefold()
+        if not normalized:
+            return None
+        if len(normalized) != 64:
+            raise ValueError("document_hash must be a SHA-256 hexadecimal digest")
+        try:
+            int(normalized, 16)
+        except ValueError as exc:
+            raise ValueError(
+                "document_hash must be a SHA-256 hexadecimal digest"
+            ) from exc
+        return normalized
 
     @staticmethod
     def merge_contributor(provenance: ObservationProvenance, *, job_id: str | None, research_intent: str | None) -> ObservationProvenance:
