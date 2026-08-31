@@ -5308,3 +5308,13 @@ investment decision is created by this checkpoint.
 - Re-ran patch whitespace inspection. It reported only existing Windows LF-to-CRLF notices and no malformed patch content.
 - The audit did not stage, commit, or push files. External repository mutation remains pending explicit instruction.
 - Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 147 — Plain-English live case status command
+
+- Added a non-technical renderer and one-command status view for the live India Kharif case.
+- `python -m scripts.show_india_kharif_status` now prints the case identity, current stage, permitted interpretation, causal confidence ceiling and eligibility, verified evidence layers, unresolved gaps, eligible queue actions, safety boundary, and whether a production object was created.
+- The command reads only the deterministic readiness and evidence-queue JSON artifacts. It performs no network access and no external or production mutation.
+- Current output correctly states `WEATHER_CROP_HINT_ONLY`, a ten-percent ineligible causal confidence ceiling, the five principal unresolved gaps, and no currently eligible external action.
+- Added the command and its behavior to the operational live-research runbook.
+- Offline tests pass for stage, confidence, missing-evidence, queue, and no-production-object rendering. The live command also completed successfully against the actual artifacts.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.

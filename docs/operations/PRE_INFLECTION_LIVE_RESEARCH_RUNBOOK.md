@@ -55,6 +55,14 @@ python -m scripts.build_india_kharif_evidence_queue --output data/live_cases/ind
 
 These commands perform local deterministic assessment only. They do not authorize or initiate external acquisition.
 
+Plain-English status:
+
+```powershell
+python -m scripts.show_india_kharif_status
+```
+
+This prints the current stage, permitted interpretation, confidence ceiling, verified layers, missing evidence, queue status, and safety boundary without modifying any production object.
+
 ## Core verification commands
 
 ```powershell
