@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "inputs": {
+    "case_id": "INDIA-KHARIF-2026",
+    "current_weather_ready": true,
+    "current_crop_progress_ready": true,
+    "soil_or_crop_condition_ready": false,
+    "irrigation_buffer_resolved": false,
+    "input_market_ready": true,
+    "output_price_ready": false,
+    "physical_arrivals_ready": false,
+    "contradiction_review_complete": true,
+    "independent_source_group_count": 3,
+    "company_bridge_ready": false,
+    "factual_catalyst_ready": false,
+    "expectation_reset_ready": false,
+    "stale_critical_input_ids": [],
+    "unresolved_gaps": [
+      "Observed soil moisture or crop condition is not available through the governed public route.",
+      "Current reservoir storage is not verified and crop-geography mapped.",
+      "Official current output-price payload was not captured.",
+      "Mandi arrival quantity and unit are not verified.",
+      "No issuer-specific exposure disclosure or dated catalyst is in scope."
+    ]
+  },
+  "assessment": {
+    "stage": "WEATHER_CROP_HINT_ONLY",
+    "weather_crop_hint_ready": true,
+    "sector_transmission_ready": false,
+    "company_case_ready": false,
+    "expectation_reset_ready": false,
+    "reason_codes": [
+      "CROP_CONDITION_UNRESOLVED",
+      "IRRIGATION_BUFFER_UNRESOLVED",
+      "OUTPUT_PRICE_TRANSMISSION_MISSING",
+      "PHYSICAL_ARRIVALS_MISSING"
+    ],
+    "next_evidence_priorities": [
+      "official soil-moisture or crop-condition observation",
+      "current reservoir storage mapped to crop geography",
+      "hash-bound current official food or mandi prices",
+      "verified mandi arrival quantity and unit"
+    ],
+    "permitted_claim": "Current public data supports a weather-and-crop research hint only; causal sector and company impact remain unproven."
+  },
+  "causal_interpretation_confidence_ceiling": {
+    "maximum_confidence_percent": 10,
+    "confidence_eligible": false,
+    "reason_codes": [
+      "INFERRED_EVIDENCE",
+      "GEOGRAPHY_MISMATCH",
+      "CRITICAL_EVIDENCE_LAYERS_MISSING",
+      "EVIDENCE_CEILING_BELOW_RESEARCH_THRESHOLD"
+    ],
+    "non_authority_statement": "Confidence ceiling only; it does not estimate probability, expected return, or position size."
+  },
+  "creates_observation": false,
+  "requires_human_review": true,
+  "non_authority_statement": "Research readiness only; not a Signal, Catalyst, Opportunity, recommendation, position, or trade."
+}

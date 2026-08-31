@@ -1,0 +1,71 @@
+{
+  "acquisition_id": "AGRI-2026-IMD-REVIEW-003",
+  "creates_observation": false,
+  "deferred_candidates": [
+    {
+      "candidate_id": "09dfa2a4538a84055379aeb0b08f5c4d56364b18b377c778767582b30e16fcef",
+      "event_type": "WEATHER_ANOMALY",
+      "reason_codes": [
+        "UNCERTAIN_STATEMENT_REQUIRES_CORROBORATION"
+      ],
+      "requires_corroboration": true,
+      "source_passage": "❖ Rainfall activity is likely to be normal to above normal over foothills of Himalayas, east Central India, normal over most parts of East India, below normal over Peninsular India during the week (Annexure III).",
+      "statement_posture": "UNCERTAIN",
+      "validation_decision": "DEFER"
+    },
+    {
+      "candidate_id": "16cd9126d989166916a33ac47372f92a2833222335dc95c59e837e6aafe52c3a",
+      "event_type": "WEATHER_ANOMALY",
+      "reason_codes": [
+        "UNCERTAIN_STATEMENT_REQUIRES_CORROBORATION"
+      ],
+      "requires_corroboration": true,
+      "source_passage": "❖ Overall, the country as a whole, the rainfall is likely to be below normal during the week.",
+      "statement_posture": "UNCERTAIN",
+      "validation_decision": "DEFER"
+    },
+    {
+      "candidate_id": "147c7a6079b0c411c8eab0748b62185cacb02af087118e865cc7b66d41aa97b8",
+      "event_type": "WEATHER_ANOMALY",
+      "reason_codes": [
+        "UNCERTAIN_STATEMENT_REQUIRES_CORROBORATION"
+      ],
+      "requires_corroboration": true,
+      "source_passage": "❖ Rainfall is likely to be normal to above normal over East India and adjoining east central India.",
+      "statement_posture": "UNCERTAIN",
+      "validation_decision": "DEFER"
+    },
+    {
+      "candidate_id": "338c5976863b1c7af95bdb66843a7b1b46897cd5ca15eb7ab95053e3dafc6a01",
+      "event_type": "WEATHER_ANOMALY",
+      "reason_codes": [
+        "UNCERTAIN_STATEMENT_REQUIRES_CORROBORATION"
+      ],
+      "requires_corroboration": true,
+      "source_passage": "❖ Overall, the country as a whole, the rainfall is likely to be below normal during the week.",
+      "statement_posture": "UNCERTAIN",
+      "validation_decision": "DEFER"
+    },
+    {
+      "candidate_id": "3b82e50fde4d2f45d2e5f61e783acd2a40a8d1828e87e07d4635a88136e1d2fc",
+      "event_type": "WEATHER_ANOMALY",
+      "reason_codes": [
+        "UNCERTAIN_STATEMENT_REQUIRES_CORROBORATION"
+      ],
+      "requires_corroboration": true,
+      "source_passage": "Agromet advisories for likely impact of Heavy Rainfall ❖ In Odisha, drain excess water from rice, maize, pulses, cotton, pigeon pea, vegetables and nursery beds; keep drainage channels and outlets clear, and postpone sowing, fertilizer application and intercultural operations in waterlogged fields until the soil becomes workable.",
+      "statement_posture": "UNCERTAIN",
+      "validation_decision": "DEFER"
+    }
+  ],
+  "document_hash": "b08bcc9af0a8b541134ec848c7485f511a2e00dd23b62a5084b9dfb436f9efc0",
+  "excluded_candidate_ids": [],
+  "extraction_id": "AGRI-2026-IMD-REVIEW-EXT-003",
+  "package_fingerprint": "c887b0854dd0ba002d74c316fa2c0f595f6d00f4d7ea7ecc5b091912dc0caf3f",
+  "package_id": "INDIA-KHARIF-2026-IMD-ERF-REVIEW-002",
+  "package_status": "RESEARCH_HOLD_CORROBORATION",
+  "proposals": [],
+  "requires_human_review": true,
+  "schema_version": 1,
+  "source_url": "https://mausam.imd.gov.in/Forecast/marquee_data/ERF%2027.08.26.pdf"
+}

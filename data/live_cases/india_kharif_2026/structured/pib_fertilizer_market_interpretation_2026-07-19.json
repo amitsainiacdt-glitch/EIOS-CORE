@@ -1,0 +1,42 @@
+{
+  "balances": [
+    {
+      "availability_to_requirement_percent": 125.25,
+      "closing_stock_lmt": 16.72,
+      "product": "DAP",
+      "sales_to_requirement_percent": 72.28,
+      "supply_shortfall": false
+    },
+    {
+      "availability_to_requirement_percent": 137.28,
+      "closing_stock_lmt": 8.63,
+      "product": "MOP",
+      "sales_to_requirement_percent": 51.69,
+      "supply_shortfall": false
+    },
+    {
+      "availability_to_requirement_percent": 174.44,
+      "closing_stock_lmt": 45.21,
+      "product": "NPKS",
+      "sales_to_requirement_percent": 81.19,
+      "supply_shortfall": false
+    },
+    {
+      "availability_to_requirement_percent": 149.71,
+      "closing_stock_lmt": 69.01,
+      "product": "UREA",
+      "sales_to_requirement_percent": 86.64,
+      "supply_shortfall": false
+    }
+  ],
+  "company_impact_assessment": "RESEARCH_HOLD",
+  "creates_observation": false,
+  "national_supply_assessment": "NATIONAL_AVAILABILITY_ABOVE_REQUIREMENT",
+  "period_label": "01.04.26 TO 19.07.26",
+  "reason_codes": [
+    "COMPARABLE_PRIOR_PERIOD_SALES_MISSING",
+    "GOVERNED_COMPANY_EXPOSURE_MISSING"
+  ],
+  "requires_human_review": true,
+  "sales_momentum_assessment": "RESEARCH_HOLD"
+}

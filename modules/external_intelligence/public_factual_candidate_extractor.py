@@ -36,7 +36,7 @@ class PublicFactualCandidateExtractor:
     COMPANY = re.compile(r"\b[A-Z][A-Za-z&.'-]*(?:\s+[A-Z][A-Za-z&.'-]*){0,5}\s+(?:Limited|Ltd\.?|Corporation|Corp\.?|Industries|Bank)\b")
     SENTENCE = re.compile(r"\S(?:.*?)(?:[.!?]+(?=\s|$)|$)", re.DOTALL)
     NEGATED = re.compile(r"(?i)\b(?:not|no|never|denied|rejected|cancelled|canceled|failed to|did not|has not|have not)\b")
-    UNCERTAIN = re.compile(r"(?i)\b(?:(?:may(?!\s+(?:\d{1,2}|20\d{2})\b))|might|could|proposed|expected|plans? to|intends? to|subject to)\b")
+    UNCERTAIN = re.compile(r"(?i)\b(?:(?:may(?!\s+(?:\d{1,2}|20\d{2})\b))|might|could|likely|forecast|forecasted|proposed|expected|plans? to|intends? to|subject to)\b")
 
     def extract(self, *, acquisition, extraction, admission, subject_entity):
         if not isinstance(acquisition, TrustedPublicAcquisitionResult):

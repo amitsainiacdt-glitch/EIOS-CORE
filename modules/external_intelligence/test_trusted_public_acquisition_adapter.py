@@ -129,7 +129,7 @@ def main():
         india = TrustedPublicSourceRegistry.india_primary_sources()
         assert india.resolve("https://www.nseindia.com/corporates/announcements").source_id == "NSE"
         source_ids = {item.source_id for item in india.all()}
-        assert {"NSE", "BSE", "SEBI", "RBI", "IMD", "NRSC", "ISRO", "AGRI_MINISTRY", "CWC", "CGWB", "FERTILIZERS_DEPARTMENT", "FOOD_DISTRIBUTION_DEPARTMENT", "AGMARKNET", "DGFT"}.issubset(source_ids)
+        assert {"NSE", "BSE", "SEBI", "RBI", "IMD", "NRSC", "ISRO", "AGRI_MINISTRY", "PIB", "CWC", "NWIC", "CGWB", "FERTILIZERS_DEPARTMENT", "FOOD_DISTRIBUTION_DEPARTMENT", "CONSUMER_AFFAIRS_PRICES", "AGMARKNET", "INDIA_OGD", "DGFT"}.issubset(source_ids)
         assert india.resolve("https://mausam.imd.gov.in/responsive/agromet.php").source_id == "IMD"
         assert india.resolve("https://www.fert.nic.in/publication").source_id == "FERTILIZERS_DEPARTMENT"
         assert india.resolve("https://dfpd.gov.in/allocation-of-food-grains/en").source_id == "FOOD_DISTRIBUTION_DEPARTMENT"

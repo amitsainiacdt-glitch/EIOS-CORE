@@ -47,6 +47,7 @@ def main():
         assert capacity.statement_posture == "UNCERTAIN"
         assert approval.statement_posture == "NEGATED"
         assert PublicFactualCandidateExtractor.UNCERTAIN.search("Meeting May 20 to 22, 2026") is None
+        assert PublicFactualCandidateExtractor.UNCERTAIN.search("Rainfall is likely to be below normal") is not None
         for item in preview.candidates:
             assert text[item.passage_start:item.passage_end] == item.source_passage
             assert item.document_hash == receipt.document_hash

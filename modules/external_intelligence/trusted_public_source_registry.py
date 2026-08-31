@@ -77,11 +77,15 @@ class TrustedPublicSourceRegistry:
             TrustedPublicSourceDefinition("NRSC", "National Remote Sensing Centre", ("nrsc.gov.in",), source_type="EARTH_OBSERVATION_AUTHORITY"),
             TrustedPublicSourceDefinition("ISRO", "Indian Space Research Organisation", ("isro.gov.in",), source_type="EARTH_OBSERVATION_AUTHORITY"),
             TrustedPublicSourceDefinition("AGRI_MINISTRY", "Ministry of Agriculture and Farmers Welfare", ("agriwelfare.gov.in",), source_type="AGRICULTURE_AUTHORITY"),
+            TrustedPublicSourceDefinition("PIB", "Press Information Bureau", ("pib.gov.in",), source_type="GOVERNMENT_RELEASE_AUTHORITY"),
             TrustedPublicSourceDefinition("CWC", "Central Water Commission", ("cwc.gov.in",), source_type="HYDROLOGY_AUTHORITY"),
+            TrustedPublicSourceDefinition("NWIC", "National Water Informatics Centre", ("nwic.in", "nwic.gov.in"), source_type="HYDROLOGY_DATA_AUTHORITY"),
             TrustedPublicSourceDefinition("CGWB", "Central Ground Water Board", ("cgwb.gov.in",), source_type="HYDROLOGY_AUTHORITY"),
             TrustedPublicSourceDefinition("FERTILIZERS_DEPARTMENT", "Department of Fertilizers", ("fert.nic.in",), source_type="FERTILIZER_AUTHORITY"),
             TrustedPublicSourceDefinition("FOOD_DISTRIBUTION_DEPARTMENT", "Department of Food and Public Distribution", ("dfpd.gov.in",), source_type="FOOD_STOCK_AUTHORITY"),
+            TrustedPublicSourceDefinition("CONSUMER_AFFAIRS_PRICES", "Department of Consumer Affairs Price Monitoring Division", ("fcainfoweb.nic.in",), source_type="FOOD_PRICE_AUTHORITY"),
             TrustedPublicSourceDefinition("AGMARKNET", "Agricultural Marketing Information Network", ("agmarknet.gov.in",), source_type="AGRICULTURE_MARKET_DATA"),
+            TrustedPublicSourceDefinition("INDIA_OGD", "Open Government Data Platform India", ("data.gov.in",), source_type="GOVERNMENT_OPEN_DATA_AUTHORITY"),
             TrustedPublicSourceDefinition("DGFT", "Directorate General of Foreign Trade", ("dgft.gov.in",), source_type="TRADE_POLICY_AUTHORITY"),
         ))
 

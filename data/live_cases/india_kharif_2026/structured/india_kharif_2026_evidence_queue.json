@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "case_id": "INDIA-KHARIF-2026",
+  "generated_at": "2026-08-31T12:00:00+00:00",
+  "items": [
+    {
+      "need_id": "MAIZE-MANDI-PRICE-ARRIVALS",
+      "priority": 90,
+      "action": "WAIT",
+      "eligible_now": false,
+      "next_eligible_at": null,
+      "reason_codes": [
+        "USER_ACCESS_REQUIRED",
+        "ACCESS_REQUIRED"
+      ]
+    },
+    {
+      "need_id": "OBSERVED-SOIL-OR-CROP-CONDITION",
+      "priority": 90,
+      "action": "WAIT",
+      "eligible_now": false,
+      "next_eligible_at": "2026-09-03 12:00:00+00:00",
+      "reason_codes": [
+        "USER_ACCESS_REQUIRED",
+        "ACCESS_REQUIRED",
+        "RETRY_BACKOFF_ACTIVE"
+      ]
+    },
+    {
+      "need_id": "CURRENT-RESERVOIR-CROP-MAP",
+      "priority": 80,
+      "action": "WAIT",
+      "eligible_now": false,
+      "next_eligible_at": "2026-09-07 12:00:00+00:00",
+      "reason_codes": [
+        "RETRY_BACKOFF_ACTIVE"
+      ]
+    },
+    {
+      "need_id": "CURRENT-OFFICIAL-FOOD-PRICES",
+      "priority": 67,
+      "action": "WAIT",
+      "eligible_now": false,
+      "next_eligible_at": "2026-09-02 06:00:00+00:00",
+      "reason_codes": [
+        "RETRY_BACKOFF_ACTIVE"
+      ]
+    },
+    {
+      "need_id": "DATED-COMPANY-CATALYST",
+      "priority": 35,
+      "action": "WAIT",
+      "eligible_now": false,
+      "next_eligible_at": null,
+      "reason_codes": [
+        "DEFER_UNTIL_SECTOR_TRANSMISSION_READY"
+      ]
+    },
+    {
+      "need_id": "ISSUER-EXPOSURE-DISCLOSURE",
+      "priority": 35,
+      "action": "WAIT",
+      "eligible_now": false,
+      "next_eligible_at": null,
+      "reason_codes": [
+        "DEFER_UNTIL_SECTOR_TRANSMISSION_READY"
+      ]
+    }
+  ],
+  "automatic_external_actions": false,
+  "requires_human_review": true,
+  "non_authority_statement": "Research queue only; it cannot bypass access controls or create an investment conclusion."
+}

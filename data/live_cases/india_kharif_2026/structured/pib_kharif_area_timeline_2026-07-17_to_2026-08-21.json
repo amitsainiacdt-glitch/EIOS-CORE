@@ -1,0 +1,641 @@
+{
+  "comparisons": [
+    {
+      "changes": [
+        {
+          "crop": "Bajra",
+          "earlier_current_area": 39.98,
+          "earlier_prior_year_gap": -9.08,
+          "gap_change": 8.53,
+          "later_current_area": 62.44,
+          "later_prior_year_gap": -0.55
+        },
+        {
+          "crop": "Castorseed",
+          "earlier_current_area": 0.4,
+          "earlier_prior_year_gap": -0.03,
+          "gap_change": -0.65,
+          "later_current_area": 2.27,
+          "later_prior_year_gap": -0.68
+        },
+        {
+          "crop": "Cotton",
+          "earlier_current_area": 92.53,
+          "earlier_prior_year_gap": -5.87,
+          "gap_change": 5.46,
+          "later_current_area": 106.01,
+          "later_prior_year_gap": -0.41
+        },
+        {
+          "crop": "Grand Total",
+          "earlier_current_area": 658.19,
+          "earlier_prior_year_gap": -42.28,
+          "gap_change": 24.32,
+          "later_current_area": 967.92,
+          "later_prior_year_gap": -17.96
+        },
+        {
+          "crop": "Groundnut",
+          "earlier_current_area": 34.52,
+          "earlier_prior_year_gap": -3.17,
+          "gap_change": 6.88,
+          "later_current_area": 46.82,
+          "later_prior_year_gap": 3.71
+        },
+        {
+          "crop": "Jowar",
+          "earlier_current_area": 8.74,
+          "earlier_prior_year_gap": -1.25,
+          "gap_change": 1.47,
+          "later_current_area": 12.82,
+          "later_prior_year_gap": 0.22
+        },
+        {
+          "crop": "Kulthi",
+          "earlier_current_area": 0.15,
+          "earlier_prior_year_gap": 0.02,
+          "gap_change": -0.01,
+          "later_current_area": 0.18,
+          "later_prior_year_gap": 0.01
+        },
+        {
+          "crop": "Maize",
+          "earlier_current_area": 67.89,
+          "earlier_prior_year_gap": -3.61,
+          "gap_change": 0.13,
+          "later_current_area": 87.15,
+          "later_prior_year_gap": -3.48
+        },
+        {
+          "crop": "Moong",
+          "earlier_current_area": 23.98,
+          "earlier_prior_year_gap": -2.97,
+          "gap_change": 1.13,
+          "later_current_area": 31.37,
+          "later_prior_year_gap": -1.84
+        },
+        {
+          "crop": "Moth Bean",
+          "earlier_current_area": 4.62,
+          "earlier_prior_year_gap": -2.87,
+          "gap_change": 3.01,
+          "later_current_area": 8.8,
+          "later_prior_year_gap": 0.14
+        },
+        {
+          "crop": "Nigerseed",
+          "earlier_current_area": 0.08,
+          "earlier_prior_year_gap": 0.05,
+          "gap_change": -0.07,
+          "later_current_area": 0.12,
+          "later_prior_year_gap": -0.02
+        },
+        {
+          "crop": "Other Oilseeds",
+          "earlier_current_area": 0.07,
+          "earlier_prior_year_gap": 0.02,
+          "gap_change": 0.02,
+          "later_current_area": 0.1,
+          "later_prior_year_gap": 0.04
+        },
+        {
+          "crop": "Other pulses",
+          "earlier_current_area": 2.16,
+          "earlier_prior_year_gap": -0.26,
+          "gap_change": 0.05,
+          "later_current_area": 3.03,
+          "later_prior_year_gap": -0.21
+        },
+        {
+          "crop": "Ragi",
+          "earlier_current_area": 1.06,
+          "earlier_prior_year_gap": -0.4,
+          "gap_change": 0.09,
+          "later_current_area": 2.8,
+          "later_prior_year_gap": -0.31
+        },
+        {
+          "crop": "Rice",
+          "earlier_current_area": 166.41,
+          "earlier_prior_year_gap": -1.41,
+          "gap_change": -14.49,
+          "later_current_area": 344.78,
+          "later_prior_year_gap": -15.9
+        },
+        {
+          "crop": "Sesamum",
+          "earlier_current_area": 5.12,
+          "earlier_prior_year_gap": -0.84,
+          "gap_change": 2.28,
+          "later_current_area": 9.96,
+          "later_prior_year_gap": 1.44
+        },
+        {
+          "crop": "Shri Anna cum Coarse Cereals",
+          "earlier_current_area": 119.03,
+          "earlier_prior_year_gap": -15.06,
+          "gap_change": 10.35,
+          "later_current_area": 168.5,
+          "later_prior_year_gap": -4.71
+        },
+        {
+          "crop": "Small millets",
+          "earlier_current_area": 1.37,
+          "earlier_prior_year_gap": -0.72,
+          "gap_change": 0.14,
+          "later_current_area": 3.3,
+          "later_prior_year_gap": -0.58
+        },
+        {
+          "crop": "Soybean",
+          "earlier_current_area": 106.02,
+          "earlier_prior_year_gap": -5.02,
+          "gap_change": 5.28,
+          "later_current_area": 119.92,
+          "later_prior_year_gap": 0.26
+        },
+        {
+          "crop": "Sugarcane",
+          "earlier_current_area": 57.58,
+          "earlier_prior_year_gap": 0.86,
+          "gap_change": -1.17,
+          "later_current_area": 58.31,
+          "later_prior_year_gap": -0.31
+        },
+        {
+          "crop": "Sunflower",
+          "earlier_current_area": 0.88,
+          "earlier_prior_year_gap": 0.34,
+          "gap_change": 0.09,
+          "later_current_area": 1.01,
+          "later_prior_year_gap": 0.43
+        },
+        {
+          "crop": "Total Jute and Mesta",
+          "earlier_current_area": 6.32,
+          "earlier_prior_year_gap": 0.13,
+          "gap_change": -0.01,
+          "later_current_area": 6.34,
+          "later_prior_year_gap": 0.12
+        },
+        {
+          "crop": "Total Oilseeds",
+          "earlier_current_area": 147.09,
+          "earlier_prior_year_gap": -8.63,
+          "gap_change": 13.82,
+          "later_current_area": 180.2,
+          "later_prior_year_gap": 5.19
+        },
+        {
+          "crop": "Total Pulses",
+          "earlier_current_area": 69.23,
+          "earlier_prior_year_gap": -12.29,
+          "gap_change": 10.34,
+          "later_current_area": 103.78,
+          "later_prior_year_gap": -1.95
+        },
+        {
+          "crop": "Tur",
+          "earlier_current_area": 24.8,
+          "earlier_prior_year_gap": -5.36,
+          "gap_change": 2.75,
+          "later_current_area": 37.53,
+          "later_prior_year_gap": -2.61
+        },
+        {
+          "crop": "Urad",
+          "earlier_current_area": 13.51,
+          "earlier_prior_year_gap": -0.85,
+          "gap_change": 3.42,
+          "later_current_area": 22.86,
+          "later_prior_year_gap": 2.57
+        }
+      ],
+      "creates_observation": false,
+      "decision": "PASS",
+      "earlier_period": "17.07.2026",
+      "later_period": "07.08.2026",
+      "reason_codes": [],
+      "requires_human_review": true,
+      "shared_crop_count": 26
+    },
+    {
+      "changes": [
+        {
+          "crop": "Bajra",
+          "earlier_current_area": 62.44,
+          "earlier_prior_year_gap": -0.55,
+          "gap_change": 1.24,
+          "later_current_area": 63.98,
+          "later_prior_year_gap": 0.69
+        },
+        {
+          "crop": "Castorseed",
+          "earlier_current_area": 2.27,
+          "earlier_prior_year_gap": -0.68,
+          "gap_change": -1.67,
+          "later_current_area": 3.83,
+          "later_prior_year_gap": -2.35
+        },
+        {
+          "crop": "Cotton",
+          "earlier_current_area": 106.01,
+          "earlier_prior_year_gap": -0.41,
+          "gap_change": -0.55,
+          "later_current_area": 107.3,
+          "later_prior_year_gap": -0.96
+        },
+        {
+          "crop": "Grand Total",
+          "earlier_current_area": 967.92,
+          "earlier_prior_year_gap": -17.96,
+          "gap_change": -2.99,
+          "later_current_area": 1016.57,
+          "later_prior_year_gap": -20.95
+        },
+        {
+          "crop": "Groundnut",
+          "earlier_current_area": 46.82,
+          "earlier_prior_year_gap": 3.71,
+          "gap_change": -2.69,
+          "later_current_area": 48.03,
+          "later_prior_year_gap": 1.02
+        },
+        {
+          "crop": "Jowar",
+          "earlier_current_area": 12.82,
+          "earlier_prior_year_gap": 0.22,
+          "gap_change": 0.47,
+          "later_current_area": 13.3,
+          "later_prior_year_gap": 0.69
+        },
+        {
+          "crop": "Kulthi",
+          "earlier_current_area": 0.18,
+          "earlier_prior_year_gap": 0.01,
+          "gap_change": 0.0,
+          "later_current_area": 0.19,
+          "later_prior_year_gap": 0.01
+        },
+        {
+          "crop": "Maize",
+          "earlier_current_area": 87.15,
+          "earlier_prior_year_gap": -3.48,
+          "gap_change": -0.19,
+          "later_current_area": 88.39,
+          "later_prior_year_gap": -3.67
+        },
+        {
+          "crop": "Moong",
+          "earlier_current_area": 31.37,
+          "earlier_prior_year_gap": -1.84,
+          "gap_change": 0.47,
+          "later_current_area": 32.05,
+          "later_prior_year_gap": -1.37
+        },
+        {
+          "crop": "Moth Bean",
+          "earlier_current_area": 8.8,
+          "earlier_prior_year_gap": 0.14,
+          "gap_change": 0.09,
+          "later_current_area": 8.92,
+          "later_prior_year_gap": 0.23
+        },
+        {
+          "crop": "Nigerseed",
+          "earlier_current_area": 0.12,
+          "earlier_prior_year_gap": -0.02,
+          "gap_change": 0.1,
+          "later_current_area": 0.24,
+          "later_prior_year_gap": 0.08
+        },
+        {
+          "crop": "Other Oilseeds",
+          "earlier_current_area": 0.1,
+          "earlier_prior_year_gap": 0.04,
+          "gap_change": 0.0,
+          "later_current_area": 0.1,
+          "later_prior_year_gap": 0.04
+        },
+        {
+          "crop": "Other pulses",
+          "earlier_current_area": 3.03,
+          "earlier_prior_year_gap": -0.21,
+          "gap_change": -0.06,
+          "later_current_area": 3.14,
+          "later_prior_year_gap": -0.27
+        },
+        {
+          "crop": "Ragi",
+          "earlier_current_area": 2.8,
+          "earlier_prior_year_gap": -0.31,
+          "gap_change": -1.49,
+          "later_current_area": 3.46,
+          "later_prior_year_gap": -1.8
+        },
+        {
+          "crop": "Rice",
+          "earlier_current_area": 344.78,
+          "earlier_prior_year_gap": -15.9,
+          "gap_change": 1.53,
+          "later_current_area": 379.07,
+          "later_prior_year_gap": -14.37
+        },
+        {
+          "crop": "Sesamum",
+          "earlier_current_area": 9.96,
+          "earlier_prior_year_gap": 1.44,
+          "gap_change": 0.19,
+          "later_current_area": 10.35,
+          "later_prior_year_gap": 1.63
+        },
+        {
+          "crop": "Shri Anna cum Coarse Cereals",
+          "earlier_current_area": 168.5,
+          "earlier_prior_year_gap": -4.71,
+          "gap_change": 0.54,
+          "later_current_area": 172.96,
+          "later_prior_year_gap": -4.17
+        },
+        {
+          "crop": "Small millets",
+          "earlier_current_area": 3.3,
+          "earlier_prior_year_gap": -0.58,
+          "gap_change": 0.49,
+          "later_current_area": 3.83,
+          "later_prior_year_gap": -0.09
+        },
+        {
+          "crop": "Soybean",
+          "earlier_current_area": 119.92,
+          "earlier_prior_year_gap": 0.26,
+          "gap_change": -2.02,
+          "later_current_area": 120.84,
+          "later_prior_year_gap": -1.76
+        },
+        {
+          "crop": "Sugarcane",
+          "earlier_current_area": 58.31,
+          "earlier_prior_year_gap": -0.31,
+          "gap_change": 0.0,
+          "later_current_area": 58.31,
+          "later_prior_year_gap": -0.31
+        },
+        {
+          "crop": "Sunflower",
+          "earlier_current_area": 1.01,
+          "earlier_prior_year_gap": 0.43,
+          "gap_change": 0.03,
+          "later_current_area": 1.06,
+          "later_prior_year_gap": 0.46
+        },
+        {
+          "crop": "Total Jute and Mesta",
+          "earlier_current_area": 6.34,
+          "earlier_prior_year_gap": 0.12,
+          "gap_change": -0.01,
+          "later_current_area": 6.34,
+          "later_prior_year_gap": 0.11
+        },
+        {
+          "crop": "Total Oilseeds",
+          "earlier_current_area": 180.2,
+          "earlier_prior_year_gap": 5.19,
+          "gap_change": -6.08,
+          "later_current_area": 184.46,
+          "later_prior_year_gap": -0.89
+        },
+        {
+          "crop": "Total Pulses",
+          "earlier_current_area": 103.78,
+          "earlier_prior_year_gap": -1.95,
+          "gap_change": 1.6,
+          "later_current_area": 108.14,
+          "later_prior_year_gap": -0.35
+        },
+        {
+          "crop": "Tur",
+          "earlier_current_area": 37.53,
+          "earlier_prior_year_gap": -2.61,
+          "gap_change": 0.92,
+          "later_current_area": 40.31,
+          "later_prior_year_gap": -1.69
+        },
+        {
+          "crop": "Urad",
+          "earlier_current_area": 22.86,
+          "earlier_prior_year_gap": 2.57,
+          "gap_change": 0.16,
+          "later_current_area": 23.52,
+          "later_prior_year_gap": 2.73
+        }
+      ],
+      "creates_observation": false,
+      "decision": "PASS",
+      "earlier_period": "07.08.2026",
+      "later_period": "14.08.2026",
+      "reason_codes": [],
+      "requires_human_review": true,
+      "shared_crop_count": 26
+    },
+    {
+      "changes": [
+        {
+          "crop": "Bajra",
+          "earlier_current_area": 63.98,
+          "earlier_prior_year_gap": 0.69,
+          "gap_change": 0.66,
+          "later_current_area": 64.68,
+          "later_prior_year_gap": 1.35
+        },
+        {
+          "crop": "Castorseed",
+          "earlier_current_area": 3.83,
+          "earlier_prior_year_gap": -2.35,
+          "gap_change": 0.81,
+          "later_current_area": 5.88,
+          "later_prior_year_gap": -1.54
+        },
+        {
+          "crop": "Cotton",
+          "earlier_current_area": 107.3,
+          "earlier_prior_year_gap": -0.96,
+          "gap_change": 0.68,
+          "later_current_area": 108.45,
+          "later_prior_year_gap": -0.28
+        },
+        {
+          "crop": "Grand Total",
+          "earlier_current_area": 1016.57,
+          "earlier_prior_year_gap": -20.95,
+          "gap_change": 4.88,
+          "later_current_area": 1056.7,
+          "later_prior_year_gap": -16.07
+        },
+        {
+          "crop": "Groundnut",
+          "earlier_current_area": 48.03,
+          "earlier_prior_year_gap": 1.02,
+          "gap_change": -0.45,
+          "later_current_area": 48.79,
+          "later_prior_year_gap": 0.57
+        },
+        {
+          "crop": "Jowar",
+          "earlier_current_area": 13.3,
+          "earlier_prior_year_gap": 0.69,
+          "gap_change": 0.12,
+          "later_current_area": 13.41,
+          "later_prior_year_gap": 0.81
+        },
+        {
+          "crop": "Kulthi",
+          "earlier_current_area": 0.19,
+          "earlier_prior_year_gap": 0.01,
+          "gap_change": -0.04,
+          "later_current_area": 0.23,
+          "later_prior_year_gap": -0.03
+        },
+        {
+          "crop": "Maize",
+          "earlier_current_area": 88.39,
+          "earlier_prior_year_gap": -3.67,
+          "gap_change": -0.12,
+          "later_current_area": 89.51,
+          "later_prior_year_gap": -3.79
+        },
+        {
+          "crop": "Moong",
+          "earlier_current_area": 32.05,
+          "earlier_prior_year_gap": -1.37,
+          "gap_change": 0.12,
+          "later_current_area": 32.68,
+          "later_prior_year_gap": -1.25
+        },
+        {
+          "crop": "Moth Bean",
+          "earlier_current_area": 8.92,
+          "earlier_prior_year_gap": 0.23,
+          "gap_change": -0.18,
+          "later_current_area": 9.22,
+          "later_prior_year_gap": 0.05
+        },
+        {
+          "crop": "Nigerseed",
+          "earlier_current_area": 0.24,
+          "earlier_prior_year_gap": 0.08,
+          "gap_change": 0.03,
+          "later_current_area": 0.33,
+          "later_prior_year_gap": 0.11
+        },
+        {
+          "crop": "Ragi",
+          "earlier_current_area": 3.46,
+          "earlier_prior_year_gap": -1.8,
+          "gap_change": 0.01,
+          "later_current_area": 4.81,
+          "later_prior_year_gap": -1.79
+        },
+        {
+          "crop": "Rice",
+          "earlier_current_area": 379.07,
+          "earlier_prior_year_gap": -14.37,
+          "gap_change": 1.18,
+          "later_current_area": 405.1,
+          "later_prior_year_gap": -13.19
+        },
+        {
+          "crop": "Sesamum",
+          "earlier_current_area": 10.35,
+          "earlier_prior_year_gap": 1.63,
+          "gap_change": -0.21,
+          "later_current_area": 10.81,
+          "later_prior_year_gap": 1.42
+        },
+        {
+          "crop": "Shri Anna cum Coarse Cereals",
+          "earlier_current_area": 172.96,
+          "earlier_prior_year_gap": -4.17,
+          "gap_change": 0.72,
+          "later_current_area": 176.36,
+          "later_prior_year_gap": -3.45
+        },
+        {
+          "crop": "Soybean",
+          "earlier_current_area": 120.84,
+          "earlier_prior_year_gap": -1.76,
+          "gap_change": 0.35,
+          "later_current_area": 121.35,
+          "later_prior_year_gap": -1.41
+        },
+        {
+          "crop": "Sugarcane",
+          "earlier_current_area": 58.31,
+          "earlier_prior_year_gap": -0.31,
+          "gap_change": -0.12,
+          "later_current_area": 58.44,
+          "later_prior_year_gap": -0.43
+        },
+        {
+          "crop": "Sunflower",
+          "earlier_current_area": 1.06,
+          "earlier_prior_year_gap": 0.46,
+          "gap_change": 0.03,
+          "later_current_area": 1.1,
+          "later_prior_year_gap": 0.49
+        },
+        {
+          "crop": "Total Jute and Mesta",
+          "earlier_current_area": 6.34,
+          "earlier_prior_year_gap": 0.11,
+          "gap_change": -0.01,
+          "later_current_area": 6.34,
+          "later_prior_year_gap": 0.1
+        },
+        {
+          "crop": "Total Oilseeds",
+          "earlier_current_area": 184.46,
+          "earlier_prior_year_gap": -0.89,
+          "gap_change": 0.57,
+          "later_current_area": 188.37,
+          "later_prior_year_gap": -0.32
+        },
+        {
+          "crop": "Total Pulses",
+          "earlier_current_area": 108.14,
+          "earlier_prior_year_gap": -0.35,
+          "gap_change": 1.84,
+          "later_current_area": 113.63,
+          "later_prior_year_gap": 1.49
+        },
+        {
+          "crop": "Tur",
+          "earlier_current_area": 40.31,
+          "earlier_prior_year_gap": -1.69,
+          "gap_change": 2.11,
+          "later_current_area": 43.86,
+          "later_prior_year_gap": 0.42
+        },
+        {
+          "crop": "Urad",
+          "earlier_current_area": 23.52,
+          "earlier_prior_year_gap": 2.73,
+          "gap_change": -0.08,
+          "later_current_area": 24.38,
+          "later_prior_year_gap": 2.65
+        }
+      ],
+      "creates_observation": false,
+      "decision": "PASS",
+      "earlier_period": "14.08.2026",
+      "later_period": "2026-08-21",
+      "reason_codes": [],
+      "requires_human_review": true,
+      "shared_crop_count": 23
+    }
+  ],
+  "creates_observation": false,
+  "decision": "PASS",
+  "requires_human_review": true,
+  "schema_version": 1
+}

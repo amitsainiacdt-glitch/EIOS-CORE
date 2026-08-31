@@ -1,0 +1,66 @@
+{
+  "acquisition_id": "AGRI-2026-PIB-017",
+  "creates_observation": false,
+  "extraction_id": "AGRI-2026-PIB-EXT-017",
+  "period_label": "01.04.26 TO 19.07.26",
+  "records": [
+    {
+      "acquisition_id": "AGRI-2026-PIB-017",
+      "availability": 39.54,
+      "closing_stock": 16.72,
+      "dbt_sales": 22.82,
+      "document_hash": "35ea6cde03af34214482205ae10fddba5a44c96b4b4bd085dae4faf927721933",
+      "period_label": "01.04.26 TO 19.07.26",
+      "product": "DAP",
+      "record_id": "c647ccce33b2ec66ab8474fd77be9a2461ea4383f0576f113c03dc81d2a6e8ad",
+      "requirement": 31.57,
+      "source_row": "2 | DAP | 31.57 | 39.54 | 22.82 | 16.72",
+      "source_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2288857&lang=1&reg=1",
+      "unit": "LMT"
+    },
+    {
+      "acquisition_id": "AGRI-2026-PIB-017",
+      "availability": 13.81,
+      "closing_stock": 8.63,
+      "dbt_sales": 5.2,
+      "document_hash": "35ea6cde03af34214482205ae10fddba5a44c96b4b4bd085dae4faf927721933",
+      "period_label": "01.04.26 TO 19.07.26",
+      "product": "MOP",
+      "record_id": "d707d3a14a15270f51c6c234380ce5bd936da9e7c899577826bb6ff033bafeec",
+      "requirement": 10.06,
+      "source_row": "3 | MOP | 10.06 | 13.81 | 5.20 | 8.63",
+      "source_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2288857&lang=1&reg=1",
+      "unit": "LMT"
+    },
+    {
+      "acquisition_id": "AGRI-2026-PIB-017",
+      "availability": 84.57,
+      "closing_stock": 45.21,
+      "dbt_sales": 39.36,
+      "document_hash": "35ea6cde03af34214482205ae10fddba5a44c96b4b4bd085dae4faf927721933",
+      "period_label": "01.04.26 TO 19.07.26",
+      "product": "NPKS",
+      "record_id": "c69122dd67a9ba6abbf86f4e171144a2cd9a76742de966d99d3990f9d8835703",
+      "requirement": 48.48,
+      "source_row": "4 | NPKS | 48.48 | 84.57 | 39.36 | 45.21",
+      "source_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2288857&lang=1&reg=1",
+      "unit": "LMT"
+    },
+    {
+      "acquisition_id": "AGRI-2026-PIB-017",
+      "availability": 163.78,
+      "closing_stock": 69.01,
+      "dbt_sales": 94.78,
+      "document_hash": "35ea6cde03af34214482205ae10fddba5a44c96b4b4bd085dae4faf927721933",
+      "period_label": "01.04.26 TO 19.07.26",
+      "product": "UREA",
+      "record_id": "b13a6c29dfe3b6450e491811d1321a421b1b88e3bdefbcd51fab35ceb41aa9d7",
+      "requirement": 109.4,
+      "source_row": "1 | UREA | 109.40 | 163.78 | 94.78 | 69.01",
+      "source_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2288857&lang=1&reg=1",
+      "unit": "LMT"
+    }
+  ],
+  "requires_human_review": true,
+  "schema_version": 1
+}

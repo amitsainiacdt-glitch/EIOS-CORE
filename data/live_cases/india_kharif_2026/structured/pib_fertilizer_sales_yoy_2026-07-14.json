@@ -1,0 +1,21 @@
+{
+  "acquisition_id": "AGRI-2026-PIB-019",
+  "comparison": {
+    "acquisition_id": "AGRI-2026-PIB-019",
+    "comparison_id": "7ab0ab29de92c9bd501fdf3174ca5447d0ff755bea8e92d90b2a6fc22cb3932f",
+    "current_consumption_lmt": 151.74,
+    "current_period_label": "KHARIF 2026 THROUGH 14 JULY 2026",
+    "document_hash": "472a0b84f533e8ac57f15365bf10acc9d4374f746efa2d89d50c05b3e2a25fbd",
+    "passage_end": 8431,
+    "passage_start": 8196,
+    "prior_consumption_lmt": 157.05,
+    "prior_period_label": "CORRESPONDING KHARIF 2025 PERIOD",
+    "source_passage": "During the ongoing Kharif 2026 season (1 April 2026 to 14 July 2026), total consumption of major fertilizers&mdash;Urea, DAP, MOP and NPKS&mdash;stood at 151.74 LMT, compared to 157.05 LMT during the corresponding period of Kharif 2025",
+    "source_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2287255&lang=1&reg=3",
+    "year_over_year_percent": -3.38
+  },
+  "creates_observation": false,
+  "extraction_id": "AGRI-2026-PIB-EXT-019",
+  "requires_human_review": true,
+  "schema_version": 1
+}

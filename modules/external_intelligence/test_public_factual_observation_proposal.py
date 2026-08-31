@@ -10,7 +10,9 @@ from modules.external_intelligence.http_retriever import RetrievedContent
 from modules.external_intelligence.public_document_extraction_ledger import PublicDocumentExtractionLedger
 from modules.external_intelligence.public_factual_candidate_extractor import PublicFactualCandidateExtractor
 from modules.external_intelligence.public_factual_candidate_validator import PublicFactualCandidateValidator
+from modules.external_intelligence.public_factual_candidate_validation import PublicFactualCandidateValidationDecision
 from modules.external_intelligence.public_factual_observation_proposal_builder import PublicFactualObservationProposalBuilder
+from modules.external_intelligence.public_factual_observation_review_package_builder import PublicFactualObservationReviewPackageBuilder
 from modules.external_intelligence.public_factual_observation_review_ledger import PublicFactualObservationReviewLedger
 from modules.external_intelligence.public_factual_observation_review_ledger import PublicFactualObservationReviewDecision
 from modules.external_intelligence.public_observation_admission_gate import PublicObservationAdmissionGate
@@ -40,13 +42,44 @@ def main():
         acquisition = TrustedPublicAcquisitionResult(registry.resolve(receipt.source_url), receipt, RetrievedContent(receipt.source_url, 200, text, "text/plain", {}), body)
         extraction = TrustedPublicDocumentExtractionAdapter(PublicDocumentExtractionLedger(root / "e.jsonl"), clock=lambda: now + timedelta(seconds=1)).extract(acquisition, extraction_id="E1", recorder="Extractor")
         admission = PublicObservationAdmissionGate(registry).preview(acquisition=acquisition, extraction=extraction, observations=(), title="Filing", entity="Alpha Engineering Limited", category="EXCHANGE_FILING", confidence=80)
-        candidate = PublicFactualCandidateExtractor().extract(acquisition=acquisition, extraction=extraction, admission=admission, subject_entity="Alpha Engineering Limited").candidates[0]
+        candidate_preview = PublicFactualCandidateExtractor().extract(acquisition=acquisition, extraction=extraction, admission=admission, subject_entity="Alpha Engineering Limited")
+        candidate = candidate_preview.candidates[0]
         validation = PublicFactualCandidateValidator().validate(candidate=candidate, acquisition=acquisition, extraction=extraction)
         proposal = PublicFactualObservationProposalBuilder().build(proposal_id="PROP-1", candidate=candidate, validation=validation, acquisition=acquisition, extraction=extraction)
         assert proposal.description == candidate.source_passage
         assert proposal.category == "PUBLIC_FACT_ORDER_CONTRACT"
         assert proposal.requires_human_review and not hasattr(proposal, "confidence")
         assert proposal.explicit_amounts == ("INR 125 crore",)
+        package = PublicFactualObservationReviewPackageBuilder().build(
+            package_id="PKG-1", candidate_preview=candidate_preview, validations=(validation,), acquisition=acquisition,
+            extraction=extraction, included_event_types=("ORDER_CONTRACT",),
+        )
+        assert len(package.proposals) == 1 and package.proposals[0].description == candidate.source_passage
+        assert package.package_status == "READY_FOR_HUMAN_PROPOSAL_REVIEW" and not package.deferred_candidates
+        assert package.requires_human_review and not package.creates_observation
+        assert PublicFactualObservationReviewPackageBuilder().build(
+            package_id="PKG-1", candidate_preview=candidate_preview, validations=(validation,), acquisition=acquisition,
+            extraction=extraction, included_event_types=("ORDER_CONTRACT",),
+        ) == package
+        deferred_validation = replace(
+            validation, decision=PublicFactualCandidateValidationDecision.DEFER,
+            reason_codes=("UNCERTAIN_STATEMENT_REQUIRES_CORROBORATION",), requires_corroboration=True,
+        )
+        held_package = PublicFactualObservationReviewPackageBuilder().build(
+            package_id="PKG-HOLD", candidate_preview=candidate_preview, validations=(deferred_validation,),
+            acquisition=acquisition, extraction=extraction, included_event_types=("ORDER_CONTRACT",),
+        )
+        assert held_package.package_status == "RESEARCH_HOLD_CORROBORATION"
+        assert not held_package.proposals and len(held_package.deferred_candidates) == 1
+        try:
+            PublicFactualObservationReviewPackageBuilder().build(
+                package_id="PKG-BLOCKED", candidate_preview=candidate_preview, validations=(validation,), acquisition=acquisition,
+                extraction=extraction, included_event_types=("WEATHER_ANOMALY",),
+            )
+        except ValueError as exc:
+            assert "at least one" in str(exc)
+        else:
+            raise AssertionError("empty review package accepted")
 
         ledger = PublicFactualObservationReviewLedger(root / "reviews.jsonl")
         approved = ledger.record(proposal, review_id="REV-1", decision="APPROVE", approved_confidence=82, notes="Exact exchange passage confirms the order; materiality requires later analysis.", reviewed_at=now + timedelta(minutes=1), reviewer="Human Reviewer")

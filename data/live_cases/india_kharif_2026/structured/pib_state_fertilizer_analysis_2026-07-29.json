@@ -1,0 +1,146 @@
+{
+  "creates_observation": false,
+  "national_availability_above_requirement": true,
+  "national_product_count": 4,
+  "period_label": "01.04.26 TO 29.07.26",
+  "requires_human_review": true,
+  "state_count": 36,
+  "state_requirement_gaps": [
+    {
+      "availability_gap_lmt": -0.02,
+      "availability_lmt": 0.85,
+      "closing_stock_lmt": 0.71,
+      "product": "MOP",
+      "requirement_lmt": 0.87,
+      "state": "Bihar"
+    },
+    {
+      "availability_gap_lmt": -0.52,
+      "availability_lmt": 2.02,
+      "closing_stock_lmt": 0.51,
+      "product": "DAP",
+      "requirement_lmt": 2.54,
+      "state": "Chhattisgarh"
+    },
+    {
+      "availability_gap_lmt": -0.01,
+      "availability_lmt": 0.0,
+      "closing_stock_lmt": 0.0,
+      "product": "MOP",
+      "requirement_lmt": 0.01,
+      "state": "Goa"
+    },
+    {
+      "availability_gap_lmt": -0.28,
+      "availability_lmt": 2.29,
+      "closing_stock_lmt": 0.6,
+      "product": "DAP",
+      "requirement_lmt": 2.57,
+      "state": "Gujarat"
+    },
+    {
+      "availability_gap_lmt": -0.06,
+      "availability_lmt": 0.38,
+      "closing_stock_lmt": 0.24,
+      "product": "MOP",
+      "requirement_lmt": 0.44,
+      "state": "Haryana"
+    },
+    {
+      "availability_gap_lmt": -0.01,
+      "availability_lmt": 0.09,
+      "closing_stock_lmt": 0.03,
+      "product": "NPKS",
+      "requirement_lmt": 0.1,
+      "state": "Himachal Pradesh"
+    },
+    {
+      "availability_gap_lmt": -0.03,
+      "availability_lmt": 0.41,
+      "closing_stock_lmt": 0.15,
+      "product": "DAP",
+      "requirement_lmt": 0.44,
+      "state": "Jharkhand"
+    },
+    {
+      "availability_gap_lmt": -0.12,
+      "availability_lmt": 3.41,
+      "closing_stock_lmt": 0.96,
+      "product": "DAP",
+      "requirement_lmt": 3.53,
+      "state": "Madhya Pradesh"
+    },
+    {
+      "availability_gap_lmt": -0.18,
+      "availability_lmt": 0.61,
+      "closing_stock_lmt": 0.32,
+      "product": "MOP",
+      "requirement_lmt": 0.79,
+      "state": "Madhya Pradesh"
+    },
+    {
+      "availability_gap_lmt": -0.01,
+      "availability_lmt": 0.01,
+      "closing_stock_lmt": 0.0,
+      "product": "DAP",
+      "requirement_lmt": 0.02,
+      "state": "Meghalaya"
+    },
+    {
+      "availability_gap_lmt": -0.02,
+      "availability_lmt": 0.0,
+      "closing_stock_lmt": 0.0,
+      "product": "DAP",
+      "requirement_lmt": 0.02,
+      "state": "Mizoram"
+    },
+    {
+      "availability_gap_lmt": -0.01,
+      "availability_lmt": 0.01,
+      "closing_stock_lmt": 0.01,
+      "product": "UREA",
+      "requirement_lmt": 0.02,
+      "state": "Mizoram"
+    },
+    {
+      "availability_gap_lmt": -0.48,
+      "availability_lmt": 2.73,
+      "closing_stock_lmt": 0.65,
+      "product": "DAP",
+      "requirement_lmt": 3.21,
+      "state": "Rajasthan"
+    },
+    {
+      "availability_gap_lmt": -0.04,
+      "availability_lmt": 2.03,
+      "closing_stock_lmt": 0.31,
+      "product": "DAP",
+      "requirement_lmt": 2.07,
+      "state": "Telangana"
+    },
+    {
+      "availability_gap_lmt": -0.03,
+      "availability_lmt": 0.56,
+      "closing_stock_lmt": 0.4,
+      "product": "MOP",
+      "requirement_lmt": 0.59,
+      "state": "Telangana"
+    },
+    {
+      "availability_gap_lmt": -0.17,
+      "availability_lmt": 1.39,
+      "closing_stock_lmt": 1.13,
+      "product": "MOP",
+      "requirement_lmt": 1.56,
+      "state": "Uttar Pradesh"
+    },
+    {
+      "availability_gap_lmt": -0.08,
+      "availability_lmt": 0.04,
+      "closing_stock_lmt": 0.02,
+      "product": "NPKS",
+      "requirement_lmt": 0.12,
+      "state": "Uttarakhand"
+    }
+  ]
+}

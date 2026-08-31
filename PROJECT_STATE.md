@@ -4916,3 +4916,395 @@ investment decision is created by this checkpoint.
 - The canary exposed an agronomic-advice false positive: an instruction mentioning fertilizer was incorrectly labelled as a fertilizer-market event. `application` was removed from the market trigger, and a regression test now prevents application advice from masquerading as sales, availability, inventory, allocation, shortage, or subsidy evidence.
 - Windows terminal preview output now replaces unsupported decorative characters instead of terminating the audit display.
 - Production Observations remain exactly 46. No live forecast candidate has been proposed, human-reviewed, committed, joined into Temporal Evidence, or supplied to mandatory Meta.
+
+## Checkpoint 116 — Governed factual review package and forecast hold
+
+- Added a deterministic human-review package contract and builder above validated public factual candidates.
+- Packages bind the exact acquisition, extraction, document hash, source URL, candidate/proposal fingerprints, excluded candidates, and package fingerprint.
+- Validated candidates may become review-only proposals; deferred candidates remain separately visible with exact source passages, validation decisions, reason codes, and corroboration requirements.
+- Package status is fail-closed: `READY_FOR_HUMAN_PROPOSAL_REVIEW` only when included candidates are validated without deferred items; otherwise it is `RESEARCH_HOLD_CORROBORATION`.
+- Added a guarded command-line workflow that reacquires and extracts the public document, reruns admission, candidate extraction, and validation, then writes the review package without committing any Observation.
+- Corrected forecast semantics: `likely`, `forecast`, and `forecasted` now produce `UNCERTAIN` statement posture. A date use such as `May 20` remains protected from false uncertainty.
+- The first IMD package is retained only as a superseded audit artifact because it predated the forecast-posture correction and must not be reviewed or committed.
+- The corrected IMD package contains zero Observation proposals and five deferred weather candidates, each held for `UNCERTAIN_STATEMENT_REQUIRES_CORROBORATION`.
+- This is the intended result: an official forecast can open and prioritize research, but cannot be represented as realized rainfall, crop damage, fertilizer demand, or an investable conclusion.
+- Production Observations remain exactly 46. No Evidence, Temporal Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 117 — Guarded observed-rainfall extraction and period-collision control
+
+- Located the official IMD meteorological-subdivision rainfall page and its server-rendered daily, weekly, monthly, and cumulative controls.
+- Added a narrow structured extractor for IMD rainfall map records embedded in the verified HTML. It never executes page scripts; it parses only the acquired bytes after SHA-256, source-authority, acquisition, extraction-receipt, content-type, and fingerprint validation.
+- Each structured record preserves area, displayed period label, departure percentage, actual millimetres, normal millimetres, exact embedded source fragment, byte-character offsets, acquisition ID, document hash, and source URL.
+- The first live parser iteration exposed cross-record contamination when a `No Data` aggregate preceded a numeric subdivision. No facts were admitted. The parser was replaced with a two-stage object-isolation design that makes cross-object numeric matching structurally impossible.
+- Offline tests now include a leading `No Data` record, exact-passage checks, daily and weekly label formats, and altered-byte refusal.
+- The corrected daily extract for 0830 hours 29 August to 0830 hours 30 August 2026 contains 40 aligned records. It reports India at -26% departure (5.2 mm actual versus 7.1 mm normal) and South Peninsula at -66% (1.8 mm versus 5.2 mm), with substantial positive and negative subdivision dispersion.
+- These are one-day observed conditions only. They do not establish a seasonal rain deficit, crop stress, fertilizer demand, food-price impact, or company earnings impact.
+- Added a cross-period consistency service. Differently labelled period views with identical shared area/value tuples are blocked as `PERIOD_VIEW_DATA_COLLISION` and cannot count as independent corroboration.
+- The official weekly-labelled view returned the same 40 area/value tuples as the daily view and is therefore blocked pending a distinct verified weekly source or later observations.
+- Superseded parser-development datasets are explicitly marked and must not be used. Production Observations remain exactly 46; mandatory Meta remains on research hold.
+
+## Checkpoint 118 — Monthly and cumulative rainfall persistence evidence
+
+- Bound rainfall period extraction to IMD's active `D`, `W`, `M`, or `C` page selector so a selected monthly view cannot accidentally inherit a cumulative label also displayed on the page.
+- Generalized displayed period parsing for IMD line breaks, punctuation, single dates, and date ranges while preserving normalized official label text.
+- The corrected monthly view covers 1-30 August 2026 and contains 40 numeric area records. India is -16% (207.3 mm actual versus 248.1 mm normal) and South Peninsula is -26% (137.7 mm versus 185.1 mm).
+- The cumulative monsoon view covers 1 June-30 August 2026 and contains 31 numeric area records. India is -14% (597.6 mm versus 693.9 mm) and South Peninsula is -24% (420.3 mm versus 550.6 mm).
+- Monthly and cumulative values are distinct from the daily view and establish usable public-authority persistence evidence for rainfall deficit at national and South-Peninsula scope.
+- The active weekly label is 20-26 August 2026, but all 40 weekly area/value tuples remain identical to the daily 29-30 August view. The weekly dataset stays blocked by `PERIOD_VIEW_DATA_COLLISION`.
+- Geographic dispersion remains material: cumulative Gujarat Region and Madhya Maharashtra are above normal while South Peninsula and Telangana are below normal. EIOS must not turn a national or regional aggregate into a uniform company exposure claim.
+- Rainfall persistence advances only the weather-anomaly research layer. Crop-stage stress, soil moisture, irrigation buffering, sowing/crop progress, fertilizer application/sales, food supply, and governed company exposure remain unresolved.
+- Production Observations remain exactly 46. No Observation proposal, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 119 — Soil-moisture source boundary and readiness gate
+
+- Verified the official NRSC/Bhuvan catalogue listing for the two-day India Surface Soil Moisture product at 0.25-degree grid resolution, with catalogue availability through 25 August 2026.
+- Guardedly acquired the official 31-page technical document and extracted 43,151 text characters; two pages without text are explicitly recorded in the extraction receipt.
+- The actual archive download path requires a user login. EIOS did not bypass that access boundary and did not copy browser or search-result text into evidence.
+- Added a fail-closed readiness service that separates four materially different states: source discovery, guarded structured measurements, baseline-relative anomaly, and crop-stage stress.
+- Catalogue availability is discovery only. Absolute soil-moisture measurements cannot corroborate a weather anomaly without a valid baseline and computed anomaly.
+- Even a valid soil-moisture anomaly cannot support crop stress without crop-stage/geography mapping and independent corroboration such as crop progress, vegetation condition, or ground reporting.
+- A complete chain reaches only `READY_FOR_CROP_STRESS_REVIEW`; it still creates no Observation and requires human review.
+- The live India Kharif case remains on research hold because the underlying grid dataset, baseline anomaly, crop-stage geography map, and independent crop-condition corroboration are not yet present.
+- Production Observations remain exactly 46. No Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 120 — Guarded official Kharif crop-area structure
+
+- Added the Press Information Bureau as a separately identified government-release authority rather than misrepresenting it as the Ministry's own domain.
+- Guardedly acquired and deterministically extracted the Ministry of Agriculture and Farmers Welfare's official all-India Kharif weekly area report for 21 August 2026.
+- Added a hash-bound crop-area table extractor that requires the configured PIB authority, exact Ministry attribution, a dated reporting period, audited HTML lineage, and internal row arithmetic within a narrow tolerance.
+- The first live structured run exposed duplicate desktop/mobile table rendering: 50 parsed rows represented 25 repeated facts. That artifact is retained as superseded, and deterministic record-identity suppression now produces exactly 25 unique crop rows.
+- The 21 August report shows a mixed crop picture, not uniform crop failure: Grand Total area was 1,056.70 lakh hectares versus 1,072.77 a year earlier, a difference of -16.07; rice was -13.19, maize -3.79, and coarse cereals -3.45, while total pulses were +1.49 and total oilseeds were nearly flat at -0.32 lakh hectares.
+- Crop dispersion is material within the aggregates: Urad and Bajra were above the prior year while Moong, Ragi, Soybean, and Castorseed were below. EIOS must retain crop-level differences and cannot treat the rainfall deficit as a uniform fertilizer-demand or food-supply effect.
+- The structured dataset is review-only. Area sown is an independent crop-progress measure, but it does not by itself establish yield damage, fertilizer sales, food-stock pressure, company exposure, or an investable catalyst.
+- Offline tests cover exact extraction, ISO and day-first reporting dates, arithmetic reconciliation, duplicate suppression, altered-byte refusal, and absence of production writes.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 121 — Four-date Kharif crop-progress timeline and schema-drift control
+
+- Guardedly acquired and structured official Kharif area reports for 17 July, 7 August, 14 August, and 21 August 2026.
+- Added temporal consistency checks requiring later reporting dates, unique crop identities, non-decreasing cumulative sown area, and stable official normal-area definitions.
+- Added narrow crop aliases for official naming changes such as Arhar/Tur, Urdbean/Urad, Moongbean/Moong, and Jute & Mesta/Total Jute and Mesta while preserving every original source row.
+- The first live timeline correctly blocked because reports through 14 August included an extra final-2025-area column that was absent on 21 August. The parser had retained the correct current, prior-year, and difference values but had assigned the wrong numeric column as normal area.
+- Replaced the fixed-position assumption with explicit variable-schema handling: normal area is the first numeric field after the crop, while current area, prior-year area, and reported difference are the final three fields. Superseded artifacts remain labelled and unusable.
+- The corrected live timeline passes all three intervals, with 26 shared crops through 14 August and 23 shared crops on the changed 21 August table.
+- Aggregate sowing weakness narrowed materially but did not disappear: the Grand Total year-over-year gap moved from -42.28 lakh hectares on 17 July to -16.07 on 21 August.
+- Crop paths diverged. Pulses improved from -12.29 to +1.49; coarse cereals from -15.06 to -3.45; cotton from -5.87 to -0.28; and oilseeds from -8.63 to -0.32 lakh hectares. Rice lag widened into early August and then improved from -15.90 on 7 August to -13.19 on 21 August. Maize remained persistently around 3.5-3.8 lakh hectares below the prior year.
+- This timeline contradicts a simple nationwide crop-collapse interpretation while identifying persistent crop-specific lag for further geography, crop-stage, yield, and input-demand research.
+- Sown-area recovery does not prove normal yield or fertilizer demand, and a remaining area gap does not prove crop damage. Mandatory Meta still requires soil-moisture or crop-condition evidence, irrigation buffering, input-market facts, and governed company exposure.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 122 — Current hydrology source audit and irrigation-buffer gate
+
+- Investigated the current official CWC reservoir route as the principal contradiction test for rainfall-driven crop stress.
+- The legacy CWC bulletin page was updated on 28 August 2026 but its publicly rendered list exposed older bulletins rather than a verifiable current 2026 PDF. EIOS did not guess a filename or substitute an indexed third-party summary.
+- Guardedly acquired the official public RSMS dashboard shell. Its static text contains only a 24-character application shell; current records are dynamically requested by the public client.
+- Verified the RSMS application structure and public dashboard endpoint names without logging in. The portal uses its normal client-side signed request envelope. EIOS did not imitate credentials, inspect browser storage, or bypass the portal boundary.
+- Added NWIC as a separately identified hydrology-data authority and tested its public ArcGIS reservoir layer. The apparent August layer is queryable, but its fields are explicitly August 2022 and therefore cannot represent August 2026 storage.
+- One over-encoded NWIC request returned an HTML service page; the corrected request returned a 95-character JSON error. Both are audit receipts, neither is usable hydrology evidence.
+- Added a fail-closed hydrology-buffer readiness service requiring a configured CWC/NWIC authority, a reporting date no more than ten days old, guarded and parsed structured records, comparison with normal and prior-year storage, and crop-to-basin geography mapping.
+- Current national storage without crop/basin mapping can reach only current-hydrology review, not an irrigation-shield conclusion. A stale official layer remains blocked even if it is technically accessible.
+- The irrigation shield remains unresolved. The April CWC bulletin stays a pre-monsoon baseline only; the 2022 NWIC layer and dynamic RSMS shell cannot update it.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 123 — Official Kharif fertilizer balance and demand/earnings separation
+
+- Guardedly acquired and deterministically extracted the official all-India Kharif 2026 fertilizer release covering 1 April through 19 July 2026.
+- Added a hash-bound structured extractor that isolates the ongoing-Kharif table from the separate fiscal-year table and requires exact PIB authority, fertilizer-ministry attribution, audited HTML lineage, the four major product categories, and closing-stock reconciliation.
+- Closing stock must approximately equal availability minus DBT sales within 0.05 LMT. Duplicate rendered rows are suppressed by deterministic record identity, and altered source bytes fail closed.
+- The resulting four review-only records show availability above requirement for every major product: 149.71% for Urea, 125.25% for DAP, 137.28% for MOP, and 174.44% for NPKS.
+- Closing stocks were positive at 69.01 LMT Urea, 16.72 DAP, 8.63 MOP, and 45.21 NPKS. The national balance therefore contradicts a broad fertilizer-supply-shortage thesis as of 19 July.
+- Added a non-investment interpretation layer that keeps three questions separate: national supply balance, comparable-period sales momentum, and governed company impact.
+- DBT sales as a percentage of assessed requirement were 86.64% for Urea, 72.28% for DAP, 51.69% for MOP, and 81.19% for NPKS. These ratios are season-progress measures, not growth rates or earnings proxies.
+- Supply comfort cannot be translated into strong sales, margin, market share, or company earnings. Sales momentum remains on research hold without a like-for-like prior-period comparison; company impact remains on hold without public product/geography exposure and company disclosures.
+- Guardedly acquired the separate official release containing a comparable Kharif consumption reference through 14 July for subsequent structured year-over-year analysis. It has not yet been converted into a comparison record.
+- Offline tests cover exact section isolation, product completeness, stock reconciliation, altered-byte refusal, supply-shortfall preservation, and refusal to infer sales momentum or company impact from availability.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 124 — Comparable Kharif fertilizer-consumption momentum
+
+- Added a hash-bound extractor for the official explicit corresponding-period fertilizer-consumption statement through 14 July 2026.
+- The extractor requires the configured PIB government-release authority, fertilizer-ministry attribution, exact audited HTML lineage, an explicit current Kharif period, a corresponding Kharif 2025 period, positive LMT values, and altered-byte refusal.
+- The official comparison reports 151.74 LMT consumption of major fertilizers through 14 July 2026 versus 157.05 LMT in the corresponding Kharif 2025 period, a calculated year-over-year decline of 3.38%.
+- This is a direct aggregate demand signal and contradicts a broad Kharif fertilizer-demand surge through that date. It is analytically distinct from the 19 July supply-balance table, which showed availability above requirement.
+- Added a bounded sales-momentum interpretation that preserves only aggregate direction. It explicitly refuses to infer which product caused the decline, whether rainfall caused it, or which company benefited or suffered.
+- Product momentum remains on hold pending comparable Urea, DAP, MOP, and NPKS prior-period sales. Weather attribution remains on hold pending crop-stage, geography, application-timing, and nutrient-substitution evidence. Company impact remains on hold pending governed public exposure and company disclosures.
+- The combination now says: fertilizer was nationally available, but aggregate consumption was modestly below the comparable prior year. Supply comfort is therefore not evidence of demand strength.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 125 — State-by-product fertilizer geography and scope control
+
+- Searched for like-for-like prior-period product sales and rejected the available full-season Kharif 2025 product totals as an invalid comparator to partial Kharif 2026 data.
+- Guardedly acquired and structured the official state-wise fertilizer requirement, availability, DBT sales, and closing-stock table through 29 July 2026.
+- Added a state-by-product extractor requiring Department of Fertilizers attribution, a dated Kharif period, audited PIB lineage, exactly sixteen numeric measures per geographic row, four complete products, and availability-minus-sales closing-stock reconciliation.
+- Live parser development stopped safely twice on heading punctuation and encoded `&amp;`; no incomplete artifact was produced. Standard HTML-entity decoding and an exact regression fixture now cover the official representation.
+- The current dataset contains 148 records: Urea, DAP, MOP, and NPKS for 36 States/UTs plus four separately labelled All India records.
+- Corrected geography scope after the first successful extract exposed `All India` as the 37th table row. The superseded artifact is retained but cannot be used; current records explicitly distinguish `STATE` from `ALL_INDIA`.
+- Added a geographic balance analysis that prevents nationally adequate availability from hiding state/product requirement gaps while also refusing to call those gaps retail shortages.
+- Seventeen state-product rows had availability below assessed requirement. Material examples include Chhattisgarh DAP (-0.52 LMT), Rajasthan DAP (-0.48), Gujarat DAP (-0.28), Madhya Pradesh MOP (-0.18), and Uttar Pradesh MOP (-0.17).
+- Telangana, a cumulative rainfall-deficit geography in the current weather case, had modest DAP (-0.04) and MOP (-0.03 LMT) requirement gaps, but retained positive closing stocks of 0.31 and 0.40 LMT respectively. This is not proof of shortage, excess demand, or weather causation.
+- Goa MOP, Meghalaya DAP, and Mizoram DAP showed zero rounded closing stock, but each requirement gap was only 0.01-0.02 LMT. These are research flags requiring newer state evidence, not market alarms.
+- State sales remain cumulative season-to-date values without state/product prior-period comparators. Meta may use them for geographic research prioritization only; company attribution remains blocked.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 126 — Pre-monsoon foodgrain policy-buffer baseline and freshness gate
+
+- Investigated current official foodgrain stock and procurement sources. The newest directly accessible stock-versus-norm statement was dated 28 May 2026; EIOS did not mislabel it as an August reading.
+- Guardedly acquired and structured the official Central Pool wheat and rice statements with exact PIB lineage, food-distribution ministry attribution, reporting date, norm reference date, LMT values, and source passages.
+- Wheat stock was 513 LMT versus a 275.80 LMT 1 July norm, or 186.00% of norm. Rice stock was 397 LMT versus a 135.40 LMT norm, or 293.21% of norm, with another 298 LMT of procured paddy reported as awaiting milling.
+- This establishes a strong national policy-buffer baseline entering the monsoon and contradicts an immediate national wheat/rice shortage thesis at that time.
+- Added a freshness-aware buffer gate. At 31 August, the May reading is 95 days old and remains `RESEARCH_HOLD` for current stock status even though the historical buffer was above norm.
+- Foodgrain stocks do not by themselves establish market arrivals, open-market prices, procurement stress, policy release timing, processor margins, or company impact. Food-price pressure remains separately blocked.
+- The FCI public homepage displayed zero values and explicitly excluded Central Pool stock held by State agencies; EIOS did not treat those zeros as real national stock data.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 127 — Official food-price transmission gate
+
+- Added the Department of Consumer Affairs Price Monitoring Division as a dedicated official food-price authority, separate from news and corporate sources.
+- Added a hash-bound structured extractor for daily retail and wholesale comparison tables. It preserves current, one-week, one-month, six-month, one-year, and two-year prices and changes without creating an Observation.
+- The extractor requires exact guarded acquisition and extraction lineage, official department/report attribution, reporting date, market-level separation, unique commodities, minimum table completeness, and reconciliation of every published percentage against its price pair.
+- Added a freshness-aware Meta interpretation gate. It can state the direction and size of a current official national price comparison, but blocks claims that weather or crop area caused the move, that a national average proves state arrivals, or that the move proves company earnings impact.
+- Offline tests pass for valid extraction, missing comparison values, altered-byte refusal, percentage-tampering refusal, review-only behavior, and the non-investment interpretation boundary.
+- Three governed attempts to capture the live retail table were recorded. The first was blocked by the workspace network boundary; two approved attempts reached the official host but timed out at the fixed 15-second acquisition limit. No unverified web values were converted into structured EIOS data.
+- The parser is ready for live activation when the official table can be captured within the governed limit. Maize is not represented in this Consumer Affairs basket and still requires a separate official mandi price/arrival source.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 128 — Mandi price-and-arrival source boundary
+
+- Verified that the Government of India now directs current price-and-arrival users to the public AGMARKNET 2.0 dashboard or UPAg. The AGMARKNET public shell is current and JavaScript-rendered.
+- Stopped client inspection when the official AGMARKNET application explicitly prohibited developer-tool inspection. EIOS did not reverse-engineer protected client behavior, imitate a signed request, use credentials, or rely on an unofficial API wrapper.
+- Verified the sanctioned Open Government Data catalog for daily AGMARKNET mandi prices. Its catalog was updated on 29 August 2026 and is owned by the Agriculture Ministry, Department of Agriculture and Farmers Welfare, and Directorate of Marketing and Inspection.
+- The OGD catalog describes daily state/market/commodity wholesale minimum, maximum, and modal prices, including maize coverage through the general commodity dataset. Its programmatic interface requires an issued API key; EIOS did not invent or borrow one.
+- No official arrival-quantity field and unit were verified through the accessible OGD catalog. Therefore current physical-arrival analysis remains unavailable even though the official service description says the newer dashboard tracks arrivals.
+- Added India OGD as a separately identified government open-data authority and added a fail-closed mandi readiness gate with three states: `RESEARCH_HOLD`, `PRICE_ONLY_READY`, and `PRICE_AND_ARRIVAL_READY`.
+- Price readiness now requires sanctioned access, current catalog metadata, hash-bound payload, reporting date, commodity, geography, and minimum/modal/maximum prices. Arrival readiness additionally requires verified arrival quantity and unit fields.
+- Meta cannot label rising price as tightening physical supply until both price and arrivals are ready. It also cannot infer production loss from lower arrivals, extrapolate one mandi nationally, attribute co-movement to weather, infer company earnings, or generate an investment conclusion.
+- Offline tests cover inaccessible but current metadata, captured price-only data, complete price-and-arrival data, blocked claims, and trusted-source registration.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 129 — Governed sector-to-company impact bridge
+
+- Audited the existing agriculture-climate company-exposure registry. Its public crop, state, product, customer, irrigation, and optional revenue tags remain useful for research planning, but source identifiers alone are intentionally insufficient for a company-impact claim.
+- Added a stricter company-impact bridge requiring a governed sector fact and a public, hash-bound NSE, BSE, or SEBI disclosure with a traceable document, substantive exact passage, current disclosure date, and public-information-only status.
+- When the sector fact identifies a crop, state, or product, the company disclosure must match every identified dimension. A broad operating-geography statement cannot substitute for product or crop exposure.
+- Company-hypothesis readiness also requires a disclosed revenue or volume materiality percentage and an explicit operating transmission mechanism. Qualitative exposure alone remains `EXPOSURE_MAPPED_RESEARCH_HOLD`.
+- The bridge has three effective outcomes: `SECTOR_ONLY`, `EXPOSURE_MAPPED_RESEARCH_HOLD`, and `COMPANY_HYPOTHESIS_READY`. Even the final state authorizes only a hypothesis for further validation, not an earnings conclusion.
+- The bridge explicitly blocks claims that the sector fact caused company revenue or profit, that exposure guarantees an outcome, that revenue exposure equals profit sensitivity, that the information is not priced, or that a recommendation or trade follows.
+- Offline tests confirm that broad geography-only disclosure is held, exact crop/state/product plus materiality and mechanism reaches hypothesis readiness, non-exchange authority and invalid hashes fail closed, and missing materiality remains blocked.
+- No live company was attributed in this checkpoint because no user-selected issuer and matching governed disclosure package were supplied. This avoids reverse-fitting a company to the agricultural facts.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 130 — Dated catalyst-event and expectation-reset gate
+
+- Added an upstream evidence gate before the existing canonical Catalyst classifier. This does not create a second catalyst engine or alter the signal-to-catalyst bridge.
+- A candidate now requires a discrete announced, scheduled, or completed event. A continuing trend, however important, remains a research lead rather than being relabelled as a catalyst.
+- Factual-event readiness requires public-only evidence from an approved primary government, exchange, or securities-regulator authority; a hash-bound and traceable source document; substantive exact passage; event date; governed fact linkage; quantified magnitude and unit; explicit operating mechanism; and a testable invalidation condition.
+- A factual event may reach `FACTUAL_EVENT_READY`, making it eligible for canonical catalyst-family research. Announcement is still not execution, cash realization, revenue, profit, or free cash flow.
+- `EXPECTATION_RESET_READY` is a separate, stricter state requiring a documented public expectation baseline and an explicit gap between that baseline and the event. EIOS will not call an event surprising, unpriced, or expectation-changing merely because it is new.
+- The gate supports the canonical catalyst families, including government policy, regulatory change, commodity, supply constraint, order/contract, capacity expansion, pricing, and expectation reset, without bypassing the existing classifier.
+- Explicitly blocked claims include guaranteed operating impact, announcement-equals-execution, event-value-equals-earnings, unpriced surprise without a baseline, and any direct Opportunity, recommendation, or trade authorization.
+- Offline tests pass for a quantified order event, missing expectation baseline, complete expectation comparator, continuing-trend rejection, and unquantified-event rejection. The existing signal-cluster-to-catalyst integration suite also passes unchanged after enabling Unicode console output on Windows.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 131 — Mandatory Meta decision-packet assembly
+
+- Preserved the existing mandatory Meta gate and added a final read-only assembly gate around it. The new layer does not weaken or duplicate causal-indicator coverage, independence, contradiction, missing-evidence, kill-test, or evidence-binding controls.
+- A packet cannot assemble unless the original Mandatory Meta gate is `READY_FOR_PRE_INFLECTION`, governed facts are identified, at least two independent source groups are present, and contradiction research is explicitly completed.
+- Contradiction research must supply contrary governed facts or a substantive explanation for why no contradiction was found. An empty contradiction field is no longer silently treated as a completed check.
+- Any identified stale input blocks the assembled case. Unresolved research gaps remain visible in the packet even when they do not independently block sector monitoring.
+- Added distinct outcomes: `RESEARCH_HOLD`, `SECTOR_MONITORING_READY`, `COMPANY_PRE_INFLECTION_RESEARCH_READY`, and `COMPANY_EXPECTATION_RESET_RESEARCH_READY`.
+- Sector readiness cannot be presented as company readiness. Company pre-inflection readiness additionally requires both the governed company-exposure bridge and a factual dated catalyst event. Expectation-reset readiness further requires the public expectation comparator.
+- Every ready state remains research-only and requires human review. The packet explicitly has no authority to create a Signal, Catalyst, Opportunity, recommendation, position, or trade.
+- Offline tests pass for company pre-inflection assembly, expectation-reset assembly, stale-input refusal, sector-only monitoring, and unexplained empty contradiction refusal. The original mandatory Meta gate suite continues to pass unchanged.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 132 — Live India Kharif end-to-end readiness snapshot
+
+- Applied the cross-layer gates to the actual India Kharif 2026 research case and generated a machine-readable, review-only readiness artifact.
+- The current case is `WEATHER_CROP_HINT_ONLY`. Current official rainfall and the four-date crop-area timeline establish a valid research hint, with fertilizer input-market evidence and explicit contradiction review providing additional context.
+- The case is not yet `SECTOR_TRANSMISSION_RESEARCH_READY`. Observed soil moisture or crop condition is unavailable through the governed route, and current reservoir storage has not been verified and mapped to affected crop geography.
+- Current official output-price bytes were not successfully captured, and verified mandi arrival quantity plus unit remain unavailable. Therefore EIOS cannot yet distinguish production stress, irrigation buffering, inventory/policy effects, and market-supply transmission with sufficient confidence.
+- The case contains meaningful contradictions: national sowing weakness narrowed, several crop groups recovered, fertilizer availability exceeded requirement, aggregate fertilizer consumption was modestly lower year over year, and the foodgrain buffer was strong before the monsoon but is now stale for current claims.
+- No company-specific case is in scope. The case has no hash-bound issuer exposure package, quantified company materiality, dated factual catalyst, or public expectation comparator.
+- Added a deterministic cross-layer readiness service with stages from `RESEARCH_HOLD` through weather/crop hint, sector transmission, company pre-inflection, and company expectation-reset research readiness.
+- Freshness is fail-closed: a stale critical input pushes an otherwise complete causal case back to the hint stage. Tests cover the current live state, sector advancement, company advancement, and stale-input refusal.
+- The generated `india_kharif_2026_pre_inflection_readiness.json` creates no Observation and requires human review.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 133 — Information-gain evidence acquisition queue
+
+- Converted the live readiness blockers into a deterministic, machine-readable acquisition queue rather than repeatedly retrying every unavailable source.
+- Queue priority combines whether evidence blocks sector transmission, whether it later blocks company attribution, contradiction value, expected information gain, and a penalty for repeated attempts.
+- Added explicit route states for ready public access, transient failure, access required, source boundary, and stale-only data. The queue cannot bypass a source boundary or treat required user credentials/API keys as available.
+- Added exponential retry backoff capped at sixteen multipliers. A recently failed source is not hammered simply because its evidence would be valuable.
+- Company disclosure and company catalyst research are automatically deferred until sector transmission is ready. This prevents expensive reverse-fitting of issuers to an unproven sector narrative.
+- The current live queue has no eligible immediate external action. Consumer Affairs prices remain under retry backoff; NRSC soil/crop condition and India OGD mandi access require user-issued access; current reservoir alternatives are cooling down after stale/failed routes; and issuer/catalyst work is deferred.
+- The highest-value unresolved domains remain current reservoir storage mapped to crop geography, observed soil or crop condition, maize mandi price plus verified arrivals, and current official output prices.
+- The generated `india_kharif_2026_evidence_queue.json` is advisory and review-only. It records no automatic external action and cannot bypass access controls or create an investment conclusion.
+- Offline tests verify prioritization, transient-failure backoff, access-required blocking, company deferral, and later company eligibility once sector transmission becomes ready.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 134 — Consolidated safety-chain regression and ledger integrity
+
+- Ran the complete newly added research chain from trusted source intake through rainfall, crop area, fertilizer interpretation, food-price parsing, mandi readiness, company impact, catalyst-event readiness, Mandatory Meta packet assembly, live pre-inflection readiness, and evidence acquisition scheduling.
+- All selected source, interpretation, company, catalyst, Meta, live-readiness, and queue tests passed. The unchanged canonical signal-cluster-to-catalyst integration had already passed in checkpoint 130.
+- Re-ran the public factual candidate, Observation-proposal, and Temporal Evidence boundary tests. All passed, confirming that research artifacts cannot silently cross into governed production objects.
+- Regenerated both live machine-readable snapshots from their deterministic scripts. The readiness stage remains `WEATHER_CROP_HINT_ONLY`, and the acquisition queue still authorizes no immediate external action.
+- Parsed the complete live audit ledgers. The acquisition ledger contains 67 valid rows with 67 unique acquisition identities; the extraction ledger contains 53 valid rows with 53 unique extraction identities.
+- Failed, timed-out, stale, partial, and successful source attempts remain in the append-only audit trail rather than being erased. This preserves the difference between unavailable evidence and evidence that was never sought.
+- Source formatting inspection found only existing Windows LF-to-CRLF notices and the known inaccessible `.pytest_cache` directory warning. No patch whitespace error or production-data mutation was found.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 135 — Look-ahead-safe hypothesis outcome resolution
+
+- Added an institutional outcome-resolution layer so EIOS can measure whether early hypotheses were actually correct instead of retaining only successful narratives.
+- A hypothesis is frozen with an identity, case, exact metric, geography, direction, threshold, optional baseline, target date, freeze time, confidence, and bound evidence fingerprints. These fields produce a SHA-256 hypothesis fingerprint.
+- Any later change to the threshold, horizon, confidence, scope, or evidence binding causes a fingerprint mismatch and makes the hypothesis ineligible for scoring.
+- Outcome measurements require the same metric and geography, a reporting date on or after the predefined target, acquisition after publication, evaluation after acquisition, authoritative HTTPS lineage, exact passage, and a valid document hash.
+- The resolver supports above/below thresholds and baseline-relative increase/decrease hypotheses. Baseline-relative predictions cannot be scored without a frozen baseline.
+- Results are explicit: `CONFIRMED`, `DISCONFIRMED`, or `INVALID_OR_INCONCLUSIVE`. Inconclusive or lineage-invalid outcomes are not counted as successes or failures.
+- Confidence must be set before the outcome and remains available for later calibration analysis. Outcome scoring itself has no investment authority.
+- Offline tests pass for confirmed and disconfirmed outcomes, post-hoc threshold tampering, and an outcome published before the target horizon.
+- The live India Kharif case remains `WEATHER_CROP_HINT_ONLY`, so no sector or company hypothesis was frozen merely to create a track record. Freezing begins only after the applicable readiness gate is satisfied.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 136 — Complete-cohort confidence calibration
+
+- Added cohort-level calibration so EIOS measures whether stated confidence corresponds to actual confirmed outcomes rather than reporting raw prediction counts.
+- Every declared cohort starts with an expected hypothesis-identity list. Missing hypotheses or resolutions produce `INCOMPLETE_COHORT`, preventing selective removal of failed or inconvenient cases.
+- Only fingerprint-valid `CONFIRMED` and `DISCONFIRMED` resolutions are scoreable. Invalid or inconclusive outcomes remain counted and visible but are not converted into wins or losses.
+- Reports now include expected count, scoreable resolved count, inconclusive count, missing count, hit rate, mean stated confidence, calibration gap, and Brier score.
+- A default minimum of twenty scoreable outcomes is required before any performance claim is ready. Smaller samples remain available for process inspection but are labelled `SAMPLE_TOO_SMALL`.
+- Duplicate or unexpected hypothesis identities fail closed, preserving the declared cohort boundary.
+- Calibration measures research-process reliability only. It is explicitly not evidence of future returns, investment skill, or trade authority.
+- Offline tests pass for mixed confirmed/disconfirmed/inconclusive outcomes, exact hit-rate and Brier calculations, incomplete-cohort refusal, and insufficient-sample refusal.
+- No calibration report was generated for the live Kharif case because it has no readiness-qualified frozen hypothesis or resolved outcome.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 137 — Append-only hash-chained hypothesis ledger
+
+- Added a durable prospective hypothesis ledger so prediction freezing is enforceable rather than merely a dataclass convention.
+- Every entry contains a monotonically increasing sequence, the previous entry hash, the complete frozen hypothesis payload, and its own SHA-256 entry hash. The first record anchors to an explicit genesis hash.
+- Recording revalidates the hypothesis fingerprint, timezone-aware freeze and target dates, evidence binding, and non-authority statement before appending.
+- Duplicate hypothesis identities are rejected. A prediction cannot be replaced by appending another version under the same identity.
+- Reading validates every hypothesis fingerprint, sequence number, previous-hash link, current entry hash, and unique identity. Editing or removing an earlier row breaks the chain for that row or all subsequent rows.
+- Offline tests pass for two linked entries, duplicate refusal, pre-append hypothesis tampering refusal, and post-write ledger tampering detection.
+- The ledger remains a research-audit object. Its existence does not imply correctness, investment skill, or authority to create a recommendation or trade.
+- No live ledger entry was created for India Kharif 2026 because the case remains below sector-transmission readiness. This preserves the rule against freezing low-quality hints merely to inflate activity counts.
+- The outcome resolver and complete-cohort calibration tests continue to pass with the ledger layer present.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 138 — Hash-chained outcome-resolution ledger
+
+- Completed the prospective audit chain with an append-only resolution ledger binding each public outcome to the exact frozen hypothesis fingerprint and hypothesis-ledger entry hash.
+- Each resolution entry preserves the full public outcome payload, an outcome fingerprint, the deterministic resolution result, previous resolution-entry hash, and its own entry hash.
+- A hypothesis may be resolved only once. A later outcome cannot silently replace an earlier resolution under the same hypothesis identity.
+- Before recording, the existing look-ahead-safe resolver revalidates metric, geography, target horizon, publication/acquisition/evaluation order, source lineage, and scoring eligibility.
+- Reading validates sequence, prior-entry linkage, hypothesis bindings, outcome fingerprint, entry hash, and unique resolution identity.
+- Offline tests pass for linked confirmed and disconfirmed resolutions, duplicate-resolution refusal, and post-write observed-value tampering detection.
+- The hypothesis ledger, resolution ledger, and complete-cohort calibration now form one prospective chain: freeze before outcome, resolve against public evidence, then calibrate the complete declared cohort.
+- These ledgers measure research discipline only. They do not convert a correct hypothesis into an investment recommendation or establish realized investment performance.
+- No live Kharif resolution was recorded because no readiness-qualified live hypothesis exists.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 139 — Cross-cohort calibration-drift control
+
+- Added drift monitoring across distinct, complete prospective hypothesis cohorts so historical calibration is not assumed to remain valid indefinitely.
+- Drift assessment requires both baseline and recent calibration reports to be performance-claim ready. Incomplete or undersized cohorts produce `INSUFFICIENT_FOR_DRIFT_TEST` and require conservative review rather than a false no-drift result.
+- The monitor calculates change in Brier score, absolute confidence-calibration gap, and hit rate. Default review triggers are Brier deterioration of 0.05 or more, calibration-gap widening of ten points or more, or a hit-rate decline of fifteen points or more.
+- Material deterioration produces `DRIFT_REVIEW_REQUIRED`. The permitted response is to suspend confidence escalation and review source mix, market or policy regime, prediction thresholds, and analyst process.
+- A stable comparison produces `NO_MATERIAL_DRIFT`, but still does not authorize automatic confidence increases.
+- Reusing the same cohort as both baseline and recent comparison is invalid, preventing circular self-comparison.
+- Offline tests pass for a stable cohort transition, simultaneous Brier/gap/hit-rate deterioration, and an incomplete recent cohort requiring review.
+- The full prospective chain now includes hypothesis freezing, append-only prediction storage, public outcome resolution, append-only result storage, complete-cohort calibration, and cross-cohort drift detection.
+- No live drift report exists because the live Kharif case has no resolved readiness-qualified hypothesis cohort.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 140 — Semantic public-source schema-drift gate
+
+- Added a reusable schema contract and drift gate for structured government tables and APIs, addressing silent changes in headings, types, units, row counts, and duplicate rendering.
+- Contracts freeze source and dataset identity, required and optional fields, field types, units, identity keys, permitted row-count range, and a SHA-256 contract fingerprint.
+- An unchanged structure produces `SCHEMA_COMPATIBLE`. New fields not relied upon by the extractor produce `NON_BREAKING_ADDITIVE_DRIFT` and remain visible for deliberate future adoption.
+- Missing required fields, required-field type changes, unit changes, source/dataset identity changes, out-of-contract row counts, and duplicate identities produce `BREAKING_DRIFT` and block ingestion.
+- A modified or corrupted schema contract produces `INVALID_CONTRACT`; the system cannot weaken a contract without changing and reviewing its fingerprint.
+- Unit drift is explicitly semantic. A price changing from rupees per quintal to rupees per kilogram is held even when every numeric value still parses.
+- Offline tests pass for compatible schema, additive arrival field, breaking price-unit change, duplicate identity refusal, and contract tampering detection.
+- Existing crop-area and food-price extractor suites continue to pass, including their source-specific duplicate, percentage, and lineage safeguards.
+- Schema compatibility does not validate factual accuracy or analytical meaning; it is one required layer before extraction can be trusted.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 141 — Evidence-constrained confidence ceiling
+
+- Added a deterministic ceiling preventing Meta or a human-authored hypothesis from claiming more confidence than the supporting evidence structure permits.
+- The ceiling considers primary-authority status, freshness, direct versus proxy or inferred evidence, exact geographic match, period comparability, schema compatibility, hash-bound lineage, independent-source count, unresolved material contradictions, and missing critical layers.
+- Schema incompatibility or missing hash-bound lineage makes confidence ineligible regardless of other strengths. A ceiling below fifty percent is also ineligible for a formal research hypothesis.
+- Penalties are transparent reason codes rather than a hidden model score. The ceiling is a maximum; it does not force the analyst to use that confidence or estimate investment probability.
+- Offline tests pass for strong direct evidence, proxy/geography/independence weakness, stale contradictory evidence, broken schema, and missing critical layers. Mandatory Meta and calibration-drift suites continue to pass.
+- Applied the ceiling to the live India Kharif causal interpretation. The official rainfall and acreage facts remain valid, but transmission is inferred, geography is not yet sufficiently exact, and crop-condition, irrigation-buffer, and output-market layers are missing.
+- The resulting live causal-interpretation ceiling is ten percent and is confidence-ineligible. This is now embedded in `india_kharif_2026_pre_inflection_readiness.json` alongside the unchanged `WEATHER_CROP_HINT_ONLY` stage.
+- The ten-percent ceiling applies to the causal sector interpretation, not to the accuracy of each underlying official measurement.
+- Confidence ceilings have no expected-return, valuation, position-sizing, recommendation, or trade authority.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 142 — Readiness-bound hypothesis freezing service
+
+- Closed the creation-side bypass between live-case readiness, evidence confidence, and the append-only hypothesis ledger.
+- A sector hypothesis can now be created only when the case assessment is `sector_transmission_ready`. A weather/crop hint cannot be frozen as a formal sector prediction.
+- A company hypothesis requires the stricter `company_case_ready` state. Sector readiness cannot be reused to create an issuer-specific prediction.
+- The freezing service requires an eligible evidence-confidence ceiling and rejects any proposed confidence above that ceiling before calculating a hypothesis fingerprint.
+- Freeze and target dates must be timezone-aware and ordered prospectively; evidence fingerprints are mandatory; confidence must be strictly between zero and one hundred.
+- Successful creation produces the canonical frozen-hypothesis object with its SHA-256 fingerprint and explicit non-authority statement, ready for the separate append-only ledger.
+- Offline tests pass for a valid sector hypothesis, hint-only refusal, over-ceiling confidence refusal, and company-hypothesis refusal from a sector-only case.
+- The existing confidence-ceiling and hypothesis-ledger suites continue to pass, proving the creation gate and storage gate agree.
+- The live India Kharif case remains unable to freeze a hypothesis because it is `WEATHER_CROP_HINT_ONLY` and its causal confidence ceiling is ineligible at ten percent.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 143 — Human-authorized hypothesis-freezing boundary
+
+- Strengthened the freezing service so technical readiness and an eligible confidence ceiling are necessary but no longer sufficient to create a formal hypothesis.
+- Freezing now requires the governed Pre-Inflection preview and its Mandatory Meta human-review receipt.
+- The review decision must be `AUTHORIZE_PRE_INFLECTION_REVIEW`. `HOLD_FOR_RESEARCH` and `REJECT_ASSESSMENT` cannot authorize prediction creation.
+- The preview must bind exactly to the review identity, Meta assessment identity, and stored Meta assessment fingerprint. A review from another assessment or a copied preview fails closed.
+- The preview must remain eligible for human Pre-Inflection review. Sector hypotheses require reviewed sector scope; company hypotheses require reviewed entity scope in addition to company-case readiness.
+- This closes a path where valid-looking readiness and confidence objects could otherwise be assembled without the durable Mandatory Meta review chain.
+- Offline tests pass for authorized sector freezing, hint-only refusal, over-ceiling refusal, company-scope refusal, held-review refusal, and mismatched-review binding refusal.
+- Mandatory Meta, hypothesis ledger, and freezing suites all continue to pass together.
+- The live Kharif case has no authorized Meta review or eligible Pre-Inflection preview and therefore remains unable to freeze a hypothesis.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 144 — End-to-end prospective lifecycle integration
+
+- Added and passed one integrated prospective lifecycle test spanning the full governance chain rather than testing only isolated components.
+- The synthetic lifecycle begins with a human-authorized Mandatory Meta receipt and a matching governed Pre-Inflection preview, then supplies sector readiness and an eligible evidence-confidence ceiling.
+- The freezing service creates a fingerprinted sector hypothesis below the confidence ceiling, and the hypothesis is appended to a temporary hash-chained ledger.
+- A later hash-bound public outcome with matching metric, geography, and target horizon is resolved against the exact hypothesis-ledger entry and appended to the temporary resolution ledger.
+- The confirmed result is then included in its complete declared cohort and produces the expected one-case calibration metrics, including a Brier score of 0.1225 for a 65% confidence success.
+- Re-ran the component suites for freezing, hypothesis ledger, resolution ledger, calibration, and calibration drift alongside the integrated test. All passed.
+- This demonstrates that identities, fingerprints, dates, review bindings, readiness, confidence limits, outcomes, and cohort accounting remain compatible across the complete lifecycle.
+- The integration uses temporary synthetic records only. It created no live hypothesis, live resolution, calibration performance claim, or production object.
+- The live India Kharif case remains unchanged at `WEATHER_CROP_HINT_ONLY` with an ineligible ten-percent causal confidence ceiling.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 145 — Operational live-research runbook and executable handoff
+
+- Added `docs/operations/PRE_INFLECTION_LIVE_RESEARCH_RUNBOOK.md` as the concise operational handoff for the governed public pre-inflection path.
+- The runbook records the live India Kharif stage, ten-percent ineligible causal confidence ceiling, verified evidence, unresolved transmission layers, and deliberate deferral of company research.
+- It documents the required path from public acquisition and hash-bound extraction through schema checks, Mandatory Meta, company/catalyst separation, confidence ceiling, human-authorized hypothesis freezing, outcome resolution, complete-cohort calibration, and drift monitoring.
+- Added exact Windows PowerShell commands for regenerating the live readiness and evidence-queue artifacts without initiating external acquisition.
+- Added the core verification suite, production Observation integrity command, human authority points, fail-closed source and interpretation rules, principal live artifact paths, and current evidence priorities.
+- Executed every core command listed in the runbook. The prospective lifecycle, Mandatory Meta, schema drift, confidence ceiling, acquisition queue, live readiness, hypothesis freezing, hypothesis ledger, resolution ledger, calibration, and drift tests all passed.
+- The production Observation integrity command also passed at exactly 46 records.
+- The runbook explicitly prohibits bypassing access controls, importing unbound displayed values, price-only supply inference, exposure-only earnings inference, unbenchmarked expectation-reset claims, over-ceiling freezing, and selective cohort deletion.
+- The repository now has a reproducible operational entry point for the large checkpoint set rather than relying on conversation history.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Checkpoint 146 — Pre-commit security and artifact integrity audit
+
+- Ran a bounded sensitive-pattern and merge-marker scan across the changed project state, external-intelligence modules, scripts, operational documentation, and live-case data.
+- No private-key marker, common GitHub token form, AWS access-key form, or unresolved merge marker was found.
+- The first quote-heavy scan command was rejected by PowerShell parsing and performed no file scan; it was replaced with safely separated patterns. A broad retry encountered only the known inaccessible `.pytest_cache`; the final scoped scan completed successfully across all relevant changed paths.
+- Parsed all 32 structured JSON artifacts in the live Kharif case successfully.
+- Parsed the acquisition and extraction ledgers together and verified 120 populated record identities. This total comprises the previously verified 67 acquisition and 53 extraction receipts.
+- Checked every ledger source URL for embedded username credentials; none were present.
+- Re-ran patch whitespace inspection. It reported only existing Windows LF-to-CRLF notices and no malformed patch content.
+- The audit did not stage, commit, or push files. External repository mutation remains pending explicit instruction.
+- Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.

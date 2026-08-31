@@ -1,0 +1,37 @@
+{
+  "acquisition_id": "AGRI-2026-PIB-027",
+  "creates_observation": false,
+  "extraction_id": "AGRI-2026-PIB-EXT-027",
+  "records": [
+    {
+      "acquisition_id": "AGRI-2026-PIB-027",
+      "additional_unmilled_paddy_lmt": null,
+      "buffer_norm_lmt": 275.8,
+      "document_hash": "a036079853fefe637ef5fda113b9b08549693844992386f69dc911a9ddceec80",
+      "grain": "WHEAT",
+      "norm_reference_date": "1 JULY",
+      "record_id": "84c38228e8f3d68e302f07ba86023e2fa558570ae821a59351834c3e66d8b56d",
+      "reporting_date": "28 MAY 2026",
+      "source_passage": "As on 28 May 2026, wheat stock in the Central Pool stood at 513 Lakh Metric Tonnes (LMT) against the prescribed buffer norm of 275.80 LMT for 1 July",
+      "source_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2267611&lang=2&reg=48",
+      "stock_lmt": 513.0,
+      "stock_to_norm_percent": 186.0
+    },
+    {
+      "acquisition_id": "AGRI-2026-PIB-027",
+      "additional_unmilled_paddy_lmt": 298.0,
+      "buffer_norm_lmt": 135.4,
+      "document_hash": "a036079853fefe637ef5fda113b9b08549693844992386f69dc911a9ddceec80",
+      "grain": "RICE",
+      "norm_reference_date": "1 JULY",
+      "record_id": "1288ce5b91ac7733de4996f5139bd90c89d5a74c153aef5cb44e06108b9988b3",
+      "reporting_date": "28 MAY 2026",
+      "source_passage": "Rice stock in the Central Pool stood at 397 LMT against the prescribed buffer norm of 135.40 LMT for 1 July. In addition, around 298 LMT of procured paddy is yet to be milled",
+      "source_url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2267611&lang=2&reg=48",
+      "stock_lmt": 397.0,
+      "stock_to_norm_percent": 293.21
+    }
+  ],
+  "requires_human_review": true,
+  "schema_version": 1
+}
