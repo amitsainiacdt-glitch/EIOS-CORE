@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "company": "Coromandel International",
+  "ticker": "COROMANDEL",
+  "official_archive_url": "https://www.coromandel.biz/investors/annual-reports/",
+  "coverage_label": "Latest 10 financial years",
+  "governance_note": "Availability is not evidence. Only facts extracted with page references and subsequently approved may enter EIOS reasoning.",
+  "reports": [
+    {
+      "financial_year": "2025-26",
+      "title": "Integrated Annual Report 2025-26",
+      "official_url": "https://www.coromandel.biz/investors/annual-reports/",
+      "access": "OFFICIAL_ARCHIVE",
+      "status": "AVAILABLE_NOT_EXTRACTED",
+      "extracted_fact_count": 0,
+      "highlights": []
+    },
+    {
+      "financial_year": "2024-25",
+      "title": "Integrated Annual Report 2024-25",
+      "official_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+      "access": "DIRECT_OFFICIAL_PDF",
+      "status": "EXTRACTED_PENDING_HUMAN_REVIEW",
+      "extracted_fact_count": 10,
+      "highlights": [
+        "Standalone revenue ₹24,064 crore, up 9% year on year",
+        "EBITDA ₹2,656 crore and PAT ₹1,941 crore",
+        "Record phosphatic fertilizer sales of 4 million tonnes",
+        "₹830 crore capex supporting backward integration and Kakinada expansion",
+        "Climate and monsoon failure explicitly identified as a business risk"
+      ]
+    },
+    {
+      "financial_year": "2023-24",
+      "title": "Integrated Annual Report 2023-24",
+      "official_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+      "access": "DIRECT_OFFICIAL_PDF",
+      "status": "AVAILABLE_NOT_EXTRACTED",
+      "extracted_fact_count": 0,
+      "highlights": []
+    },
+    {
+      "financial_year": "2022-23",
+      "title": "Integrated Annual Report 2022-23",
+      "official_url": "https://www.coromandel.biz/investors/annual-reports/",
+      "access": "OFFICIAL_ARCHIVE",
+      "status": "AVAILABLE_NOT_EXTRACTED",
+      "extracted_fact_count": 0,
+      "highlights": []
+    },
+    {
+      "financial_year": "2021-22",
+      "title": "Integrated Annual Report 2021-22",
+      "official_url": "https://www.coromandel.biz/investors/annual-reports/",
+      "access": "OFFICIAL_ARCHIVE",
+      "status": "AVAILABLE_NOT_EXTRACTED",
+      "extracted_fact_count": 0,
+      "highlights": []
+    },
+    {
+      "financial_year": "2020-21",
+      "title": "Annual Report 2020-21",
+      "official_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+      "access": "DIRECT_OFFICIAL_PDF",
+      "status": "AVAILABLE_NOT_EXTRACTED",
+      "extracted_fact_count": 0,
+      "highlights": []
+    },
+    {
+      "financial_year": "2019-20",
+      "title": "Annual Report 2019-20",
+      "official_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+      "access": "DIRECT_OFFICIAL_PDF",
+      "status": "AVAILABLE_NOT_EXTRACTED",
+      "extracted_fact_count": 0,
+      "highlights": []
+    },
+    {
+      "financial_year": "2018-19",
+      "title": "Annual Report 2018-19",
+      "official_url": "https://www.coromandel.biz/investors/annual-reports/",
+      "access": "OFFICIAL_ARCHIVE",
+      "status": "AVAILABLE_NOT_EXTRACTED",
+      "extracted_fact_count": 0,
+      "highlights": []
+    },
+    {
+      "financial_year": "2017-18",
+      "title": "Annual Report 2017-18",
+      "official_url": "https://www.coromandel.biz/investors/annual-reports/",
+      "access": "OFFICIAL_ARCHIVE",
+      "status": "AVAILABLE_NOT_EXTRACTED",
+      "extracted_fact_count": 0,
+      "highlights": []
+    },
+    {
+      "financial_year": "2016-17",
+      "title": "Annual Report 2016-17",
+      "official_url": "https://www.coromandel.biz/investors/annual-reports/",
+      "access": "OFFICIAL_ARCHIVE",
+      "status": "AVAILABLE_NOT_EXTRACTED",
+      "extracted_fact_count": 0,
+      "highlights": []
+    }
+  ]
+}

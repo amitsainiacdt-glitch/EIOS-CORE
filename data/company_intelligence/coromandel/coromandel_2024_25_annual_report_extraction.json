@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "extraction_id": "COROMANDEL-AR-2024-25-EXTRACTION-001",
+  "entity": "Coromandel International",
+  "ticker": "COROMANDEL",
+  "source": {
+    "source_id": "COROMANDEL-ANNUAL-REPORTS",
+    "document_title": "Integrated Report 2024-25",
+    "issuer_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+    "reporting_period_end": "2025-03-31",
+    "sha256": "E87FD2D5E385EBA3B66D3EF029A7DA83B7BFDA01FED1EFF95FBA570097B01310",
+    "authority": "ISSUER_OFFICIAL"
+  },
+  "status": "EXTRACTED_PENDING_HUMAN_REVIEW",
+  "facts": [
+    {
+      "fact_id": "CORO-FY25-REVENUE",
+      "kind": "FINANCIAL_RESULT",
+      "statement": "Standalone revenue from operations for FY2024-25 was INR 24,064 crore, up 9% year on year.",
+      "value": 24064,
+      "unit": "INR_CRORE",
+      "period": "FY2024-25",
+      "pdf_page": 49,
+      "printed_pages": "94-95"
+    },
+    {
+      "fact_id": "CORO-FY25-EBITDA",
+      "kind": "FINANCIAL_RESULT",
+      "statement": "EBITDA for FY2024-25 was INR 2,656 crore, approximately 11% higher year on year.",
+      "value": 2656,
+      "unit": "INR_CRORE",
+      "period": "FY2024-25",
+      "pdf_page": 50,
+      "printed_pages": "96-97"
+    },
+    {
+      "fact_id": "CORO-FY25-PAT",
+      "kind": "FINANCIAL_RESULT",
+      "statement": "Profit after tax for FY2024-25 was INR 1,941 crore, approximately 13% higher year on year.",
+      "value": 1941,
+      "unit": "INR_CRORE",
+      "period": "FY2024-25",
+      "pdf_page": 50,
+      "printed_pages": "96-97"
+    },
+    {
+      "fact_id": "CORO-FY25-PHOSPHATIC-VOLUME",
+      "kind": "OPERATING_RESULT",
+      "statement": "The company reported record phosphatic fertilizer sales of 4 million tons, with plants operating close to full capacity.",
+      "value": 4,
+      "unit": "MILLION_TONS",
+      "period": "FY2024-25",
+      "pdf_page": 6,
+      "printed_pages": "8-9"
+    },
+    {
+      "fact_id": "CORO-FY25-CROP-PROTECTION-REVENUE",
+      "kind": "SEGMENT_RESULT",
+      "statement": "Crop Protection and bioproducts revenue reached INR 2,637 crore, growing 7% year on year.",
+      "value": 2637,
+      "unit": "INR_CRORE",
+      "period": "FY2024-25",
+      "pdf_page": 6,
+      "printed_pages": "8-9"
+    },
+    {
+      "fact_id": "CORO-FY25-CAPEX",
+      "kind": "CAPITAL_ALLOCATION",
+      "statement": "Capital expenditure in FY2024-25 was INR 830 crore, 61% higher than the previous year, primarily for backward integration and Kakinada capacity expansion.",
+      "value": 830,
+      "unit": "INR_CRORE",
+      "period": "FY2024-25",
+      "pdf_page": 50,
+      "printed_pages": "96-97"
+    },
+    {
+      "fact_id": "CORO-KAKINADA-EXPANSION",
+      "kind": "DATED_MANAGEMENT_COMMITMENT",
+      "statement": "A 0.75 million ton brownfield fertilizer capacity expansion at Kakinada was described as expected within two years.",
+      "value": 0.75,
+      "unit": "MILLION_TONS_ANNUAL_CAPACITY",
+      "time_language": "within two years from the FY2024-25 report",
+      "pdf_page": 6,
+      "printed_pages": "8-9"
+    },
+    {
+      "fact_id": "CORO-BACKWARD-INTEGRATION-2026",
+      "kind": "DATED_MANAGEMENT_COMMITMENT",
+      "statement": "Sulphuric acid and phosphoric acid projects were described as progressing toward commissioning by early 2026, intended to make fertilizer manufacturing sites backward integrated and reduce import dependence.",
+      "time_language": "early 2026",
+      "pdf_page": 6,
+      "printed_pages": "8-9"
+    },
+    {
+      "fact_id": "CORO-MONSOON-RISK",
+      "kind": "ISSUER_DISCLOSED_RISK",
+      "statement": "The company identifies climate change or monsoon failure in target markets as a risk to turnover and profitability.",
+      "transmission_channels": ["TURNOVER", "PROFITABILITY"],
+      "pdf_page": 36,
+      "printed_pages": "68-69"
+    },
+    {
+      "fact_id": "CORO-MONSOON-MITIGATION",
+      "kind": "RISK_MITIGATION",
+      "statement": "The disclosed mitigations for climate or monsoon failure include market-oriented product liquidation and climate-monitoring tools for product placement.",
+      "pdf_page": 36,
+      "printed_pages": "68-69"
+    }
+  ],
+  "research_links": {
+    "india_kharif_2026": {
+      "relevance": "The issuer explicitly identifies monsoon failure as a turnover and profitability risk, establishing a possible company exposure channel.",
+      "company_bridge_ready": false,
+      "reason": "The report establishes general exposure but does not quantify current Kharif-2026 sensitivity by crop, state, product, revenue, or margin.",
+      "permitted_claim": "Coromandel has disclosed that monsoon failure can affect turnover and profitability; current event-specific impact remains unproven."
+    }
+  },
+  "creates_observation": false,
+  "requires_human_review": true,
+  "non_authority_statement": "Extracted issuer statements only; not a Signal, Catalyst, Opportunity, recommendation, position, or trade."
+}

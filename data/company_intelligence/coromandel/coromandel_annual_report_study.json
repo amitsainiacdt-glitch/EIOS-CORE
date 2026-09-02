@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "company": "Coromandel International",
+  "ticker": "COROMANDEL",
+  "requested_years": 10,
+  "available_years": 10,
+  "extracted_years": 10,
+  "reviewed_years": 0,
+  "status": "PARTIAL",
+  "findings": [
+    {
+      "finding_id": "CORO-STUDY-FY25-GROWTH",
+      "category": "FINANCIAL_MOMENTUM",
+      "headline": "Profit grew faster than revenue in FY2024-25",
+      "interpretation": "Reported revenue grew 9%, EBITDA about 11%, and PAT about 13%. This is a positive one-year operating signal, but it is not yet a durable trend.",
+      "fact_ids": [
+        "CORO-FY25-REVENUE",
+        "CORO-FY25-EBITDA",
+        "CORO-FY25-PAT"
+      ],
+      "confidence_percent": 85,
+      "status": "PRELIMINARY"
+    },
+    {
+      "finding_id": "CORO-STUDY-FY25-MARGINS",
+      "category": "UNIT_ECONOMICS",
+      "headline": "FY2024-25 EBITDA margin was 11.0%",
+      "interpretation": "PAT margin was 8.1%. EIOS needs the preceding nine years to distinguish structural improvement from a favourable cycle.",
+      "fact_ids": [
+        "CORO-FY25-REVENUE",
+        "CORO-FY25-EBITDA",
+        "CORO-FY25-PAT"
+      ],
+      "confidence_percent": 90,
+      "status": "PRELIMINARY"
+    },
+    {
+      "finding_id": "CORO-STUDY-FY25-INVESTMENT",
+      "category": "CAPITAL_ALLOCATION",
+      "headline": "Capex equalled 3.4% of revenue",
+      "interpretation": "The investment is directed toward backward integration and capacity expansion. Returns and commissioning progress must be monitored before treating it as a catalyst.",
+      "fact_ids": [
+        "CORO-FY25-CAPEX",
+        "CORO-KAKINADA-EXPANSION",
+        "CORO-BACKWARD-INTEGRATION-2026"
+      ],
+      "confidence_percent": 80,
+      "status": "PRELIMINARY"
+    },
+    {
+      "finding_id": "CORO-STUDY-FY25-DIVERSIFICATION",
+      "category": "BUSINESS_MIX",
+      "headline": "Crop Protection and bioproducts were 11.0% of standalone revenue",
+      "interpretation": "This supplies a measurable diversification reference point; ten-year segment history is required to establish whether mix is strengthening.",
+      "fact_ids": [
+        "CORO-FY25-CROP-PROTECTION-REVENUE",
+        "CORO-FY25-REVENUE"
+      ],
+      "confidence_percent": 80,
+      "status": "PRELIMINARY"
+    },
+    {
+      "finding_id": "CORO-STUDY-MONSOON-EXPOSURE",
+      "category": "RISK_TRANSMISSION",
+      "headline": "Monsoon conditions can transmit into turnover and profitability",
+      "interpretation": "The issuer explicitly acknowledges the exposure and describes mitigation, but does not quantify current sensitivity by state, crop, product, revenue or margin.",
+      "fact_ids": [
+        "CORO-MONSOON-RISK",
+        "CORO-MONSOON-MITIGATION"
+      ],
+      "confidence_percent": 75,
+      "status": "PRELIMINARY"
+    }
+  ],
+  "missing_work": [
+    "Extract and reconcile the preceding nine annual reports.",
+    "Build ten-year income statement, balance sheet and cash-flow series.",
+    "Compare management commitments with subsequent delivery.",
+    "Run cross-year contradiction, risk recurrence and segment-mix analysis.",
+    "Complete human review before findings can influence a verdict."
+  ],
+  "meta_status": "INSUFFICIENT_LONGITUDINAL_HISTORY",
+  "meta_permitted_conclusion": "FY2024-25 shows positive one-year momentum and identifiable expansion and monsoon channels; persistence, causality and valuation implications remain unproven.",
+  "verdict_status": "RESEARCH_HOLD",
+  "creates_recommendation": false,
+  "extraction_coverage_percent": 100
+}

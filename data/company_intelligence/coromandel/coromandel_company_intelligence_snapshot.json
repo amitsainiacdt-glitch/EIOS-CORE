@@ -1,0 +1,373 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "COROMANDEL-COMPANY-INTELLIGENCE-2026-08-31",
+  "company_name": "Coromandel International",
+  "ticker": "COROMANDEL",
+  "generated_at": "2026-09-02T09:28:15.076896+00:00",
+  "layers": {
+    "identity": {
+      "status": "READY",
+      "summary": "Canonical issuer identity is registered.",
+      "source_ids": [
+        "COROMANDEL-ANNUAL-REPORTS"
+      ],
+      "fact_ids": [],
+      "warnings": [],
+      "as_of": null,
+      "coverage_percent": 100
+    },
+    "financials": {
+      "status": "READY",
+      "summary": "10 of 10 requested annual periods have governed financial data; missing values remain explicit.",
+      "source_ids": [
+        "COROMANDEL-ANNUAL-REPORTS"
+      ],
+      "fact_ids": [
+        "CORO-FY25-REVENUE",
+        "CORO-FY25-EBITDA",
+        "CORO-FY25-PAT",
+        "CORO-FY25-PHOSPHATIC-VOLUME",
+        "CORO-FY25-CROP-PROTECTION-REVENUE",
+        "CORO-FY25-CAPEX"
+      ],
+      "warnings": [
+        "QUARTERLY_HISTORY_MISSING",
+        "CASH_FLOW_SERIES_MISSING"
+      ],
+      "as_of": null,
+      "coverage_percent": 100
+    },
+    "macro": {
+      "status": "PARTIAL",
+      "summary": "Automatic macro monitoring is connected; company transmission and source authority remain unproven.",
+      "source_ids": [
+        "fce5712213b678c4ad6cd5f12516a36a28e2847a94b120bafdceac7884cc3752",
+        "3c7daace26407344022f80327a7ef9a8ddab13bb837e4724e09c7acb557a12ab",
+        "2d62b7bcc7f9de25101257ffc424fb86d01a11c97dd38af90b86054b6beff36f",
+        "3f6b735bf1cf817f01a3e2b4e45f6843e60cbcc89d8d543784e5c416c1d167b3",
+        "5f61a49028f0edb41db34ef59af6f98e8978e7e511038c71094eaafb978418a3",
+        "77af68c9255260bc0cdf9493c4cd87c1b148dbabd2d968a92f1db03b1a35a49d",
+        "4d5efa91cafd919b4bb6caeea1ffecac1ba2598a5df6005d52d1a1c0a1430ece",
+        "4e5a0eb7bc056d6dba918c4fbbf0b29d4657d851d07a26e6dc8b39c52ccf8206",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb",
+        "dcbc6dbf715d5df1814c964ff826661d07a9a96a8c63c6fd9fb4c00c62849a40",
+        "dbf9907b404e24b6eddbd602b7f108285e063f468ad861aea87f8ff71c09aa9a",
+        "5da894ae6773516ec6cfc2f675685aeacbd13aeb409e2543dc2d2c2e61bad367",
+        "e5b2889634fde5c91acc9d3412fc9eb0329bea0e98304f47e4b0288b47e8000e",
+        "5600d993d446b08524a26af6de33f29726d5b2cdf91239ee2d52f068aaa0de32",
+        "20bdc820aa03e1841b20669a93716fd7e4bd46201fd9e4fac0274e591d39b60b",
+        "c6252bfa04edad7f65f34844f4903fa7c2bfac559ece86436cd12e6ec16365b3",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb"
+      ],
+      "fact_ids": [],
+      "warnings": [
+        "CAUSAL_TRANSMISSION_NOT_VERIFIED",
+        "PRIMARY_MACRO_SOURCE_REQUIRED"
+      ],
+      "as_of": null,
+      "coverage_percent": 15
+    },
+    "sector": {
+      "status": "PARTIAL",
+      "summary": "Sector and competitive monitoring is collecting candidates; independent sector evidence remains incomplete.",
+      "source_ids": [
+        "fce5712213b678c4ad6cd5f12516a36a28e2847a94b120bafdceac7884cc3752",
+        "3c7daace26407344022f80327a7ef9a8ddab13bb837e4724e09c7acb557a12ab",
+        "2d62b7bcc7f9de25101257ffc424fb86d01a11c97dd38af90b86054b6beff36f",
+        "3f6b735bf1cf817f01a3e2b4e45f6843e60cbcc89d8d543784e5c416c1d167b3",
+        "5f61a49028f0edb41db34ef59af6f98e8978e7e511038c71094eaafb978418a3",
+        "77af68c9255260bc0cdf9493c4cd87c1b148dbabd2d968a92f1db03b1a35a49d",
+        "4d5efa91cafd919b4bb6caeea1ffecac1ba2598a5df6005d52d1a1c0a1430ece",
+        "4e5a0eb7bc056d6dba918c4fbbf0b29d4657d851d07a26e6dc8b39c52ccf8206",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb",
+        "dcbc6dbf715d5df1814c964ff826661d07a9a96a8c63c6fd9fb4c00c62849a40",
+        "dbf9907b404e24b6eddbd602b7f108285e063f468ad861aea87f8ff71c09aa9a",
+        "5da894ae6773516ec6cfc2f675685aeacbd13aeb409e2543dc2d2c2e61bad367",
+        "e5b2889634fde5c91acc9d3412fc9eb0329bea0e98304f47e4b0288b47e8000e",
+        "5600d993d446b08524a26af6de33f29726d5b2cdf91239ee2d52f068aaa0de32",
+        "20bdc820aa03e1841b20669a93716fd7e4bd46201fd9e4fac0274e591d39b60b",
+        "c6252bfa04edad7f65f34844f4903fa7c2bfac559ece86436cd12e6ec16365b3",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb"
+      ],
+      "fact_ids": [],
+      "warnings": [
+        "SECTOR_EVIDENCE_REVIEW_REQUIRED"
+      ],
+      "as_of": null,
+      "coverage_percent": 15
+    },
+    "micro": {
+      "status": "NOT_STARTED",
+      "summary": "Backend integration has not started for this layer.",
+      "source_ids": [],
+      "fact_ids": [],
+      "warnings": [],
+      "as_of": null,
+      "coverage_percent": 0
+    },
+    "news_and_filings": {
+      "status": "PARTIAL",
+      "summary": "Automatic intake found 17 company items; META review is required before they become evidence.",
+      "source_ids": [
+        "fce5712213b678c4ad6cd5f12516a36a28e2847a94b120bafdceac7884cc3752",
+        "3c7daace26407344022f80327a7ef9a8ddab13bb837e4724e09c7acb557a12ab",
+        "2d62b7bcc7f9de25101257ffc424fb86d01a11c97dd38af90b86054b6beff36f",
+        "3f6b735bf1cf817f01a3e2b4e45f6843e60cbcc89d8d543784e5c416c1d167b3",
+        "5f61a49028f0edb41db34ef59af6f98e8978e7e511038c71094eaafb978418a3",
+        "77af68c9255260bc0cdf9493c4cd87c1b148dbabd2d968a92f1db03b1a35a49d",
+        "4d5efa91cafd919b4bb6caeea1ffecac1ba2598a5df6005d52d1a1c0a1430ece",
+        "4e5a0eb7bc056d6dba918c4fbbf0b29d4657d851d07a26e6dc8b39c52ccf8206",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb",
+        "dcbc6dbf715d5df1814c964ff826661d07a9a96a8c63c6fd9fb4c00c62849a40",
+        "dbf9907b404e24b6eddbd602b7f108285e063f468ad861aea87f8ff71c09aa9a",
+        "5da894ae6773516ec6cfc2f675685aeacbd13aeb409e2543dc2d2c2e61bad367",
+        "e5b2889634fde5c91acc9d3412fc9eb0329bea0e98304f47e4b0288b47e8000e",
+        "5600d993d446b08524a26af6de33f29726d5b2cdf91239ee2d52f068aaa0de32",
+        "20bdc820aa03e1841b20669a93716fd7e4bd46201fd9e4fac0274e591d39b60b",
+        "c6252bfa04edad7f65f34844f4903fa7c2bfac559ece86436cd12e6ec16365b3",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb"
+      ],
+      "fact_ids": [],
+      "warnings": [
+        "UNREVIEWED_DISCOVERIES_PRESENT"
+      ],
+      "as_of": null,
+      "coverage_percent": 25
+    },
+    "company_events": {
+      "status": "PARTIAL",
+      "summary": "Two dated capacity and backward-integration commitments were extracted.",
+      "source_ids": [
+        "COROMANDEL-ANNUAL-REPORTS"
+      ],
+      "fact_ids": [
+        "CORO-KAKINADA-EXPANSION",
+        "CORO-BACKWARD-INTEGRATION-2026"
+      ],
+      "warnings": [
+        "EVENT_COMPLETION_NOT_VERIFIED"
+      ],
+      "as_of": null,
+      "coverage_percent": 20
+    },
+    "meta_causality": {
+      "status": "PARTIAL",
+      "summary": "META triaged 17 discoveries: 13 await human review; none can change the verdict automatically.",
+      "source_ids": [
+        "fce5712213b678c4ad6cd5f12516a36a28e2847a94b120bafdceac7884cc3752",
+        "3c7daace26407344022f80327a7ef9a8ddab13bb837e4724e09c7acb557a12ab",
+        "2d62b7bcc7f9de25101257ffc424fb86d01a11c97dd38af90b86054b6beff36f",
+        "3f6b735bf1cf817f01a3e2b4e45f6843e60cbcc89d8d543784e5c416c1d167b3",
+        "5f61a49028f0edb41db34ef59af6f98e8978e7e511038c71094eaafb978418a3",
+        "77af68c9255260bc0cdf9493c4cd87c1b148dbabd2d968a92f1db03b1a35a49d",
+        "4d5efa91cafd919b4bb6caeea1ffecac1ba2598a5df6005d52d1a1c0a1430ece",
+        "4e5a0eb7bc056d6dba918c4fbbf0b29d4657d851d07a26e6dc8b39c52ccf8206",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb",
+        "dcbc6dbf715d5df1814c964ff826661d07a9a96a8c63c6fd9fb4c00c62849a40",
+        "dbf9907b404e24b6eddbd602b7f108285e063f468ad861aea87f8ff71c09aa9a",
+        "5da894ae6773516ec6cfc2f675685aeacbd13aeb409e2543dc2d2c2e61bad367",
+        "e5b2889634fde5c91acc9d3412fc9eb0329bea0e98304f47e4b0288b47e8000e",
+        "5600d993d446b08524a26af6de33f29726d5b2cdf91239ee2d52f068aaa0de32",
+        "20bdc820aa03e1841b20669a93716fd7e4bd46201fd9e4fac0274e591d39b60b",
+        "c6252bfa04edad7f65f34844f4903fa7c2bfac559ece86436cd12e6ec16365b3",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb"
+      ],
+      "fact_ids": [],
+      "warnings": [
+        "HUMAN_REVIEW_REQUIRED",
+        "VERDICT_IMPACT_BLOCKED"
+      ],
+      "as_of": null,
+      "coverage_percent": 20
+    },
+    "catalysts": {
+      "status": "PARTIAL",
+      "summary": "Catalyst candidates are collected, but no dated catalyst with verified earnings transmission is approved.",
+      "source_ids": [
+        "fce5712213b678c4ad6cd5f12516a36a28e2847a94b120bafdceac7884cc3752",
+        "3c7daace26407344022f80327a7ef9a8ddab13bb837e4724e09c7acb557a12ab",
+        "2d62b7bcc7f9de25101257ffc424fb86d01a11c97dd38af90b86054b6beff36f",
+        "3f6b735bf1cf817f01a3e2b4e45f6843e60cbcc89d8d543784e5c416c1d167b3",
+        "5f61a49028f0edb41db34ef59af6f98e8978e7e511038c71094eaafb978418a3",
+        "77af68c9255260bc0cdf9493c4cd87c1b148dbabd2d968a92f1db03b1a35a49d",
+        "4d5efa91cafd919b4bb6caeea1ffecac1ba2598a5df6005d52d1a1c0a1430ece",
+        "4e5a0eb7bc056d6dba918c4fbbf0b29d4657d851d07a26e6dc8b39c52ccf8206",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb",
+        "dcbc6dbf715d5df1814c964ff826661d07a9a96a8c63c6fd9fb4c00c62849a40",
+        "dbf9907b404e24b6eddbd602b7f108285e063f468ad861aea87f8ff71c09aa9a",
+        "5da894ae6773516ec6cfc2f675685aeacbd13aeb409e2543dc2d2c2e61bad367",
+        "e5b2889634fde5c91acc9d3412fc9eb0329bea0e98304f47e4b0288b47e8000e",
+        "5600d993d446b08524a26af6de33f29726d5b2cdf91239ee2d52f068aaa0de32",
+        "20bdc820aa03e1841b20669a93716fd7e4bd46201fd9e4fac0274e591d39b60b",
+        "c6252bfa04edad7f65f34844f4903fa7c2bfac559ece86436cd12e6ec16365b3",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb"
+      ],
+      "fact_ids": [],
+      "warnings": [
+        "CATALYST_NOT_VALIDATED"
+      ],
+      "as_of": null,
+      "coverage_percent": 10
+    },
+    "expectations": {
+      "status": "PARTIAL",
+      "summary": "Expectation-gap monitoring is connected; market expectations and a measurable surprise threshold are not established.",
+      "source_ids": [
+        "fce5712213b678c4ad6cd5f12516a36a28e2847a94b120bafdceac7884cc3752",
+        "3c7daace26407344022f80327a7ef9a8ddab13bb837e4724e09c7acb557a12ab",
+        "2d62b7bcc7f9de25101257ffc424fb86d01a11c97dd38af90b86054b6beff36f",
+        "3f6b735bf1cf817f01a3e2b4e45f6843e60cbcc89d8d543784e5c416c1d167b3",
+        "5f61a49028f0edb41db34ef59af6f98e8978e7e511038c71094eaafb978418a3",
+        "77af68c9255260bc0cdf9493c4cd87c1b148dbabd2d968a92f1db03b1a35a49d",
+        "4d5efa91cafd919b4bb6caeea1ffecac1ba2598a5df6005d52d1a1c0a1430ece",
+        "4e5a0eb7bc056d6dba918c4fbbf0b29d4657d851d07a26e6dc8b39c52ccf8206",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb",
+        "dcbc6dbf715d5df1814c964ff826661d07a9a96a8c63c6fd9fb4c00c62849a40",
+        "dbf9907b404e24b6eddbd602b7f108285e063f468ad861aea87f8ff71c09aa9a",
+        "5da894ae6773516ec6cfc2f675685aeacbd13aeb409e2543dc2d2c2e61bad367",
+        "e5b2889634fde5c91acc9d3412fc9eb0329bea0e98304f47e4b0288b47e8000e",
+        "5600d993d446b08524a26af6de33f29726d5b2cdf91239ee2d52f068aaa0de32",
+        "20bdc820aa03e1841b20669a93716fd7e4bd46201fd9e4fac0274e591d39b60b",
+        "c6252bfa04edad7f65f34844f4903fa7c2bfac559ece86436cd12e6ec16365b3",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb"
+      ],
+      "fact_ids": [],
+      "warnings": [
+        "EXPECTATION_BENCHMARK_MISSING"
+      ],
+      "as_of": null,
+      "coverage_percent": 10
+    },
+    "management": {
+      "status": "PARTIAL",
+      "summary": "Management and corporate-event monitoring is connected; long-term promise-versus-delivery analysis remains incomplete.",
+      "source_ids": [
+        "fce5712213b678c4ad6cd5f12516a36a28e2847a94b120bafdceac7884cc3752",
+        "3c7daace26407344022f80327a7ef9a8ddab13bb837e4724e09c7acb557a12ab",
+        "2d62b7bcc7f9de25101257ffc424fb86d01a11c97dd38af90b86054b6beff36f",
+        "3f6b735bf1cf817f01a3e2b4e45f6843e60cbcc89d8d543784e5c416c1d167b3",
+        "5f61a49028f0edb41db34ef59af6f98e8978e7e511038c71094eaafb978418a3",
+        "77af68c9255260bc0cdf9493c4cd87c1b148dbabd2d968a92f1db03b1a35a49d",
+        "4d5efa91cafd919b4bb6caeea1ffecac1ba2598a5df6005d52d1a1c0a1430ece",
+        "4e5a0eb7bc056d6dba918c4fbbf0b29d4657d851d07a26e6dc8b39c52ccf8206",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb",
+        "dcbc6dbf715d5df1814c964ff826661d07a9a96a8c63c6fd9fb4c00c62849a40",
+        "dbf9907b404e24b6eddbd602b7f108285e063f468ad861aea87f8ff71c09aa9a",
+        "5da894ae6773516ec6cfc2f675685aeacbd13aeb409e2543dc2d2c2e61bad367",
+        "e5b2889634fde5c91acc9d3412fc9eb0329bea0e98304f47e4b0288b47e8000e",
+        "5600d993d446b08524a26af6de33f29726d5b2cdf91239ee2d52f068aaa0de32",
+        "20bdc820aa03e1841b20669a93716fd7e4bd46201fd9e4fac0274e591d39b60b",
+        "c6252bfa04edad7f65f34844f4903fa7c2bfac559ece86436cd12e6ec16365b3",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb"
+      ],
+      "fact_ids": [],
+      "warnings": [
+        "TEN_YEAR_MANAGEMENT_ASSESSMENT_MISSING"
+      ],
+      "as_of": null,
+      "coverage_percent": 10
+    },
+    "competition": {
+      "status": "PARTIAL",
+      "summary": "Competitive-change candidates are being monitored but have not passed comparative validation.",
+      "source_ids": [
+        "fce5712213b678c4ad6cd5f12516a36a28e2847a94b120bafdceac7884cc3752",
+        "3c7daace26407344022f80327a7ef9a8ddab13bb837e4724e09c7acb557a12ab",
+        "2d62b7bcc7f9de25101257ffc424fb86d01a11c97dd38af90b86054b6beff36f",
+        "3f6b735bf1cf817f01a3e2b4e45f6843e60cbcc89d8d543784e5c416c1d167b3",
+        "5f61a49028f0edb41db34ef59af6f98e8978e7e511038c71094eaafb978418a3",
+        "77af68c9255260bc0cdf9493c4cd87c1b148dbabd2d968a92f1db03b1a35a49d",
+        "4d5efa91cafd919b4bb6caeea1ffecac1ba2598a5df6005d52d1a1c0a1430ece",
+        "4e5a0eb7bc056d6dba918c4fbbf0b29d4657d851d07a26e6dc8b39c52ccf8206",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb",
+        "dcbc6dbf715d5df1814c964ff826661d07a9a96a8c63c6fd9fb4c00c62849a40",
+        "dbf9907b404e24b6eddbd602b7f108285e063f468ad861aea87f8ff71c09aa9a",
+        "5da894ae6773516ec6cfc2f675685aeacbd13aeb409e2543dc2d2c2e61bad367",
+        "e5b2889634fde5c91acc9d3412fc9eb0329bea0e98304f47e4b0288b47e8000e",
+        "5600d993d446b08524a26af6de33f29726d5b2cdf91239ee2d52f068aaa0de32",
+        "20bdc820aa03e1841b20669a93716fd7e4bd46201fd9e4fac0274e591d39b60b",
+        "c6252bfa04edad7f65f34844f4903fa7c2bfac559ece86436cd12e6ec16365b3",
+        "46372b5627de7a3b1b135c8187605fa21b9ea4f8840f5cc8595be74f3a1ed0eb"
+      ],
+      "fact_ids": [],
+      "warnings": [
+        "COMPETITOR_COMPARISON_INCOMPLETE"
+      ],
+      "as_of": null,
+      "coverage_percent": 10
+    },
+    "risks_and_contradictions": {
+      "status": "PARTIAL",
+      "summary": "Issuer monsoon risk and mitigation statements were extracted; independent contradiction review is incomplete.",
+      "source_ids": [
+        "COROMANDEL-ANNUAL-REPORTS"
+      ],
+      "fact_ids": [
+        "CORO-MONSOON-RISK",
+        "CORO-MONSOON-MITIGATION"
+      ],
+      "warnings": [
+        "INDEPENDENT_CONTRADICTION_SEARCH_MISSING"
+      ],
+      "as_of": null,
+      "coverage_percent": 15
+    },
+    "valuation": {
+      "status": "NOT_STARTED",
+      "summary": "Backend integration has not started for this layer.",
+      "source_ids": [],
+      "fact_ids": [],
+      "warnings": [],
+      "as_of": null,
+      "coverage_percent": 0
+    },
+    "master_dossier": {
+      "status": "RESEARCH_HOLD",
+      "summary": "Master Dossier cannot advance until mandatory intelligence layers are ready.",
+      "source_ids": [],
+      "fact_ids": [],
+      "warnings": [
+        "MANDATORY_INPUT_LAYERS_INCOMPLETE"
+      ],
+      "as_of": null,
+      "coverage_percent": 5
+    },
+    "monitoring": {
+      "status": "PARTIAL",
+      "summary": "Official source locations are registered, but a successful automatic collection cycle is not yet verified.",
+      "source_ids": [
+        "COROMANDEL-ANNUAL-REPORTS"
+      ],
+      "fact_ids": [],
+      "warnings": [
+        "AUTOMATIC_CYCLE_NOT_VERIFIED"
+      ],
+      "as_of": null,
+      "coverage_percent": 25
+    }
+  },
+  "verdict_status": "RESEARCH_HOLD",
+  "verdict": null,
+  "confidence_percent": null,
+  "verdict_reasons": [
+    "No verdict is permitted until all mandatory backend layers are ready."
+  ],
+  "unresolved_gaps": [
+    "macro: PARTIAL",
+    "sector: PARTIAL",
+    "micro: NOT_STARTED",
+    "news_and_filings: PARTIAL",
+    "company_events: PARTIAL",
+    "meta_causality: PARTIAL",
+    "catalysts: PARTIAL",
+    "expectations: PARTIAL",
+    "management: PARTIAL",
+    "competition: PARTIAL",
+    "risks_and_contradictions: PARTIAL",
+    "valuation: NOT_STARTED",
+    "master_dossier: RESEARCH_HOLD",
+    "monitoring: PARTIAL"
+  ],
+  "creates_recommendation": false,
+  "requires_human_review": true
+}

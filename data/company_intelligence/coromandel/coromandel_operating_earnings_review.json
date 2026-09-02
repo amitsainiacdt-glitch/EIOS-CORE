@@ -1,0 +1,778 @@
+{
+  "schema_version": 1,
+  "ticker": "COROMANDEL",
+  "periods": [
+    {
+      "period": "FY2017-18",
+      "basis": "STANDALONE",
+      "facts": {
+        "revenue": {
+          "pdf_page": 117,
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "10,98,654",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 10986.54,
+          "source_passage": "Revenue from operations 24  10,98,654  10,18,530",
+          "column": 1
+        },
+        "other_income": {
+          "pdf_page": 117,
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "5,780",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 57.8,
+          "source_passage": "Other income 25  5,780  5,338",
+          "column": 1
+        },
+        "finance_costs": {
+          "pdf_page": 117,
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "17,844",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 178.44,
+          "source_passage": "Finance costs 28  17,844  22,367",
+          "column": 1
+        },
+        "depreciation_amortisation": {
+          "pdf_page": 117,
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "9,706",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 97.06,
+          "source_passage": "Depreciation and amortisation expense 29  9,706  9,988",
+          "column": 1
+        },
+        "profit_before_exceptional_and_tax": {
+          "pdf_page": 117,
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "1,00,252",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1002.52,
+          "source_passage": "III Profit before exceptional items and tax (I - II)  1,00,252  71,186",
+          "column": 1
+        }
+      },
+      "calculated_operating_ebitda": 1220.22,
+      "formula": "Profit before exceptional items and tax + finance costs + depreciation/amortisation - other income",
+      "limitation": "Calculated measure, not an issuer-reported EBITDA quote. Includes all reported finance costs (including lease interest where applicable); accounting and business-scope changes still require review.",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    },
+    {
+      "period": "FY2018-19",
+      "basis": "STANDALONE",
+      "facts": {
+        "revenue": {
+          "pdf_page": 76,
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "13,20,385",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 13203.85,
+          "source_passage": "Revenue from operations 24  13,11,719  13,20,385",
+          "column": 2
+        },
+        "other_income": {
+          "pdf_page": 76,
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "3,637",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 36.37,
+          "source_passage": "Other income 25  3,769  3,637",
+          "column": 2
+        },
+        "finance_costs": {
+          "pdf_page": 76,
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "25,082",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 250.82,
+          "source_passage": "Finance costs 28  23,529  25,082",
+          "column": 2
+        },
+        "depreciation_amortisation": {
+          "pdf_page": 76,
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "11,325",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 113.25,
+          "source_passage": "Depreciation and amortisation expense 29  15,727  11,325",
+          "column": 2
+        },
+        "profit_before_exceptional_and_tax": {
+          "pdf_page": 76,
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "1,10,972",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1109.72,
+          "source_passage": "III Profit before exceptional items and tax (I - II)  1,37,136  1,10,972",
+          "column": 2
+        }
+      },
+      "calculated_operating_ebitda": 1437.42,
+      "formula": "Profit before exceptional items and tax + finance costs + depreciation/amortisation - other income",
+      "limitation": "Calculated measure, not an issuer-reported EBITDA quote. Includes all reported finance costs (including lease interest where applicable); accounting and business-scope changes still require review.",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    },
+    {
+      "period": "FY2019-20",
+      "basis": "STANDALONE",
+      "facts": {
+        "revenue": {
+          "pdf_page": 76,
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "13,11,719",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 13117.19,
+          "source_passage": "Revenue from operations 24  13,11,719  13,20,385",
+          "column": 1
+        },
+        "other_income": {
+          "pdf_page": 76,
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "3,769",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 37.69,
+          "source_passage": "Other income 25  3,769  3,637",
+          "column": 1
+        },
+        "finance_costs": {
+          "pdf_page": 76,
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "23,529",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 235.29,
+          "source_passage": "Finance costs 28  23,529  25,082",
+          "column": 1
+        },
+        "depreciation_amortisation": {
+          "pdf_page": 76,
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "15,727",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 157.27,
+          "source_passage": "Depreciation and amortisation expense 29  15,727  11,325",
+          "column": 1
+        },
+        "profit_before_exceptional_and_tax": {
+          "pdf_page": 76,
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "1,37,136",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1371.36,
+          "source_passage": "III Profit before exceptional items and tax (I - II)  1,37,136  1,10,972",
+          "column": 1
+        }
+      },
+      "calculated_operating_ebitda": 1726.23,
+      "formula": "Profit before exceptional items and tax + finance costs + depreciation/amortisation - other income",
+      "limitation": "Calculated measure, not an issuer-reported EBITDA quote. Includes all reported finance costs (including lease interest where applicable); accounting and business-scope changes still require review.",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    },
+    {
+      "period": "FY2020-21",
+      "basis": "STANDALONE",
+      "facts": {
+        "revenue": {
+          "pdf_page": 73,
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "14,16,295",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 14162.95,
+          "source_passage": "Revenue from operations 24  14,16,295  13,11,719",
+          "column": 1
+        },
+        "other_income": {
+          "pdf_page": 73,
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "4,242",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 42.42,
+          "source_passage": "Other income 25  4,242  3,769",
+          "column": 1
+        },
+        "finance_costs": {
+          "pdf_page": 73,
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "10,570",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 105.7,
+          "source_passage": "Finance costs 28  10,570  23,529",
+          "column": 1
+        },
+        "depreciation_amortisation": {
+          "pdf_page": 73,
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "17,209",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 172.09,
+          "source_passage": "Depreciation and amortisation expense 29  17,209  15,727",
+          "column": 1
+        },
+        "profit_before_exceptional_and_tax": {
+          "pdf_page": 73,
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "1,76,555",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1765.55,
+          "source_passage": "III Profit before tax (I - II)  1,76,555  1,37,136",
+          "column": 1
+        }
+      },
+      "calculated_operating_ebitda": 2000.92,
+      "formula": "Profit before exceptional items and tax + finance costs + depreciation/amortisation - other income",
+      "limitation": "Calculated measure, not an issuer-reported EBITDA quote. Includes all reported finance costs (including lease interest where applicable); accounting and business-scope changes still require review.",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    },
+    {
+      "period": "FY2021-22",
+      "basis": "STANDALONE",
+      "facts": {
+        "revenue": {
+          "pdf_page": 118,
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "19,08,826",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 19088.26,
+          "source_passage": "Revenue from operations 24 19,08,826 14,15,620",
+          "column": 1
+        },
+        "other_income": {
+          "pdf_page": 118,
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "14,317",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 143.17,
+          "source_passage": "Other income 25 14,317 7,449",
+          "column": 1
+        },
+        "finance_costs": {
+          "pdf_page": 118,
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "7,543",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 75.43,
+          "source_passage": "Finance costs 28 7,543 10,562",
+          "column": 1
+        },
+        "depreciation_amortisation": {
+          "pdf_page": 118,
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "17,202",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 172.02,
+          "source_passage": "Depreciation and amortisation expenses 29 17,202 17,245",
+          "column": 1
+        },
+        "profit_before_exceptional_and_tax": {
+          "pdf_page": 118,
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "1,93,141",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1931.41,
+          "source_passage": "III   Profit before tax (I - II)  1,93,141 1,76,604",
+          "column": 1
+        }
+      },
+      "calculated_operating_ebitda": 2035.69,
+      "formula": "Profit before exceptional items and tax + finance costs + depreciation/amortisation - other income",
+      "limitation": "Calculated measure, not an issuer-reported EBITDA quote. Includes all reported finance costs (including lease interest where applicable); accounting and business-scope changes still require review.",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    },
+    {
+      "period": "FY2022-23",
+      "basis": "STANDALONE",
+      "facts": {
+        "revenue": {
+          "pdf_page": 136,
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "29,60,955",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 29609.55,
+          "source_passage": "Revenue from operations 24  22,02,921  29,60,955",
+          "column": 2
+        },
+        "other_income": {
+          "pdf_page": 136,
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "17,476",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 174.76,
+          "source_passage": "Other income 25  27,909  17,476",
+          "column": 2
+        },
+        "finance_costs": {
+          "pdf_page": 136,
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "18,928",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 189.28,
+          "source_passage": "Finance costs 28  18,525  18,928",
+          "column": 2
+        },
+        "depreciation_amortisation": {
+          "pdf_page": 136,
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "18,120",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 181.2,
+          "source_passage": "Depreciation and amortisation expenses 29  22,220  18,120",
+          "column": 2
+        },
+        "profit_before_exceptional_and_tax": {
+          "pdf_page": 136,
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "2,72,204",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2722.04,
+          "source_passage": "III Profit before tax (I - II)  2,27,248  2,72,204",
+          "column": 2
+        }
+      },
+      "calculated_operating_ebitda": 2917.76,
+      "formula": "Profit before exceptional items and tax + finance costs + depreciation/amortisation - other income",
+      "limitation": "Calculated measure, not an issuer-reported EBITDA quote. Includes all reported finance costs (including lease interest where applicable); accounting and business-scope changes still require review.",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    },
+    {
+      "period": "FY2023-24",
+      "basis": "STANDALONE",
+      "facts": {
+        "revenue": {
+          "pdf_page": 136,
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "22,02,921",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 22029.21,
+          "source_passage": "Revenue from operations 24  22,02,921  29,60,955",
+          "column": 1
+        },
+        "other_income": {
+          "pdf_page": 136,
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "27,909",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 279.09,
+          "source_passage": "Other income 25  27,909  17,476",
+          "column": 1
+        },
+        "finance_costs": {
+          "pdf_page": 136,
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "18,525",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 185.25,
+          "source_passage": "Finance costs 28  18,525  18,928",
+          "column": 1
+        },
+        "depreciation_amortisation": {
+          "pdf_page": 136,
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "22,220",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 222.2,
+          "source_passage": "Depreciation and amortisation expenses 29  22,220  18,120",
+          "column": 1
+        },
+        "profit_before_exceptional_and_tax": {
+          "pdf_page": 136,
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "2,27,248",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2272.48,
+          "source_passage": "III Profit before tax (I - II)  2,27,248  2,72,204",
+          "column": 1
+        }
+      },
+      "calculated_operating_ebitda": 2400.84,
+      "formula": "Profit before exceptional items and tax + finance costs + depreciation/amortisation - other income",
+      "limitation": "Calculated measure, not an issuer-reported EBITDA quote. Includes all reported finance costs (including lease interest where applicable); accounting and business-scope changes still require review.",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    },
+    {
+      "period": "FY2024-25",
+      "basis": "STANDALONE",
+      "facts": {
+        "revenue": {
+          "pdf_page": 140,
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "24,06,425",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 24064.25,
+          "source_passage": "Revenue from operations 24  24,06,425  22,02,921",
+          "column": 1
+        },
+        "other_income": {
+          "pdf_page": 140,
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "36,371",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 363.71,
+          "source_passage": "Other income 25  36,371  27,909",
+          "column": 1
+        },
+        "finance_costs": {
+          "pdf_page": 140,
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "25,774",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 257.74,
+          "source_passage": "Finance costs 28  25,774  18,525",
+          "column": 1
+        },
+        "depreciation_amortisation": {
+          "pdf_page": 140,
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "27,671",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 276.71,
+          "source_passage": "Depreciation and amortisation expense 29  27,671  22,220",
+          "column": 1
+        },
+        "profit_before_exceptional_and_tax": {
+          "pdf_page": 140,
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "2,48,513",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2485.13,
+          "source_passage": "III Profit before exceptional items and tax (I - II)  2,48,513  2,27,248",
+          "column": 1
+        }
+      },
+      "calculated_operating_ebitda": 2655.87,
+      "formula": "Profit before exceptional items and tax + finance costs + depreciation/amortisation - other income",
+      "limitation": "Calculated measure, not an issuer-reported EBITDA quote. Includes all reported finance costs (including lease interest where applicable); accounting and business-scope changes still require review.",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    }
+  ],
+  "extracted_fact_count": 40,
+  "calculated_fact_count": 8,
+  "creates_evidence": false,
+  "review_status": "PENDING_META_REVIEW"
+}

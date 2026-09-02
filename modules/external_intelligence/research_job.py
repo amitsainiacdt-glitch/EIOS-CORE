@@ -62,6 +62,8 @@ class ResearchJob:
 
     observation_confidence: float = 70.0
 
+    entity_domain: str | None = None
+
     def validate(self) -> None:
         """
         Validate the research job definition.
@@ -116,6 +118,9 @@ class ResearchJob:
                 "observation_confidence must be "
                 "between 0 and 100"
             )
+
+        if self.entity_domain is not None and not self.entity_domain.strip():
+            raise ValueError("entity_domain must be None or a non-empty domain")
 
 
 __all__ = [

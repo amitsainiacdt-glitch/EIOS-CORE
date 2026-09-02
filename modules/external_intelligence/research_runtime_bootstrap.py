@@ -26,6 +26,7 @@ class ResearchRuntimeBootstrapConfig:
 
     tavily_api_key: str
     observation_path: Path
+    offline_mode: bool = False
     enable_historical_comparison: bool = False
     historical_comparison_audit_path: Path | None = None
 
@@ -51,6 +52,7 @@ class ResearchRuntimeBootstrapConfig:
                 "TAVILY_API_KEY",
                 "",
             ).strip(),
+            offline_mode=cls._parse_boolean(values.get("EIOS_OFFLINE_MODE", "false"), name="EIOS_OFFLINE_MODE"),
             observation_path=Path(
                 values.get(
                     "EIOS_OBSERVATION_PATH",
@@ -145,10 +147,8 @@ class ResearchRuntimeBootstrap:
 
         errors = []
 
-        if not self.config.tavily_api_key:
-            errors.append(
-                "TAVILY_API_KEY is not configured."
-            )
+        # Network search is optional: without an API key the runtime uses the
+        # offline provider and preserves an explicit no-search result.
 
         self._validate_observation_path(errors)
         self._validate_historical_comparison_audit(errors)
@@ -225,6 +225,7 @@ class ResearchRuntimeBootstrap:
         runtime_options = dict(
             observation_path=self.config.observation_path,
             tavily_api_key=self.config.tavily_api_key,
+            offline_mode=self.config.offline_mode,
             enable_historical_comparison=(
                 self.config.enable_historical_comparison
             ),

@@ -84,6 +84,7 @@ from modules.external_intelligence.scheduled_research_runner import (
 from modules.external_intelligence.tavily_search_provider import (
     TavilySearchProvider,
 )
+from modules.external_intelligence.local_search_provider import LocalSearchProvider
 
 from modules.observation.observation_engine import (
     ObservationEngine,
@@ -117,6 +118,7 @@ class ResearchRuntime:
         *,
         observation_path: str | Path = "data/observations.json",
         tavily_api_key: str | None = None,
+        offline_mode: bool = False,
         context: ResearchContext | None = None,
         enable_historical_comparison: bool = False,
         historical_comparison_audit_path: str | Path | None = None,
@@ -213,15 +215,7 @@ class ResearchRuntime:
         # TAVILY PROVIDER
         # ==================================================
 
-        self.provider = TavilySearchProvider(
-            api_key=tavily_api_key
-        )
-
-        if not self.provider.configured:
-
-            raise RuntimeError(
-                "TAVILY_API_KEY is not configured"
-            )
+        self.provider = LocalSearchProvider() if offline_mode else TavilySearchProvider(api_key=tavily_api_key)
 
         # ==================================================
         # EXTERNAL RESEARCH ORCHESTRATOR

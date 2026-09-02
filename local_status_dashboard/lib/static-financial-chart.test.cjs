@@ -1,0 +1,41 @@
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const Module = require('node:module');
+const ts = require('typescript');
+const React = require('react');
+const { renderToStaticMarkup } = require('react-dom/server');
+const { buildFinancialChartData } = require('./financial-chart-data.ts');
+const filename = path.join(__dirname, '../components/static-financial-chart.tsx');
+const compiled = ts.transpileModule(fs.readFileSync(filename, 'utf8'), { compilerOptions: { jsx: ts.JsxEmit.ReactJSX, module: ts.ModuleKind.CommonJS } }).outputText;
+const mod = new Module(filename, module);
+mod.filename = filename;
+mod.paths = module.paths;
+mod._compile(compiled, filename);
+const { StaticFinancialChart } = mod.exports;
+const render = (data, series) => renderToStaticMarkup(React.createElement(StaticFinancialChart, { data, series, title: 'Financial trend' }));
+test('server output includes real bars, lines, axes and source values without browser JavaScript', () => {
+  const read = name => JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/company_intelligence/coromandel', name), 'utf8'));
+  const pack = read('coromandel_cash_flow_review.json');
+  const data = buildFinancialChartData({ cashFlowReview: pack }, pack.periods.map(p => p.period));
+  const html = render(data, [{ key: 'operatingCash', label: 'Operating cash', color: '#fff', kind: 'bar' }, { key: 'freeCash', label: 'Free cash', color: '#aaa', kind: 'line' }]);
+  assert.match(html, /<svg/);
+  assert.equal((html.match(/<rect /g) || []).length, 8);
+  assert.equal((html.match(/<circle /g) || []).length, 8);
+  assert.match(html, /<path d="M/);
+  assert.match(html, /₹-45.01 crore/);
+  assert.match(html, /24-25/);
+  assert.doesNotMatch(html, /NaN|Infinity/);
+});
+test('missing points break the path and do not produce bars or markers', () => {
+  const html = render([{ period: 'FY2022-23', value: 12 }, { period: 'FY2023-24', value: null }, { period: 'FY2024-25', value: -2 }], [{ key: 'value', label: 'Value', color: '#fff', kind: 'line' }]);
+  assert.match(html, /<path d="M[^"L]+ M/);
+  assert.equal((html.match(/<circle /g) || []).length, 2);
+});
+test('zero bars have zero height; empty data does not invent charts', () => {
+  const html = render([{ period: 'FY2024-25', value: 0 }], [{ key: 'value', label: 'Value', color: '#fff', kind: 'bar' }]);
+  assert.match(html, /<rect[^>]+height="0"/);
+  assert.doesNotMatch(html, /NaN|Infinity/);
+  assert.doesNotMatch(render([{ period: 'FY2024-25', value: null }], [{ key: 'value', label: 'Value', color: '#fff', kind: 'bar' }]), /<svg/);
+});

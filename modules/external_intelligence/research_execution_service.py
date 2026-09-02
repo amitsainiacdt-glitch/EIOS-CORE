@@ -176,6 +176,7 @@ class ResearchExecutionService:
             cycle_id=cycle_id,
             job_id=job.job_id,
             retrieved_at=run_time,
+            entity_domain=job.entity_domain,
         )
 
         self.scheduler.mark_run(

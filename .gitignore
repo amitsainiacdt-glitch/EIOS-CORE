@@ -47,3 +47,13 @@ Thumbs.db
 # EIOS runtime observation data
 data/observations.json
 data/test_external_research_orchestrator_observations.json
+
+# Local credentials, working files and generated runtime state
+.env
+.env.*
+!.env.example
+.pytest_cache/
+/tmp/
+/data/runtime/
+/data/company_intelligence/company_document_acquisition_ledger.jsonl
+*.tsbuildinfo

@@ -49,7 +49,8 @@ class PublicObservationAdmissionGate:
         except (TypeError, ValueError):
             source = None
             reasons.append("SOURCE_NOT_TRUSTED")
-        quality = SourceQualityService().classify(acquired.source_url)
+        entity_domain = source.domains[0] if source and source.source_type == "COMPANY_PRIMARY" else None
+        quality = SourceQualityService().classify(acquired.source_url, entity_domain=entity_domain)
         if quality.quality_tier not in self.allowed_quality_tiers:
             reasons.append("SOURCE_QUALITY_INSUFFICIENT")
 

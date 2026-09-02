@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-08-31",
+  "governance": {
+    "status": "DISCOVERED_NOT_EXTRACTED",
+    "creates_observation": false,
+    "requires_human_review": true,
+    "statement": "Official source locations only. Discovery does not verify a fact, catalyst, expectation change, or investment case."
+  },
+  "companies": {
+    "COROMANDEL": {
+      "entity": "Coromandel International",
+      "sources": [
+        {
+          "source_id": "COROMANDEL-ANNUAL-REPORTS",
+          "source_type": "ANNUAL_REPORT",
+          "url": "https://www.coromandel.biz/investors/annual-reports/",
+          "authority": "ISSUER_OFFICIAL",
+          "status": "EXTRACTED_PENDING_HUMAN_REVIEW"
+        },
+        {
+          "source_id": "COROMANDEL-QUARTERLY-PRESENTATIONS",
+          "source_type": "INVESTOR_PRESENTATION",
+          "url": "https://www.coromandel.biz/investors/corporate-presentation/",
+          "authority": "ISSUER_OFFICIAL",
+          "status": "DISCOVERED_NOT_EXTRACTED"
+        },
+        {
+          "source_id": "COROMANDEL-INVESTOR-HUB",
+          "source_type": "FINANCIAL_RESULTS_AND_TRANSCRIPTS",
+          "url": "https://www.coromandel.biz/investors/",
+          "authority": "ISSUER_OFFICIAL",
+          "status": "DISCOVERED_NOT_EXTRACTED"
+        },
+        {
+          "source_id": "COROMANDEL-EXCHANGE-DISCLOSURES",
+          "source_type": "EXCHANGE_DISCLOSURE",
+          "url": "https://www.coromandel.biz/investors/disclosures/",
+          "authority": "ISSUER_OFFICIAL",
+          "status": "DISCOVERED_NOT_EXTRACTED"
+        }
+      ]
+    },
+    "KPITTECH": {
+      "entity": "KPIT Technologies",
+      "sources": [
+        {
+          "source_id": "KPIT-ANNUAL-REPORT-2025-26",
+          "source_type": "ANNUAL_REPORT",
+          "url": "https://www.kpit.com/annual-report-2025-26/",
+          "authority": "ISSUER_OFFICIAL",
+          "status": "DISCOVERED_NOT_EXTRACTED"
+        },
+        {
+          "source_id": "KPIT-INVESTOR-GOVERNANCE",
+          "source_type": "RESULTS_PRESENTATIONS_AND_DISCLOSURES",
+          "url": "https://www.kpit.com/investor-gov/",
+          "authority": "ISSUER_OFFICIAL",
+          "status": "DISCOVERED_NOT_EXTRACTED"
+        }
+      ]
+    }
+  }
+}

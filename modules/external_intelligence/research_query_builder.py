@@ -75,11 +75,17 @@ class ExternalResearchQueryBuilder:
                 "intent must not be empty"
             )
 
+        source_hint = {
+            "OFFICIAL_DOCUMENT_DISCOVERY": "official investor relations annual report results presentation transcript",
+            "EXCHANGE_DISCLOSURES": "official NSE BSE exchange filing disclosure",
+        }.get(normalized_intent, "")
+
         query = (
             f'"{normalized_company}" '
             f'"{normalized_ticker}" '
-            f'{normalized_question}'
-        )
+            f'{normalized_question} '
+            f'{source_hint}'
+        ).strip()
 
         return ExternalResearchQuery(
             company=normalized_company,

@@ -98,7 +98,7 @@ class TrustedPublicDocumentExtractionAdapter:
             for number, page in enumerate(reader.pages, 1):
                 value = page.extract_text() or ""
                 value = re.sub(r"\s+", " ", value).strip()
-                if value: page_texts.append(value)
+                if value: page_texts.append(f"[[PDF_PAGE_{number}]] {value}")
                 else: blank_pages.append(number)
             text = "\n".join(page_texts).strip()
         except Exception as exc:

@@ -1,0 +1,4260 @@
+{
+  "company": "Coromandel International",
+  "ticker": "COROMANDEL",
+  "schema_version": 1,
+  "periods": [
+    {
+      "period": "FY2017-18",
+      "basis": "STANDALONE",
+      "facts": {
+        "total_assets": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "9,77,047",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 9770.47,
+          "source_passage": "Total assets9,77,047  8,56,298",
+          "column": 1
+        },
+        "total_equity": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "3,17,176",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3171.76,
+          "source_passage": "Total equity3,17,176  2,81,193",
+          "column": 1
+        },
+        "total_liabilities": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "6,59,871",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 6598.71,
+          "source_passage": "Total liabilities6,59,871  5,75,105",
+          "column": 1
+        },
+        "total_equity_liabilities": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "9,77,047",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 9770.47,
+          "source_passage": "Total equity and liabilities9,77,047  8,56,298",
+          "column": 1
+        },
+        "property_plant_equipment": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "1,29,332",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1293.32,
+          "source_passage": "(a) Property, plant and equipment4  1,29,332  1,31,570",
+          "column": 1
+        },
+        "capital_work_in_progress": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "3,596",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 35.96,
+          "source_passage": "(b) Capital work-in-progress4  3,596  1,371",
+          "column": 1
+        },
+        "inventory": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "2,22,713",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2227.13,
+          "source_passage": "(a) Inventories9  2,22,713  1,72,461",
+          "column": 1
+        },
+        "trade_receivables": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "1,52,313",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1523.13,
+          "source_passage": "ii) Trade receivables11  1,52,313  1,61,849",
+          "column": 1
+        },
+        "subsidies_receivable": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "2,62,686",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2626.86,
+          "source_passage": "iii) Government subsidies receivable2,62,686  2,55,703",
+          "column": 1
+        },
+        "cash_equivalents": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "43,897",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 438.97,
+          "source_passage": "iv) Cash and cash equivalents12  43,897  14,240",
+          "column": 1
+        },
+        "other_bank_balances": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "10,890",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 108.9,
+          "source_passage": "v) Bank balances other than cash and cash \n     equivalents13  10,890  2,112",
+          "column": 1
+        },
+        "non_current_assets": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "1,71,744",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1717.44,
+          "source_passage": "1 Non-current assets subtotal: 1,71,744  1,74,588",
+          "column": 1
+        },
+        "current_assets": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "8,05,303",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 8053.03,
+          "source_passage": "2 Current assets subtotal: 8,05,303  6,81,710",
+          "column": 1
+        },
+        "non_current_liabilities": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "15,104",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 151.04,
+          "source_passage": "2 Non-current liabilities subtotal: 15,104  17,414",
+          "column": 1
+        },
+        "current_liabilities": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "6,44,767",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 6447.67,
+          "source_passage": "3 Current liabilities subtotal: 6,44,767  5,57,691",
+          "column": 1
+        },
+        "non_current_liabilities_borrowings": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 144,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "value": 0.0,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": "-",
+          "source_passage": "Long term borrowings  -  - ",
+          "column": 1
+        },
+        "non_current_liabilities_lease_liabilities": null,
+        "non_current_liabilities_provisions": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "1,439",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 14.39,
+          "source_passage": "(b) Provisions20  1,439  1,417",
+          "column": 1
+        },
+        "non_current_liabilities_other_financial_liabilities": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "128",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1.28,
+          "source_passage": "i) Other financial liabilities19  128  123",
+          "column": 1
+        },
+        "non_current_liabilities_other_liabilities": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "975",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 9.75,
+          "source_passage": "(d) Other non-current liabilities22  975  1,023",
+          "column": 1
+        },
+        "current_liabilities_borrowings": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "2,73,081",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2730.81,
+          "source_passage": "i) Borrowings18  2,73,081  2,23,056",
+          "column": 1
+        },
+        "current_liabilities_lease_liabilities": null,
+        "current_liabilities_provisions": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "906",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 9.06,
+          "source_passage": "(b) Provisions20  906  1,474",
+          "column": 1
+        },
+        "current_liabilities_other_financial_liabilities": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "24,330",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 243.3,
+          "source_passage": "iii) Other financial liabilities19  24,330  31,226",
+          "column": 1
+        },
+        "current_liabilities_other_liabilities": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "8,385",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 83.85,
+          "source_passage": "(d) Other current liabilities22  8,385  7,131",
+          "column": 1
+        },
+        "trade_payables_msme": null,
+        "trade_payables_other": null,
+        "trade_payables_total": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 116,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "raw_value": "3,35,870",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3358.7,
+          "source_passage": "ii) Trade payables23  3,35,870  2,93,165",
+          "column": 1
+        },
+        "total_borrowings_ex_leases": {
+          "report_year": "2017-18",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 144,
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ],
+          "value": 2730.81,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": null,
+          "source_passage": "Short term borrowings  2,73,081  2,23,056 \nLong term borrowings  -  - ",
+          "column": 1,
+          "calculation": "Short-term plus long-term borrowings; excludes lease liabilities, trade payables and other liabilities."
+        }
+      },
+      "checks_residual_crore": {
+        "assets_equal_equity_plus_liabilities": 0.0,
+        "asset_subtotals": 0.0,
+        "liability_subtotals": 0.0,
+        "reported_grand_totals": 0.0
+      },
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false,
+      "missing_meaning": "Not separately reported/extracted; an absent borrowing or lease row is not asserted to be zero."
+    },
+    {
+      "period": "FY2018-19",
+      "basis": "STANDALONE",
+      "facts": {
+        "total_assets": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "10,64,738",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 10647.38,
+          "source_passage": "Total assets10,21,776  10,64,738",
+          "column": 2
+        },
+        "total_equity": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "3,43,393",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3433.93,
+          "source_passage": "Total equity4,38,904  3,43,393",
+          "column": 2
+        },
+        "total_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "7,21,345",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 7213.45,
+          "source_passage": "Total liabilities5,82,872  7,21,345",
+          "column": 2
+        },
+        "total_equity_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "10,64,738",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 10647.38,
+          "source_passage": "Total equity and liabilities10,21,776  10,64,738",
+          "column": 2
+        },
+        "property_plant_equipment": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "1,30,058",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1300.58,
+          "source_passage": "(a) Property, plant and equipment3  1,61,324  1,30,058",
+          "column": 2
+        },
+        "capital_work_in_progress": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "17,569",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 175.69,
+          "source_passage": "(b) Capital work-in-progress3  4,919  17,569",
+          "column": 2
+        },
+        "inventory": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "3,23,423",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3234.23,
+          "source_passage": "(a) Inventories9  2,69,193  3,23,423",
+          "column": 2
+        },
+        "trade_receivables": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "1,82,870",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1828.7,
+          "source_passage": "ii) Trade receivables11  1,72,435  1,82,870",
+          "column": 2
+        },
+        "subsidies_receivable": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "2,39,348",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2393.48,
+          "source_passage": "iii) Government subsidies receivable2,31,622  2,39,348",
+          "column": 2
+        },
+        "cash_equivalents": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "11,093",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 110.93,
+          "source_passage": "iv) Cash and cash equivalents12  3,236  11,093",
+          "column": 2
+        },
+        "other_bank_balances": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "2,719",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 27.19,
+          "source_passage": "v) Bank balances other than cash and cash equivalents13  2,776  2,719",
+          "column": 2
+        },
+        "non_current_assets": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "1,92,936",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1929.36,
+          "source_passage": "1 Non-current assets subtotal: 2,46,781  1,92,936",
+          "column": 2
+        },
+        "current_assets": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "8,71,802",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 8718.02,
+          "source_passage": "2 Current assets subtotal: 7,74,995  8,71,802",
+          "column": 2
+        },
+        "non_current_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "13,532",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 135.32,
+          "source_passage": "2 Non-current liabilities subtotal: 46,301  13,532",
+          "column": 2
+        },
+        "current_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "7,07,813",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 7078.13,
+          "source_passage": "3 Current liabilities subtotal: 5,36,571  7,07,813",
+          "column": 2
+        },
+        "non_current_liabilities_borrowings": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 90,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "value": 0.0,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": "-",
+          "source_passage": "Long term borrowings  -  - ",
+          "column": 2
+        },
+        "non_current_liabilities_lease_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "-",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 0.0,
+          "source_passage": "i) Lease liabilities4  37,542  -",
+          "column": 2
+        },
+        "non_current_liabilities_provisions": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "1,397",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 13.97,
+          "source_passage": "(b) Provisions20  2,108  1,397",
+          "column": 2
+        },
+        "non_current_liabilities_other_financial_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "168",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1.68,
+          "source_passage": "ii) Other financial liabilities19  146  168",
+          "column": 2
+        },
+        "non_current_liabilities_other_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "908",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 9.08,
+          "source_passage": "(d) Other non-current liabilities22  876  908",
+          "column": 2
+        },
+        "current_liabilities_borrowings": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "2,95,694",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2956.94,
+          "source_passage": "i) Borrowings18  1,62,760  2,95,694",
+          "column": 2
+        },
+        "current_liabilities_lease_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "-",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 0.0,
+          "source_passage": "ii) Lease liabilities4  1,855  -",
+          "column": 2
+        },
+        "current_liabilities_provisions": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "1,810",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 18.1,
+          "source_passage": "(b) Provisions20  1,460  1,810",
+          "column": 2
+        },
+        "current_liabilities_other_financial_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "23,676",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 236.76,
+          "source_passage": "iv) Other financial liabilities19  23,779  23,676",
+          "column": 2
+        },
+        "current_liabilities_other_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "6,534",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 65.34,
+          "source_passage": "(d) Other current liabilities22  7,714  6,534",
+          "column": 2
+        },
+        "trade_payables_msme": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "1,261",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 12.61,
+          "source_passage": "Total outstanding dues of micro enterprises and small enterprises943  1,261",
+          "column": 2
+        },
+        "trade_payables_other": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "3,75,006",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3750.06,
+          "source_passage": "Total outstanding dues of creditors other than micro enterprises and  small enterprises 3,33,774  3,75,006",
+          "column": 2
+        },
+        "trade_payables_total": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": null,
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3762.67,
+          "source_passage": "Calculated: MSME payables plus other trade payables",
+          "column": 2,
+          "calculation": "trade_payables_msme + trade_payables_other"
+        },
+        "total_borrowings_ex_leases": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 90,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "value": 2956.94,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": null,
+          "source_passage": "Short term borrowings  1,62,760  2,95,694 \nLong term borrowings  -  - ",
+          "column": 2,
+          "calculation": "Short-term plus long-term borrowings; excludes lease liabilities, trade payables and other liabilities."
+        }
+      },
+      "checks_residual_crore": {
+        "assets_equal_equity_plus_liabilities": 0.0,
+        "asset_subtotals": 0.0,
+        "liability_subtotals": 0.0,
+        "reported_grand_totals": 0.0
+      },
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false,
+      "missing_meaning": "Not separately reported/extracted; an absent borrowing or lease row is not asserted to be zero."
+    },
+    {
+      "period": "FY2019-20",
+      "basis": "STANDALONE",
+      "facts": {
+        "total_assets": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "10,21,776",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 10217.76,
+          "source_passage": "Total assets10,21,776  10,64,738",
+          "column": 1
+        },
+        "total_equity": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "4,38,904",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 4389.04,
+          "source_passage": "Total equity4,38,904  3,43,393",
+          "column": 1
+        },
+        "total_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "5,82,872",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 5828.72,
+          "source_passage": "Total liabilities5,82,872  7,21,345",
+          "column": 1
+        },
+        "total_equity_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "10,21,776",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 10217.76,
+          "source_passage": "Total equity and liabilities10,21,776  10,64,738",
+          "column": 1
+        },
+        "property_plant_equipment": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "1,61,324",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1613.24,
+          "source_passage": "(a) Property, plant and equipment3  1,61,324  1,30,058",
+          "column": 1
+        },
+        "capital_work_in_progress": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "4,919",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 49.19,
+          "source_passage": "(b) Capital work-in-progress3  4,919  17,569",
+          "column": 1
+        },
+        "inventory": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "2,69,193",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2691.93,
+          "source_passage": "(a) Inventories9  2,69,193  3,23,423",
+          "column": 1
+        },
+        "trade_receivables": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "1,72,435",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1724.35,
+          "source_passage": "ii) Trade receivables11  1,72,435  1,82,870",
+          "column": 1
+        },
+        "subsidies_receivable": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "2,31,622",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2316.22,
+          "source_passage": "iii) Government subsidies receivable2,31,622  2,39,348",
+          "column": 1
+        },
+        "cash_equivalents": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "3,236",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 32.36,
+          "source_passage": "iv) Cash and cash equivalents12  3,236  11,093",
+          "column": 1
+        },
+        "other_bank_balances": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "2,776",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 27.76,
+          "source_passage": "v) Bank balances other than cash and cash equivalents13  2,776  2,719",
+          "column": 1
+        },
+        "non_current_assets": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "2,46,781",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2467.81,
+          "source_passage": "1 Non-current assets subtotal: 2,46,781  1,92,936",
+          "column": 1
+        },
+        "current_assets": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "7,74,995",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 7749.95,
+          "source_passage": "2 Current assets subtotal: 7,74,995  8,71,802",
+          "column": 1
+        },
+        "non_current_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "46,301",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 463.01,
+          "source_passage": "2 Non-current liabilities subtotal: 46,301  13,532",
+          "column": 1
+        },
+        "current_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "5,36,571",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 5365.71,
+          "source_passage": "3 Current liabilities subtotal: 5,36,571  7,07,813",
+          "column": 1
+        },
+        "non_current_liabilities_borrowings": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 90,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "value": 0.0,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": "-",
+          "source_passage": "Long term borrowings  -  - ",
+          "column": 1
+        },
+        "non_current_liabilities_lease_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "37,542",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 375.42,
+          "source_passage": "i) Lease liabilities4  37,542  -",
+          "column": 1
+        },
+        "non_current_liabilities_provisions": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "2,108",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 21.08,
+          "source_passage": "(b) Provisions20  2,108  1,397",
+          "column": 1
+        },
+        "non_current_liabilities_other_financial_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "146",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1.46,
+          "source_passage": "ii) Other financial liabilities19  146  168",
+          "column": 1
+        },
+        "non_current_liabilities_other_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "876",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 8.76,
+          "source_passage": "(d) Other non-current liabilities22  876  908",
+          "column": 1
+        },
+        "current_liabilities_borrowings": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "1,62,760",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1627.6,
+          "source_passage": "i) Borrowings18  1,62,760  2,95,694",
+          "column": 1
+        },
+        "current_liabilities_lease_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "1,855",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 18.55,
+          "source_passage": "ii) Lease liabilities4  1,855  -",
+          "column": 1
+        },
+        "current_liabilities_provisions": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "1,460",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 14.6,
+          "source_passage": "(b) Provisions20  1,460  1,810",
+          "column": 1
+        },
+        "current_liabilities_other_financial_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "23,779",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 237.79,
+          "source_passage": "iv) Other financial liabilities19  23,779  23,676",
+          "column": 1
+        },
+        "current_liabilities_other_liabilities": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "7,714",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 77.14,
+          "source_passage": "(d) Other current liabilities22  7,714  6,534",
+          "column": 1
+        },
+        "trade_payables_msme": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "943",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 9.43,
+          "source_passage": "Total outstanding dues of micro enterprises and small enterprises943  1,261",
+          "column": 1
+        },
+        "trade_payables_other": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": "3,33,774",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3337.74,
+          "source_passage": "Total outstanding dues of creditors other than micro enterprises and  small enterprises 3,33,774  3,75,006",
+          "column": 1
+        },
+        "trade_payables_total": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 76,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "raw_value": null,
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3347.17,
+          "source_passage": "Calculated: MSME payables plus other trade payables",
+          "column": 1,
+          "calculation": "trade_payables_msme + trade_payables_other"
+        },
+        "total_borrowings_ex_leases": {
+          "report_year": "2019-20",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 90,
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ],
+          "value": 1627.6,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": null,
+          "source_passage": "Short term borrowings  1,62,760  2,95,694 \nLong term borrowings  -  - ",
+          "column": 1,
+          "calculation": "Short-term plus long-term borrowings; excludes lease liabilities, trade payables and other liabilities."
+        }
+      },
+      "checks_residual_crore": {
+        "assets_equal_equity_plus_liabilities": 0.0,
+        "asset_subtotals": 0.0,
+        "liability_subtotals": 0.0,
+        "reported_grand_totals": 0.0
+      },
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false,
+      "missing_meaning": "Not separately reported/extracted; an absent borrowing or lease row is not asserted to be zero."
+    },
+    {
+      "period": "FY2020-21",
+      "basis": "STANDALONE",
+      "facts": {
+        "total_assets": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "8,94,201",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 8942.01,
+          "source_passage": "Total assets8,94,201  10,21,776",
+          "column": 1
+        },
+        "total_equity": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "5,20,031",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 5200.31,
+          "source_passage": "Total equity5,20,031  4,38,904",
+          "column": 1
+        },
+        "total_liabilities": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "3,74,170",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3741.7,
+          "source_passage": "Total liabilities3,74,170  5,82,872",
+          "column": 1
+        },
+        "total_equity_liabilities": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "8,94,201",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 8942.01,
+          "source_passage": "Total equity and liabilities8,94,201  10,21,776",
+          "column": 1
+        },
+        "property_plant_equipment": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "1,61,111",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1611.11,
+          "source_passage": "(a) Property, plant and equipment3  1,61,111  1,61,324",
+          "column": 1
+        },
+        "capital_work_in_progress": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "7,570",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 75.7,
+          "source_passage": "(c) Capital work-in-progress3  7,570  4,919",
+          "column": 1
+        },
+        "inventory": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "2,58,722",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2587.22,
+          "source_passage": "(a)  Inventories9  2,58,722  2,69,193",
+          "column": 1
+        },
+        "trade_receivables": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "56,231",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 562.31,
+          "source_passage": "ii) Trade receivables11  56,231  1,72,435",
+          "column": 1
+        },
+        "subsidies_receivable": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "58,966",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 589.66,
+          "source_passage": "iii) Government subsidies receivable58,966  2,31,622",
+          "column": 1
+        },
+        "cash_equivalents": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "63,982",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 639.82,
+          "source_passage": "iv) Cash and cash equivalents12  63,982  3,236",
+          "column": 1
+        },
+        "other_bank_balances": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "2,999",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 29.99,
+          "source_passage": "v) Bank balances other than cash and cash equivalents13  2,999  2,776",
+          "column": 1
+        },
+        "non_current_assets": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "2,49,795",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2497.95,
+          "source_passage": "1 Non-current assets subtotal: 2,49,795  2,46,781",
+          "column": 1
+        },
+        "current_assets": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "6,44,406",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 6444.06,
+          "source_passage": "2 Current assets subtotal: 6,44,406  7,74,995",
+          "column": 1
+        },
+        "non_current_liabilities": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "44,182",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 441.82,
+          "source_passage": "2 Non-current liabilities subtotal: 44,182  46,301",
+          "column": 1
+        },
+        "current_liabilities": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "3,29,988",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3299.88,
+          "source_passage": "3 Current liabilities subtotal: 3,29,988  5,36,571",
+          "column": 1
+        },
+        "non_current_liabilities_borrowings": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 87,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "value": 0.0,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": "-",
+          "source_passage": "Long term borrowings  -    -   ",
+          "column": 1
+        },
+        "non_current_liabilities_lease_liabilities": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "36,191",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 361.91,
+          "source_passage": "i) Lease liabilities4  36,191  37,542",
+          "column": 1
+        },
+        "non_current_liabilities_provisions": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "1,372",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 13.72,
+          "source_passage": "(b) Provisions20  1,372  2,108",
+          "column": 1
+        },
+        "non_current_liabilities_other_financial_liabilities": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "176",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1.76,
+          "source_passage": "ii) Other financial liabilities19  176  146",
+          "column": 1
+        },
+        "non_current_liabilities_other_liabilities": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "827",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 8.27,
+          "source_passage": "(d) Other non-current liabilities22  827  876",
+          "column": 1
+        },
+        "current_liabilities_borrowings": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "293",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2.93,
+          "source_passage": "i) Borrowings18  293  162,760",
+          "column": 1
+        },
+        "current_liabilities_lease_liabilities": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "2,143",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 21.43,
+          "source_passage": "ii) Lease liabilities4  2,143  1,855",
+          "column": 1
+        },
+        "current_liabilities_provisions": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "2,155",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 21.55,
+          "source_passage": "(b) Provisions20  2,155  1,460",
+          "column": 1
+        },
+        "current_liabilities_other_financial_liabilities": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "22,094",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 220.94,
+          "source_passage": "iv) Other financial liabilities19  22,094  23,779",
+          "column": 1
+        },
+        "current_liabilities_other_liabilities": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "7,044",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 70.44,
+          "source_passage": "(d) Other current liabilities22  7,044  7,714",
+          "column": 1
+        },
+        "trade_payables_msme": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "936",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 9.36,
+          "source_passage": "Total outstanding dues of micro enterprises and small enterprises936  943",
+          "column": 1
+        },
+        "trade_payables_other": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": "2,91,721",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2917.21,
+          "source_passage": "Total outstanding dues of creditors other than micro enterprises and  small enterprises 2,91,721  3,33,774",
+          "column": 1
+        },
+        "trade_payables_total": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 73,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "raw_value": null,
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2926.57,
+          "source_passage": "Calculated: MSME payables plus other trade payables",
+          "column": 1,
+          "calculation": "trade_payables_msme + trade_payables_other"
+        },
+        "total_borrowings_ex_leases": {
+          "report_year": "2020-21",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 87,
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ],
+          "value": 2.93,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": null,
+          "source_passage": "Short term borrowings  293  162,760 \nLong term borrowings  -    -   ",
+          "column": 1,
+          "calculation": "Short-term plus long-term borrowings; excludes lease liabilities, trade payables and other liabilities."
+        }
+      },
+      "checks_residual_crore": {
+        "assets_equal_equity_plus_liabilities": 0.0,
+        "asset_subtotals": 0.0,
+        "liability_subtotals": 0.0,
+        "reported_grand_totals": 0.0
+      },
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false,
+      "missing_meaning": "Not separately reported/extracted; an absent borrowing or lease row is not asserted to be zero."
+    },
+    {
+      "period": "FY2021-22",
+      "basis": "STANDALONE",
+      "facts": {
+        "total_assets": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "11,21,304",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 11213.04,
+          "source_passage": "Total assets11,21,304 8,94,813",
+          "column": 1
+        },
+        "total_equity": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "6,29,801",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 6298.01,
+          "source_passage": "Total equity6,29,801 5,21,260",
+          "column": 1
+        },
+        "total_liabilities": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "4,91,503",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 4915.03,
+          "source_passage": "Total liabilities4,91,503 3,73,553",
+          "column": 1
+        },
+        "total_equity_liabilities": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "11,21,304",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 11213.04,
+          "source_passage": "Total equity and liabilities11,21,304 8,94,813",
+          "column": 1
+        },
+        "property_plant_equipment": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "1,70,103",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1701.03,
+          "source_passage": "(a)   Property, plant and equipment3 1,70,103 1,61,579",
+          "column": 1
+        },
+        "capital_work_in_progress": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "11,982",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 119.82,
+          "source_passage": "(b)   Capital work-in-progress3 11,982 7,568",
+          "column": 1
+        },
+        "inventory": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "3,65,531",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3655.31,
+          "source_passage": "(a)   Inventories9 3,65,531                2,59,331",
+          "column": 1
+        },
+        "trade_receivables": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "24,249",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 242.49,
+          "source_passage": "ii) Trade receivables11 24,249 55,907",
+          "column": 1
+        },
+        "subsidies_receivable": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "29,414",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 294.14,
+          "source_passage": "iii) Government subsidies receivable29,414 58,966",
+          "column": 1
+        },
+        "cash_equivalents": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "65,765",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 657.65,
+          "source_passage": "iv) Cash and cash equivalents12 65,765 65,393",
+          "column": 1
+        },
+        "other_bank_balances": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "1,04,727",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1047.27,
+          "source_passage": "v) Bank balances other than cash and cash equivalents13 1,04,727 2,999",
+          "column": 1
+        },
+        "non_current_assets": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "2,95,425",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2954.25,
+          "source_passage": "1 Non-current assets subtotal: 2,95,425 2,48,452",
+          "column": 1
+        },
+        "current_assets": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "8,25,879",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 8258.79,
+          "source_passage": "2 Current assets subtotal: 8,25,879 6,46,361",
+          "column": 1
+        },
+        "non_current_liabilities": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "45,868",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 458.68,
+          "source_passage": "2 Non-current liabilities subtotal: 45,868                   44,153",
+          "column": 1
+        },
+        "current_liabilities": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "4,45,635",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 4456.35,
+          "source_passage": "3 Current liabilities subtotal: 4,45,635                3,29,400",
+          "column": 1
+        },
+        "non_current_liabilities_borrowings": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 138,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "value": 0.0,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": "-",
+          "source_passage": "Long term borrowings - -",
+          "column": 1
+        },
+        "non_current_liabilities_lease_liabilities": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "37,089",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 370.89,
+          "source_passage": "i) Lease liabilities4 37,089 36,191",
+          "column": 1
+        },
+        "non_current_liabilities_provisions": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "1,428",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 14.28,
+          "source_passage": "(b)   Provisions20 1,428 1,372",
+          "column": 1
+        },
+        "non_current_liabilities_other_financial_liabilities": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "195",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1.95,
+          "source_passage": "ii) Other financial liabilities19 195 176",
+          "column": 1
+        },
+        "non_current_liabilities_other_liabilities": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "779",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 7.79,
+          "source_passage": "(d)   Other non-current liabilities22 779 827",
+          "column": 1
+        },
+        "current_liabilities_borrowings": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "4",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 0.04,
+          "source_passage": "i) Borrowings18 4 121",
+          "column": 1
+        },
+        "current_liabilities_lease_liabilities": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "2,403",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 24.03,
+          "source_passage": "ii) Lease liabilities4 2,403 2,143",
+          "column": 1
+        },
+        "current_liabilities_provisions": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "1,898",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 18.98,
+          "source_passage": "(b)   Provisions20 1,898 2,160",
+          "column": 1
+        },
+        "current_liabilities_other_financial_liabilities": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "24,137",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 241.37,
+          "source_passage": "iv) Other financial liabilities19 24,137 22,094",
+          "column": 1
+        },
+        "current_liabilities_other_liabilities": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "18,382",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 183.82,
+          "source_passage": "(d)   Other current liabilities22 18,382 7,133",
+          "column": 1
+        },
+        "trade_payables_msme": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "2,996",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 29.96,
+          "source_passage": "Total outstanding dues of micro enterprises and small enterprises2,996 936",
+          "column": 1
+        },
+        "trade_payables_other": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": "3,88,322",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3883.22,
+          "source_passage": "Total outstanding dues of creditors other than micro enterprises and small enterprises 3,88,322 2,91,227",
+          "column": 1
+        },
+        "trade_payables_total": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 118,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "raw_value": null,
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3913.18,
+          "source_passage": "Calculated: MSME payables plus other trade payables",
+          "column": 1,
+          "calculation": "trade_payables_msme + trade_payables_other"
+        },
+        "total_borrowings_ex_leases": {
+          "report_year": "2021-22",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "pdf_page": 138,
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ],
+          "value": 0.04,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": null,
+          "source_passage": "Short term borrowings 4 121 \nLong term borrowings - -",
+          "column": 1,
+          "calculation": "Short-term plus long-term borrowings; excludes lease liabilities, trade payables and other liabilities."
+        }
+      },
+      "checks_residual_crore": {
+        "assets_equal_equity_plus_liabilities": 0.0,
+        "asset_subtotals": 0.0,
+        "liability_subtotals": 0.0,
+        "reported_grand_totals": 0.0
+      },
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false,
+      "missing_meaning": "Not separately reported/extracted; an absent borrowing or lease row is not asserted to be zero."
+    },
+    {
+      "period": "FY2022-23",
+      "basis": "STANDALONE",
+      "facts": {
+        "total_assets": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "14,19,147",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 14191.47,
+          "source_passage": "Total assets15,68,177  14,19,147",
+          "column": 2
+        },
+        "total_equity": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "7,86,796",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 7867.96,
+          "source_passage": "Total equity9,40,323  7,86,796",
+          "column": 2
+        },
+        "total_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "6,32,351",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 6323.51,
+          "source_passage": "Total liabilities6,27,854  6,32,351",
+          "column": 2
+        },
+        "total_equity_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "14,19,147",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 14191.47,
+          "source_passage": "Total equity and liabilities15,68,177  14,19,147",
+          "column": 2
+        },
+        "property_plant_equipment": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "1,82,779",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1827.79,
+          "source_passage": "(a) Property, plant and equipment3  2,37,507  1,82,779",
+          "column": 2
+        },
+        "capital_work_in_progress": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "37,500",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 375.0,
+          "source_passage": "(b) Capital work-in-progress3  20,308  37,500",
+          "column": 2
+        },
+        "inventory": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "4,41,251",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 4412.51,
+          "source_passage": "(a) Inventories9  4,57,434  4,41,251",
+          "column": 2
+        },
+        "trade_receivables": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "59,120",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 591.2,
+          "source_passage": "ii) Trade receivables11  1,40,455  59,120",
+          "column": 2
+        },
+        "subsidies_receivable": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "2,37,791",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2377.91,
+          "source_passage": "iii) Government subsidies receivable1,37,715  2,37,791",
+          "column": 2
+        },
+        "cash_equivalents": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "1,33,138",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1331.38,
+          "source_passage": "iv) Cash and cash equivalents12  1,05,979  1,33,138",
+          "column": 2
+        },
+        "other_bank_balances": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "2,400",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 24.0,
+          "source_passage": "v) Bank balances other than cash and cash equivalents13  1,69,215  2,400",
+          "column": 2
+        },
+        "non_current_assets": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "3,85,619",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3856.19,
+          "source_passage": "1 Non-current assets subtotal: 3,56,931  3,85,619",
+          "column": 2
+        },
+        "current_assets": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "10,33,528",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 10335.28,
+          "source_passage": "2 Current assets subtotal: 12,11,246  10,33,528",
+          "column": 2
+        },
+        "non_current_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "46,818",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 468.18,
+          "source_passage": "2 Non-current liabilities subtotal: 52,121  46,818",
+          "column": 2
+        },
+        "current_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "5,85,533",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 5855.33,
+          "source_passage": "3 Current liabilities subtotal: 5,75,733  5,85,533",
+          "column": 2
+        },
+        "non_current_liabilities_borrowings": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 155,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "value": 0.0,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": "Nil (explicit narrative disclosure)",
+          "source_passage": "i) There are no outstanding long-term borrowings as at 31 March 2024 and as at 31st March 2023.",
+          "column": 2
+        },
+        "non_current_liabilities_lease_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "36,308",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 363.08,
+          "source_passage": "i) Lease liabilities4  40,821  36,308",
+          "column": 2
+        },
+        "non_current_liabilities_provisions": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "1,953",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 19.53,
+          "source_passage": "(b) Provisions20  2,218  1,953",
+          "column": 2
+        },
+        "non_current_liabilities_other_financial_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "2,113",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 21.13,
+          "source_passage": "ii) Other financial liabilities19  1,878  2,113",
+          "column": 2
+        },
+        "non_current_liabilities_other_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "755",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 7.55,
+          "source_passage": "(d) Other non-current liabilities22  681  755",
+          "column": 2
+        },
+        "current_liabilities_borrowings": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "450",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 4.5,
+          "source_passage": "i) Borrowings18  29  450",
+          "column": 2
+        },
+        "current_liabilities_lease_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "2,490",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 24.9,
+          "source_passage": "ii) Lease liabilities4  2,932  2,490",
+          "column": 2
+        },
+        "current_liabilities_provisions": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "2,298",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 22.98,
+          "source_passage": "(b) Provisions20  2,401  2,298",
+          "column": 2
+        },
+        "current_liabilities_other_financial_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "28,264",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 282.64,
+          "source_passage": "iv) Other financial liabilities19  25,944  28,264",
+          "column": 2
+        },
+        "current_liabilities_other_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "14,720",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 147.2,
+          "source_passage": "(d) Other current liabilities22  9,737  14,720",
+          "column": 2
+        },
+        "trade_payables_msme": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "1,851",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 18.51,
+          "source_passage": "Total outstanding dues of micro enterprises and small enterprises2,903  1,851",
+          "column": 2
+        },
+        "trade_payables_other": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "5,29,745",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 5297.45,
+          "source_passage": "Total outstanding dues of creditors other than micro enterprises and  small enterprises 5,31,787  5,29,745",
+          "column": 2
+        },
+        "trade_payables_total": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": null,
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 5315.96,
+          "source_passage": "Calculated: MSME payables plus other trade payables",
+          "column": 2,
+          "calculation": "trade_payables_msme + trade_payables_other"
+        },
+        "total_borrowings_ex_leases": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 155,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "value": 4.5,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": null,
+          "source_passage": "Short term borrowings  29  450 \ni) There are no outstanding long-term borrowings as at 31 March 2024 and as at 31st March 2023.",
+          "column": 2,
+          "calculation": "Short-term plus long-term borrowings; excludes lease liabilities, trade payables and other liabilities."
+        }
+      },
+      "checks_residual_crore": {
+        "assets_equal_equity_plus_liabilities": 0.0,
+        "asset_subtotals": 0.0,
+        "liability_subtotals": 0.0,
+        "reported_grand_totals": 0.0
+      },
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false,
+      "missing_meaning": "Not separately reported/extracted; an absent borrowing or lease row is not asserted to be zero."
+    },
+    {
+      "period": "FY2023-24",
+      "basis": "STANDALONE",
+      "facts": {
+        "total_assets": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "15,68,177",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 15681.77,
+          "source_passage": "Total assets15,68,177  14,19,147",
+          "column": 1
+        },
+        "total_equity": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "9,40,323",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 9403.23,
+          "source_passage": "Total equity9,40,323  7,86,796",
+          "column": 1
+        },
+        "total_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "6,27,854",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 6278.54,
+          "source_passage": "Total liabilities6,27,854  6,32,351",
+          "column": 1
+        },
+        "total_equity_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "15,68,177",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 15681.77,
+          "source_passage": "Total equity and liabilities15,68,177  14,19,147",
+          "column": 1
+        },
+        "property_plant_equipment": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "2,37,507",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2375.07,
+          "source_passage": "(a) Property, plant and equipment3  2,37,507  1,82,779",
+          "column": 1
+        },
+        "capital_work_in_progress": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "20,308",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 203.08,
+          "source_passage": "(b) Capital work-in-progress3  20,308  37,500",
+          "column": 1
+        },
+        "inventory": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "4,57,434",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 4574.34,
+          "source_passage": "(a) Inventories9  4,57,434  4,41,251",
+          "column": 1
+        },
+        "trade_receivables": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "1,40,455",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1404.55,
+          "source_passage": "ii) Trade receivables11  1,40,455  59,120",
+          "column": 1
+        },
+        "subsidies_receivable": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "1,37,715",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1377.15,
+          "source_passage": "iii) Government subsidies receivable1,37,715  2,37,791",
+          "column": 1
+        },
+        "cash_equivalents": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "1,05,979",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1059.79,
+          "source_passage": "iv) Cash and cash equivalents12  1,05,979  1,33,138",
+          "column": 1
+        },
+        "other_bank_balances": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "1,69,215",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1692.15,
+          "source_passage": "v) Bank balances other than cash and cash equivalents13  1,69,215  2,400",
+          "column": 1
+        },
+        "non_current_assets": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "3,56,931",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3569.31,
+          "source_passage": "1 Non-current assets subtotal: 3,56,931  3,85,619",
+          "column": 1
+        },
+        "current_assets": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "12,11,246",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 12112.46,
+          "source_passage": "2 Current assets subtotal: 12,11,246  10,33,528",
+          "column": 1
+        },
+        "non_current_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "52,121",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 521.21,
+          "source_passage": "2 Non-current liabilities subtotal: 52,121  46,818",
+          "column": 1
+        },
+        "current_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "5,75,733",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 5757.33,
+          "source_passage": "3 Current liabilities subtotal: 5,75,733  5,85,533",
+          "column": 1
+        },
+        "non_current_liabilities_borrowings": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 155,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "value": 0.0,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": "Nil (explicit narrative disclosure)",
+          "source_passage": "i) There are no outstanding long-term borrowings as at 31 March 2024 and as at 31st March 2023.",
+          "column": 1
+        },
+        "non_current_liabilities_lease_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "40,821",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 408.21,
+          "source_passage": "i) Lease liabilities4  40,821  36,308",
+          "column": 1
+        },
+        "non_current_liabilities_provisions": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "2,218",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 22.18,
+          "source_passage": "(b) Provisions20  2,218  1,953",
+          "column": 1
+        },
+        "non_current_liabilities_other_financial_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "1,878",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 18.78,
+          "source_passage": "ii) Other financial liabilities19  1,878  2,113",
+          "column": 1
+        },
+        "non_current_liabilities_other_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "681",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 6.81,
+          "source_passage": "(d) Other non-current liabilities22  681  755",
+          "column": 1
+        },
+        "current_liabilities_borrowings": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "29",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 0.29,
+          "source_passage": "i) Borrowings18  29  450",
+          "column": 1
+        },
+        "current_liabilities_lease_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "2,932",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 29.32,
+          "source_passage": "ii) Lease liabilities4  2,932  2,490",
+          "column": 1
+        },
+        "current_liabilities_provisions": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "2,401",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 24.01,
+          "source_passage": "(b) Provisions20  2,401  2,298",
+          "column": 1
+        },
+        "current_liabilities_other_financial_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "25,944",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 259.44,
+          "source_passage": "iv) Other financial liabilities19  25,944  28,264",
+          "column": 1
+        },
+        "current_liabilities_other_liabilities": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "9,737",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 97.37,
+          "source_passage": "(d) Other current liabilities22  9,737  14,720",
+          "column": 1
+        },
+        "trade_payables_msme": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "2,903",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 29.03,
+          "source_passage": "Total outstanding dues of micro enterprises and small enterprises2,903  1,851",
+          "column": 1
+        },
+        "trade_payables_other": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": "5,31,787",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 5317.87,
+          "source_passage": "Total outstanding dues of creditors other than micro enterprises and  small enterprises 5,31,787  5,29,745",
+          "column": 1
+        },
+        "trade_payables_total": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 136,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "raw_value": null,
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 5346.9,
+          "source_passage": "Calculated: MSME payables plus other trade payables",
+          "column": 1,
+          "calculation": "trade_payables_msme + trade_payables_other"
+        },
+        "total_borrowings_ex_leases": {
+          "report_year": "2023-24",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 155,
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ],
+          "value": 0.29,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": null,
+          "source_passage": "Short term borrowings  29  450 \ni) There are no outstanding long-term borrowings as at 31 March 2024 and as at 31st March 2023.",
+          "column": 1,
+          "calculation": "Short-term plus long-term borrowings; excludes lease liabilities, trade payables and other liabilities."
+        }
+      },
+      "checks_residual_crore": {
+        "assets_equal_equity_plus_liabilities": 0.0,
+        "asset_subtotals": 0.0,
+        "liability_subtotals": 0.0,
+        "reported_grand_totals": 0.0
+      },
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false,
+      "missing_meaning": "Not separately reported/extracted; an absent borrowing or lease row is not asserted to be zero."
+    },
+    {
+      "period": "FY2024-25",
+      "basis": "STANDALONE",
+      "facts": {
+        "total_assets": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "18,23,571",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 18235.71,
+          "source_passage": "Total assets18,23,571  15,68,177",
+          "column": 1
+        },
+        "total_equity": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "10,99,936",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 10999.36,
+          "source_passage": "Total equity10,99,936  9,40,323",
+          "column": 1
+        },
+        "total_liabilities": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "7,23,635",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 7236.35,
+          "source_passage": "Total liabilities7,23,635  6,27,854",
+          "column": 1
+        },
+        "total_equity_liabilities": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "18,23,571",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 18235.71,
+          "source_passage": "Total equity and liabilities18,23,571  15,68,177",
+          "column": 1
+        },
+        "property_plant_equipment": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "2,58,198",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 2581.98,
+          "source_passage": "(a) Property, plant and equipment3  2,58,198  2,37,507",
+          "column": 1
+        },
+        "capital_work_in_progress": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "35,088",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 350.88,
+          "source_passage": "(b) Capital work-in-progress3  35,088  20,308",
+          "column": 1
+        },
+        "inventory": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "4,68,418",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 4684.18,
+          "source_passage": "(a) Inventories9  4,68,418  4,57,434",
+          "column": 1
+        },
+        "trade_receivables": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "1,22,171",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1221.71,
+          "source_passage": "ii) Trade receivables11  1,22,171  1,40,455",
+          "column": 1
+        },
+        "subsidies_receivable": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "1,65,364",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 1653.64,
+          "source_passage": "iii) Government subsidies receivable1,65,364  1,37,715",
+          "column": 1
+        },
+        "cash_equivalents": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "19,771",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 197.71,
+          "source_passage": "iv) Cash and cash equivalents12  19,771  1,06,162",
+          "column": 1
+        },
+        "other_bank_balances": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "3,28,251",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3282.51,
+          "source_passage": "v) Bank balances other than cash and cash equivalents13  3,28,251  1,80,301",
+          "column": 1
+        },
+        "non_current_assets": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "5,22,491",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 5224.91,
+          "source_passage": "1 Non-current assets subtotal: 5,22,491  3,56,931",
+          "column": 1
+        },
+        "current_assets": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "13,01,080",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 13010.8,
+          "source_passage": "2 Current assets subtotal: 13,01,080  12,11,246",
+          "column": 1
+        },
+        "non_current_liabilities": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "60,666",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 606.66,
+          "source_passage": "2 Non-current liabilities subtotal: 60,666  52,121",
+          "column": 1
+        },
+        "current_liabilities": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "6,62,969",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 6629.69,
+          "source_passage": "3 Current liabilities subtotal: 6,62,969  5,75,733",
+          "column": 1
+        },
+        "non_current_liabilities_borrowings": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 156,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "value": 0.0,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": "Nil (explicit narrative disclosure)",
+          "source_passage": "i)  There are no outstanding long-term borrowings as at 31 March 2025 and as at 31 March 2024. ",
+          "column": 1
+        },
+        "non_current_liabilities_lease_liabilities": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "51,124",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 511.24,
+          "source_passage": "i) Lease liabilities5  51,124  40,821",
+          "column": 1
+        },
+        "non_current_liabilities_provisions": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "394",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 3.94,
+          "source_passage": "(b) Provisions20  394  2,218",
+          "column": 1
+        },
+        "non_current_liabilities_other_financial_liabilities": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "1,836",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 18.36,
+          "source_passage": "ii) Other financial liabilities19  1,836  1,878",
+          "column": 1
+        },
+        "non_current_liabilities_other_liabilities": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "633",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 6.33,
+          "source_passage": "(d) Other non-current liabilities22  633  681",
+          "column": 1
+        },
+        "current_liabilities_borrowings": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "18",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 0.18,
+          "source_passage": "i) Borrowings18  18  29",
+          "column": 1
+        },
+        "current_liabilities_lease_liabilities": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "3,387",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 33.87,
+          "source_passage": "ii) Lease liabilities5  3,387  2,932",
+          "column": 1
+        },
+        "current_liabilities_provisions": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "5,793",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 57.93,
+          "source_passage": "(b) Provisions20  5,793  2,401",
+          "column": 1
+        },
+        "current_liabilities_other_financial_liabilities": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "40,683",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 406.83,
+          "source_passage": "iv) Other financial liabilities19  40,683  32,621",
+          "column": 1
+        },
+        "current_liabilities_other_liabilities": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "14,580",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 145.8,
+          "source_passage": "(c) Other current liabilities22  14,580  9,737",
+          "column": 1
+        },
+        "trade_payables_msme": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "3,330",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 33.3,
+          "source_passage": "Total outstanding dues of micro enterprises and small enterprises3,330  2,903",
+          "column": 1
+        },
+        "trade_payables_other": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": "5,95,178",
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 5951.78,
+          "source_passage": "Total outstanding dues of creditors other than micro enterprises and  small enterprises 5,95,178  5,25,110",
+          "column": 1
+        },
+        "trade_payables_total": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 140,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "raw_value": null,
+          "raw_unit": "INR_LAKH",
+          "unit": "INR_CRORE",
+          "value": 5985.08,
+          "source_passage": "Calculated: MSME payables plus other trade payables",
+          "column": 1,
+          "calculation": "trade_payables_msme + trade_payables_other"
+        },
+        "total_borrowings_ex_leases": {
+          "report_year": "2024-25",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "pdf_page": 156,
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ],
+          "value": 0.18,
+          "unit": "INR_CRORE",
+          "raw_unit": "INR_LAKH",
+          "raw_value": null,
+          "source_passage": "Short term borrowings  18  29 \ni)  There are no outstanding long-term borrowings as at 31 March 2025 and as at 31 March 2024. ",
+          "column": 1,
+          "calculation": "Short-term plus long-term borrowings; excludes lease liabilities, trade payables and other liabilities."
+        }
+      },
+      "checks_residual_crore": {
+        "assets_equal_equity_plus_liabilities": 0.0,
+        "asset_subtotals": 0.0,
+        "liability_subtotals": 0.0,
+        "reported_grand_totals": 0.0
+      },
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false,
+      "missing_meaning": "Not separately reported/extracted; an absent borrowing or lease row is not asserted to be zero."
+    }
+  ],
+  "review_status": "PENDING_META_REVIEW",
+  "creates_evidence": false,
+  "extracted_fact_count": 213,
+  "calculated_fact_count": 15,
+  "limitations": [
+    "Mixed original/comparative report vintages are preserved, not silently harmonised.",
+    "FY2021-22 includes merger restatements; FY2024-25 includes accrued-interest reclassification. Review reporting scope before using trends.",
+    "Other bank balances can contain restricted deposits; they are not all freely available cash.",
+    "Section totals reconcile, but individual notes, line-item sums and META approval remain separate checks."
+  ]
+}

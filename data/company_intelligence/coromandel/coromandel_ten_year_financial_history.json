@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "company": "Coromandel International",
+  "ticker": "COROMANDEL",
+  "basis": "STANDALONE_AUDITED",
+  "currency": "INR_CRORE",
+  "status": "PARTIAL_GOVERNED_EXTRACTION",
+  "periods": [
+    {
+      "period": "FY2015-16",
+      "values": {"revenue": 11624.98, "pat": 357.86},
+      "evidence_ids": ["CORO-FY16-REVENUE", "CORO-FY16-PAT"],
+      "source": {"document": "Annual Report 2016-17", "pdf_page": 113, "printed_pages": "", "statement": "Standalone Statement of Profit and Loss", "authority": "ISSUER_OFFICIAL", "column": "For the year ended 31 March 2016"}
+    },
+    {
+      "period": "FY2016-17",
+      "values": {"revenue": 10185.30, "pat": 476.78, "cash_and_equivalents": 142.40, "trade_receivables": 1618.49, "inventory": 1724.61, "net_worth": 2811.93},
+      "evidence_ids": ["CORO-FY17-REVENUE", "CORO-FY17-PAT"],
+      "source": {"document": "Annual Report 2017-18", "pdf_page": 116, "printed_pages": "", "statement": "Comparative standalone balance sheet and profit and loss", "authority": "ISSUER_OFFICIAL", "column": "For the year ended 31 March 2017"}
+    },
+    {
+      "period": "FY2017-18",
+      "values": {"revenue": 10986.00, "pat": 659.00, "cash_and_equivalents": 438.97, "trade_receivables": 1523.13, "inventory": 2227.13, "net_worth": 3171.76},
+      "evidence_ids": ["CORO-FY18-REVENUE", "CORO-FY18-PAT"],
+      "source": {"document": "Annual Report 2017-18", "pdf_page": 116, "printed_pages": "", "statement": "Standalone balance sheet and issuer-reported performance", "authority": "ISSUER_OFFICIAL", "column": "FY2017-18"}
+    },
+    {
+      "period": "FY2018-19",
+      "values": {"revenue": 13203.85, "pat": 713.91, "cash_and_equivalents": 110.93, "trade_receivables": 1828.70, "inventory": 3234.23, "net_worth": 3433.93},
+      "evidence_ids": ["CORO-FY19-REVENUE", "CORO-FY19-PAT"],
+      "source": {"document": "Annual Report 2019-20", "pdf_page": 76, "printed_pages": "146-147", "statement": "Comparative standalone balance sheet and profit and loss", "authority": "ISSUER_OFFICIAL", "column": "For the year ended 31 March 2019"}
+    },
+    {
+      "period": "FY2019-20",
+      "values": {"revenue": 13117.19, "pat": 1059.17, "cash_and_equivalents": 32.36, "trade_receivables": 1724.35, "inventory": 2691.93, "net_worth": 4389.04},
+      "evidence_ids": ["CORO-FY20-REVENUE", "CORO-FY20-PAT"],
+      "source": {"document": "Annual Report 2019-20", "pdf_page": 76, "printed_pages": "146-147", "statement": "Standalone balance sheet and profit and loss", "authority": "ISSUER_OFFICIAL", "column": "For the year ended 31 March 2020"}
+    },
+    {
+      "period": "FY2020-21",
+      "values": {"revenue": 14162.95, "pat": 1312.18, "cash_and_equivalents": 639.82, "trade_receivables": 562.31, "inventory": 2587.22, "net_worth": 5200.31},
+      "evidence_ids": ["CORO-FY21-REVENUE", "CORO-FY21-PAT"],
+      "source": {"document": "Annual Report 2020-21", "pdf_page": 73, "printed_pages": "142-143", "statement": "Standalone balance sheet and profit and loss", "authority": "ISSUER_OFFICIAL", "column": "For the year ended 31 March 2021"}
+    },
+    {
+      "period": "FY2021-22",
+      "values": {"revenue": 19111.00, "pat": 1412.45, "cash_and_equivalents": 657.65, "trade_receivables": 242.49, "inventory": 3655.31, "net_worth": 6298.01},
+      "evidence_ids": ["CORO-FY22-REVENUE", "CORO-FY22-PAT"],
+      "source": {"document": "Integrated Annual Report 2021-22", "pdf_page": 118, "printed_pages": "", "statement": "Standalone balance sheet and issuer-reported performance", "authority": "ISSUER_OFFICIAL", "column": "FY2021-22"}
+    },
+    {
+      "period": "FY2022-23",
+      "values": {"revenue": 29609.55, "pat": 2034.67, "operating_cash_flow": 560.47},
+      "evidence_ids": ["CORO-FY23-REVENUE", "CORO-FY23-PAT", "CORO-FY23-CFO"],
+      "source": {"document": "Integrated Annual Report 2023-24", "pdf_pages": [136, 137], "printed_pages": "268-271", "statement": "Standalone financial statements", "authority": "ISSUER_OFFICIAL", "column": "For the year ended 31 March 2023"}
+    },
+    {
+      "period": "FY2023-24",
+      "values": {"revenue": 22029.21, "pat": 1719.25, "operating_cash_flow": 1461.78, "capex": 514.97, "cash_and_equivalents": 1059.79, "trade_receivables": 1404.55, "inventory": 4574.34, "net_worth": 9403.23},
+      "evidence_ids": ["CORO-FY24-REVENUE", "CORO-FY24-PAT", "CORO-FY24-CFO", "CORO-FY24-CAPEX-CASH"],
+      "source": {"document": "Integrated Annual Report 2023-24", "pdf_pages": [136, 137], "printed_pages": "268-271", "statement": "Standalone financial statements", "authority": "ISSUER_OFFICIAL", "column": "For the year ended 31 March 2024"}
+    },
+    {
+      "period": "FY2024-25",
+      "values": {"revenue": 24064, "ebitda": 2656, "pat": 1941, "capex": 830, "cash_and_equivalents": 197.71, "trade_receivables": 1221.71, "inventory": 4684.18, "net_worth": 10999.36},
+      "evidence_ids": ["CORO-FY25-REVENUE", "CORO-FY25-EBITDA", "CORO-FY25-PAT", "CORO-FY25-CAPEX"],
+      "source": {"document": "Integrated Annual Report 2024-25", "printed_pages": "94-97", "statement": "Issuer-reported standalone performance", "authority": "ISSUER_OFFICIAL", "column": "FY2024-25"}
+    }
+  ],
+  "governance_note": "Values are direct audited or issuer-reported figures converted from INR lakhs to INR crore where required. Missing values remain null. Comparative columns are linked to the report and page from which they were extracted."
+}

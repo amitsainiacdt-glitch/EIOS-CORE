@@ -93,6 +93,7 @@ from modules.external_intelligence.research_search_engine import (
 from modules.external_intelligence.search_provider import (
     SearchProvider,
 )
+from modules.external_intelligence.source_quality_service import SourceQualityService
 
 from modules.external_intelligence.source_selection import (
     SelectedSource,
@@ -340,6 +341,7 @@ class ExternalResearchOrchestrator:
         cycle_id: str | None = None,
         job_id: str | None = None,
         retrieved_at: datetime | None = None,
+        entity_domain: str | None = None,
     ) -> ExternalResearchResult:
         """
         Execute external research retrieval.
@@ -564,6 +566,16 @@ class ExternalResearchOrchestrator:
 
                 continue
 
+            # Official-document and exchange jobs are fail-closed: a third-party
+            # result may remain useful elsewhere, but it cannot enter an official
+            # intake lane. Issuer and regulatory domains are Tier 1.
+            classification = SourceQualityService().classify(
+                result.url,
+                entity_domain=entity_domain,
+            )
+            if query.intent in {"OFFICIAL_DOCUMENT_DISCOVERY", "EXCHANGE_DISCLOSURES"} and classification.quality_tier != "TIER_1":
+                continue
+
             # ==================================================
             # OBSERVATION
             # ==================================================
@@ -583,6 +595,7 @@ class ExternalResearchOrchestrator:
                     research_intent=query.intent,
                     retrieved_at=retrieved_at,
                     content_type=normalized.content_type,
+                    entity_domain=entity_domain,
                 )
             )
 

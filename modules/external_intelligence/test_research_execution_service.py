@@ -54,6 +54,7 @@ class FakeOrchestrator:
         cycle_id=None,
         job_id=None,
         retrieved_at=None,
+        entity_domain=None,
     ):
 
         self.last_query = query
@@ -69,6 +70,7 @@ class FakeOrchestrator:
             "cycle_id": cycle_id,
             "job_id": job_id,
             "retrieved_at": retrieved_at,
+            "entity_domain": entity_domain,
         }
 
         return self.result
@@ -279,6 +281,7 @@ def main():
         "cycle_id": None,
         "job_id": "JOB-001",
         "retrieved_at": run_time,
+        "entity_domain": None,
     }
 
     print(

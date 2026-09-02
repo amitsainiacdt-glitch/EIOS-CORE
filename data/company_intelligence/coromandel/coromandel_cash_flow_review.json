@@ -1,0 +1,1639 @@
+{
+  "schema_version": 1,
+  "company": "Coromandel International",
+  "ticker": "COROMANDEL",
+  "periods": [
+    {
+      "period": "FY2017-18",
+      "basis": "STANDALONE",
+      "facts": {
+        "operating_cash_flow": {
+          "value": 253.19,
+          "unit": "INR_CRORE",
+          "raw_value": "25,319",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 118,
+          "column": 1,
+          "source_passage": "Net cash flow from operating activities                                                           (A)  25,319  91,702",
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "report_year": "2017-18",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ]
+        },
+        "investing_cash_flow": {
+          "value": 44.32,
+          "unit": "INR_CRORE",
+          "raw_value": "4,432",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 119,
+          "column": 1,
+          "source_passage": "Net cash from/ (used in) investing activities                                                   (B)  4,432 (7,189)",
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "report_year": "2017-18",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ]
+        },
+        "financing_cash_flow": {
+          "value": -0.94,
+          "unit": "INR_CRORE",
+          "raw_value": "(94)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 119,
+          "column": 1,
+          "source_passage": "Net cash from/ (used in) financing activities                                                  (C)  (94)  (86,203)",
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "report_year": "2017-18",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ]
+        },
+        "opening_cash": {
+          "value": 142.4,
+          "unit": "INR_CRORE",
+          "raw_value": "14,240",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 119,
+          "column": 1,
+          "source_passage": "Cash and cash equivalents at the beginning of the year  14,240  15,930",
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "report_year": "2017-18",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ]
+        },
+        "closing_cash": {
+          "value": 438.97,
+          "unit": "INR_CRORE",
+          "raw_value": "43,897",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 119,
+          "column": 1,
+          "source_passage": "Cash and cash equivalents at the end of the year  43,897  14,240",
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "report_year": "2017-18",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ]
+        },
+        "cash_capex": {
+          "value": 114.32,
+          "unit": "INR_CRORE",
+          "raw_value": "(11,432)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 118,
+          "column": 1,
+          "source_passage": "Purchase of property, plant and equipments, including capital work-in-progress and capital advances (11,432)  (8,987)",
+          "document_hash": "50138d95e2616185269e31825e69a566afd037acefe140dfe1b735e2d9c110b8",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2017_18.pdf",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "report_year": "2017-18",
+          "column_periods": [
+            "FY2017-18",
+            "FY2016-17"
+          ]
+        }
+      },
+      "derived": {
+        "net_cash_change": 296.57,
+        "free_cash_flow": 138.87,
+        "free_cash_flow_definition": "Operating cash flow less cash purchases of PPE/intangibles including CWIP and capital advances; excludes separately reported leasehold land and acquisitions."
+      },
+      "cash_bridge_residual": 0.0,
+      "numerical_check": "RECONCILED",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    },
+    {
+      "period": "FY2018-19",
+      "basis": "STANDALONE",
+      "facts": {
+        "operating_cash_flow": {
+          "value": 512.64,
+          "unit": "INR_CRORE",
+          "raw_value": "51,264",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 77,
+          "column": 2,
+          "source_passage": "Net cash flow from operating activities  (A)  1,86,668  51,264",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2019-20",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ]
+        },
+        "investing_cash_flow": {
+          "value": -596.56,
+          "unit": "INR_CRORE",
+          "raw_value": "(59,656)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 77,
+          "column": 2,
+          "source_passage": "Net cash from/ (used in) investing activities (B)  (21,924)  (59,656)",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2019-20",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ]
+        },
+        "financing_cash_flow": {
+          "value": -244.13,
+          "unit": "INR_CRORE",
+          "raw_value": "(24,413)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 77,
+          "column": 2,
+          "source_passage": "Net cash from/ (used in) financing activities (C)  (1,72,601)  (24,413)",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2019-20",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ]
+        },
+        "opening_cash": {
+          "value": 438.98,
+          "unit": "INR_CRORE",
+          "raw_value": "43,898",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 77,
+          "column": 2,
+          "source_passage": "Cash and cash equivalents at the beginning of the year  11,093  43,898",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2019-20",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ]
+        },
+        "closing_cash": {
+          "value": 110.93,
+          "unit": "INR_CRORE",
+          "raw_value": "11,093",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 77,
+          "column": 2,
+          "source_passage": "Cash and cash equivalents at the end of the year (as per Note 12)  3,236  11,093",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2019-20",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ]
+        },
+        "cash_capex": {
+          "value": 271.98,
+          "unit": "INR_CRORE",
+          "raw_value": "(27,198)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 77,
+          "column": 2,
+          "source_passage": "Purchase of property, plant and equipments, including capital work-in-progress and capital advances (25,316)  (27,198)",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2019-20",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ]
+        }
+      },
+      "derived": {
+        "net_cash_change": -328.05,
+        "free_cash_flow": 240.66,
+        "free_cash_flow_definition": "Operating cash flow less cash purchases of PPE/intangibles including CWIP and capital advances; excludes separately reported leasehold land and acquisitions."
+      },
+      "cash_bridge_residual": 0.0,
+      "numerical_check": "RECONCILED",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    },
+    {
+      "period": "FY2019-20",
+      "basis": "STANDALONE",
+      "facts": {
+        "operating_cash_flow": {
+          "value": 1866.68,
+          "unit": "INR_CRORE",
+          "raw_value": "1,86,668",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 77,
+          "column": 1,
+          "source_passage": "Net cash flow from operating activities  (A)  1,86,668  51,264",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2019-20",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ]
+        },
+        "investing_cash_flow": {
+          "value": -219.24,
+          "unit": "INR_CRORE",
+          "raw_value": "(21,924)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 77,
+          "column": 1,
+          "source_passage": "Net cash from/ (used in) investing activities (B)  (21,924)  (59,656)",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2019-20",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ]
+        },
+        "financing_cash_flow": {
+          "value": -1726.01,
+          "unit": "INR_CRORE",
+          "raw_value": "(1,72,601)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 77,
+          "column": 1,
+          "source_passage": "Net cash from/ (used in) financing activities (C)  (1,72,601)  (24,413)",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2019-20",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ]
+        },
+        "opening_cash": {
+          "value": 110.93,
+          "unit": "INR_CRORE",
+          "raw_value": "11,093",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 77,
+          "column": 1,
+          "source_passage": "Cash and cash equivalents at the beginning of the year  11,093  43,898",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2019-20",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ]
+        },
+        "closing_cash": {
+          "value": 32.36,
+          "unit": "INR_CRORE",
+          "raw_value": "3,236",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 77,
+          "column": 1,
+          "source_passage": "Cash and cash equivalents at the end of the year (as per Note 12)  3,236  11,093",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2019-20",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ]
+        },
+        "cash_capex": {
+          "value": 253.16,
+          "unit": "INR_CRORE",
+          "raw_value": "(25,316)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 77,
+          "column": 1,
+          "source_passage": "Purchase of property, plant and equipments, including capital work-in-progress and capital advances (25,316)  (27,198)",
+          "document_hash": "665f12fa7bf4d7e9466fada254992286efec8322888089e41aa510cabe21d327",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2019_20.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/08/AR-20.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2019-20",
+          "column_periods": [
+            "FY2019-20",
+            "FY2018-19"
+          ]
+        }
+      },
+      "derived": {
+        "net_cash_change": -78.57,
+        "free_cash_flow": 1613.52,
+        "free_cash_flow_definition": "Operating cash flow less cash purchases of PPE/intangibles including CWIP and capital advances; excludes separately reported leasehold land and acquisitions."
+      },
+      "cash_bridge_residual": 0.0,
+      "numerical_check": "RECONCILED",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    },
+    {
+      "period": "FY2020-21",
+      "basis": "STANDALONE",
+      "facts": {
+        "operating_cash_flow": {
+          "value": 4124.67,
+          "unit": "INR_CRORE",
+          "raw_value": "4,12,467",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 74,
+          "column": 1,
+          "source_passage": "Net cash flow from operating activities                                    (A)  4,12,467  1,86,668",
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2020-21",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ]
+        },
+        "investing_cash_flow": {
+          "value": -1252.86,
+          "unit": "INR_CRORE",
+          "raw_value": "(1,25,286)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 74,
+          "column": 1,
+          "source_passage": "Net cash (used in) investing activities                             (B)  (1,25,286)  (21,924)",
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2020-21",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ]
+        },
+        "financing_cash_flow": {
+          "value": -2264.35,
+          "unit": "INR_CRORE",
+          "raw_value": "(2,26,435)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 74,
+          "column": 1,
+          "source_passage": "Net cash (used in) financing activities                            (C)  (2,26,435)  (1,72,601)",
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2020-21",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ]
+        },
+        "opening_cash": {
+          "value": 32.36,
+          "unit": "INR_CRORE",
+          "raw_value": "3,236",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 74,
+          "column": 1,
+          "source_passage": "Cash and cash equivalents at the beginning of the year  3,236  11,093",
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2020-21",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ]
+        },
+        "closing_cash": {
+          "value": 639.82,
+          "unit": "INR_CRORE",
+          "raw_value": "63,982",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 74,
+          "column": 1,
+          "source_passage": "Cash and cash equivalents at the end of the year (as per Note 12)  63,982  3,236",
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2020-21",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ]
+        },
+        "cash_capex": {
+          "value": 187.99,
+          "unit": "INR_CRORE",
+          "raw_value": "(18,799)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 74,
+          "column": 1,
+          "source_passage": "Purchase of property, plant and equipment, including capital work-in-progress and capital advances (18,799)  (25,316)",
+          "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+          "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2020-21",
+          "column_periods": [
+            "FY2020-21",
+            "FY2019-20"
+          ]
+        }
+      },
+      "derived": {
+        "net_cash_change": 607.46,
+        "free_cash_flow": 3936.68,
+        "free_cash_flow_definition": "Operating cash flow less cash purchases of PPE/intangibles including CWIP and capital advances; excludes separately reported leasehold land and acquisitions."
+      },
+      "cash_bridge_residual": 0.0,
+      "numerical_check": "RECONCILED",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    },
+    {
+      "period": "FY2021-22",
+      "basis": "STANDALONE",
+      "facts": {
+        "operating_cash_flow": {
+          "value": 2093.24,
+          "unit": "INR_CRORE",
+          "raw_value": "2,09,324",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 119,
+          "column": 1,
+          "source_passage": "Net cash flows from operating activities (A) 2,09,324 4,12,512",
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "report_year": "2021-22",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ]
+        },
+        "investing_cash_flow": {
+          "value": -1647.44,
+          "unit": "INR_CRORE",
+          "raw_value": "(1,64,744)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 119,
+          "column": 1,
+          "source_passage": "Net cash used in investing activities                                                                  (B) (1,64,744) (1,25,270)",
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "report_year": "2021-22",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ]
+        },
+        "financing_cash_flow": {
+          "value": -442.08,
+          "unit": "INR_CRORE",
+          "raw_value": "(44,208)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 119,
+          "column": 1,
+          "source_passage": "Net cash used in financing activities (C) (44,208) (2,26,351)",
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "report_year": "2021-22",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ]
+        },
+        "opening_cash": {
+          "value": 653.93,
+          "unit": "INR_CRORE",
+          "raw_value": "65,393",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 119,
+          "column": 1,
+          "source_passage": "Cash and cash equivalents at the beginning of the year 65,393 3,263",
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "report_year": "2021-22",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ]
+        },
+        "closing_cash": {
+          "value": 657.65,
+          "unit": "INR_CRORE",
+          "raw_value": "65,765",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 119,
+          "column": 1,
+          "source_passage": "Cash and cash equivalents at the end of the year (as per Note 12) 65,765 65,393",
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "report_year": "2021-22",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ]
+        },
+        "cash_capex": {
+          "value": 277.81,
+          "unit": "INR_CRORE",
+          "raw_value": "(27,781)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 119,
+          "column": 1,
+          "source_passage": "Purchase of property, plant and equipments and other intangible assets including capital work-in- progress and capital advances (27,781) (18,813)",
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "report_year": "2021-22",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ]
+        },
+        "business_combination_cash": {
+          "value": 0.0,
+          "unit": "INR_CRORE",
+          "raw_value": "-",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 119,
+          "column": 1,
+          "source_passage": "Add: Cash and cash equivalents acquired on account of common control business combination (refer note 47) -   1,239",
+          "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+          "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+          "url_kind": "OFFICIAL_ARCHIVE",
+          "report_year": "2021-22",
+          "column_periods": [
+            "FY2021-22",
+            "FY2020-21"
+          ]
+        }
+      },
+      "derived": {
+        "net_cash_change": 3.72,
+        "free_cash_flow": 1815.43,
+        "free_cash_flow_definition": "Operating cash flow less cash purchases of PPE/intangibles including CWIP and capital advances; excludes separately reported leasehold land and acquisitions."
+      },
+      "cash_bridge_residual": 0.0,
+      "numerical_check": "RECONCILED",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    },
+    {
+      "period": "FY2022-23",
+      "basis": "STANDALONE",
+      "facts": {
+        "operating_cash_flow": {
+          "value": 560.47,
+          "unit": "INR_CRORE",
+          "raw_value": "56,047",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 137,
+          "column": 2,
+          "source_passage": "Net cash flows from operating activities  (A)  1,46,178  56,047",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2023-24",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ]
+        },
+        "investing_cash_flow": {
+          "value": 656.26,
+          "unit": "INR_CRORE",
+          "raw_value": "65,626",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 137,
+          "column": 2,
+          "source_passage": "Net cash flow from / (used) in investing activities (B)  (1,32,112)  65,626",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2023-24",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ]
+        },
+        "financing_cash_flow": {
+          "value": -543.0,
+          "unit": "INR_CRORE",
+          "raw_value": "(54,300)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 137,
+          "column": 2,
+          "source_passage": "Net cash used in financing activities (C)  (41,225)  (54,300)",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2023-24",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ]
+        },
+        "opening_cash": {
+          "value": 657.65,
+          "unit": "INR_CRORE",
+          "raw_value": "65,765",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 137,
+          "column": 2,
+          "source_passage": "Cash and cash equivalents at the beginning of the year  1,33,138  65,765",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2023-24",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ]
+        },
+        "closing_cash": {
+          "value": 1331.38,
+          "unit": "INR_CRORE",
+          "raw_value": "1,33,138",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 137,
+          "column": 2,
+          "source_passage": "Cash and cash equivalents at the end of the year (as per Note 12)  1,05,979  1,33,138",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2023-24",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ]
+        },
+        "cash_capex": {
+          "value": 605.48,
+          "unit": "INR_CRORE",
+          "raw_value": "(60,548)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 137,
+          "column": 2,
+          "source_passage": "Purchase of property, plant and equipments and other intangible assets including capital work-in-progress and capital advances (51,497)  (60,548)",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2023-24",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ]
+        }
+      },
+      "derived": {
+        "net_cash_change": 673.73,
+        "free_cash_flow": -45.01,
+        "free_cash_flow_definition": "Operating cash flow less cash purchases of PPE/intangibles including CWIP and capital advances; excludes separately reported leasehold land and acquisitions."
+      },
+      "cash_bridge_residual": 0.0,
+      "numerical_check": "RECONCILED",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    },
+    {
+      "period": "FY2023-24",
+      "basis": "STANDALONE",
+      "facts": {
+        "operating_cash_flow": {
+          "value": 1461.78,
+          "unit": "INR_CRORE",
+          "raw_value": "1,46,178",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 137,
+          "column": 1,
+          "source_passage": "Net cash flows from operating activities  (A)  1,46,178  56,047",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2023-24",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ]
+        },
+        "investing_cash_flow": {
+          "value": -1321.12,
+          "unit": "INR_CRORE",
+          "raw_value": "(1,32,112)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 137,
+          "column": 1,
+          "source_passage": "Net cash flow from / (used) in investing activities (B)  (1,32,112)  65,626",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2023-24",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ]
+        },
+        "financing_cash_flow": {
+          "value": -412.25,
+          "unit": "INR_CRORE",
+          "raw_value": "(41,225)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 137,
+          "column": 1,
+          "source_passage": "Net cash used in financing activities (C)  (41,225)  (54,300)",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2023-24",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ]
+        },
+        "opening_cash": {
+          "value": 1331.38,
+          "unit": "INR_CRORE",
+          "raw_value": "1,33,138",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 137,
+          "column": 1,
+          "source_passage": "Cash and cash equivalents at the beginning of the year  1,33,138  65,765",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2023-24",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ]
+        },
+        "closing_cash": {
+          "value": 1059.79,
+          "unit": "INR_CRORE",
+          "raw_value": "1,05,979",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 137,
+          "column": 1,
+          "source_passage": "Cash and cash equivalents at the end of the year (as per Note 12)  1,05,979  1,33,138",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2023-24",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ]
+        },
+        "cash_capex": {
+          "value": 514.97,
+          "unit": "INR_CRORE",
+          "raw_value": "(51,497)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 137,
+          "column": 1,
+          "source_passage": "Purchase of property, plant and equipments and other intangible assets including capital work-in-progress and capital advances (51,497)  (60,548)",
+          "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2023-24",
+          "column_periods": [
+            "FY2023-24",
+            "FY2022-23"
+          ]
+        }
+      },
+      "derived": {
+        "net_cash_change": -271.59,
+        "free_cash_flow": 946.81,
+        "free_cash_flow_definition": "Operating cash flow less cash purchases of PPE/intangibles including CWIP and capital advances; excludes separately reported leasehold land and acquisitions."
+      },
+      "cash_bridge_residual": 0.0,
+      "numerical_check": "RECONCILED",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    },
+    {
+      "period": "FY2024-25",
+      "basis": "STANDALONE",
+      "facts": {
+        "operating_cash_flow": {
+          "value": 2545.7,
+          "unit": "INR_CRORE",
+          "raw_value": "2,54,570",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 141,
+          "column": 1,
+          "source_passage": "Net cash flows from operating activities                                                          (A)  2,54,570  1,46,178",
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2024-25",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ]
+        },
+        "investing_cash_flow": {
+          "value": -2768.97,
+          "unit": "INR_CRORE",
+          "raw_value": "(2,76,897)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 141,
+          "column": 1,
+          "source_passage": "Net cash flow used in investing activities (B)  (2,76,897)  (1,32,374)",
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2024-25",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ]
+        },
+        "financing_cash_flow": {
+          "value": -640.64,
+          "unit": "INR_CRORE",
+          "raw_value": "(64,064)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 141,
+          "column": 1,
+          "source_passage": "Net cash flow used in financing activities (C)  (64,064)  (41,225)",
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2024-25",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ]
+        },
+        "opening_cash": {
+          "value": 1061.62,
+          "unit": "INR_CRORE",
+          "raw_value": "1,06,162",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 141,
+          "column": 1,
+          "source_passage": "Cash and cash equivalents at the beginning of the year  1,06,162  1,33,583",
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2024-25",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ]
+        },
+        "closing_cash": {
+          "value": 197.71,
+          "unit": "INR_CRORE",
+          "raw_value": "19,771",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 141,
+          "column": 1,
+          "source_passage": "Cash and cash equivalents at the end of the year (as per Note 12)  19,771  1,06,162",
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2024-25",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ]
+        },
+        "cash_capex": {
+          "value": 829.64,
+          "unit": "INR_CRORE",
+          "raw_value": "(82,964)",
+          "raw_unit": "INR_LAKH",
+          "pdf_page": 141,
+          "column": 1,
+          "source_passage": "Purchase of property, plant and equipments and other intangible assets, including capital work-in-progress and capital advances (82,964)  (51,497)",
+          "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+          "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+          "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+          "url_kind": "DIRECT_OFFICIAL_PDF",
+          "report_year": "2024-25",
+          "column_periods": [
+            "FY2024-25",
+            "FY2023-24"
+          ]
+        }
+      },
+      "derived": {
+        "net_cash_change": -863.91,
+        "free_cash_flow": 1716.06,
+        "free_cash_flow_definition": "Operating cash flow less cash purchases of PPE/intangibles including CWIP and capital advances; excludes separately reported leasehold land and acquisitions."
+      },
+      "cash_bridge_residual": 0.0,
+      "numerical_check": "RECONCILED",
+      "review_status": "PENDING_META_REVIEW",
+      "creates_evidence": false
+    }
+  ],
+  "source_document_count": 6,
+  "extracted_fact_count": 49,
+  "review_status": "PENDING_META_REVIEW",
+  "creates_evidence": false,
+  "continuity_warnings": [
+    {
+      "period": "FY2021-22",
+      "difference_crore": 14.11,
+      "meaning": "The FY2021-22 report explicitly restates the prior year after the merger of LPFL and CSQM. The original and revised cash bridges explain the INR14.11 crore change. This is a change of reported basis, not evidence of cash disappearing.",
+      "reason": "Merger restatement",
+      "status": "NUMERICALLY_RECONCILED_PENDING_META_REVIEW",
+      "note": {
+        "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+        "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+        "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+        "url_kind": "OFFICIAL_ARCHIVE",
+        "report_year": "2021-22",
+        "column_periods": [
+          "FY2021-22",
+          "FY2020-21"
+        ],
+        "pdf_page": 154,
+        "source_passage": "On 01 February 2021, the Board of Directors had earlier approved the proposed Scheme of Amalgamation of Liberty Pesticides \nand Fertilizers Limited (LPFL) and Coromandel SQM (India) Private Limited (CSQM) with the Company subject to approval \nof the Hon\u2019ble National Company Law Tribunal, Hyderabad (NCL T) under Section 230 and 232 of the Companies Act 2013.  \nSubsequent to 31 March 2022, the Hon\u2019ble National Company Law Tribunal, Hyderabad (NCL T) has approved the Scheme \nof Amalgamation (\u2018Scheme\u2019) of and Liberty Pesticides and Fertilizers Limited (LPFL) and Coromandel SQM (India) Private \nLimited (CSQM) (wholly owned subsidiaries) on 26 April 2022, with the Company with effect from 01 April 2021, being the \nappointed date under the said Scheme.\nThe Company has accounted for this merger under the \u201cPooling of interests\u201d method for common control transactions as \nper the requirements of Ind AS 103 \u201cBusiness Combinations\u201d. Accordingly, the company has recognised Gain on Bargain \npurchase of \u20b9 266 Lakhs and Gain on re-measurement of previously held interest of \u20b9 760 Lakhs under Other comprehensive \nincome and Gain on Bargain purchase of \u20b9 163 Lakhs in Capital reserve.\nFurther, in accordance with Ind AS 103 \u2018Business Combinations\u2019, the Company has restated the figures for previous year \npresented in the Standalone financial statements. This merger did not have material impact on Standalone financial \nstatements.",
+        "note_heading": "47 Subsequent events",
+        "reason": "Merger restatement",
+        "explanation": "The FY2021-22 report explicitly restates the prior year after the merger of LPFL and CSQM. The original and revised cash bridges explain the INR14.11 crore change. This is a change of reported basis, not evidence of cash disappearing."
+      }
+    },
+    {
+      "period": "FY2024-25",
+      "difference_crore": 1.83,
+      "meaning": "Note 42 reclassifies accrued interest from other financial assets into cash, bank balances and loans. The revised FY2023-24 cash figure is INR1.83 crore higher. The note supplies the reporting explanation; the cash-specific allocation is inferred from the source-version comparison, not separately quoted by the note. The company states the reclassification does not affect profit or total equity.",
+      "reason": "Accrued-interest reclassification",
+      "status": "NUMERICALLY_RECONCILED_PENDING_META_REVIEW",
+      "note": {
+        "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+        "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+        "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+        "url_kind": "DIRECT_OFFICIAL_PDF",
+        "report_year": "2024-25",
+        "column_periods": [
+          "FY2024-25",
+          "FY2023-24"
+        ],
+        "pdf_page": 168,
+        "source_passage": ", in view of improved presentation, the Company has reassessed presentation of following:\nA)  Accrued salaries and wages to employees have been reclassified under \u201cOther financial liabilities\u201d which were earlier included in trade \npayables amounting to Rs. 7,240 lakhs as at March 31, 2025 (Rs. 6,677 lakhs as at March 31, 2024).\nB)  Interest accrued on cash and cash equivalents, other bank balances and loans amounting to Rs. 8,897 Lakhs as at 31 March 2025 (Rs. \n11,269 Lakhs as at 31 March 2024) have been reclassified from other financial assets to respective aforesaid financial statement captions.\nC)  Interest accrued but not due on financial liabilities amounting to Rs. 1,651 Lakhs as at 31 March 2025 (Rs. 1,525 Lakhs as at 31 March 2024) \nhave been reclassified within other financial liabilities.\n The above changes do not impact recognition and measurement of items in the financial statements, and, consequentially, there is no \nimpact on total equity and/ or profit (loss) for the current or any of the earlier periods. Nor there is any material impact on presentation \nof cash flow statement. Considering the nature of changes, the management believes that they do not have any material impact on the \nbalance sheet at the beginning of the comparative period and, therefore, there is no need for separate presentation of third balance sheet.\nNotes forming part of the Standalone financial statements\n(\u20b9 in Lakhs, unless otherwise stated)",
+        "note_heading": "42. During the year",
+        "reason": "Accrued-interest reclassification",
+        "explanation": "Note 42 reclassifies accrued interest from other financial assets into cash, bank balances and loans. The revised FY2023-24 cash figure is INR1.83 crore higher. The note supplies the reporting explanation; the cash-specific allocation is inferred from the source-version comparison, not separately quoted by the note. The company states the reclassification does not affect profit or total equity."
+      }
+    }
+  ],
+  "revision_reviews": [
+    {
+      "period": "FY2020-21",
+      "deltas_crore": {
+        "operating_cash_flow": 0.45,
+        "investing_cash_flow": 0.16,
+        "financing_cash_flow": 0.84,
+        "opening_cash": 0.27,
+        "closing_cash": 14.11,
+        "cash_capex": 0.14,
+        "business_combination_cash": 12.39
+      },
+      "original": {
+        "period": "FY2020-21",
+        "basis": "STANDALONE",
+        "facts": {
+          "operating_cash_flow": {
+            "value": 4124.67,
+            "unit": "INR_CRORE",
+            "raw_value": "4,12,467",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 74,
+            "column": 1,
+            "source_passage": "Net cash flow from operating activities                                    (A)  4,12,467  1,86,668",
+            "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+            "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2020-21",
+            "column_periods": [
+              "FY2020-21",
+              "FY2019-20"
+            ]
+          },
+          "investing_cash_flow": {
+            "value": -1252.86,
+            "unit": "INR_CRORE",
+            "raw_value": "(1,25,286)",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 74,
+            "column": 1,
+            "source_passage": "Net cash (used in) investing activities                             (B)  (1,25,286)  (21,924)",
+            "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+            "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2020-21",
+            "column_periods": [
+              "FY2020-21",
+              "FY2019-20"
+            ]
+          },
+          "financing_cash_flow": {
+            "value": -2264.35,
+            "unit": "INR_CRORE",
+            "raw_value": "(2,26,435)",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 74,
+            "column": 1,
+            "source_passage": "Net cash (used in) financing activities                            (C)  (2,26,435)  (1,72,601)",
+            "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+            "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2020-21",
+            "column_periods": [
+              "FY2020-21",
+              "FY2019-20"
+            ]
+          },
+          "opening_cash": {
+            "value": 32.36,
+            "unit": "INR_CRORE",
+            "raw_value": "3,236",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 74,
+            "column": 1,
+            "source_passage": "Cash and cash equivalents at the beginning of the year  3,236  11,093",
+            "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+            "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2020-21",
+            "column_periods": [
+              "FY2020-21",
+              "FY2019-20"
+            ]
+          },
+          "closing_cash": {
+            "value": 639.82,
+            "unit": "INR_CRORE",
+            "raw_value": "63,982",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 74,
+            "column": 1,
+            "source_passage": "Cash and cash equivalents at the end of the year (as per Note 12)  63,982  3,236",
+            "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+            "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2020-21",
+            "column_periods": [
+              "FY2020-21",
+              "FY2019-20"
+            ]
+          },
+          "cash_capex": {
+            "value": 187.99,
+            "unit": "INR_CRORE",
+            "raw_value": "(18,799)",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 74,
+            "column": 1,
+            "source_passage": "Purchase of property, plant and equipment, including capital work-in-progress and capital advances (18,799)  (25,316)",
+            "document_hash": "e87e236782ee150eacd14fce54b7b087df1e9f5d00df3063c028b73b9c89edb2",
+            "local_document": "tmp/pdfs/coromandel_annual_report_2020_21.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2021/12/AnnualReport2020-2021.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2020-21",
+            "column_periods": [
+              "FY2020-21",
+              "FY2019-20"
+            ]
+          }
+        },
+        "derived": {
+          "net_cash_change": 607.46,
+          "free_cash_flow": 3936.68,
+          "free_cash_flow_definition": "Operating cash flow less cash purchases of PPE/intangibles including CWIP and capital advances; excludes separately reported leasehold land and acquisitions."
+        },
+        "cash_bridge_residual": 0.0,
+        "numerical_check": "RECONCILED",
+        "review_status": "PENDING_META_REVIEW",
+        "creates_evidence": false
+      },
+      "revised": {
+        "period": "FY2020-21",
+        "basis": "STANDALONE",
+        "facts": {
+          "operating_cash_flow": {
+            "value": 4125.12,
+            "unit": "INR_CRORE",
+            "raw_value": "4,12,512",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 119,
+            "column": 2,
+            "source_passage": "Net cash flows from operating activities (A) 2,09,324 4,12,512",
+            "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+            "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+            "url_kind": "OFFICIAL_ARCHIVE",
+            "report_year": "2021-22",
+            "column_periods": [
+              "FY2021-22",
+              "FY2020-21"
+            ]
+          },
+          "investing_cash_flow": {
+            "value": -1252.7,
+            "unit": "INR_CRORE",
+            "raw_value": "(1,25,270)",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 119,
+            "column": 2,
+            "source_passage": "Net cash used in investing activities                                                                  (B) (1,64,744) (1,25,270)",
+            "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+            "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+            "url_kind": "OFFICIAL_ARCHIVE",
+            "report_year": "2021-22",
+            "column_periods": [
+              "FY2021-22",
+              "FY2020-21"
+            ]
+          },
+          "financing_cash_flow": {
+            "value": -2263.51,
+            "unit": "INR_CRORE",
+            "raw_value": "(2,26,351)",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 119,
+            "column": 2,
+            "source_passage": "Net cash used in financing activities (C) (44,208) (2,26,351)",
+            "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+            "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+            "url_kind": "OFFICIAL_ARCHIVE",
+            "report_year": "2021-22",
+            "column_periods": [
+              "FY2021-22",
+              "FY2020-21"
+            ]
+          },
+          "opening_cash": {
+            "value": 32.63,
+            "unit": "INR_CRORE",
+            "raw_value": "3,263",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 119,
+            "column": 2,
+            "source_passage": "Cash and cash equivalents at the beginning of the year 65,393 3,263",
+            "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+            "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+            "url_kind": "OFFICIAL_ARCHIVE",
+            "report_year": "2021-22",
+            "column_periods": [
+              "FY2021-22",
+              "FY2020-21"
+            ]
+          },
+          "closing_cash": {
+            "value": 653.93,
+            "unit": "INR_CRORE",
+            "raw_value": "65,393",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 119,
+            "column": 2,
+            "source_passage": "Cash and cash equivalents at the end of the year (as per Note 12) 65,765 65,393",
+            "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+            "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+            "url_kind": "OFFICIAL_ARCHIVE",
+            "report_year": "2021-22",
+            "column_periods": [
+              "FY2021-22",
+              "FY2020-21"
+            ]
+          },
+          "cash_capex": {
+            "value": 188.13,
+            "unit": "INR_CRORE",
+            "raw_value": "(18,813)",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 119,
+            "column": 2,
+            "source_passage": "Purchase of property, plant and equipments and other intangible assets including capital work-in- progress and capital advances (27,781) (18,813)",
+            "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+            "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+            "url_kind": "OFFICIAL_ARCHIVE",
+            "report_year": "2021-22",
+            "column_periods": [
+              "FY2021-22",
+              "FY2020-21"
+            ]
+          },
+          "business_combination_cash": {
+            "value": 12.39,
+            "unit": "INR_CRORE",
+            "raw_value": "1,239",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 119,
+            "column": 2,
+            "source_passage": "Add: Cash and cash equivalents acquired on account of common control business combination (refer note 47) -   1,239",
+            "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+            "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+            "url_kind": "OFFICIAL_ARCHIVE",
+            "report_year": "2021-22",
+            "column_periods": [
+              "FY2021-22",
+              "FY2020-21"
+            ]
+          }
+        },
+        "derived": {
+          "net_cash_change": 608.91,
+          "free_cash_flow": 3936.99,
+          "free_cash_flow_definition": "Operating cash flow less cash purchases of PPE/intangibles including CWIP and capital advances; excludes separately reported leasehold land and acquisitions."
+        },
+        "cash_bridge_residual": 0.0,
+        "numerical_check": "RECONCILED",
+        "review_status": "PENDING_META_REVIEW",
+        "creates_evidence": false
+      },
+      "status": "NUMERICALLY_RECONCILED_PENDING_META_REVIEW",
+      "creates_evidence": false,
+      "note": {
+        "document_hash": "dd8f906720e22e9e747d6e338ae6ab5677fbabb4158395c5cfdc2f4a4adbf7d6",
+        "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2021_22.pdf",
+        "source_url": "https://www.coromandel.biz/investors/annual-reports/",
+        "url_kind": "OFFICIAL_ARCHIVE",
+        "report_year": "2021-22",
+        "column_periods": [
+          "FY2021-22",
+          "FY2020-21"
+        ],
+        "pdf_page": 154,
+        "source_passage": "On 01 February 2021, the Board of Directors had earlier approved the proposed Scheme of Amalgamation of Liberty Pesticides \nand Fertilizers Limited (LPFL) and Coromandel SQM (India) Private Limited (CSQM) with the Company subject to approval \nof the Hon\u2019ble National Company Law Tribunal, Hyderabad (NCL T) under Section 230 and 232 of the Companies Act 2013.  \nSubsequent to 31 March 2022, the Hon\u2019ble National Company Law Tribunal, Hyderabad (NCL T) has approved the Scheme \nof Amalgamation (\u2018Scheme\u2019) of and Liberty Pesticides and Fertilizers Limited (LPFL) and Coromandel SQM (India) Private \nLimited (CSQM) (wholly owned subsidiaries) on 26 April 2022, with the Company with effect from 01 April 2021, being the \nappointed date under the said Scheme.\nThe Company has accounted for this merger under the \u201cPooling of interests\u201d method for common control transactions as \nper the requirements of Ind AS 103 \u201cBusiness Combinations\u201d. Accordingly, the company has recognised Gain on Bargain \npurchase of \u20b9 266 Lakhs and Gain on re-measurement of previously held interest of \u20b9 760 Lakhs under Other comprehensive \nincome and Gain on Bargain purchase of \u20b9 163 Lakhs in Capital reserve.\nFurther, in accordance with Ind AS 103 \u2018Business Combinations\u2019, the Company has restated the figures for previous year \npresented in the Standalone financial statements. This merger did not have material impact on Standalone financial \nstatements.",
+        "note_heading": "47 Subsequent events",
+        "reason": "Merger restatement",
+        "explanation": "The FY2021-22 report explicitly restates the prior year after the merger of LPFL and CSQM. The original and revised cash bridges explain the INR14.11 crore change. This is a change of reported basis, not evidence of cash disappearing."
+      }
+    },
+    {
+      "period": "FY2023-24",
+      "deltas_crore": {
+        "operating_cash_flow": 0.0,
+        "investing_cash_flow": -2.62,
+        "financing_cash_flow": 0.0,
+        "opening_cash": 4.45,
+        "closing_cash": 1.83,
+        "cash_capex": 0.0,
+        "business_combination_cash": 0.0
+      },
+      "original": {
+        "period": "FY2023-24",
+        "basis": "STANDALONE",
+        "facts": {
+          "operating_cash_flow": {
+            "value": 1461.78,
+            "unit": "INR_CRORE",
+            "raw_value": "1,46,178",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 137,
+            "column": 1,
+            "source_passage": "Net cash flows from operating activities  (A)  1,46,178  56,047",
+            "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2023-24",
+            "column_periods": [
+              "FY2023-24",
+              "FY2022-23"
+            ]
+          },
+          "investing_cash_flow": {
+            "value": -1321.12,
+            "unit": "INR_CRORE",
+            "raw_value": "(1,32,112)",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 137,
+            "column": 1,
+            "source_passage": "Net cash flow from / (used) in investing activities (B)  (1,32,112)  65,626",
+            "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2023-24",
+            "column_periods": [
+              "FY2023-24",
+              "FY2022-23"
+            ]
+          },
+          "financing_cash_flow": {
+            "value": -412.25,
+            "unit": "INR_CRORE",
+            "raw_value": "(41,225)",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 137,
+            "column": 1,
+            "source_passage": "Net cash used in financing activities (C)  (41,225)  (54,300)",
+            "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2023-24",
+            "column_periods": [
+              "FY2023-24",
+              "FY2022-23"
+            ]
+          },
+          "opening_cash": {
+            "value": 1331.38,
+            "unit": "INR_CRORE",
+            "raw_value": "1,33,138",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 137,
+            "column": 1,
+            "source_passage": "Cash and cash equivalents at the beginning of the year  1,33,138  65,765",
+            "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2023-24",
+            "column_periods": [
+              "FY2023-24",
+              "FY2022-23"
+            ]
+          },
+          "closing_cash": {
+            "value": 1059.79,
+            "unit": "INR_CRORE",
+            "raw_value": "1,05,979",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 137,
+            "column": 1,
+            "source_passage": "Cash and cash equivalents at the end of the year (as per Note 12)  1,05,979  1,33,138",
+            "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2023-24",
+            "column_periods": [
+              "FY2023-24",
+              "FY2022-23"
+            ]
+          },
+          "cash_capex": {
+            "value": 514.97,
+            "unit": "INR_CRORE",
+            "raw_value": "(51,497)",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 137,
+            "column": 1,
+            "source_passage": "Purchase of property, plant and equipments and other intangible assets including capital work-in-progress and capital advances (51,497)  (60,548)",
+            "document_hash": "a7bfa27e067e5d6233ac7a7f044172d1a8d01a0e7a83ebad33e5304f31411732",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2023_24.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/03/Integrated-Annual-Report-FY-2023-24.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2023-24",
+            "column_periods": [
+              "FY2023-24",
+              "FY2022-23"
+            ]
+          }
+        },
+        "derived": {
+          "net_cash_change": -271.59,
+          "free_cash_flow": 946.81,
+          "free_cash_flow_definition": "Operating cash flow less cash purchases of PPE/intangibles including CWIP and capital advances; excludes separately reported leasehold land and acquisitions."
+        },
+        "cash_bridge_residual": 0.0,
+        "numerical_check": "RECONCILED",
+        "review_status": "PENDING_META_REVIEW",
+        "creates_evidence": false
+      },
+      "revised": {
+        "period": "FY2023-24",
+        "basis": "STANDALONE",
+        "facts": {
+          "operating_cash_flow": {
+            "value": 1461.78,
+            "unit": "INR_CRORE",
+            "raw_value": "1,46,178",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 141,
+            "column": 2,
+            "source_passage": "Net cash flows from operating activities                                                          (A)  2,54,570  1,46,178",
+            "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2024-25",
+            "column_periods": [
+              "FY2024-25",
+              "FY2023-24"
+            ]
+          },
+          "investing_cash_flow": {
+            "value": -1323.74,
+            "unit": "INR_CRORE",
+            "raw_value": "(1,32,374)",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 141,
+            "column": 2,
+            "source_passage": "Net cash flow used in investing activities (B)  (2,76,897)  (1,32,374)",
+            "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2024-25",
+            "column_periods": [
+              "FY2024-25",
+              "FY2023-24"
+            ]
+          },
+          "financing_cash_flow": {
+            "value": -412.25,
+            "unit": "INR_CRORE",
+            "raw_value": "(41,225)",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 141,
+            "column": 2,
+            "source_passage": "Net cash flow used in financing activities (C)  (64,064)  (41,225)",
+            "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2024-25",
+            "column_periods": [
+              "FY2024-25",
+              "FY2023-24"
+            ]
+          },
+          "opening_cash": {
+            "value": 1335.83,
+            "unit": "INR_CRORE",
+            "raw_value": "1,33,583",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 141,
+            "column": 2,
+            "source_passage": "Cash and cash equivalents at the beginning of the year  1,06,162  1,33,583",
+            "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2024-25",
+            "column_periods": [
+              "FY2024-25",
+              "FY2023-24"
+            ]
+          },
+          "closing_cash": {
+            "value": 1061.62,
+            "unit": "INR_CRORE",
+            "raw_value": "1,06,162",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 141,
+            "column": 2,
+            "source_passage": "Cash and cash equivalents at the end of the year (as per Note 12)  19,771  1,06,162",
+            "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2024-25",
+            "column_periods": [
+              "FY2024-25",
+              "FY2023-24"
+            ]
+          },
+          "cash_capex": {
+            "value": 514.97,
+            "unit": "INR_CRORE",
+            "raw_value": "(51,497)",
+            "raw_unit": "INR_LAKH",
+            "pdf_page": 141,
+            "column": 2,
+            "source_passage": "Purchase of property, plant and equipments and other intangible assets, including capital work-in-progress and capital advances (82,964)  (51,497)",
+            "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+            "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+            "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+            "url_kind": "DIRECT_OFFICIAL_PDF",
+            "report_year": "2024-25",
+            "column_periods": [
+              "FY2024-25",
+              "FY2023-24"
+            ]
+          }
+        },
+        "derived": {
+          "net_cash_change": -274.21,
+          "free_cash_flow": 946.81,
+          "free_cash_flow_definition": "Operating cash flow less cash purchases of PPE/intangibles including CWIP and capital advances; excludes separately reported leasehold land and acquisitions."
+        },
+        "cash_bridge_residual": 0.0,
+        "numerical_check": "RECONCILED",
+        "review_status": "PENDING_META_REVIEW",
+        "creates_evidence": false
+      },
+      "status": "NUMERICALLY_RECONCILED_PENDING_META_REVIEW",
+      "creates_evidence": false,
+      "note": {
+        "document_hash": "e87fd2d5e385eba3b66d3ef029a7da83b7bfda01fed1eff95fba570097b01310",
+        "local_document": "tmp/pdfs/coromandel_integrated_annual_report_2024_25.pdf",
+        "source_url": "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf",
+        "url_kind": "DIRECT_OFFICIAL_PDF",
+        "report_year": "2024-25",
+        "column_periods": [
+          "FY2024-25",
+          "FY2023-24"
+        ],
+        "pdf_page": 168,
+        "source_passage": ", in view of improved presentation, the Company has reassessed presentation of following:\nA)  Accrued salaries and wages to employees have been reclassified under \u201cOther financial liabilities\u201d which were earlier included in trade \npayables amounting to Rs. 7,240 lakhs as at March 31, 2025 (Rs. 6,677 lakhs as at March 31, 2024).\nB)  Interest accrued on cash and cash equivalents, other bank balances and loans amounting to Rs. 8,897 Lakhs as at 31 March 2025 (Rs. \n11,269 Lakhs as at 31 March 2024) have been reclassified from other financial assets to respective aforesaid financial statement captions.\nC)  Interest accrued but not due on financial liabilities amounting to Rs. 1,651 Lakhs as at 31 March 2025 (Rs. 1,525 Lakhs as at 31 March 2024) \nhave been reclassified within other financial liabilities.\n The above changes do not impact recognition and measurement of items in the financial statements, and, consequentially, there is no \nimpact on total equity and/ or profit (loss) for the current or any of the earlier periods. Nor there is any material impact on presentation \nof cash flow statement. Considering the nature of changes, the management believes that they do not have any material impact on the \nbalance sheet at the beginning of the comparative period and, therefore, there is no need for separate presentation of third balance sheet.\nNotes forming part of the Standalone financial statements\n(\u20b9 in Lakhs, unless otherwise stated)",
+        "note_heading": "42. During the year",
+        "reason": "Accrued-interest reclassification",
+        "explanation": "Note 42 reclassifies accrued interest from other financial assets into cash, bank balances and loans. The revised FY2023-24 cash figure is INR1.83 crore higher. The note supplies the reporting explanation; the cash-specific allocation is inferred from the source-version comparison, not separately quoted by the note. The company states the reclassification does not affect profit or total equity."
+      }
+    }
+  ],
+  "limitations": [
+    "Reconciliation does not constitute META or human approval.",
+    "Figures are from explicitly mapped local report pages; source discovery for new companies is not implemented by this script.",
+    "Some source URLs resolve to the official archive rather than directly to the preserved PDF.",
+    "Cross-report basis differences require review; do not combine with PAT to calculate cash conversion before confirming comparable reporting scope."
+  ]
+}

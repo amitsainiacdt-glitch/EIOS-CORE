@@ -105,6 +105,7 @@ class ExternalObservationAdapter:
         public_fact_statement_posture: str | None = None,
         public_fact_proposal_id: str | None = None,
         public_fact_review_id: str | None = None,
+        entity_domain: str | None = None,
     ) -> Observation | None:
         """
         Convert externally obtained information into an
@@ -139,6 +140,7 @@ class ExternalObservationAdapter:
             public_fact_proposal_id=public_fact_proposal_id,
             public_fact_review_id=public_fact_review_id,
             content=description,
+            entity_domain=entity_domain,
         )
 
         duplicate = (
@@ -189,6 +191,7 @@ class ExternalObservationAdapter:
         public_fact_proposal_id,
         public_fact_review_id,
         content,
+        entity_domain,
     ) -> ObservationProvenance | None:
         """Build deterministic lineage only when runtime context is supplied."""
 
@@ -215,7 +218,7 @@ class ExternalObservationAdapter:
             return None
 
         parsed = urlparse(source)
-        classification = SourceQualityService().classify(source)
+        classification = SourceQualityService().classify(source, entity_domain=entity_domain)
         canonical_url = ObservationDeduplicationService.canonicalize_url(source)
         normalized_document_hash = (
             ObservationDeduplicationService.normalize_document_hash(

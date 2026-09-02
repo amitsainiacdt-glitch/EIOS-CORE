@@ -2,7 +2,83 @@
 
 # Everest Investment Operating System (EIOS)
 
+## 2026-09-02 — Local cash-flow extraction and review table
+
+- Added a fail-closed, page-scoped local PDF cash-flow extractor and Coromandel source mapping. Re-running `python scripts/extract_coromandel_cash_flow_history.py` extracts 48 source figures for FY2017-18 through FY2024-25 from six preserved reports. No network/provider call is used.
+- Operating, investing, financing, opening cash, closing cash and cash fixed-asset purchases are retained with original lakh values, normalized crore values, PDF pages, passages, source references and document SHA-256. Free cash flow is explicitly calculated, not presented as a quoted source figure.
+- All eight within-year cash bridges reconcile. Cross-report opening/closing differences of INR14.11 crore (FY2021-22) and INR1.83 crore (FY2024-25) remain flagged for reporting-scope/restatement review. No automatic economic explanation is asserted.
+- Output: `data/company_intelligence/coromandel/coromandel_cash_flow_review.json`. Every record remains `PENDING_META_REVIEW`, `creates_evidence: false`. It is displayed separately and is NOT merged into governed financial history or verdict inputs.
+- The local company financials page now includes an eight-year cash-flow review table, arithmetic explanation and expandable source passages. Dashboard synchronization carries this review pack without passing it into the financial interpreter.
+- Seven new extractor tests and four existing interpreter tests passed. Dashboard production build passed and `/companies/coromandel` returned HTTP200 after restart. Browser visual verification was not performed. A separate TypeScript check reports existing string-index typing errors in the company quick table and opportunities page; these remain unresolved.
+- This is a manually mapped local report import, NOT automatic source discovery for every company. META approval, review of restatements, remaining balance-sheet fields and quarterly history are still outstanding. Earlier offline cycles returning zero extracted documents must not be described as successful extraction.
+
 ## Current Project Status
+
+### Graph visibility repair (2026-09-02)
+
+- User reported only boxes, not charts. A local React server-render test confirmed the installed Recharts ComposedChart emits an empty wrapper with no SVG/bars before hydration, even with explicit dimensions. This establishes the absent server fallback, not the exact cause of the user's browser hydration failure.
+- Replaced financial-trend client charts with server-rendered quantitative SVGs using the same review data adapter. Real bars, lines, year labels and axes are included without browser JavaScript or resize measurement; narrow screens can scroll the chart. Native point titles and accessible exact-number tables remain available. No changes to approved facts/verdicts.
+- All six chart tests passed, including server SVG/bar/line presence, real negative cash flow, missing-point gaps and zero-height zero bars. Production build passed. Browser visual QA has not been performed; user confirmation remains necessary.
+
+### Financial graphs (2026-09-02)
+
+- Replaced the old percentage-height mini-bars and decorative waiting bars with four responsive, source-pack-backed charts placed before the financial tables: standalone revenue, calculated operating EBITDA, operating cash/fixed-asset purchases/calculated free cash flow, and inventory/trade receivables.
+- Selected FY2017-18–FY2024-25 history is labeled explicitly; all plotted review-pack figures remain pending META review. No governed inputs, approvals or verdicts changed. Missing/nonfinite observations stay null, lines do not bridge missing years, zero baselines and negative cash flow are preserved.
+- Added exact-value tooltips, visible legends, plain-English explanations, source-table links, and accessible expandable chart-number tables. Companies without review packs get an honest empty state, not Coromandel data or invented charts.
+- Three chart-data tests passed, including every plotted source-pack value, negative/zero/missing behavior, and input immutability. Production build passed and the restarted local company route returned HTTP200. Browser visual verification was not performed.
+- Full TypeScript check remains blocked by existing cash-flow optional-fact typing at the company page and the opportunities page string/never issue; no new chart-file diagnostics appeared. Local only; not deployed.
+
+### Operating EBITDA review display (2026-09-02)
+
+- Added the eight-year operating EBITDA calculation table at `#operating-earnings-history`, first in Financials. It shows pre-exceptional/pre-tax profit, finance costs, depreciation/amortisation, other income and the calculated result, with a separate company-reported EBITDA row. No reported values or approved analysis inputs were replaced.
+- Added pre-display checks on all 40 saved inputs: lakh/crore conversion, numeric finiteness, period/column mapping, document hash/page consistency, duplicate periods and exact calculation arithmetic. These checks are NOT META approval or independent re-reading of the PDF by an AI reviewer.
+- Supporting passages and official report/archive links are expandable. Explanation explicitly distinguishes calculated operating EBITDA from cash flow, issuer definitions and buy signals, and warns about merger/lease-accounting comparability.
+- All 39 focused tests pass, including tampered arithmetic, unit/raw-value mismatch and mixed-source rejection. Company-reported EBITDA still has seven unextracted years; an alternative calculated series is now available for all eight years. Six accounting-capex gaps and quarterly history remain unfinished. Everything remains local and pending META review.
+
+### Desktop shortcut and earnings preparation (2026-09-02)
+
+- Inspected `C:\Users\RBI\Desktop\EIOS Dashboard.lnk`: it already targets the current workspace launcher. Changed that launcher to open `/companies/coromandel?desktopRefresh=<timestamp>#financials` rather than the home page. The link itself did not need replacement. Added a non-mutating `-CheckOnly` mode; health checking retains the root URL. Launcher syntax validated and target route returned HTTP200. Desktop-browser visual testing was not performed.
+- Added local operating-earnings extraction: 40 source inputs across eight years, plus eight explicitly calculated operating EBITDA values. Formula: pre-exceptional/pre-tax profit + finance costs + depreciation/amortisation - other income. Preserves source-page/hash/column provenance, rejects ambiguous exceptional-item layouts, and distinguishes calculations from issuer-reported EBITDA.
+- Output `coromandel_operating_earnings_review.json` is pending META review, not yet connected to UI summary or governed analysis. Existing reported EBITDA/history remains untouched. All 35 focused tests pass. Accounting capex and quarterly history remain unfinished.
+
+### Note-backed borrowing review (2026-09-02)
+
+- Added borrowing-note extraction from six mapped standalone note18 pages (144,90,87,138,155,156). Each year has an explicit long-term borrowing zero, from a printed numeric row or year-bound narrative disclosure, rather than inference from an absent balance-sheet row.
+- Short-term note totals must exactly match balance-sheet current borrowings. Added a separate calculated `total_borrowings_ex_leases` field with an explicit exclusion definition; lease liabilities and other liabilities remain separate. Original analysis data is not overwritten.
+- Summary display now labels this metric Borrowings (excluding leases) and supplies eight pending-review values. Thirteen summary gaps remain: EBITDA7 and accounting capex6. Balance review has 213 directly extracted fields plus 15 calculated fields.
+- All 31 focused tests pass, including explicit-zero, missing-note, wrong-year and disagreement checks. META approval and quarterly history remain outstanding; no public deployment.
+
+### Financial-summary gaps (2026-09-02)
+
+- Diagnosed duplicate sparse summary views: newly extracted balance/cash-flow review facts were not reflected in older summary cells.
+- Added `financial_display.py` as a presentation-only layer AFTER interpretation. It fills only null cells for exact matching standalone metrics, years and crore units with hash/page-bound pending-review facts. Existing values and analysis inputs remain unchanged; capex/cash-capex and debt/current-borrowing substitutions are prohibited.
+- Connected both summary-table renderers through one shared value component. Ten gaps are now displayed in amber with Pending META badges and links to source review sections. Remaining 21 summary gaps: EBITDA7, accounting capex6, total debt8. Missing cells explain the reason on hover.
+- Four new display-layer tests plus 23 existing tests pass. Dashboard build passed. This is presentation integration, not new source extraction or META approval. Quarterly extraction remains outstanding.
+
+### Liability-detail follow-up (2026-09-02)
+
+- Expanded the eight-year review with current/non-current provisions, other financial liabilities, other liabilities and trade payables. Latest pack has 205 directly extracted facts plus seven separately labelled calculated trade-payable totals. Older single-row trade payables retain their original source value.
+- MSME and other-creditor payables are preserved separately. Calculated totals have no fabricated raw source amount; their formula is retained. Missing rows remain null. Existing four grand-total/subtotal checks continue to pass, but this is not yet a full component-to-total or note-level audit.
+- Local balance-sheet UI includes these rows and distinguishes quoted from calculated figures. All 23 focused balance-sheet/cash-flow/interpreter tests pass. META approval remains pending; no governed evidence or investment verdict was created.
+- Next: quarterly history and remaining note-level checks. Public launch remains prohibited without explicit approval.
+
+### Eight-year balance-sheet review table (2026-09-02)
+
+- Added `local_balance_sheet_extractor.py` and `scripts/extract_coromandel_balance_sheet_history.py`, using six preserved PDFs and explicitly mapped standalone pages. Extracted 142 non-null fields across FY2017-18 through FY2024-25 into `coromandel_balance_sheet_review.json`.
+- Includes assets/equity/liabilities, four current/non-current subtotals, PPE, CWIP, inventory, customer/subsidy receivables, cash, other bank balances and separately reported current/non-current borrowings and lease obligations. Missing entries remain null, not zero.
+- Four checks per year: assets = equity + liabilities; asset and liability subtotals; equality of reported grand totals. These are total checks, not proof that every statement line has been extracted or approved.
+- Old manual financial history is unchanged. Review records stay `PENDING_META_REVIEW`, `creates_evidence: false`, separate from verdict inputs. Report-vintage, restricted-deposit and merger/reclassification limitations are retained.
+- Added local `#balance-sheet-history` table with source passages, linked report references and plain-English explanation. PDF layouts for earliest/latest source years were visually inspected. Six new tests plus 15 existing cash-flow/interpreter tests pass.
+- Still needed: detailed notes and remaining line items (including trade payables/provisions), META adjudication, quarterly history and reusable source discovery. No public launch or deployment.
+
+### Cash-flow revision follow-up (2026-09-02)
+
+- Original eight-year cash values are preserved. Added two full later comparative versions and line-by-line revision comparisons, not silent replacement of earlier reports.
+- FY2021-22 Note47 (PDF154) explicitly confirms prior-year restatement following the LPFL/CSQM merger. The FY2020-21 original-to-revised closing cash difference is INR14.11 crore: opening0.27 + operating0.45 + investing0.16 + financing0.84 + acquired cash12.39. Added support for the explicitly reported business-combination cash adjustment, separate from operating cash and FCF.
+- FY2024-25 Note42 (PDF168) explains accrued-interest reclassification into cash/bank balances/loans. FY2023-24 closing cash changes by INR1.83 crore: opening4.45 + investing(-2.62), with operating and financing unchanged. The precise cash allocation is an inference from compared figures; the note quotes the aggregate reclassification and states no profit/equity effect. Both notes were inspected as rendered PDF pages.
+- Local cash-flow UI now shows the explanations, expandable notes and original-versus-revised comparison tables. All records remain pending META review and create no governed evidence or verdict.
+- The current eight-year review pack includes 49 directly extracted figures (one explicitly reported zero acquisition adjustment added), plus separate comparative versions. Parser tests cover acquisition adjustments, wrong years, broken bridges, duplicate/missing rows and not borrowing numbers from an adjacent row.
+- Remaining: mandatory META adjudication, complete balance-sheet extraction, quarterly history, reusable source discovery. This follow-up does not complete those tasks or authorize launch.
 
 Status: Active Development
 
