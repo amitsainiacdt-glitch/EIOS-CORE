@@ -5928,3 +5928,11 @@ investment decision is created by this checkpoint.
 - Rainfall deficit is classified only as a supported demand risk, not the confirmed cause of the Q1 profit decline: management reported delayed sowing and cautious sentiment, but also rainfall recovery and 13% growth in point-of-sale fertiliser volume. The dashboard shows these distinctions, official-source links, alternatives and what EIOS must monitor next.
 - This is source-backed research explanation, not human approval of the extracted financial packet. It does not clear the eight reporting-note decisions, populate governed quarterly history, change the verdict, recommend an investment or authorize a trade.
 - Validation: all 343 company-intelligence tests pass, dashboard snapshot regeneration succeeds, the production build passes, and the cause section was verified visible in the running browser.
+
+## Cause-linked automatic monitoring plan (2026-09-07)
+
+- Added a reusable monitoring-rule layer between quarterly cause research and the existing catalyst/risk engines. A rule defines its indicator, unit, favourable direction, required primary source, update cadence, improvement meaning and deterioration meaning. It remains bound to the originating company/quarter/basis cause evidence.
+- Coromandel now has six planned indicators: phosphoric-acid settlement price, NBS subsidy/input-cost coverage, NPK/DAP primary volume, crop-protection PBIT margin, seasonal rainfall deficit and relevant crop sowing acreage. The first four require official company or Department of Fertilizers evidence; weather and acreage require IMD and Agriculture Ministry primary releases.
+- Added deterministic direction evaluation for future numeric observations. It can label a new value favourable, adverse or unchanged, but explicitly cannot infer causation, materiality, durability or market mispricing from direction alone.
+- Monitoring output is structurally barred from creating a catalyst, changing a verdict or authorizing a trade. The UI displays the six indicators as awaiting their next governed update and explains the source and direction EIOS will use.
+- Validation: all 346 company-intelligence tests pass, dashboard snapshot regeneration succeeds and the production build passes. No external scheduler/provider was added and no live observation was collected in this checkpoint.

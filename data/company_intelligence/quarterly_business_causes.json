@@ -17,7 +17,11 @@
       "source_date": "2026-07-24",
       "alternative_explanations": "The accounting-line increase can also reflect product volume, mix and inventory timing. Those possibilities are not erased; the cause is confirmed because management explicitly linked the quarter's margin pressure to input prices and subsidy insufficiency.",
       "what_would_confirm": "Track Q2 phosphoric acid, ammonia and sulphur benchmarks, revised NBS rates, fertiliser segment margin and management's quantified cost bridge.",
-      "decision_boundary": "Confirmed explanation of quarterly pressure; not proof that the pressure is temporary, fully priced in, or an investment opportunity."
+      "decision_boundary": "Confirmed explanation of quarterly pressure; not proof that the pressure is temporary, fully priced in, or an investment opportunity.",
+      "monitoring_rules": [
+        {"id":"coro-phosphoric-acid-price","indicator":"Quarterly phosphoric-acid settlement price","family":"COMMODITY_INPUT","unit":"USD per tonne","favourable_direction":"DOWN","source_requirement":"Official company transcript plus independent primary commodity source","cadence":"Quarterly and on new settlement","improvement_meaning":"A sustained decline would reduce a major fertiliser input pressure if subsidy and selling prices do not fall faster.","deterioration_meaning":"A further rise would increase margin pressure unless subsidy or selling-price pass-through compensates it."},
+        {"id":"coro-nbs-cost-cover","indicator":"NBS subsidy coverage versus input-cost movement","family":"GOVERNMENT_POLICY","unit":"percentage-point coverage gap","favourable_direction":"UP","source_requirement":"Department of Fertilizers notification and verified input basket","cadence":"On every NBS notification","improvement_meaning":"A narrowing compensation gap would improve fertiliser economics.","deterioration_meaning":"A widening gap would leave more input inflation with the producer."}
+      ]
     },
     {
       "id": "coromandel-q1fy27-volume-discipline",
@@ -35,7 +39,10 @@
       "source_date": "2026-07-24",
       "alternative_explanations": "Weather-delayed demand and industry supply constraints also influenced volumes, so production discipline should not be read as the only cause of the decline.",
       "what_would_confirm": "Compare Q2 production, primary sales, point-of-sale demand and closing inventory with input-price movements.",
-      "decision_boundary": "Explains revenue quality and operating choices; does not establish future demand or margin recovery."
+      "decision_boundary": "Explains revenue quality and operating choices; does not establish future demand or margin recovery.",
+      "monitoring_rules": [
+        {"id":"coro-npk-dap-primary-volume","indicator":"NPK and DAP primary sales volume","family":"VOLUME","unit":"lakh tonnes","favourable_direction":"UP","source_requirement":"Official company sales-volume summary","cadence":"Quarterly","improvement_meaning":"Recovery with stable inventory would indicate physical activity is supporting revenue.","deterioration_meaning":"A further decline would weaken volume support and require demand-versus-discipline attribution."}
+      ]
     },
     {
       "id": "coromandel-q1fy27-crop-protection-offset",
@@ -53,7 +60,10 @@
       "source_date": "2026-07-24",
       "alternative_explanations": "One strong quarter may reflect shipment timing or favourable mix. Durability needs further quarters and cash conversion.",
       "what_would_confirm": "Check export volumes, realisations, order visibility, receivables and crop-protection margin over the next two quarters.",
-      "decision_boundary": "A demonstrated offset in this quarter; not yet proof of a durable company-wide earnings inflection."
+      "decision_boundary": "A demonstrated offset in this quarter; not yet proof of a durable company-wide earnings inflection.",
+      "monitoring_rules": [
+        {"id":"coro-cpc-pbit-margin","indicator":"Standalone crop-protection PBIT margin","family":"SEGMENT_MARGIN","unit":"percent","favourable_direction":"UP","source_requirement":"Official quarterly presentation or segment accounts","cadence":"Quarterly","improvement_meaning":"Stable or improving margin with revenue growth would support a durable offset thesis.","deterioration_meaning":"Margin reversal would suggest the Q1 mix and export benefit was temporary or weakening."}
+      ]
     },
     {
       "id": "coromandel-q1fy27-rainfall",
@@ -71,7 +81,11 @@
       "source_date": "2026-07-24",
       "alternative_explanations": "Channel inventory, product pricing and crop mix can change sales independently of rainfall. The evidence supports risk, not a proven earnings loss attributable to rain.",
       "what_would_confirm": "Use official rainfall and reservoir updates, crop sowing acreage, point-of-sale volumes and Q2 segment revenue together.",
-      "decision_boundary": "Supported demand risk only; it is not classified as the confirmed cause of Q1 profit decline."
+      "decision_boundary": "Supported demand risk only; it is not classified as the confirmed cause of Q1 profit decline.",
+      "monitoring_rules": [
+        {"id":"india-seasonal-rain-deficit","indicator":"All-India seasonal rainfall deficit","family":"WEATHER_DEMAND","unit":"percent below long-period average","favourable_direction":"DOWN","source_requirement":"India Meteorological Department primary release","cadence":"Weekly during crop season","improvement_meaning":"A falling deficit reduces one demand risk but must be checked against regional rain, reservoir and sowing data.","deterioration_meaning":"A widening deficit raises crop-area and agri-input demand risk."},
+        {"id":"india-crop-sowing-area","indicator":"Relevant crop sowing acreage versus prior year","family":"WEATHER_DEMAND","unit":"percent change","favourable_direction":"UP","source_requirement":"Ministry of Agriculture primary acreage release","cadence":"Weekly during sowing season","improvement_meaning":"Acreage recovery would support fertiliser and crop-protection demand potential.","deterioration_meaning":"A sustained acreage decline would increase demand risk, subject to crop and regional mix."}
+      ]
     }
   ]
 }

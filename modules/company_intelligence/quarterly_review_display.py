@@ -8,6 +8,7 @@ from modules.company_intelligence.quarterly_note_draft_display import attach_not
 from modules.company_intelligence.quarterly_note_human_review import QuarterlyNoteReviewLedger
 from modules.company_intelligence.quarterly_plain_english import explain_quarterly_financials
 from modules.company_intelligence.quarterly_business_causes import load_quarterly_business_causes
+from modules.company_intelligence.quarterly_cause_monitoring import build_quarterly_cause_monitoring
 
 
 def display_reporting_notes(payload, document_hash, *, basis='', period_end=''):
@@ -83,13 +84,15 @@ def load_quarterly_review_display(root, ticker):
                 url = candidate.get('source_url', '')
                 parsed = urlsplit(url)
                 safe_url = url if parsed.scheme == 'https' and parsed.hostname and not parsed.username and not parsed.password else None
+                causes = load_quarterly_business_causes(
+                    root / 'data/company_intelligence/quarterly_business_causes.json',
+                    ticker=ticker, period_end=source['period_end'], basis=source['basis'])
                 items.append({'id': candidate['candidate_id'], 'period': review['period'], 'basis': review['basis'],
                     'summary': review['reviewer_summary'], 'figures': review['figures_for_review_inr_crore'],
                     'plainEnglish': explain_quarterly_financials(
                         review, reviewed_notes, prior_comparable_figures(queue['quarterly_record_evidence'], record)),
-                    'businessCauses': load_quarterly_business_causes(
-                        root / 'data/company_intelligence/quarterly_business_causes.json',
-                        ticker=ticker, period_end=source['period_end'], basis=source['basis']),
+                    'businessCauses': causes,
+                    'causeMonitoring': build_quarterly_cause_monitoring(causes),
                     'assistantUnitReview': bool(source.get('header_evidence', {}).get('spanning_source_headers', {}).get('unit', {}).get('review_id')),
                     'checks': review['checks'], 'notChecked': review['not_checked'],
                     'reportingNotes': attach_note_drafts(root,

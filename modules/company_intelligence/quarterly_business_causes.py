@@ -23,10 +23,12 @@ def load_quarterly_business_causes(path, *, ticker, period_end, basis):
             if item['id'] in seen:
                 raise ValueError('duplicate cause id')
             seen.add(item['id'])
-            items.append({key: item[key] for key in (
+            selected = {key: item[key] for key in (
                 'id', 'cause', 'status', 'effect', 'plain_english', 'financial_link',
                 'evidence_summary', 'source_title', 'source_url', 'source_date',
-                'alternative_explanations', 'what_would_confirm', 'decision_boundary')})
+                'alternative_explanations', 'what_would_confirm', 'decision_boundary')}
+            selected['monitoring_rules'] = item.get('monitoring_rules', [])
+            items.append(selected)
         except (KeyError, TypeError, ValueError):
             invalid += 1
     confirmed = sum(item['status'] == 'CONFIRMED' for item in items)
