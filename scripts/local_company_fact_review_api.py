@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import sys
+from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from uuid import uuid4
@@ -13,6 +14,7 @@ sys.path.insert(0, str(ROOT))
 
 from scripts.record_company_fact_review import main as record_review
 from scripts.sync_local_status_dashboard import main as sync_dashboard
+from modules.company_intelligence.quarterly_note_human_review import QuarterlyNoteReviewLedger
 
 
 HOST = "127.0.0.1"
@@ -34,6 +36,8 @@ class ReviewHandler(BaseHTTPRequestHandler):
         self._json(200, {"ok": True, "service": "EIOS local fact review"})
 
     def do_POST(self):
+        if self.path == "/quarterly-note-review":
+            return self._quarterly_note_review()
         if self.path != "/review":
             return self._json(404, {"ok": False, "error": "Not found"})
         origin = self.headers.get("Origin")
@@ -71,6 +75,45 @@ class ReviewHandler(BaseHTTPRequestHandler):
             self._json(400, {"ok": False, "error": str(exc)})
         except Exception:
             self._json(500, {"ok": False, "error": "The review could not be recorded. No decision was written."})
+
+    def _quarterly_note_review(self):
+        origin = self.headers.get('Origin')
+        if origin not in ALLOWED_ORIGINS:
+            return self._json(403, {'ok': False, 'error': 'Review requests are accepted only from the local EIOS dashboard.'})
+        try:
+            size = int(self.headers.get('Content-Length', '0'))
+            if size <= 0 or size > 16_384:
+                raise ValueError('Invalid request size')
+            payload = json.loads(self.rfile.read(size))
+            queue_path = Path(str(payload.get('queuePath', ''))).resolve()
+            intake_root = (ROOT / 'data/runtime/quarterly_intake').resolve()
+            if queue_path.name != 'quarterly-candidates.json' or intake_root not in queue_path.parents:
+                raise ValueError('Invalid quarterly review packet')
+            queue = json.loads(queue_path.read_text(encoding='utf-8'))
+            note_id = str(payload.get('noteId', ''))
+            note = next((item for item in queue.get('reporting_notes', {}).get('candidates', [])
+                         if item.get('candidate_id') == note_id), None)
+            if note is None:
+                raise ValueError('Reporting note was not found in this packet')
+            record = queue.get('quarterly_record_evidence', {}).get(str(payload.get('quarterlyCandidateId', '')))
+            if not record:
+                raise ValueError('Quarterly candidate was not found in this packet')
+            source = record['source_column']
+            decision = str(payload.get('decision', '')).upper()
+            if decision not in {'APPLIES', 'DOES_NOT_APPLY', 'UNRESOLVED'}:
+                raise ValueError('Decision must be APPLIES, DOES_NOT_APPLY or UNRESOLVED')
+            receipt = QuarterlyNoteReviewLedger(ROOT / 'data/company_intelligence/quarterly_note_human_reviews.jsonl').record(
+                note, review_id=f'QNOTE-{uuid4().hex}', document_hash=source['document_hash'],
+                company=queue['company'], period_end=source['period_end'], basis=source['basis'],
+                decision=decision, rationale=str(payload.get('rationale', '')),
+                reviewed_at=datetime.now(timezone.utc), reviewer=str(payload.get('reviewer', 'EIOS_LOCAL_USER')))
+            sync_dashboard()
+            return self._json(200, {'ok': True, 'decision': receipt.decision.value,
+                                    'message': 'Reporting-note decision recorded in the append-only audit ledger.'})
+        except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
+            return self._json(400, {'ok': False, 'error': str(exc)})
+        except Exception:
+            return self._json(500, {'ok': False, 'error': 'The note review could not be recorded. No decision was written.'})
 
     def log_message(self, format, *args):
         return

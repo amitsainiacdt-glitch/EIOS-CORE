@@ -11824,10 +11824,10 @@
       "quarterlyReview": {
         "items": [
           {
-            "id": "QUARTERLY-c43888c07a73fcafa56f5b7ab6b8cf479edbbf98a08282355c4e826b675d2b71",
+            "id": "QUARTERLY-e0f358d1b940a42b3c1e0fa3a2ec8d9ab23d0f08df191743d9512dafe468973c",
             "period": "Q1-FY2027",
             "basis": "STANDALONE",
-            "summary": "The four core figures agree across the two readings and the income total reconciles. Source identity and reporting notes still need verification.",
+            "summary": "The four core figures agree across both readings and reconcile. Delivery provenance passes; reporting notes still require human review.",
             "figures": {
               "revenue": "7743.55",
               "other_income": "48.76",
@@ -11857,9 +11857,285 @@
                 "explanation": "An unresolved extraction warning cannot be cleared by this review."
               },
               {
-                "code": "OFFICIAL_SOURCE_AND_COMPANY_IDENTITY",
+                "code": "OFFICIAL_SOURCE_DELIVERY_PROVENANCE",
+                "status": "PASS",
+                "explanation": "The exact document bytes must retain a trusted direct receipt or corroborated browser-capture provenance for the official URL."
+              },
+              {
+                "code": "REPORTING_NOTES_AND_RESTATEMENTS",
                 "status": "HOLD",
-                "explanation": "Independent evidence must confirm that this exact PDF is an official filing for the selected company. A supplied URL is not a verified download."
+                "explanation": "Review the reporting notes, audit status and any restatement or balancing-quarter explanation before publication."
+              }
+            ],
+            "notChecked": [
+              "Cash flow and balance sheet completeness",
+              "Earnings quality",
+              "Historical trends",
+              "Valuation and investment verdict"
+            ],
+            "reportingNotes": {
+              "items": [
+                {
+                  "id": "61587c1573eab13f4ddbe67c4810815f91b218b2a8eee32e18bf5ca129fd3102",
+                  "topic": "LIMITED_REVIEW",
+                  "page": 2,
+                  "context": {
+                    "basisMentions": [
+                      "CONSOLIDATED",
+                      "STANDALONE"
+                    ],
+                    "dateMentions": [
+                      "2026-07-23"
+                    ],
+                    "cues": [
+                      "The passage mentions both accounting bases. Check which part concerns the figures above.",
+                      "Other dates are mentioned, but the displayed period-end date is not clearly identified. Do not treat this as a current-quarter adjustment without review."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "Notes: \nThe above unaudited standalone and consolidated financial results of Coromandcl International Limited (\"the Company\"), which have been prepared in accordance with the Indian Accounting Standards (\"Ind AS\") \nprescribed under Section 133 of the Companies Act, 2013 (\"the Act'') read with relevant rules issued thereunder, other accounting principles generally accepted in India and guidelines issued by the Securities and Exchange \nBoard of India (\"Sl•:Jll\") were reviewed and recommended by the Audit Committee and approved by the Board of Directors in their meetings held on 23 July 2026. The Statutory Auditors have carried out a limited review \nand issued unmodified reports thereon .",
+                  "question": "Check the assurance provided. A limited review must not be described as a full audit.",
+                  "humanReview": null,
+                  "assistantDraft": null
+                },
+                {
+                  "id": "7ab8196510de5e8e5cc3dfa8c8739fd7554fc7b2425eb3892bf69d54fbcc639a",
+                  "topic": "IMPAIRMENT",
+                  "page": 2,
+                  "context": {
+                    "basisMentions": [],
+                    "dateMentions": [
+                      "2026-03-31"
+                    ],
+                    "cues": [
+                      "The accounting basis is not explicit in this passage.",
+                      "Other dates are mentioned, but the displayed period-end date is not clearly identified. Do not treat this as a current-quarter adjustment without review."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "2 l•:xceptional items for the quarter and year ended 31 March 2026 represent estimated provision towards impairment of investment/goodwill relating to Company's Drones subsidiary business. This is primarily on account \nof delay in execution of certain orders.",
+                  "question": "Check the affected period and accounting basis. Do not automatically remove the charge from earnings.",
+                  "humanReview": null,
+                  "assistantDraft": null
+                },
+                {
+                  "id": "06ab53b1594a612d494b86bce2903b27e5cf935a3da22647e75d9ac290a9248b",
+                  "topic": "COMPARABILITY",
+                  "page": 2,
+                  "context": {
+                    "basisMentions": [
+                      "CONSOLIDATED"
+                    ],
+                    "dateMentions": [
+                      "2025-06-30",
+                      "2025-08-08",
+                      "2026-06-30"
+                    ],
+                    "cues": [
+                      "The text names consolidated accounts, while the figures above are standalone. Do not transfer the note automatically.",
+                      "The displayed period-end date is mentioned. Other dates may have a different role; confirm the note applies to this quarter."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "3 During the previous year, the Company acquired equity shares of NACI, Industries Limited (\"NACL'') representing 53.08% of the voting share capital of NACL. Consequently, NACL became a subsidiary of the Company \nw.c.f. 8 August 2025. The transaction was accounted in accordance with Ind AS 103 - Business Combinations. The acquisition pertains to the Company's crop protection segment. The consolidated figures for the quarter \nended 30 June 2026 may not be comparable with those for the quarter ended 30 June 2025 due to this acquisition.",
+                  "question": "Check which periods and accounting basis are affected before interpreting growth.",
+                  "humanReview": null,
+                  "assistantDraft": null
+                },
+                {
+                  "id": "07a96ddb5862bd68bdf3dff17cff154a62e933bae0ce745596a6500da251a484",
+                  "topic": "LIMITED_REVIEW",
+                  "page": 2,
+                  "context": {
+                    "basisMentions": [],
+                    "dateMentions": [
+                      "2025-12-31",
+                      "2026-03-31"
+                    ],
+                    "cues": [
+                      "The accounting basis is not explicit in this passage.",
+                      "Other dates are mentioned, but the displayed period-end date is not clearly identified. Do not treat this as a current-quarter adjustment without review."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "5 The figures of the quarter ended 31 March 2026 arc the balancing figures between the audited figures of the full financial year ended 31 March 2026 and the year to date figures upto third quarter ended 31 December 2025 \nwhich were subjected to a Limited review .",
+                  "question": "Check the assurance provided. A limited review must not be described as a full audit.",
+                  "humanReview": null,
+                  "assistantDraft": null
+                },
+                {
+                  "id": "0aa9f86c1964a09d9ec5cf70d00692dde6407326b2aa3e766896a1a03a3601f7",
+                  "topic": "BALANCING_QUARTER",
+                  "page": 2,
+                  "context": {
+                    "basisMentions": [],
+                    "dateMentions": [
+                      "2025-12-31",
+                      "2026-03-31"
+                    ],
+                    "cues": [
+                      "The accounting basis is not explicit in this passage.",
+                      "Other dates are mentioned, but the displayed period-end date is not clearly identified. Do not treat this as a current-quarter adjustment without review."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "5 The figures of the quarter ended 31 March 2026 arc the balancing figures between the audited figures of the full financial year ended 31 March 2026 and the year to date figures upto third quarter ended 31 December 2025 \nwhich were subjected to a Limited review .",
+                  "question": "Check whether the quarter is derived from full-year figures less nine-month figures.",
+                  "humanReview": null,
+                  "assistantDraft": null
+                },
+                {
+                  "id": "0561a45c8352d539f52abfae7ca0da1f5de510cf010fa62e3866cf9195a5d84e",
+                  "topic": "IMPAIRMENT",
+                  "page": 2,
+                  "context": {
+                    "basisMentions": [
+                      "CONSOLIDATED",
+                      "STANDALONE"
+                    ],
+                    "dateMentions": [
+                      "2026-03-31"
+                    ],
+                    "cues": [
+                      "The passage mentions both accounting bases. Check which part concerns the figures above.",
+                      "Other dates are mentioned, but the displayed period-end date is not clearly identified. Do not treat this as a current-quarter adjustment without review."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "30 June 31March 30 June 31March 30June 31March 30June 31March \n2026 2026 2025 2026 2026 2026 2025 2026 \nSegment revenue \na, Nutrient and other allied business 6,910.49 4,~70.83 6,311.1 I 27,692.87 6,951.03 4,952.50 6,351.73 27,726.87 \nb. Crop protection 870.08 715.16 724.-19 3,053.60 1,250.76 1,076.25 724.85 3,968.25 \nTotal 7,780.57 5,685.99 7,035.60 30,746.47 8,201.79 6,028.75 7,076.58 31,695.12 \nI .css: lntcr-~cbl'fficnt rc,•cnuc 37.02 25.09 34.28 215.58 37.02 25.09 34.28 215.58 \nRevenue from operations 7,743.55 5,660.90 7,001.32 30,530.89 8,164.77 6,003.66 7,042.30 31,479.54 \nSegment results \na. Nutrient and other allied busines s :.i-- 469.88 223.30 636.68 2,473.64 478.91 2+4.44 629.48 2,463.86 \nb. Crop protcction 158,81 137.94 110.64 568.80 170.15 120.29 111.16 510.81 \nTotal 628.69 361.24 747.32 3,042.44 649.06 364.73 740.64 2,974.67 \nAdjusted for. \na Unallocable expense (96.17) (112.24) (79.10) (362.79) (96.17) (11224) (79.10) (362.79) \nb. J o'inancc costs (75.94) (74.92) (65.28) (287.39) (89.02) (89.32) (67.96) (342,59) \nc. Other income 48.76 87,35 81.60 350.62 49.81 64.50 83.74 347.91 \nd, Share in loss of joint venture and associates - (0.02} (0.04} (0.06) \nProfit before tax 505.34 261.43 684.54 2,742.88 513.68 227.65 677.28 2,617.14 \n\"\" after rcCO!,'Tlising impairment charge of Rs. 125.15 crorcs and Rs 70.56 crorcs in standalone and consolidated financial results respectively for the quarter and year ended 31 March 2026 (refer note 2)",
+                  "question": "Check the affected period and accounting basis. Do not automatically remove the charge from earnings.",
+                  "humanReview": null,
+                  "assistantDraft": null
+                },
+                {
+                  "id": "b2997c302af7b201745314af33016f4b00788146094300310ee25ea7d3a84157",
+                  "topic": "LIMITED_REVIEW",
+                  "page": 4,
+                  "context": {
+                    "basisMentions": [],
+                    "dateMentions": [],
+                    "cues": [
+                      "The accounting basis is not explicit in this passage.",
+                      "No complete date was recognised. Read the original passage before assigning it to a quarter."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "3. We conducted our review of the Statement in accordance with the Standard on Review Engagements \n(SRE) 2410, \"Review of Interim Financial Information Performed by the Independent Auditor of the \nEntity\" issued by the Institute of Chartered Accountants of India. This standard requires that we plan \nand perform the review to obtain moderate assurance as to whether the Statement is free of material \nmisstatement. A review of interim financial information consists of making inquiries, primarily of \npersons responsible for financial and accounting matters, and applying analytical and other review \nprocedures. A review is substantially less in scope than an audit conducted in accordance with Standards \non Auditing and consequently does not enable us to obtain assurance that we would become aware of \nall significant matters that might be identified in an audit. Accordingly, we do not express an audit \nopinion.",
+                  "question": "Check the assurance provided. A limited review must not be described as a full audit.",
+                  "humanReview": null,
+                  "assistantDraft": null
+                },
+                {
+                  "id": "cc63707eae556b287771a4d44d6673e90797a61865aaa33e0fa99d093d1d3da1",
+                  "topic": "LIMITED_REVIEW",
+                  "page": 5,
+                  "context": {
+                    "basisMentions": [],
+                    "dateMentions": [],
+                    "cues": [
+                      "The accounting basis is not explicit in this passage.",
+                      "No complete date was recognised. Read the original passage before assigning it to a quarter."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "3. We conducted our review of the Statement in accordance with the Standard on Review Engagements \n(SRE) 2410, \"Review of Interim Financial Information Performed by the Independent Auditor of the \nEntity\" issued by the Institute of Chartered Accountants of India. This standard requires that we plan and \nperform the review to obtain moderate assurance as to whether the Statement is free of material \nmisstatement. A review of interim financial information consists of making inquiries, primarily of persons \nresponsible for financial and accounting matters, and applying analytical and other review procedures. A \nreview is substantially less in scope than an audit conducted in accordance with Standards on Auditing and \nconsequently does not enable us to obtain assurance that we would become aware of all significant matters \nthat might be identified in an audit. Accordingly, we do not express an audit opinion. \nWe also performed procedures in accordance with the Master Circular issued by the Securities and \nExchange Board of India under Regulation 33(8) of the Listing Regulations, to the extent applicable.",
+                  "question": "Check the assurance provided. A limited review must not be described as a full audit.",
+                  "humanReview": null,
+                  "assistantDraft": null
+                }
+              ],
+              "invalidCount": 0
+            },
+            "queuePath": "C:\\Users\\RBI\\Desktop\\EIOS\\data\\runtime\\quarterly_intake\\9ed529593ae80c64f0e37f8029545a0efe1223f6f6a5eb3963ab4c613bbde079\\205e8b8bef4f44e9ba04bb3b5a2852f1\\quarterly-candidates.json",
+            "periodEnd": "2026-06-30",
+            "sourceUrl": "https://www.coromandel.biz/wp-content/uploads/2026/07/Q1-results-1.pdf",
+            "sourcePage": 1,
+            "documentHash": "9ed529593ae80c64f0e37f8029545a0efe1223f6f6a5eb3963ab4c613bbde079",
+            "readings": [
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "(a) Revenue from operations",
+                "native_text": "7,743.55",
+                "ocr_text": "7,743.55",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "(b) Other income",
+                "native_text": "48.76",
+                "ocr_text": "48.76",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "Total income",
+                "native_text": "7,792.31",
+                "ocr_text": "7,792.31",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "9 Net profit after tax (7-8)",
+                "native_text": "376.96",
+                "ocr_text": "376.96",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              }
+            ],
+            "status": "HOLD_FOR_REPORTING_NOTE_REVIEW"
+          },
+          {
+            "id": "QUARTERLY-c43888c07a73fcafa56f5b7ab6b8cf479edbbf98a08282355c4e826b675d2b71",
+            "period": "Q1-FY2027",
+            "basis": "STANDALONE",
+            "summary": "The four core figures agree across both readings and reconcile. Source delivery and reporting notes still require review.",
+            "figures": {
+              "revenue": "7743.55",
+              "other_income": "48.76",
+              "total_income": "7792.31",
+              "pat": "376.96"
+            },
+            "assistantUnitReview": true,
+            "checks": [
+              {
+                "code": "PERIOD_BASIS_UNIT_AND_TOTALS",
+                "status": "PASS",
+                "explanation": "Check the printed quarter, standalone/consolidated basis, currency scale and income arithmetic together."
+              },
+              {
+                "code": "NORMALIZED_VALUES_MATCH",
+                "status": "PASS",
+                "explanation": "The saved figures must equal a fresh calculation from the source cells."
+              },
+              {
+                "code": "FOUR_CORE_SOURCE_READINGS",
+                "status": "PASS",
+                "explanation": "Revenue, other income, total income and total net profit must retain matching text/image readings from the same column."
+              },
+              {
+                "code": "EXTRACTION_CANDIDATE_CHECKED",
+                "status": "PASS",
+                "explanation": "An unresolved extraction warning cannot be cleared by this review."
+              },
+              {
+                "code": "OFFICIAL_SOURCE_DELIVERY_PROVENANCE",
+                "status": "HOLD",
+                "explanation": "The exact document bytes must retain a trusted direct receipt or corroborated browser-capture provenance for the official URL."
               },
               {
                 "code": "REPORTING_NOTES_AND_RESTATEMENTS",
@@ -11896,6 +12172,7 @@
                   },
                   "passage": "Notes: \nThe above unaudited standalone and consolidated financial results of Coromandcl International Limited (\"the Company\"), which have been prepared in accordance with the Indian Accounting Standards (\"Ind AS\") \nprescribed under Section 133 of the Companies Act, 2013 (\"the Act'') read with relevant rules issued thereunder, other accounting principles generally accepted in India and guidelines issued by the Securities and Exchange \nBoard of India (\"Sl•:Jll\") were reviewed and recommended by the Audit Committee and approved by the Board of Directors in their meetings held on 23 July 2026. The Statutory Auditors have carried out a limited review \nand issued unmodified reports thereon .",
                   "question": "Check the assurance provided. A limited review must not be described as a full audit.",
+                  "humanReview": null,
                   "assistantDraft": {
                     "explanation": "The note reports limited review with unmodified reports. This is not a full annual audit or a guarantee of financial strength.",
                     "status": "ASSISTANT_DRAFT_NOT_APPROVED"
@@ -11919,6 +12196,7 @@
                   },
                   "passage": "2 l•:xceptional items for the quarter and year ended 31 March 2026 represent estimated provision towards impairment of investment/goodwill relating to Company's Drones subsidiary business. This is primarily on account \nof delay in execution of certain orders.",
                   "question": "Check the affected period and accounting basis. Do not automatically remove the charge from earnings.",
+                  "humanReview": null,
                   "assistantDraft": {
                     "explanation": "The drone-business impairment relates to March quarter and year-end. Do not subtract it again from June earnings or equate a rebound with underlying improvement.",
                     "status": "ASSISTANT_DRAFT_NOT_APPROVED"
@@ -11946,6 +12224,7 @@
                   },
                   "passage": "3 During the previous year, the Company acquired equity shares of NACI, Industries Limited (\"NACL'') representing 53.08% of the voting share capital of NACL. Consequently, NACL became a subsidiary of the Company \nw.c.f. 8 August 2025. The transaction was accounted in accordance with Ind AS 103 - Business Combinations. The acquisition pertains to the Company's crop protection segment. The consolidated figures for the quarter \nended 30 June 2026 may not be comparable with those for the quarter ended 30 June 2025 due to this acquisition.",
                   "question": "Check which periods and accounting basis are affected before interpreting growth.",
+                  "humanReview": null,
                   "assistantDraft": {
                     "explanation": "NACL's acquisition changes group composition. Consolidated growth is not necessarily organic growth; do not transfer this specific comparability warning automatically to standalone figures.",
                     "status": "ASSISTANT_DRAFT_NOT_APPROVED"
@@ -11970,6 +12249,7 @@
                   },
                   "passage": "5 The figures of the quarter ended 31 March 2026 arc the balancing figures between the audited figures of the full financial year ended 31 March 2026 and the year to date figures upto third quarter ended 31 December 2025 \nwhich were subjected to a Limited review .",
                   "question": "Check the assurance provided. A limited review must not be described as a full audit.",
+                  "humanReview": null,
                   "assistantDraft": null
                 },
                 {
@@ -11991,6 +12271,7 @@
                   },
                   "passage": "5 The figures of the quarter ended 31 March 2026 arc the balancing figures between the audited figures of the full financial year ended 31 March 2026 and the year to date figures upto third quarter ended 31 December 2025 \nwhich were subjected to a Limited review .",
                   "question": "Check whether the quarter is derived from full-year figures less nine-month figures.",
+                  "humanReview": null,
                   "assistantDraft": {
                     "explanation": "March is annual results minus nine-month results. Explain this construction when comparing June with March; it is not a restatement by itself.",
                     "status": "ASSISTANT_DRAFT_NOT_APPROVED"
@@ -12017,6 +12298,7 @@
                   },
                   "passage": "30 June 31March 30 June 31March 30June 31March 30June 31March \n2026 2026 2025 2026 2026 2026 2025 2026 \nSegment revenue \na, Nutrient and other allied business 6,910.49 4,~70.83 6,311.1 I 27,692.87 6,951.03 4,952.50 6,351.73 27,726.87 \nb. Crop protection 870.08 715.16 724.-19 3,053.60 1,250.76 1,076.25 724.85 3,968.25 \nTotal 7,780.57 5,685.99 7,035.60 30,746.47 8,201.79 6,028.75 7,076.58 31,695.12 \nI .css: lntcr-~cbl'fficnt rc,•cnuc 37.02 25.09 34.28 215.58 37.02 25.09 34.28 215.58 \nRevenue from operations 7,743.55 5,660.90 7,001.32 30,530.89 8,164.77 6,003.66 7,042.30 31,479.54 \nSegment results \na. Nutrient and other allied busines s :.i-- 469.88 223.30 636.68 2,473.64 478.91 2+4.44 629.48 2,463.86 \nb. Crop protcction 158,81 137.94 110.64 568.80 170.15 120.29 111.16 510.81 \nTotal 628.69 361.24 747.32 3,042.44 649.06 364.73 740.64 2,974.67 \nAdjusted for. \na Unallocable expense (96.17) (112.24) (79.10) (362.79) (96.17) (11224) (79.10) (362.79) \nb. J o'inancc costs (75.94) (74.92) (65.28) (287.39) (89.02) (89.32) (67.96) (342,59) \nc. Other income 48.76 87,35 81.60 350.62 49.81 64.50 83.74 347.91 \nd, Share in loss of joint venture and associates - (0.02} (0.04} (0.06) \nProfit before tax 505.34 261.43 684.54 2,742.88 513.68 227.65 677.28 2,617.14 \n\"\" after rcCO!,'Tlising impairment charge of Rs. 125.15 crorcs and Rs 70.56 crorcs in standalone and consolidated financial results respectively for the quarter and year ended 31 March 2026 (refer note 2)",
                   "question": "Check the affected period and accounting basis. Do not automatically remove the charge from earnings.",
+                  "humanReview": null,
                   "assistantDraft": null
                 },
                 {
@@ -12035,6 +12317,7 @@
                   },
                   "passage": "3. We conducted our review of the Statement in accordance with the Standard on Review Engagements \n(SRE) 2410, \"Review of Interim Financial Information Performed by the Independent Auditor of the \nEntity\" issued by the Institute of Chartered Accountants of India. This standard requires that we plan \nand perform the review to obtain moderate assurance as to whether the Statement is free of material \nmisstatement. A review of interim financial information consists of making inquiries, primarily of \npersons responsible for financial and accounting matters, and applying analytical and other review \nprocedures. A review is substantially less in scope than an audit conducted in accordance with Standards \non Auditing and consequently does not enable us to obtain assurance that we would become aware of \nall significant matters that might be identified in an audit. Accordingly, we do not express an audit \nopinion.",
                   "question": "Check the assurance provided. A limited review must not be described as a full audit.",
+                  "humanReview": null,
                   "assistantDraft": null
                 },
                 {
@@ -12053,11 +12336,14 @@
                   },
                   "passage": "3. We conducted our review of the Statement in accordance with the Standard on Review Engagements \n(SRE) 2410, \"Review of Interim Financial Information Performed by the Independent Auditor of the \nEntity\" issued by the Institute of Chartered Accountants of India. This standard requires that we plan and \nperform the review to obtain moderate assurance as to whether the Statement is free of material \nmisstatement. A review of interim financial information consists of making inquiries, primarily of persons \nresponsible for financial and accounting matters, and applying analytical and other review procedures. A \nreview is substantially less in scope than an audit conducted in accordance with Standards on Auditing and \nconsequently does not enable us to obtain assurance that we would become aware of all significant matters \nthat might be identified in an audit. Accordingly, we do not express an audit opinion. \nWe also performed procedures in accordance with the Master Circular issued by the Securities and \nExchange Board of India under Regulation 33(8) of the Listing Regulations, to the extent applicable.",
                   "question": "Check the assurance provided. A limited review must not be described as a full audit.",
+                  "humanReview": null,
                   "assistantDraft": null
                 }
               ],
               "invalidCount": 0
             },
+            "queuePath": "C:\\Users\\RBI\\Desktop\\EIOS\\data\\runtime\\quarterly_intake\\17b16806779abafa77ed78665e5e0389fd6acc2eb63b4d0189e1e4fd3f0c2aab\\1e3613737d214a69866867011eaa6334\\quarterly-candidates.json",
+            "periodEnd": "2026-06-30",
             "sourceUrl": "https://www.coromandel.biz/wp-content/uploads/2026/07/Q1-results-1.pdf",
             "sourcePage": 1,
             "documentHash": "17b16806779abafa77ed78665e5e0389fd6acc2eb63b4d0189e1e4fd3f0c2aab",
@@ -12099,7 +12385,7 @@
                 "creates_approved_facts": false
               }
             ],
-            "status": "UNAPPROVED_REVIEW_ONLY"
+            "status": "HOLD_FOR_SOURCE_AND_FINANCIAL_REVIEW"
           }
         ],
         "invalidPacketCount": 0,

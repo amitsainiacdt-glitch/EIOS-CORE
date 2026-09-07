@@ -1,10 +1,13 @@
+'use client';
+import { useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 type Review = { items: { id: string; period: string; basis: string; summary: string;
   figures: Record<string, string>; checks: { code: string; status: string; explanation: string }[];
   notChecked: string[]; sourceUrl: string | null; sourcePage: number; documentHash: string; assistantUnitReview: boolean;
-  reportingNotes: { items: { id: string; topic: string; page: number; passage: string; question: string;
+  queuePath: string; periodEnd: string; reportingNotes: { items: { id: string; topic: string; page: number; passage: string; question: string;
     assistantDraft?: { explanation: string; status: string } | null;
+    humanReview?: { decision: string; rationale: string; reviewer: string; reviewed_at: string } | null;
     context: { cues: string[]; dateMentions: string[]; basisMentions: string[] } }[]; invalidCount: number };
   readings: { row_label: string; native_text: string; ocr_text: string; status: string }[] }[];
   invalidPacketCount: number };
@@ -12,6 +15,20 @@ const labels: Record<string, string> = { revenue: 'Revenue', other_income: 'Othe
 const noteLabels: Record<string, string> = { LIMITED_REVIEW: 'Audit and review scope', COMPARABILITY: 'Can the periods be compared?', BALANCING_QUARTER: 'How the quarter was calculated', IMPAIRMENT: 'Impairment and exceptional charges', RESTATEMENT_OR_REGROUPING: 'Restatements and regrouping' };
 
 export function QuarterlyReview({ review }: { review: Review }) {
+  const [editing, setEditing] = useState<{ itemId: string; noteId: string; queuePath: string; decision: string } | null>(null);
+  const [rationale, setRationale] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [feedback, setFeedback] = useState<Record<string,string>>({});
+  async function submit() {
+    if (!editing || rationale.trim().length < 10) return;
+    setBusy(true);
+    try {
+      const response = await fetch('http://127.0.0.1:3001/quarterly-note-review', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ queuePath: editing.queuePath, quarterlyCandidateId: editing.itemId, noteId: editing.noteId, decision: editing.decision, rationale: rationale.trim(), reviewer: 'EIOS_LOCAL_USER' }) });
+      const body = await response.json() as { error?: string }; if (!response.ok) throw new Error(body.error || 'Review failed');
+      setFeedback(current => ({...current, [editing.noteId]: `${editing.decision.replaceAll('_',' ')} recorded — refresh to recompute the hold`})); setEditing(null); setRationale('');
+    } catch (error) { setFeedback(current => ({...current, [editing.noteId]: error instanceof Error ? error.message : 'Review service unavailable'})); }
+    finally { setBusy(false); }
+  }
   return <section id="quarterly-review" className="scroll-mt-32 rounded-xl border border-amber-300/20 bg-[#0a171a] p-5 mt-6 text-base text-slate-200">
     <h2 className="text-xl font-semibold text-white">Quarterly review</h2>
     <p className="mt-2 text-amber-200">Unapproved research · Not included in financial history, charts or the investment verdict.</p>
@@ -35,7 +52,7 @@ export function QuarterlyReview({ review }: { review: Review }) {
         {!item.reportingNotes.items.length && <p className="mt-3 text-slate-400">No reporting-note passages are available here. This does not mean the report has no qualifications or adjustments.</p>}
         {item.reportingNotes.invalidCount > 0 && <p className="mt-3 text-amber-200">Some note references were withheld because their source details were incomplete.</p>}
         <div className="mt-4 grid gap-3 lg:grid-cols-2">{item.reportingNotes.items.map(note => <details key={note.id} className="min-w-0 rounded-lg border border-white/10 bg-black/10 p-4">
-          <summary className="cursor-pointer font-medium text-sky-200">{noteLabels[note.topic] ?? 'Reporting note'} · Page {note.page}<span className="mt-1 block text-sm text-amber-200">{note.assistantDraft ? 'Draft explanation available — awaiting review' : 'Unreviewed passage'}</span></summary>
+          <summary className="cursor-pointer font-medium text-sky-200">{noteLabels[note.topic] ?? 'Reporting note'} · Page {note.page}<span className={`mt-1 block text-sm ${note.humanReview ? 'text-emerald-200' : 'text-amber-200'}`}>{feedback[note.id] || (note.humanReview ? `Human decision: ${note.humanReview.decision.replaceAll('_',' ')}` : note.assistantDraft ? 'Draft explanation available — awaiting review' : 'Unreviewed passage')}</span></summary>
           {note.assistantDraft && <div className="mt-4 rounded-md border border-amber-300/20 bg-amber-300/5 p-4">
             <p className="font-medium text-amber-200">In plain English — assistant research draft</p>
             <p className="mt-2 leading-7">{note.assistantDraft.explanation}</p>
@@ -49,6 +66,7 @@ export function QuarterlyReview({ review }: { review: Review }) {
           </div>
           <p className="mt-3 text-sm text-slate-400">Extracted source text — may contain reading errors:</p>
           <blockquote className="mt-2 max-h-80 overflow-auto whitespace-pre-wrap break-words border-l-2 border-slate-500 pl-3 text-base leading-7 text-slate-300">{note.passage}</blockquote>
+          {note.humanReview ? <div className="mt-3 rounded-md border border-emerald-300/15 bg-emerald-300/5 p-3"><p className="font-medium text-emerald-200">Reviewed: {note.humanReview.decision.replaceAll('_',' ')}</p><p className="mt-1 text-sm text-slate-300">{note.humanReview.rationale}</p></div> : <div className="mt-3"><p className="mb-2 text-sm text-slate-400">Does this note apply to the {item.basis.toLowerCase()} quarter ending {item.periodEnd}?</p><div className="flex flex-wrap gap-2">{[['APPLIES','Applies'],['DOES_NOT_APPLY','Does not apply'],['UNRESOLVED','Still uncertain']].map(([decision,label]) => <button key={decision} onClick={() => {setEditing({itemId:item.id,noteId:note.id,queuePath:item.queuePath,decision});setRationale('')}} className="rounded-md border border-white/10 px-3 py-2 text-sm text-slate-200">{label}</button>)}</div>{editing?.noteId === note.id && <div className="mt-3"><textarea rows={3} value={rationale} onChange={event => setRationale(event.target.value)} placeholder="Explain what you checked and why…" className="w-full rounded-md border border-white/10 bg-black/20 p-3 text-sm text-white"/><button disabled={busy || rationale.trim().length < 10} onClick={submit} className="mt-2 rounded-md bg-emerald-300 px-3 py-2 text-sm font-semibold text-[#071114] disabled:opacity-40">{busy ? 'Recording…' : 'Confirm decision'}</button></div>}</div>}
           {item.sourceUrl && <a className="mt-3 inline-block text-sm text-sky-300 underline" href={`${item.sourceUrl.split('#')[0]}#page=${note.page}`} target="_blank" rel="noreferrer">Open supplied filing at page {note.page} — origin unverified</a>}
         </details>)}</div>
       </div>

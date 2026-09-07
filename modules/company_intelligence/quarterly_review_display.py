@@ -5,6 +5,7 @@ from urllib.parse import urlsplit
 from modules.company_intelligence.quarterly_financial_review import assess_quarterly_financials
 from modules.company_intelligence.quarterly_note_context import note_context
 from modules.company_intelligence.quarterly_note_draft_display import attach_note_drafts
+from modules.company_intelligence.quarterly_note_human_review import QuarterlyNoteReviewLedger
 
 
 def display_reporting_notes(payload, document_hash, *, basis='', period_end=''):
@@ -21,12 +22,14 @@ def display_reporting_notes(payload, document_hash, *, basis='', period_end=''):
         seen.add(note['candidate_id'])
         items.append({'id': note['candidate_id'], 'topic': note['topic'], 'page': note['pdf_page'],
                       'context': note_context(note['source_passage'], basis=basis, period_end=period_end),
-                      'passage': note['source_passage'], 'question': note['review_question']})
+                      'passage': note['source_passage'], 'question': note['review_question'],
+                      'humanReview': note.get('human_review')})
     return {'items': items, 'invalidCount': invalid}
 
 
 def load_quarterly_review_display(root, ticker):
     directory = root / 'data/runtime/quarterly_intake'
+    note_ledger = QuarterlyNoteReviewLedger(root / 'data/company_intelligence/quarterly_note_human_reviews.jsonl')
     items, seen, invalid = [], set(), 0
     for path in sorted(directory.rglob('quarterly-candidates.json'), key=lambda p: p.stat().st_mtime, reverse=True):
         try:
@@ -48,7 +51,10 @@ def load_quarterly_review_display(root, ticker):
                 if identity in seen:
                     continue
                 seen.add(identity)
-                review = assess_quarterly_financials(record)
+                reviewed_notes = note_ledger.apply(queue.get('reporting_notes', {'candidates': []}),
+                    document_hash=digest, company=queue['company'], period_end=source['period_end'], basis=source['basis'])
+                review = assess_quarterly_financials(record, source_verification=queue.get('source_verification'),
+                                                     reporting_notes=reviewed_notes)
                 url = candidate.get('source_url', '')
                 parsed = urlsplit(url)
                 safe_url = url if parsed.scheme == 'https' and parsed.hostname and not parsed.username and not parsed.password else None
@@ -57,11 +63,12 @@ def load_quarterly_review_display(root, ticker):
                     'assistantUnitReview': bool(source.get('header_evidence', {}).get('spanning_source_headers', {}).get('unit', {}).get('review_id')),
                     'checks': review['checks'], 'notChecked': review['not_checked'],
                     'reportingNotes': attach_note_drafts(root,
-                        display_reporting_notes(queue.get('reporting_notes', {}), digest,
+                        display_reporting_notes(reviewed_notes, digest,
                                                 basis=source['basis'], period_end=source['period_end']),
                         ticker=ticker, document_hash=digest, period_end=source['period_end']),
+                    'queuePath': str(path.resolve()), 'periodEnd': source['period_end'],
                     'sourceUrl': safe_url, 'sourcePage': source['pdf_page'], 'documentHash': digest,
-                    'readings': source.get('raw_readings', []), 'status': 'UNAPPROVED_REVIEW_ONLY'})
+                    'readings': source.get('raw_readings', []), 'status': review['decision']})
         except (OSError, ValueError, KeyError, TypeError):
             invalid += 1
     return {'items': items, 'invalidPacketCount': invalid, 'changesVerdict': False}
