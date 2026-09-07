@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
-from modules.company_intelligence.quarterly_review_display import load_quarterly_review_display, display_reporting_notes
+from modules.company_intelligence.quarterly_review_display import load_quarterly_review_display, display_reporting_notes, prior_comparable_figures
 
 
 class QuarterlyDisplayTests(unittest.TestCase):
@@ -22,6 +22,14 @@ class QuarterlyDisplayTests(unittest.TestCase):
 
     def test_duplicate_note_not_repeated(self):
         self.assertEqual(len(display_reporting_notes({'candidates': [self.note(), self.note()]}, 'a'*64)['items']), 1)
+
+    def test_prior_comparable_requires_same_quarter_and_basis(self):
+        current={'source_column':{'quarter':'Q1-FY2027','basis':'STANDALONE'}}
+        prior={'status':'CHECKED_PENDING_REVIEW','source_column':{'quarter':'Q1-FY2026','basis':'STANDALONE'},
+               'values_inr_crore':{'revenue':'80','pat':'6'}}
+        self.assertEqual(prior_comparable_figures({'current':current,'prior':prior},current),{'revenue':'80','pat':'6'})
+        prior['source_column']['basis']='CONSOLIDATED'
+        self.assertIsNone(prior_comparable_figures({'current':current,'prior':prior},current))
 
     def test_empty_workspace_has_no_candidate_values(self):
         with TemporaryDirectory() as folder:

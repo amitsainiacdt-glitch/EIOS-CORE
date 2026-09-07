@@ -25,9 +25,18 @@ def assess_quarterly_financials(record, *, source_verification=None, reporting_n
         try:
             native = numeric_reading(reading.get('native_text', ''))
             ocr = numeric_reading(reading.get('ocr_text', ''))
-            readings_ok = readings_ok and (
-                reading.get('status') == 'READINGS_AGREE_PENDING_REVIEW' and native is not None
-                and native == ocr == Decimal(str(cell.get('value')))
+            value = Decimal(str(cell.get('value')))
+            direct = reading.get('status') == 'READINGS_AGREE_PENDING_REVIEW' and native is not None and native == ocr == value
+            triangulated = (reading.get('status') == 'ARITHMETICALLY_TRIANGULATED_PENDING_REVIEW'
+                and value in {candidate for candidate in (native, ocr) if candidate is not None}
+                and reading.get('selected_value') == str(value)
+                and reading.get('selected_reading') in {'NATIVE','OCR'}
+                and reading.get('triangulation', {}).get('method') == 'REVENUE_PLUS_OTHER_INCOME_EQUALS_TOTAL_INCOME'
+                and source.get('cells', {}).get('revenue') and source.get('cells', {}).get('other_income')
+                and source.get('cells', {}).get('total_income')
+                and abs(Decimal(str(source['cells']['revenue']['value'])) + Decimal(str(source['cells']['other_income']['value']))
+                        - Decimal(str(source['cells']['total_income']['value']))) <= Decimal('0.02'))
+            readings_ok = readings_ok and ((direct or triangulated)
                 and reading.get('pdf_page') == source.get('pdf_page')
                 and reading.get('column_index') == source.get('column_index'))
         except (InvalidOperation, ValueError, TypeError):

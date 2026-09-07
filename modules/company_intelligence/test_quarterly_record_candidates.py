@@ -3,6 +3,26 @@ from modules.company_intelligence.quarterly_record_candidates import build_recor
 
 
 class RecordCandidateTests(unittest.TestCase):
+    def test_complementary_readings_can_be_uniquely_triangulated_by_total(self):
+        page, receipt, ticker, digest = self.fixture()
+        revenue = next(c for c in receipt['comparison']['cells'] if c['column_index'] == 0 and 'Revenue' in c['row_label'])
+        other = next(c for c in receipt['comparison']['cells'] if c['column_index'] == 0 and 'Other income' in c['row_label'])
+        revenue['native_text'] = 'unreadable'; revenue['status'] = 'HOLD_UNREADABLE_OR_MISSING'
+        other['ocr_text'] = 'unreadable'; other['status'] = 'HOLD_UNREADABLE_OR_MISSING'
+        result = build_record_candidates(page, receipt, ticker, digest)['records'][0]
+        self.assertEqual(result['status'], 'CHECKED_PENDING_REVIEW')
+        self.assertEqual(result['source_column']['cells']['revenue']['source_reading']['selected_reading'], 'OCR')
+        self.assertEqual(result['source_column']['cells']['other_income']['source_reading']['selected_reading'], 'NATIVE')
+
+    def test_triangulation_rejects_values_that_do_not_explain_total(self):
+        page, receipt, ticker, digest = self.fixture()
+        revenue = next(c for c in receipt['comparison']['cells'] if c['column_index'] == 0 and 'Revenue' in c['row_label'])
+        other = next(c for c in receipt['comparison']['cells'] if c['column_index'] == 0 and 'Other income' in c['row_label'])
+        revenue['native_text'] = 'unreadable'; revenue['ocr_text'] = '999'; revenue['status'] = 'HOLD_UNREADABLE_OR_MISSING'
+        other['ocr_text'] = 'unreadable'; other['status'] = 'HOLD_UNREADABLE_OR_MISSING'
+        result = build_record_candidates(page, receipt, ticker, digest)['records'][0]
+        self.assertEqual(result['status'], 'HOLD')
+        self.assertIn('UNRESOLVED_CELL:revenue', result['issues'])
     def fixture(self):
         digest = 'a' * 64
         column = {'column_index': 0, 'x_bounds': [10,60]}

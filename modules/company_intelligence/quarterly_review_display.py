@@ -28,10 +28,27 @@ def display_reporting_notes(payload, document_hash, *, basis='', period_end=''):
     return {'items': items, 'invalidCount': invalid}
 
 
+def prior_comparable_figures(records, current):
+    source = current.get('source_column', {})
+    try:
+        quarter, fiscal = source['quarter'].split('-FY')
+        target = f'{quarter}-FY{int(fiscal)-1}'
+    except (KeyError, ValueError, AttributeError):
+        return None
+    matches = [item for item in records.values() if item is not current
+               and item.get('status') == 'CHECKED_PENDING_REVIEW'
+               and item.get('source_column', {}).get('quarter') == target
+               and item.get('source_column', {}).get('basis') == source.get('basis')]
+    if len(matches) != 1:
+        return None
+    values = matches[0].get('values_inr_crore', {})
+    return values if all(key in values for key in ('revenue','pat')) else None
+
+
 def load_quarterly_review_display(root, ticker):
     directory = root / 'data/runtime/quarterly_intake'
     note_ledger = QuarterlyNoteReviewLedger(root / 'data/company_intelligence/quarterly_note_human_reviews.jsonl')
-    items, seen, invalid = [], set(), 0
+    items, seen, seen_content, invalid = [], set(), set(), 0
     for path in sorted(directory.rglob('quarterly-candidates.json'), key=lambda p: p.stat().st_mtime, reverse=True):
         try:
             queue = json.loads(path.read_text(encoding='utf-8'))
@@ -52,6 +69,11 @@ def load_quarterly_review_display(root, ticker):
                 if identity in seen:
                     continue
                 seen.add(identity)
+                content_identity = (source['ticker'].upper(), source['quarter'], source['basis'],
+                                    json.dumps(record.get('values_inr_crore', {}), sort_keys=True))
+                if content_identity in seen_content:
+                    continue
+                seen_content.add(content_identity)
                 reviewed_notes = note_ledger.apply(queue.get('reporting_notes', {'candidates': []}),
                     document_hash=digest, company=queue['company'], period_end=source['period_end'], basis=source['basis'])
                 review = assess_quarterly_financials(record, source_verification=queue.get('source_verification'),
@@ -61,7 +83,8 @@ def load_quarterly_review_display(root, ticker):
                 safe_url = url if parsed.scheme == 'https' and parsed.hostname and not parsed.username and not parsed.password else None
                 items.append({'id': candidate['candidate_id'], 'period': review['period'], 'basis': review['basis'],
                     'summary': review['reviewer_summary'], 'figures': review['figures_for_review_inr_crore'],
-                    'plainEnglish': explain_quarterly_financials(review, reviewed_notes),
+                    'plainEnglish': explain_quarterly_financials(
+                        review, reviewed_notes, prior_comparable_figures(queue['quarterly_record_evidence'], record)),
                     'assistantUnitReview': bool(source.get('header_evidence', {}).get('spanning_source_headers', {}).get('unit', {}).get('review_id')),
                     'checks': review['checks'], 'notChecked': review['not_checked'],
                     'reportingNotes': attach_note_drafts(root,

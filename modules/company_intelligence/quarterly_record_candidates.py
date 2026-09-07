@@ -1,5 +1,7 @@
 """Join recognised headers to agreeing source cells and reconcile totals."""
 import re
+from decimal import Decimal
+from itertools import product
 from modules.company_intelligence.quarterly_column_reconciliation import reconcile_column
 from modules.company_intelligence.quarterly_ocr_comparison import numeric_reading
 
@@ -34,7 +36,7 @@ def build_record_candidates(page, receipt, ticker, document_hash):
             if len(ruled) != 1 or len(mapped) != 1 or any(
                     abs(a-b) > 1 for a,b in zip(ruled[0]['x_bounds'], mapped[0]['x_bounds'])):
                 issues.append('HEADER_VALUE_COLUMN_GEOMETRY_MISMATCH')
-            cells, raw_readings = {}, []
+            cells, raw_readings, unresolved = {}, [], {}
             for metric in ('revenue', 'other_income', 'total_income', 'pat'):
                 matches = [c for c in comparison.get('cells', []) if c['column_index'] == index
                            and metric_for_label(c['row_label']) == metric]
@@ -46,10 +48,32 @@ def build_record_candidates(page, receipt, ticker, document_hash):
                 native, ocr = numeric_reading(cell['native_text']), numeric_reading(cell['ocr_text'])
                 if (cell['pdf_page'] != page['pdf_page'] or cell['status'] != 'READINGS_AGREE_PENDING_REVIEW'
                         or native is None or ocr is None or native != ocr or not native.is_finite()):
-                    issues.append('UNRESOLVED_CELL:' + metric)
+                    unresolved[metric] = (cell, native, ocr)
                     continue
                 cells[metric] = {'document_hash': document_hash, 'pdf_page': page['pdf_page'],
                                  'column_index': index, 'value': str(native), 'source_reading': cell}
+            # Some old filings have complementary text/OCR defects. Resolve revenue
+            # and other income only when one unique pair exactly explains a separately
+            # agreeing total; preserve both failed readings and the arithmetic proof.
+            if all(name in unresolved for name in ('revenue', 'other_income')) and 'total_income' in cells:
+                choices = []
+                for name in ('revenue', 'other_income'):
+                    cell, native, ocr = unresolved[name]
+                    choices.append([(kind, value) for kind, value in (('NATIVE', native), ('OCR', ocr))
+                                    if value is not None and value.is_finite()])
+                target = Decimal(cells['total_income']['value'])
+                matches = [(left, right) for left, right in product(*choices)
+                           if abs(left[1] + right[1] - target) <= Decimal('0.02')]
+                if len(matches) == 1:
+                    for name, selected in zip(('revenue', 'other_income'), matches[0]):
+                        original = unresolved.pop(name)[0]
+                        reading = {**original, 'status': 'ARITHMETICALLY_TRIANGULATED_PENDING_REVIEW',
+                                   'selected_reading': selected[0], 'selected_value': str(selected[1]),
+                                   'triangulation': {'method':'REVENUE_PLUS_OTHER_INCOME_EQUALS_TOTAL_INCOME',
+                                                     'total_income':str(target), 'tolerance':'0.02'}}
+                        cells[name] = {'document_hash':document_hash, 'pdf_page':page['pdf_page'],
+                                       'column_index':index, 'value':str(selected[1]), 'source_reading':reading}
+            issues.extend('UNRESOLVED_CELL:' + metric for metric in unresolved)
             source = {'ticker': ticker, 'document_hash': document_hash, 'pdf_page': page['pdf_page'],
                       'table_id': table['table_id'], 'column_index': index, 'cells': cells,
                       'header_text': header['header_text'], 'header_evidence': header,
