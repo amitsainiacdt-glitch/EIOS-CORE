@@ -13,6 +13,14 @@
 - **Immediate sequence:** (1) preserve this tested checkpoint, (2) implement an accessible governed acquisition route, (3) complete income-statement/balance-sheet/cash-flow and quarterly normalization, (4) activate META approval and Master Dossier promotion, (5) connect reasoning/verdict/UI refresh, and (6) validate on multiple unseen companies.
 - **Canonical-state rule:** this root file is the authoritative project state. Files under `docs/` are supporting architecture/history and must point here for the live checkpoint.
 
+## Governed issuer-source priority integrated — 2026-09-07
+
+- Corrected automatic official-document collection so configured issuer report URLs are always considered for general official-document jobs, rather than only when web search returns no sources.
+- Governed issuer locations are attempted before supplemental search results; duplicate URLs are removed and the existing per-job source limit is retained.
+- Exact-quarter jobs remain excluded from generic issuer-page/annual-report fallback, preventing an older or unrelated report from satisfying a targeted quarterly request.
+- All 307 company-intelligence tests pass, including new source-priority and duplicate-acquisition coverage. The external research orchestrator regression also passes.
+- This improves acquisition routing but does not bypass issuer HTTP 403/406 restrictions or create approved facts. A supported unattended transport/provider remains necessary for blocked sources.
+
 ## 2026-09-02 — Local cash-flow extraction and review table
 
 - Added a fail-closed, page-scoped local PDF cash-flow extractor and Coromandel source mapping. Re-running `python scripts/extract_coromandel_cash_flow_history.py` extracts 48 source figures for FY2017-18 through FY2024-25 from six preserved reports. No network/provider call is used.

@@ -68,14 +68,27 @@ class AutomaticOfficialDocumentPipeline:
                 screened = assess_quarterly_search_results([s.result for s in selected_sources], plan)
                 selected_sources = [s for s, assessment in zip(selected_sources, screened['results'])
                                     if assessment['status'] == 'TARGET_QUARTER_CANDIDATE']
-            if not selected_sources and not target_period and job.intent == "OFFICIAL_DOCUMENT_DISCOVERY" and self.source_manifest:
+            if not target_period and job.intent == "OFFICIAL_DOCUMENT_DISCOVERY" and self.source_manifest:
                 discovered = discover_official_reports(job, self.source_manifest, adapter,
                     acquired_at=acquired_at, cycle_id=cycle_id)
                 counts["discovery_pages_checked"] += discovered['pages_checked']
                 counts["discovery_pages_failed"] += discovered['pages_failed']
                 counts["discovery_pdf_links_found"] += discovered['pdf_links_found']
                 counts["failed"] += discovered['pages_failed']
-                selected_sources = discovered['selected_sources']
+                # Governed issuer locations are stronger acquisition candidates than
+                # search results. Always consider them, even when search returned
+                # weaker links, then supplement with search without fetching a URL
+                # twice. Exact-quarter jobs remain excluded from this generic path.
+                combined_sources = [*discovered['selected_sources'], *selected_sources]
+                selected_sources = []
+                combined_urls = set()
+                for source in combined_sources:
+                    if source.result.url in combined_urls:
+                        continue
+                    combined_urls.add(source.result.url)
+                    selected_sources.append(source)
+                    if len(selected_sources) >= job.max_sources:
+                        break
             seen_urls = set()
             for selected in selected_sources:
                 url = selected.result.url

@@ -4,6 +4,8 @@ import unittest
 from modules.company_intelligence.official_report_discovery import ReportLinks, discover_official_reports
 from modules.company_intelligence.automatic_official_document_pipeline import AutomaticOfficialDocumentPipeline
 from modules.company_intelligence.test_automatic_official_document_pipeline import job
+from modules.external_intelligence.source_selection import SelectedSource
+from modules.external_intelligence.search_result import ExternalSearchResult
 
 
 class OfficialReportDiscoveryTests(unittest.TestCase):
@@ -57,3 +59,52 @@ class OfficialReportDiscoveryTests(unittest.TestCase):
         self.assertEqual(report['pages_failed'], 1)
         self.assertEqual(report['errors'], ['HTTP_403'])
         self.assertEqual(discover_official_reports(self.job, {}, adapter, acquired_at=datetime.now(timezone.utc), cycle_id='TEST')['pages_checked'], 0)
+
+    def test_configured_issuer_url_is_used_before_search_results(self):
+        configured = 'https://www.coromandel.biz/configured.pdf'
+        searched = 'https://www.coromandel.biz/search-result.pdf'
+        self.manifest['companies']['COROMANDEL']['sources'][0]['document_urls'] = [configured]
+        acquisitions = []
+
+        def acquire(**kwargs):
+            if kwargs['recorder'] == 'EIOS_AUTOMATION':
+                acquisitions.append(kwargs['url'])
+            return SimpleNamespace(document_bytes=None, receipt=SimpleNamespace(error_code='HTTP_406'))
+
+        pipeline = AutomaticOfficialDocumentPipeline(
+            archive=SimpleNamespace(),
+            acquisition_ledger=SimpleNamespace(),
+            adapter_factory=lambda registry, ledger: SimpleNamespace(registry=registry, acquire=acquire),
+            source_manifest=self.manifest,
+        )
+        result = SimpleNamespace(selected_sources=[SelectedSource(ExternalSearchResult(
+            title='Search result', url=searched, snippet='', source='TEST'))])
+
+        summary = pipeline.run(
+            [self.job], [result], cycle_id='TEST', acquired_at=datetime.now(timezone.utc))
+
+        self.assertEqual(acquisitions, [configured, searched])
+        self.assertEqual(summary.approved_urls, 2)
+
+    def test_configured_and_search_duplicate_is_acquired_once(self):
+        configured = 'https://www.coromandel.biz/configured.pdf'
+        self.manifest['companies']['COROMANDEL']['sources'][0]['document_urls'] = [configured]
+        acquisitions = []
+
+        def acquire(**kwargs):
+            if kwargs['recorder'] == 'EIOS_AUTOMATION':
+                acquisitions.append(kwargs['url'])
+            return SimpleNamespace(document_bytes=None, receipt=SimpleNamespace(error_code='HTTP_406'))
+
+        pipeline = AutomaticOfficialDocumentPipeline(
+            archive=SimpleNamespace(),
+            acquisition_ledger=SimpleNamespace(),
+            adapter_factory=lambda registry, ledger: SimpleNamespace(registry=registry, acquire=acquire),
+            source_manifest=self.manifest,
+        )
+        result = SimpleNamespace(selected_sources=[SelectedSource(ExternalSearchResult(
+            title='Duplicate', url=configured, snippet='', source='TEST'))])
+
+        pipeline.run([self.job], [result], cycle_id='TEST', acquired_at=datetime.now(timezone.utc))
+
+        self.assertEqual(acquisitions, [configured])
