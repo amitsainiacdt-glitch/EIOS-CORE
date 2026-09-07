@@ -1,0 +1,43 @@
+"""Governed contract for alternate delivery of a blocked official document."""
+
+from dataclasses import dataclass
+from hashlib import sha256
+from typing import Protocol
+from urllib.parse import urlsplit
+
+
+@dataclass(frozen=True)
+class OfficialDocumentDeliveryProvenance:
+    provider_id: str
+    delivery_url: str
+    requested_official_url: str
+
+
+class OfficialDocumentFallbackProvider(Protocol):
+    def acquire_after_failure(self, primary_result, **acquisition_request): ...
+
+
+def validate_fallback_delivery(result, *, requested_url: str):
+    """Fail closed unless alternate delivery retains an auditable source chain."""
+    if result is None or result.document_bytes is None or result.retrieved_content is None:
+        raise ValueError("fallback provider returned no document")
+    provenance = getattr(result, "delivery_provenance", None)
+    if not isinstance(provenance, OfficialDocumentDeliveryProvenance):
+        raise ValueError("fallback delivery provenance is required")
+    if not provenance.provider_id.strip():
+        raise ValueError("fallback provider identity is required")
+    if provenance.requested_official_url != requested_url:
+        raise ValueError("fallback delivery changed the requested official URL")
+    if urlsplit(provenance.delivery_url).scheme.casefold() != "https":
+        raise ValueError("fallback delivery URL must use HTTPS")
+    receipt = result.receipt
+    if receipt.requested_url != requested_url:
+        raise ValueError("fallback receipt does not preserve the official URL")
+    if sha256(result.document_bytes).hexdigest() != receipt.document_hash:
+        raise ValueError("fallback bytes do not match the acquisition receipt")
+    if len(result.document_bytes) != receipt.bytes_received:
+        raise ValueError("fallback byte count does not match the acquisition receipt")
+    return result
+
+
+__all__ = ["OfficialDocumentDeliveryProvenance", "OfficialDocumentFallbackProvider", "validate_fallback_delivery"]

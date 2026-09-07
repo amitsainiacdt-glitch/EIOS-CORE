@@ -21,6 +21,14 @@
 - All 307 company-intelligence tests pass, including new source-priority and duplicate-acquisition coverage. The external research orchestrator regression also passes.
 - This improves acquisition routing but does not bypass issuer HTTP 403/406 restrictions or create approved facts. A supported unattended transport/provider remains necessary for blocked sources.
 
+## Governed blocked-source provider boundary — 2026-09-07
+
+- Added a provider-neutral fallback boundary for official documents that direct issuer/exchange HTTP cannot retrieve. The normal trusted-source attempt always runs first.
+- Alternate delivery is rejected unless it names the delivery provider, uses HTTPS, preserves the exact requested official URL, supplies a matching acquisition receipt, and passes document hash and byte-count checks.
+- A valid alternate delivery rejoins the existing archive, extraction, evidence-admission, META and human-review pipeline; it cannot bypass approval or change a verdict directly.
+- Added end-to-end coverage proving a blocked direct document can pass through the governed fallback and normal archive. All 312 company-intelligence tests pass.
+- No live provider is connected by this checkpoint. The contract makes such a connection safe and replaceable; credentials, commercial access and provider selection remain external prerequisites.
+
 ## 2026-09-02 — Local cash-flow extraction and review table
 
 - Added a fail-closed, page-scoped local PDF cash-flow extractor and Coromandel source mapping. Re-running `python scripts/extract_coromandel_cash_flow_history.py` extracts 48 source figures for FY2017-18 through FY2024-25 from six preserved reports. No network/provider call is used.

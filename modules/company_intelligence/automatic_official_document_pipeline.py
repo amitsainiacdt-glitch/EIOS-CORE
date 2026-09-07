@@ -11,6 +11,7 @@ from modules.company_intelligence.company_document_archive import CompanyDocumen
 from modules.company_intelligence.company_fact_review_queue import CompanyFactReviewQueueBuilder
 from modules.company_intelligence.company_candidate_meta_review import CompanyCandidateMetaReviewWriter
 from modules.company_intelligence.official_report_discovery import discover_official_reports
+from modules.company_intelligence.official_document_fallback import validate_fallback_delivery
 from modules.external_intelligence.public_document_extraction_ledger import PublicDocumentExtractionLedger
 from modules.external_intelligence.public_observation_admission_gate import PublicObservationAdmissionGate
 from modules.external_intelligence.public_source_acquisition_ledger import PublicSourceAcquisitionLedger
@@ -43,13 +44,14 @@ class OfficialDocumentCycleSummary:
 
 
 class AutomaticOfficialDocumentPipeline:
-    def __init__(self, archive: CompanyDocumentArchive, acquisition_ledger: PublicSourceAcquisitionLedger, *, extraction_ledger: PublicDocumentExtractionLedger | None = None, review_queue_root=None, adapter_factory=TrustedPublicAcquisitionAdapter, source_manifest=None):
+    def __init__(self, archive: CompanyDocumentArchive, acquisition_ledger: PublicSourceAcquisitionLedger, *, extraction_ledger: PublicDocumentExtractionLedger | None = None, review_queue_root=None, adapter_factory=TrustedPublicAcquisitionAdapter, source_manifest=None, fallback_provider=None):
         self.archive = archive
         self.acquisition_ledger = acquisition_ledger
         self.adapter_factory = adapter_factory
         self.extraction_ledger = extraction_ledger
         self.review_queue_root = review_queue_root
         self.source_manifest = source_manifest
+        self.fallback_provider = fallback_provider
 
     def run(self, executed_jobs, results, *, cycle_id: str, acquired_at: datetime) -> OfficialDocumentCycleSummary:
         counts = {"candidates_seen": 0, "approved_urls": 0, "archived": 0, "unchanged": 0, "new_versions": 0, "failed": 0, "extracted": 0, "fact_candidates_queued": 0, "extraction_holds": 0, "meta_reviewed": 0, "human_review_ready": 0, "meta_holds": 0}
@@ -99,12 +101,16 @@ class AutomaticOfficialDocumentPipeline:
                 counts["approved_urls"] += 1
                 token = sha256(f"{cycle_id}\n{job.job_id}\n{url}".encode()).hexdigest()[:20]
                 try:
-                    acquisition = adapter.acquire(
+                    request = dict(
                         acquisition_id=f"COMPANY-DOC-{token}", cycle_id=cycle_id,
                         job_id=job.job_id, research_intent=job.intent, url=url,
                         recorder="EIOS_AUTOMATION", requested_at=acquired_at,
                         source_document_id=self._document_id(job.ticker, url),
                     )
+                    acquisition = adapter.acquire(**request)
+                    if acquisition.document_bytes is None and self.fallback_provider is not None:
+                        fallback = self.fallback_provider.acquire_after_failure(acquisition, **request)
+                        acquisition = validate_fallback_delivery(fallback, requested_url=url)
                     if acquisition.document_bytes is None:
                         counts["failed"] += 1
                         continue

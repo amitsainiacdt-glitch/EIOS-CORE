@@ -1,8 +1,10 @@
 from datetime import datetime, timezone
+from hashlib import sha256
 from types import SimpleNamespace
 import unittest
 
 from modules.company_intelligence.automatic_official_document_pipeline import AutomaticOfficialDocumentPipeline
+from modules.company_intelligence.official_document_fallback import OfficialDocumentDeliveryProvenance
 from modules.external_intelligence.research_job import ResearchJob
 
 
@@ -30,6 +32,33 @@ class FakeAdapter:
 class FailingAdapter(FakeAdapter):
     def acquire(self, **kwargs):
         raise ValueError("malformed document")
+
+
+class BlockedAdapter(FakeAdapter):
+    def acquire(self, **kwargs):
+        return SimpleNamespace(document_bytes=None, receipt=SimpleNamespace(requested_url=kwargs["url"]))
+
+
+class GovernedFallback:
+    def __init__(self):
+        self.calls = 0
+
+    def acquire_after_failure(self, primary_result, **kwargs):
+        self.calls += 1
+        body = b"%PDF provider-delivered official copy"
+        return SimpleNamespace(
+            document_bytes=body,
+            retrieved_content=SimpleNamespace(content_type="application/pdf"),
+            receipt=SimpleNamespace(
+                requested_url=kwargs["url"], document_hash=sha256(body).hexdigest(),
+                bytes_received=len(body), source_url=kwargs["url"], content_type="application/pdf",
+                acquisition_id=kwargs["acquisition_id"],
+            ),
+            delivery_provenance=OfficialDocumentDeliveryProvenance(
+                "APPROVED_PROVIDER", "https://provider.example/delivery", kwargs["url"]),
+            source=SimpleNamespace(source_id="ISSUER-COROMANDEL"),
+            url=kwargs["url"], change_status="FIRST_SEEN",
+        )
 
 
 def job(intent="OFFICIAL_DOCUMENT_DISCOVERY"):
@@ -75,6 +104,19 @@ class AutomaticOfficialDocumentPipelineTests(unittest.TestCase):
         )
         self.assertEqual(summary.failed, 1)
         self.assertEqual(summary.archived, 0)
+
+    def test_blocked_document_uses_governed_fallback_then_normal_archive(self):
+        archive = FakeArchive()
+        fallback = GovernedFallback()
+        url = "https://www.coromandel.biz/reports/blocked.pdf"
+        selected = [SimpleNamespace(result=SimpleNamespace(url=url))]
+        summary = AutomaticOfficialDocumentPipeline(
+            archive, object(), adapter_factory=BlockedAdapter, fallback_provider=fallback,
+        ).run([job()], [SimpleNamespace(selected_sources=selected)],
+              cycle_id="CYCLE-1", acquired_at=datetime.now(timezone.utc))
+        self.assertEqual(fallback.calls, 1)
+        self.assertEqual(archive.urls, [url])
+        self.assertEqual(summary.archived, 1)
 
 
 if __name__ == "__main__":
