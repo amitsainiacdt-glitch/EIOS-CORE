@@ -11834,6 +11834,31 @@
               "total_income": "7792.31",
               "pat": "376.96"
             },
+            "plainEnglish": {
+              "posture": "SINGLE_PERIOD_CONTEXT_ONLY",
+              "headline": "₹7,743.55 crore revenue produced ₹376.96 crore profit — a 4.87% net margin.",
+              "summary": "The quarter provides a checked starting point, but not a trend.",
+              "figure_explanations": [
+                "Revenue from operations was ₹7,743.55 crore. This shows the scale of sales for the quarter; by itself it does not show whether the business improved.",
+                "Net profit was ₹376.96 crore. The company retained about 4.87% of profit for every ₹100 of operating revenue.",
+                "Other income was ₹48.76 crore, about 0.63% of total income. A low share means reported income is mostly linked to operations; it does not prove earnings quality.",
+                "Revenue plus other income reconciles to total income of ₹7,792.31 crore."
+              ],
+              "accounting_note_explanations": [
+                {
+                  "topic": "REVIEW_INCOMPLETE",
+                  "meaning": "8 reporting-note passage(s) still need a conclusive human applicability decision.",
+                  "review_rationale": ""
+                }
+              ],
+              "conclusion": "The quarter provides a checked starting point, but not a trend. This is financial evidence, not an investment verdict.",
+              "limitations": [
+                "Cash flow and balance sheet completeness",
+                "Earnings quality",
+                "Historical trends",
+                "Valuation and investment verdict"
+              ]
+            },
             "assistantUnitReview": true,
             "checks": [
               {
@@ -12109,6 +12134,31 @@
               "other_income": "48.76",
               "total_income": "7792.31",
               "pat": "376.96"
+            },
+            "plainEnglish": {
+              "posture": "SINGLE_PERIOD_CONTEXT_ONLY",
+              "headline": "₹7,743.55 crore revenue produced ₹376.96 crore profit — a 4.87% net margin.",
+              "summary": "The quarter provides a checked starting point, but not a trend.",
+              "figure_explanations": [
+                "Revenue from operations was ₹7,743.55 crore. This shows the scale of sales for the quarter; by itself it does not show whether the business improved.",
+                "Net profit was ₹376.96 crore. The company retained about 4.87% of profit for every ₹100 of operating revenue.",
+                "Other income was ₹48.76 crore, about 0.63% of total income. A low share means reported income is mostly linked to operations; it does not prove earnings quality.",
+                "Revenue plus other income reconciles to total income of ₹7,792.31 crore."
+              ],
+              "accounting_note_explanations": [
+                {
+                  "topic": "REVIEW_INCOMPLETE",
+                  "meaning": "8 reporting-note passage(s) still need a conclusive human applicability decision.",
+                  "review_rationale": ""
+                }
+              ],
+              "conclusion": "The quarter provides a checked starting point, but not a trend. This is financial evidence, not an investment verdict.",
+              "limitations": [
+                "Cash flow and balance sheet completeness",
+                "Earnings quality",
+                "Historical trends",
+                "Valuation and investment verdict"
+              ]
             },
             "assistantUnitReview": true,
             "checks": [

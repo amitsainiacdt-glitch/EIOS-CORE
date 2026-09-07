@@ -15,6 +15,7 @@ from modules.company_intelligence.governed_fact_engine_router import GovernedFac
 from modules.company_intelligence.engine_analysis_intake import EngineAnalysisIntakeRepository
 from modules.company_intelligence.initial_engine_consumers import InitialEngineAnalysisRepository
 from modules.company_intelligence.quarterly_publication_gate import quarterly_approval_assessment
+from modules.company_intelligence.governed_quarterly_financial import GovernedQuarterlyFinancialRepository
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,6 +39,7 @@ def main(argv=None) -> int:
     parser.add_argument("--engine-intake-ledger", default="data/company_intelligence/engine_analysis_intake.jsonl")
     parser.add_argument("--initial-engine-results", default="data/company_intelligence/initial_engine_analysis_results.jsonl")
     parser.add_argument("--quarterly-note-review-ledger", default="data/company_intelligence/quarterly_note_human_reviews.jsonl")
+    parser.add_argument("--quarterly-financial-repository", default="data/company_intelligence/governed_quarterly_financials.jsonl")
     args = parser.parse_args(argv)
     queue, meta_payload = json.loads(inside_workspace(args.queue).read_text(encoding="utf-8")), json.loads(inside_workspace(args.meta).read_text(encoding="utf-8"))
     candidate_payload = next((item for item in queue["candidates"] if item["candidate_id"] == args.candidate_id), None)
@@ -51,8 +53,9 @@ def main(argv=None) -> int:
     assessment_payload["reviewed_at"] = datetime.fromisoformat(assessment_payload["reviewed_at"])
     meta = CompanyCandidateMetaAssessment(**assessment_payload)
     now = datetime.now(timezone.utc)
+    quarterly_assessment = None
     if args.decision == 'APPROVE':
-        quarterly_approval_assessment(candidate, queue, inside_workspace(args.quarterly_note_review_ledger))
+        quarterly_assessment = quarterly_approval_assessment(candidate, queue, inside_workspace(args.quarterly_note_review_ledger))
     review = CompanyFactHumanReviewLedger(inside_workspace(args.review_ledger)).record(
         candidate, meta, review_id=args.review_id, decision=args.decision,
         approved_confidence=args.approved_confidence, rationale=args.rationale,
@@ -64,6 +67,10 @@ def main(argv=None) -> int:
             candidate, meta, review, created_at=now,
         )
         print(f"Governed fact created: {fact.fact_id}")
+        if quarterly_assessment is not None:
+            quarterly = GovernedQuarterlyFinancialRepository(inside_workspace(args.quarterly_financial_repository)).materialize(
+                candidate, fact, queue['quarterly_record_evidence'][candidate.candidate_id], quarterly_assessment, created_at=now)
+            print(f"Governed quarterly financial record created: {quarterly.record_id}")
         route = GovernedFactEngineRouter(inside_workspace(args.engine_route_ledger)).route(fact, routed_at=now)
         print(f"Fact routed to {len(route.target_analysis_queues)} governed analysis queues: {route.route_id}")
         work = EngineAnalysisIntakeRepository(inside_workspace(args.engine_intake_ledger)).dispatch(fact, route, created_at=now)

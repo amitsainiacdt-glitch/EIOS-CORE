@@ -6,6 +6,7 @@ from modules.company_intelligence.quarterly_financial_review import assess_quart
 from modules.company_intelligence.quarterly_note_context import note_context
 from modules.company_intelligence.quarterly_note_draft_display import attach_note_drafts
 from modules.company_intelligence.quarterly_note_human_review import QuarterlyNoteReviewLedger
+from modules.company_intelligence.quarterly_plain_english import explain_quarterly_financials
 
 
 def display_reporting_notes(payload, document_hash, *, basis='', period_end=''):
@@ -60,6 +61,7 @@ def load_quarterly_review_display(root, ticker):
                 safe_url = url if parsed.scheme == 'https' and parsed.hostname and not parsed.username and not parsed.password else None
                 items.append({'id': candidate['candidate_id'], 'period': review['period'], 'basis': review['basis'],
                     'summary': review['reviewer_summary'], 'figures': review['figures_for_review_inr_crore'],
+                    'plainEnglish': explain_quarterly_financials(review, reviewed_notes),
                     'assistantUnitReview': bool(source.get('header_evidence', {}).get('spanning_source_headers', {}).get('unit', {}).get('review_id')),
                     'checks': review['checks'], 'notChecked': review['not_checked'],
                     'reportingNotes': attach_note_drafts(root,
