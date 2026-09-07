@@ -17,6 +17,15 @@ class OfficialDocumentFallbackProvider(Protocol):
     def acquire_after_failure(self, primary_result, **acquisition_request): ...
 
 
+@dataclass(frozen=True)
+class FallbackAcquisitionResult:
+    source: object
+    receipt: object
+    retrieved_content: object
+    document_bytes: bytes
+    delivery_provenance: OfficialDocumentDeliveryProvenance
+
+
 def validate_fallback_delivery(result, *, requested_url: str):
     """Fail closed unless alternate delivery retains an auditable source chain."""
     if result is None or result.document_bytes is None or result.retrieved_content is None:
@@ -28,8 +37,10 @@ def validate_fallback_delivery(result, *, requested_url: str):
         raise ValueError("fallback provider identity is required")
     if provenance.requested_official_url != requested_url:
         raise ValueError("fallback delivery changed the requested official URL")
-    if urlsplit(provenance.delivery_url).scheme.casefold() != "https":
-        raise ValueError("fallback delivery URL must use HTTPS")
+    scheme = urlsplit(provenance.delivery_url).scheme.casefold()
+    local_inbox = provenance.provider_id == "EIOS_GOVERNED_LOCAL_INBOX" and scheme == "eios-local"
+    if scheme != "https" and not local_inbox:
+        raise ValueError("fallback delivery must use HTTPS or the governed local inbox")
     receipt = result.receipt
     if receipt.requested_url != requested_url:
         raise ValueError("fallback receipt does not preserve the official URL")
@@ -40,4 +51,4 @@ def validate_fallback_delivery(result, *, requested_url: str):
     return result
 
 
-__all__ = ["OfficialDocumentDeliveryProvenance", "OfficialDocumentFallbackProvider", "validate_fallback_delivery"]
+__all__ = ["FallbackAcquisitionResult", "OfficialDocumentDeliveryProvenance", "OfficialDocumentFallbackProvider", "validate_fallback_delivery"]

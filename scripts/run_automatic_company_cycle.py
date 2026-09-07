@@ -17,6 +17,7 @@ from modules.company_intelligence.review_memory_report import build_review_memor
 from modules.company_intelligence.collection_outcome import describe_document_collection
 from modules.company_intelligence.quarterly_source_retry import run_source_retries
 from modules.company_intelligence.automatic_official_document_pipeline import AutomaticOfficialDocumentPipeline
+from modules.company_intelligence.local_document_fallback_provider import LocalDocumentFallbackProvider
 from modules.company_intelligence.company_document_archive import CompanyDocumentArchive
 from modules.external_intelligence.public_source_acquisition_ledger import PublicSourceAcquisitionLedger
 from modules.external_intelligence.public_document_extraction_ledger import PublicDocumentExtractionLedger
@@ -36,6 +37,7 @@ DOCUMENT_ARCHIVE_LEDGER = ROOT / "data" / "company_intelligence" / "document_arc
 DOCUMENT_ACQUISITION_LEDGER = ROOT / "data" / "company_intelligence" / "company_document_acquisition_ledger.jsonl"
 DOCUMENT_EXTRACTION_LEDGER = ROOT / "data" / "company_intelligence" / "company_document_extraction_ledger.jsonl"
 FACT_REVIEW_QUEUE_ROOT = ROOT / "data" / "company_intelligence" / "fact_review_queue"
+OFFICIAL_DOCUMENT_INBOX = ROOT / "data" / "runtime" / "official_document_inbox"
 
 
 def all_automatic_jobs():
@@ -94,13 +96,16 @@ def main() -> int:
         status["executed_jobs"] = len(result.executed_jobs)
         status["observations"] = runtime.observation_count()
 
+        acquisition_ledger = PublicSourceAcquisitionLedger(DOCUMENT_ACQUISITION_LEDGER)
         document_summary = AutomaticOfficialDocumentPipeline(
             CompanyDocumentArchive(DOCUMENT_ARCHIVE_ROOT, DOCUMENT_ARCHIVE_LEDGER),
-            PublicSourceAcquisitionLedger(DOCUMENT_ACQUISITION_LEDGER),
+            acquisition_ledger,
             extraction_ledger=PublicDocumentExtractionLedger(DOCUMENT_EXTRACTION_LEDGER),
             review_queue_root=FACT_REVIEW_QUEUE_ROOT,
             source_manifest=None if config.offline_mode else json.loads(
                 (ROOT / 'data/company_intelligence/company_source_manifest.json').read_text(encoding='utf-8')),
+            fallback_provider=LocalDocumentFallbackProvider(
+                OFFICIAL_DOCUMENT_INBOX, workspace=ROOT, ledger=acquisition_ledger),
         ).run(result.executed_jobs, result.results, cycle_id=started_at.isoformat(), acquired_at=started_at)
         status["official_documents"] = document_summary.__dict__
         status["collection_outcome"] = describe_document_collection(status["official_documents"])

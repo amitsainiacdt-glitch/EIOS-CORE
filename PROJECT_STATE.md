@@ -29,6 +29,14 @@
 - Added end-to-end coverage proving a blocked direct document can pass through the governed fallback and normal archive. All 312 company-intelligence tests pass.
 - No live provider is connected by this checkpoint. The contract makes such a connection safe and replaceable; credentials, commercial access and provider selection remain external prerequisites.
 
+## Automatic governed local document inbox connected — 2026-09-07
+
+- Implemented and connected the first real blocked-source fallback provider: `data/runtime/official_document_inbox` is checked automatically by the scheduled company cycle after direct official-source acquisition fails.
+- Each PDF requires exactly one sidecar mapping containing schema version, local filename, exact official source URL and expected SHA-256. Missing, ambiguous, path-escaping, non-PDF or hash-mismatched inputs fail closed.
+- Local delivery is explicitly recorded as `EIOS_GOVERNED_LOCAL_INBOX`; it is not misrepresented as an issuer network download. Valid documents rejoin the normal archive, extraction, admission, META and human-review path.
+- All 314 company-intelligence tests pass and the scheduled-cycle entry point compiles.
+- This makes browser/download-to-EIOS intake automatic once a source-backed file reaches the controlled inbox. Fully remote unattended acquisition still requires an accessible issuer/exchange route or an approved online provider implementation.
+
 ## 2026-09-02 — Local cash-flow extraction and review table
 
 - Added a fail-closed, page-scoped local PDF cash-flow extractor and Coromandel source mapping. Re-running `python scripts/extract_coromandel_cash_flow_history.py` extracts 48 source figures for FY2017-18 through FY2024-25 from six preserved reports. No network/provider call is used.
