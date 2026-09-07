@@ -11824,7 +11824,7 @@
       "quarterlyReview": {
         "items": [
           {
-            "id": "QUARTERLY-e0f358d1b940a42b3c1e0fa3a2ec8d9ab23d0f08df191743d9512dafe468973c",
+            "id": "QUARTERLY-6ab206d6eccbe84d572f0996c18b4c6d1f17d87594868bde5f173d5274a53748",
             "period": "Q1-FY2027",
             "basis": "STANDALONE",
             "summary": "The four core figures agree across both readings and reconcile. Delivery provenance passes; reporting notes still require human review.",
@@ -11832,6 +11832,13 @@
               "revenue": "7743.55",
               "other_income": "48.76",
               "total_income": "7792.31",
+              "traded_goods_purchases": "2665.60",
+              "inventory_change": "-958.69",
+              "employee_benefits": "244.14",
+              "freight_distribution": "400.62",
+              "total_expenses": "7286.97",
+              "pbt_before_exceptional": "505.34",
+              "profit_before_tax": "505.34",
               "pat": "376.96"
             },
             "plainEnglish": {
@@ -11867,6 +11874,41 @@
                   "Finance and depreciation",
                   "Tax, exceptional items and accounting adjustments"
                 ]
+              },
+              "cost_attribution": {
+                "total_expenses_current_crore": "7286.97",
+                "total_expenses_prior_crore": "6398.38",
+                "total_expense_change_crore": "888.59",
+                "total_expense_change_percent": "13.89",
+                "revenue_change_percent": "10.60",
+                "pbt_change_crore": "-179.20",
+                "pbt_change_percent": "-26.18",
+                "pbt_margin_current_percent": "6.53",
+                "pbt_margin_prior_percent": "9.78",
+                "comparable_lines": [
+                  {
+                    "metric": "employee_benefits",
+                    "label": "Employee benefits",
+                    "current_crore": "244.14",
+                    "prior_crore": "217.32",
+                    "change_crore": "26.82",
+                    "change_percent": "12.34",
+                    "effect": "PRESSURE"
+                  },
+                  {
+                    "metric": "freight_distribution",
+                    "label": "Freight and distribution",
+                    "current_crore": "400.62",
+                    "prior_crore": "352.18",
+                    "change_crore": "48.44",
+                    "change_percent": "13.75",
+                    "effect": "PRESSURE"
+                  }
+                ],
+                "unallocated_expense_change_crore": "813.33",
+                "below_pbt_burden_change_crore": "-47.93",
+                "meaning": "Total expenses rose 13.89% while revenue rose 10.60%. Costs therefore grew faster than sales, compressing profit before exceptional items and tax.",
+                "boundary": "The difference between PBT and PAT includes tax and may include other below-PBT effects; it is not labelled as tax alone."
               },
               "conclusion": "Sales increased but profit fell, which points to margin pressure, higher costs or adverse one-offs requiring explanation. This is financial evidence, not an investment verdict.",
               "limitations": [
@@ -12096,7 +12138,7 @@
               ],
               "invalidCount": 0
             },
-            "queuePath": "C:\\Users\\RBI\\Desktop\\EIOS\\data\\runtime\\quarterly_intake\\9ed529593ae80c64f0e37f8029545a0efe1223f6f6a5eb3963ab4c613bbde079\\205e8b8bef4f44e9ba04bb3b5a2852f1\\reconciled-triangulation-v1\\quarterly-candidates.json",
+            "queuePath": "C:\\Users\\RBI\\Desktop\\EIOS\\data\\runtime\\quarterly_intake\\9ed529593ae80c64f0e37f8029545a0efe1223f6f6a5eb3963ab4c613bbde079\\af22743ee8e2424aa4124c54b031b32a\\quarterly-candidates.json",
             "periodEnd": "2026-06-30",
             "sourceUrl": "https://www.coromandel.biz/wp-content/uploads/2026/07/Q1-results-1.pdf",
             "sourcePage": 1,
@@ -12132,6 +12174,105 @@
               {
                 "pdf_page": 1,
                 "column_index": 0,
+                "row_label": "(a) Cost of raw materials and packing materials consumed",
+                "native_text": "4,371.80",
+                "ocr_text": "",
+                "status": "HOLD_UNREADABLE_OR_MISSING",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "(b) Purchases of traded goods",
+                "native_text": "2,665.60",
+                "ocr_text": "2,665.60",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "(c) Changes in inventories of fu1islu~d goods, work-in-progress and traded goods",
+                "native_text": "(958.69)",
+                "ocr_text": "(958.69)",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "(d) Employee benefits expense",
+                "native_text": "244.14",
+                "ocr_text": "244.14",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "(e) Finance costs",
+                "native_text": "75.94",
+                "ocr_text": "",
+                "status": "HOLD_UNREADABLE_OR_MISSING",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "(f) Depreciation and amortisation expense",
+                "native_text": "88.03",
+                "ocr_text": "",
+                "status": "HOLD_UNREADABLE_OR_MISSING",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "(g) l're1ght and distribution expense",
+                "native_text": "400.62",
+                "ocr_text": "400.62",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "(h) Other expenses",
+                "native_text": "399.53",
+                "ocr_text": "399-53",
+                "status": "HOLD_UNREADABLE_OR_MISSING",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "Total expenses",
+                "native_text": "7,286.97",
+                "ocr_text": "7,286.97",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "5 Profit before exceptional items and tax (3+4)",
+                "native_text": "505.34",
+                "ocr_text": "505.34",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "7 Profit before tax (5+6)",
+                "native_text": "505.34",
+                "ocr_text": "505.34",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
                 "row_label": "9 Net profit after tax (7-8)",
                 "native_text": "376.96",
                 "ocr_text": "376.96",
@@ -12142,7 +12283,7 @@
             "status": "HOLD_FOR_REPORTING_NOTE_REVIEW"
           },
           {
-            "id": "QUARTERLY-71f75845e4192660ea37156026069da4c0d29eafb2c5e02670d14d6de0bcb550",
+            "id": "QUARTERLY-a15ea695fa65f4a3da4da0dc936d503a5af032c3eb4fc0b2346f79adc0162166",
             "period": "Q1-FY2026",
             "basis": "STANDALONE",
             "summary": "The four core figures agree across both readings and reconcile. Delivery provenance passes; reporting notes still require human review.",
@@ -12150,6 +12291,12 @@
               "revenue": "7001.32",
               "other_income": "81.60",
               "total_income": "7082.92",
+              "employee_benefits": "217.32",
+              "finance_costs": "65.28",
+              "depreciation_amortisation": "69.75",
+              "freight_distribution": "352.18",
+              "total_expenses": "6398.38",
+              "pbt_before_exceptional": "684.54",
               "pat": "508.23"
             },
             "plainEnglish": {
@@ -12170,6 +12317,7 @@
                 }
               ],
               "profit_bridge": null,
+              "cost_attribution": null,
               "conclusion": "The quarter provides a checked starting point, but not a trend. This is financial evidence, not an investment verdict.",
               "limitations": [
                 "Cash flow and balance sheet completeness",
@@ -12398,7 +12546,7 @@
               ],
               "invalidCount": 0
             },
-            "queuePath": "C:\\Users\\RBI\\Desktop\\EIOS\\data\\runtime\\quarterly_intake\\9ed529593ae80c64f0e37f8029545a0efe1223f6f6a5eb3963ab4c613bbde079\\205e8b8bef4f44e9ba04bb3b5a2852f1\\reconciled-triangulation-v1\\quarterly-candidates.json",
+            "queuePath": "C:\\Users\\RBI\\Desktop\\EIOS\\data\\runtime\\quarterly_intake\\9ed529593ae80c64f0e37f8029545a0efe1223f6f6a5eb3963ab4c613bbde079\\af22743ee8e2424aa4124c54b031b32a\\quarterly-candidates.json",
             "periodEnd": "2025-06-30",
             "sourceUrl": "https://www.coromandel.biz/wp-content/uploads/2026/07/Q1-results-1.pdf",
             "sourcePage": 1,
@@ -12429,6 +12577,105 @@
                 "native_text": "7,082.92",
                 "ocr_text": "7,082.92",
                 "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 2,
+                "row_label": "(a) Cost of raw materials and packing materials consumed",
+                "native_text": "3,604.26",
+                "ocr_text": "3,60426",
+                "status": "HOLD_UNREADABLE_OR_MISSING",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 2,
+                "row_label": "(b) Purchases of traded goods",
+                "native_text": "2,347.54",
+                "ocr_text": "2,347.34",
+                "status": "HOLD_EXTRACTOR_DISAGREEMENT",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 2,
+                "row_label": "(c) Changes in inventories of fu1islu~d goods, work-in-progress and traded goods",
+                "native_text": "(638.45)",
+                "ocr_text": "(538.45)",
+                "status": "HOLD_EXTRACTOR_DISAGREEMENT",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 2,
+                "row_label": "(d) Employee benefits expense",
+                "native_text": "217.32",
+                "ocr_text": "217.32",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 2,
+                "row_label": "(e) Finance costs",
+                "native_text": "65.28",
+                "ocr_text": "65.28",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 2,
+                "row_label": "(f) Depreciation and amortisation expense",
+                "native_text": "69.75",
+                "ocr_text": "69.75",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 2,
+                "row_label": "(g) l're1ght and distribution expense",
+                "native_text": "352.18",
+                "ocr_text": "352.18",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 2,
+                "row_label": "(h) Other expenses",
+                "native_text": "380 50",
+                "ocr_text": "38030",
+                "status": "HOLD_UNREADABLE_OR_MISSING",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 2,
+                "row_label": "Total expenses",
+                "native_text": "6,398.38",
+                "ocr_text": "6,398.38",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 2,
+                "row_label": "5 Profit before exceptional items and tax (3+4)",
+                "native_text": "684.54",
+                "ocr_text": "684.54",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 2,
+                "row_label": "7 Profit before tax (5+6)",
+                "native_text": "684.54",
+                "ocr_text": "684,54",
+                "status": "HOLD_UNREADABLE_OR_MISSING",
                 "creates_approved_facts": false
               },
               {

@@ -69,8 +69,9 @@ def load_quarterly_review_display(root, ticker):
                 if identity in seen:
                     continue
                 seen.add(identity)
+                values = record.get('values_inr_crore', {})
                 content_identity = (source['ticker'].upper(), source['quarter'], source['basis'],
-                                    json.dumps(record.get('values_inr_crore', {}), sort_keys=True))
+                                    tuple((key, values.get(key)) for key in ('revenue','other_income','total_income','pat')))
                 if content_identity in seen_content:
                     continue
                 seen_content.add(content_identity)

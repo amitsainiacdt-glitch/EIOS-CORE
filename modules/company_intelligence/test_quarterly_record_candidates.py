@@ -87,3 +87,16 @@ class RecordCandidateTests(unittest.TestCase):
     def test_owner_profit_and_pretax_not_total_pat(self):
         for label in ('Profit attributable to owners', 'Net profit before tax', 'Segment profit'):
             self.assertIsNone(metric_for_label(label))
+
+    def test_expense_and_profit_rows_are_explicitly_mapped(self):
+        expected = {'Cost of raw materials and packing materials consumed':'raw_materials',
+                    'Purchases of traded goods':'traded_goods_purchases',
+                    'Changes in inventories of finished goods':'inventory_change',
+                    'Employee benefits expense':'employee_benefits', 'Finance costs':'finance_costs',
+                    'Depreciation and amortisation expense':'depreciation_amortisation',
+                    'Freight and distribution expense':'freight_distribution', 'Other expenses':'other_expenses',
+                    'Total expenses':'total_expenses',
+                    'Profit before exceptional items and tax (3+4)':'pbt_before_exceptional',
+                    'Profit before tax (5+6)':'profit_before_tax'}
+        for label, metric in expected.items():
+            with self.subTest(label=label): self.assertEqual(metric_for_label(label), metric)

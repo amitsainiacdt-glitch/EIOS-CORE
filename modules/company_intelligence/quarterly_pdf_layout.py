@@ -61,7 +61,7 @@ def column_candidates(words):
             if row[0]['top'] < revenue[0]['top']:
                 continue
             label = ' '.join(w['text'] for w in row if w['x1'] < edges[0])
-            if not re.search(r'revenue from operations|other income|total income|net profit after tax', label, re.I):
+            if not re.search(r'revenue from operations|other income|total income|net profit after tax|cost of raw materials|purchases of traded goods|changes in inventories|employee benefits|finance costs|depreciation and amortisation|distribution expense|other expenses|total expenses|profit before exceptional items and tax|profit before tax', label, re.I):
                 continue
             selected = within(row)
             cells.append({'row_label': label, 'raw_text': ' '.join(w['text'] for w in selected),

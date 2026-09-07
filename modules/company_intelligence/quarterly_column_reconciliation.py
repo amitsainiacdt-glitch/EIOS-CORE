@@ -63,7 +63,10 @@ def reconcile_column(column):
         errors.append('NOT_A_DISCRETE_INDIAN_FINANCIAL_QUARTER')
 
     values = {}
-    for metric in ('revenue', 'other_income', 'total_income', 'pat', 'ebitda'):
+    for metric in ('revenue', 'other_income', 'total_income', 'raw_materials', 'traded_goods_purchases',
+                   'inventory_change', 'employee_benefits', 'finance_costs', 'depreciation_amortisation',
+                   'freight_distribution', 'other_expenses', 'total_expenses',
+                   'pbt_before_exceptional', 'profit_before_tax', 'pat', 'ebitda'):
         cell = column.get('cells', {}).get(metric)
         if cell is None:
             continue
