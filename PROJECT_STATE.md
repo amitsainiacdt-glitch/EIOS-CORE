@@ -67,6 +67,13 @@
 - Two other columns remain held for ambiguous duration/date headers. The surviving candidate remains held for official-source identity and reporting-note review; no history or verdict changes.
 - Pipeline summaries now count quarterly candidates and their META outcomes. The repeated no-network/no-paid-search probe reports 1 queued candidate, 1 META review and 1 META hold. All 316 company-intelligence tests pass.
 
+## Quarterly source and reporting-note holds separated — 2026-09-07
+
+- Financial review now evaluates source-delivery provenance separately from reporting-note completion. A trusted direct receipt or corroborated browser capture can pass the delivery check when official URL and document hash match; a merely hash-bound local inbox copy cannot.
+- Reporting notes remain held until human review. Each extracted note now receives explicit basis/date applicability cues without automatically assigning an impairment, acquisition, balancing-quarter or limited-review passage to the selected column.
+- The controlled Coromandel candidate passes all four technical checks plus source-delivery provenance and remains `HOLD_FOR_REPORTING_NOTE_REVIEW`. No approval, history update or verdict change occurs.
+- Added regression coverage for accepted corroborated delivery, unresolved note applicability and rejection of unverified local-inbox origin. All 318 company-intelligence tests pass.
+
 ## 2026-09-02 — Local cash-flow extraction and review table
 
 - Added a fail-closed, page-scoped local PDF cash-flow extractor and Coromandel source mapping. Re-running `python scripts/extract_coromandel_cash_flow_history.py` extracts 48 source figures for FY2017-18 through FY2024-25 from six preserved reports. No network/provider call is used.

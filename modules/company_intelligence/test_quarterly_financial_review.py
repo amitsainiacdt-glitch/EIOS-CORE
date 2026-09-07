@@ -40,3 +40,30 @@ class QuarterlyFinancialReviewTests(unittest.TestCase):
         before = assess_quarterly_financials(record)['record_fingerprint']
         record['source_column']['cells']['pat']['source_reading']['ocr_text'] = '100'
         self.assertNotEqual(before, assess_quarterly_financials(record)['record_fingerprint'])
+
+    def test_corroborated_delivery_passes_source_but_notes_remain_held(self):
+        record = self.record()
+        source = record['source_column']
+        result = assess_quarterly_financials(record, source_verification={
+            'status': 'ACQUISITION_RECEIPT_PRESERVED_PENDING_REVIEW',
+            'provider_id': 'EIOS_CORROBORATED_BROWSER_CAPTURE',
+            'document_hash': source['document_hash'],
+            'source_url': 'https://issuer.example/q1.pdf',
+        }, reporting_notes={'review_complete': False, 'candidates': [{
+            'topic': 'COMPARABILITY', 'source_passage': 'Standalone results for 30 June 2026 are not comparable.'
+        }]})
+        self.assertEqual(result['checks'][4]['status'], 'PASS')
+        self.assertEqual(result['checks'][5]['status'], 'HOLD')
+        self.assertEqual(result['decision'], 'HOLD_FOR_REPORTING_NOTE_REVIEW')
+        self.assertEqual(result['reporting_note_assessments'][0]['applicability']['status'], 'APPLICABILITY_UNCONFIRMED')
+
+    def test_unverified_local_inbox_does_not_pass_source(self):
+        record = self.record()
+        source = record['source_column']
+        result = assess_quarterly_financials(record, source_verification={
+            'status': 'ACQUISITION_RECEIPT_PRESERVED_PENDING_REVIEW',
+            'provider_id': 'EIOS_GOVERNED_LOCAL_INBOX',
+            'document_hash': source['document_hash'],
+            'source_url': 'https://issuer.example/q1.pdf',
+        })
+        self.assertEqual(result['checks'][4]['status'], 'HOLD')

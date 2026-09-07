@@ -4,9 +4,10 @@ from hashlib import sha256
 import json
 from modules.company_intelligence.quarterly_column_reconciliation import reconcile_extracted_column
 from modules.company_intelligence.quarterly_ocr_comparison import numeric_reading
+from modules.company_intelligence.quarterly_note_context import note_context
 
 
-def assess_quarterly_financials(record):
+def assess_quarterly_financials(record, *, source_verification=None, reporting_notes=None):
     checks = []
     def check(code, passed, explanation):
         checks.append({'code': code, 'status': 'PASS' if passed else 'HOLD', 'explanation': explanation})
@@ -35,20 +36,31 @@ def assess_quarterly_financials(record):
           'Revenue, other income, total income and total net profit must retain matching text/image readings from the same column.')
     check('EXTRACTION_CANDIDATE_CHECKED', record.get('status') == 'CHECKED_PENDING_REVIEW' and not record.get('issues'),
           'An unresolved extraction warning cannot be cleared by this review.')
-    # A typed company name, source URL, or local byte hash cannot prove origin.
-    check('OFFICIAL_SOURCE_AND_COMPANY_IDENTITY', False,
-          'Independent evidence must confirm that this exact PDF is an official filing for the selected company. A supplied URL is not a verified download.')
-    check('REPORTING_NOTES_AND_RESTATEMENTS', False,
+    source_verification = source_verification or {}
+    source_ok = (source_verification.get('status') == 'ACQUISITION_RECEIPT_PRESERVED_PENDING_REVIEW'
+                 and source_verification.get('provider_id') in {'DIRECT_TRUSTED_SOURCE', 'EIOS_CORROBORATED_BROWSER_CAPTURE'}
+                 and source_verification.get('document_hash') == source.get('document_hash')
+                 and source_verification.get('source_url', '').startswith('https://'))
+    check('OFFICIAL_SOURCE_DELIVERY_PROVENANCE', source_ok,
+          'The exact document bytes must retain a trusted direct receipt or corroborated browser-capture provenance for the official URL.')
+    reporting_notes = reporting_notes or {}
+    notes_complete = reporting_notes.get('review_complete') is True
+    check('REPORTING_NOTES_AND_RESTATEMENTS', notes_complete,
           'Review the reporting notes, audit status and any restatement or balancing-quarter explanation before publication.')
     technical_ok = all(c['status'] == 'PASS' for c in checks[:4])
     fingerprint = sha256(json.dumps(record, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
     figures = record.get('values_inr_crore', {}) if technical_ok else {}
+    note_assessments = [{**item, 'applicability': note_context(item.get('source_passage', ''),
+        basis=source.get('basis', ''), period_end=source.get('period_end', ''))}
+        for item in reporting_notes.get('candidates', [])]
+    decision = 'HOLD_FOR_REPORTING_NOTE_REVIEW' if source_ok and not notes_complete else 'HOLD_FOR_SOURCE_AND_FINANCIAL_REVIEW'
     return {'schema_version': 1, 'record_fingerprint': fingerprint,
-            'method': 'DETERMINISTIC_FINANCIAL_CHECKS_V1', 'decision': 'HOLD_FOR_SOURCE_AND_FINANCIAL_REVIEW',
+            'method': 'DETERMINISTIC_FINANCIAL_CHECKS_V1', 'decision': decision,
             'technical_checks_passed': technical_ok, 'checks': checks,
-            'reviewer_summary': ('The four core figures agree across the two readings and the income total reconciles. '
-                                 'Source identity and reporting notes still need verification.' if technical_ok else
+            'reviewer_summary': ('The four core figures agree across both readings and reconcile. '
+                                 + ('Delivery provenance passes; reporting notes still require human review.' if source_ok else 'Source delivery and reporting notes still require review.') if technical_ok else
                                  'Some financial extraction checks failed. Resolve the listed holds before source approval.'),
+            'reporting_note_assessments': note_assessments,
             'figures_for_review_inr_crore': figures,
             'period': source.get('quarter'), 'basis': source.get('basis'),
             'not_checked': ['Cash flow and balance sheet completeness', 'Earnings quality',

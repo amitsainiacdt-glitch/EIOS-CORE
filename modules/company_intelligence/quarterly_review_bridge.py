@@ -59,7 +59,9 @@ def write_quarterly_review_queue(report, *, output_directory, company, source_ur
              'creates_evidence': False, 'requires_meta_review': True, 'requires_human_review': True}
     queue_path.write_text(json.dumps(queue, indent=2), encoding='utf-8')
     assessments = CompanyCandidateMetaReviewWriter().write(candidates, output_path=meta_path, reviewed_at=now)
-    financial_assessments = {key: assess_quarterly_financials(record) for key,record in records.items()}
+    financial_assessments = {key: assess_quarterly_financials(record,
+        source_verification=queue['source_verification'], reporting_notes=queue['reporting_notes'])
+        for key,record in records.items()}
     financial_path = folder / 'quarterly-financial-review.json'
     financial_path.write_text(json.dumps({'schema_version': 1, 'assessments': financial_assessments,
         'creates_approved_facts': False, 'changes_verdict': False}, indent=2), encoding='utf-8')
