@@ -14,6 +14,7 @@ from modules.company_intelligence.plain_english_company_interpreter import Plain
 from modules.company_intelligence.ten_year_financial_interpreter import TenYearFinancialInterpreter
 from modules.company_intelligence.financial_display import add_display_cells
 from modules.company_intelligence.operating_earnings_review import validate_earnings_review
+from modules.company_intelligence.quarterly_review_display import load_quarterly_review_display
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -203,6 +204,7 @@ def main() -> None:
             ),
             "tenYearFinancials": {**add_display_cells(TenYearFinancialInterpreter().build(extraction, financial_history), cash_review, balance_review), "cashFlowReview": cash_review, "balanceSheetReviewData": balance_review, "operatingEarningsReview": earnings_review},
             "reviewInbox": review_inbox,
+            "quarterlyReview": load_quarterly_review_display(ROOT, identity["ticker"]),
             "officialSourceCount": len(official_sources),
             "officialSourceTypes": sorted({item["source_type"] for item in official_sources}),
             "sourceDiscoveryStatus": "DISCOVERED_NOT_EXTRACTED" if official_sources else "NOT_STARTED",
@@ -353,6 +355,7 @@ def main() -> None:
             "executedJobs": runtime_status.get("executed_jobs"),
             "observationCount": runtime_status.get("observations"),
             "errors": runtime_status.get("errors", []),
+            "collectionOutcome": runtime_status.get("collection_outcome", {}),
         },
     }
 

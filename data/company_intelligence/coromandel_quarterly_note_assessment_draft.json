@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "status": "ASSISTANT_RESEARCH_DRAFT_NOT_HUMAN_APPROVED",
+  "reviewed_on": "2026-09-03",
+  "ticker": "COROMANDEL",
+  "target_period_end": "2026-06-30",
+  "document_hash": "17b16806779abafa77ed78665e5e0389fd6acc2eb63b4d0189e1e4fd3f0c2aab",
+  "method": "ASSISTANT_VISUAL_REVIEW_OF_LOCAL_NOTES_WITH_WEB_TEXT_CORROBORATION",
+  "alternate_official_url": "https://www.coromandel.biz/wp-content/uploads/2026/07/CIL_Outcome_BM_23072026_SD.pdf",
+  "discovered_on": "https://www.coromandel.biz/investors/disclosures/",
+  "alternate_document_bytes_acquired": false,
+  "alternate_document_hash": null,
+  "source_identity_hold_cleared": false,
+  "notes_review_complete": false,
+  "creates_approved_facts": false,
+  "changes_verdict": false,
+  "assessments": [
+    {
+      "candidate_id": "dff22d96c7e0e813ec655402d8812030e1502accc7507e50123c54f1bf220d9e",
+      "local_pdf_page": 2,
+      "printed_note": 1,
+      "basis": ["STANDALONE", "CONSOLIDATED"],
+      "period_end": "2026-06-30",
+      "explanation": "The note reports limited review with unmodified reports. This is not a full annual audit or a guarantee of financial strength."
+    },
+    {
+      "candidate_id": "6d87586acc17d322d80bf9b61af5389520d1f926568ffd3ef94235163815008a",
+      "local_pdf_page": 2,
+      "printed_note": 2,
+      "period_end": "2026-03-31",
+      "explanation": "The drone-business impairment relates to March quarter and year-end. Do not subtract it again from June earnings or equate a rebound with underlying improvement."
+    },
+    {
+      "candidate_id": "80e44781034c05cf0136fd5e82e5fcc40149a5755c3424373dd45a537ef140db",
+      "local_pdf_page": 2,
+      "printed_note": 3,
+      "basis": ["CONSOLIDATED"],
+      "comparison_period_ends": ["2026-06-30", "2025-06-30"],
+      "explanation": "NACL's acquisition changes group composition. Consolidated growth is not necessarily organic growth; do not transfer this specific comparability warning automatically to standalone figures."
+    },
+    {
+      "candidate_id": "ea761166f720f89d573c48a3c4ee91212bf97e2af4772263b674ada5beca4e24",
+      "local_pdf_page": 2,
+      "printed_note": 5,
+      "period_end": "2026-03-31",
+      "explanation": "March is annual results minus nine-month results. Explain this construction when comparing June with March; it is not a restatement by itself."
+    }
+  ],
+  "remaining_work": [
+    "Obtain and preserve official PDF bytes and establish page correspondence",
+    "Complete auditor-report and other reporting-note review",
+    "Displayed as unapproved assistant research only; governed review and approval remain incomplete"
+  ]
+}

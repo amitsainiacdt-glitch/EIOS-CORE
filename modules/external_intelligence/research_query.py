@@ -48,6 +48,8 @@ class ExternalResearchQuery:
     query: str
 
     intent: str
+    quarter_period_end: str | None = None
+    issuer_domain: str | None = None
 
 
 __all__ = [

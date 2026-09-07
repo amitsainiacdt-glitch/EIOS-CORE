@@ -1,0 +1,5 @@
+# Optional Windows quarterly layout/OCR dependencies, tested 2026-09-03.
+# EIOS's existing application dependencies remain required separately.
+pdfplumber==0.11.7
+pdfminer.six==20250506
+pypdfium2==5.13.0

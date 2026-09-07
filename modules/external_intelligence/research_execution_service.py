@@ -26,6 +26,7 @@ Does NOT:
 from __future__ import annotations
 
 from datetime import datetime
+from dataclasses import replace
 
 from modules.external_intelligence.external_research_orchestrator import (
     ExternalResearchOrchestrator,
@@ -164,6 +165,8 @@ class ResearchExecutionService:
             intent=job.intent,
         )
 
+        if job.quarter_period_end is not None:
+            query = replace(query, quarter_period_end=job.quarter_period_end, issuer_domain=job.entity_domain)
         result = self.orchestrator.execute(
             query,
             max_sources=job.max_sources,

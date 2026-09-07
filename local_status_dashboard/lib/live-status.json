@@ -23,65 +23,65 @@
     "waiting": 6,
     "automaticExternalActions": false
   },
-  "productionObservationCount": 77,
+  "productionObservationCount": 94,
   "companies": [
     {
       "name": "The Anup Engineering Limited",
       "ticker": "ANUP",
       "sector": "Industrial Engineering",
-      "evidenceCount": 48,
-      "averageEvidenceConfidence": 71.8,
-      "latestEvidenceAt": "2026-09-02T05:02:31.825191+00:00",
+      "evidenceCount": 55,
+      "averageEvidenceConfidence": 71.5,
+      "latestEvidenceAt": "2026-09-07T09:06:14.732283+00:00",
       "recentEvidence": [
         {
-          "title": "The Anup Engineering Ltd share price | About The Anup Enginee | Key Insights - Screener",
+          "title": "The Anup Engineering Share Price Today - Live NSE/BSE | ICICI Direct",
           "category": "External Web",
           "confidence": 70.0
         },
         {
-          "title": "The Anup Engineering Ltd. Corporate Action: Annual Report, Bonus & Dividend History",
+          "title": "The Anup Engineering Ltd,Price Rs. 1789.00",
           "category": "External Web",
           "confidence": 70.0
         },
         {
-          "title": "The Anup Engineering Corporate Actions - Dividend, Bonus, Splits",
+          "title": "The Anup Engineering Ltd,Price Rs. 1789.00",
           "category": "External Web",
           "confidence": 70.0
         }
       ],
       "recentDiscoveries": [
         {
-          "title": "The Anup Engineering Ltd share price | About The Anup Enginee | Key Insights - Screener",
-          "sourceUrl": "https://www.screener.in/company/ANUP/consolidated",
-          "discoveredAt": "2026-09-02T05:02:31.825191+00:00",
-          "researchIntent": "INDUSTRY_AND_COMPETITIVE",
-          "sourceQualityTier": "TIER_3",
-          "reviewStatus": "PENDING_HUMAN_REVIEW",
-          "verdictImpact": "NONE"
-        },
-        {
-          "title": "The Anup Engineering Ltd. Corporate Action: Annual Report, Bonus & Dividend History",
-          "sourceUrl": "https://www.etmoney.com/stocks/the-anup-engineering-ltd/corporate-actions/1826",
-          "discoveredAt": "2026-09-02T05:02:18.357217+00:00",
+          "title": "The Anup Engineering Share Price Today - Live NSE/BSE | ICICI Direct",
+          "sourceUrl": "https://www.icicidirect.com/stocks/the-anup-engineering-ltd-share-price",
+          "discoveredAt": "2026-09-07T09:06:14.732283+00:00",
           "researchIntent": "MANAGEMENT_AND_CORPORATE",
           "sourceQualityTier": "TIER_3",
           "reviewStatus": "PENDING_HUMAN_REVIEW",
           "verdictImpact": "NONE"
         },
         {
-          "title": "The Anup Engineering Corporate Actions - Dividend, Bonus, Splits",
-          "sourceUrl": "https://www.angelone.in/stocks/the-anup-engineering-ltd/corporate-action",
-          "discoveredAt": "2026-09-02T05:02:16.455175+00:00",
+          "title": "The Anup Engineering Ltd,Price Rs. 1789.00",
+          "sourceUrl": "https://www.sharekhan.com/stock/the-anup-engineering-ltd",
+          "discoveredAt": "2026-09-07T09:06:11.718799+00:00",
           "researchIntent": "MANAGEMENT_AND_CORPORATE",
           "sourceQualityTier": "TIER_3",
           "reviewStatus": "PENDING_HUMAN_REVIEW",
           "verdictImpact": "NONE"
         },
         {
-          "title": "The Anup Engineering Q1 Consolidated Net Profit At 5.7 ... - Sahi",
-          "sourceUrl": "https://www.sahi.com/news/the-anup-engineering-q1-consolidated-net-profit-at-5-7m-rupees-versus-263m-yoy-4877-PE1_COR",
-          "discoveredAt": "2026-09-02T05:01:43.058431+00:00",
-          "researchIntent": "ORDER_AND_CAPACITY",
+          "title": "The Anup Engineering Ltd,Price Rs. 1789.00",
+          "sourceUrl": "https://www.sharekhan.com/stock/the-anup-engineering-ltd",
+          "discoveredAt": "2026-09-07T09:05:22.603694+00:00",
+          "researchIntent": "REGULATORY_DEVELOPMENTS",
+          "sourceQualityTier": "TIER_3",
+          "reviewStatus": "PENDING_HUMAN_REVIEW",
+          "verdictImpact": "NONE"
+        },
+        {
+          "title": "THE ANUP ENGINEERING LTD. : Latest Quarterly Results Analysis - ICICI Direct",
+          "sourceUrl": "https://www.icicidirect.com/research/equity/rapid-results/the-anup-engineering-ltd",
+          "discoveredAt": "2026-09-07T09:05:00.103113+00:00",
+          "researchIntent": "FINANCIAL_DEVELOPMENTS",
           "sourceQualityTier": "TIER_3",
           "reviewStatus": "PENDING_HUMAN_REVIEW",
           "verdictImpact": "NONE"
@@ -89,8 +89,17 @@
         {
           "title": "The Anup Engineering Q1 Consolidated Net Profit At 5.7M Rupees Versus 263M YoY",
           "sourceUrl": "https://www.sahi.com/news/the-anup-engineering-q1-consolidated-net-profit-at-5-7m-rupees-versus-263m-yoy-4877-PE1_COR",
-          "discoveredAt": "2026-09-02T05:01:37.983084+00:00",
+          "discoveredAt": "2026-09-07T09:04:52.273523+00:00",
           "researchIntent": "FINANCIAL_DEVELOPMENTS",
+          "sourceQualityTier": "TIER_3",
+          "reviewStatus": "PENDING_HUMAN_REVIEW",
+          "verdictImpact": "NONE"
+        },
+        {
+          "title": "The Anup Engineering Ltd,Price Rs. 1789.00 (-0.75%) | on Fri 4/09/2026,15:27:0 | Mirae Asset Sharekhan",
+          "sourceUrl": "https://www.sharekhan.com/stock/the-anup-engineering-ltd",
+          "discoveredAt": "2026-09-07T09:04:07.225286+00:00",
+          "researchIntent": "COMPANY_DEVELOPMENTS",
           "sourceQualityTier": "TIER_3",
           "reviewStatus": "PENDING_HUMAN_REVIEW",
           "verdictImpact": "NONE"
@@ -98,26 +107,17 @@
         {
           "title": "The Anup Engineering News - The Anup Engineering Announcement, Latest News on The Anup Engineering - The Economic Times",
           "sourceUrl": "https://economictimes.indiatimes.com/the-anup-engineering-ltd/stocksupdate/companyid-68035.cms",
-          "discoveredAt": "2026-09-02T05:01:22.773050+00:00",
+          "discoveredAt": "2026-09-07T09:04:02.411651+00:00",
           "researchIntent": "COMPANY_DEVELOPMENTS",
           "sourceQualityTier": "TIER_2",
           "reviewStatus": "PENDING_HUMAN_REVIEW",
           "verdictImpact": "NONE"
         },
         {
-          "title": "The Anup Engineering Share Price Today - Live NSE/BSE",
-          "sourceUrl": "https://www.icicidirect.com/stocks/the-anup-engineering-ltd-share-price",
-          "discoveredAt": "2026-09-01T02:14:47.407998+00:00",
-          "researchIntent": "MANAGEMENT_AND_CORPORATE",
-          "sourceQualityTier": "TIER_3",
-          "reviewStatus": "PENDING_HUMAN_REVIEW",
-          "verdictImpact": "NONE"
-        },
-        {
-          "title": "The Anup Engineering Corporate Actions - Dividend, Bonus, Splits",
-          "sourceUrl": "https://www.angelone.in/stocks/the-anup-engineering-ltd/corporate-action",
-          "discoveredAt": "2026-09-01T02:14:45.376655+00:00",
-          "researchIntent": "MANAGEMENT_AND_CORPORATE",
+          "title": "The Anup Engineering Ltd share price | About The Anup Enginee | Key Insights - Screener",
+          "sourceUrl": "https://www.screener.in/company/ANUP/consolidated",
+          "discoveredAt": "2026-09-02T05:02:31.825191+00:00",
+          "researchIntent": "INDUSTRY_AND_COMPETITIVE",
           "sourceQualityTier": "TIER_3",
           "reviewStatus": "PENDING_HUMAN_REVIEW",
           "verdictImpact": "NONE"
@@ -141,39 +141,39 @@
         },
         "newsFundamentalMonitor": [
           {
-            "headline": "The Anup Engineering Ltd share price | About The Anup Enginee | Key Insights - Screener",
+            "headline": "The Anup Engineering Share Price Today - Live NSE/BSE | ICICI Direct",
             "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
             "possible_pathway": "Possible path: selling price or input cost change → gross margin → operating profit → cash flow.",
             "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
             "what_would_confirm": "Confirm the size, duration, product exposure, pass-through ability and competitor response.",
-            "source_url": "https://www.screener.in/company/ANUP/consolidated",
+            "source_url": "https://www.icicidirect.com/stocks/the-anup-engineering-ltd-share-price",
             "review_status": "PENDING_HUMAN_REVIEW"
           },
           {
-            "headline": "The Anup Engineering Ltd. Corporate Action: Annual Report, Bonus & Dividend History",
+            "headline": "The Anup Engineering Ltd,Price Rs. 1789.00",
+            "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
+            "possible_pathway": "Possible path: selling price or input cost change → gross margin → operating profit → cash flow.",
+            "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
+            "what_would_confirm": "Confirm the size, duration, product exposure, pass-through ability and competitor response.",
+            "source_url": "https://www.sharekhan.com/stock/the-anup-engineering-ltd",
+            "review_status": "PENDING_HUMAN_REVIEW"
+          },
+          {
+            "headline": "The Anup Engineering Ltd,Price Rs. 1789.00",
+            "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
+            "possible_pathway": "Possible path: selling price or input cost change → gross margin → operating profit → cash flow.",
+            "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
+            "what_would_confirm": "Confirm the size, duration, product exposure, pass-through ability and competitor response.",
+            "source_url": "https://www.sharekhan.com/stock/the-anup-engineering-ltd",
+            "review_status": "PENDING_HUMAN_REVIEW"
+          },
+          {
+            "headline": "THE ANUP ENGINEERING LTD. : Latest Quarterly Results Analysis - ICICI Direct",
             "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
             "possible_pathway": "Possible fundamental pathway is not yet classified from the headline alone.",
             "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
             "what_would_confirm": "Read the primary source, identify the affected business driver, quantify the impact and search for contradictions.",
-            "source_url": "https://www.etmoney.com/stocks/the-anup-engineering-ltd/corporate-actions/1826",
-            "review_status": "PENDING_HUMAN_REVIEW"
-          },
-          {
-            "headline": "The Anup Engineering Corporate Actions - Dividend, Bonus, Splits",
-            "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
-            "possible_pathway": "Possible fundamental pathway is not yet classified from the headline alone.",
-            "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
-            "what_would_confirm": "Read the primary source, identify the affected business driver, quantify the impact and search for contradictions.",
-            "source_url": "https://www.angelone.in/stocks/the-anup-engineering-ltd/corporate-action",
-            "review_status": "PENDING_HUMAN_REVIEW"
-          },
-          {
-            "headline": "The Anup Engineering Q1 Consolidated Net Profit At 5.7 ... - Sahi",
-            "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
-            "possible_pathway": "Possible fundamental pathway is not yet classified from the headline alone.",
-            "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
-            "what_would_confirm": "Read the primary source, identify the affected business driver, quantify the impact and search for contradictions.",
-            "source_url": "https://www.sahi.com/news/the-anup-engineering-q1-consolidated-net-profit-at-5-7m-rupees-versus-263m-yoy-4877-PE1_COR",
+            "source_url": "https://www.icicidirect.com/research/equity/rapid-results/the-anup-engineering-ltd",
             "review_status": "PENDING_HUMAN_REVIEW"
           },
           {
@@ -186,12 +186,12 @@
             "review_status": "PENDING_HUMAN_REVIEW"
           },
           {
-            "headline": "The Anup Engineering News - The Anup Engineering Announcement, Latest News on The Anup Engineering - The Economic Times",
+            "headline": "The Anup Engineering Ltd,Price Rs. 1789.00 (-0.75%) | on Fri 4/09/2026,15:27:0 | Mirae Asset Sharekhan",
             "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
-            "possible_pathway": "Possible fundamental pathway is not yet classified from the headline alone.",
+            "possible_pathway": "Possible path: selling price or input cost change → gross margin → operating profit → cash flow.",
             "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
-            "what_would_confirm": "Read the primary source, identify the affected business driver, quantify the impact and search for contradictions.",
-            "source_url": "https://economictimes.indiatimes.com/the-anup-engineering-ltd/stocksupdate/companyid-68035.cms",
+            "what_would_confirm": "Confirm the size, duration, product exposure, pass-through ability and competitor response.",
+            "source_url": "https://www.sharekhan.com/stock/the-anup-engineering-ltd",
             "review_status": "PENDING_HUMAN_REVIEW"
           }
         ],
@@ -1156,6 +1156,11 @@
         "held": 0,
         "approved": 0,
         "items": []
+      },
+      "quarterlyReview": {
+        "items": [],
+        "invalidPacketCount": 0,
+        "changesVerdict": false
       },
       "officialSourceCount": 0,
       "officialSourceTypes": [],
@@ -2253,6 +2258,11 @@
         "approved": 0,
         "items": []
       },
+      "quarterlyReview": {
+        "items": [],
+        "invalidPacketCount": 0,
+        "changesVerdict": false
+      },
       "officialSourceCount": 0,
       "officialSourceTypes": [],
       "sourceDiscoveryStatus": "NOT_STARTED",
@@ -2275,11 +2285,55 @@
       "name": "KPIT Technologies",
       "ticker": "KPITTECH",
       "sector": "Automotive Software",
-      "evidenceCount": 0,
-      "averageEvidenceConfidence": null,
-      "latestEvidenceAt": null,
-      "recentEvidence": [],
-      "recentDiscoveries": [],
+      "evidenceCount": 3,
+      "averageEvidenceConfidence": 70.0,
+      "latestEvidenceAt": "2026-09-07T09:05:58.849843+00:00",
+      "recentEvidence": [
+        {
+          "title": "KPIT Technologies Ltd,Price Rs. 576.00 (-1.29%) | on - Sharekhan",
+          "category": "Governed Company Intake",
+          "confidence": 70.0
+        },
+        {
+          "title": "10 Top Kpit Technologies KPITTECH Share price target (tomorrow) | 10 top stock Price (target) Kpit Technologies KPITTECH NSE - MunafaSutra.com",
+          "category": "Governed Company Intake",
+          "confidence": 70.0
+        },
+        {
+          "title": "KPITTECH Share Price Today: KPIT Technologies NSE",
+          "category": "Governed Company Intake",
+          "confidence": 70.0
+        }
+      ],
+      "recentDiscoveries": [
+        {
+          "title": "KPIT Technologies Ltd,Price Rs. 576.00 (-1.29%) | on - Sharekhan",
+          "sourceUrl": "https://www.sharekhan.com/stock/kpit-technologies-ltd",
+          "discoveredAt": "2026-09-07T09:05:58.849843+00:00",
+          "researchIntent": "MANAGEMENT_AND_CORPORATE",
+          "sourceQualityTier": "TIER_3",
+          "reviewStatus": "PENDING_HUMAN_REVIEW",
+          "verdictImpact": "NONE"
+        },
+        {
+          "title": "10 Top Kpit Technologies KPITTECH Share price target (tomorrow) | 10 top stock Price (target) Kpit Technologies KPITTECH NSE - MunafaSutra.com",
+          "sourceUrl": "https://munafasutra.com/nse/priceTarget/KPITTECH",
+          "discoveredAt": "2026-09-07T09:05:50.867193+00:00",
+          "researchIntent": "CATALYST_AND_EXPECTATION_GAP",
+          "sourceQualityTier": "TIER_3",
+          "reviewStatus": "PENDING_HUMAN_REVIEW",
+          "verdictImpact": "NONE"
+        },
+        {
+          "title": "KPITTECH Share Price Today: KPIT Technologies NSE",
+          "sourceUrl": "https://www.tickertape.in/stocks/kpit-technologies-KPIE",
+          "discoveredAt": "2026-09-07T09:05:49.282145+00:00",
+          "researchIntent": "CATALYST_AND_EXPECTATION_GAP",
+          "sourceQualityTier": "TIER_3",
+          "reviewStatus": "PENDING_HUMAN_REVIEW",
+          "verdictImpact": "NONE"
+        }
+      ],
       "plainEnglishAnalysis": {
         "knownFacts": [],
         "warningSignals": [],
@@ -2296,7 +2350,35 @@
             "Contingent liabilities and related-party exposure"
           ]
         },
-        "newsFundamentalMonitor": [],
+        "newsFundamentalMonitor": [
+          {
+            "headline": "KPIT Technologies Ltd,Price Rs. 576.00 (-1.29%) | on - Sharekhan",
+            "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
+            "possible_pathway": "Possible path: selling price or input cost change → gross margin → operating profit → cash flow.",
+            "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
+            "what_would_confirm": "Confirm the size, duration, product exposure, pass-through ability and competitor response.",
+            "source_url": "https://www.sharekhan.com/stock/kpit-technologies-ltd",
+            "review_status": "PENDING_HUMAN_REVIEW"
+          },
+          {
+            "headline": "10 Top Kpit Technologies KPITTECH Share price target (tomorrow) | 10 top stock Price (target) Kpit Technologies KPITTECH NSE - MunafaSutra.com",
+            "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
+            "possible_pathway": "Possible path: selling price or input cost change → gross margin → operating profit → cash flow.",
+            "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
+            "what_would_confirm": "Confirm the size, duration, product exposure, pass-through ability and competitor response.",
+            "source_url": "https://munafasutra.com/nse/priceTarget/KPITTECH",
+            "review_status": "PENDING_HUMAN_REVIEW"
+          },
+          {
+            "headline": "KPITTECH Share Price Today: KPIT Technologies NSE",
+            "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
+            "possible_pathway": "Possible path: selling price or input cost change → gross margin → operating profit → cash flow.",
+            "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
+            "what_would_confirm": "Confirm the size, duration, product exposure, pass-through ability and competitor response.",
+            "source_url": "https://www.tickertape.in/stocks/kpit-technologies-KPIE",
+            "review_status": "PENDING_HUMAN_REVIEW"
+          }
+        ],
         "numberComparisons": [],
         "decisionJourney": [
           {
@@ -2350,10 +2432,10 @@
           {
             "step": 7,
             "question": "Is current news changing fundamentals?",
-            "answer": "No current reviewed news candidate is available.",
+            "answer": "3 news or filing candidates require review.",
             "meaning": "A headline matters only if it changes revenue, margins, cash flow, risk, management credibility or valuation.",
             "decision_effect": "Fundamental change is not proven from headline sentiment.",
-            "status": "UNKNOWN"
+            "status": "PARTIAL"
           },
           {
             "step": 8,
@@ -3259,6 +3341,11 @@
         "approved": 0,
         "items": []
       },
+      "quarterlyReview": {
+        "items": [],
+        "invalidPacketCount": 0,
+        "changesVerdict": false
+      },
       "officialSourceCount": 2,
       "officialSourceTypes": [
         "ANNUAL_REPORT",
@@ -3277,75 +3364,57 @@
       "researchLink": null,
       "companyBridgeReady": false,
       "datedCatalystReady": false,
-      "readiness": "SOURCES_DISCOVERED",
-      "readinessLabel": "Official sources found — extraction pending"
+      "readiness": "EVIDENCE_ONLY",
+      "readinessLabel": "Evidence found — company case not yet proven"
     },
     {
       "name": "Coromandel International",
       "ticker": "COROMANDEL",
       "sector": "Fertilizers & Agri Inputs",
-      "evidenceCount": 17,
+      "evidenceCount": 24,
       "averageEvidenceConfidence": 70.0,
-      "latestEvidenceAt": "2026-09-02T05:02:45.187535+00:00",
+      "latestEvidenceAt": "2026-09-07T09:06:56.303429+00:00",
       "recentEvidence": [
         {
-          "title": "Weather in Coromandel, India",
+          "title": "Coromandel Int Share Price Today, Coromandel Int Stock Price Live NSE/BSE Updates | The Economic Times",
           "category": "Governed Company Intake",
           "confidence": 70.0
         },
         {
-          "title": "Coromandel International (COROMANDEL) Q4 25/26 Summary | Quartr",
+          "title": "Weather in India",
           "category": "Governed Company Intake",
           "confidence": 70.0
         },
         {
-          "title": "Coromandel International Q1 net falls 26% despite higher revenue - The Hindu",
+          "title": "Coromandel International Ltd,Price Rs. 1937.55 (0.35%)",
           "category": "Governed Company Intake",
           "confidence": 70.0
         }
       ],
       "recentDiscoveries": [
         {
-          "title": "Weather in Coromandel, India",
+          "title": "Coromandel Int Share Price Today, Coromandel Int Stock Price Live NSE/BSE Updates | The Economic Times",
+          "sourceUrl": "https://economictimes.indiatimes.com/coromandel-international-ltd/stocks/companyid-13851.cms",
+          "discoveredAt": "2026-09-07T09:06:56.303429+00:00",
+          "researchIntent": "MACRO_AND_CAUSAL_TRANSMISSION",
+          "sourceQualityTier": "TIER_2",
+          "reviewStatus": "PENDING_HUMAN_REVIEW",
+          "verdictImpact": "NONE"
+        },
+        {
+          "title": "Weather in India",
           "sourceUrl": "https://www.weatherapi.com/",
-          "discoveredAt": "2026-09-02T05:02:45.187535+00:00",
+          "discoveredAt": "2026-09-07T09:06:52.924623+00:00",
           "researchIntent": "MACRO_AND_CAUSAL_TRANSMISSION",
           "sourceQualityTier": "TIER_3",
-          "reviewStatus": "PENDING_HUMAN_REVIEW",
+          "reviewStatus": "LOW_RELEVANCE_HOLD",
           "verdictImpact": "NONE"
         },
         {
-          "title": "Coromandel International (COROMANDEL) Q4 25/26 Summary | Quartr",
-          "sourceUrl": "https://quartr.com/events/coromandel-international-limited-coromandel-q4-25-26_FPD4W0q7",
-          "discoveredAt": "2026-09-02T05:02:41.893795+00:00",
-          "researchIntent": "MACRO_AND_CAUSAL_TRANSMISSION",
-          "sourceQualityTier": "TIER_3",
-          "reviewStatus": "PENDING_HUMAN_REVIEW",
-          "verdictImpact": "NONE"
-        },
-        {
-          "title": "Coromandel International Q1 net falls 26% despite higher revenue - The Hindu",
-          "sourceUrl": "https://www.thehindu.com/business/Industry/coromandel-international-q1-net-falls-26-despite-higher-revenue/article71258864.ece",
-          "discoveredAt": "2026-09-02T05:02:25.298769+00:00",
-          "researchIntent": "CURRENT_NEWS",
-          "sourceQualityTier": "TIER_3",
-          "reviewStatus": "PENDING_HUMAN_REVIEW",
-          "verdictImpact": "NONE"
-        },
-        {
-          "title": "Coromandel International Ltd. Corporate Action: Annual Report, Bonus & Dividend History",
-          "sourceUrl": "https://www.etmoney.com/stocks/coromandel-international-ltd/corporate-actions/112",
-          "discoveredAt": "2026-09-02T05:02:11.489456+00:00",
-          "researchIntent": "MANAGEMENT_AND_CORPORATE",
-          "sourceQualityTier": "TIER_3",
-          "reviewStatus": "PENDING_HUMAN_REVIEW",
-          "verdictImpact": "NONE"
-        },
-        {
-          "title": "Coromandel International Schedules Q1 FY27 Earnings Call",
-          "sourceUrl": "https://www.sahi.com/news/coromandel-international-schedules-q1-fy27-earnings-call-68-PE1_CORPO",
-          "discoveredAt": "2026-09-02T05:02:09.107027+00:00",
-          "researchIntent": "MANAGEMENT_AND_CORPORATE",
+          "title": "Coromandel International Ltd,Price Rs. 1937.55 (0.35%)",
+          "sourceUrl": "https://www.sharekhan.com/stock/coromandel-international-ltd",
+          "discoveredAt": "2026-09-07T09:06:39.799472+00:00",
+          "researchIntent": "INDUSTRY_AND_COMPETITIVE",
           "sourceQualityTier": "TIER_3",
           "reviewStatus": "PENDING_HUMAN_REVIEW",
           "verdictImpact": "NONE"
@@ -3353,26 +3422,44 @@
         {
           "title": "Coromandel International News - Coromandel International Announcement, Latest News on Coromandel International - The Economic Times",
           "sourceUrl": "https://economictimes.indiatimes.com/coromandel-international-ltd/stocksupdate/companyid-13851.cms",
-          "discoveredAt": "2026-09-02T05:02:01.535201+00:00",
-          "researchIntent": "CATALYST_AND_EXPECTATION_GAP",
+          "discoveredAt": "2026-09-07T09:06:23.836702+00:00",
+          "researchIntent": "CURRENT_NEWS",
           "sourceQualityTier": "TIER_2",
           "reviewStatus": "PENDING_HUMAN_REVIEW",
           "verdictImpact": "NONE"
         },
         {
-          "title": "Latest Coromandel International Limited Tenders 2026 | Tender247",
-          "sourceUrl": "https://www.tender247.com/organization/coromandel+international+limited+tenders",
-          "discoveredAt": "2026-09-02T05:01:50.292511+00:00",
-          "researchIntent": "ORDER_AND_CAPACITY",
+          "title": "Coromandel International Ltd,Price Rs. 1937.55 (0.35%)",
+          "sourceUrl": "https://www.sharekhan.com/stock/coromandel-international-ltd",
+          "discoveredAt": "2026-09-07T09:06:21.883767+00:00",
+          "researchIntent": "CURRENT_NEWS",
           "sourceQualityTier": "TIER_3",
           "reviewStatus": "PENDING_HUMAN_REVIEW",
           "verdictImpact": "NONE"
         },
         {
-          "title": "Coromandel International Ltd Tenders - Search Tenders For Coromandel International Ltd In India",
-          "sourceUrl": "https://www.tenderdetail.com/Indian-tender/coromandel-international-ltd-tenders",
-          "discoveredAt": "2026-09-02T05:01:48.341863+00:00",
-          "researchIntent": "ORDER_AND_CAPACITY",
+          "title": "Coromandel International Ltd,Price Rs. 1937.55 (0.35%)",
+          "sourceUrl": "https://www.sharekhan.com/stock/coromandel-international-ltd",
+          "discoveredAt": "2026-09-07T09:05:42.880812+00:00",
+          "researchIntent": "MANAGEMENT_AND_CORPORATE",
+          "sourceQualityTier": "TIER_3",
+          "reviewStatus": "PENDING_HUMAN_REVIEW",
+          "verdictImpact": "NONE"
+        },
+        {
+          "title": "Coromandel International Ltd,Price Rs. 1937.55 (0.35%)",
+          "sourceUrl": "https://www.sharekhan.com/stock/coromandel-international-ltd",
+          "discoveredAt": "2026-09-07T09:05:33.664207+00:00",
+          "researchIntent": "CATALYST_AND_EXPECTATION_GAP",
+          "sourceQualityTier": "TIER_3",
+          "reviewStatus": "PENDING_HUMAN_REVIEW",
+          "verdictImpact": "NONE"
+        },
+        {
+          "title": "Weather in Coromandel, India",
+          "sourceUrl": "https://www.weatherapi.com/",
+          "discoveredAt": "2026-09-02T05:02:45.187535+00:00",
+          "researchIntent": "MACRO_AND_CAUSAL_TRANSMISSION",
           "sourceQualityTier": "TIER_3",
           "reviewStatus": "PENDING_HUMAN_REVIEW",
           "verdictImpact": "NONE"
@@ -3492,48 +3579,30 @@
         },
         "newsFundamentalMonitor": [
           {
-            "headline": "Weather in Coromandel, India",
+            "headline": "Coromandel Int Share Price Today, Coromandel Int Stock Price Live NSE/BSE Updates | The Economic Times",
+            "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
+            "possible_pathway": "Possible path: selling price or input cost change → gross margin → operating profit → cash flow.",
+            "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
+            "what_would_confirm": "Confirm the size, duration, product exposure, pass-through ability and competitor response.",
+            "source_url": "https://economictimes.indiatimes.com/coromandel-international-ltd/stocks/companyid-13851.cms",
+            "review_status": "PENDING_HUMAN_REVIEW"
+          },
+          {
+            "headline": "Weather in India",
             "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
             "possible_pathway": "Possible fundamental pathway is not yet classified from the headline alone.",
             "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
             "what_would_confirm": "Read the primary source, identify the affected business driver, quantify the impact and search for contradictions.",
             "source_url": "https://www.weatherapi.com/",
-            "review_status": "PENDING_HUMAN_REVIEW"
+            "review_status": "LOW_RELEVANCE_HOLD"
           },
           {
-            "headline": "Coromandel International (COROMANDEL) Q4 25/26 Summary | Quartr",
+            "headline": "Coromandel International Ltd,Price Rs. 1937.55 (0.35%)",
             "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
-            "possible_pathway": "Possible fundamental pathway is not yet classified from the headline alone.",
+            "possible_pathway": "Possible path: selling price or input cost change → gross margin → operating profit → cash flow.",
             "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
-            "what_would_confirm": "Read the primary source, identify the affected business driver, quantify the impact and search for contradictions.",
-            "source_url": "https://quartr.com/events/coromandel-international-limited-coromandel-q4-25-26_FPD4W0q7",
-            "review_status": "PENDING_HUMAN_REVIEW"
-          },
-          {
-            "headline": "Coromandel International Q1 net falls 26% despite higher revenue - The Hindu",
-            "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
-            "possible_pathway": "Possible fundamental pathway is not yet classified from the headline alone.",
-            "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
-            "what_would_confirm": "Read the primary source, identify the affected business driver, quantify the impact and search for contradictions.",
-            "source_url": "https://www.thehindu.com/business/Industry/coromandel-international-q1-net-falls-26-despite-higher-revenue/article71258864.ece",
-            "review_status": "PENDING_HUMAN_REVIEW"
-          },
-          {
-            "headline": "Coromandel International Ltd. Corporate Action: Annual Report, Bonus & Dividend History",
-            "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
-            "possible_pathway": "Possible fundamental pathway is not yet classified from the headline alone.",
-            "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
-            "what_would_confirm": "Read the primary source, identify the affected business driver, quantify the impact and search for contradictions.",
-            "source_url": "https://www.etmoney.com/stocks/coromandel-international-ltd/corporate-actions/112",
-            "review_status": "PENDING_HUMAN_REVIEW"
-          },
-          {
-            "headline": "Coromandel International Schedules Q1 FY27 Earnings Call",
-            "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
-            "possible_pathway": "Possible fundamental pathway is not yet classified from the headline alone.",
-            "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
-            "what_would_confirm": "Read the primary source, identify the affected business driver, quantify the impact and search for contradictions.",
-            "source_url": "https://www.sahi.com/news/coromandel-international-schedules-q1-fy27-earnings-call-68-PE1_CORPO",
+            "what_would_confirm": "Confirm the size, duration, product exposure, pass-through ability and competitor response.",
+            "source_url": "https://www.sharekhan.com/stock/coromandel-international-ltd",
             "review_status": "PENDING_HUMAN_REVIEW"
           },
           {
@@ -3543,6 +3612,24 @@
             "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
             "what_would_confirm": "Read the primary source, identify the affected business driver, quantify the impact and search for contradictions.",
             "source_url": "https://economictimes.indiatimes.com/coromandel-international-ltd/stocksupdate/companyid-13851.cms",
+            "review_status": "PENDING_HUMAN_REVIEW"
+          },
+          {
+            "headline": "Coromandel International Ltd,Price Rs. 1937.55 (0.35%)",
+            "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
+            "possible_pathway": "Possible path: selling price or input cost change → gross margin → operating profit → cash flow.",
+            "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
+            "what_would_confirm": "Confirm the size, duration, product exposure, pass-through ability and competitor response.",
+            "source_url": "https://www.sharekhan.com/stock/coromandel-international-ltd",
+            "review_status": "PENDING_HUMAN_REVIEW"
+          },
+          {
+            "headline": "Coromandel International Ltd,Price Rs. 1937.55 (0.35%)",
+            "plain_english": "This item may matter, but EIOS has not yet proved that it changes revenue, margins, cash flow, risk or valuation.",
+            "possible_pathway": "Possible path: selling price or input cost change → gross margin → operating profit → cash flow.",
+            "fundamental_status": "FUNDAMENTAL_CHANGE_NOT_PROVEN",
+            "what_would_confirm": "Confirm the size, duration, product exposure, pass-through ability and competitor response.",
+            "source_url": "https://www.sharekhan.com/stock/coromandel-international-ltd",
             "review_status": "PENDING_HUMAN_REVIEW"
           }
         ],
@@ -11734,12 +11821,297 @@
         "approved": 0,
         "items": []
       },
-      "officialSourceCount": 4,
+      "quarterlyReview": {
+        "items": [
+          {
+            "id": "QUARTERLY-c43888c07a73fcafa56f5b7ab6b8cf479edbbf98a08282355c4e826b675d2b71",
+            "period": "Q1-FY2027",
+            "basis": "STANDALONE",
+            "summary": "The four core figures agree across the two readings and the income total reconciles. Source identity and reporting notes still need verification.",
+            "figures": {
+              "revenue": "7743.55",
+              "other_income": "48.76",
+              "total_income": "7792.31",
+              "pat": "376.96"
+            },
+            "assistantUnitReview": true,
+            "checks": [
+              {
+                "code": "PERIOD_BASIS_UNIT_AND_TOTALS",
+                "status": "PASS",
+                "explanation": "Check the printed quarter, standalone/consolidated basis, currency scale and income arithmetic together."
+              },
+              {
+                "code": "NORMALIZED_VALUES_MATCH",
+                "status": "PASS",
+                "explanation": "The saved figures must equal a fresh calculation from the source cells."
+              },
+              {
+                "code": "FOUR_CORE_SOURCE_READINGS",
+                "status": "PASS",
+                "explanation": "Revenue, other income, total income and total net profit must retain matching text/image readings from the same column."
+              },
+              {
+                "code": "EXTRACTION_CANDIDATE_CHECKED",
+                "status": "PASS",
+                "explanation": "An unresolved extraction warning cannot be cleared by this review."
+              },
+              {
+                "code": "OFFICIAL_SOURCE_AND_COMPANY_IDENTITY",
+                "status": "HOLD",
+                "explanation": "Independent evidence must confirm that this exact PDF is an official filing for the selected company. A supplied URL is not a verified download."
+              },
+              {
+                "code": "REPORTING_NOTES_AND_RESTATEMENTS",
+                "status": "HOLD",
+                "explanation": "Review the reporting notes, audit status and any restatement or balancing-quarter explanation before publication."
+              }
+            ],
+            "notChecked": [
+              "Cash flow and balance sheet completeness",
+              "Earnings quality",
+              "Historical trends",
+              "Valuation and investment verdict"
+            ],
+            "reportingNotes": {
+              "items": [
+                {
+                  "id": "dff22d96c7e0e813ec655402d8812030e1502accc7507e50123c54f1bf220d9e",
+                  "topic": "LIMITED_REVIEW",
+                  "page": 2,
+                  "context": {
+                    "basisMentions": [
+                      "CONSOLIDATED",
+                      "STANDALONE"
+                    ],
+                    "dateMentions": [
+                      "2026-07-23"
+                    ],
+                    "cues": [
+                      "The passage mentions both accounting bases. Check which part concerns the figures above.",
+                      "Other dates are mentioned, but the displayed period-end date is not clearly identified. Do not treat this as a current-quarter adjustment without review."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "Notes: \nThe above unaudited standalone and consolidated financial results of Coromandcl International Limited (\"the Company\"), which have been prepared in accordance with the Indian Accounting Standards (\"Ind AS\") \nprescribed under Section 133 of the Companies Act, 2013 (\"the Act'') read with relevant rules issued thereunder, other accounting principles generally accepted in India and guidelines issued by the Securities and Exchange \nBoard of India (\"Sl•:Jll\") were reviewed and recommended by the Audit Committee and approved by the Board of Directors in their meetings held on 23 July 2026. The Statutory Auditors have carried out a limited review \nand issued unmodified reports thereon .",
+                  "question": "Check the assurance provided. A limited review must not be described as a full audit.",
+                  "assistantDraft": {
+                    "explanation": "The note reports limited review with unmodified reports. This is not a full annual audit or a guarantee of financial strength.",
+                    "status": "ASSISTANT_DRAFT_NOT_APPROVED"
+                  }
+                },
+                {
+                  "id": "6d87586acc17d322d80bf9b61af5389520d1f926568ffd3ef94235163815008a",
+                  "topic": "IMPAIRMENT",
+                  "page": 2,
+                  "context": {
+                    "basisMentions": [],
+                    "dateMentions": [
+                      "2026-03-31"
+                    ],
+                    "cues": [
+                      "The accounting basis is not explicit in this passage.",
+                      "Other dates are mentioned, but the displayed period-end date is not clearly identified. Do not treat this as a current-quarter adjustment without review."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "2 l•:xceptional items for the quarter and year ended 31 March 2026 represent estimated provision towards impairment of investment/goodwill relating to Company's Drones subsidiary business. This is primarily on account \nof delay in execution of certain orders.",
+                  "question": "Check the affected period and accounting basis. Do not automatically remove the charge from earnings.",
+                  "assistantDraft": {
+                    "explanation": "The drone-business impairment relates to March quarter and year-end. Do not subtract it again from June earnings or equate a rebound with underlying improvement.",
+                    "status": "ASSISTANT_DRAFT_NOT_APPROVED"
+                  }
+                },
+                {
+                  "id": "80e44781034c05cf0136fd5e82e5fcc40149a5755c3424373dd45a537ef140db",
+                  "topic": "COMPARABILITY",
+                  "page": 2,
+                  "context": {
+                    "basisMentions": [
+                      "CONSOLIDATED"
+                    ],
+                    "dateMentions": [
+                      "2025-06-30",
+                      "2025-08-08",
+                      "2026-06-30"
+                    ],
+                    "cues": [
+                      "The text names consolidated accounts, while the figures above are standalone. Do not transfer the note automatically.",
+                      "The displayed period-end date is mentioned. Other dates may have a different role; confirm the note applies to this quarter."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "3 During the previous year, the Company acquired equity shares of NACI, Industries Limited (\"NACL'') representing 53.08% of the voting share capital of NACL. Consequently, NACL became a subsidiary of the Company \nw.c.f. 8 August 2025. The transaction was accounted in accordance with Ind AS 103 - Business Combinations. The acquisition pertains to the Company's crop protection segment. The consolidated figures for the quarter \nended 30 June 2026 may not be comparable with those for the quarter ended 30 June 2025 due to this acquisition.",
+                  "question": "Check which periods and accounting basis are affected before interpreting growth.",
+                  "assistantDraft": {
+                    "explanation": "NACL's acquisition changes group composition. Consolidated growth is not necessarily organic growth; do not transfer this specific comparability warning automatically to standalone figures.",
+                    "status": "ASSISTANT_DRAFT_NOT_APPROVED"
+                  }
+                },
+                {
+                  "id": "f1b1541d2ecf777c5b376a76ec31583ccc44e513badfb14c579742e5ab378149",
+                  "topic": "LIMITED_REVIEW",
+                  "page": 2,
+                  "context": {
+                    "basisMentions": [],
+                    "dateMentions": [
+                      "2025-12-31",
+                      "2026-03-31"
+                    ],
+                    "cues": [
+                      "The accounting basis is not explicit in this passage.",
+                      "Other dates are mentioned, but the displayed period-end date is not clearly identified. Do not treat this as a current-quarter adjustment without review."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "5 The figures of the quarter ended 31 March 2026 arc the balancing figures between the audited figures of the full financial year ended 31 March 2026 and the year to date figures upto third quarter ended 31 December 2025 \nwhich were subjected to a Limited review .",
+                  "question": "Check the assurance provided. A limited review must not be described as a full audit.",
+                  "assistantDraft": null
+                },
+                {
+                  "id": "ea761166f720f89d573c48a3c4ee91212bf97e2af4772263b674ada5beca4e24",
+                  "topic": "BALANCING_QUARTER",
+                  "page": 2,
+                  "context": {
+                    "basisMentions": [],
+                    "dateMentions": [
+                      "2025-12-31",
+                      "2026-03-31"
+                    ],
+                    "cues": [
+                      "The accounting basis is not explicit in this passage.",
+                      "Other dates are mentioned, but the displayed period-end date is not clearly identified. Do not treat this as a current-quarter adjustment without review."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "5 The figures of the quarter ended 31 March 2026 arc the balancing figures between the audited figures of the full financial year ended 31 March 2026 and the year to date figures upto third quarter ended 31 December 2025 \nwhich were subjected to a Limited review .",
+                  "question": "Check whether the quarter is derived from full-year figures less nine-month figures.",
+                  "assistantDraft": {
+                    "explanation": "March is annual results minus nine-month results. Explain this construction when comparing June with March; it is not a restatement by itself.",
+                    "status": "ASSISTANT_DRAFT_NOT_APPROVED"
+                  }
+                },
+                {
+                  "id": "a2d3b4709a5a837dbb385fd6a728fc8e2cbda5da4c98fd7eb746ab4a65fdfb40",
+                  "topic": "IMPAIRMENT",
+                  "page": 2,
+                  "context": {
+                    "basisMentions": [
+                      "CONSOLIDATED",
+                      "STANDALONE"
+                    ],
+                    "dateMentions": [
+                      "2026-03-31"
+                    ],
+                    "cues": [
+                      "The passage mentions both accounting bases. Check which part concerns the figures above.",
+                      "Other dates are mentioned, but the displayed period-end date is not clearly identified. Do not treat this as a current-quarter adjustment without review."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "30 June 31March 30 June 31March 30June 31March 30June 31March \n2026 2026 2025 2026 2026 2026 2025 2026 \nSegment revenue \na, Nutrient and other allied business 6,910.49 4,~70.83 6,311.1 I 27,692.87 6,951.03 4,952.50 6,351.73 27,726.87 \nb. Crop protection 870.08 715.16 724.-19 3,053.60 1,250.76 1,076.25 724.85 3,968.25 \nTotal 7,780.57 5,685.99 7,035.60 30,746.47 8,201.79 6,028.75 7,076.58 31,695.12 \nI .css: lntcr-~cbl'fficnt rc,•cnuc 37.02 25.09 34.28 215.58 37.02 25.09 34.28 215.58 \nRevenue from operations 7,743.55 5,660.90 7,001.32 30,530.89 8,164.77 6,003.66 7,042.30 31,479.54 \nSegment results \na. Nutrient and other allied busines s :.i-- 469.88 223.30 636.68 2,473.64 478.91 2+4.44 629.48 2,463.86 \nb. Crop protcction 158,81 137.94 110.64 568.80 170.15 120.29 111.16 510.81 \nTotal 628.69 361.24 747.32 3,042.44 649.06 364.73 740.64 2,974.67 \nAdjusted for. \na Unallocable expense (96.17) (112.24) (79.10) (362.79) (96.17) (11224) (79.10) (362.79) \nb. J o'inancc costs (75.94) (74.92) (65.28) (287.39) (89.02) (89.32) (67.96) (342,59) \nc. Other income 48.76 87,35 81.60 350.62 49.81 64.50 83.74 347.91 \nd, Share in loss of joint venture and associates - (0.02} (0.04} (0.06) \nProfit before tax 505.34 261.43 684.54 2,742.88 513.68 227.65 677.28 2,617.14 \n\"\" after rcCO!,'Tlising impairment charge of Rs. 125.15 crorcs and Rs 70.56 crorcs in standalone and consolidated financial results respectively for the quarter and year ended 31 March 2026 (refer note 2)",
+                  "question": "Check the affected period and accounting basis. Do not automatically remove the charge from earnings.",
+                  "assistantDraft": null
+                },
+                {
+                  "id": "0fcf266f9881d9bc74f1fb23668964716f893d94f4b3f5473eee20b52584adc3",
+                  "topic": "LIMITED_REVIEW",
+                  "page": 4,
+                  "context": {
+                    "basisMentions": [],
+                    "dateMentions": [],
+                    "cues": [
+                      "The accounting basis is not explicit in this passage.",
+                      "No complete date was recognised. Read the original passage before assigning it to a quarter."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "3. We conducted our review of the Statement in accordance with the Standard on Review Engagements \n(SRE) 2410, \"Review of Interim Financial Information Performed by the Independent Auditor of the \nEntity\" issued by the Institute of Chartered Accountants of India. This standard requires that we plan \nand perform the review to obtain moderate assurance as to whether the Statement is free of material \nmisstatement. A review of interim financial information consists of making inquiries, primarily of \npersons responsible for financial and accounting matters, and applying analytical and other review \nprocedures. A review is substantially less in scope than an audit conducted in accordance with Standards \non Auditing and consequently does not enable us to obtain assurance that we would become aware of \nall significant matters that might be identified in an audit. Accordingly, we do not express an audit \nopinion.",
+                  "question": "Check the assurance provided. A limited review must not be described as a full audit.",
+                  "assistantDraft": null
+                },
+                {
+                  "id": "1d9396bf19b90da7d05a97334c430c949d61d88b131aceaef7b043c7f4211e2c",
+                  "topic": "LIMITED_REVIEW",
+                  "page": 5,
+                  "context": {
+                    "basisMentions": [],
+                    "dateMentions": [],
+                    "cues": [
+                      "The accounting basis is not explicit in this passage.",
+                      "No complete date was recognised. Read the original passage before assigning it to a quarter."
+                    ],
+                    "status": "APPLICABILITY_UNCONFIRMED",
+                    "creates_approved_facts": false
+                  },
+                  "passage": "3. We conducted our review of the Statement in accordance with the Standard on Review Engagements \n(SRE) 2410, \"Review of Interim Financial Information Performed by the Independent Auditor of the \nEntity\" issued by the Institute of Chartered Accountants of India. This standard requires that we plan and \nperform the review to obtain moderate assurance as to whether the Statement is free of material \nmisstatement. A review of interim financial information consists of making inquiries, primarily of persons \nresponsible for financial and accounting matters, and applying analytical and other review procedures. A \nreview is substantially less in scope than an audit conducted in accordance with Standards on Auditing and \nconsequently does not enable us to obtain assurance that we would become aware of all significant matters \nthat might be identified in an audit. Accordingly, we do not express an audit opinion. \nWe also performed procedures in accordance with the Master Circular issued by the Securities and \nExchange Board of India under Regulation 33(8) of the Listing Regulations, to the extent applicable.",
+                  "question": "Check the assurance provided. A limited review must not be described as a full audit.",
+                  "assistantDraft": null
+                }
+              ],
+              "invalidCount": 0
+            },
+            "sourceUrl": "https://www.coromandel.biz/wp-content/uploads/2026/07/Q1-results-1.pdf",
+            "sourcePage": 1,
+            "documentHash": "17b16806779abafa77ed78665e5e0389fd6acc2eb63b4d0189e1e4fd3f0c2aab",
+            "readings": [
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "(a) Revenue from operations",
+                "native_text": "7,743.55",
+                "ocr_text": "7,743.55",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "(b) Other income",
+                "native_text": "48.76",
+                "ocr_text": "48.76",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "Total income",
+                "native_text": "7,792.31",
+                "ocr_text": "7,792.31",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              },
+              {
+                "pdf_page": 1,
+                "column_index": 0,
+                "row_label": "9 Net profit after tax (7-8)",
+                "native_text": "376.96",
+                "ocr_text": "376.96",
+                "status": "READINGS_AGREE_PENDING_REVIEW",
+                "creates_approved_facts": false
+              }
+            ],
+            "status": "UNAPPROVED_REVIEW_ONLY"
+          }
+        ],
+        "invalidPacketCount": 0,
+        "changesVerdict": false
+      },
+      "officialSourceCount": 5,
       "officialSourceTypes": [
         "ANNUAL_REPORT",
         "EXCHANGE_DISCLOSURE",
         "FINANCIAL_RESULTS_AND_TRANSCRIPTS",
-        "INVESTOR_PRESENTATION"
+        "INVESTOR_PRESENTATION",
+        "QUARTERLY_RESULTS"
       ],
       "sourceDiscoveryStatus": "DISCOVERED_NOT_EXTRACTED",
       "extractedFactCount": 10,
@@ -11987,7 +12359,7 @@
         ]
       },
       "intelligenceSnapshot": {
-        "generatedAt": "2026-09-02T09:28:15.076896+00:00",
+        "generatedAt": "2026-09-07T09:07:11.085076+00:00",
         "verdictStatus": "RESEARCH_HOLD",
         "verdict": null,
         "confidencePercent": null,
@@ -12045,7 +12417,7 @@
           {
             "name": "news_and_filings",
             "status": "PARTIAL",
-            "summary": "Automatic intake found 17 company items; META review is required before they become evidence.",
+            "summary": "Automatic intake found 24 company items; META review is required before they become evidence.",
             "coveragePercent": 25
           },
           {
@@ -12057,7 +12429,7 @@
           {
             "name": "meta_causality",
             "status": "PARTIAL",
-            "summary": "META triaged 17 discoveries: 13 await human review; none can change the verdict automatically.",
+            "summary": "META triaged 24 discoveries: 19 await human review; none can change the verdict automatically.",
             "coveragePercent": 20
           },
           {
@@ -12123,6 +12495,18 @@
           "status": "PARTIAL",
           "items": [
             {
+              "title": "Coromandel International News - Coromandel International Announcement, Latest News on Coromandel International - The Economic Times",
+              "sourceUrl": "https://economictimes.indiatimes.com/coromandel-international-ltd/stocksupdate/companyid-13851.cms",
+              "discoveredAt": "2026-09-07T09:06:23.836702+00:00",
+              "researchIntent": "CURRENT_NEWS"
+            },
+            {
+              "title": "Coromandel International Ltd,Price Rs. 1937.55 (0.35%)",
+              "sourceUrl": "https://www.sharekhan.com/stock/coromandel-international-ltd",
+              "discoveredAt": "2026-09-07T09:06:21.883767+00:00",
+              "researchIntent": "CURRENT_NEWS"
+            },
+            {
               "title": "Coromandel International Q1 net falls 26% despite higher revenue - The Hindu",
               "sourceUrl": "https://www.thehindu.com/business/Industry/coromandel-international-q1-net-falls-26-despite-higher-revenue/article71258864.ece",
               "discoveredAt": "2026-09-02T05:02:25.298769+00:00",
@@ -12153,7 +12537,7 @@
               "researchIntent": "EXCHANGE_DISCLOSURES"
             }
           ],
-          "statement": "Automatic intake is connected and has preserved 17 company discoveries. They remain review candidates and cannot influence the verdict until META and human review approve them."
+          "statement": "Automatic intake is connected and has preserved 24 company discoveries. They remain review candidates and cannot influence the verdict until META and human review approve them."
         }
       },
       "researchLink": {
@@ -12173,13 +12557,14 @@
   "createsObservation": false,
   "nonAuthorityStatement": "Research readiness only; not a Signal, Catalyst, Opportunity, recommendation, position, or trade.",
   "runtime": {
-    "status": "SUCCESS",
-    "startedAt": "2026-09-02T09:28:14.035448+00:00",
-    "finishedAt": "2026-09-02T09:28:15.210238+00:00",
+    "status": "RUNNING",
+    "startedAt": "2026-09-07T09:03:55.298203+00:00",
+    "finishedAt": null,
     "jobCount": 22,
-    "executedJobs": 22,
-    "observationCount": 77,
-    "errors": []
+    "executedJobs": 0,
+    "observationCount": null,
+    "errors": [],
+    "collectionOutcome": {}
   },
   "opportunityWatch": {
     "eligibilityRule": "Only companies with a READY governed intelligence verdict may enter Eligible Opportunities.",
@@ -12194,7 +12579,7 @@
     "researchCandidateCount": 4
   },
   "homeStatus": {
-    "runtimeStatus": "SUCCESS",
+    "runtimeStatus": "RUNNING",
     "earlyIntelligenceCaseCount": 1,
     "confirmedOpportunityCount": 0,
     "deteriorationAlertCount": null,

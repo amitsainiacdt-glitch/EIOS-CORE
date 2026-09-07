@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "reviews": [
+    {
+      "review_id": "coromandel-17b168-unit-visual-20260903",
+      "document_hash": "17b16806779abafa77ed78665e5e0389fd6acc2eb63b4d0189e1e4fd3f0c2aab",
+      "pdf_page": 1,
+      "table_id": "ruled-0",
+      "crop_bbox": [637.8399666666666, 33.780010000000004, 761.8399666666666, 51.780010000000004],
+      "image_sha256": "f4e1e1617945520369d6d32697d0ce2cce035b296e61b2cdc57b3b8b0caa854f",
+      "evidence_report": "data/runtime/quarterly_intake/17b16806779abafa77ed78665e5e0389fd6acc2eb63b4d0189e1e4fd3f0c2aab/b6f945eef3a24d988f3eb23e28b5b951/unit-probe-12f36e8b03fe45d596b0f56ad1f8be3f/report.json",
+      "observed_text": "₹ in Crores",
+      "reviewer_kind": "ASSISTANT_VISUAL_REVIEW",
+      "status": "CANDIDATE_NOT_HUMAN_APPROVED",
+      "reviewed_on": "2026-09-03",
+      "reason": "Assistant visually inspected the preserved unit crop. Printed rupee glyph is visible; Windows OCR reads R. This is a document-specific visual reading, not a general R-to-INR rule.",
+      "creates_approved_facts": false
+    }
+  ]
+}

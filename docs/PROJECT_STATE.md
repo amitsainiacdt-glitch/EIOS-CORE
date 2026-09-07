@@ -1,5 +1,7 @@
 # PROJECT STATE
 
+> Historical project-state record. The authoritative live checkpoint is the repository-root `PROJECT_STATE.md`. This file must not be used to select the next development task.
+
 Current Phase
 
 Release 3

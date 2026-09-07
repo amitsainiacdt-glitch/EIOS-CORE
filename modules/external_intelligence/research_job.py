@@ -63,6 +63,7 @@ class ResearchJob:
     observation_confidence: float = 70.0
 
     entity_domain: str | None = None
+    quarter_period_end: str | None = None
 
     def validate(self) -> None:
         """
@@ -121,6 +122,11 @@ class ResearchJob:
 
         if self.entity_domain is not None and not self.entity_domain.strip():
             raise ValueError("entity_domain must be None or a non-empty domain")
+        if self.quarter_period_end is not None:
+            from modules.company_intelligence.quarterly_search_target import quarterly_search_plan
+            if self.intent != 'OFFICIAL_DOCUMENT_DISCOVERY' or not self.entity_domain:
+                raise ValueError('Quarter targeting requires official-document intent and issuer domain')
+            quarterly_search_plan(self.company, self.entity_domain, self.quarter_period_end)
 
 
 __all__ = [

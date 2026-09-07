@@ -2,6 +2,17 @@
 
 # Everest Investment Operating System (EIOS)
 
+## Canonical current checkpoint — 2026-09-07
+
+- **Development state:** active development; not launch-ready.
+- **Current completed checkpoint:** governed quarterly extraction and review pipeline, exact-quarter research targeting, controlled source verification/retry, browser-assisted official-PDF provenance, and dashboard quarterly-review presentation.
+- **Latest automatic cycle:** process status `SUCCESS`; 22 of 22 jobs executed and 94 observations recorded, but official-document collection produced 0 archives, 0 extractions and 0 fact candidates, with 7 failures. Process success must not be interpreted as successful financial ingestion.
+- **Latest validation:** 305 company-intelligence tests pass; the dashboard production build passes; the directly affected research-job, execution-service, orchestrator and trusted-document-adapter regression suites pass.
+- **Governance boundary:** extracted quarterly and historical review records remain unapproved, create no governed evidence and do not change financial history or verdicts.
+- **Current objective:** establish unattended, source-backed official-document acquisition for many companies, then complete full-statement extraction and mandatory META/human adjudication before facts enter the Master Dossier.
+- **Immediate sequence:** (1) preserve this tested checkpoint, (2) implement an accessible governed acquisition route, (3) complete income-statement/balance-sheet/cash-flow and quarterly normalization, (4) activate META approval and Master Dossier promotion, (5) connect reasoning/verdict/UI refresh, and (6) validate on multiple unseen companies.
+- **Canonical-state rule:** this root file is the authoritative project state. Files under `docs/` are supporting architecture/history and must point here for the live checkpoint.
+
 ## 2026-09-02 — Local cash-flow extraction and review table
 
 - Added a fail-closed, page-scoped local PDF cash-flow extractor and Coromandel source mapping. Re-running `python scripts/extract_coromandel_cash_flow_history.py` extracts 48 source figures for FY2017-18 through FY2024-25 from six preserved reports. No network/provider call is used.
@@ -13,6 +24,68 @@
 - This is a manually mapped local report import, NOT automatic source discovery for every company. META approval, review of restatements, remaining balance-sheet fields and quarterly history are still outstanding. Earlier offline cycles returning zero extracted documents must not be described as successful extraction.
 
 ## Current Project Status
+
+### Direct report URL import for automatic collection (2026-09-02)
+
+- Added the issuer-published Coromandel FY2024-25 report URL to the official source manifest. Direct URLs are now preferred when configured, so EIOS can acquire a report even if the issuer index page returns HTTP403/406.
+- The same guarded path remains in force: HTTPS and allowlisted issuer domain, public-network validation, content hashing, immutable archive, text extraction and META/human review gates. Direct configuration does not create approved facts or a verdict.
+- All 120 company-intelligence tests pass and the source manifest parses correctly. A live direct-download test could not run because the Codex usage limit was reached; no new online report was downloaded in this step.
+- This is the automatic site-to-EIOS upload path for configured URLs. For a company with no configured direct URL, EIOS still needs an accessible index page or a local report import. No GitHub push was attempted.
+
+### Direct official-page discovery fallback (2026-09-02)
+
+- Found a structural dependency: the automatic document pipeline previously followed only selected search results and did not visit saved official investor-page locations when that list was empty.
+- Added bounded direct discovery on one configured annual-report page per eligible official-document job, selecting at most two allowlisted PDF links in publisher order. It reuses the guarded acquisition adapter (HTTPS/domain/redirect/public-address checks) and existing archive/extraction/META pipeline. The automatic runner enables this fallback only outside explicit offline mode. It does not claim page order proves the newest year or provide quarterly-source discovery.
+- Added explicit discovery page/failure/link counts. Test probe limits collection to at most one linked report and preserves diagnostics separately under data/runtime/official_collection_probe. No fabricated search results or approved facts.
+- All 117 company-intelligence tests pass. Live Coromandel probe first hit the sandbox connection boundary; approved network retry reached the official page but received HTTP406. KPIT's configured page received HTTP403. Both returned zero discovered links and zero downloads. Website access remains unresolved; the code path is implemented but live collection is NOT demonstrated.
+- Did not bypass site restrictions, switch to browser scraping, use paid credits, change Windows scheduling, run all jobs or push GitHub. Next work must address a genuinely accessible authorized source or source-import route, and retain extraction failure diagnostics/retry behavior.
+
+### Automatic schedule and honest collection outcome (2026-09-02)
+
+- Read Windows task `EIOS Automatic Company Intelligence`: Ready, daily at 06:00 India time, StartWhenAvailable true, WakeToRun false. Last scheduled run 2026-09-02 10:31:11 returned 0; next scheduled run 2026-09-03 06:00. Schedule was not changed or manually triggered.
+- Latest saved cycle status reported SUCCESS but zero extracted documents and zero fact candidates. Process success is not proof of fresh research.
+- Added a separate `collection_outcome` to future automatic-cycle status: no extraction, unchanged existing documents, extracted without candidates, candidates pending review, partial failures/holds, or unavailable counts. Existing process status is preserved for compatibility; new data is never described as approved.
+- Six new outcome tests; all 114 company-intelligence tests pass. Existing historical status was not rewritten; no network cycle was run. Frontend display of the new outcome remains pending.
+
+### Automatic repeat checks for inspected sources (2026-09-02)
+
+- Added a read-only consistency checker for the two assistant-inspected examples. It rebuilds example fingerprints from the current extraction pack, validates arithmetic and provenance, hashes original local documents, and compares selected saved values/page/year columns. Changed/missing files, changed extraction/reference values, invalid authority flags and paths outside the workspace require re-review.
+- Connected it to the automatic company's cycle preflight/status; issues stop that run before collection. Absent reference observations are reported explicitly as NO_REFERENCE_CHECKS, not passed verification. Full collection cycle was not run during this task.
+- Local check returned SAVED_EXAMPLES_UNCHANGED for both examples. Six added regression tests; all 108 company-intelligence tests pass. No new human feedback or approval, no AI training, no verdict change; this is repeatable consistency checking against assistant observations, not independent audit or protection against coordinated tampering of all local files.
+
+### Two real PDF examples inspected (2026-09-02)
+
+- Visually inspected PDF141 (FY2024-25 report) and PDF137 (FY2023-24 report, FY2022-23 comparative column); file hashes match the extraction records. Standalone headings, lakh units, CFO and fixed-asset purchase outflows match all four selected amounts. Calculated FCF is 1716.06 and -45.01 crore respectively.
+- Saved assistant-only observations with example fingerprints under `data/runtime/financial_source_assistant_review.json` and a readable review note in `docs/FINANCIAL_SOURCE_REVIEW_2026_09_02.md`. No selected-value corrections were required. This is not whole-series verification or a review of every cash-flow line.
+- No human decisions, META approvals or learned feedback were fabricated. Memory count remains zero; the two assistant checks are pending independent review and are not imported as training labels. No UI or verdict changes.
+
+### First real review worksheet (2026-09-02)
+
+- Added a repeatable worksheet builder using the existing eight-year Coromandel cash-flow extraction pack. Generated local JSON and readable Markdown under `data/runtime/financial_review_examples.*` with operating cash, fixed-asset cash spending, calculated FCF, original units, year-column/page references and review questions.
+- Builder checks source bindings, lakh/crore and spending-sign conversions, common document/year columns, FCF arithmetic and duplicate periods. These are mechanical checks of saved extraction data, not an independent PDF review.
+- Every example remains AWAITING_SOURCE_REVIEW with no human decision. No review-memory entries or governed facts were created. The financial worksheet is not yet an approved numerical-correction workflow; existing event-review memory must not be described as trained on these financial examples.
+- Three added regression tests, including actual saved data, tampered inputs and duplicate/status rejection. All 102 company-intelligence tests pass. No network collection or GitHub push performed.
+
+### Review-memory measurement (2026-09-02)
+
+- Added a read-only memory report counting real reviews, usable snapshots, legacy records and time-ineligible feedback. It replays up to 100 recent known reviews with and without memory and checks retained feedback, restrictive decisions and preserved authority gates.
+- These are known-feedback retention tests, not holdout accuracy, model training or investment performance. Unseen-fact and investment accuracy remain null. Empty memory reports AWAITING_REVIEW_FEEDBACK, not successful learning.
+- Connected the report to the automatic company-cycle preflight/status. A failed memory replay blocks that cycle. The automatic cycle itself was not run during this change; no external collection or review decisions were triggered.
+- `python scripts/report_review_memory.py` currently reports zero real reviews. All 99 company-intelligence tests pass, including six new report tests. Naive/unknown-timezone legacy decisions no longer cause aware-date comparisons to fail and are not applied as learned feedback.
+
+### Controlled review memory (2026-09-02)
+
+- Added persisted candidate snapshots to newly recorded human review receipts, bound to existing candidate fingerprints. Old receipts remain readable; absent snapshots are not invented or automatically backfilled.
+- The production META writer now reads the default human review ledger. Exact matches across repeated extraction runs remember prior REJECT/HOLD decisions and hold the repeated fact for research; earlier APPROVE decisions are context only and cannot bypass fresh checks/human review or create evidence, catalysts or verdicts.
+- Match scope includes company, document hash, URL, PDF page, passage, amounts/dates, event type and posture. No fuzzy generalization across companies/reports, no AI weight training, no investment-outcome learning. Future-dated feedback is excluded from historical assessments; mismatched saved snapshots fail closed.
+- Eight new regression tests; all 93 company-intelligence tests pass. No real review ledger existed at implementation time, so there are no live learned decisions yet. Tests use synthetic temporary records only. This does NOT make quarterly extraction or report-page discovery autonomous. UI memory display and measured outcome evaluation remain future work.
+
+### Quarterly staging safeguards (2026-09-02)
+
+- Full company-intelligence unittest discovery passed: 85 tests after five new quarterly validation tests (80 before changes).
+- Quarterly staging now rejects booleans, nonfinite/overflowing numbers, malformed quarter labels, annual/YTD period labels and invalid identifiers. True zero, missing values and losses remain distinct. Quarter labels explicitly use the financial-year-ending convention.
+- Removed source-ID-only self-promotion to GOVERNED: this staging type accepts STAGED only. Approval must come through the separate governed review workflow, not a label. No production callers currently instantiate this type; quarterly extraction and UI integration remain outstanding.
+- This is backend preparation, not newly extracted quarterly data or a completed automatic pipeline. GitHub push remains blocked pending the user's explicit approval of the saved commit payload and destination; no retry was attempted.
 
 ### Graph visibility repair (2026-09-02)
 
@@ -5394,3 +5467,340 @@ investment decision is created by this checkpoint.
 - Added the command and its behavior to the operational live-research runbook.
 - Offline tests pass for stage, confidence, missing-evidence, queue, and no-production-object rendering. The live command also completed successfully against the actual artifacts.
 - Production Observations remain exactly 46. No Observation, Evidence, Meta conclusion, EIP state, Signal, Catalyst, Opportunity, recommendation, position, or trade was created.
+
+## Product mandate — Best-in-class intelligence, analytics, and explanation (2026-09-02)
+
+- EIOS is to be built as a trusted investment-research system, not a decorative dashboard or price-only alert tool.
+- Every material conclusion must be traceable to dated, source-linked evidence. Missing, stale, conflicting, or inaccessible data must be shown plainly and must never be silently filled or invented.
+- The analytical layer must combine long-term financial statements, quarterly trends, cash flow, balance-sheet quality, valuation context, macro and sector conditions, company news, orders/tenders, and catalysts.
+- Mandatory Meta analysis must test evidence quality, compare figures across time and peers, identify what changed, explain the likely business impact, show supporting and opposing facts, and enforce confidence ceilings before any verdict is displayed.
+- The presentation must speak to an intelligent normal reader: lead with the conclusion, then show the numbers, logic, sources, uncertainty, and what would change the view. Tables and charts should make ten-year/available history and trends easy to inspect.
+- EIOS must detect early hints before they appear in reported results where evidence permits, while labeling them as hints rather than facts and separating observation, interpretation, hypothesis, catalyst, opportunity, and recommendation.
+- Automation must preserve each company’s evidence and extraction history, refresh independently on a schedule, report collection failures honestly, and retain an auditable change history.
+- Learning is governed: human review outcomes may improve future ranking and explanations only through measured, replayable feedback; no unreviewed pattern is allowed to become a financial verdict.
+- The release bar is professional trust: reliable ingestion, complete-enough coverage, explainable analytics, visible provenance, fail-closed safety, accessible UI, and regression-tested behavior across companies.
+
+## Checkpoint 148 — Quarterly presentation gate connected (2026-09-02)
+
+- Added a dedicated quarterly-trend table to the company financial view for quarter, revenue, EBITDA, and PAT.
+- The table consumes only reconciled quarterly records and clearly displays missing data instead of estimating from annual totals or headlines.
+- The existing official Coromandel annual report was checked for quarterly performance tables; its references to quarterly bank returns are compliance disclosures, not quarterly operating results, so no unsupported figures were imported.
+- The quarterly safeguard therefore remains active: the UI is ready, but the data stays empty until an official quarterly-results document is acquired and reconciled.
+- The dashboard build passes after this change.
+
+## Checkpoint 149 — Quarterly source discovery wired and regression-tested (2026-09-02)
+
+- Automatic official-source discovery now recognizes issuer annual-report pages, quarterly-results pages, and investor-presentation pages through the governed manifest.
+- Discovery remains bounded, allowlisted, and non-authoritative: a link is only a candidate until acquisition, extraction, reconciliation, META review, and human authorization complete.
+- The complete company-intelligence regression suite passed: 120 tests.
+
+## Quarterly discovery correction (2026-09-03)
+
+- Corrected the premature return after configured annual-report URLs: remaining document capacity now permits page discovery.
+- Prioritized quarterly-results pages ahead of annual indexes and presentations within the two-page limit.
+- Enforced the document limit across all pages and direct URLs, with duplicate suppression.
+- Added regression cases for a known annual PDF alongside a quarterly page and for the global document cap. All 122 company-intelligence tests passed offline.
+- No quarterly figures were acquired or approved in this step. Live source accessibility and source-backed extraction remain unverified; passing tests does not establish successful collection.
+
+## Direct quarterly acquisition attempt (2026-09-03)
+
+- Located the Q1 FY2027 PDF link on the issuer's quarterly-results index and registered the exact document URL in the source manifest.
+- An approved-network acquisition using the governed archive command returned HTTP 406. The index was readable through web research, but no PDF bytes were acquired into EIOS; no quarterly figures were extracted or approved.
+- The next acquisition alternative is an official exchange-hosted copy or a user-supplied original PDF; do not treat browser/search text as a hash-bound local document.
+- User credit stop rule: stop further EIOS development and notify when purchased credits are observed at 500 or below, based on the original 1,000-credit budget. A 30-minute monitor is active; this is not an exact account spending cap.
+
+## Exchange acquisition alternatives checked (2026-09-03)
+
+- Tested public NSE filing https://nsearchives.nseindia.com/corporate/COROMANDELINT_07052026140636_BMOutcome_SD.pdf (quarter/year ended March 2026): approved-network download timed out after 45 seconds with zero bytes.
+- Tested public BSE filing https://www.bseindia.com/xml-data/corpfiling/AttachLive/1d018ae7-3b0e-4af2-a29c-dd7f87317068.pdf (June 2025 historical quarter): returned HTTP 404.
+- Neither is a verified copy of the June 2026 filing. Neither downloaded successfully; no figures, archive approvals, or investment conclusions were created.
+- Current practical handoff: user-supplied official quarterly PDF for the existing local importer, or a newly verified accessible official filing URL. Do not describe the quarterly extraction or approval-to-UI integration as complete.
+
+## User-supplied quarterly PDF imported (2026-09-03)
+
+- Copied the user-specified Desktop Q1-results-1.pdf without changing the original and imported it via the existing local-source workflow.
+- SHA-256: 17b16806779abafa77ed78665e5e0389fd6acc2eb63b4d0189e1e4fd3f0c2aab. Seven pages, 21,706 extracted characters, extraction SUCCEEDED with no warnings; eight generic fact candidates queued, zero human-review-ready and zero approved facts.
+- Extracted document heading identifies unaudited standalone and consolidated results for the quarter ended June 30, 2026. This is local-import provenance, not a verified network download.
+- Visual column reconciliation is still pending: Poppler was not located on PATH or the checked Codex tree, and current Python lacks fitz/pypdfium2. Do not promote noisy extracted numeric text into quarterly records until visually checked.
+- Quarterly table population and graph integration remain unfinished.
+
+## Reusable quarterly row-candidate extractor (2026-09-03)
+
+- Added an issuer-independent layout-text extractor and local CLI that identify candidate revenue, total-income, PAT and EBITDA rows, retaining hash, page, raw row and raw cells.
+- Strict numeric-token parsing preserves zeros/negatives and flags OCR corruption or dashes without guessing. Total income remains distinct from revenue. No quarter, basis or unit is assigned from column position alone.
+- Ran against the user-supplied Coromandel PDF: seven table-row candidates saved under data/runtime/quarterly_candidates, all held for column reconciliation. This is separate from the earlier eight generic fact candidates.
+- All 127 company-intelligence tests passed. OCR, column-header mapping, arithmetic reconciliation, and approved-record UI integration remain unfinished; no facts or verdicts were approved.
+
+## Extraction safety and credit limit update (2026-09-03)
+
+- User replaced the 500-credit stop/notification threshold with 300 credits remaining. The existing monitor was updated; the former threshold is superseded.
+- Quarterly candidate extraction now rejects numeric overflow, avoids classifying pre-tax profit subtotals as PAT, and preserves original layout spacing for subsequent column matching.
+- Added regression tests for those three cases. Column reconciliation and OCR remain incomplete; no production financial records were approved.
+
+## Deterministic quarterly column reconciliation (2026-09-03)
+
+- Added a reusable validator for explicitly mapped column metadata: discrete Indian fiscal quarter dates, fiscal-year label, standalone/consolidated basis, units, hash/page/column binding and core metrics.
+- Checks revenue plus other income against total income using a 0.02 source-unit rounding tolerance. Missing checks do not become passes; invalid columns expose no normalized values.
+- Converts supported INR lakh/million/crore units using Decimal, preserving negative and zero values. Successful validation is CHECKED_PENDING_REVIEW, never approval.
+- Nine new synthetic test cases cover annual/YTD rejection, wrong fiscal year, mixed columns, arithmetic failure, missing inputs, invalid values, unit/basis holds and March quarters. All 139 company-intelligence tests passed.
+- This stage requires explicit mapped headers; automatic header recognition/OCR and wiring the real PDF candidates into this validator remain unfinished. No live figures or UI records were approved.
+
+## Isolated column-header recognition (2026-09-03)
+
+- Added conservative recognition of explicit quarter-ended headers with supported textual/day-first/ISO dates, INR crore/lakh/million units and standalone/consolidated basis.
+- Connected recognized metadata to column arithmetic/binding validation; pre-existing metadata conflicts are held, not overwritten.
+- Missing labels, multiple dates, mixed bases/units/currencies, annual/YTD markers and invalid dates remain held. All 143 company-intelligence tests passed.
+- Important scope: this recognizes one already-isolated full column header. The PDF layout adapter must still assemble shared headers and align cells; OCR and real-document end-to-end mapping remain incomplete. No new approved quarterly records or UI figures were created.
+
+## PDF geometry adapter tested on actual quarterly report (2026-09-03)
+
+- Located bundled Python with pdfplumber and rendering support. Inspected a rendering of page 1; the source has 90-degree rotation and OCR text corruption.
+- Added a reusable memory-only rotation normalization and geometry adapter. Repeated year anchors form candidate column bands; raw words, coordinates, missing cells, boundary overlap and shared header uncertainty remain explicit.
+- Ran the adapter on the supplied PDF: two candidate table pages, 16 candidate columns in total, all held. These include additional table material, not 16 verified quarterly periods.
+- Original PDF unchanged. Layout output is bound to its SHA-256 under data/runtime/quarterly_candidates. No arithmetic-approved records, evidence or verdict changes.
+- All 145 company-intelligence tests passed. Shared spanning-header interpretation, OCR correction with provenance, table classification and automatic invocation from the ingestion pipeline remain unfinished.
+
+## Financial versus segment table classification (2026-09-03)
+
+- Added explicit-label table classification to the geometry adapter, distinguishing main-statement candidates, segment tables and unknown tables. Segment/unknown tables expose no company_mapping_columns; raw geometry remains preserved separately.
+- Tested against saved geometry from the actual PDF: page 1 classified as a main-statement candidate, page 2 as a segment table excluded from company mapping.
+- All 148 company-intelligence tests passed. Shared header resolution and ingestion-to-UI integration remain unfinished; this classification is not financial-data approval.
+
+## Source-bound shared-header resolver (2026-09-03)
+
+- Added deterministic resolution for explicit source-bound header spans, scoped to document hash, PDF page and table identity. Exactly one applicable basis, duration and unit span is required per column.
+- Overlap, missing scope, foreign-page/table headers, annual duration and damaged labels remain held. Five new tests passed; the company-intelligence suite reached 153 passing tests.
+- This resolver consumes explicit column-range spans; automatic span detection from PDF borders/OCR is NOT implemented. It has not resolved the actual report's corrupted headings, and no quarterly facts were approved.
+
+## Ruled-table boundary detection on real report (2026-09-03)
+
+- Added pdfplumber ruled-table detection to the PDF adapter, deriving value-column boundaries from individual dated cells and recording which columns lie fully inside each shared header cell.
+- Re-ran the real seven-page report: ruled geometry is now saved alongside existing word geometry; page 1 contains eight value columns and detected standalone/consolidated group boundaries.
+- Header text is not silently repaired: corrupted consolidated, quarter-duration and currency/unit strings still require OCR/review. Some merged detected cells also combine duration labels, so boundaries alone do not establish semantic scope.
+- All 154 company-intelligence tests passed. No quarterly financial records were approved or sent to the UI.
+
+## Native Windows OCR executed successfully (2026-09-03)
+
+- Found built-in Windows OCR with en-US/en-GB recognition languages; Tesseract installation was unnecessary.
+- Added scripts/extract_windows_ocr.ps1: workspace-bounded image/output paths, local WinRT OCR, image-size checks, input-image SHA-256, language/engine/timestamp and per-word pixel boxes, with explicit non-approval flags and resource disposal.
+- Ran OCR on the normalized first-page render of the actual quarterly PDF: 287 text lines saved to windows-ocr-page1.json under its document-hash runtime directory. No network service was used.
+- The separate OCR stream recovered quarter/year duration headings and the words 'in Crores'. This is not proof that every heading/number is correct or that the currency is established.
+- Still required: bind the render transform to PDF coordinates/hash, compare OCR against native text, resolve spanning headers, and invoke the fallback automatically from ingestion. No facts, financial table updates or verdicts were approved.
+
+## Combined quarterly intake with automatic OCR fallback (2026-09-03)
+
+- Added quarterly_pdf_intake and its CLI: preserve immutable per-run PDF bytes, extract layout, select at most three identifiable main-statement OCR targets, render, call local Windows OCR and verify image hash. Source-to-image transforms and per-stage failures are recorded.
+- Live run on the supplied PDF succeeded with one OCR page and 287 lines, bound to PDF hash, image hash and normalized coordinates. Fixed relative-path invocation and made OCR hashing independent of PowerShell module autoload.
+- Local report import now invokes this path when extracted opening text identifies quarterly financial results; missing dependencies are explicitly held. The standalone combined path was live-tested; the newly added importer invocation still needs an end-to-end test.
+- 157 company-intelligence tests passed, including OCR target selection/budget tests. These do not establish OCR accuracy. Native/OCR disagreement reconciliation and production UI mapping remain unfinished. Scanned pages without recognizable native main-table headings still require a separate detection path.
+
+## Native/OCR comparison integrated (2026-09-03)
+
+- Added hash/page/dimension-bound comparison of native financial cells with OCR words transformed to normalized PDF coordinates; raw texts, disagreements and unreadable/boundary-overlap holds remain visible.
+- Wired comparison into the combined intake. Live PDF run examined 32 cells: six matching readings and 26 holds. These are diagnostic comparison counts, not verified financial facts or measured extraction accuracy.
+- Some native text boxes and visual/OCR rows appear offset; better row registration and render quality require investigation before promoting matches. Agreement alone never approves data.
+- Five additional comparison tests pass; all 162 company-intelligence tests passed. No UI financial values or verdicts were changed.
+
+## OCR registration diagnosis (2026-09-03)
+
+- Added unique alphabetic-label registration diagnostics, fitting a 2D affine OCR-to-native mapping with outlier rejection. Financial numbers are not used as alignment anchors.
+- The actual saved report supplies 32 matching textual anchors, with maximum fitted residual about 0.76 PDF units. The fit indicates rotation/translation, explaining why identity-coordinate matching can select neighboring rows.
+- Diagnostics are attached to subsequent intake runs but not yet applied to cell comparison. Coverage, independent validation and rejection limits must gate application; this fit is not verified financial accuracy.
+- All 164 company-intelligence tests passed, including synthetic known-shift and insufficient-anchor cases. No production figures approved.
+
+## Checked alignment applied to cell comparison (2026-09-03)
+
+- Added leave-one-label-out prediction checks, minimum anchor coverage, distortion/shift limits and maximum 1.5-PDF-unit validation error. Rejected registration holds all comparisons.
+- Integrated checked transforms into OCR-to-native cell selection. Replayed the real saved report: 32 textual anchors passed with maximum omitted-anchor error about 0.85 PDF units; matching cell readings increased from six to 13, with 19 still held.
+- These are extraction agreement counts, not approved facts or independently measured accuracy. No values were repaired or sent to the UI.
+- All 168 company-intelligence tests passed. The local-import invocation, remaining OCR issues, header binding, and reviewed-record materialization still need end-to-end verification.
+
+## Automatic local import chain verified (2026-09-03)
+
+- Increased OCR rendering to 200 dpi with a conservative 2500-pixel maximum edge; recorded actual resolution in the render transform. Visually inspected the resulting page.
+- Real comparison improved to 21 agreeing readings out of 32 cells, with 11 held. These are not approved financial records or an accuracy score.
+- The bundled interpreter lacked requests for the import chain. Installed approved PDF dependencies into EIOS's existing user Python environment instead and recorded layout/render versions in requirements-quarterly-extraction.txt.
+- Successfully ran the existing local importer end to end with the supplied PDF: archive preserved, text extraction SUCCEEDED, quarterly detection invoked layout/render/OCR/comparison automatically, 21 agreements, RESEARCH_HOLD and no approved facts.
+- Re-ran all 168 company-intelligence tests successfully. Remaining work includes shared-header semantic binding, disagreement review and governed materialization; no new quarterly UI values were created.
+
+## Shared-header binding connected to intake (2026-09-03)
+
+- Added coordinate-registered OCR/native header binding within actual ruled cells, preserving both readings and inferred column-span candidates. Source hash/page/image/dimensions and alignment gates apply.
+- Live report recovered 'Standalone results', 'Consolidated results' and left-group 'Quarter ended'. Right-group merged duration remains damaged/ambiguous; multiple 'ended' labels are rejected even when only one duration word is legible.
+- Unit region OCR reads 'in Crores)' but misses the currency symbol; all eight columns remain held rather than inferring INR from company nationality or domain.
+- All 171 tests passed before the final conservative multiple-duration guard. No quarterly records or UI figures approved. Next work is targeted header-region OCR and separation of the right-group duration cell, not relaxation of these holds.
+
+## Targeted header OCR fallback automated (2026-09-03)
+
+- Added a reusable local header-region OCR module and CLI. It checks preserved PDF bytes against the intake hash, enlarges ruled-table headers within the OCR image budget, and records crop coordinates, pixel scales, image hashes and raw readings separately.
+- Connected this second pass to quarterly intake when first-pass header resolution remains held. Failed fallback stays held; its readings do not replace first-pass data or approve financial facts.
+- Inspected the enlarged real header. It distinguishes quarter/year headings visually, but OCR still misses the rupee symbol and corrupts some words. Semantic reconciliation of the second pass remains unfinished.
+- Live combined run 7d71362917254fcaa11fa0ba81207df5 generated one targeted region automatically and retained RESEARCH_HOLD. All 174 company-intelligence tests passed, including triggering, skipping and failure handling. No new quarterly UI figures or verdict changes.
+
+## Header second-pass comparison connected (2026-09-03)
+
+- Targeted OCR now produces source/page/table/image-bound header comparisons for every affected column, distinguishing agreement, conflict, ambiguity and missing readings. Original readings remain unchanged and ambiguity flags survive comparison.
+- Validates crop dimensions/scales and uses the checked full-page alignment for provisional header projection. Transfer of that registration to the new OCR pass is explicitly pending review, not independently validated; these comparisons cannot approve records.
+- Real combined run b2d2fe5ac35b41c59641df746b2b6db6 produced eight column comparisons: basis readings agree, the left quarterly heading degraded on the second OCR pass, the right duration cell remains ambiguous, and currency remains unconfirmed. Inspected the enlarged header again; no numerical or textual repair was applied.
+- All 182 company-intelligence tests pass. No new UI values or verdict changes. Next substantive work: resolve ruled-cell separation and independently validate header mapping, then currency/date checks and governed quarterly record materialization. Automatic extraction is not yet publication-ready across companies.
+
+## Unruled duration-heading partition proposal (2026-09-03)
+
+- Inspected actual PDF vector edges: the right quarter/year header row has no dividing vertical line. Increasing border tolerance would fabricate a boundary, so no border repair was applied.
+- Added a bounded geometric proposal generator: exact quarter/year-ended OCR phrases must uniquely align with contiguous date-column groups. Corrupt prefixes, poorly centred headings and nonunique alternatives are rejected. Original ambiguity and publication holds remain intact; proposals are separate review evidence.
+- Real automatic intake run 763390d451bc4042a191e88bd63c0f07 proposed quarter-ended for columns 4-6 and year-ended for column 7, matching the visually inspected enlarged report. This is a provisional layout proposal, not approved financial data or independent validation of registration.
+- All 186 company-intelligence tests passed. Currency recognition, date verification, registration transfer validation and governed record materialization remain unfinished. No new UI financial figures or verdict changes.
+
+## Desktop access restored and launcher hardened (2026-09-03)
+
+- User reported desktop app would not open. Neither service was initially listening. Dashboard production build passed; starting existing launcher restored both services. Opening the browser required desktop permission in this tool environment and succeeded when authorized. Original cause of the user's stopped services is not established.
+- Existing EIOS Dashboard.lnk points to scripts/open_eios_dashboard.ps1; no shortcut replacement needed. Launcher now derives workspace from its location, reuses an existing build, supports explicit rebuild/no-browser checks, logs child-process output, detects early dashboard exit and allows saved dashboard access if review-service launch fails.
+- Cold-start tested by identity-checking and stopping only EIOS's vinext process. Updated launcher restarted it successfully; company page HTTP 200 and review health ok. Opened the dashboard in the user's normal desktop browser. Kept local-only under Sites guidance; no publication or data approvals.
+- Resume extraction work at pending header registration/currency/date validation; no financial correctness claims changed by the launcher repair.
+
+## Isolated date-cell verification integrated (2026-09-03)
+
+- Added strict whole-cell calendar parsing and native/OCR date comparison. Keeps raw readings; rejects invalid dates, damaged months, multiple dates, ambiguous numeric ordering and conflicting years. Spacing normalization is allowed but OCR characters are not repaired. Dates never imply quarter/annual duration.
+- Both full-page and targeted header binding now record source-bound date comparisons. A date conflict or missing reading overrides an otherwise recognised header with HOLD.
+- Actual intake run 7dbda27a6bd04b04bb739a2502558495: seven of eight native/OCR dates agree in each pass, but the held column differs. Full-page OCR misses the day in column 5; targeted OCR reads Match instead of March in column 1. No favourable-pass merging or promotion was performed. Visually inspected the rendered date header.
+- All 196 company-intelligence tests passed, including a binding-level regression proving date conflicts block recognition. Currency recognition, independent registration-transfer validation and reviewed quarterly materialization remain open. No new UI figures or verdict changes.
+
+## Fresh crop alignment gate added (2026-09-03)
+
+- Added a no-refitting check of the transferred full-page transform against fresh crop OCR alphabetic labels. Requires at least 12 mutually unique spatial matches, 65% matched eligible labels, horizontal/vertical coverage and maximum 1.5-PDF-unit residual per accepted match. Numeric values are excluded as anchors.
+- Targeted header comparison is now blocked when this crop check fails. This checks geometric consistency with native text, not independence of source evidence, financial accuracy or approval eligibility.
+- Real intake run b6f945eef3a24d988f3eb23e28b5b951 passed with 25 anchors, matched fraction 0.6757 and maximum residual 0.5063 PDF units. Visually inspected the enlarged header. Thresholds remain engineering safeguards tested on one issuer, not a calibrated cross-company accuracy guarantee.
+- All 202 company-intelligence tests passed, including shifted crops, duplicate anchors, sparse coverage and numeric-only inputs. Currency recognition, held date readings and reviewed financial record materialization remain unfinished. No UI financial figures or verdicts changed.
+
+## Focused currency OCR diagnostic and review reason (2026-09-03)
+
+- Added an explicitly bounded diagnostic CLI for the upper-right unit region (one main table, 600 dpi, installed en-US/en-GB OCR only). It preserves source/image hashes and does not feed its readings into approved facts or run automatically on every import.
+- Real probe unit-probe-12f36e8b03fe45d596b0f56ad1f8be3f under intake b6f945eef3a24d988f3eb23e28b5b951 returned '(R in Crores)' in both languages. Visually checked the crop: printed rupee glyph is present, but Windows OCR misreads it. Currency extraction remains unresolved; do not keep repeating this same OCR setup or substitute R with INR.
+- Added explicit unit-reading assessments to automatic header binding: missing INR, conflicting currencies or ambiguous scales produce NEEDS_UNIT_REVIEW with raw text and source binding. Candidate recognition alone cannot approve data.
+- All 206 company-intelligence tests passed. Next needs a genuinely different currency-reading method or source-bound reviewed unit evidence, followed by date and record reconciliation. No quarterly UI figures or verdicts changed.
+
+## Document-bound visual unit correction reused automatically (2026-09-03)
+
+- No alternative OCR/vision reader was found configured. Visually inspected the preserved unit crop and saved an ASSISTANT_VISUAL_REVIEW candidate reading '₹ in Crores', explicitly not a human approval or general R-to-INR rule.
+- Added a document/page/table-specific unit review registry and loader. Reuse requires matching evidence metadata, original PDF hash and crop image hash; absent/damaged local evidence fails closed. Duplicate reviews, conflicting currencies/scales, existing explicit unit readings and date holds are not overridden.
+- Combined intake automatically applies this unit candidate to the byte-identical report. Real run 08d9a23d26d3421ba1a3a535b4be6912 now recognises three standalone quarterly headers (Q1-FY2027, Q4-FY2026, Q1-FY2026) as INR_CRORE pending review. Annual columns remain excluded from quarterly recognition; right-side duration/date issues remain held.
+- All 212 company-intelligence tests passed. This resolves the exact report's unit-candidate blocker using saved assistant review, not general automatic currency OCR across hundreds of companies. No financial facts or UI figures were approved. Next: reconcile recognised columns' numeric cells and provide an auditable record-review path; broader OCR fallback remains needed.
+
+## Quarterly numeric record candidates connected (2026-09-03)
+
+- Added adapter joining recognised headers to native/OCR agreeing metric cells with source/page/image and column-geometry checks. Rejects duplicate metrics, conflicting numbers and uncertain headers; does not map owner-attributable or pretax profit to total PAT. Uses existing Decimal income reconciliation and keeps raw evidence.
+- Wired candidates into future automatic intake. Added read-only saved-intake replay CLI, avoiding repeat OCR for numeric reconciliation. Replayed actual run 08d9a23d26d3421ba1a3a535b4be6912 successfully.
+- Q1-FY2027 standalone candidate now CHECKED_PENDING_REVIEW: revenue 7743.55, other income 48.76, total income 7792.31 and total PAT 376.96 INR crore. Income arithmetic passes. Both Meta and human review remain required; no published fact is created.
+- Q4-FY2026 and Q1-FY2026 candidates remain held for unreadable/missing metric readings, with explicit reasons and no normalized values exposed. All 220 company-intelligence tests pass. New intake invocation is wired but this turn verified the numeric adapter via saved evidence, not another complete OCR run. Next: connect these review candidates to the governed review workflow; no UI figures changed.
+
+## Quarterly candidates bridged into existing META/human-review formats (2026-09-03)
+
+- Added quarterly_review_bridge: repeats arithmetic validation, uses stable full-record/company/source identity, preserves raw transcription plus complete structured record evidence, deduplicates candidates and skips held extracts. Labels transcription as structured, not a verbatim source passage; preserves local_import origin and distinct QUARTERLY_FINANCIAL_RESULT event type.
+- Writes standard candidates and META files accepted by the existing human-review command. Future quarterly intake invokes this bridge when company/source URL context is supplied; local import now forwards both. Missing context is explicitly held.
+- Replayed real saved evidence into 08d9a23d26d3421ba1a3a535b4be6912/review-bridge-v1: one candidate queued, two held extracts excluded, one META HOLD_FOR_RESEARCH and zero human-approval-ready records. Existing event-oriented META does not establish financial materiality or company context from the table transcription, and local-source authority remains unresolved. Do not present this as completed financial META validation.
+- All 226 company-intelligence tests passed, including queue/meta output and proof that the existing human ledger rejects approval while META holds. No human decision was written. No UI queue integration, quarterly fact materialization or public financial data changed. Next: financial-specific source/context review and reviewer presentation; broader automatic sourcing remains unfinished.
+
+## Financial-specific review assessment added (2026-09-03)
+
+- Added deterministic quarterly financial review alongside (not in place of) the existing META authority hold. Rechecks printed header/period/basis/unit and arithmetic, normalized values, all four underlying native/OCR readings and their locations, and extraction status. Evidence fingerprints bind each assessment to its record.
+- Review output gives plain-English checks, review-only figures, explicit official-source/company-identity and reporting-note/restatement holds, and a list of analyses not performed. It does not claim earnings-quality, cash-flow, valuation or investment analysis.
+- Connected assessment writing to the quarterly review bridge; real saved candidate replay into financial-review-v1 passed all four technical checks and retained both publication holds. This is a deterministic diagnostic assessment, not an LLM analysis or complete mandatory META approval. No UI integration or human decision was made.
+- All 232 company-intelligence tests passed, including altered header, changed OCR values, wrong cell location and missing evidence. Next: verified source/company lineage and reporting-note evidence, then reviewer UI and governed quarterly materialization. No published financial values changed.
+
+## Quarterly review evidence visible in local company UI (2026-09-03)
+
+- Added a separate Quarterly review panel near the company header with a direct jump link. Shows candidate figures in a table, plain-English passed checks/publication holds, source-text versus image readings, supplied filing link/page, document fingerprint and explicitly unassessed areas. Unapproved figures remain excluded from financial history, charts and verdicts.
+- Dashboard sync discovers saved quarterly queues, verifies preserved PDF hash and company ticker, recomputes financial checks, deduplicates source columns and withholds invalid packets. Coromandel has one candidate; three other current companies have none. Displays assistant unit-review involvement separately from human approval.
+- All 235 company-intelligence tests passed; local production build passed. Restarted only the verified EIOS server, confirmed company page HTTP 200 and opened /companies/coromandel#quarterly-review. No browser visual/interaction QA was performed this turn. Sites guidance used; kept local, no hosting/publication or human review decisions.
+- This delivers reviewer visibility, not the complete verified-company-analysis milestone. Official source identity, reporting-note verification, approval/materialization and broader financial history/analysis remain unfinished.
+
+## Reporting-note candidates extracted with quarterly intake (2026-09-03)
+
+- Added page/hash/offset-bound native-text passage detection for limited review, comparability, balancing quarters, impairment and restatement/regrouping. Preserves original passages, explicit unresolved period/basis scope, missing-text pages and review questions. Keyword matches never grant audit status or complete note review; absence is not proof of no issue.
+- Real report notes on page 2 discuss limited review, acquisition-related consolidated comparability, March balancing figures and impairment. Visually inspected the rendered notes page. Corrupted OCR remains in raw passages, not silently repaired.
+- Full current intake successfully ran to completion at 1e3613737d214a69866867011eaa6334: eight topic/passage candidates attached to standard quarterly review packet, one financial candidate queued, zero approval-ready. This also verifies the previously wired numeric/review bridge in a complete OCR run.
+- All 241 company-intelligence tests pass. Notes are now backend review evidence, not yet displayed in the company panel or resolved into period-specific conclusions. Source authority and reporting-note approval holds remain; no financial history/chart/verdict changes.
+
+## Reporting notes displayed beside quarterly review figures (2026-09-03)
+
+- Extended quarterly review display with eight expandable topic/passages from the newest Coromandel review packet. Shows plain-language review questions, original extracted text, page links to the supplied filing, and explicit unreviewed/source-origin/period-and-basis caveats. No note is automatically applied to the displayed standalone quarter.
+- Display filters mismatched document hashes, missing/invalid page references and duplicate note IDs. Missing notes do not imply a clean report. Source text is rendered as escaped React text, not HTML.
+- All 244 company-intelligence tests passed. Dashboard sync found eight note entries for Coromandel and no candidates for other current companies; production build passed. Restarted only the identified EIOS server, confirmed company route HTTP 200 and requested the existing local review URL in Codex. No browser visual/interaction QA performed.
+- Sites skill used to preserve existing design and local-only operation. No financial history, chart, verdict or approval state changed. Official lineage and period-specific reporting-note interpretation remain required before governed publication.
+
+## Reporting-note context cues (2026-09-03)
+
+- Quarterly review notes now show explicit accounting-basis and date mentions alongside the original passage. Warns against transferring consolidated notes to standalone figures or treating historical charges as current-quarter adjustments. Matching mentions do not establish applicability; unreadable date-like text remains flagged rather than repaired.
+- All passages remain visible and unapproved. These deterministic review cues are not completed Meta interpretation, source verification or investment conclusions.
+- All 249 company-intelligence tests passed; dashboard sync and production build passed. Restarted the identified EIOS dashboard and confirmed company route HTTP 200. No browser visual/interaction QA performed. Sites guidance preserved the existing local-only presentation; no cloud publication or approved financial data changes.
+
+## Independent quarterly source-copy comparison (2026-09-03)
+
+- Added scripts/verify_quarterly_source.py and quarterly_source_match.py: resolves the candidate against configured company/issuer domain, rechecks preserved PDF hash, uses the existing guarded acquisition adapter, and compares fresh issuer bytes. Saves a unique acquisition ledger and verification result per attempt; preserves valid downloaded PDFs without replacing the original.
+- Distinguishes exact match, changed document, non-PDF response, receipt mismatch and unavailable source. Exact byte identity explicitly does not verify company content, reporting notes or authorize financial publication. This is an explicit command, not yet connected to scheduled collection or dashboard source-hold clearing.
+- Coromandel live attempt on 2026-09-03 returned HTTP 406 after network permission was granted. Evidence: latest run 1e3613737d214a69866867011eaa6334/source-verification/cae799cdc20d4bdfa073639a8ed60c90/verification.json under the existing quarterly document hash directory. The initial sandbox-denied attempt is also retained separately. No issuer PDF acquired and no source/notes approval granted.
+- All 256 company-intelligence tests passed, including seven new source-match tests. No UI changes or app rebuild needed. Next source-verification dependency is an accessible official copy or a supported alternate acquisition route; reporting-note interpretation remains unfinished.
+
+## Alternate issuer filing and draft note interpretation (2026-09-03)
+
+- Official disclosures index links CIL_Outcome_BM_23072026_SD.pdf, a nine-page board-outcome filing. Web research retrieved its text, including the results and notes after two cover pages; this is corroboration, not a preserved byte acquisition. Local guarded download returned HTTP 406, recorded in source-verification/36d44b62d2a34f70a6c33f28eded3fa6 under the latest Coromandel intake.
+- Source verifier now accepts an alternate observed issuer URL, validates it against the configured issuer registry and preserves the candidate's original URL separately. Does not rewrite original evidence or bypass domain controls.
+- Visually reviewed local notes page using PDF skill. Saved four source/candidate-bound assistant draft interpretations in data/company_intelligence/coromandel_quarterly_note_assessment_draft.json: limited review, historical impairment, consolidated acquisition comparability and March balancing-quarter construction. No human approval, complete notes clearance or automatic earnings adjustments. Draft file is not yet consumed by UI or approval workflow.
+- Alternate-source tests cover default URL, issuer alternative, lookalike rejection and local-target rejection. Official PDF byte acquisition remains blocked; the browser research path must not be represented as EIOS's own successful download.
+- Validation: all 260 company-intelligence tests passed. No UI or approved financial history changes this turn.
+
+## Draft explanations connected to quarterly UI (2026-09-03)
+
+- Connected assistant note drafts by company, PDF hash, target period, note ID and page. Rejects approval claims and ambiguous duplicate drafts. Coromandel displays four plain-English draft explanations alongside original evidence; other notes remain unreviewed. The panel explicitly distinguishes assistant-prepared research from automated EIOS conclusions.
+- Added eight tests; all 268 company-intelligence tests passed. Dashboard sync confirmed four attached drafts; production build passed; restarted only the identified EIOS server and confirmed company route HTTP 200. No browser visual QA performed.
+- Sites skill preserved the existing local-only design. No source-identity clearance, human approval, financial history, chart or verdict changes. Official PDF acquisition remains blocked; governed publication and full reporting-note review are unfinished.
+
+## Source comparison runs automatically during quarterly intake (2026-09-03)
+
+- Added quarterly_source_intake.py and connected it to run_quarterly_intake after extraction and before review queue creation. Each document gets one comparison attempt (15-second request timeout, at most two redirects), using the unique configured company identity and issuer domain. Missing or mismatched context skips network access and saves an explicit hold.
+- Preserves a unique verification result, acquisition ledger and downloaded PDF when available. Source result is included in intake.json and quarterly-candidates.json. Extraction is persisted before the request; expected download/configuration errors and source-check storage failures do not discard the review packet or approve any figures.
+- All 275 company-intelligence tests passed, including intake-to-review-packet integration tests for a successful source comparison and source-check storage failure. Network was mocked in these new tests; no claim of a successful live issuer download. Existing Coromandel HTTP 406 remains unresolved.
+- Applies to new imports using the quarterly intake path, including the local report import command. Does not yet provide scheduled retries, alternate-source discovery, approval-hold clearing or full automatic company coverage. No UI or governed financial history changes.
+
+## Controlled quarterly source retries (2026-09-03)
+
+- Added quarterly_source_retry.py and a preview-by-default retry command. Reads saved packets and source-verification history, verifies original PDF hash, deduplicates columns/runs by document/company/URL and never reruns OCR. A transient unavailable-source failure may retry after 24 hours, with a three-attempt history limit and one document attempt per cycle invocation. Access refusals such as HTTP 406, changed documents, recorded matches and invalid evidence require review rather than repeated fetching.
+- Wired retries into the existing automatic company cycle after collection. Offline mode skips them. No new scheduler was installed or executed; retries depend on that cycle running and reaching the collection stage. The cycle's existing overlap lock applies; standalone --execute should not be run concurrently with it.
+- All 284 company-intelligence tests passed. Ran read-only retry planning against real saved Coromandel packets: zero network attempts, SOURCE_ACCESS_REQUIRES_ATTENTION due to HTTP 406. No UI/approval/history/verdict changes. Accessible alternate acquisition remains unresolved.
+
+## Exchange route tested; acquisition access remains blocked (2026-09-03)
+
+- Discovered BSE results URL https://www.bseindia.com/xml-data/corpfiling/AttachLive/089ec18e-802d-48b9-897b-975365997029.pdf via https://theannexure.com/company/506395. Directory was used only for link discovery, not as verified financial data. Guarded direct BSE download returned HTTP 403; saved under latest Coromandel intake/source-verification/935231ee4d7b4fe892efb346c0744eb4. No PDF bytes obtained.
+- Explicit --exchange-source mode now restricts alternate URLs to BSE/NSE registry, separately labels exchange vs issuer matches and saved copies, and retains company-content/notes holds. Default issuer mode remains unchanged. This command is not automatic exchange discovery/fallback, and no third-party provider was connected or purchased.
+- All 289 company-intelligence tests pass. Both issuer (406) and tested exchange (403) programmatic acquisition routes are unavailable. Further automatic collection requires a supported accessible provider/integration; repeated download attempts or further approval checks do not resolve this access dependency. No UI or approved financial data changes.
+
+## Existing provider audit and independent source retries (2026-09-03)
+
+- Read-only configuration check found TAVILY_API_KEY present in process environment; secret value was never displayed. No checked Brave/FMP/Financial Datasets/EODHD/Alpha Vantage key was present in process or user environment. This is not an exhaustive account inventory or proof of key validity. No usable financial-data connector was found among available tools; plugin search/suggestion tools were not available, so no installation was requested.
+- Credential-free Tavily DNS/HEAD probe succeeded at network level and returned HTTP 401 without credentials. Earlier saved cycle failure was DNS resolution. No authenticated search, API-credit use, purchase or provider connection was performed. Search connectivity does not resolve official PDF download restrictions.
+- Moved saved quarterly source retries ahead of search execution (still after existing validation/safety gates), persisting their result before the provider call. A later search failure now retains completed retry status rather than skipping this independent work. Offline mode preserved.
+- All 290 company-intelligence tests passed, including online/offline search-failure ordering and status preservation. No complete live company cycle was run. Next provider step requires authorization for a bounded authenticated test of the existing Tavily connection; financial statement acquisition remains unverified.
+
+## Authorized single Tavily search test (2026-09-03)
+
+- User authorized one small test search. Ran existing TavilySearchProvider once (basic search, max five results, 15-second timeout, no retries) for Coromandel June 30 2026 quarterly results on coromandel.biz. Authentication/search succeeded and returned five issuer URLs.
+- Results were older/mismatched periods: Q3 FY26 press release, FY26 annual-results press release, Q4 FY26 presentation, February 2026 transcript and an older newspaper-results PDF. The requested Q1 FY27 filing was not found by this query. Provider connectivity is demonstrated; target-document discovery, byte acquisition and financial approval are not.
+- No extra searches, full automatic cycle, source downloads, approvals or code changes. The call may consume Tavily credit; actual billed credit amount was not returned by the existing provider interface. One-test authorization must not be treated as an unlimited paid-search budget.
+
+## Exact-quarter discovery preparation (2026-09-03)
+
+- Added quarterly_search_target.py and an offline plan/assessment command. Maps Indian April-March quarter-end dates to fiscal labels and prepares exact-quarter/explicit-date search queries. Classifies result titles against issuer domain and explicit quarter/year metadata; unclear dates remain unconfirmed, conflicting/invalid ranges ambiguous, other periods mismatched. Upload-directory years are never treated as reporting periods. A matching title is only a retrieval candidate, not verified content.
+- Replayed the five earlier live-result titles locally: three wrong-quarter labels and two unconfirmed titles; none accepted for Q1 FY2027. This planner/assessor is not yet wired into the automatic research search/selection path; no extra Tavily request or API-credit usage occurred.
+- All 301 company-intelligence tests passed. No financial approval or UI changes. Next integration must preserve other report searches while applying target-quarter screening only to explicitly quarter-targeted jobs.
+
+## Quarter targeting wired into research execution (2026-09-03)
+
+- ResearchJob now supports optional quarter_period_end, validated for official-document jobs with issuer domain and Indian fiscal quarter end. Execution carries target metadata into ExternalResearchQuery; orchestrator builds one exact-quarter query and screens metadata before source selection/retrieval, retaining all screening decisions in result.quarter_screening. General/annual research without target remains unchanged.
+- Official document collection repeats target screening and does not substitute generic manifest/annual PDFs when targeted search returns no candidate. Matching title remains only a retrieval candidate; PDF/company/period/content verification is still required.
+- All 305 company-intelligence unittest tests passed, including retrieval filtering, general-search preservation, fallback prevention and job validation. Pytest is not installed; existing main-style external regression suites are run separately. No paid search or full live cycle run. Existing saved jobs were not assigned a new period or enabled; targeted execution requires explicit quarter_period_end configuration.
+
+## Browser-assisted official PDF acquisition succeeded (2026-09-03)
+
+- Opened issuer Q1-results-1.pdf in Codex in-app browser. Viewer completed loading seven pages; clicked its Download button. Observed new Downloads/Q1-results-1.pdf (3,672,882 bytes), preserved under data/runtime/browser_source_capture/coromandel-20260903-9ed52959/source.pdf with provenance.json. SHA256 9ed529593ae80c64f0e37f8029545a0efe1223f6f6a5eb3963ab4c613bbde079 differs from original 17b168... upload. Neither original nor prior evidence was replaced.
+- Added read-only PDF copy-comparison script. All seven pages have identical extracted text and matching rendered RGB hashes/sizes at 120 dpi. Saved page-comparison.json; visually inspected rendered financial-table and notes pages using PDF skill. This corroborates visible contents, not exact-byte equality, signature validity or untested PDF internals. Cause of byte difference not established.
+- This is a successful assistant/browser-assisted official-site acquisition, not a working unattended EIOS transport. Direct HTTP routes remain blocked. No API-credit spending, human approval, financial history or verdict changes. Next: integrate browser-acquired provenance into review without relabelling it as direct HTTP or automatically clearing approval holds.

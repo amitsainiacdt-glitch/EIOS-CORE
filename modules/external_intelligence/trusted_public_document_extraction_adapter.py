@@ -77,7 +77,7 @@ class TrustedPublicDocumentExtractionAdapter:
             status = "PARTIAL"
             warnings = (f"Extracted text is shorter than {self.minimum_characters} characters.",)
         extraction_receipt = self.ledger.record(
-            receipt, extraction_id=extraction_id, extraction_method=self._method(media_type),
+            receipt, extraction_id=extraction_id, extraction_method=self._lineage_method(receipt, self._method(media_type)),
             status=status, extracted_content=text, warnings=warnings,
             extracted_at=self.clock(), recorder=recorder,
         )
@@ -111,7 +111,7 @@ class TrustedPublicDocumentExtractionAdapter:
         if len(text) < self.minimum_characters: warnings.append(f"Extracted text is shorter than {self.minimum_characters} characters.")
         status = "PARTIAL" if warnings else "SUCCEEDED"
         extraction_receipt = self.ledger.record(
-            receipt, extraction_id=extraction_id, extraction_method="pypdf_text_layer_v1", status=status,
+            receipt, extraction_id=extraction_id, extraction_method=self._lineage_method(receipt, "pypdf_text_layer_v1"), status=status,
             extracted_content=text, page_count=page_count, warnings=tuple(warnings),
             extracted_at=self.clock(), recorder=recorder,
         )
@@ -124,6 +124,10 @@ class TrustedPublicDocumentExtractionAdapter:
             extracted_at=self.clock(), recorder=recorder,
         )
         return TrustedPublicDocumentExtractionResult(receipt, None)
+
+    @staticmethod
+    def _lineage_method(receipt, method):
+        return 'local_import_' + method if receipt.research_intent == 'LOCAL_OFFICIAL_DOCUMENT_IMPORT' else method
 
     @staticmethod
     def _media_type(value):

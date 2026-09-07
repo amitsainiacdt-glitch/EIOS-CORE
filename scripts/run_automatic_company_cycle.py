@@ -13,6 +13,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from modules.company_intelligence.company_coverage_job_provider import load_company_coverage_jobs
+from modules.company_intelligence.review_memory_report import build_review_memory_report
+from modules.company_intelligence.collection_outcome import describe_document_collection
+from modules.company_intelligence.quarterly_source_retry import run_source_retries
 from modules.company_intelligence.automatic_official_document_pipeline import AutomaticOfficialDocumentPipeline
 from modules.company_intelligence.company_document_archive import CompanyDocumentArchive
 from modules.external_intelligence.public_source_acquisition_ledger import PublicSourceAcquisitionLedger
@@ -22,6 +25,7 @@ from modules.external_intelligence.research_runtime_bootstrap import ResearchRun
 from scripts.build_coromandel_annual_report_study import main as build_coromandel_study
 from scripts.build_coromandel_company_intelligence_snapshot import main as build_coromandel_snapshot
 from scripts.sync_local_status_dashboard import main as sync_dashboard
+from scripts.check_financial_source_regression import run_check as check_financial_sources
 
 
 RUNTIME_DIR = ROOT / "data" / "runtime"
@@ -63,6 +67,15 @@ def main() -> int:
     write_status(status)
     try:
         os.chdir(ROOT)
+        status["financial_source_consistency"] = check_financial_sources()
+        if status["financial_source_consistency"]["issues"]:
+            raise ValueError("Previously checked financial sources require re-review")
+        status["review_memory"] = build_review_memory_report(
+            ROOT / "data/company_intelligence/company_fact_human_reviews.jsonl",
+            evaluated_at=started_at,
+        )
+        if status["review_memory"]["failed_review_ids"]:
+            raise ValueError("Review-memory replay safeguards failed")
         config = ResearchRuntimeBootstrapConfig.from_environment()
         bootstrap = ResearchRuntimeBootstrap(config, job_provider=all_automatic_jobs)
         validation = bootstrap.validate()
@@ -72,6 +85,11 @@ def main() -> int:
             status["errors"] = list(validation.errors)
             return 1
 
+        # Saved document retries are independent of the search provider. Run them
+        # after validation/safety gates but before search can fail.
+        status['quarterly_source_retries'] = run_source_retries(ROOT, now=started_at,
+                                                               offline=config.offline_mode, execute=True)
+        write_status(status)
         runtime, result = bootstrap.run_once(now=started_at.replace(tzinfo=None))
         status["executed_jobs"] = len(result.executed_jobs)
         status["observations"] = runtime.observation_count()
@@ -81,8 +99,11 @@ def main() -> int:
             PublicSourceAcquisitionLedger(DOCUMENT_ACQUISITION_LEDGER),
             extraction_ledger=PublicDocumentExtractionLedger(DOCUMENT_EXTRACTION_LEDGER),
             review_queue_root=FACT_REVIEW_QUEUE_ROOT,
+            source_manifest=None if config.offline_mode else json.loads(
+                (ROOT / 'data/company_intelligence/company_source_manifest.json').read_text(encoding='utf-8')),
         ).run(result.executed_jobs, result.results, cycle_id=started_at.isoformat(), acquired_at=started_at)
         status["official_documents"] = document_summary.__dict__
+        status["collection_outcome"] = describe_document_collection(status["official_documents"])
 
         # Rebuild read models after collection. These builders remain fail-closed:
         # they do not approve evidence or manufacture a verdict.

@@ -32,6 +32,7 @@ class CompanyFactHumanReviewReceipt:
     rationale: str
     reviewed_at: datetime
     reviewer: str
+    candidate_snapshot: dict | None = None
 
 
 class CompanyFactHumanReviewLedger:
@@ -57,6 +58,7 @@ class CompanyFactHumanReviewLedger:
             self.meta_fingerprint(meta), decision, confidence,
             self._text(rationale, "rationale"), self._datetime(reviewed_at),
             self._text(reviewer, "reviewer"),
+            asdict(candidate),
         )
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.path.open("a", encoding="utf-8") as ledger:
@@ -79,6 +81,10 @@ class CompanyFactHumanReviewLedger:
                 item = CompanyFactHumanReviewReceipt(**value)
                 self._sha(item.candidate_fingerprint)
                 self._sha(item.meta_assessment_fingerprint)
+                if item.candidate_snapshot is not None:
+                    snapshot = CompanyFactReviewCandidate(**item.candidate_snapshot)
+                    if snapshot.candidate_id != item.candidate_id or self.candidate_fingerprint(snapshot) != item.candidate_fingerprint:
+                        raise ValueError("learning snapshot does not bind to reviewed candidate")
                 if item.candidate_id in candidates or item.review_id in reviews:
                     raise ValueError("duplicate review identity")
                 if (item.decision == CompanyFactHumanDecision.APPROVE) != (item.approved_confidence is not None):
@@ -87,6 +93,20 @@ class CompanyFactHumanReviewLedger:
             except (KeyError, TypeError, ValueError) as exc:
                 raise ValueError(f"invalid company fact review at line {number}: {exc}") from exc
         return tuple(result)
+
+    def previous_decisions(self, candidate):
+        """Exact-source review memory, not transferable approval or model training."""
+        def identity(item):
+            # Ignore run-specific IDs, but never generalize across documents, pages,
+            # companies, amounts or interpretation of the statement.
+            payload = asdict(item)
+            for key in ("candidate_id", "extraction_id", "extraction_method", "review_status", "creates_evidence"):
+                payload.pop(key, None)
+            return json.dumps(payload, sort_keys=True, separators=(",", ":"))
+        target = identity(candidate)
+        return tuple(review for review in self.read_all()
+                     if review.candidate_snapshot is not None
+                     and identity(CompanyFactReviewCandidate(**review.candidate_snapshot)) == target)
 
     @classmethod
     def validate_binding(cls, candidate, meta, review):

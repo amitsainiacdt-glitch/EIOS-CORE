@@ -50,7 +50,7 @@ class CompanyCandidateMetaAssessment:
 class CompanyCandidateMetaReviewEngine:
     """Assess research eligibility without creating investment authority."""
 
-    def assess(self, candidate: CompanyFactReviewCandidate, *, reviewed_at: datetime) -> CompanyCandidateMetaAssessment:
+    def assess(self, candidate: CompanyFactReviewCandidate, *, reviewed_at: datetime, review_ledger_path: Path | None = None) -> CompanyCandidateMetaAssessment:
         if not isinstance(candidate, CompanyFactReviewCandidate):
             raise ValueError("candidate must be a CompanyFactReviewCandidate")
         if not isinstance(reviewed_at, datetime):
@@ -58,6 +58,9 @@ class CompanyCandidateMetaReviewEngine:
         reasons = []
 
         authority = "VERIFIED_PRIMARY_LINEAGE"
+        if candidate.extraction_method.startswith('local_import_'):
+            authority = "AUTHORITY_HOLD"
+            reasons.append("LOCAL_IMPORT_ORIGIN_REQUIRES_INDEPENDENT_REVIEW")
         if not re.fullmatch(r"[0-9a-f]{64}", candidate.document_hash) or not candidate.source_url.startswith("https://"):
             authority = "AUTHORITY_HOLD"
             reasons.append("PRIMARY_LINEAGE_INVALID")
@@ -90,6 +93,19 @@ class CompanyCandidateMetaReviewEngine:
         decision = "READY_FOR_HUMAN_REVIEW"
         if authority != "VERIFIED_PRIMARY_LINEAGE" or relevance != "DIRECT_COMPANY_REFERENCE" or not material:
             decision = "HOLD_FOR_RESEARCH"
+        if review_ledger_path is not None:
+            from modules.company_intelligence.company_fact_human_review import CompanyFactHumanReviewLedger
+            previous = CompanyFactHumanReviewLedger(review_ledger_path).previous_decisions(candidate)
+            for review in previous:
+                if (review.reviewed_at.tzinfo is None or reviewed_at.tzinfo is None):
+                    reasons.append("REVIEW_MEMORY_TIMEZONE_UNKNOWN_NOT_APPLIED")
+                    continue
+                if review.reviewed_at > reviewed_at:
+                    continue  # Backtests must not learn from future decisions.
+                reasons.append(f"REVIEW_MEMORY_{review.decision.value}_SAME_SOURCE_FACT")
+                if review.decision.value in {"REJECT", "HOLD"}:
+                    decision = "HOLD_FOR_RESEARCH"
+            # An earlier approval never overrides current checks or new human review.
         assessment_id = sha256(f"{candidate.candidate_id}\n{candidate.document_hash}\nCANDIDATE_META_V1".encode()).hexdigest()
         return CompanyCandidateMetaAssessment(
             1, assessment_id, candidate.candidate_id, candidate.company,
@@ -102,8 +118,10 @@ class CompanyCandidateMetaReviewEngine:
 
 
 class CompanyCandidateMetaReviewWriter:
-    def write(self, candidates, *, output_path: Path, reviewed_at: datetime):
-        assessments = tuple(CompanyCandidateMetaReviewEngine().assess(item, reviewed_at=reviewed_at) for item in candidates)
+    def write(self, candidates, *, output_path: Path, reviewed_at: datetime, review_ledger_path: Path | None = None):
+        if review_ledger_path is None:
+            review_ledger_path = Path(__file__).resolve().parents[2] / "data/company_intelligence/company_fact_human_reviews.jsonl"
+        assessments = tuple(CompanyCandidateMetaReviewEngine().assess(item, reviewed_at=reviewed_at, review_ledger_path=review_ledger_path) for item in candidates)
         payload = {
             "schema_version": 1,
             "reviewed_at": reviewed_at.isoformat(),

@@ -1,5 +1,7 @@
 # EIOS SPRINT BOARD
 
+> Historical sprint record. The authoritative current checkpoint and execution sequence are maintained in the repository-root `PROJECT_STATE.md`. Sprint 004 below is retained as development history.
+
 ---
 
 ## Sprint

@@ -202,6 +202,7 @@ class ExternalResearchResult:
     job_id: str | None = None
     execution_count: int = 0
     observation_count: int = 0
+    quarter_screening: dict | None = None
 
 
 # ==========================================================
@@ -384,6 +385,15 @@ class ExternalResearchOrchestrator:
         # SEARCH
         # ==================================================
 
+        quarter_plan = None
+        quarter_screening = None
+        if query.quarter_period_end is not None:
+            from dataclasses import replace
+            from modules.company_intelligence.quarterly_search_target import quarterly_search_plan, assess_quarterly_search_results
+            if query.intent != 'OFFICIAL_DOCUMENT_DISCOVERY' or not query.issuer_domain:
+                raise ValueError('Quarter targeting requires official-document intent and issuer domain')
+            quarter_plan = quarterly_search_plan(query.company, query.issuer_domain, query.quarter_period_end)
+            query = replace(query, query=quarter_plan['queries'][0])
         search_results = (
             self.search_engine.search(
                 query
@@ -394,6 +404,10 @@ class ExternalResearchOrchestrator:
         # SOURCE SELECTION
         # ==================================================
 
+        if quarter_plan is not None:
+            quarter_screening = assess_quarterly_search_results(search_results, quarter_plan)
+            search_results = [result for result, assessment in zip(search_results, quarter_screening['results'])
+                              if assessment['status'] == 'TARGET_QUARTER_CANDIDATE']
         selected_sources = (
             self.source_selection_engine.select(
                 search_results,
@@ -639,6 +653,7 @@ class ExternalResearchOrchestrator:
             job_id=job_id,
             execution_count=1 if job_id is not None else 0,
             observation_count=len(observations),
+            quarter_screening=quarter_screening,
         )
 
 

@@ -10,6 +10,7 @@ from urllib.parse import urlsplit
 from modules.company_intelligence.company_document_archive import CompanyDocumentArchive
 from modules.company_intelligence.company_fact_review_queue import CompanyFactReviewQueueBuilder
 from modules.company_intelligence.company_candidate_meta_review import CompanyCandidateMetaReviewWriter
+from modules.company_intelligence.official_report_discovery import discover_official_reports
 from modules.external_intelligence.public_document_extraction_ledger import PublicDocumentExtractionLedger
 from modules.external_intelligence.public_observation_admission_gate import PublicObservationAdmissionGate
 from modules.external_intelligence.public_source_acquisition_ledger import PublicSourceAcquisitionLedger
@@ -36,25 +37,47 @@ class OfficialDocumentCycleSummary:
     meta_reviewed: int
     human_review_ready: int
     meta_holds: int
+    discovery_pages_checked: int = 0
+    discovery_pages_failed: int = 0
+    discovery_pdf_links_found: int = 0
 
 
 class AutomaticOfficialDocumentPipeline:
-    def __init__(self, archive: CompanyDocumentArchive, acquisition_ledger: PublicSourceAcquisitionLedger, *, extraction_ledger: PublicDocumentExtractionLedger | None = None, review_queue_root=None, adapter_factory=TrustedPublicAcquisitionAdapter):
+    def __init__(self, archive: CompanyDocumentArchive, acquisition_ledger: PublicSourceAcquisitionLedger, *, extraction_ledger: PublicDocumentExtractionLedger | None = None, review_queue_root=None, adapter_factory=TrustedPublicAcquisitionAdapter, source_manifest=None):
         self.archive = archive
         self.acquisition_ledger = acquisition_ledger
         self.adapter_factory = adapter_factory
         self.extraction_ledger = extraction_ledger
         self.review_queue_root = review_queue_root
+        self.source_manifest = source_manifest
 
     def run(self, executed_jobs, results, *, cycle_id: str, acquired_at: datetime) -> OfficialDocumentCycleSummary:
         counts = {"candidates_seen": 0, "approved_urls": 0, "archived": 0, "unchanged": 0, "new_versions": 0, "failed": 0, "extracted": 0, "fact_candidates_queued": 0, "extraction_holds": 0, "meta_reviewed": 0, "human_review_ready": 0, "meta_holds": 0}
+        counts.update(discovery_pages_checked=0, discovery_pages_failed=0, discovery_pdf_links_found=0)
         for job, result in zip(executed_jobs, results, strict=True):
             if job.intent not in OFFICIAL_INTENTS or not job.entity_domain:
                 continue
             registry = self._registry(job)
             adapter = self.adapter_factory(registry, self.acquisition_ledger)
+            selected_sources = result.selected_sources
+            # A targeted search must not fall back to arbitrary annual/older PDFs.
+            target_period = getattr(job, 'quarter_period_end', None)
+            if target_period:
+                from modules.company_intelligence.quarterly_search_target import quarterly_search_plan, assess_quarterly_search_results
+                plan = quarterly_search_plan(job.company, job.entity_domain, target_period)
+                screened = assess_quarterly_search_results([s.result for s in selected_sources], plan)
+                selected_sources = [s for s, assessment in zip(selected_sources, screened['results'])
+                                    if assessment['status'] == 'TARGET_QUARTER_CANDIDATE']
+            if not selected_sources and not target_period and job.intent == "OFFICIAL_DOCUMENT_DISCOVERY" and self.source_manifest:
+                discovered = discover_official_reports(job, self.source_manifest, adapter,
+                    acquired_at=acquired_at, cycle_id=cycle_id)
+                counts["discovery_pages_checked"] += discovered['pages_checked']
+                counts["discovery_pages_failed"] += discovered['pages_failed']
+                counts["discovery_pdf_links_found"] += discovered['pdf_links_found']
+                counts["failed"] += discovered['pages_failed']
+                selected_sources = discovered['selected_sources']
             seen_urls = set()
-            for selected in result.selected_sources:
+            for selected in selected_sources:
                 url = selected.result.url
                 counts["candidates_seen"] += 1
                 if url in seen_urls or not self._approved(url, job.entity_domain):

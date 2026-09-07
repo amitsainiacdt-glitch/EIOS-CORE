@@ -15,6 +15,9 @@
           "source_id": "COROMANDEL-ANNUAL-REPORTS",
           "source_type": "ANNUAL_REPORT",
           "url": "https://www.coromandel.biz/investors/annual-reports/",
+          "document_urls": [
+            "https://www.coromandel.biz/wp-content/uploads/2025/07/Integrated-Annual-Report-2024-25-1.pdf"
+          ],
           "authority": "ISSUER_OFFICIAL",
           "status": "EXTRACTED_PENDING_HUMAN_REVIEW"
         },
@@ -24,6 +27,17 @@
           "url": "https://www.coromandel.biz/investors/corporate-presentation/",
           "authority": "ISSUER_OFFICIAL",
           "status": "DISCOVERED_NOT_EXTRACTED"
+        },
+        {
+          "source_id": "COROMANDEL-QUARTERLY-RESULTS",
+          "source_type": "QUARTERLY_RESULTS",
+          "url": "https://www.coromandel.biz/investors/financial-results-quarterly/",
+          "document_urls": [
+            "https://www.coromandel.biz/wp-content/uploads/2026/07/Q1-results-1.pdf"
+          ],
+          "authority": "ISSUER_OFFICIAL",
+          "status": "DISCOVERED_NOT_EXTRACTED",
+          "required_review": "SOURCE_RECONCILIATION_AND_META_REVIEW"
         },
         {
           "source_id": "COROMANDEL-INVESTOR-HUB",
