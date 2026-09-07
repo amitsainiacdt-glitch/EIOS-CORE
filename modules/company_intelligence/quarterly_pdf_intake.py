@@ -42,7 +42,7 @@ def plan_ocr(layout, limit=3):
     return eligible[:limit], [page['pdf_page'] for page in eligible[limit:]]
 
 
-def run_quarterly_intake(path, *, workspace, ticker, company=None, source_url=None):
+def run_quarterly_intake(path, *, workspace, ticker, company=None, source_url=None, source_verification_override=None):
     from pypdf import PdfReader, PdfWriter
     import pdfplumber
     workspace = Path(workspace).resolve()
@@ -124,12 +124,15 @@ def run_quarterly_intake(path, *, workspace, ticker, company=None, source_url=No
     report['targeted_header_ocr'] = run_header_fallback(report, workspace=workspace)
     # One source request per imported document, not one per metric or column.
     # Persist extraction first so network failure never loses the review work.
-    try:
-        report['source_verification'] = verify_intake_source(original, digest, workspace=workspace,
-            output_directory=folder, ticker=ticker, company=company, source_url=source_url)
-    except OSError as exc:
-        report['source_verification'] = {'status': 'SOURCE_CHECK_STORAGE_FAILED_HOLD',
-            'explanation': str(exc), 'creates_approved_facts': False, 'changes_verdict': False}
+    if source_verification_override is not None:
+        report['source_verification'] = dict(source_verification_override)
+    else:
+        try:
+            report['source_verification'] = verify_intake_source(original, digest, workspace=workspace,
+                output_directory=folder, ticker=ticker, company=company, source_url=source_url)
+        except OSError as exc:
+            report['source_verification'] = {'status': 'SOURCE_CHECK_STORAGE_FAILED_HOLD',
+                'explanation': str(exc), 'creates_approved_facts': False, 'changes_verdict': False}
     report['review_queue'] = (write_quarterly_review_queue(report, output_directory=folder,
                               company=company, source_url=source_url)
                              if company and source_url else {'status': 'HOLD_MISSING_COMPANY_SOURCE_CONTEXT',

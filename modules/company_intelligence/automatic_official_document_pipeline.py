@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime
 from hashlib import sha256
+import re
+from pathlib import Path
 from urllib.parse import urlsplit
 
 from modules.company_intelligence.company_document_archive import CompanyDocumentArchive
@@ -45,10 +47,13 @@ class OfficialDocumentCycleSummary:
     fallback_retrieved: int = 0
     fallback_unavailable: int = 0
     fallback_providers: dict[str, int] | None = None
+    quarterly_intakes: int = 0
+    quarterly_candidates: int = 0
+    quarterly_holds: int = 0
 
 
 class AutomaticOfficialDocumentPipeline:
-    def __init__(self, archive: CompanyDocumentArchive, acquisition_ledger: PublicSourceAcquisitionLedger, *, extraction_ledger: PublicDocumentExtractionLedger | None = None, review_queue_root=None, adapter_factory=TrustedPublicAcquisitionAdapter, source_manifest=None, fallback_provider=None):
+    def __init__(self, archive: CompanyDocumentArchive, acquisition_ledger: PublicSourceAcquisitionLedger, *, extraction_ledger: PublicDocumentExtractionLedger | None = None, review_queue_root=None, adapter_factory=TrustedPublicAcquisitionAdapter, source_manifest=None, fallback_provider=None, quarterly_intake_runner=None):
         self.archive = archive
         self.acquisition_ledger = acquisition_ledger
         self.adapter_factory = adapter_factory
@@ -56,11 +61,13 @@ class AutomaticOfficialDocumentPipeline:
         self.review_queue_root = review_queue_root
         self.source_manifest = source_manifest
         self.fallback_provider = fallback_provider
+        self.quarterly_intake_runner = quarterly_intake_runner
 
     def run(self, executed_jobs, results, *, cycle_id: str, acquired_at: datetime) -> OfficialDocumentCycleSummary:
         counts = {"candidates_seen": 0, "approved_urls": 0, "archived": 0, "unchanged": 0, "new_versions": 0, "failed": 0, "extracted": 0, "fact_candidates_queued": 0, "extraction_holds": 0, "meta_reviewed": 0, "human_review_ready": 0, "meta_holds": 0}
         counts.update(discovery_pages_checked=0, discovery_pages_failed=0, discovery_pdf_links_found=0)
         counts.update(fallback_attempted=0, fallback_retrieved=0, fallback_unavailable=0, fallback_providers={})
+        counts.update(quarterly_intakes=0, quarterly_candidates=0, quarterly_holds=0)
         for job, result in zip(executed_jobs, results, strict=True):
             if job.intent not in OFFICIAL_INTENTS or not job.entity_domain:
                 continue
@@ -150,6 +157,31 @@ class AutomaticOfficialDocumentPipeline:
                             counts["extraction_holds"] += 1
                             continue
                         counts["extracted"] += 1
+                        if re.search(r"financial results", extraction.extracted_text, re.I) and re.search(r"quarter\s+(?:ended|and)", extraction.extracted_text, re.I):
+                            runner = self.quarterly_intake_runner
+                            if runner is None:
+                                from modules.company_intelligence.quarterly_pdf_intake import run_quarterly_intake
+                                runner = run_quarterly_intake
+                            delivery = getattr(acquisition, "delivery_provenance", None)
+                            source_check = {
+                                "status": "ACQUISITION_RECEIPT_PRESERVED_PENDING_REVIEW",
+                                "provider_id": getattr(delivery, "provider_id", "DIRECT_TRUSTED_SOURCE"),
+                                "source_url": url, "document_hash": acquisition.receipt.document_hash,
+                                "creates_approved_facts": False, "changes_verdict": False,
+                            }
+                            report = runner(self.archive.root / version.archive_path, workspace=Path(__file__).resolve().parents[2],
+                                ticker=job.ticker, company=job.company, source_url=url,
+                                source_verification_override=source_check)
+                            review = report.get("review_queue", {})
+                            counts["quarterly_intakes"] += 1
+                            quarterly_candidates = int(review.get("candidate_count", 0))
+                            counts["quarterly_candidates"] += quarterly_candidates
+                            counts["quarterly_holds"] += int(review.get("held_extraction_count", 0))
+                            counts["fact_candidates_queued"] += quarterly_candidates
+                            counts["meta_reviewed"] += quarterly_candidates
+                            counts["human_review_ready"] += int(review.get("human_review_ready", 0))
+                            counts["meta_holds"] += int(review.get("meta_held_count", 0))
+                            continue
                         admission = PublicObservationAdmissionGate(registry).preview(
                             acquisition=acquisition, extraction=extraction, observations=(),
                             title=selected.result.title or "Official company document",

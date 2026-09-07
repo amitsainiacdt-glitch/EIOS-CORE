@@ -59,6 +59,14 @@
 - The repeated probe succeeded: 1 official candidate, 1 fallback attempt/retrieval, 1 archive, 1 extraction, 8 fact candidates and 8 META assessments. All 8 were held for further research; 0 became approved facts and no verdict changed.
 - The probe used no external network and no paid search. All 316 company-intelligence tests continue to pass.
 
+## Automatic financial-results routing proven — 2026-09-07
+
+- Routed recognized quarterly financial-results PDFs from the official-document pipeline into the specialized table/OCR/header/unit/reconciliation intake instead of the generic event-sentence extractor.
+- Added a narrowly governed transfer of an assistant visual unit candidate across the two Coromandel PDF hashes only when the preserved comparison proves exact text and exact rendered-page equality. The transfer remains non-human-approved and creates no fact.
+- Controlled probe now produces one checked Q1 FY2027 standalone financial candidate: revenue INR 7,743.55 crore, other income INR 48.76 crore, total income INR 7,792.31 crore and PAT INR 376.96 crore. Both native and OCR readings agree and the income arithmetic passes.
+- Two other columns remain held for ambiguous duration/date headers. The surviving candidate remains held for official-source identity and reporting-note review; no history or verdict changes.
+- Pipeline summaries now count quarterly candidates and their META outcomes. The repeated no-network/no-paid-search probe reports 1 queued candidate, 1 META review and 1 META hold. All 316 company-intelligence tests pass.
+
 ## 2026-09-02 — Local cash-flow extraction and review table
 
 - Added a fail-closed, page-scoped local PDF cash-flow extractor and Coromandel source mapping. Re-running `python scripts/extract_coromandel_cash_flow_history.py` extracts 48 source figures for FY2017-18 through FY2024-25 from six preserved reports. No network/provider call is used.

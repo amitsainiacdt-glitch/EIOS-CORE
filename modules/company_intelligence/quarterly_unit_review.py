@@ -7,8 +7,7 @@ from modules.company_intelligence.quarterly_shared_headers import resolve_shared
 from modules.company_intelligence.quarterly_unit_reading import assess_unit_reading
 
 
-def validated_unit_reviews(workspace, document_hash):
-    root = Path(workspace).resolve()
+def _direct_validated_unit_reviews(root, document_hash):
     registry = root / 'data/company_intelligence/quarterly_unit_reviews.json'
     if not registry.exists():
         return []
@@ -40,6 +39,40 @@ def validated_unit_reviews(workspace, document_hash):
             continue
         valid.append(review)
     return valid
+
+
+def validated_unit_reviews(workspace, document_hash):
+    root = Path(workspace).resolve()
+    direct = _direct_validated_unit_reviews(root, document_hash)
+    if direct:
+        return direct
+    capture_root = root / 'data/runtime/browser_source_capture'
+    for provenance_path in capture_root.glob('*/provenance.json') if capture_root.is_dir() else ():
+        try:
+            provenance = json.loads(provenance_path.read_text(encoding='utf-8'))
+            if provenance.get('document_hash') != document_hash or provenance.get('status') != 'BROWSER_COPY_CORROBORATED_PENDING_REVIEW':
+                continue
+            source = (provenance_path.parent / provenance['preserved_file']).resolve()
+            if provenance_path.parent.resolve() not in source.parents or hashlib.sha256(source.read_bytes()).hexdigest() != document_hash:
+                continue
+            comparison = json.loads((provenance_path.parent / provenance['comparison_file']).read_text(encoding='utf-8'))
+            if comparison.get('original_hash') != provenance.get('original_upload_hash') or comparison.get('download_hash') != document_hash:
+                continue
+            originals = _direct_validated_unit_reviews(root, comparison['original_hash'])
+            transferred = []
+            for review in originals:
+                page = next((item for item in comparison.get('pages', []) if item.get('page') == review['pdf_page']), None)
+                if not page or page.get('text_exact_match') is not True or page.get('render_exact_match') is not True:
+                    continue
+                transferred.append({**review, 'document_hash': document_hash,
+                    'review_id': review['review_id'] + '-render-equivalent-' + document_hash[:12],
+                    'equivalent_original_hash': comparison['original_hash'],
+                    'equivalence_status': 'EXACT_TEXT_AND_RENDER_MATCH_NOT_HUMAN_APPROVAL'})
+            if transferred:
+                return transferred
+        except (OSError, ValueError, KeyError, TypeError):
+            continue
+    return []
 
 
 def apply_unit_reviews(binding, page, reviews, document_hash):

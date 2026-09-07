@@ -55,7 +55,8 @@ def main() -> int:
     output.mkdir(parents=True, exist_ok=True)
     (output / "summary.json").write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(payload, indent=2))
-    return 0 if summary.fallback_retrieved == 1 and summary.archived == 1 and summary.extracted == 1 else 1
+    return 0 if (summary.fallback_retrieved == 1 and summary.archived == 1
+                 and summary.extracted == 1 and summary.quarterly_candidates >= 1) else 1
 
 
 if __name__ == "__main__":

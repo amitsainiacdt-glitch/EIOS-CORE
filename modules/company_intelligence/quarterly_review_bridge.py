@@ -23,7 +23,8 @@ def quarterly_review_candidate(record, *, company, source_url):
     fingerprint = sha256(json.dumps({'record': record, 'company': company, 'source_url': source_url},
                                    sort_keys=True, separators=(',', ':')).encode()).hexdigest()
     # A labelled transcription, not a verbatim quotation or company identity proof.
-    passage = 'Structured table transcription (not a verbatim passage):\n' + source['header_text'] + '\n'
+    passage = f'Company context from governed intake (not table text): {company}\n'
+    passage += 'Structured table transcription (not a verbatim passage):\n' + source['header_text'] + '\n'
     passage += '\n'.join(f"{cell['row_label']}: {cell['native_text']}" for cell in source['raw_readings'])
     return CompanyFactReviewCandidate(
         schema_version=1, candidate_id='QUARTERLY-' + fingerprint,
