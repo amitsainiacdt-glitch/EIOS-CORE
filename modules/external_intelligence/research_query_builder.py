@@ -78,6 +78,7 @@ class ExternalResearchQueryBuilder:
         source_hint = {
             "OFFICIAL_DOCUMENT_DISCOVERY": "official investor relations annual report results presentation transcript",
             "EXCHANGE_DISCLOSURES": "official NSE BSE exchange filing disclosure",
+            "PRIMARY_INDICATOR_MONITORING": "official primary authority latest value reporting date",
         }.get(normalized_intent, "")
 
         query = (

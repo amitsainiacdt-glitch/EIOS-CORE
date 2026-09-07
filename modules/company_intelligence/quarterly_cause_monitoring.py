@@ -45,12 +45,14 @@ def evaluate_direction(rule, *, previous, current):
 
 
 def _validate(rule):
-    required = ('id','indicator','family','unit','unit','favourable_direction','source_requirement',
+    required = ('id','indicator','family','unit','favourable_direction','source_requirement','source_domain',
                 'cadence','improvement_meaning','deterioration_meaning')
     if any(not isinstance(rule.get(key), str) or not rule[key].strip() for key in required):
         raise ValueError('monitoring rule field missing')
     if rule['family'] not in FAMILIES or rule['favourable_direction'] not in DIRECTIONS:
         raise ValueError('invalid rule classification')
+    if '/' in rule['source_domain'] or '.' not in rule['source_domain']:
+        raise ValueError('source_domain must be a bare domain')
 
 
 def _number(value):

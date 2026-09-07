@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from modules.company_intelligence.company_coverage_job_provider import load_company_coverage_jobs
+from modules.company_intelligence.quarterly_monitoring_job_provider import load_quarterly_monitoring_jobs
 from modules.company_intelligence.review_memory_report import build_review_memory_report
 from modules.company_intelligence.collection_outcome import describe_document_collection
 from modules.company_intelligence.quarterly_source_retry import run_source_retries
@@ -43,7 +44,7 @@ OFFICIAL_DOCUMENT_INBOX = ROOT / "data" / "runtime" / "official_document_inbox"
 
 
 def all_automatic_jobs():
-    jobs = [*ResearchJobConfiguration.all_jobs(), *load_company_coverage_jobs()]
+    jobs = [*ResearchJobConfiguration.all_jobs(), *load_company_coverage_jobs(), *load_quarterly_monitoring_jobs()]
     ids = [job.job_id for job in jobs]
     if len(ids) != len(set(ids)):
         raise ValueError("automatic research job IDs must be unique")

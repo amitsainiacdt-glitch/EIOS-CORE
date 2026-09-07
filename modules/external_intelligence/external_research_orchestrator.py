@@ -587,7 +587,7 @@ class ExternalResearchOrchestrator:
                 result.url,
                 entity_domain=entity_domain,
             )
-            if query.intent in {"OFFICIAL_DOCUMENT_DISCOVERY", "EXCHANGE_DISCLOSURES"} and classification.quality_tier != "TIER_1":
+            if query.intent in {"OFFICIAL_DOCUMENT_DISCOVERY", "EXCHANGE_DISCLOSURES", "PRIMARY_INDICATOR_MONITORING"} and classification.quality_tier != "TIER_1":
                 continue
 
             # ==================================================

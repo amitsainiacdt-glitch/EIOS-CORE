@@ -5936,3 +5936,11 @@ investment decision is created by this checkpoint.
 - Added deterministic direction evaluation for future numeric observations. It can label a new value favourable, adverse or unchanged, but explicitly cannot infer causation, materiality, durability or market mispricing from direction alone.
 - Monitoring output is structurally barred from creating a catalyst, changing a verdict or authorizing a trade. The UI displays the six indicators as awaiting their next governed update and explains the source and direction EIOS will use.
 - Validation: all 346 company-intelligence tests pass, dashboard snapshot regeneration succeeds and the production build passes. No external scheduler/provider was added and no live observation was collected in this checkpoint.
+
+## Primary-source monitoring jobs connected to automatic cycle (2026-09-07)
+
+- Converted the six cause-linked indicators into recurring ResearchJob definitions loaded by the existing unattended company cycle. EIOS now plans 28 automatic jobs in total, including six dedicated PRIMARY_INDICATOR_MONITORING jobs. Weekly crop-season data uses a weekly cadence; quarterly company metrics use a quarterly cadence; notification/settlement indicators are checked daily for a new official release.
+- Every indicator now carries a bare approved authority domain. Company figures are restricted to coromandel.biz, subsidy notifications to fert.gov.in, rainfall to mausam.imd.gov.in and crop acreage to agriwelfare.gov.in. The query identifies the exact indicator and unit and requests retention of the source passage and reporting date.
+- Extended the external-research quality boundary so a primary-indicator job can create an observation only when source classification is Tier 1 for that exact approved domain. A relevant-looking secondary page is discarded from this lane rather than used to update the number.
+- These jobs produce research observations only. Numeric extraction, same-unit/date comparison and alert materialization remain the next stage; catalyst creation, verdict changes and trades remain prohibited.
+- Validation: all 348 company-intelligence tests pass, including an explicit secondary-domain rejection test. External query-builder and orchestrator regression suites pass; dashboard snapshot regeneration succeeds. No paid search or live network collection was run in this checkpoint.
