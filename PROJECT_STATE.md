@@ -45,6 +45,13 @@
 - All 315 company-intelligence tests pass; the automatic-cycle entry point compiles.
 - Provider research confirmed that the examined Financial Datasets API is US/SEC-focused and is therefore not an adequate primary solution for EIOS's Indian-company coverage. No paid provider was connected or queried.
 
+## Acquisition provenance exposed in System Runtime UI — 2026-09-07
+
+- Automatic document-cycle summaries now distinguish fallback attempts, successful fallback retrievals, unavailable fallbacks and counts by delivery-provider identity.
+- Dashboard synchronization carries candidates seen, archives, extractions, direct failures and fallback provenance into the runtime read model. The System Runtime page explains that fallback retrieval is still pending review and is not an approved fact.
+- Refreshed the local dashboard snapshot from the completed 7 September cycle: 22/22 jobs, 94 observations, 20 document candidates, 7 direct failures and 0 archived/extracted documents in that pre-fallback run.
+- All 316 company-intelligence tests pass and the dashboard production build passes.
+
 ## 2026-09-02 — Local cash-flow extraction and review table
 
 - Added a fail-closed, page-scoped local PDF cash-flow extractor and Coromandel source mapping. Re-running `python scripts/extract_coromandel_cash_flow_history.py` extracts 48 source figures for FY2017-18 through FY2024-25 from six preserved reports. No network/provider call is used.

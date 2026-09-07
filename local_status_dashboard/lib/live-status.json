@@ -12557,14 +12557,37 @@
   "createsObservation": false,
   "nonAuthorityStatement": "Research readiness only; not a Signal, Catalyst, Opportunity, recommendation, position, or trade.",
   "runtime": {
-    "status": "RUNNING",
+    "status": "SUCCESS",
     "startedAt": "2026-09-07T09:03:55.298203+00:00",
-    "finishedAt": null,
+    "finishedAt": "2026-09-07T09:07:11.349580+00:00",
     "jobCount": 22,
-    "executedJobs": 0,
-    "observationCount": null,
+    "executedJobs": 22,
+    "observationCount": 94,
     "errors": [],
-    "collectionOutcome": {}
+    "collectionOutcome": {
+      "status": "COLLECTION_NEEDS_ATTENTION",
+      "message": "0 documents extracted; 7 failed and 0 held for review.",
+      "counts": {
+        "candidates_seen": 20,
+        "archived": 0,
+        "unchanged": 0,
+        "failed": 7,
+        "extracted": 0,
+        "fact_candidates_queued": 0,
+        "extraction_holds": 0
+      },
+      "new_facts_approved": false
+    },
+    "acquisition": {
+      "candidatesSeen": 20,
+      "documentsArchived": 0,
+      "documentsExtracted": 0,
+      "failures": 7,
+      "fallbackAttempted": 0,
+      "fallbackRetrieved": 0,
+      "fallbackUnavailable": 0,
+      "fallbackProviders": {}
+    }
   },
   "opportunityWatch": {
     "eligibilityRule": "Only companies with a READY governed intelligence verdict may enter Eligible Opportunities.",
@@ -12579,7 +12602,7 @@
     "researchCandidateCount": 4
   },
   "homeStatus": {
-    "runtimeStatus": "RUNNING",
+    "runtimeStatus": "SUCCESS",
     "earlyIntelligenceCaseCount": 1,
     "confirmedOpportunityCount": 0,
     "deteriorationAlertCount": null,

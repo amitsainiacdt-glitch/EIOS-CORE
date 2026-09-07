@@ -327,6 +327,7 @@ def main() -> None:
             "readinessLabel": "Evidence found — company case not yet proven" if evidence else ("Facts extracted — human review pending" if extraction else ("Official sources found — extraction pending" if official_sources else "Registered — governed evidence not yet attached")),
         })
 
+    official_documents = runtime_status.get("official_documents") or {}
     snapshot = {
         "caseId": readiness["inputs"]["case_id"],
         "stage": assessment["stage"],
@@ -356,6 +357,16 @@ def main() -> None:
             "observationCount": runtime_status.get("observations"),
             "errors": runtime_status.get("errors", []),
             "collectionOutcome": runtime_status.get("collection_outcome", {}),
+            "acquisition": {
+                "candidatesSeen": official_documents.get("candidates_seen", 0),
+                "documentsArchived": official_documents.get("archived", 0),
+                "documentsExtracted": official_documents.get("extracted", 0),
+                "failures": official_documents.get("failed", 0),
+                "fallbackAttempted": official_documents.get("fallback_attempted", 0),
+                "fallbackRetrieved": official_documents.get("fallback_retrieved", 0),
+                "fallbackUnavailable": official_documents.get("fallback_unavailable", 0),
+                "fallbackProviders": official_documents.get("fallback_providers", {}),
+            },
         },
     }
 

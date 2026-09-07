@@ -41,6 +41,10 @@ class OfficialDocumentCycleSummary:
     discovery_pages_checked: int = 0
     discovery_pages_failed: int = 0
     discovery_pdf_links_found: int = 0
+    fallback_attempted: int = 0
+    fallback_retrieved: int = 0
+    fallback_unavailable: int = 0
+    fallback_providers: dict[str, int] | None = None
 
 
 class AutomaticOfficialDocumentPipeline:
@@ -56,6 +60,7 @@ class AutomaticOfficialDocumentPipeline:
     def run(self, executed_jobs, results, *, cycle_id: str, acquired_at: datetime) -> OfficialDocumentCycleSummary:
         counts = {"candidates_seen": 0, "approved_urls": 0, "archived": 0, "unchanged": 0, "new_versions": 0, "failed": 0, "extracted": 0, "fact_candidates_queued": 0, "extraction_holds": 0, "meta_reviewed": 0, "human_review_ready": 0, "meta_holds": 0}
         counts.update(discovery_pages_checked=0, discovery_pages_failed=0, discovery_pdf_links_found=0)
+        counts.update(fallback_attempted=0, fallback_retrieved=0, fallback_unavailable=0, fallback_providers={})
         for job, result in zip(executed_jobs, results, strict=True):
             if job.intent not in OFFICIAL_INTENTS or not job.entity_domain:
                 continue
@@ -109,8 +114,15 @@ class AutomaticOfficialDocumentPipeline:
                     )
                     acquisition = adapter.acquire(**request)
                     if acquisition.document_bytes is None and self.fallback_provider is not None:
+                        counts["fallback_attempted"] += 1
                         fallback = self.fallback_provider.acquire_after_failure(acquisition, **request)
-                        acquisition = validate_fallback_delivery(fallback, requested_url=url)
+                        if fallback is None:
+                            counts["fallback_unavailable"] += 1
+                        else:
+                            acquisition = validate_fallback_delivery(fallback, requested_url=url)
+                            counts["fallback_retrieved"] += 1
+                            provider_id = acquisition.delivery_provenance.provider_id
+                            counts["fallback_providers"][provider_id] = counts["fallback_providers"].get(provider_id, 0) + 1
                     if acquisition.document_bytes is None:
                         counts["failed"] += 1
                         continue

@@ -117,6 +117,24 @@ class AutomaticOfficialDocumentPipelineTests(unittest.TestCase):
         self.assertEqual(fallback.calls, 1)
         self.assertEqual(archive.urls, [url])
         self.assertEqual(summary.archived, 1)
+        self.assertEqual(summary.fallback_attempted, 1)
+        self.assertEqual(summary.fallback_retrieved, 1)
+        self.assertEqual(summary.fallback_unavailable, 0)
+        self.assertEqual(summary.fallback_providers, {"APPROVED_PROVIDER": 1})
+
+    def test_missing_fallback_document_is_reported_without_false_success(self):
+        class EmptyFallback:
+            def acquire_after_failure(self, primary_result, **kwargs):
+                return None
+        url = "https://www.coromandel.biz/reports/missing.pdf"
+        summary = AutomaticOfficialDocumentPipeline(
+            FakeArchive(), object(), adapter_factory=BlockedAdapter, fallback_provider=EmptyFallback(),
+        ).run([job()], [SimpleNamespace(selected_sources=[SimpleNamespace(result=SimpleNamespace(url=url))])],
+              cycle_id="CYCLE-1", acquired_at=datetime.now(timezone.utc))
+        self.assertEqual(summary.archived, 0)
+        self.assertEqual(summary.failed, 1)
+        self.assertEqual(summary.fallback_attempted, 1)
+        self.assertEqual(summary.fallback_unavailable, 1)
 
 
 if __name__ == "__main__":
