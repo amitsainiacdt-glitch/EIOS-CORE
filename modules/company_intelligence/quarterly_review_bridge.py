@@ -58,7 +58,8 @@ def write_quarterly_review_queue(report, *, output_directory, company, source_ur
              'source_verification': report.get('source_verification', {'status': 'NOT_RUN', 'creates_approved_facts': False}),
              'creates_evidence': False, 'requires_meta_review': True, 'requires_human_review': True}
     queue_path.write_text(json.dumps(queue, indent=2), encoding='utf-8')
-    assessments = CompanyCandidateMetaReviewWriter().write(candidates, output_path=meta_path, reviewed_at=now)
+    assessments = CompanyCandidateMetaReviewWriter().write(candidates, output_path=meta_path, reviewed_at=now,
+                                                             source_verification=queue['source_verification'])
     financial_assessments = {key: assess_quarterly_financials(record,
         source_verification=queue['source_verification'], reporting_notes=queue['reporting_notes'])
         for key,record in records.items()}

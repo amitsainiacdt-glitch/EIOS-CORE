@@ -22,6 +22,32 @@ def candidate(**changes):
 
 
 class CompanyCandidateMetaReviewTests(unittest.TestCase):
+    def test_exact_browser_corroboration_clears_only_local_origin_hold(self):
+        item = candidate()
+        item = item.__class__(**{**item.__dict__, 'extraction_method': 'local_import_quarterly_reconciled_v1'})
+        verification = {'status': 'ACQUISITION_RECEIPT_PRESERVED_PENDING_REVIEW',
+            'provider_id': 'EIOS_CORROBORATED_BROWSER_CAPTURE', 'document_hash': item.document_hash,
+            'source_url': item.source_url, 'creates_approved_facts': False}
+        result = CompanyCandidateMetaReviewEngine().assess(
+            item, reviewed_at=datetime.now(timezone.utc), source_verification=verification)
+        self.assertEqual(result.authority_status, 'VERIFIED_CORROBORATED_BROWSER_LINEAGE')
+        self.assertEqual(result.decision, 'READY_FOR_HUMAN_REVIEW')
+        self.assertFalse(result.creates_evidence)
+        self.assertFalse(result.changes_verdict)
+
+    def test_browser_corroboration_must_match_hash_and_url_exactly(self):
+        item = candidate()
+        item = item.__class__(**{**item.__dict__, 'extraction_method': 'local_import_quarterly_reconciled_v1'})
+        base = {'status': 'ACQUISITION_RECEIPT_PRESERVED_PENDING_REVIEW',
+            'provider_id': 'EIOS_CORROBORATED_BROWSER_CAPTURE', 'document_hash': item.document_hash,
+            'source_url': item.source_url}
+        for changed in ({**base, 'document_hash': 'b' * 64}, {**base, 'source_url': item.source_url + '?changed=1'},
+                        {**base, 'provider_id': 'EIOS_GOVERNED_LOCAL_INBOX'}):
+            with self.subTest(changed=changed):
+                result = CompanyCandidateMetaReviewEngine().assess(
+                    item, reviewed_at=datetime.now(timezone.utc), source_verification=changed)
+                self.assertEqual(result.authority_status, 'AUTHORITY_HOLD')
+                self.assertEqual(result.decision, 'HOLD_FOR_RESEARCH')
     def test_material_primary_candidate_reaches_human_review_only(self):
         result = CompanyCandidateMetaReviewEngine().assess(candidate(), reviewed_at=datetime.now(timezone.utc))
         self.assertEqual(result.decision, "READY_FOR_HUMAN_REVIEW")

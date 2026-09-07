@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+from urllib.parse import urlsplit
 from dataclasses import asdict, dataclass
 from datetime import datetime
 from hashlib import sha256
@@ -51,7 +52,8 @@ class CompanyCandidateMetaAssessment:
 class CompanyCandidateMetaReviewEngine:
     """Assess research eligibility without creating investment authority."""
 
-    def assess(self, candidate: CompanyFactReviewCandidate, *, reviewed_at: datetime, review_ledger_path: Path | None = None) -> CompanyCandidateMetaAssessment:
+    def assess(self, candidate: CompanyFactReviewCandidate, *, reviewed_at: datetime,
+               review_ledger_path: Path | None = None, source_verification: dict | None = None) -> CompanyCandidateMetaAssessment:
         if not isinstance(candidate, CompanyFactReviewCandidate):
             raise ValueError("candidate must be a CompanyFactReviewCandidate")
         if not isinstance(reviewed_at, datetime):
@@ -59,9 +61,12 @@ class CompanyCandidateMetaReviewEngine:
         reasons = []
 
         authority = "VERIFIED_PRIMARY_LINEAGE"
-        if candidate.extraction_method.startswith('local_import_'):
+        corroborated = self._corroborated_source(candidate, source_verification)
+        if candidate.extraction_method.startswith('local_import_') and not corroborated:
             authority = "AUTHORITY_HOLD"
             reasons.append("LOCAL_IMPORT_ORIGIN_REQUIRES_INDEPENDENT_REVIEW")
+        elif candidate.extraction_method.startswith('local_import_'):
+            authority = "VERIFIED_CORROBORATED_BROWSER_LINEAGE"
         if not re.fullmatch(r"[0-9a-f]{64}", candidate.document_hash) or not candidate.source_url.startswith("https://"):
             authority = "AUTHORITY_HOLD"
             reasons.append("PRIMARY_LINEAGE_INVALID")
@@ -92,7 +97,7 @@ class CompanyCandidateMetaReviewEngine:
             reasons.append("FORWARD_LOOKING_OR_UNCERTAIN_STATEMENT")
 
         decision = "READY_FOR_HUMAN_REVIEW"
-        if authority != "VERIFIED_PRIMARY_LINEAGE" or relevance != "DIRECT_COMPANY_REFERENCE" or not material:
+        if not authority.startswith("VERIFIED_") or relevance != "DIRECT_COMPANY_REFERENCE" or not material:
             decision = "HOLD_FOR_RESEARCH"
         if review_ledger_path is not None:
             from modules.company_intelligence.company_fact_human_review import CompanyFactHumanReviewLedger
@@ -117,12 +122,27 @@ class CompanyCandidateMetaReviewEngine:
             reviewed_at,
         )
 
+    @staticmethod
+    def _corroborated_source(candidate, verification):
+        if not isinstance(verification, dict):
+            return False
+        parsed = urlsplit(candidate.source_url)
+        return (verification.get('status') == 'ACQUISITION_RECEIPT_PRESERVED_PENDING_REVIEW'
+                and verification.get('provider_id') == 'EIOS_CORROBORATED_BROWSER_CAPTURE'
+                and verification.get('document_hash') == candidate.document_hash
+                and verification.get('source_url') == candidate.source_url
+                and parsed.scheme == 'https' and bool(parsed.hostname)
+                and not parsed.username and not parsed.password)
+
 
 class CompanyCandidateMetaReviewWriter:
-    def write(self, candidates, *, output_path: Path, reviewed_at: datetime, review_ledger_path: Path | None = None):
+    def write(self, candidates, *, output_path: Path, reviewed_at: datetime,
+              review_ledger_path: Path | None = None, source_verification: dict | None = None):
         if review_ledger_path is None:
             review_ledger_path = Path(__file__).resolve().parents[2] / "data/company_intelligence/company_fact_human_reviews.jsonl"
-        assessments = tuple(CompanyCandidateMetaReviewEngine().assess(item, reviewed_at=reviewed_at, review_ledger_path=review_ledger_path) for item in candidates)
+        assessments = tuple(CompanyCandidateMetaReviewEngine().assess(
+            item, reviewed_at=reviewed_at, review_ledger_path=review_ledger_path,
+            source_verification=source_verification) for item in candidates)
         payload = {
             "schema_version": 1,
             "reviewed_at": reviewed_at.isoformat(),

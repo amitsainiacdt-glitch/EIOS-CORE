@@ -53,7 +53,10 @@ def assess_quarterly_financials(record, *, source_verification=None, reporting_n
     note_assessments = [{**item, 'applicability': note_context(item.get('source_passage', ''),
         basis=source.get('basis', ''), period_end=source.get('period_end', ''))}
         for item in reporting_notes.get('candidates', [])]
-    decision = 'HOLD_FOR_REPORTING_NOTE_REVIEW' if source_ok and not notes_complete else 'HOLD_FOR_SOURCE_AND_FINANCIAL_REVIEW'
+    all_checks_pass = all(c['status'] == 'PASS' for c in checks)
+    decision = ('READY_FOR_HUMAN_FACT_APPROVAL' if all_checks_pass else
+                'HOLD_FOR_REPORTING_NOTE_REVIEW' if source_ok and not notes_complete else
+                'HOLD_FOR_SOURCE_AND_FINANCIAL_REVIEW')
     return {'schema_version': 1, 'record_fingerprint': fingerprint,
             'method': 'DETERMINISTIC_FINANCIAL_CHECKS_V1', 'decision': decision,
             'technical_checks_passed': technical_ok, 'checks': checks,
