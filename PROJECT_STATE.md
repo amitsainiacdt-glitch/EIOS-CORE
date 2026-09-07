@@ -52,6 +52,13 @@
 - Refreshed the local dashboard snapshot from the completed 7 September cycle: 22/22 jobs, 94 observations, 20 document candidates, 7 direct failures and 0 archived/extracted documents in that pre-fallback run.
 - All 316 company-intelligence tests pass and the dashboard production build passes.
 
+## Controlled browser-fallback path proven end to end — 2026-09-07
+
+- Added a no-network, no-paid-search production-path probe for the saved Coromandel Q1 FY2027 official report.
+- The first probe correctly found and archived the corroborated browser capture but exposed a strict acquisition-type incompatibility at extraction. Corrected the fallback result to extend the canonical trusted acquisition result rather than weakening the extractor's type gate.
+- The repeated probe succeeded: 1 official candidate, 1 fallback attempt/retrieval, 1 archive, 1 extraction, 8 fact candidates and 8 META assessments. All 8 were held for further research; 0 became approved facts and no verdict changed.
+- The probe used no external network and no paid search. All 316 company-intelligence tests continue to pass.
+
 ## 2026-09-02 — Local cash-flow extraction and review table
 
 - Added a fail-closed, page-scoped local PDF cash-flow extractor and Coromandel source mapping. Re-running `python scripts/extract_coromandel_cash_flow_history.py` extracts 48 source figures for FY2017-18 through FY2024-25 from six preserved reports. No network/provider call is used.

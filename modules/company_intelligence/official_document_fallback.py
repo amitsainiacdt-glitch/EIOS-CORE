@@ -5,6 +5,8 @@ from hashlib import sha256
 from typing import Protocol
 from urllib.parse import urlsplit
 
+from modules.external_intelligence.trusted_public_acquisition_adapter import TrustedPublicAcquisitionResult
+
 
 @dataclass(frozen=True)
 class OfficialDocumentDeliveryProvenance:
@@ -18,11 +20,7 @@ class OfficialDocumentFallbackProvider(Protocol):
 
 
 @dataclass(frozen=True)
-class FallbackAcquisitionResult:
-    source: object
-    receipt: object
-    retrieved_content: object
-    document_bytes: bytes
+class FallbackAcquisitionResult(TrustedPublicAcquisitionResult):
     delivery_provenance: OfficialDocumentDeliveryProvenance
 
 
