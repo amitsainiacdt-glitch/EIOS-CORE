@@ -100,3 +100,32 @@ class RecordCandidateTests(unittest.TestCase):
                     'Profit before tax (5+6)':'profit_before_tax'}
         for label, metric in expected.items():
             with self.subTest(label=label): self.assertEqual(metric_for_label(label), metric)
+
+    def test_unique_eight_line_expense_sum_recovers_disagreements(self):
+        page,receipt,ticker,digest=self.fixture()
+        labels=[('Cost of raw materials','40'),('Purchases of traded goods','30'),
+                ('Changes in inventories','(5)'),('Employee benefits expense','10'),('Finance costs','2'),
+                ('Depreciation and amortisation expense','3'),('Freight and distribution expense','4'),
+                ('Other expenses','6 00'),('Total expenses','90')]
+        for label,value in labels:
+            receipt['comparison']['cells'].append({'pdf_page':1,'column_index':0,'row_label':label,
+                'native_text':value,'ocr_text':value if value!='6 00' else 'bad',
+                'status':'READINGS_AGREE_PENDING_REVIEW' if value!='6 00' else 'HOLD_UNREADABLE_OR_MISSING'})
+        result=build_record_candidates(page,receipt,ticker,digest)['records'][0]
+        self.assertEqual(result['values_inr_crore']['other_expenses'],'6.00')
+        self.assertEqual(result['source_column']['cells']['other_expenses']['source_reading']['status'],
+                         'EXPENSE_SUM_TRIANGULATED_PENDING_REVIEW')
+
+    def test_non_reconciling_expense_options_remain_supplemental_hold(self):
+        page,receipt,ticker,digest=self.fixture()
+        labels=[('Cost of raw materials','40'),('Purchases of traded goods','30'),
+                ('Changes in inventories','(5)'),('Employee benefits expense','10'),('Finance costs','2'),
+                ('Depreciation and amortisation expense','3'),('Freight and distribution expense','4'),
+                ('Other expenses','7 00'),('Total expenses','84')]
+        for label,value in labels:
+            receipt['comparison']['cells'].append({'pdf_page':1,'column_index':0,'row_label':label,
+                'native_text':value,'ocr_text':value if value!='7 00' else 'bad',
+                'status':'READINGS_AGREE_PENDING_REVIEW' if value!='7 00' else 'HOLD_UNREADABLE_OR_MISSING'})
+        result=build_record_candidates(page,receipt,ticker,digest)['records'][0]
+        self.assertNotIn('other_expenses',result['values_inr_crore'])
+        self.assertIn('UNRESOLVED_CELL:other_expenses',result['source_column']['supplemental_issues'])

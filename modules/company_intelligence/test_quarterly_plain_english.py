@@ -28,6 +28,7 @@ class QuarterlyPlainEnglishTests(unittest.TestCase):
         self.assertEqual(result['cost_attribution']['total_expense_change_crore'],'20.00')
         self.assertEqual(result['cost_attribution']['unallocated_expense_change_crore'],'18.00')
         self.assertEqual(len(result['cost_attribution']['comparable_lines']),2)
+        self.assertEqual(result['cost_attribution']['dominant_pressures'][0]['label'],'Employee benefits')
 
     def test_applies_note_is_explained_and_pending_note_is_disclosed(self):
         notes={'candidates':[{'topic':'IMPAIRMENT','human_review':{'decision':'APPLIES','rationale':'Current quarter'}},

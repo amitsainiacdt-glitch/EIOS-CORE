@@ -22,6 +22,49 @@ def metric_for_label(label):
     return next((metric for metric, pattern in patterns if re.search(pattern, label)), None)
 
 
+def _reading_options(cell, native, ocr):
+    options = {(kind, value) for kind, value in (('NATIVE', native), ('OCR', ocr))
+               if value is not None and value.is_finite()}
+    # Repair only a missing decimal separator before exactly two terminal digits.
+    # The repaired value still needs the complete expense sum to be uniquely valid.
+    raw = cell.get('native_text', '').strip()
+    if re.fullmatch(r'\(?\d{1,3}(?:,\d{3})*\s\d{2}\)?', raw):
+        negative = raw.startswith('('); token = raw.strip('()')
+        value = Decimal(token.replace(',', '').replace(' ', '.')) * (-1 if negative else 1)
+        options.add(('NATIVE_DECIMAL_REPAIR', value))
+    return sorted(options)
+
+
+def _triangulate_expenses(cells, unresolved, document_hash, page, index):
+    names = ('raw_materials','traded_goods_purchases','inventory_change','employee_benefits',
+             'finance_costs','depreciation_amortisation','freight_distribution','other_expenses')
+    if 'total_expenses' not in cells or not all(name in cells or name in unresolved for name in names):
+        return
+    choices = []
+    for name in names:
+        if name in cells:
+            choices.append([(name, 'AGREED', Decimal(cells[name]['value']))])
+        else:
+            cell,native,ocr=unresolved[name]
+            choices.append([(name,kind,value) for kind,value in _reading_options(cell,native,ocr)])
+    if any(not options for options in choices): return
+    target=Decimal(cells['total_expenses']['value'])
+    matches=[]
+    for combination in product(*choices):
+        if abs(sum((item[2] for item in combination),Decimal('0'))-target)<=Decimal('0.02'):
+            signature=tuple(item[2] for item in combination)
+            if signature not in [tuple(item[2] for item in match) for match in matches]: matches.append(combination)
+    if len(matches)!=1: return
+    for name,kind,value in matches[0]:
+        if name not in unresolved: continue
+        original=unresolved.pop(name)[0]
+        reading={**original,'status':'EXPENSE_SUM_TRIANGULATED_PENDING_REVIEW','selected_reading':kind,
+                 'selected_value':str(value),'triangulation':{'method':'EIGHT_EXPENSE_LINES_EQUAL_TOTAL_EXPENSES',
+                 'total_expenses':str(target),'tolerance':'0.02'}}
+        cells[name]={'document_hash':document_hash,'pdf_page':page,'column_index':index,
+                     'value':str(value),'source_reading':reading}
+
+
 def build_record_candidates(page, receipt, ticker, document_hash):
     comparison = receipt.get('comparison', {})
     if (receipt.get('document_hash') != document_hash or receipt.get('pdf_page') != page['pdf_page']
@@ -87,6 +130,7 @@ def build_record_candidates(page, receipt, ticker, document_hash):
                                                      'total_income':str(target), 'tolerance':'0.02'}}
                         cells[name] = {'document_hash':document_hash, 'pdf_page':page['pdf_page'],
                                        'column_index':index, 'value':str(selected[1]), 'source_reading':reading}
+            _triangulate_expenses(cells, unresolved, document_hash, page['pdf_page'], index)
             for metric in unresolved:
                 (issues if metric in core_metrics else supplemental_issues).append('UNRESOLVED_CELL:' + metric)
             source = {'ticker': ticker, 'document_hash': document_hash, 'pdf_page': page['pdf_page'],

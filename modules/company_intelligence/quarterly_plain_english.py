@@ -111,6 +111,16 @@ def _cost_attribution(current, prior, current_revenue, prior_revenue, current_pa
                       'effect':'PRESSURE' if delta>0 else 'RELIEF' if delta<0 else 'NEUTRAL'})
     total_delta=total_current-total_prior; revenue_growth=_change(current_revenue,prior_revenue); expense_growth=_change(total_current,total_prior)
     below_pbt_current=pbt_current-current_pat; below_pbt_prior=pbt_prior-prior_pat
+    pressures=sorted((line for line in lines if Decimal(line['change_crore'])>0),
+                     key=lambda line:Decimal(line['change_crore']),reverse=True)
+    reliefs=sorted((line for line in lines if Decimal(line['change_crore'])<0),
+                   key=lambda line:Decimal(line['change_crore']))
+    cause_text = ''
+    if pressures:
+        cause_text += ' The largest confirmed increases were ' + ', '.join(
+            f"{line['label']} (₹{_money(Decimal(line['change_crore']))} crore)" for line in pressures[:2]) + '.'
+    if reliefs:
+        cause_text += ' The largest offsetting relief was ' + f"{reliefs[0]['label']} (₹{_money(abs(Decimal(reliefs[0]['change_crore'])))} crore)."
     return {'total_expenses_current_crore':_plain(total_current),'total_expenses_prior_crore':_plain(total_prior),
             'total_expense_change_crore':_plain(total_delta),'total_expense_change_percent':_plain(expense_growth),
             'revenue_change_percent':_plain(revenue_growth),'pbt_change_crore':_plain(pbt_current-pbt_prior),
@@ -118,8 +128,12 @@ def _cost_attribution(current, prior, current_revenue, prior_revenue, current_pa
             'pbt_margin_current_percent':_plain(pbt_current/current_revenue*100),
             'pbt_margin_prior_percent':_plain(pbt_prior/prior_revenue*100),
             'comparable_lines':lines,'unallocated_expense_change_crore':_plain(total_delta-explained),
+            'dominant_pressures':[{'label':line['label'],'change_crore':line['change_crore'],
+                'share_of_net_expense_increase_percent':_plain(Decimal(line['change_crore'])/total_delta*100) if total_delta else None}
+                for line in pressures[:3]],
+            'reliefs':[{'label':line['label'],'change_crore':line['change_crore']} for line in reliefs],
             'below_pbt_burden_change_crore':_plain(below_pbt_current-below_pbt_prior),
-            'meaning':f'Total expenses rose {_percent(expense_growth)} while revenue rose {_percent(revenue_growth)}. Costs therefore grew faster than sales, compressing profit before exceptional items and tax.',
+            'meaning':f'Total expenses rose {_percent(expense_growth)} while revenue rose {_percent(revenue_growth)}. Costs therefore grew faster than sales, compressing profit before exceptional items and tax.{cause_text}',
             'boundary':'The difference between PBT and PAT includes tax and may include other below-PBT effects; it is not labelled as tax alone.'}
 
 

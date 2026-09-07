@@ -11824,7 +11824,7 @@
       "quarterlyReview": {
         "items": [
           {
-            "id": "QUARTERLY-6ab206d6eccbe84d572f0996c18b4c6d1f17d87594868bde5f173d5274a53748",
+            "id": "QUARTERLY-1af7ca4ee6a747ef6aaa18b84ac428a6a7c5a90e86c3fbc73add25d395ca90aa",
             "period": "Q1-FY2027",
             "basis": "STANDALONE",
             "summary": "The four core figures agree across both readings and reconcile. Delivery provenance passes; reporting notes still require human review.",
@@ -11832,10 +11832,14 @@
               "revenue": "7743.55",
               "other_income": "48.76",
               "total_income": "7792.31",
+              "raw_materials": "4371.80",
               "traded_goods_purchases": "2665.60",
               "inventory_change": "-958.69",
               "employee_benefits": "244.14",
+              "finance_costs": "75.94",
+              "depreciation_amortisation": "88.03",
               "freight_distribution": "400.62",
+              "other_expenses": "399.53",
               "total_expenses": "7286.97",
               "pbt_before_exceptional": "505.34",
               "profit_before_tax": "505.34",
@@ -11887,12 +11891,57 @@
                 "pbt_margin_prior_percent": "9.78",
                 "comparable_lines": [
                   {
+                    "metric": "raw_materials",
+                    "label": "Raw materials",
+                    "current_crore": "4371.80",
+                    "prior_crore": "3604.26",
+                    "change_crore": "767.54",
+                    "change_percent": "21.30",
+                    "effect": "PRESSURE"
+                  },
+                  {
+                    "metric": "traded_goods_purchases",
+                    "label": "Purchases of traded goods",
+                    "current_crore": "2665.60",
+                    "prior_crore": "2347.54",
+                    "change_crore": "318.06",
+                    "change_percent": "13.55",
+                    "effect": "PRESSURE"
+                  },
+                  {
+                    "metric": "inventory_change",
+                    "label": "Inventory movement",
+                    "current_crore": "-958.69",
+                    "prior_crore": "-638.45",
+                    "change_crore": "-320.24",
+                    "change_percent": "-50.16",
+                    "effect": "RELIEF"
+                  },
+                  {
                     "metric": "employee_benefits",
                     "label": "Employee benefits",
                     "current_crore": "244.14",
                     "prior_crore": "217.32",
                     "change_crore": "26.82",
                     "change_percent": "12.34",
+                    "effect": "PRESSURE"
+                  },
+                  {
+                    "metric": "finance_costs",
+                    "label": "Finance costs",
+                    "current_crore": "75.94",
+                    "prior_crore": "65.28",
+                    "change_crore": "10.66",
+                    "change_percent": "16.33",
+                    "effect": "PRESSURE"
+                  },
+                  {
+                    "metric": "depreciation_amortisation",
+                    "label": "Depreciation and amortisation",
+                    "current_crore": "88.03",
+                    "prior_crore": "69.75",
+                    "change_crore": "18.28",
+                    "change_percent": "26.21",
                     "effect": "PRESSURE"
                   },
                   {
@@ -11903,11 +11952,43 @@
                     "change_crore": "48.44",
                     "change_percent": "13.75",
                     "effect": "PRESSURE"
+                  },
+                  {
+                    "metric": "other_expenses",
+                    "label": "Other expenses",
+                    "current_crore": "399.53",
+                    "prior_crore": "380.50",
+                    "change_crore": "19.03",
+                    "change_percent": "5.00",
+                    "effect": "PRESSURE"
                   }
                 ],
-                "unallocated_expense_change_crore": "813.33",
+                "unallocated_expense_change_crore": "0.00",
+                "dominant_pressures": [
+                  {
+                    "label": "Raw materials",
+                    "change_crore": "767.54",
+                    "share_of_net_expense_increase_percent": "86.38"
+                  },
+                  {
+                    "label": "Purchases of traded goods",
+                    "change_crore": "318.06",
+                    "share_of_net_expense_increase_percent": "35.79"
+                  },
+                  {
+                    "label": "Freight and distribution",
+                    "change_crore": "48.44",
+                    "share_of_net_expense_increase_percent": "5.45"
+                  }
+                ],
+                "reliefs": [
+                  {
+                    "label": "Inventory movement",
+                    "change_crore": "-320.24"
+                  }
+                ],
                 "below_pbt_burden_change_crore": "-47.93",
-                "meaning": "Total expenses rose 13.89% while revenue rose 10.60%. Costs therefore grew faster than sales, compressing profit before exceptional items and tax.",
+                "meaning": "Total expenses rose 13.89% while revenue rose 10.60%. Costs therefore grew faster than sales, compressing profit before exceptional items and tax. The largest confirmed increases were Raw materials (₹767.54 crore), Purchases of traded goods (₹318.06 crore). The largest offsetting relief was Inventory movement (₹320.24 crore).",
                 "boundary": "The difference between PBT and PAT includes tax and may include other below-PBT effects; it is not labelled as tax alone."
               },
               "conclusion": "Sales increased but profit fell, which points to margin pressure, higher costs or adverse one-offs requiring explanation. This is financial evidence, not an investment verdict.",
@@ -12138,7 +12219,7 @@
               ],
               "invalidCount": 0
             },
-            "queuePath": "C:\\Users\\RBI\\Desktop\\EIOS\\data\\runtime\\quarterly_intake\\9ed529593ae80c64f0e37f8029545a0efe1223f6f6a5eb3963ab4c613bbde079\\af22743ee8e2424aa4124c54b031b32a\\quarterly-candidates.json",
+            "queuePath": "C:\\Users\\RBI\\Desktop\\EIOS\\data\\runtime\\quarterly_intake\\9ed529593ae80c64f0e37f8029545a0efe1223f6f6a5eb3963ab4c613bbde079\\af22743ee8e2424aa4124c54b031b32a\\reconciled-triangulation-v1\\quarterly-candidates.json",
             "periodEnd": "2026-06-30",
             "sourceUrl": "https://www.coromandel.biz/wp-content/uploads/2026/07/Q1-results-1.pdf",
             "sourcePage": 1,
@@ -12283,7 +12364,7 @@
             "status": "HOLD_FOR_REPORTING_NOTE_REVIEW"
           },
           {
-            "id": "QUARTERLY-a15ea695fa65f4a3da4da0dc936d503a5af032c3eb4fc0b2346f79adc0162166",
+            "id": "QUARTERLY-33d33a2adb903622dbd8bb36522ceeb364256345f360c54a64222364120de9d4",
             "period": "Q1-FY2026",
             "basis": "STANDALONE",
             "summary": "The four core figures agree across both readings and reconcile. Delivery provenance passes; reporting notes still require human review.",
@@ -12291,10 +12372,14 @@
               "revenue": "7001.32",
               "other_income": "81.60",
               "total_income": "7082.92",
+              "raw_materials": "3604.26",
+              "traded_goods_purchases": "2347.54",
+              "inventory_change": "-638.45",
               "employee_benefits": "217.32",
               "finance_costs": "65.28",
               "depreciation_amortisation": "69.75",
               "freight_distribution": "352.18",
+              "other_expenses": "380.50",
               "total_expenses": "6398.38",
               "pbt_before_exceptional": "684.54",
               "pat": "508.23"
@@ -12546,7 +12631,7 @@
               ],
               "invalidCount": 0
             },
-            "queuePath": "C:\\Users\\RBI\\Desktop\\EIOS\\data\\runtime\\quarterly_intake\\9ed529593ae80c64f0e37f8029545a0efe1223f6f6a5eb3963ab4c613bbde079\\af22743ee8e2424aa4124c54b031b32a\\quarterly-candidates.json",
+            "queuePath": "C:\\Users\\RBI\\Desktop\\EIOS\\data\\runtime\\quarterly_intake\\9ed529593ae80c64f0e37f8029545a0efe1223f6f6a5eb3963ab4c613bbde079\\af22743ee8e2424aa4124c54b031b32a\\reconciled-triangulation-v1\\quarterly-candidates.json",
             "periodEnd": "2025-06-30",
             "sourceUrl": "https://www.coromandel.biz/wp-content/uploads/2026/07/Q1-results-1.pdf",
             "sourcePage": 1,
