@@ -18,6 +18,8 @@ from modules.company_intelligence.collection_outcome import describe_document_co
 from modules.company_intelligence.quarterly_source_retry import run_source_retries
 from modules.company_intelligence.automatic_official_document_pipeline import AutomaticOfficialDocumentPipeline
 from modules.company_intelligence.local_document_fallback_provider import LocalDocumentFallbackProvider
+from modules.company_intelligence.browser_capture_fallback_provider import BrowserCaptureFallbackProvider
+from modules.company_intelligence.official_document_fallback import ChainedOfficialDocumentFallback
 from modules.company_intelligence.company_document_archive import CompanyDocumentArchive
 from modules.external_intelligence.public_source_acquisition_ledger import PublicSourceAcquisitionLedger
 from modules.external_intelligence.public_document_extraction_ledger import PublicDocumentExtractionLedger
@@ -104,8 +106,10 @@ def main() -> int:
             review_queue_root=FACT_REVIEW_QUEUE_ROOT,
             source_manifest=None if config.offline_mode else json.loads(
                 (ROOT / 'data/company_intelligence/company_source_manifest.json').read_text(encoding='utf-8')),
-            fallback_provider=LocalDocumentFallbackProvider(
-                OFFICIAL_DOCUMENT_INBOX, workspace=ROOT, ledger=acquisition_ledger),
+            fallback_provider=ChainedOfficialDocumentFallback(
+                BrowserCaptureFallbackProvider(RUNTIME_DIR / "browser_source_capture", workspace=ROOT, ledger=acquisition_ledger),
+                LocalDocumentFallbackProvider(OFFICIAL_DOCUMENT_INBOX, workspace=ROOT, ledger=acquisition_ledger),
+            ),
         ).run(result.executed_jobs, result.results, cycle_id=started_at.isoformat(), acquired_at=started_at)
         status["official_documents"] = document_summary.__dict__
         status["collection_outcome"] = describe_document_collection(status["official_documents"])

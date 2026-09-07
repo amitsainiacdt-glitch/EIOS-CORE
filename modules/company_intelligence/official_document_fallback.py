@@ -38,7 +38,9 @@ def validate_fallback_delivery(result, *, requested_url: str):
     if provenance.requested_official_url != requested_url:
         raise ValueError("fallback delivery changed the requested official URL")
     scheme = urlsplit(provenance.delivery_url).scheme.casefold()
-    local_inbox = provenance.provider_id == "EIOS_GOVERNED_LOCAL_INBOX" and scheme == "eios-local"
+    local_inbox = provenance.provider_id in {
+        "EIOS_GOVERNED_LOCAL_INBOX", "EIOS_CORROBORATED_BROWSER_CAPTURE",
+    } and scheme == "eios-local"
     if scheme != "https" and not local_inbox:
         raise ValueError("fallback delivery must use HTTPS or the governed local inbox")
     receipt = result.receipt
@@ -51,4 +53,16 @@ def validate_fallback_delivery(result, *, requested_url: str):
     return result
 
 
-__all__ = ["FallbackAcquisitionResult", "OfficialDocumentDeliveryProvenance", "OfficialDocumentFallbackProvider", "validate_fallback_delivery"]
+class ChainedOfficialDocumentFallback:
+    def __init__(self, *providers):
+        self.providers = tuple(providers)
+
+    def acquire_after_failure(self, primary_result, **request):
+        for provider in self.providers:
+            result = provider.acquire_after_failure(primary_result, **request)
+            if result is not None:
+                return result
+        return None
+
+
+__all__ = ["ChainedOfficialDocumentFallback", "FallbackAcquisitionResult", "OfficialDocumentDeliveryProvenance", "OfficialDocumentFallbackProvider", "validate_fallback_delivery"]

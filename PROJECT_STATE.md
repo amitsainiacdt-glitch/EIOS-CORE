@@ -37,6 +37,14 @@
 - All 314 company-intelligence tests pass and the scheduled-cycle entry point compiles.
 - This makes browser/download-to-EIOS intake automatic once a source-backed file reaches the controlled inbox. Fully remote unattended acquisition still requires an accessible issuer/exchange route or an approved online provider implementation.
 
+## Corroborated browser captures connected to automatic cycle — 2026-09-07
+
+- The automatic company cycle can now reuse an EIOS-preserved browser capture after direct official HTTP acquisition fails, without requiring a duplicate manual inbox sidecar.
+- Eligibility requires one exact official-URL match, schema-valid provenance, `BROWSER_COPY_CORROBORATED_PENDING_REVIEW` status, an explicit non-approval flag, a confined preserved-file path and matching SHA-256.
+- Browser capture and governed inbox providers are chained deterministically. Their documents rejoin the ordinary archive/extraction/META/human-review pipeline and cannot approve facts or alter verdicts.
+- All 315 company-intelligence tests pass; the automatic-cycle entry point compiles.
+- Provider research confirmed that the examined Financial Datasets API is US/SEC-focused and is therefore not an adequate primary solution for EIOS's Indian-company coverage. No paid provider was connected or queried.
+
 ## 2026-09-02 — Local cash-flow extraction and review table
 
 - Added a fail-closed, page-scoped local PDF cash-flow extractor and Coromandel source mapping. Re-running `python scripts/extract_coromandel_cash_flow_history.py` extracts 48 source figures for FY2017-18 through FY2024-25 from six preserved reports. No network/provider call is used.
