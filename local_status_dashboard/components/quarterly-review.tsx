@@ -5,7 +5,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 type Review = { items: { id: string; period: string; basis: string; summary: string;
   figures: Record<string, string>; checks: { code: string; status: string; explanation: string }[];
   plainEnglish: { posture: string; headline: string; summary: string; figure_explanations: string[];
-    accounting_note_explanations: { topic: string; meaning: string; review_rationale: string }[]; conclusion: string; limitations: string[] };
+    accounting_note_explanations: { topic: string; meaning: string; review_rationale: string }[];
+    profit_bridge: null | { revenue_change_crore: string; pat_change_crore: string; pat_at_prior_margin_crore: string;
+      profit_gap_vs_prior_margin_crore: string; other_income_change_crore: string | null; meaning: string; not_yet_attributed: string[] };
+    conclusion: string; limitations: string[] };
   notChecked: string[]; sourceUrl: string | null; sourcePage: number; documentHash: string; assistantUnitReview: boolean;
   queuePath: string; periodEnd: string; reportingNotes: { items: { id: string; topic: string; page: number; passage: string; question: string;
     assistantDraft?: { explanation: string; status: string } | null;
@@ -44,6 +47,7 @@ export function QuarterlyReview({ review }: { review: Review }) {
         <h4 className="mt-2 text-lg font-semibold text-white">{item.plainEnglish.headline}</h4>
         <p className="mt-2 leading-7 text-slate-200">{item.plainEnglish.summary}</p>
         <ul className="mt-4 space-y-2">{item.plainEnglish.figure_explanations.map(text => <li key={text} className="flex gap-2 leading-7 text-slate-300"><span className="text-sky-300">•</span><span>{text}</span></li>)}</ul>
+        {item.plainEnglish.profit_bridge && <div className="mt-4 border-t border-white/10 pt-4"><p className="font-medium text-violet-200">Where the missing profit went — first bridge</p><div className="mt-3 grid gap-2 sm:grid-cols-2 xl:grid-cols-4"><Bridge label="Revenue change" value={item.plainEnglish.profit_bridge.revenue_change_crore} signed /><Bridge label="Profit change" value={item.plainEnglish.profit_bridge.pat_change_crore} signed /><Bridge label="Profit at old margin" value={item.plainEnglish.profit_bridge.pat_at_prior_margin_crore} /><Bridge label="Profit gap vs old margin" value={item.plainEnglish.profit_bridge.profit_gap_vs_prior_margin_crore} signed /></div><p className="mt-3 leading-7 text-slate-300">{item.plainEnglish.profit_bridge.meaning}</p><p className="mt-2 text-sm leading-6 text-amber-100">Not yet attributed: {item.plainEnglish.profit_bridge.not_yet_attributed.join('; ')}. EIOS will not invent the cause.</p></div>}
         {!!item.plainEnglish.accounting_note_explanations.length && <div className="mt-4 border-t border-white/10 pt-4"><p className="font-medium text-amber-200">Accounting notes translated</p>{item.plainEnglish.accounting_note_explanations.map((note,index) => <div key={`${note.topic}-${index}`} className="mt-2"><p className="leading-7 text-slate-300">{note.meaning}</p>{note.review_rationale && <p className="text-sm text-slate-500">Reviewer’s reason: {note.review_rationale}</p>}</div>)}</div>}
         <p className="mt-4 rounded-lg border border-white/10 bg-black/15 p-3 font-medium leading-7 text-white">EIOS conclusion: {item.plainEnglish.conclusion}</p>
       </section>
@@ -90,3 +94,4 @@ export function QuarterlyReview({ review }: { review: Review }) {
     </article>)}
   </section>;
 }
+function Bridge({label,value,signed=false}:{label:string;value:string;signed?:boolean}) { const number=Number(value); return <div className="rounded-lg border border-white/10 bg-black/15 p-3"><p className="text-xs text-slate-500">{label}</p><p className={`mt-1 font-semibold tabular-nums ${number < 0 ? 'text-rose-200':'text-emerald-200'}`}>{signed && number >= 0 ? '+' : ''}{number.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2})} cr</p></div> }

@@ -15,10 +15,14 @@ class QuarterlyPlainEnglishTests(unittest.TestCase):
         self.assertIn('10.00%',result['headline'])
 
     def test_growth_and_margin_are_explained_from_comparable_figures(self):
-        result=explain_quarterly_financials(assessment(), prior_comparable={'revenue':'80','pat':'6'})
+        result=explain_quarterly_financials(assessment(), prior_comparable={'revenue':'80','pat':'6','other_income':'4'})
         self.assertEqual(result['posture'],'COMPARATIVE_CONTEXT_AVAILABLE')
         self.assertIn('profit growing faster',result['summary'])
         self.assertTrue(any('percentage points' in text for text in result['figure_explanations']))
+        self.assertEqual(result['profit_bridge']['revenue_change_crore'],'20.00')
+        self.assertEqual(result['profit_bridge']['pat_at_prior_margin_crore'],'7.50')
+        self.assertEqual(result['profit_bridge']['profit_gap_vs_prior_margin_crore'],'2.50')
+        self.assertEqual(result['profit_bridge']['other_income_change_crore'],'1.00')
 
     def test_applies_note_is_explained_and_pending_note_is_disclosed(self):
         notes={'candidates':[{'topic':'IMPAIRMENT','human_review':{'decision':'APPLIES','rationale':'Current quarter'}},

@@ -17,7 +17,7 @@ def explain_quarterly_financials(assessment, reporting_notes=None, prior_compara
         return {'posture':'FIGURES_WITHHELD', 'headline':'The figures are not reliable enough to explain yet.',
                 'summary':'At least one extraction or arithmetic check failed. EIOS is withholding interpretation rather than guessing.',
                 'figure_explanations':[], 'accounting_note_explanations':[],
-                'conclusion':'No business conclusion can be drawn from this packet.', 'limitations':assessment.get('not_checked', [])}
+                'profit_bridge':None, 'conclusion':'No business conclusion can be drawn from this packet.', 'limitations':assessment.get('not_checked', [])}
     revenue, other, total, pat = (_decimal(figures[key], key) for key in ('revenue','other_income','total_income','pat'))
     margin = pat / revenue * 100 if revenue else None
     other_share = other / total * 100 if total else None
@@ -27,7 +27,7 @@ def explain_quarterly_financials(assessment, reporting_notes=None, prior_compara
         f'Other income was ₹{_money(other)} crore, about {_percent(other_share)} of total income. A low share means reported income is mostly linked to operations; it does not prove earnings quality.' if other_share is not None else 'Total income was zero, so the contribution from other income is not meaningful.',
         f'Revenue plus other income reconciles to total income of ₹{_money(total)} crore.',
     ]
-    posture, direction = 'SINGLE_PERIOD_CONTEXT_ONLY', 'The quarter provides a checked starting point, but not a trend.'
+    posture, direction, bridge = 'SINGLE_PERIOD_CONTEXT_ONLY', 'The quarter provides a checked starting point, but not a trend.', None
     if prior_comparable:
         prior_revenue = _decimal(prior_comparable.get('revenue'), 'prior revenue')
         prior_pat = _decimal(prior_comparable.get('pat'), 'prior profit')
@@ -36,6 +36,14 @@ def explain_quarterly_financials(assessment, reporting_notes=None, prior_compara
         explanations.append(f'Against the comparable period, revenue changed by {_signed(revenue_growth)} and profit changed by {_signed(profit_growth)}.')
         if margin is not None and prior_margin is not None:
             explanations.append(f'Net profit margin moved from {_percent(prior_margin)} to {_percent(margin)}, a change of {_signed_points(margin-prior_margin)} percentage points.')
+            expected_pat = revenue * prior_margin / 100
+            bridge = {'revenue_change_crore':_plain(revenue-prior_revenue),
+                      'pat_change_crore':_plain(pat-prior_pat),
+                      'pat_at_prior_margin_crore':_plain(expected_pat),
+                      'profit_gap_vs_prior_margin_crore':_plain(pat-expected_pat),
+                      'other_income_change_crore':_plain(other-_decimal(prior_comparable.get('other_income', '0'),'prior other income')) if 'other_income' in prior_comparable else None,
+                      'meaning':f'If the earlier {_percent(prior_margin)} net margin had continued, current revenue would have produced about ₹{_money(expected_pat)} crore profit. Actual profit was ₹{_money(pat)} crore, a {_gap_words(pat-expected_pat)} versus that benchmark.',
+                      'not_yet_attributed':['Raw-material and traded-goods costs','Inventory movement','Employee and operating expenses','Finance and depreciation','Tax, exceptional items and accounting adjustments']}
         posture = 'COMPARATIVE_CONTEXT_AVAILABLE'
         direction = _direction(revenue_growth, profit_growth, margin, prior_margin)
     notes, unresolved = [], 0
@@ -50,6 +58,7 @@ def explain_quarterly_financials(assessment, reporting_notes=None, prior_compara
         notes.append({'topic':'REVIEW_INCOMPLETE', 'meaning':f'{unresolved} reporting-note passage(s) still need a conclusive human applicability decision.', 'review_rationale':''})
     return {'posture':posture, 'headline':_headline(revenue, pat, margin),
             'summary':direction, 'figure_explanations':explanations, 'accounting_note_explanations':notes,
+            'profit_bridge':bridge,
             'conclusion':direction + ' This is financial evidence, not an investment verdict.',
             'limitations':assessment.get('not_checked', [])}
 
@@ -77,6 +86,8 @@ def _money(value): return f'{value:,.2f}'
 def _percent(value): return 'not meaningful' if value is None else f'{value:.2f}%'
 def _signed(value): return 'not measurable' if value is None else f'{value:+.2f}%'
 def _signed_points(value): return f'{value:+.2f}'
+def _plain(value): return format(value.quantize(Decimal('0.01')), 'f')
+def _gap_words(value): return f'₹{_money(abs(value))} crore shortfall' if value < 0 else f'₹{_money(value)} crore surplus'
 
 
 __all__=['explain_quarterly_financials']

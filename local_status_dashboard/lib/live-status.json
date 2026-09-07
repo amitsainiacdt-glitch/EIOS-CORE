@@ -11853,6 +11853,21 @@
                   "review_rationale": ""
                 }
               ],
+              "profit_bridge": {
+                "revenue_change_crore": "742.23",
+                "pat_change_crore": "-131.27",
+                "pat_at_prior_margin_crore": "562.11",
+                "profit_gap_vs_prior_margin_crore": "-185.15",
+                "other_income_change_crore": "-32.84",
+                "meaning": "If the earlier 7.26% net margin had continued, current revenue would have produced about ₹562.11 crore profit. Actual profit was ₹376.96 crore, a ₹185.15 crore shortfall versus that benchmark.",
+                "not_yet_attributed": [
+                  "Raw-material and traded-goods costs",
+                  "Inventory movement",
+                  "Employee and operating expenses",
+                  "Finance and depreciation",
+                  "Tax, exceptional items and accounting adjustments"
+                ]
+              },
               "conclusion": "Sales increased but profit fell, which points to margin pressure, higher costs or adverse one-offs requiring explanation. This is financial evidence, not an investment verdict.",
               "limitations": [
                 "Cash flow and balance sheet completeness",
@@ -12154,6 +12169,7 @@
                   "review_rationale": ""
                 }
               ],
+              "profit_bridge": null,
               "conclusion": "The quarter provides a checked starting point, but not a trend. This is financial evidence, not an investment verdict.",
               "limitations": [
                 "Cash flow and balance sheet completeness",

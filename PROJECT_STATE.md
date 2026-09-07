@@ -5895,3 +5895,10 @@ investment decision is created by this checkpoint.
 - The dashboard now selects only an exact prior-year quarter with the same accounting basis. For Q1 FY2027 it explains revenue growth of 10.60%, PAT decline of 25.83%, and net-margin compression from 7.26% to 4.87% (-2.39 percentage points). The conclusion is margin pressure requiring cost/one-off analysis, not an investment verdict.
 - The original and browser-equivalent duplicate periods are collapsed in presentation only when ticker, quarter, basis and all extracted values are identical. Source artifacts remain preserved.
 - The new packet contains two review candidates, both META-ready, and one held non-comparable column. No human approval, governed quarterly record, catalyst, verdict or trade was created.
+
+## Human-readable quarterly profit bridge (2026-09-07)
+
+- Added a transparent first-stage profit bridge to the quarterly explanation. It calculates revenue change, PAT change, the PAT that current revenue would have produced at the prior comparable net margin, and the signed gap between that benchmark and actual PAT. It does not attribute the gap to an expense line without extracted evidence.
+- For Coromandel Q1 FY2027 versus Q1 FY2026: revenue increased ₹742.23 crore, PAT decreased ₹131.27 crore, current revenue at the old 7.26% margin would imply about ₹562.11 crore PAT, and actual PAT of ₹376.96 crore is ₹185.15 crore below that benchmark. Other income also declined ₹32.84 crore but is not treated as a direct after-tax explanation.
+- The UI lists the still-unattributed possibilities—raw materials/traded goods, inventory movement, employees/operations, finance/depreciation, and tax/exceptional/accounting items—and states that EIOS will not invent the cause. Detailed expense-line extraction is the next dependency.
+- Validation remains all 337 company-intelligence tests passing; dashboard data regeneration succeeds. No review or verdict state changed.
