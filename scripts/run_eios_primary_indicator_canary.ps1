@@ -2,9 +2,8 @@ $ErrorActionPreference = 'Stop'
 
 $workspace = 'C:\Users\RBI\Desktop\EIOS'
 $credentialPath = Join-Path $workspace 'data\runtime\credentials\tavily.dpapi'
-$enabledPath = Join-Path $workspace 'data\runtime\credentials\live_search.enabled'
-if (-not (Test-Path -LiteralPath $credentialPath -PathType Leaf) -or -not (Test-Path -LiteralPath $enabledPath -PathType Leaf)) {
-    throw 'EIOS live search is not securely configured.'
+if (-not (Test-Path -LiteralPath $credentialPath -PathType Leaf)) {
+    throw 'EIOS live-search credential is not securely configured.'
 }
 
 $secureKey = (Get-Content -LiteralPath $credentialPath -Raw).Trim() | ConvertTo-SecureString

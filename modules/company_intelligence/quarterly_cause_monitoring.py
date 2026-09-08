@@ -66,6 +66,8 @@ def _validate(rule):
         if (not isinstance(groups,list) or not groups or
                 not all(isinstance(group,list) and group and all(isinstance(item,str) and item for item in group) for group in groups)):
             raise ValueError('match_term_groups must contain non-empty alias groups')
+    if 'collection_instruction' in rule and (not isinstance(rule['collection_instruction'],str) or not rule['collection_instruction'].strip()):
+        raise ValueError('collection_instruction must be a non-empty string')
 
 
 def _number(value):

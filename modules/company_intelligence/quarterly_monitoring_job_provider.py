@@ -26,10 +26,12 @@ def load_quarterly_monitoring_jobs(path=None):
             if job_id in seen:
                 raise ValueError(f'duplicate quarterly monitoring job: {job_id}')
             seen.add(job_id)
+            measurement_instruction = rule.get('collection_instruction','').strip()
             job = ResearchJob(
                 job_id=job_id, company=ticker.upper(), ticker=ticker.upper(),
                 question=(f"Check the latest official value and reporting date for {rule['indicator']}. "
-                          f"Use only the primary authority domain {rule['source_domain']}; retain the exact unit {rule['unit']} and source passage."),
+                          f"Use only the primary authority domain {rule['source_domain']}; retain the exact unit {rule['unit']} and source passage. "
+                          f"{measurement_instruction}").strip(),
                 intent='PRIMARY_INDICATOR_MONITORING', frequency_minutes=_frequency(rule['cadence']),
                 enabled=True, priority=95, max_sources=3,
                 observation_category='Primary Indicator Candidate', observation_confidence=70.0,

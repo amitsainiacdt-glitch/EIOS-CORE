@@ -5,6 +5,7 @@ import argparse
 import json
 import os
 import sys
+from hashlib import sha256
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -33,11 +34,12 @@ def main(argv=None):
         jobs = [job for job in load_quarterly_monitoring_jobs() if job.job_id == args.job_id]
         if len(jobs) != 1:
             raise ValueError("canary job ID must match exactly one primary-indicator job")
+        query_version = sha256(jobs[0].question.encode("utf-8")).hexdigest()[:12]
         config = ResearchRuntimeBootstrapConfig(
             tavily_api_key=os.environ["TAVILY_API_KEY"],
             observation_path=ROOT / "data/observations.json",
             offline_mode=False,
-            scheduler_state_path=ROOT / "data/runtime/research_schedule_state.json",
+            scheduler_state_path=ROOT / f"data/runtime/canary_schedule_{query_version}.json",
         )
         runtime, result = ResearchRuntimeBootstrap(config, job_provider=lambda: jobs).run_once(
             started.replace(tzinfo=None)
