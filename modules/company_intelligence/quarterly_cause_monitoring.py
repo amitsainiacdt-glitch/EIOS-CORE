@@ -57,6 +57,15 @@ def _validate(rule):
         raise ValueError('unit_aliases must be non-empty strings')
     if not isinstance(rule.get('match_terms'),list) or not rule['match_terms'] or not all(isinstance(item,str) and item for item in rule['match_terms']):
         raise ValueError('match_terms must be non-empty strings')
+    for key in ('accepted_postures','accepted_measurements'):
+        if key in rule and (not isinstance(rule[key],list) or not rule[key]
+                            or not all(isinstance(item,str) and item for item in rule[key])):
+            raise ValueError(f'{key} must be non-empty strings')
+    if 'match_term_groups' in rule:
+        groups=rule['match_term_groups']
+        if (not isinstance(groups,list) or not groups or
+                not all(isinstance(group,list) and group and all(isinstance(item,str) and item for item in group) for group in groups)):
+            raise ValueError('match_term_groups must contain non-empty alias groups')
 
 
 def _number(value):

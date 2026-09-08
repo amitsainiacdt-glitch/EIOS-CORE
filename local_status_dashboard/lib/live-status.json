@@ -12161,8 +12161,26 @@
                         "All India",
                         "rainfall deficit"
                       ],
+                      "match_term_groups": [
+                        [
+                          "All India",
+                          "All-India",
+                          "country as a whole"
+                        ],
+                        [
+                          "rainfall deficit",
+                          "seasonal rainfall",
+                          "rainfall departure"
+                        ]
+                      ],
+                      "accepted_postures": [
+                        "REALIZED"
+                      ],
+                      "accepted_measurements": [
+                        "DIRECT_DEFICIT"
+                      ],
                       "favourable_direction": "DOWN",
-                      "source_requirement": "India Meteorological Department primary release",
+                      "source_requirement": "India Meteorological Department primary release; realised observation only, not forecast or model range",
                       "source_domain": "mausam.imd.gov.in",
                       "cadence": "Weekly during crop season",
                       "improvement_meaning": "A falling deficit reduces one demand risk but must be checked against regional rain, reservoir and sowing data.",
@@ -12318,8 +12336,26 @@
                     "All India",
                     "rainfall deficit"
                   ],
+                  "match_term_groups": [
+                    [
+                      "All India",
+                      "All-India",
+                      "country as a whole"
+                    ],
+                    [
+                      "rainfall deficit",
+                      "seasonal rainfall",
+                      "rainfall departure"
+                    ]
+                  ],
+                  "accepted_postures": [
+                    "REALIZED"
+                  ],
+                  "accepted_measurements": [
+                    "DIRECT_DEFICIT"
+                  ],
                   "favourable_direction": "DOWN",
-                  "source_requirement": "India Meteorological Department primary release",
+                  "source_requirement": "India Meteorological Department primary release; realised observation only, not forecast or model range",
                   "source_domain": "mausam.imd.gov.in",
                   "cadence": "Weekly during crop season",
                   "improvement_meaning": "A falling deficit reduces one demand risk but must be checked against regional rain, reservoir and sowing data.",

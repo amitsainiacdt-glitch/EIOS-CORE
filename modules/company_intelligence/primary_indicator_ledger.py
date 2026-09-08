@@ -81,10 +81,21 @@ def extract_primary_indicator(observation, rule, *, ticker):
     aliases=rule.get('unit_aliases',[])
     if not aliases: return {'status':'HELD_UNIT_CONFIGURATION'}
     unit_pattern='|'.join(re.escape(alias) for alias in aliases)
-    numbers=[]
+    numbers=[]; rejected_postures=set(); rejected_measurements=set()
     for match in re.finditer(rf'(?P<value>-?\d[\d,]*(?:\.\d+)?)\s*(?P<unit>{unit_pattern})(?!\w)',text,re.I):
-        window=text[max(0,match.start()-180):min(len(text),match.end()+180)].casefold()
-        if all(term.casefold() in window for term in rule.get('match_terms',[])): numbers.append(match)
+        window=text[max(0,match.start()-180):min(len(text),match.end()+180)]
+        if not _context_matches(window,rule): continue
+        posture=_measurement_posture(window)
+        measurement=_measurement_role(text,match)
+        if rule.get('accepted_postures') and posture not in rule['accepted_postures']:
+            rejected_postures.add(posture); continue
+        if rule.get('accepted_measurements') and measurement not in rule['accepted_measurements']:
+            rejected_measurements.add(measurement); continue
+        numbers.append(match)
+    if not numbers and rejected_postures:
+        return {'status':'HELD_MEASUREMENT_POSTURE_MISMATCH','detectedPostures':sorted(rejected_postures)}
+    if not numbers and rejected_measurements:
+        return {'status':'HELD_MEASUREMENT_ROLE_MISMATCH','detectedMeasurements':sorted(rejected_measurements)}
     if len(numbers)!=1: return {'status':'HELD_VALUE_AMBIGUOUS','candidateCount':len(numbers)}
     match=numbers[0]
     passage=text[max(0,match.start()-180):min(len(text),match.end()+180)].strip()
@@ -123,6 +134,35 @@ def _extract_dates(text):
 def _extract_header_dates(header):
     marker=re.search(r'(?i)(?:press\s+release\s+)?(?:date|dated|दिन\s*ांक|तारीख)\s*[:：]?\s*(.{0,45})',header)
     return _extract_dates(marker.group(1)) if marker else []
+
+
+def _context_matches(window,rule):
+    lowered=window.casefold()
+    groups=rule.get('match_term_groups')
+    if groups:
+        return all(any(alias.casefold() in lowered for alias in group) for group in groups)
+    return all(term.casefold() in lowered for term in rule.get('match_terms',[]))
+
+
+def _measurement_posture(window):
+    lowered=window.casefold()
+    if any(term in lowered for term in ('forecast','likely to be','expected','model error','probability')):
+        return 'FORECAST'
+    if any(term in lowered for term in ('observed','actual','realised','realized','recorded','cumulative','departure')):
+        return 'REALIZED'
+    return 'UNSPECIFIED'
+
+
+def _measurement_role(text,match):
+    nearby=text[max(0,match.start()-45):min(len(text),match.end()+45)].casefold()
+    before=text[max(0,match.start()-20):match.start()]
+    if '±' in nearby or 'model error' in nearby: return 'UNCERTAINTY'
+    if re.search(r'\d+(?:\.\d+)?\s*[-–]\s*$',before): return 'RANGE_BOUND'
+    if re.search(r'(?i)of\s+(?:the\s+)?(?:long\s+period\s+average|lpa)',text[match.end():match.end()+55]):
+        return 'PERCENT_OF_LPA'
+    if any(term in nearby for term in ('deficit','below lpa','below the lpa','below long-period average','below the long-period average')):
+        return 'DIRECT_DEFICIT'
+    return 'UNCLASSIFIED'
 
 
 def attach_indicator_record_state(plan, ledger):

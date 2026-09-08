@@ -40,6 +40,29 @@ class PrimaryIndicatorLedgerTests(unittest.TestCase):
             'Between 2026-06-30 and 2026-07-01 phosphoric acid settled at 1700 USD/t.'),RULE,ticker='TEST')
         self.assertEqual('HELD_REPORTING_DATE_AMBIGUOUS',result['status'])
 
+    def test_forecast_percentage_cannot_enter_realized_deficit_history(self):
+        rainfall={**RULE,'id':'rain','unit':'percent below long-period average','unit_aliases':['%'],
+                  'source_domain':'issuer.example.com','match_terms':['All India','rainfall deficit'],
+                  'match_term_groups':[['All India','country as a whole'],['seasonal rainfall','rainfall deficit']],
+                  'accepted_postures':['REALIZED'],'accepted_measurements':['DIRECT_DEFICIT']}
+        item=observation('PRESS RELEASE Date: 14.04.2026 The forecast says seasonal rainfall over the country as a whole is likely to be 92% of LPA with a model error of ± 5%.')
+        item.provenance=ObservationProvenance(job_id='TEST-PRIMARY-INDICATOR-RAIN',research_intent='PRIMARY_INDICATOR_MONITORING',
+            source_domain='issuer.example.com',source_quality_tier='TIER_1',content_fingerprint='a'*64)
+        result=extract_primary_indicator(item,rainfall,ticker='TEST')
+        self.assertEqual('HELD_MEASUREMENT_POSTURE_MISMATCH',result['status'])
+        self.assertEqual(['FORECAST'],result['detectedPostures'])
+
+    def test_realized_direct_deficit_is_eligible(self):
+        rainfall={**RULE,'id':'rain','unit':'percent below long-period average','unit_aliases':['%'],
+                  'match_terms':['All India','rainfall deficit'],
+                  'accepted_postures':['REALIZED'],'accepted_measurements':['DIRECT_DEFICIT']}
+        item=observation('On 2026-09-07 the observed All India seasonal rainfall deficit was 8% below LPA.')
+        item.provenance=ObservationProvenance(job_id='TEST-PRIMARY-INDICATOR-RAIN',research_intent='PRIMARY_INDICATOR_MONITORING',
+            source_domain='issuer.example.com',source_quality_tier='TIER_1',content_fingerprint='a'*64)
+        result=extract_primary_indicator(item,rainfall,ticker='TEST')
+        self.assertEqual('READY_TO_RECORD',result['status'])
+        self.assertEqual('8',result['candidate']['value'])
+
     def test_ledger_compares_like_rule_and_never_changes_verdict(self):
         with tempfile.TemporaryDirectory() as folder:
             ledger=PrimaryIndicatorLedger(Path(folder)/'records.jsonl')
