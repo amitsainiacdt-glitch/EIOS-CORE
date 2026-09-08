@@ -3,6 +3,7 @@
 from datetime import datetime, timezone
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
 from modules.external_intelligence.public_source_acquisition_ledger import PublicSourceAcquisitionLedger
 from modules.external_intelligence.trusted_public_acquisition_adapter import TrustedPublicAcquisitionAdapter
@@ -135,6 +136,19 @@ def main():
         assert india.resolve("https://dfpd.gov.in/allocation-of-food-grains/en").source_id == "FOOD_DISTRIBUTION_DEPARTMENT"
 
         assert len(ledger.read_all()) == 5
+
+        default_calls = []
+        with patch(
+            "modules.external_intelligence.trusted_public_acquisition_adapter.requests.get",
+            side_effect=lambda url, **kwargs: default_calls.append((url, kwargs)) or Response(200, body=b"pdf"),
+        ):
+            response = TrustedPublicAcquisitionAdapter._public_http_get(
+                "https://exchange.example.com/public/a.pdf", timeout=15, allow_redirects=False
+            )
+        assert response.status_code == 200
+        assert default_calls[0][1]["allow_redirects"] is False
+        assert "application/pdf" in default_calls[0][1]["headers"]["Accept"]
+        assert "EIOS-PublicResearch" in default_calls[0][1]["headers"]["User-Agent"]
 
     print("TRUSTED PUBLIC ACQUISITION ADAPTER: ALL TESTS PASSED")
 

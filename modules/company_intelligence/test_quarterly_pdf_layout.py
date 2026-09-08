@@ -27,6 +27,12 @@ class QuarterlyPdfLayoutTests(unittest.TestCase):
         self.assertEqual(classify_table(words)['kind'], 'MAIN_STATEMENT_CANDIDATE')
         self.assertEqual(classify_table(words[1:])['kind'], 'UNKNOWN_TABLE')
 
+    def test_main_statement_accepts_profit_for_period_label(self):
+        words = [word('Statement of Consolidated Unaudited Financial Results', 0, 1),
+                 word('Revenue from operations', 0, 10), word('Total income', 0, 20),
+                 word('Profit for the period/year', 0, 30)]
+        self.assertEqual(classify_table(words)['kind'], 'MAIN_STATEMENT_CANDIDATE')
+
     def test_unknown_text_does_not_grant_mapping(self):
         self.assertFalse(classify_table([word('Revenue from operations', 0, 1)])['eligible_for_company_financial_mapping'])
 
@@ -42,3 +48,11 @@ class QuarterlyPdfLayoutTests(unittest.TestCase):
 
     def test_no_header_does_not_guess_columns(self):
         self.assertEqual(column_candidates([word('Revenue from operations', 5, 30)]), [])
+
+    def test_complete_dates_are_column_anchors(self):
+        words = [word('30.06.2026', 100, 10, 35), word('30.06.2025', 160, 10, 35),
+                 word('Revenue from operations', 5, 30, 65), word('100', 110, 30), word('90', 170, 30),
+                 word('Profit for the period/year', 5, 40, 70), word('8', 110, 40), word('7', 170, 40)]
+        columns = column_candidates(words)
+        self.assertEqual(len(columns), 2)
+        self.assertEqual(columns[0]['cells'][1]['row_label'], 'Profit for the period/year')

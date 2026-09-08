@@ -28,16 +28,29 @@ class TrustedPublicAcquisitionResult:
 class TrustedPublicAcquisitionAdapter:
     REDIRECT_STATUSES = {301, 302, 303, 307, 308}
 
-    def __init__(self, registry, ledger, *, transport=requests.get, address_resolver=None, clock=None, timeout=15.0, max_redirects=5):
+    def __init__(self, registry, ledger, *, transport=None, address_resolver=None, clock=None, timeout=15.0, max_redirects=5):
         if not isinstance(registry, TrustedPublicSourceRegistry): raise ValueError("registry must be a TrustedPublicSourceRegistry")
         if not isinstance(ledger, PublicSourceAcquisitionLedger): raise ValueError("ledger must be a PublicSourceAcquisitionLedger")
         if timeout <= 0: raise ValueError("timeout must be positive")
         if isinstance(max_redirects, bool) or not isinstance(max_redirects, int) or max_redirects < 0: raise ValueError("max_redirects must be a non-negative integer")
         self.registry, self.ledger = registry, ledger
-        self.transport = transport
+        self.transport = transport or self._public_http_get
         self.address_resolver = address_resolver or self._resolve_addresses
         self.clock = clock or (lambda: datetime.now(timezone.utc))
         self.timeout, self.max_redirects = float(timeout), max_redirects
+
+    @staticmethod
+    def _public_http_get(url, *, timeout, allow_redirects):
+        """Identify the retriever normally without weakening source controls."""
+        return requests.get(
+            url,
+            timeout=timeout,
+            allow_redirects=allow_redirects,
+            headers={
+                "User-Agent": "Mozilla/5.0 (compatible; EIOS-PublicResearch/1.0)",
+                "Accept": "application/pdf,text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+            },
+        )
 
     def acquire(self, *, acquisition_id, cycle_id, job_id, research_intent, url, recorder, requested_at=None, source_document_id=None):
         requested_at = requested_at or self.clock()

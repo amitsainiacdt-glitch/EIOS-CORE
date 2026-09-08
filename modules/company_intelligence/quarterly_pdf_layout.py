@@ -26,7 +26,8 @@ def classify_table(words):
                 'reason': 'Segment headings precede the revenue rows.'}
     if (re.search(r'statement of .*?financial results', header, re.I)
             and all(re.search(pattern, text, re.I) for pattern in
-                    ('revenue from operations', 'total income', 'net profit after tax'))):
+                    ('revenue from operations', 'total income',
+                     r'(?:net profit after tax|profit for the (?:period|quarter|period/year))'))):
         return {'kind': 'MAIN_STATEMENT_CANDIDATE', 'eligible_for_company_financial_mapping': True,
                 'reason': 'Financial-results heading and core statement rows are present; not approval.'}
     return {'kind': 'UNKNOWN_TABLE', 'eligible_for_company_financial_mapping': False,
@@ -39,7 +40,9 @@ def column_candidates(words):
     if revenue is None:
         return []
     header_rows = [row for row in rows if row[0]['top'] < revenue[0]['top']]
-    year_rows = [(row, [w for w in row if re.fullmatch(r'20\d{2}', w['text'])]) for row in header_rows]
+    # Issuers commonly print either a bare year or a complete period-end date
+    # in one positioned PDF token. Both are valid geometric column anchors.
+    year_rows = [(row, [w for w in row if re.search(r'(?:^|\D)20\d{2}(?:\D|$)', w['text'])]) for row in header_rows]
     eligible = [(row, years) for row, years in year_rows if len(years) >= 2]
     if not eligible:
         return []
@@ -61,7 +64,7 @@ def column_candidates(words):
             if row[0]['top'] < revenue[0]['top']:
                 continue
             label = ' '.join(w['text'] for w in row if w['x1'] < edges[0])
-            if not re.search(r'revenue from operations|other income|total income|net profit after tax|cost of raw materials|purchases of traded goods|changes in inventories|employee benefits|finance costs|depreciation and amortisation|distribution expense|other expenses|total expenses|profit before exceptional items and tax|profit before tax', label, re.I):
+            if not re.search(r'revenue from operations|other income|total income|net profit after tax|profit for the (?:period|quarter|period/year)|cost of raw materials|cost of materials consumed|purchases of traded goods|changes in inventories|employee benefits|finance costs|depreciation and amortisation|distribution expense|other expenses|total expenses|profit before exceptional items and tax|profit before tax', label, re.I):
                 continue
             selected = within(row)
             cells.append({'row_label': label, 'raw_text': ' '.join(w['text'] for w in selected),
