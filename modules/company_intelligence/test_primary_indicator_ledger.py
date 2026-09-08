@@ -26,6 +26,20 @@ class PrimaryIndicatorLedgerTests(unittest.TestCase):
         result=extract_primary_indicator(observation('On 2026-06-30 phosphoric acid was 1700 USD/t, previously 1360 USD/t.'),RULE,ticker='TEST')
         self.assertEqual('HELD_VALUE_AMBIGUOUS',result['status'])
 
+    def test_unique_header_date_is_used_when_other_document_dates_are_irrelevant(self):
+        text=('PRESS RELEASE Date: 14.04.2026 ' + ('background context ' * 35) +
+              'phosphoric acid settled at 1700 USD/t for the reported quarter. ' +
+              ('historical discussion ' * 20) + 'Archived update 2025-01-01.')
+        result=extract_primary_indicator(observation(text),RULE,ticker='TEST')
+        self.assertEqual('READY_TO_RECORD',result['status'])
+        self.assertEqual('2026-04-14',result['candidate']['reporting_date'])
+        self.assertEqual('DOCUMENT_HEADER',result['dateBasis'])
+
+    def test_two_dates_inside_indicator_passage_remain_held(self):
+        result=extract_primary_indicator(observation(
+            'Between 2026-06-30 and 2026-07-01 phosphoric acid settled at 1700 USD/t.'),RULE,ticker='TEST')
+        self.assertEqual('HELD_REPORTING_DATE_AMBIGUOUS',result['status'])
+
     def test_ledger_compares_like_rule_and_never_changes_verdict(self):
         with tempfile.TemporaryDirectory() as folder:
             ledger=PrimaryIndicatorLedger(Path(folder)/'records.jsonl')

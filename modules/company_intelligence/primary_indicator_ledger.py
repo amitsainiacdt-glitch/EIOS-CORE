@@ -71,15 +71,13 @@ class PrimaryIndicatorLedger:
 
 
 def extract_primary_indicator(observation, rule, *, ticker):
-    """Extract only one context-bound value and one explicit ISO reporting date."""
+    """Extract one value and a date bound to its passage or bulletin header."""
     provenance=getattr(observation,'provenance',None)
     expected_job=f"{ticker.upper()}-PRIMARY-INDICATOR-{rule['id'].upper()}"
     if (not provenance or provenance.job_id!=expected_job or provenance.research_intent!='PRIMARY_INDICATOR_MONITORING'
             or provenance.source_quality_tier!='TIER_1' or (provenance.source_domain or '').casefold()!=rule['source_domain']):
         return {'status':'HELD_SOURCE_BINDING'}
     text=observation.description
-    dates=sorted(set(re.findall(r'\b20\d{2}-\d{2}-\d{2}\b',text)))
-    if len(dates)!=1: return {'status':'HELD_REPORTING_DATE_AMBIGUOUS'}
     aliases=rule.get('unit_aliases',[])
     if not aliases: return {'status':'HELD_UNIT_CONFIGURATION'}
     unit_pattern='|'.join(re.escape(alias) for alias in aliases)
@@ -89,14 +87,42 @@ def extract_primary_indicator(observation, rule, *, ticker):
         if all(term.casefold() in window for term in rule.get('match_terms',[])): numbers.append(match)
     if len(numbers)!=1: return {'status':'HELD_VALUE_AMBIGUOUS','candidateCount':len(numbers)}
     match=numbers[0]
+    passage=text[max(0,match.start()-180):min(len(text),match.end()+180)].strip()
+    local_dates=_extract_dates(passage)
+    date_basis='LOCAL_INDICATOR_PASSAGE'
+    if len(local_dates)==0:
+        local_dates=_extract_header_dates(text[:600])
+        date_basis='DOCUMENT_HEADER'
+    if len(local_dates)!=1:
+        return {'status':'HELD_REPORTING_DATE_AMBIGUOUS','candidateCount':len(local_dates)}
     try: value=Decimal(match.group('value').replace(',',''))
     except InvalidOperation: return {'status':'HELD_VALUE_INVALID'}
     if not value.is_finite(): return {'status':'HELD_VALUE_INVALID'}
-    passage=text[max(0,match.start()-180):min(len(text),match.end()+180)].strip()
     return {'status':'READY_TO_RECORD','candidate':{'rule_id':rule['id'],'job_id':expected_job,'ticker':ticker.upper(),
-        'reporting_date':dates[0],'value':format(value,'f'),'unit':rule['unit'],'source_url':observation.source,
+        'reporting_date':local_dates[0],'value':format(value,'f'),'unit':rule['unit'],'source_url':observation.source,
         'source_domain':rule['source_domain'],'evidence_passage':passage,
-        'content_fingerprint':provenance.content_fingerprint}}
+        'content_fingerprint':provenance.content_fingerprint},'dateBasis':date_basis}
+
+
+_MONTHS={name.lower():number for number,name in enumerate(
+    ('January','February','March','April','May','June','July','August','September','October','November','December'),1)}
+
+
+def _extract_dates(text):
+    dates=set(re.findall(r'\b20\d{2}-\d{2}-\d{2}\b',text))
+    for day,month,year in re.findall(r'\b(0?[1-9]|[12]\d|3[01])[./-](0?[1-9]|1[0-2])[./-](20\d{2})\b',text):
+        try: dates.add(datetime(int(year),int(month),int(day)).date().isoformat())
+        except ValueError: pass
+    month_names='|'.join(_MONTHS)
+    for day,month,year in re.findall(rf'\b(0?[1-9]|[12]\d|3[01])(?:st|nd|rd|th)?\s+({month_names}),?\s+(20\d{{2}})\b',text,re.I):
+        try: dates.add(datetime(int(year),_MONTHS[month.casefold()],int(day)).date().isoformat())
+        except ValueError: pass
+    return sorted(dates)
+
+
+def _extract_header_dates(header):
+    marker=re.search(r'(?i)(?:press\s+release\s+)?(?:date|dated|दिन\s*ांक|तारीख)\s*[:：]?\s*(.{0,45})',header)
+    return _extract_dates(marker.group(1)) if marker else []
 
 
 def attach_indicator_record_state(plan, ledger):
