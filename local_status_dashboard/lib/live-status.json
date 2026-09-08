@@ -12365,10 +12365,10 @@
                   "cause_id": "coromandel-q1fy27-rainfall",
                   "cause": "Rainfall deficit created a near-term demand risk",
                   "cause_effect": "CONTEXT",
-                  "latest_signal": "AWAITING_COMPARABLE_OBSERVATION",
-                  "record_count": 1,
+                  "latest_signal": "UNCHANGED",
+                  "record_count": 2,
                   "latest_value": "14",
-                  "latest_date": "2026-09-07"
+                  "latest_date": "2026-09-08"
                 },
                 {
                   "id": "india-crop-sowing-area",
@@ -13455,7 +13455,7 @@
         ]
       },
       "intelligenceSnapshot": {
-        "generatedAt": "2026-09-08T08:03:05.581975+00:00",
+        "generatedAt": "2026-09-08T13:13:05.096890+00:00",
         "verdictStatus": "RESEARCH_HOLD",
         "verdict": null,
         "confidencePercent": null,

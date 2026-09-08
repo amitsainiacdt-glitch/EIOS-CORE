@@ -3,9 +3,10 @@ param([switch]$CheckOnly, [switch]$NoBrowser, [switch]$Rebuild)
 $ErrorActionPreference = 'Stop'
 
 $dashboardBaseUrl = 'http://localhost:3000/'
-# The desktop shortcut already targets this script. Open the current working
-# graph section, with a fresh navigation key rather than an old home tab.
-$dashboardUrl = 'http://localhost:3000/companies/coromandel?charts=3&desktopRefresh=' + [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds() + '#financial-trends'
+# The desktop shortcut targets this launcher. A fresh navigation key prevents
+# an old browser tab from masking the current dashboard build. Open the
+# quarterly intelligence section, where governed monitoring values are shown.
+$dashboardUrl = 'http://localhost:3000/companies/coromandel?desktopVersion=4&desktopRefresh=' + [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds() + '#quarterly-review'
 $workspaceDirectory = Split-Path -Parent $PSScriptRoot
 $dashboardDirectory = Join-Path $workspaceDirectory 'local_status_dashboard'
 $logDirectory = Join-Path $workspaceDirectory 'data\runtime\desktop'

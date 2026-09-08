@@ -35,6 +35,10 @@ class ImdRainfallPdfIndicatorTests(unittest.TestCase):
         self.assertEqual('1', result['cumulative_departure'])
         self.assertEqual('0', result['deficit_magnitude'])
 
+    def test_accepts_imd_whole_percent_rounding(self):
+        result = parse_imd_country_rainfall_pdf_text(TEXT.replace('642.9 748.3 -14% N', '645.5 754.5 -14% N'))
+        self.assertEqual('14', result['deficit_magnitude'])
+
 
 if __name__ == '__main__':
     unittest.main()

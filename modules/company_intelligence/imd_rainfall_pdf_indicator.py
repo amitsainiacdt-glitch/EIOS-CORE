@@ -45,7 +45,9 @@ def parse_imd_country_rainfall_pdf_text(text: str) -> dict:
     if values['cumulative_normal'] <= 0:
         raise ValueError('IMD cumulative normal rainfall must be positive')
     calculated = ((values['cumulative_actual'] - values['cumulative_normal']) / values['cumulative_normal'] * 100)
-    if abs(calculated - values['cumulative_departure']) > Decimal('0.15'):
+    # IMD publishes departure as a whole percentage in this table. Permit only
+    # the maximum half-point difference introduced by nearest-integer rounding.
+    if abs(calculated - values['cumulative_departure']) > Decimal('0.51'):
         raise ValueError('IMD cumulative departure does not reconcile to actual and normal rainfall')
     deficit = max(Decimal('0'), -values['cumulative_departure'])
     passage = ' '.join(row.group(0).split())

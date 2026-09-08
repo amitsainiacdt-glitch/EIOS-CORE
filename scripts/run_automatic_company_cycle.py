@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT))
 from modules.company_intelligence.company_coverage_job_provider import load_company_coverage_jobs
 from modules.company_intelligence.quarterly_monitoring_job_provider import load_quarterly_monitoring_jobs
 from modules.company_intelligence.primary_indicator_cycle import process_primary_indicator_observations
+from modules.company_intelligence.automatic_imd_rainfall_monitor import run_automatic_imd_rainfall_monitor
 from modules.company_intelligence.review_memory_report import build_review_memory_report
 from modules.company_intelligence.collection_outcome import describe_document_collection
 from modules.company_intelligence.quarterly_source_retry import run_source_retries
@@ -102,6 +103,10 @@ def main() -> int:
         status['primary_indicators'] = process_primary_indicator_observations(
             runtime.observation_registry.all(), ledger_path=ROOT / 'data/company_intelligence/primary_indicator_records.jsonl',
             recorded_at=started_at)
+        # Direct official-asset monitoring is independent of paid search. It is
+        # internally weekly-cadenced and records only a hash-bound IMD baseline
+        # or comparison; it cannot promote a catalyst or alter the verdict.
+        status['official_indicator_assets'] = run_automatic_imd_rainfall_monitor(ROOT, now=started_at)
 
         acquisition_ledger = PublicSourceAcquisitionLedger(DOCUMENT_ACQUISITION_LEDGER)
         document_summary = AutomaticOfficialDocumentPipeline(
