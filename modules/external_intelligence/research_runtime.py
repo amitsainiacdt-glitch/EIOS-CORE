@@ -122,6 +122,7 @@ class ResearchRuntime:
         context: ResearchContext | None = None,
         enable_historical_comparison: bool = False,
         historical_comparison_audit_path: str | Path | None = None,
+        scheduler_state_path: str | Path | None = None,
     ) -> None:
 
         self.historical_comparison_enabled = bool(
@@ -234,7 +235,7 @@ class ResearchRuntime:
         # RESEARCH EXECUTION
         # ==================================================
 
-        self.scheduler = ResearchScheduler()
+        self.scheduler = ResearchScheduler(state_path=scheduler_state_path)
 
         self.registry = ResearchJobRegistry()
 

@@ -13417,7 +13417,7 @@
         ]
       },
       "intelligenceSnapshot": {
-        "generatedAt": "2026-09-07T09:07:11.085076+00:00",
+        "generatedAt": "2026-09-08T05:09:02.025220+00:00",
         "verdictStatus": "RESEARCH_HOLD",
         "verdict": null,
         "confidencePercent": null,
@@ -13616,20 +13616,20 @@
   "nonAuthorityStatement": "Research readiness only; not a Signal, Catalyst, Opportunity, recommendation, position, or trade.",
   "runtime": {
     "status": "SUCCESS",
-    "startedAt": "2026-09-07T09:03:55.298203+00:00",
-    "finishedAt": "2026-09-07T09:07:11.349580+00:00",
-    "jobCount": 22,
-    "executedJobs": 22,
+    "startedAt": "2026-09-08T05:09:00.680571+00:00",
+    "finishedAt": "2026-09-08T05:09:02.041478+00:00",
+    "jobCount": 28,
+    "executedJobs": 28,
     "observationCount": 94,
     "errors": [],
     "collectionOutcome": {
-      "status": "COLLECTION_NEEDS_ATTENTION",
-      "message": "0 documents extracted; 7 failed and 0 held for review.",
+      "status": "NO_DOCUMENTS_EXTRACTED",
+      "message": "No documents were extracted. A completed run does not prove fresh company data was obtained.",
       "counts": {
-        "candidates_seen": 20,
+        "candidates_seen": 0,
         "archived": 0,
         "unchanged": 0,
-        "failed": 7,
+        "failed": 0,
         "extracted": 0,
         "fact_candidates_queued": 0,
         "extraction_holds": 0
@@ -13637,10 +13637,10 @@
       "new_facts_approved": false
     },
     "acquisition": {
-      "candidatesSeen": 20,
+      "candidatesSeen": 0,
       "documentsArchived": 0,
       "documentsExtracted": 0,
-      "failures": 7,
+      "failures": 0,
       "fallbackAttempted": 0,
       "fallbackRetrieved": 0,
       "fallbackUnavailable": 0,

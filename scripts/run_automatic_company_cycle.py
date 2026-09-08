@@ -123,7 +123,6 @@ def main() -> int:
         # they do not approve evidence or manufacture a verdict.
         build_coromandel_study()
         build_coromandel_snapshot()
-        sync_dashboard()
         status["status"] = "SUCCESS"
         return 0
     except Exception as exc:
@@ -135,6 +134,11 @@ def main() -> int:
         status["finished_at"] = datetime.now(timezone.utc).isoformat()
         write_status(status)
         LOCK_PATH.unlink(missing_ok=True)
+        try:
+            sync_dashboard()
+        except Exception as dashboard_exc:
+            status["dashboard_sync_error"] = f"{type(dashboard_exc).__name__}: {dashboard_exc}"
+            write_status(status)
 
 
 if __name__ == "__main__":

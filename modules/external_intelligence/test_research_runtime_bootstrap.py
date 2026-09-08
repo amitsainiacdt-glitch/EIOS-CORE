@@ -84,6 +84,7 @@ def main() -> None:
     assert config.tavily_api_key == "test-key"
     assert config.observation_path == Path("data/test.json")
     assert config.enable_historical_comparison is True
+    assert config.scheduler_state_path == Path("data/runtime/research_schedule_state.json")
 
     bootstrap = ResearchRuntimeBootstrap(
         config,
@@ -101,9 +102,24 @@ def main() -> None:
     assert runtime.kwargs == {
         "observation_path": Path("data/test.json"),
         "tavily_api_key": "test-key",
+        "offline_mode": False,
         "enable_historical_comparison": True,
+        "scheduler_state_path": Path("data/runtime/research_schedule_state.json"),
     }
     assert len(runtime.jobs) == 1
+
+    offline_runtime = ResearchRuntimeBootstrap(
+        ResearchRuntimeBootstrapConfig(
+            tavily_api_key="",
+            observation_path=Path("data/offline-test.json"),
+            offline_mode=True,
+            scheduler_state_path=Path("data/runtime/should-not-advance.json"),
+        ),
+        runtime_factory=FakeRuntime,
+        job_provider=lambda: [make_job()],
+        dependency_checker=lambda name: True,
+    ).build()
+    assert "scheduler_state_path" not in offline_runtime.kwargs
 
     run_time = datetime(2026, 8, 20, 12, 0, 0)
     runtime, result = bootstrap.run_once(run_time)
@@ -120,7 +136,7 @@ def main() -> None:
         dependency_checker=lambda name: False,
     ).validate()
     assert missing.ready is False
-    assert len(missing.errors) == 2
+    assert missing.errors == ("Python dependency 'requests' is not installed.",)
 
     duplicate_jobs = ResearchRuntimeBootstrap(
         config,

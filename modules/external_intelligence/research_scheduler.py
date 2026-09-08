@@ -22,6 +22,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timedelta
+import json
+from pathlib import Path
 
 from modules.external_intelligence.research_job import (
     ResearchJob,
@@ -51,12 +53,14 @@ class ResearchScheduler:
         - current time
     """
 
-    def __init__(self):
+    def __init__(self, state_path: str | Path | None = None):
 
         self._states: dict[
             str,
             ScheduledJobState,
         ] = {}
+        self.state_path = Path(state_path) if state_path is not None else None
+        self._saved_states = self._load_saved_states()
 
     # ======================================================
     # REGISTER
@@ -83,10 +87,8 @@ class ResearchScheduler:
                 f"{job.job_id}"
             )
 
-        self._states[
-            job.job_id
-        ] = ScheduledJobState(
-            job_id=job.job_id
+        self._states[job.job_id] = self._saved_states.get(
+            job.job_id, ScheduledJobState(job_id=job.job_id)
         )
 
     # ======================================================
@@ -183,6 +185,43 @@ class ResearchScheduler:
             last_run=run_time,
             next_run=next_run,
         )
+        self._persist()
+
+    def _load_saved_states(self) -> dict[str, ScheduledJobState]:
+        if self.state_path is None or not self.state_path.exists():
+            return {}
+        try:
+            payload = json.loads(self.state_path.read_text(encoding="utf-8"))
+            if payload.get("schema_version") != 1 or not isinstance(payload.get("jobs"), dict):
+                raise ValueError("unsupported scheduler-state schema")
+            states = {}
+            for job_id, value in payload["jobs"].items():
+                if not isinstance(job_id, str) or not job_id or not isinstance(value, dict):
+                    raise ValueError("invalid scheduler-state entry")
+                last_run = datetime.fromisoformat(value["last_run"]) if value.get("last_run") else None
+                next_run = datetime.fromisoformat(value["next_run"]) if value.get("next_run") else None
+                if (last_run is None) != (next_run is None):
+                    raise ValueError("incomplete scheduler-state entry")
+                states[job_id] = ScheduledJobState(job_id, last_run, next_run)
+            return states
+        except (json.JSONDecodeError, TypeError, ValueError) as exc:
+            raise ValueError(f"invalid persisted scheduler state: {exc}") from exc
+
+    def _persist(self) -> None:
+        if self.state_path is None:
+            return
+        self.state_path.parent.mkdir(parents=True, exist_ok=True)
+        payload = {"schema_version": 1, "jobs": {
+            job_id: {
+                "last_run": state.last_run.isoformat() if state.last_run else None,
+                "next_run": state.next_run.isoformat() if state.next_run else None,
+            }
+            for job_id, state in sorted(self._states.items())
+            if state.last_run is not None
+        }}
+        temporary = self.state_path.with_suffix(self.state_path.suffix + ".tmp")
+        temporary.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+        temporary.replace(self.state_path)
 
     # ======================================================
     # DUE JOBS

@@ -29,6 +29,7 @@ class ResearchRuntimeBootstrapConfig:
     offline_mode: bool = False
     enable_historical_comparison: bool = False
     historical_comparison_audit_path: Path | None = None
+    scheduler_state_path: Path | None = None
 
     @classmethod
     def from_environment(
@@ -70,6 +71,9 @@ class ResearchRuntimeBootstrapConfig:
             historical_comparison_audit_path=(
                 Path(audit_value) if audit_value else None
             ),
+            scheduler_state_path=Path(values.get(
+                "EIOS_SCHEDULER_STATE_PATH", "data/runtime/research_schedule_state.json"
+            ).strip()),
         )
 
     @staticmethod
@@ -230,6 +234,10 @@ class ResearchRuntimeBootstrap:
                 self.config.enable_historical_comparison
             ),
         )
+
+        # Offline maintenance cycles must not advance the live-search cadence.
+        if self.config.scheduler_state_path is not None and not self.config.offline_mode:
+            runtime_options["scheduler_state_path"] = self.config.scheduler_state_path
 
         if self.config.historical_comparison_audit_path is not None:
             runtime_options[
