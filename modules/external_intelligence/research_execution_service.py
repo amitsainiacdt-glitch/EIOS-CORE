@@ -165,6 +165,10 @@ class ResearchExecutionService:
             intent=job.intent,
         )
 
+        if (job.intent in {"OFFICIAL_DOCUMENT_DISCOVERY", "EXCHANGE_DISCLOSURES", "PRIMARY_INDICATOR_MONITORING"}
+                and job.entity_domain and hasattr(query, "query")):
+            query = replace(query, query=f"site:{job.entity_domain} {query.query}")
+
         if job.quarter_period_end is not None:
             query = replace(query, quarter_period_end=job.quarter_period_end, issuer_domain=job.entity_domain)
         result = self.orchestrator.execute(
