@@ -44,6 +44,7 @@ TEN_YEAR_FINANCIAL_HISTORY_PATHS = {
 OUTPUT_PATH = ROOT / "local_status_dashboard" / "lib" / "live-status.json"
 RUNTIME_STATUS_PATH = ROOT / "data" / "runtime" / "automatic_company_cycle_status.json"
 SECTOR_CATALYST_COVERAGE_PATH = ROOT / "data" / "company_intelligence" / "sector_catalyst_coverage.json"
+COMPANY_CATALYST_ONBOARDING_PATH = ROOT / "data" / "company_intelligence" / "company_catalyst_onboarding.json"
 
 
 def read_json(path: Path):
@@ -330,6 +331,7 @@ def main() -> None:
 
     official_documents = runtime_status.get("official_documents") or {}
     sector_coverage = read_json(SECTOR_CATALYST_COVERAGE_PATH) if SECTOR_CATALYST_COVERAGE_PATH.is_file() else None
+    company_catalyst_onboarding = read_json(COMPANY_CATALYST_ONBOARDING_PATH) if COMPANY_CATALYST_ONBOARDING_PATH.is_file() else None
     snapshot = {
         "caseId": readiness["inputs"]["case_id"],
         "stage": assessment["stage"],
@@ -378,6 +380,17 @@ def main() -> None:
             "createsCatalyst": False,
             "changesVerdict": False,
         } if sector_coverage else None),
+        "companyCatalystOnboarding": ({
+            "status": "CONNECTOR_GAP_AWARE_ROUTING",
+            "companyCount": company_catalyst_onboarding["companyCount"],
+            "companies": [{
+                "ticker": item["ticker"], "exposureStatus": item["exposureStatus"],
+                "selectedIndicatorCount": item["selectedIndicatorCount"],
+                "connectedIndicatorCount": item["connectedIndicatorCount"],
+                "activeCoverageClaim": item["activeCoverageClaim"],
+            } for item in company_catalyst_onboarding["companies"]],
+            "createsCatalyst": False, "changesVerdict": False,
+        } if company_catalyst_onboarding else None),
     }
 
     eligible_companies = [

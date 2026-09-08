@@ -13730,6 +13730,35 @@
     "createsCatalyst": false,
     "changesVerdict": false
   },
+  "companyCatalystOnboarding": {
+    "status": "CONNECTOR_GAP_AWARE_ROUTING",
+    "companyCount": 3,
+    "companies": [
+      {
+        "ticker": "ANUP",
+        "exposureStatus": "REGISTERED_UNVERIFIED",
+        "selectedIndicatorCount": 1,
+        "connectedIndicatorCount": 0,
+        "activeCoverageClaim": false
+      },
+      {
+        "ticker": "COROMANDEL",
+        "exposureStatus": "PUBLIC_EVIDENCE_PARTIAL",
+        "selectedIndicatorCount": 7,
+        "connectedIndicatorCount": 2,
+        "activeCoverageClaim": false
+      },
+      {
+        "ticker": "KPITTECH",
+        "exposureStatus": "REGISTERED_UNVERIFIED",
+        "selectedIndicatorCount": 1,
+        "connectedIndicatorCount": 0,
+        "activeCoverageClaim": false
+      }
+    ],
+    "createsCatalyst": false,
+    "changesVerdict": false
+  },
   "opportunityWatch": {
     "eligibilityRule": "Only companies with a READY governed intelligence verdict may enter Eligible Opportunities.",
     "eligibleTickers": [],

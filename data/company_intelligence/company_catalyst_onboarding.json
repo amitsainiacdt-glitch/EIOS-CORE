@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "companyCount": 3,
+  "companies": [
+    {
+      "ticker": "ANUP",
+      "entity": "The Anup Engineering",
+      "exposureStatus": "REGISTERED_UNVERIFIED",
+      "uncertainty": "Issuer sources and operating exposure require governed onboarding before active coverage.",
+      "sourceIds": [
+        "COMPANY_REGISTRY_LEGACY"
+      ],
+      "selectedIndicatorCount": 1,
+      "connectedIndicatorCount": 0,
+      "indicators": [
+        {
+          "indicatorId": "INDUSTRIAL_ORDER_CONVERSION",
+          "name": "Tender-to-order conversion",
+          "matchedSectors": [
+            "INDUSTRIALS"
+          ],
+          "matchedArchetypes": [
+            "CAPITAL_GOODS_SUPPLIER",
+            "PROJECT_MANUFACTURER"
+          ],
+          "collectorReadiness": "NOT_CONNECTED",
+          "preferredPrimarySourceTypes": [
+            "EXCHANGE_FILING",
+            "GOVERNMENT_TENDER_PORTAL"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2
+        }
+      ],
+      "activeCoverageClaim": false
+    },
+    {
+      "ticker": "COROMANDEL",
+      "entity": "Coromandel International",
+      "exposureStatus": "PUBLIC_EVIDENCE_PARTIAL",
+      "uncertainty": "Crop, state and product-level revenue exposure is not fully quantified in governed facts.",
+      "sourceIds": [
+        "COROMANDEL-ANNUAL-REPORTS",
+        "COROMANDEL-QUARTERLY-RESULTS"
+      ],
+      "selectedIndicatorCount": 7,
+      "connectedIndicatorCount": 2,
+      "indicators": [
+        {
+          "indicatorId": "AGRICULTURAL_DROUGHT_COMPOSITE",
+          "name": "Multi-dimensional agricultural drought",
+          "matchedSectors": [
+            "AGROCHEMICALS",
+            "FERTILIZERS"
+          ],
+          "matchedArchetypes": [
+            "AGROCHEMICAL_COMPANY",
+            "FERTILIZER_PRODUCER"
+          ],
+          "collectorReadiness": "PARTIAL_LIVE_INPUTS",
+          "preferredPrimarySourceTypes": [
+            "IMD_WEATHER_DATA",
+            "MNCFC_DROUGHT_ASSESSMENT",
+            "NRSC_EARTH_OBSERVATION"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2
+        },
+        {
+          "indicatorId": "CROP_SWITCH_AND_INPUT_MIX",
+          "name": "Crop switching and agricultural input mix",
+          "matchedSectors": [
+            "AGROCHEMICALS",
+            "FERTILIZERS"
+          ],
+          "matchedArchetypes": [
+            "AGROCHEMICAL_COMPANY"
+          ],
+          "collectorReadiness": "PARTIAL_LIVE_INPUTS",
+          "preferredPrimarySourceTypes": [
+            "MINISTRY_SOWING_DATA",
+            "MSP_PROCUREMENT_POLICY"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2
+        },
+        {
+          "indicatorId": "FERTILIZER_APPLICATION_TIMING",
+          "name": "Fertilizer purchase and application timing",
+          "matchedSectors": [
+            "AGROCHEMICALS",
+            "FERTILIZERS"
+          ],
+          "matchedArchetypes": [
+            "PHOSPHATIC_FERTILIZER_PRODUCER"
+          ],
+          "collectorReadiness": "NOT_CONNECTED",
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "STATE_AGRICULTURE_INPUT_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2
+        },
+        {
+          "indicatorId": "FERTILIZER_GLOBAL_INPUT_STRESS",
+          "name": "Global fertilizer input and logistics stress",
+          "matchedSectors": [
+            "AGROCHEMICALS",
+            "FERTILIZERS"
+          ],
+          "matchedArchetypes": [
+            "FERTILIZER_PRODUCER"
+          ],
+          "collectorReadiness": "NOT_CONNECTED",
+          "preferredPrimarySourceTypes": [
+            "CUSTOMS_IMPORT_DATA",
+            "GOVERNMENT_FERTILIZER_BULLETIN"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2
+        },
+        {
+          "indicatorId": "FOOD_POLICY_INTERVENTION_SUPPRESSOR",
+          "name": "Food and fertilizer policy intervention suppressor",
+          "matchedSectors": [
+            "AGROCHEMICALS",
+            "FERTILIZERS"
+          ],
+          "matchedArchetypes": [
+            "FERTILIZER_PRODUCER"
+          ],
+          "collectorReadiness": "NOT_CONNECTED",
+          "preferredPrimarySourceTypes": [
+            "DFPD_FCI_STOCK_DATA",
+            "DGFT_TRADE_POLICY",
+            "FERTILIZER_SUBSIDY_POLICY"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2
+        },
+        {
+          "indicatorId": "RABI_WATER_CARRYOVER",
+          "name": "Rabi water and soil-moisture carryover",
+          "matchedSectors": [
+            "AGROCHEMICALS",
+            "FERTILIZERS"
+          ],
+          "matchedArchetypes": [
+            "FERTILIZER_PRODUCER"
+          ],
+          "collectorReadiness": "NOT_CONNECTED",
+          "preferredPrimarySourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "IMD_POST_MONSOON_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2
+        },
+        {
+          "indicatorId": "RAINFALL_FERTILIZER_RESPONSE_CURVE",
+          "name": "Rainfall-to-fertilizer response asymmetry",
+          "matchedSectors": [
+            "AGROCHEMICALS",
+            "FERTILIZERS"
+          ],
+          "matchedArchetypes": [
+            "FERTILIZER_PRODUCER"
+          ],
+          "collectorReadiness": "NOT_CONNECTED",
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "IMD_AGROMET_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2
+        }
+      ],
+      "activeCoverageClaim": false
+    },
+    {
+      "ticker": "KPITTECH",
+      "entity": "KPIT Technologies",
+      "exposureStatus": "REGISTERED_UNVERIFIED",
+      "uncertainty": "Sector and archetype route research only; governed operating exposure extraction is incomplete.",
+      "sourceIds": [
+        "KPIT-ANNUAL-REPORT-2025-26",
+        "KPIT-INVESTOR-GOVERNANCE"
+      ],
+      "selectedIndicatorCount": 1,
+      "connectedIndicatorCount": 0,
+      "indicators": [
+        {
+          "indicatorId": "IT_DEAL_CONVERSION_AND_HIRING",
+          "name": "Deal conversion, utilisation and hiring",
+          "matchedSectors": [
+            "IT_SERVICES"
+          ],
+          "matchedArchetypes": [
+            "DIGITAL_ENGINEERING_PROVIDER"
+          ],
+          "collectorReadiness": "NOT_CONNECTED",
+          "preferredPrimarySourceTypes": [
+            "COMPANY_FILING",
+            "CLIENT_FILING"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2
+        }
+      ],
+      "activeCoverageClaim": false
+    }
+  ],
+  "createsCatalyst": false,
+  "changesVerdict": false,
+  "authorizesTrade": false
+}

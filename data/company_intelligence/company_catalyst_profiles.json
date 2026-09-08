@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "profiles": [
+    {"ticker":"COROMANDEL","entity":"Coromandel International","sector_ids":["FERTILIZERS","AGROCHEMICALS"],"company_archetypes":["FERTILIZER_PRODUCER","PHOSPHATIC_FERTILIZER_PRODUCER","AGROCHEMICAL_COMPANY"],"source_ids":["COROMANDEL-ANNUAL-REPORTS","COROMANDEL-QUARTERLY-RESULTS"],"as_of":"2026-09-08","exposure_status":"PUBLIC_EVIDENCE_PARTIAL","uncertainty":"Crop, state and product-level revenue exposure is not fully quantified in governed facts."},
+    {"ticker":"KPITTECH","entity":"KPIT Technologies","sector_ids":["IT_SERVICES"],"company_archetypes":["DIGITAL_ENGINEERING_PROVIDER"],"source_ids":["KPIT-ANNUAL-REPORT-2025-26","KPIT-INVESTOR-GOVERNANCE"],"as_of":"2026-09-08","exposure_status":"REGISTERED_UNVERIFIED","uncertainty":"Sector and archetype route research only; governed operating exposure extraction is incomplete."},
+    {"ticker":"ANUP","entity":"The Anup Engineering","sector_ids":["INDUSTRIALS"],"company_archetypes":["PROJECT_MANUFACTURER","CAPITAL_GOODS_SUPPLIER"],"source_ids":["COMPANY_REGISTRY_LEGACY"],"as_of":"2026-09-08","exposure_status":"REGISTERED_UNVERIFIED","uncertainty":"Issuer sources and operating exposure require governed onboarding before active coverage."}
+  ],
+  "collector_readiness": {
+    "COROMANDEL": {"AGRICULTURAL_DROUGHT_COMPOSITE":"PARTIAL_LIVE_INPUTS","CROP_SWITCH_AND_INPUT_MIX":"PARTIAL_LIVE_INPUTS"},
+    "KPITTECH": {},
+    "ANUP": {}
+  }
+}

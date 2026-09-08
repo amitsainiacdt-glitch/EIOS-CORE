@@ -33,6 +33,7 @@ from scripts.build_coromandel_annual_report_study import main as build_coromande
 from scripts.build_coromandel_company_intelligence_snapshot import main as build_coromandel_snapshot
 from scripts.sync_local_status_dashboard import main as sync_dashboard
 from scripts.build_sector_catalyst_coverage import main as build_sector_catalyst_coverage
+from scripts.build_company_catalyst_onboarding import main as build_company_catalyst_onboarding
 from scripts.check_financial_source_regression import run_check as check_financial_sources
 
 
@@ -133,6 +134,7 @@ def main() -> int:
         build_coromandel_study()
         build_coromandel_snapshot()
         build_sector_catalyst_coverage()
+        build_company_catalyst_onboarding()
         status["status"] = "SUCCESS"
         return 0
     except Exception as exc:
