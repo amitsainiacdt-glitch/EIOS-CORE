@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-08-31",
+  "as_of": "2026-09-08",
   "governance": {
     "status": "DISCOVERED_NOT_EXTRACTED",
     "creates_observation": false,
@@ -51,6 +51,61 @@
           "source_type": "EXCHANGE_DISCLOSURE",
           "url": "https://www.coromandel.biz/investors/disclosures/",
           "authority": "ISSUER_OFFICIAL",
+          "status": "DISCOVERED_NOT_EXTRACTED"
+        }
+      ]
+    },
+    "ANUP": {
+      "entity": "The Anup Engineering Limited",
+      "identifiers": {
+        "nse_symbol": "ANUP",
+        "bse_scrip_code": "542460",
+        "isin": "INE294Z01018"
+      },
+      "sources": [
+        {
+          "source_id": "ANUP-ANNUAL-REPORTS",
+          "source_type": "ANNUAL_REPORT",
+          "url": "https://www.anupengg.com/annual-report/",
+          "document_urls": [
+            "https://www.anupengg.com/wp-content/uploads/2025/07/Annual-Report-2024-25.pdf"
+          ],
+          "authority": "ISSUER_OFFICIAL",
+          "status": "DISCOVERED_NOT_EXTRACTED"
+        },
+        {
+          "source_id": "ANUP-QUARTERLY-RESULTS",
+          "source_type": "QUARTERLY_RESULTS",
+          "url": "https://www.anupengg.com/quarterly-report/",
+          "document_urls": [
+            "https://www.anupengg.com/wp-content/uploads/2026/08/Unaudited-Financial-Result-for-the-Quarter-Ended-30th-June-2026.pdf"
+          ],
+          "authority": "ISSUER_OFFICIAL",
+          "status": "DISCOVERED_NOT_EXTRACTED",
+          "required_review": "SOURCE_RECONCILIATION_AND_META_REVIEW"
+        },
+        {
+          "source_id": "ANUP-INVESTOR-PRESENTATIONS",
+          "source_type": "INVESTOR_PRESENTATION",
+          "url": "https://www.anupengg.com/quarterly-report/",
+          "document_urls": [
+            "https://www.anupengg.com/wp-content/uploads/2026/08/Q1-Investor-Presentation-of-30.06.2026.pdf"
+          ],
+          "authority": "ISSUER_OFFICIAL",
+          "status": "DISCOVERED_NOT_EXTRACTED"
+        },
+        {
+          "source_id": "ANUP-REGULATORY-DISCLOSURES",
+          "source_type": "EXCHANGE_DISCLOSURE",
+          "url": "https://www.anupengg.com/disclosures/",
+          "authority": "ISSUER_OFFICIAL",
+          "status": "DISCOVERED_NOT_EXTRACTED"
+        },
+        {
+          "source_id": "ANUP-NSE-FINANCIAL-RESULTS",
+          "source_type": "EXCHANGE_FINANCIAL_FILING",
+          "url": "https://www.nseindia.com/companies-listing/corporate-filings-financial-results?symbol=ANUP",
+          "authority": "EXCHANGE_OFFICIAL",
           "status": "DISCOVERED_NOT_EXTRACTED"
         }
       ]

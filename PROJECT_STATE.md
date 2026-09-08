@@ -6051,3 +6051,11 @@ investment decision is created by this checkpoint.
 - Generated a machine-readable onboarding report that distinguishes relevant logic from connected collection and permits an active coverage claim only when governed exposure is ready and every selected indicator has a collector. Current active coverage claims are withheld for all three companies.
 - Connected the onboarding report to the unattended builder and dashboard read model. The System / Research Runtime screen now shows 35 sector labels, 29 causal indicators, company-level selected versus connected counts and an explicit `Coverage claim withheld` label.
 - Validation: all 372 company-intelligence tests pass, including sector-plus-archetype routing and partial/unverified boundaries. The dashboard production build passes. This layer creates no catalyst, changes no verdict and authorizes no trade.
+
+## Anup governed source onboarding and automatic routing (2026-09-08)
+
+- Registered The Anup Engineering Limited as a governed monitored company with its issuer identity, NSE symbol `ANUP`, BSE scrip code `542460` and ISIN `INE294Z01018`. This onboarding is independent of the inconsistent legacy dossier metadata.
+- Added issuer-official source lanes for annual reports, quarterly financial results, investor presentations and Regulation 46 disclosures, plus an official NSE financial-results lane. The latest configured issuer documents are the FY2024-25 annual report and Q1 FY2027 result and investor presentation; their contents remain unapproved until extraction and reconciliation complete.
+- Added the standard eight-job unattended coverage plan: official documents, exchange disclosures, orders/capacity, management/corporate events, current news, sector/competition, macro transmission and catalysts/expectation gaps.
+- A bounded live probe successfully selected the issuer-published Q1 FY2027 result PDF. It checked no uncontrolled pages, reported no failures and created no approved facts, catalyst, verdict, recommendation or trade action.
+- Validation: all 372 company-intelligence tests pass, and the scheduler loads eight Anup jobs among 24 governed recurring company jobs. The next checkpoint is source-byte acquisition and typed quarterly extraction with cross-source reconciliation.

@@ -1162,9 +1162,15 @@
         "invalidPacketCount": 0,
         "changesVerdict": false
       },
-      "officialSourceCount": 0,
-      "officialSourceTypes": [],
-      "sourceDiscoveryStatus": "NOT_STARTED",
+      "officialSourceCount": 5,
+      "officialSourceTypes": [
+        "ANNUAL_REPORT",
+        "EXCHANGE_DISCLOSURE",
+        "EXCHANGE_FINANCIAL_FILING",
+        "INVESTOR_PRESENTATION",
+        "QUARTERLY_RESULTS"
+      ],
+      "sourceDiscoveryStatus": "DISCOVERED_NOT_EXTRACTED",
       "extractedFactCount": 0,
       "extractedFacts": [],
       "extractionStatus": "NOT_STARTED",
