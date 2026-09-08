@@ -14,6 +14,18 @@ class AlignmentTests(unittest.TestCase):
         points = [{'ocr': [x, y], 'native': [x, y]} for x in (0, 1, 2, 3) for y in (0, 1, 2, 3)]
         self.assertEqual(validate_alignment({'anchors': points})['status'], 'HOLD_ALIGNMENT_VALIDATION')
 
+    def test_small_ocr_noise_passes_but_larger_displacement_fails(self):
+        baseline = [{'ocr': [x, y], 'native': [x, y]}
+                    for x in (0, 100, 200, 300) for y in (0, 100, 200, 300)]
+        within = [{**point, 'native': list(point['native'])} for point in baseline]
+        within[0]['native'][0] += 1.9
+        self.assertEqual(validate_alignment({'anchors': within})['status'],
+                         'ALIGNMENT_CHECKED_FOR_COMPARISON')
+        outside = [{**point, 'native': list(point['native'])} for point in baseline]
+        outside[0]['native'][0] += 2.1
+        self.assertEqual(validate_alignment({'anchors': outside})['status'],
+                         'HOLD_ALIGNMENT_VALIDATION')
+
     def test_known_shift_and_tilt_recovered_without_numeric_anchors(self):
         native, words = [], []
         labels = ['alpha', 'bravo', 'charlie', 'delta', 'echo', 'foxtrot', 'golf', 'hotel', 'india']

@@ -101,6 +101,10 @@ class RecordCandidateTests(unittest.TestCase):
         for label, metric in expected.items():
             with self.subTest(label=label): self.assertEqual(metric_for_label(label), metric)
 
+    def test_common_issuer_profit_and_material_labels_are_mapped(self):
+        self.assertEqual(metric_for_label('7 Profit for the period/year'), 'pat')
+        self.assertEqual(metric_for_label('(a) Cost of materials consumed'), 'raw_materials')
+
     def test_unique_eight_line_expense_sum_recovers_disagreements(self):
         page,receipt,ticker,digest=self.fixture()
         labels=[('Cost of raw materials','40'),('Purchases of traded goods','30'),

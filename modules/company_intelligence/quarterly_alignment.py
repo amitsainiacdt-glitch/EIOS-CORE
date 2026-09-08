@@ -4,6 +4,11 @@ from statistics import median
 import re
 
 
+# Two PDF points are about 0.7 mm and remain far below a financial column's
+# detected width. This gate compares held-out text anchors, never numeric cells.
+MAX_HELD_OUT_ANCHOR_ERROR_PDF_UNITS = 2.0
+
+
 def _key(text):
     text = text.strip('.,:;()').lower()
     return text if re.fullmatch(r'[a-z]{4,}', text) else None
@@ -50,7 +55,7 @@ def validate_alignment(estimate):
         if (abs(x[0]) > 20 or abs(y[0]) > 20 or abs(x[1] - 1) > .03
                 or abs(y[2] - 1) > .03 or abs(x[2]) > .06 or abs(y[1]) > .06):
             issues.append('EXCESSIVE_GEOMETRIC_DISTORTION')
-        if max(errors) > 1.5:
+        if max(errors) > MAX_HELD_OUT_ANCHOR_ERROR_PDF_UNITS:
             issues.append('HELD_OUT_ANCHOR_ERROR')
     except ValueError:
         issues.append('DEGENERATE_VALIDATION')

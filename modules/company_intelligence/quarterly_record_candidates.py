@@ -10,10 +10,12 @@ def metric_for_label(label):
     label = re.sub(r'^\s*(?:\([a-z]\)|\d+)\s*', '', label).strip().lower()
     exact = {'revenue from operations': 'revenue', 'other income': 'other_income',
              'total income': 'total_income', 'net profit after tax (7-8)': 'pat',
-             'net profit after tax': 'pat', 'total expenses':'total_expenses'}
+             'net profit after tax': 'pat', 'profit for the period/year': 'pat',
+             'profit for the period': 'pat', 'profit for the quarter': 'pat',
+             'total expenses':'total_expenses'}
     if label in exact: return exact[label]
     patterns = (
-        ('raw_materials', r'^cost of raw materials'), ('traded_goods_purchases', r'^purchases of traded goods'),
+        ('raw_materials', r'^cost of (?:raw )?materials(?: consumed)?'), ('traded_goods_purchases', r'^purchases of traded goods'),
         ('inventory_change', r'^changes in inventories'), ('employee_benefits', r'^employee benefits'),
         ('finance_costs', r'^finance costs'), ('depreciation_amortisation', r'^depreciation and amortisation'),
         ('freight_distribution', r'distribution expense$'), ('other_expenses', r'^other expenses$'),
