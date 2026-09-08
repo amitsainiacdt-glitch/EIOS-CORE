@@ -23,7 +23,7 @@
     "waiting": 6,
     "automaticExternalActions": false
   },
-  "productionObservationCount": 97,
+  "productionObservationCount": 99,
   "companies": [
     {
       "name": "The Anup Engineering Limited",
@@ -12179,6 +12179,7 @@
                       "accepted_measurements": [
                         "DIRECT_DEFICIT"
                       ],
+                      "collection_instruction": "Return only realised or observed all-India rainfall departure/deficit for a completed period. Exclude forecasts, probability ranges, model error, normal-category thresholds and historical LPA baselines.",
                       "favourable_direction": "DOWN",
                       "source_requirement": "India Meteorological Department primary release; realised observation only, not forecast or model range",
                       "source_domain": "mausam.imd.gov.in",
@@ -12354,6 +12355,7 @@
                   "accepted_measurements": [
                     "DIRECT_DEFICIT"
                   ],
+                  "collection_instruction": "Return only realised or observed all-India rainfall departure/deficit for a completed period. Exclude forecasts, probability ranges, model error, normal-category thresholds and historical LPA baselines.",
                   "favourable_direction": "DOWN",
                   "source_requirement": "India Meteorological Department primary release; realised observation only, not forecast or model range",
                   "source_domain": "mausam.imd.gov.in",
@@ -12364,9 +12366,9 @@
                   "cause": "Rainfall deficit created a near-term demand risk",
                   "cause_effect": "CONTEXT",
                   "latest_signal": "AWAITING_COMPARABLE_OBSERVATION",
-                  "record_count": 0,
-                  "latest_value": null,
-                  "latest_date": null
+                  "record_count": 1,
+                  "latest_value": "14",
+                  "latest_date": "2026-09-07"
                 },
                 {
                   "id": "india-crop-sowing-area",
@@ -12401,7 +12403,7 @@
               "creates_catalyst": false,
               "changes_verdict": false,
               "authorizes_trade": false,
-              "recordStatus": "CONNECTED_AWAITING_FIRST_RECORD"
+              "recordStatus": "HISTORY_AVAILABLE"
             },
             "assistantUnitReview": true,
             "checks": [
@@ -13453,7 +13455,7 @@
         ]
       },
       "intelligenceSnapshot": {
-        "generatedAt": "2026-09-08T05:09:02.025220+00:00",
+        "generatedAt": "2026-09-08T08:03:05.581975+00:00",
         "verdictStatus": "RESEARCH_HOLD",
         "verdict": null,
         "confidencePercent": null,
@@ -13473,8 +13475,7 @@
           "competition: PARTIAL",
           "risks_and_contradictions: PARTIAL",
           "valuation: NOT_STARTED",
-          "master_dossier: RESEARCH_HOLD",
-          "monitoring: PARTIAL"
+          "master_dossier: RESEARCH_HOLD"
         ],
         "requiresHumanReview": true,
         "layers": [
@@ -13570,9 +13571,9 @@
           },
           {
             "name": "monitoring",
-            "status": "PARTIAL",
-            "summary": "Official source locations are registered, but a successful automatic collection cycle is not yet verified.",
-            "coveragePercent": 25
+            "status": "READY",
+            "summary": "Automatic monitoring is active. The latest cycle executed 28 jobs and preserved 24 Coromandel discoveries.",
+            "coveragePercent": 100
           }
         ],
         "longTerm": {
