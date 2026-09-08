@@ -12022,6 +12022,13 @@
                       "indicator": "Quarterly phosphoric-acid settlement price",
                       "family": "COMMODITY_INPUT",
                       "unit": "USD per tonne",
+                      "unit_aliases": [
+                        "USD/t",
+                        "$/t"
+                      ],
+                      "match_terms": [
+                        "phosphoric acid"
+                      ],
                       "favourable_direction": "DOWN",
                       "source_requirement": "Official company transcript plus independent primary commodity source",
                       "source_domain": "coromandel.biz",
@@ -12034,6 +12041,14 @@
                       "indicator": "NBS subsidy coverage versus input-cost movement",
                       "family": "GOVERNMENT_POLICY",
                       "unit": "percentage-point coverage gap",
+                      "unit_aliases": [
+                        "percentage points",
+                        "pp"
+                      ],
+                      "match_terms": [
+                        "NBS",
+                        "input cost"
+                      ],
                       "favourable_direction": "UP",
                       "source_requirement": "Department of Fertilizers notification and verified input basket",
                       "source_domain": "fert.gov.in",
@@ -12063,6 +12078,15 @@
                       "indicator": "NPK and DAP primary sales volume",
                       "family": "VOLUME",
                       "unit": "lakh tonnes",
+                      "unit_aliases": [
+                        "lakh tonnes",
+                        "lakh MT"
+                      ],
+                      "match_terms": [
+                        "NPK",
+                        "DAP",
+                        "primary sales"
+                      ],
                       "favourable_direction": "UP",
                       "source_requirement": "Official company sales-volume summary",
                       "source_domain": "coromandel.biz",
@@ -12092,6 +12116,14 @@
                       "indicator": "Standalone crop-protection PBIT margin",
                       "family": "SEGMENT_MARGIN",
                       "unit": "percent",
+                      "unit_aliases": [
+                        "%",
+                        "percent"
+                      ],
+                      "match_terms": [
+                        "crop protection",
+                        "PBIT"
+                      ],
                       "favourable_direction": "UP",
                       "source_requirement": "Official quarterly presentation or segment accounts",
                       "source_domain": "coromandel.biz",
@@ -12121,6 +12153,14 @@
                       "indicator": "All-India seasonal rainfall deficit",
                       "family": "WEATHER_DEMAND",
                       "unit": "percent below long-period average",
+                      "unit_aliases": [
+                        "%",
+                        "percent"
+                      ],
+                      "match_terms": [
+                        "All India",
+                        "rainfall deficit"
+                      ],
                       "favourable_direction": "DOWN",
                       "source_requirement": "India Meteorological Department primary release",
                       "source_domain": "mausam.imd.gov.in",
@@ -12133,6 +12173,14 @@
                       "indicator": "Relevant crop sowing acreage versus prior year",
                       "family": "WEATHER_DEMAND",
                       "unit": "percent change",
+                      "unit_aliases": [
+                        "%",
+                        "percent"
+                      ],
+                      "match_terms": [
+                        "crop sowing",
+                        "year-on-year"
+                      ],
                       "favourable_direction": "UP",
                       "source_requirement": "Ministry of Agriculture primary acreage release",
                       "source_domain": "agriwelfare.gov.in",
@@ -12154,6 +12202,13 @@
                   "indicator": "Quarterly phosphoric-acid settlement price",
                   "family": "COMMODITY_INPUT",
                   "unit": "USD per tonne",
+                  "unit_aliases": [
+                    "USD/t",
+                    "$/t"
+                  ],
+                  "match_terms": [
+                    "phosphoric acid"
+                  ],
                   "favourable_direction": "DOWN",
                   "source_requirement": "Official company transcript plus independent primary commodity source",
                   "source_domain": "coromandel.biz",
@@ -12163,13 +12218,24 @@
                   "cause_id": "coromandel-q1fy27-input-cost",
                   "cause": "Raw-material inflation exceeded subsidy support",
                   "cause_effect": "PRESSURE",
-                  "latest_signal": "AWAITING_NEW_OBSERVATION"
+                  "latest_signal": "AWAITING_COMPARABLE_OBSERVATION",
+                  "record_count": 0,
+                  "latest_value": null,
+                  "latest_date": null
                 },
                 {
                   "id": "coro-nbs-cost-cover",
                   "indicator": "NBS subsidy coverage versus input-cost movement",
                   "family": "GOVERNMENT_POLICY",
                   "unit": "percentage-point coverage gap",
+                  "unit_aliases": [
+                    "percentage points",
+                    "pp"
+                  ],
+                  "match_terms": [
+                    "NBS",
+                    "input cost"
+                  ],
                   "favourable_direction": "UP",
                   "source_requirement": "Department of Fertilizers notification and verified input basket",
                   "source_domain": "fert.gov.in",
@@ -12179,13 +12245,25 @@
                   "cause_id": "coromandel-q1fy27-input-cost",
                   "cause": "Raw-material inflation exceeded subsidy support",
                   "cause_effect": "PRESSURE",
-                  "latest_signal": "AWAITING_NEW_OBSERVATION"
+                  "latest_signal": "AWAITING_COMPARABLE_OBSERVATION",
+                  "record_count": 0,
+                  "latest_value": null,
+                  "latest_date": null
                 },
                 {
                   "id": "coro-npk-dap-primary-volume",
                   "indicator": "NPK and DAP primary sales volume",
                   "family": "VOLUME",
                   "unit": "lakh tonnes",
+                  "unit_aliases": [
+                    "lakh tonnes",
+                    "lakh MT"
+                  ],
+                  "match_terms": [
+                    "NPK",
+                    "DAP",
+                    "primary sales"
+                  ],
                   "favourable_direction": "UP",
                   "source_requirement": "Official company sales-volume summary",
                   "source_domain": "coromandel.biz",
@@ -12195,13 +12273,24 @@
                   "cause_id": "coromandel-q1fy27-volume-discipline",
                   "cause": "Lower fertiliser volume was a deliberate inventory response",
                   "cause_effect": "CONTEXT",
-                  "latest_signal": "AWAITING_NEW_OBSERVATION"
+                  "latest_signal": "AWAITING_COMPARABLE_OBSERVATION",
+                  "record_count": 0,
+                  "latest_value": null,
+                  "latest_date": null
                 },
                 {
                   "id": "coro-cpc-pbit-margin",
                   "indicator": "Standalone crop-protection PBIT margin",
                   "family": "SEGMENT_MARGIN",
                   "unit": "percent",
+                  "unit_aliases": [
+                    "%",
+                    "percent"
+                  ],
+                  "match_terms": [
+                    "crop protection",
+                    "PBIT"
+                  ],
                   "favourable_direction": "UP",
                   "source_requirement": "Official quarterly presentation or segment accounts",
                   "source_domain": "coromandel.biz",
@@ -12211,13 +12300,24 @@
                   "cause_id": "coromandel-q1fy27-crop-protection-offset",
                   "cause": "Crop protection partly offset fertiliser weakness",
                   "cause_effect": "OFFSET",
-                  "latest_signal": "AWAITING_NEW_OBSERVATION"
+                  "latest_signal": "AWAITING_COMPARABLE_OBSERVATION",
+                  "record_count": 0,
+                  "latest_value": null,
+                  "latest_date": null
                 },
                 {
                   "id": "india-seasonal-rain-deficit",
                   "indicator": "All-India seasonal rainfall deficit",
                   "family": "WEATHER_DEMAND",
                   "unit": "percent below long-period average",
+                  "unit_aliases": [
+                    "%",
+                    "percent"
+                  ],
+                  "match_terms": [
+                    "All India",
+                    "rainfall deficit"
+                  ],
                   "favourable_direction": "DOWN",
                   "source_requirement": "India Meteorological Department primary release",
                   "source_domain": "mausam.imd.gov.in",
@@ -12227,13 +12327,24 @@
                   "cause_id": "coromandel-q1fy27-rainfall",
                   "cause": "Rainfall deficit created a near-term demand risk",
                   "cause_effect": "CONTEXT",
-                  "latest_signal": "AWAITING_NEW_OBSERVATION"
+                  "latest_signal": "AWAITING_COMPARABLE_OBSERVATION",
+                  "record_count": 0,
+                  "latest_value": null,
+                  "latest_date": null
                 },
                 {
                   "id": "india-crop-sowing-area",
                   "indicator": "Relevant crop sowing acreage versus prior year",
                   "family": "WEATHER_DEMAND",
                   "unit": "percent change",
+                  "unit_aliases": [
+                    "%",
+                    "percent"
+                  ],
+                  "match_terms": [
+                    "crop sowing",
+                    "year-on-year"
+                  ],
                   "favourable_direction": "UP",
                   "source_requirement": "Ministry of Agriculture primary acreage release",
                   "source_domain": "agriwelfare.gov.in",
@@ -12243,14 +12354,18 @@
                   "cause_id": "coromandel-q1fy27-rainfall",
                   "cause": "Rainfall deficit created a near-term demand risk",
                   "cause_effect": "CONTEXT",
-                  "latest_signal": "AWAITING_NEW_OBSERVATION"
+                  "latest_signal": "AWAITING_COMPARABLE_OBSERVATION",
+                  "record_count": 0,
+                  "latest_value": null,
+                  "latest_date": null
                 }
               ],
               "invalidCount": 0,
               "summary": "6 evidence-linked indicators are ready for the next automatic collection cycle. A directional move is an alert for review—not a catalyst, verdict change or trade.",
               "creates_catalyst": false,
               "changes_verdict": false,
-              "authorizes_trade": false
+              "authorizes_trade": false,
+              "recordStatus": "CONNECTED_AWAITING_FIRST_RECORD"
             },
             "assistantUnitReview": true,
             "checks": [
@@ -12677,7 +12792,8 @@
               "summary": "No valid evidence-linked monitoring rules are available.",
               "creates_catalyst": false,
               "changes_verdict": false,
-              "authorizes_trade": false
+              "authorizes_trade": false,
+              "recordStatus": "CONNECTED_AWAITING_FIRST_RECORD"
             },
             "assistantUnitReview": true,
             "checks": [

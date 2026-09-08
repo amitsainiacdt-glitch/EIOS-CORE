@@ -38,6 +38,17 @@ def load_quarterly_monitoring_jobs(path=None):
     return jobs
 
 
+def load_quarterly_monitoring_rules(path=None):
+    source = path or ROOT / 'data/company_intelligence/quarterly_business_causes.json'
+    import json
+    raw=json.loads(source.read_text(encoding='utf-8')); result={}
+    for ticker,period,basis in sorted({(item.get('ticker',''),item.get('period_end',''),item.get('basis','')) for item in raw.get('items',[])}):
+        causes=load_quarterly_business_causes(source,ticker=ticker,period_end=period,basis=basis)
+        for rule in build_quarterly_cause_monitoring(causes)['rules']:
+            result[f"{ticker.upper()}-PRIMARY-INDICATOR-{rule['id'].upper()}"]=(ticker,rule)
+    return result
+
+
 def _frequency(cadence):
     lowered = cadence.lower()
     if 'weekly' in lowered: return 10080
@@ -46,4 +57,4 @@ def _frequency(cadence):
     raise ValueError(f'unsupported monitoring cadence: {cadence}')
 
 
-__all__ = ['load_quarterly_monitoring_jobs']
+__all__ = ['load_quarterly_monitoring_jobs','load_quarterly_monitoring_rules']

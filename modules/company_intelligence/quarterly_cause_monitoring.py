@@ -53,6 +53,10 @@ def _validate(rule):
         raise ValueError('invalid rule classification')
     if '/' in rule['source_domain'] or '.' not in rule['source_domain']:
         raise ValueError('source_domain must be a bare domain')
+    if not isinstance(rule.get('unit_aliases'),list) or not rule['unit_aliases'] or not all(isinstance(item,str) and item for item in rule['unit_aliases']):
+        raise ValueError('unit_aliases must be non-empty strings')
+    if not isinstance(rule.get('match_terms'),list) or not rule['match_terms'] or not all(isinstance(item,str) and item for item in rule['match_terms']):
+        raise ValueError('match_terms must be non-empty strings')
 
 
 def _number(value):

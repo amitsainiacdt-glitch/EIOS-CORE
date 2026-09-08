@@ -4,6 +4,7 @@ from modules.company_intelligence.quarterly_cause_monitoring import build_quarte
 
 RULE = {'id':'r1','indicator':'Input price','family':'COMMODITY_INPUT','unit':'USD/t',
         'favourable_direction':'DOWN','source_requirement':'Primary source','source_domain':'example.gov.in','cadence':'Quarterly',
+        'unit_aliases':['USD/t'],'match_terms':['input'],
         'improvement_meaning':'Lower cost pressure','deterioration_meaning':'Higher cost pressure'}
 
 

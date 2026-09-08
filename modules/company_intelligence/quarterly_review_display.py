@@ -9,6 +9,7 @@ from modules.company_intelligence.quarterly_note_human_review import QuarterlyNo
 from modules.company_intelligence.quarterly_plain_english import explain_quarterly_financials
 from modules.company_intelligence.quarterly_business_causes import load_quarterly_business_causes
 from modules.company_intelligence.quarterly_cause_monitoring import build_quarterly_cause_monitoring
+from modules.company_intelligence.primary_indicator_ledger import PrimaryIndicatorLedger, attach_indicator_record_state
 
 
 def display_reporting_notes(payload, document_hash, *, basis='', period_end=''):
@@ -92,7 +93,9 @@ def load_quarterly_review_display(root, ticker):
                     'plainEnglish': explain_quarterly_financials(
                         review, reviewed_notes, prior_comparable_figures(queue['quarterly_record_evidence'], record)),
                     'businessCauses': causes,
-                    'causeMonitoring': build_quarterly_cause_monitoring(causes),
+                    'causeMonitoring': attach_indicator_record_state(
+                        build_quarterly_cause_monitoring(causes),
+                        PrimaryIndicatorLedger(root / 'data/company_intelligence/primary_indicator_records.jsonl')),
                     'assistantUnitReview': bool(source.get('header_evidence', {}).get('spanning_source_headers', {}).get('unit', {}).get('review_id')),
                     'checks': review['checks'], 'notChecked': review['not_checked'],
                     'reportingNotes': attach_note_drafts(root,

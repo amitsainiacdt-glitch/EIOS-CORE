@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT))
 
 from modules.company_intelligence.company_coverage_job_provider import load_company_coverage_jobs
 from modules.company_intelligence.quarterly_monitoring_job_provider import load_quarterly_monitoring_jobs
+from modules.company_intelligence.primary_indicator_cycle import process_primary_indicator_results
 from modules.company_intelligence.review_memory_report import build_review_memory_report
 from modules.company_intelligence.collection_outcome import describe_document_collection
 from modules.company_intelligence.quarterly_source_retry import run_source_retries
@@ -98,6 +99,9 @@ def main() -> int:
         runtime, result = bootstrap.run_once(now=started_at.replace(tzinfo=None))
         status["executed_jobs"] = len(result.executed_jobs)
         status["observations"] = runtime.observation_count()
+        status['primary_indicators'] = process_primary_indicator_results(
+            result.results, ledger_path=ROOT / 'data/company_intelligence/primary_indicator_records.jsonl',
+            recorded_at=started_at)
 
         acquisition_ledger = PublicSourceAcquisitionLedger(DOCUMENT_ACQUISITION_LEDGER)
         document_summary = AutomaticOfficialDocumentPipeline(
