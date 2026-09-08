@@ -16,6 +16,7 @@ from modules.company_intelligence.company_coverage_job_provider import load_comp
 from modules.company_intelligence.quarterly_monitoring_job_provider import load_quarterly_monitoring_jobs
 from modules.company_intelligence.primary_indicator_cycle import process_primary_indicator_observations
 from modules.company_intelligence.automatic_imd_rainfall_monitor import run_automatic_imd_rainfall_monitor
+from modules.company_intelligence.automatic_crop_sowing_monitor import crop_area_urls_from_research, run_automatic_crop_sowing_monitor
 from modules.company_intelligence.review_memory_report import build_review_memory_report
 from modules.company_intelligence.collection_outcome import describe_document_collection
 from modules.company_intelligence.quarterly_source_retry import run_source_retries
@@ -107,6 +108,8 @@ def main() -> int:
         # internally weekly-cadenced and records only a hash-bound IMD baseline
         # or comparison; it cannot promote a catalyst or alter the verdict.
         status['official_indicator_assets'] = run_automatic_imd_rainfall_monitor(ROOT, now=started_at)
+        status['official_crop_sowing'] = run_automatic_crop_sowing_monitor(
+            ROOT, candidate_urls=crop_area_urls_from_research(result.results), now=started_at)
 
         acquisition_ledger = PublicSourceAcquisitionLedger(DOCUMENT_ACQUISITION_LEDGER)
         document_summary = AutomaticOfficialDocumentPipeline(

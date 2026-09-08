@@ -12200,9 +12200,10 @@
                         "crop sowing",
                         "year-on-year"
                       ],
+                      "collection_instruction": "Return the latest All-India Kharif or Rabi crop-area release with the reporting date, current total area and corresponding prior-year total area. Preserve crop-wise rows; exclude forecasts and commentary without the official table.",
                       "favourable_direction": "UP",
-                      "source_requirement": "Ministry of Agriculture primary acreage release",
-                      "source_domain": "agriwelfare.gov.in",
+                      "source_requirement": "Ministry of Agriculture release published by Press Information Bureau",
+                      "source_domain": "www.pib.gov.in",
                       "cadence": "Weekly during sowing season",
                       "improvement_meaning": "Acreage recovery would support fertiliser and crop-protection demand potential.",
                       "deterioration_meaning": "A sustained acreage decline would increase demand risk, subject to crop and regional mix."
@@ -12383,9 +12384,10 @@
                     "crop sowing",
                     "year-on-year"
                   ],
+                  "collection_instruction": "Return the latest All-India Kharif or Rabi crop-area release with the reporting date, current total area and corresponding prior-year total area. Preserve crop-wise rows; exclude forecasts and commentary without the official table.",
                   "favourable_direction": "UP",
-                  "source_requirement": "Ministry of Agriculture primary acreage release",
-                  "source_domain": "agriwelfare.gov.in",
+                  "source_requirement": "Ministry of Agriculture release published by Press Information Bureau",
+                  "source_domain": "www.pib.gov.in",
                   "cadence": "Weekly during sowing season",
                   "improvement_meaning": "Acreage recovery would support fertiliser and crop-protection demand potential.",
                   "deterioration_meaning": "A sustained acreage decline would increase demand risk, subject to crop and regional mix.",
@@ -12393,9 +12395,9 @@
                   "cause": "Rainfall deficit created a near-term demand risk",
                   "cause_effect": "CONTEXT",
                   "latest_signal": "AWAITING_COMPARABLE_OBSERVATION",
-                  "record_count": 0,
-                  "latest_value": null,
-                  "latest_date": null
+                  "record_count": 1,
+                  "latest_value": "-1.60",
+                  "latest_date": "2026-09-04"
                 }
               ],
               "invalidCount": 0,
@@ -13455,7 +13457,7 @@
         ]
       },
       "intelligenceSnapshot": {
-        "generatedAt": "2026-09-08T13:13:05.096890+00:00",
+        "generatedAt": "2026-09-08T13:21:33.780625+00:00",
         "verdictStatus": "RESEARCH_HOLD",
         "verdict": null,
         "confidencePercent": null,
