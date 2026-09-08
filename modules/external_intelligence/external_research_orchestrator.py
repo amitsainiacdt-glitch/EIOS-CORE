@@ -460,16 +460,29 @@ class ExternalResearchOrchestrator:
                 )
 
             except Exception as exc:
-
-                retrieval_failures.append(
-                    RetrievalFailure(
+                # Some official sites block direct automated PDF retrieval.
+                # Accept only the provider's preserved raw copy of the exact
+                # result URL; never promote the shorter search snippet.
+                if getattr(result, "raw_content", "") and getattr(result, "delivery_provider", ""):
+                    retrieved = RetrievedContent(
                         url=result.url,
-                        error_type=type(exc).__name__,
-                        error_message=str(exc),
+                        status_code=200,
+                        content=result.raw_content,
+                        content_type="text/plain; delivery=provider-mediated",
+                        headers={
+                            "X-EIOS-Delivery-Provider": result.delivery_provider,
+                            "X-EIOS-Direct-Retrieval-Error": type(exc).__name__,
+                        },
                     )
-                )
-
-                continue
+                else:
+                    retrieval_failures.append(
+                        RetrievalFailure(
+                            url=result.url,
+                            error_type=type(exc).__name__,
+                            error_message=str(exc),
+                        )
+                    )
+                    continue
 
             # ==================================================
             # SUCCESSFUL RETRIEVAL
@@ -609,6 +622,7 @@ class ExternalResearchOrchestrator:
                     research_intent=query.intent,
                     retrieved_at=retrieved_at,
                     content_type=normalized.content_type,
+                    extraction_method=retrieved.headers.get("X-EIOS-Delivery-Provider"),
                     entity_domain=entity_domain,
                 )
             )

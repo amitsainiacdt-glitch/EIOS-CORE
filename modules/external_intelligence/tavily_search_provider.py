@@ -119,7 +119,13 @@ class TavilySearchProvider(SearchProvider):
             "query": query.query,
             "search_depth": "basic",
             "include_answer": False,
-            "include_raw_content": False,
+            "include_raw_content": (
+                "text" if query.intent in {
+                    "OFFICIAL_DOCUMENT_DISCOVERY",
+                    "EXCHANGE_DISCLOSURES",
+                    "PRIMARY_INDICATOR_MONITORING",
+                } else False
+            ),
             "max_results": 5,
         }
 
@@ -166,6 +172,8 @@ class TavilySearchProvider(SearchProvider):
                 )
             )
 
+            raw_content = str(item.get("raw_content") or "")
+
             if not url:
                 continue
 
@@ -175,6 +183,10 @@ class TavilySearchProvider(SearchProvider):
                     url=url,
                     snippet=snippet,
                     source="Tavily Search",
+                    raw_content=raw_content,
+                    delivery_provider=(
+                        "TAVILY_SEARCH_RAW_CONTENT" if raw_content else ""
+                    ),
                 )
             )
 

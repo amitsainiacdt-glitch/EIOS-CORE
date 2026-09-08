@@ -39,6 +39,12 @@ class ExternalSearchResult:
 
     source: str = ""
 
+    # Optional provider-delivered copy of content from the exact result URL.
+    # This records a transport route, not independent corroboration.
+    raw_content: str = ""
+
+    delivery_provider: str = ""
+
 
 __all__ = [
     "ExternalSearchResult",

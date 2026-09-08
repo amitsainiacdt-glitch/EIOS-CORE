@@ -29,10 +29,16 @@ class PrimaryIndicatorCycleTests(unittest.TestCase):
             summary = process_primary_indicator_results(
                 (result,), ledger_path=path, recorded_at=datetime(2026, 9, 8, tzinfo=timezone.utc)
             )
+            replay = process_primary_indicator_results(
+                (result,), ledger_path=path, recorded_at=datetime(2026, 9, 9, tzinfo=timezone.utc)
+            )
             records = PrimaryIndicatorLedger(path).read_all()
 
         self.assertEqual(summary['recorded'], 1)
         self.assertEqual(summary['held'], 0)
+        self.assertEqual(replay['recorded'], 0)
+        self.assertEqual(replay['already_recorded'], 1)
+        self.assertEqual(len(records), 1)
         self.assertFalse(summary['creates_catalyst'])
         self.assertFalse(summary['changes_verdict'])
         self.assertFalse(summary['authorizes_trade'])

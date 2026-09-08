@@ -12,7 +12,7 @@ from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from modules.company_intelligence.primary_indicator_cycle import process_primary_indicator_results
+from modules.company_intelligence.primary_indicator_cycle import process_primary_indicator_observations
 from modules.company_intelligence.quarterly_monitoring_job_provider import load_quarterly_monitoring_jobs
 from modules.external_intelligence.research_runtime_bootstrap import ResearchRuntimeBootstrap, ResearchRuntimeBootstrapConfig
 
@@ -42,8 +42,8 @@ def main(argv=None):
         runtime, result = ResearchRuntimeBootstrap(config, job_provider=lambda: jobs).run_once(
             started.replace(tzinfo=None)
         )
-        indicator = process_primary_indicator_results(
-            result.results,
+        indicator = process_primary_indicator_observations(
+            runtime.observation_registry.all(),
             ledger_path=ROOT / "data/company_intelligence/primary_indicator_records.jsonl",
             recorded_at=started,
         )

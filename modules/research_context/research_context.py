@@ -11,6 +11,7 @@ Release 18.3
 """
 
 from datetime import datetime
+import sys
 
 from modules.intelligence.intelligence_mesh import IntelligenceMesh
 
@@ -79,10 +80,15 @@ class ResearchContext:
 
     def publish_intelligence(self, intelligence):
         self.intelligence_mesh.publish(intelligence)
-        print(
+        message = (
             f"Published Intelligence: {intelligence.title} "
             f"({self.intelligence_mesh.count()} total)"
-    )
+        )
+        try:
+            print(message)
+        except UnicodeEncodeError:
+            encoding = getattr(sys.stdout, "encoding", None) or "ascii"
+            print(message.encode(encoding, errors="backslashreplace").decode(encoding))
 
     # -------------------------------------------------
     # Evidence
