@@ -43,6 +43,7 @@ TEN_YEAR_FINANCIAL_HISTORY_PATHS = {
 }
 OUTPUT_PATH = ROOT / "local_status_dashboard" / "lib" / "live-status.json"
 RUNTIME_STATUS_PATH = ROOT / "data" / "runtime" / "automatic_company_cycle_status.json"
+SECTOR_CATALYST_COVERAGE_PATH = ROOT / "data" / "company_intelligence" / "sector_catalyst_coverage.json"
 
 
 def read_json(path: Path):
@@ -328,6 +329,7 @@ def main() -> None:
         })
 
     official_documents = runtime_status.get("official_documents") or {}
+    sector_coverage = read_json(SECTOR_CATALYST_COVERAGE_PATH) if SECTOR_CATALYST_COVERAGE_PATH.is_file() else None
     snapshot = {
         "caseId": readiness["inputs"]["case_id"],
         "stage": assessment["stage"],
@@ -368,6 +370,14 @@ def main() -> None:
                 "fallbackProviders": official_documents.get("fallback_providers", {}),
             },
         },
+        "sectorCatalystCoverage": ({
+            "status": "PASSIVE_CAUSAL_KNOWLEDGE",
+            "sectorCount": sector_coverage["sectorCount"],
+            "indicatorCount": sector_coverage["indicatorCount"],
+            "coveredSectorIds": [item["sectorId"] for item in sector_coverage["sectors"]],
+            "createsCatalyst": False,
+            "changesVerdict": False,
+        } if sector_coverage else None),
     }
 
     eligible_companies = [

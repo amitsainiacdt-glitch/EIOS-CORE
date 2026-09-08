@@ -1,0 +1,5862 @@
+{
+  "schemaVersion": 1,
+  "registryVersion": "2026-09-08",
+  "sectorCount": 35,
+  "indicatorCount": 29,
+  "sectors": [
+    {
+      "sectorId": "AEROSPACE",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "DEFENCE_ORDER_EXECUTION_CASH",
+          "name": "Defence order execution and cash conversion",
+          "eventTypes": [
+            "TENDER",
+            "ORDER_CONTRACT",
+            "EXECUTION_UPDATE"
+          ],
+          "economicVariable": "Funded executable order, milestone delivery, indigenous content and customer advances",
+          "expectedDirection": "SUPPORTIVE",
+          "leadTimeQuarters": [
+            2,
+            12
+          ],
+          "earningsChannels": [
+            "ORDER_BOOK",
+            "REVENUE",
+            "MARGIN",
+            "WORKING_CAPITAL",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "DEFENCE_PRIME",
+            "ELECTRONICS_SUPPLIER",
+            "SHIPYARD"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEFENCE_MINISTRY_CONTRACT",
+            "EXCHANGE_FILING"
+          ],
+          "corroboratingSourceTypes": [
+            "BUDGET_DOCUMENT",
+            "CUSTOMER_ACCEPTANCE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 180,
+          "falsePositiveConditions": [
+            "Expression of interest",
+            "Framework value without funded quantity"
+          ],
+          "contradictionTests": [
+            "Acceptance delayed",
+            "Receivables rise"
+          ],
+          "killTests": [
+            "Contract cancelled",
+            "Security clearance or execution failure"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "AGRICULTURE",
+      "indicatorCount": 13,
+      "indicators": [
+        {
+          "indicatorId": "AGRICULTURAL_DROUGHT_COMPOSITE",
+          "name": "Multi-dimensional agricultural drought",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "HYDROLOGY",
+            "CROP_PROGRESS",
+            "SATELLITE_CROP_CONDITION"
+          ],
+          "economicVariable": "Persistent crop-water stress by crop and geography",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "ACREAGE",
+            "YIELD",
+            "INPUT_DEMAND",
+            "FOOD_SUPPLY"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "SEED_COMPANY",
+            "AGROCHEMICAL_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "IMD_WEATHER_DATA",
+            "MNCFC_DROUGHT_ASSESSMENT",
+            "NRSC_EARTH_OBSERVATION"
+          ],
+          "corroboratingSourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "STATE_SOWING_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "All-India deficit hides normal crop districts",
+            "Short deficit followed by recovery",
+            "Rain outside crop areas"
+          ],
+          "contradictionTests": [
+            "Soil moisture normal",
+            "Vegetation condition normal",
+            "Sowing catches up"
+          ],
+          "killTests": [
+            "Rainfall and soil moisture recover",
+            "Irrigation fully offsets stress",
+            "Crop condition remains normal"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "AGRI_SUPPLY_CHAIN_AMPLIFICATION",
+          "name": "Agricultural supply-chain amplification",
+          "eventTypes": [
+            "AGRI_PRICE_SUPPLY_CHAIN",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Farm-gate to wholesale and retail price wedge",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RAW_MATERIAL_COST",
+            "GROSS_MARGIN",
+            "WASTAGE",
+            "REALIZATION"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "RETAILER",
+            "COLD_CHAIN_COMPANY",
+            "LOGISTICS_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "AGMARKNET_MANDI_DATA",
+            "CONSUMER_AFFAIRS_PRICE_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "RAIL_ROAD_MOVEMENT",
+            "COMPANY_PROCUREMENT_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 14,
+          "falsePositiveConditions": [
+            "Festival seasonality",
+            "Local transport event without production loss"
+          ],
+          "contradictionTests": [
+            "Market arrivals normalize",
+            "Retail-farm spread contracts"
+          ],
+          "killTests": [
+            "Government logistics intervention",
+            "Perishable supply recovers"
+          ],
+          "requiredUpstreamIndicators": [
+            "CROP_STAGE_WATER_STRESS",
+            "SATELLITE_CROP_HEALTH_DIVERGENCE"
+          ]
+        },
+        {
+          "indicatorId": "CROP_STAGE_WATER_STRESS",
+          "name": "Crop-stage water stress",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS",
+            "SATELLITE_CROP_CONDITION"
+          ],
+          "economicVariable": "Water stress at crop-specific sensitive growth stages",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "YIELD",
+            "QUALITY",
+            "HARVEST_TIMING"
+          ],
+          "companyArchetypes": [
+            "GRAIN_PRODUCER",
+            "FOOD_PROCESSOR",
+            "SEED_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "IMD_AGROMET_ADVISORY",
+            "MNCFC_CROP_FORECAST"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_CROP_REPORT",
+            "SATELLITE_CROP_HEALTH"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Stress occurs outside the sensitive stage",
+            "Short-duration variety escapes stress"
+          ],
+          "contradictionTests": [
+            "Crop stage unaffected",
+            "Late rain restores development"
+          ],
+          "killTests": [
+            "Crop condition recovers",
+            "Harvest is already complete"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        },
+        {
+          "indicatorId": "CROP_SWITCH_AND_INPUT_MIX",
+          "name": "Crop switching and agricultural input mix",
+          "eventTypes": [
+            "CROP_PROGRESS",
+            "AGRI_PRICE_SUPPLY_CHAIN",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Acreage migration among crops and varieties",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "SEED_VOLUME",
+            "FERTILIZER_MIX",
+            "PESTICIDE_MIX",
+            "CROP_SUPPLY"
+          ],
+          "companyArchetypes": [
+            "SEED_COMPANY",
+            "AGROCHEMICAL_COMPANY",
+            "FERTILIZER_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "MINISTRY_SOWING_DATA",
+            "MSP_PROCUREMENT_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "SATELLITE_ACREAGE",
+            "MANDI_PRICES"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "Temporary sowing delay mistaken for crop switch",
+            "Reported acreage revisions"
+          ],
+          "contradictionTests": [
+            "Original crop acreage catches up",
+            "Price incentives reverse"
+          ],
+          "killTests": [
+            "No confirmed acreage substitution",
+            "Seed availability prevents switching"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS"
+          ]
+        },
+        {
+          "indicatorId": "FERTILIZER_APPLICATION_TIMING",
+          "name": "Fertilizer purchase and application timing",
+          "eventTypes": [
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "Crop-stage fertilizer application and deferred demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "INVENTORY",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "UREA_PRODUCER",
+            "PHOSPHATIC_FERTILIZER_PRODUCER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "STATE_AGRICULTURE_INPUT_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "COMPANY_CHANNEL_DISCLOSURE",
+            "SOWING_PROGRESS"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Dealer stocking mistaken for farm application",
+            "Delayed sales mistaken for destroyed demand"
+          ],
+          "contradictionTests": [
+            "Sowing catches up",
+            "Application resumes after rain"
+          ],
+          "killTests": [
+            "Seasonal application volume normalizes",
+            "Crop abandonment becomes widespread"
+          ],
+          "requiredUpstreamIndicators": [
+            "CROP_STAGE_WATER_STRESS",
+            "IRRIGATION_DROUGHT_SHIELD"
+          ]
+        },
+        {
+          "indicatorId": "FERTILIZER_GLOBAL_INPUT_STRESS",
+          "name": "Global fertilizer input and logistics stress",
+          "eventTypes": [
+            "GLOBAL_INPUT_COST",
+            "FERTILIZER_MARKET",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Gas, ammonia, phosphate, potash, currency, freight, imports, and subsidy receivables",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "INPUT_COST",
+            "IMPORT_AVAILABILITY",
+            "MARGIN",
+            "SUBSIDY_RECEIVABLE",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "FERTILIZER_IMPORTER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CUSTOMS_IMPORT_DATA",
+            "GOVERNMENT_FERTILIZER_BULLETIN"
+          ],
+          "corroboratingSourceTypes": [
+            "GLOBAL_COMMODITY_DATA",
+            "SHIPPING_DATA",
+            "COMPANY_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Quoted spot price lacks traded volume",
+            "Currency move is temporary"
+          ],
+          "contradictionTests": [
+            "Long-term contracts protect cost",
+            "Subsidy adjustment offsets shock"
+          ],
+          "killTests": [
+            "Supply normalizes",
+            "Working-capital funding fails",
+            "Domestic price controls eliminate pass-through"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "FOOD_POLICY_INTERVENTION_SUPPRESSOR",
+          "name": "Food and fertilizer policy intervention suppressor",
+          "eventTypes": [
+            "FOOD_STOCK_POLICY",
+            "POLICY_REGULATION",
+            "FERTILIZER_MARKET"
+          ],
+          "economicVariable": "Government buffer, procurement, trade, stock-limit, allocation and subsidy response",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "MARKET_PRICE",
+            "PROCUREMENT",
+            "INVENTORY",
+            "MARGIN",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "GRAIN_TRADER",
+            "FERTILIZER_PRODUCER",
+            "SUGAR_MILL"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DFPD_FCI_STOCK_DATA",
+            "DGFT_TRADE_POLICY",
+            "FERTILIZER_SUBSIDY_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "CUSTOMS_TRADE_DATA",
+            "GOVERNMENT_PROCUREMENT_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 14,
+          "falsePositiveConditions": [
+            "Announcement without implementation",
+            "National stocks unavailable in deficit region"
+          ],
+          "contradictionTests": [
+            "Buffer release is too small",
+            "Import logistics are delayed"
+          ],
+          "killTests": [
+            "Effective intervention caps prices",
+            "Policy removes producer economics"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "IRRIGATION_DROUGHT_SHIELD",
+          "name": "Irrigation and groundwater drought shield",
+          "eventTypes": [
+            "HYDROLOGY",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Effective irrigation protection by crop geography",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "ACREAGE",
+            "YIELD",
+            "PUMP_DEMAND",
+            "POWER_COST"
+          ],
+          "companyArchetypes": [
+            "IRRIGATED_FARM_INPUT_COMPANY",
+            "IRRIGATION_EQUIPMENT_COMPANY",
+            "RURAL_LENDER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "CGWB_GROUNDWATER_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_IRRIGATION_DATA",
+            "NRSC_SOIL_MOISTURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "Headline storage masks basin deficit",
+            "Installed irrigation lacks water or power"
+          ],
+          "contradictionTests": [
+            "Reservoir and groundwater remain adequate",
+            "Irrigation coverage exceeds vulnerable acreage"
+          ],
+          "killTests": [
+            "Effective irrigation fully protects the crop",
+            "Water releases normalize"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        },
+        {
+          "indicatorId": "NUTRIENT_MIX_SUBSTITUTION",
+          "name": "Nutrient and product-mix substitution",
+          "eventTypes": [
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Urea, DAP, NPK, MOP, specialty and biological nutrient mix",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "PRODUCT_MIX",
+            "REALIZATION",
+            "MARGIN",
+            "IMPORT_REQUIREMENT"
+          ],
+          "companyArchetypes": [
+            "UREA_PRODUCER",
+            "DAP_PRODUCER",
+            "NPK_PRODUCER",
+            "SPECIALTY_NUTRIENT_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "FERTILIZER_SUBSIDY_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_PRODUCT_SALES",
+            "COMPANY_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 30,
+          "falsePositiveConditions": [
+            "Substitution is caused only by temporary shortage",
+            "Channel inventory distorts reported mix"
+          ],
+          "contradictionTests": [
+            "Product availability normalizes",
+            "Crop mix is unchanged"
+          ],
+          "killTests": [
+            "No persistent state-level mix change",
+            "Subsidy change reverses"
+          ],
+          "requiredUpstreamIndicators": [
+            "FERTILIZER_APPLICATION_TIMING"
+          ]
+        },
+        {
+          "indicatorId": "RABI_WATER_CARRYOVER",
+          "name": "Rabi water and soil-moisture carryover",
+          "eventTypes": [
+            "HYDROLOGY",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "Post-monsoon water available for rabi planting",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RABI_ACREAGE",
+            "RABI_YIELD",
+            "WINTER_INPUT_DEMAND"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "SEED_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "IMD_POST_MONSOON_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_SOWING_DATA",
+            "NRSC_SOIL_MOISTURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Reservoirs are outside crop basin",
+            "Stored water allocated away from agriculture"
+          ],
+          "contradictionTests": [
+            "Northeast monsoon replenishes water",
+            "Rabi sowing remains normal"
+          ],
+          "killTests": [
+            "Rabi water availability normalizes",
+            "Crop acreage is unaffected"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "IRRIGATION_DROUGHT_SHIELD"
+          ]
+        },
+        {
+          "indicatorId": "RAINFALL_FERTILIZER_RESPONSE_CURVE",
+          "name": "Rainfall-to-fertilizer response asymmetry",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Crop- and moisture-specific economically optimal fertilizer demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "MIX",
+            "REALIZATION",
+            "EBITDA",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "FERTILIZER_IMPORTER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "IMD_AGROMET_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "MNCFC_CROP_CONDITION",
+            "COMPANY_CHANNEL_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Rainfall headline used without crop exposure",
+            "Price rise mistaken for producer margin"
+          ],
+          "contradictionTests": [
+            "Irrigation offsets stress",
+            "Sales and application remain normal",
+            "Crop acreage shifts to different nutrient needs"
+          ],
+          "killTests": [
+            "Severe acreage loss",
+            "Government allocation or subsidy changes dominate",
+            "Raw-material shock removes margin benefit"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS",
+            "IRRIGATION_DROUGHT_SHIELD",
+            "FERTILIZER_APPLICATION_TIMING",
+            "NUTRIENT_MIX_SUBSTITUTION"
+          ]
+        },
+        {
+          "indicatorId": "RAINFALL_RURAL_DEMAND_TRANSMISSION",
+          "name": "Rainfall-to-rural-income and demand transmission",
+          "eventTypes": [
+            "RURAL_DEMAND",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Farm income, rural liquidity, credit quality, and non-farm demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RURAL_VOLUME",
+            "DELINQUENCY",
+            "CREDIT_DEMAND",
+            "DEALER_INVENTORY"
+          ],
+          "companyArchetypes": [
+            "TRACTOR_MAKER",
+            "TWO_WHEELER_MAKER",
+            "RURAL_FMCG",
+            "MICROFINANCE_LENDER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "RURAL_WAGE_AND_DEMAND_DATA",
+            "AGRICULTURE_OUTPUT_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "COMPANY_RURAL_CHANNEL_DISCLOSURE",
+            "CREDIT_BUREAU_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 60,
+          "falsePositiveConditions": [
+            "Government transfers offset income loss",
+            "Urban demand masks rural weakness"
+          ],
+          "contradictionTests": [
+            "Rural wages and sales remain firm",
+            "Credit stress does not rise"
+          ],
+          "killTests": [
+            "Income support fully offsets shock",
+            "Crop outcome recovers"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS"
+          ]
+        },
+        {
+          "indicatorId": "SATELLITE_CROP_HEALTH_DIVERGENCE",
+          "name": "Satellite crop-health divergence",
+          "eventTypes": [
+            "SATELLITE_CROP_CONDITION",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "NDVI, NDWI, VCI, VHI, soil moisture, acreage and forecast divergence",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "PRODUCTION_ESTIMATE",
+            "YIELD",
+            "PROCUREMENT",
+            "FOOD_INVENTORY"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "COMMODITY_USER",
+            "AGRI_INPUT_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "MNCFC_FASAL",
+            "NRSC_NDVI_NDWI"
+          ],
+          "corroboratingSourceTypes": [
+            "NISAR_SOIL_MOISTURE",
+            "STATE_GROUND_REPORT"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 30,
+          "falsePositiveConditions": [
+            "Cloud contamination",
+            "Normal seasonal phenology",
+            "Crop calendar mismatch"
+          ],
+          "contradictionTests": [
+            "Ground reports remain normal",
+            "Later imagery recovers"
+          ],
+          "killTests": [
+            "No persistent spectral divergence",
+            "Official acreage confirms normal crop"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        }
+      ]
+    },
+    {
+      "sectorId": "AGRI_FINANCE",
+      "indicatorCount": 13,
+      "indicators": [
+        {
+          "indicatorId": "AGRICULTURAL_DROUGHT_COMPOSITE",
+          "name": "Multi-dimensional agricultural drought",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "HYDROLOGY",
+            "CROP_PROGRESS",
+            "SATELLITE_CROP_CONDITION"
+          ],
+          "economicVariable": "Persistent crop-water stress by crop and geography",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "ACREAGE",
+            "YIELD",
+            "INPUT_DEMAND",
+            "FOOD_SUPPLY"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "SEED_COMPANY",
+            "AGROCHEMICAL_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "IMD_WEATHER_DATA",
+            "MNCFC_DROUGHT_ASSESSMENT",
+            "NRSC_EARTH_OBSERVATION"
+          ],
+          "corroboratingSourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "STATE_SOWING_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "All-India deficit hides normal crop districts",
+            "Short deficit followed by recovery",
+            "Rain outside crop areas"
+          ],
+          "contradictionTests": [
+            "Soil moisture normal",
+            "Vegetation condition normal",
+            "Sowing catches up"
+          ],
+          "killTests": [
+            "Rainfall and soil moisture recover",
+            "Irrigation fully offsets stress",
+            "Crop condition remains normal"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "AGRI_SUPPLY_CHAIN_AMPLIFICATION",
+          "name": "Agricultural supply-chain amplification",
+          "eventTypes": [
+            "AGRI_PRICE_SUPPLY_CHAIN",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Farm-gate to wholesale and retail price wedge",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RAW_MATERIAL_COST",
+            "GROSS_MARGIN",
+            "WASTAGE",
+            "REALIZATION"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "RETAILER",
+            "COLD_CHAIN_COMPANY",
+            "LOGISTICS_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "AGMARKNET_MANDI_DATA",
+            "CONSUMER_AFFAIRS_PRICE_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "RAIL_ROAD_MOVEMENT",
+            "COMPANY_PROCUREMENT_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 14,
+          "falsePositiveConditions": [
+            "Festival seasonality",
+            "Local transport event without production loss"
+          ],
+          "contradictionTests": [
+            "Market arrivals normalize",
+            "Retail-farm spread contracts"
+          ],
+          "killTests": [
+            "Government logistics intervention",
+            "Perishable supply recovers"
+          ],
+          "requiredUpstreamIndicators": [
+            "CROP_STAGE_WATER_STRESS",
+            "SATELLITE_CROP_HEALTH_DIVERGENCE"
+          ]
+        },
+        {
+          "indicatorId": "CROP_STAGE_WATER_STRESS",
+          "name": "Crop-stage water stress",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS",
+            "SATELLITE_CROP_CONDITION"
+          ],
+          "economicVariable": "Water stress at crop-specific sensitive growth stages",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "YIELD",
+            "QUALITY",
+            "HARVEST_TIMING"
+          ],
+          "companyArchetypes": [
+            "GRAIN_PRODUCER",
+            "FOOD_PROCESSOR",
+            "SEED_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "IMD_AGROMET_ADVISORY",
+            "MNCFC_CROP_FORECAST"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_CROP_REPORT",
+            "SATELLITE_CROP_HEALTH"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Stress occurs outside the sensitive stage",
+            "Short-duration variety escapes stress"
+          ],
+          "contradictionTests": [
+            "Crop stage unaffected",
+            "Late rain restores development"
+          ],
+          "killTests": [
+            "Crop condition recovers",
+            "Harvest is already complete"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        },
+        {
+          "indicatorId": "CROP_SWITCH_AND_INPUT_MIX",
+          "name": "Crop switching and agricultural input mix",
+          "eventTypes": [
+            "CROP_PROGRESS",
+            "AGRI_PRICE_SUPPLY_CHAIN",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Acreage migration among crops and varieties",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "SEED_VOLUME",
+            "FERTILIZER_MIX",
+            "PESTICIDE_MIX",
+            "CROP_SUPPLY"
+          ],
+          "companyArchetypes": [
+            "SEED_COMPANY",
+            "AGROCHEMICAL_COMPANY",
+            "FERTILIZER_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "MINISTRY_SOWING_DATA",
+            "MSP_PROCUREMENT_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "SATELLITE_ACREAGE",
+            "MANDI_PRICES"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "Temporary sowing delay mistaken for crop switch",
+            "Reported acreage revisions"
+          ],
+          "contradictionTests": [
+            "Original crop acreage catches up",
+            "Price incentives reverse"
+          ],
+          "killTests": [
+            "No confirmed acreage substitution",
+            "Seed availability prevents switching"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS"
+          ]
+        },
+        {
+          "indicatorId": "FERTILIZER_APPLICATION_TIMING",
+          "name": "Fertilizer purchase and application timing",
+          "eventTypes": [
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "Crop-stage fertilizer application and deferred demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "INVENTORY",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "UREA_PRODUCER",
+            "PHOSPHATIC_FERTILIZER_PRODUCER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "STATE_AGRICULTURE_INPUT_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "COMPANY_CHANNEL_DISCLOSURE",
+            "SOWING_PROGRESS"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Dealer stocking mistaken for farm application",
+            "Delayed sales mistaken for destroyed demand"
+          ],
+          "contradictionTests": [
+            "Sowing catches up",
+            "Application resumes after rain"
+          ],
+          "killTests": [
+            "Seasonal application volume normalizes",
+            "Crop abandonment becomes widespread"
+          ],
+          "requiredUpstreamIndicators": [
+            "CROP_STAGE_WATER_STRESS",
+            "IRRIGATION_DROUGHT_SHIELD"
+          ]
+        },
+        {
+          "indicatorId": "FERTILIZER_GLOBAL_INPUT_STRESS",
+          "name": "Global fertilizer input and logistics stress",
+          "eventTypes": [
+            "GLOBAL_INPUT_COST",
+            "FERTILIZER_MARKET",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Gas, ammonia, phosphate, potash, currency, freight, imports, and subsidy receivables",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "INPUT_COST",
+            "IMPORT_AVAILABILITY",
+            "MARGIN",
+            "SUBSIDY_RECEIVABLE",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "FERTILIZER_IMPORTER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CUSTOMS_IMPORT_DATA",
+            "GOVERNMENT_FERTILIZER_BULLETIN"
+          ],
+          "corroboratingSourceTypes": [
+            "GLOBAL_COMMODITY_DATA",
+            "SHIPPING_DATA",
+            "COMPANY_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Quoted spot price lacks traded volume",
+            "Currency move is temporary"
+          ],
+          "contradictionTests": [
+            "Long-term contracts protect cost",
+            "Subsidy adjustment offsets shock"
+          ],
+          "killTests": [
+            "Supply normalizes",
+            "Working-capital funding fails",
+            "Domestic price controls eliminate pass-through"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "FOOD_POLICY_INTERVENTION_SUPPRESSOR",
+          "name": "Food and fertilizer policy intervention suppressor",
+          "eventTypes": [
+            "FOOD_STOCK_POLICY",
+            "POLICY_REGULATION",
+            "FERTILIZER_MARKET"
+          ],
+          "economicVariable": "Government buffer, procurement, trade, stock-limit, allocation and subsidy response",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "MARKET_PRICE",
+            "PROCUREMENT",
+            "INVENTORY",
+            "MARGIN",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "GRAIN_TRADER",
+            "FERTILIZER_PRODUCER",
+            "SUGAR_MILL"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DFPD_FCI_STOCK_DATA",
+            "DGFT_TRADE_POLICY",
+            "FERTILIZER_SUBSIDY_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "CUSTOMS_TRADE_DATA",
+            "GOVERNMENT_PROCUREMENT_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 14,
+          "falsePositiveConditions": [
+            "Announcement without implementation",
+            "National stocks unavailable in deficit region"
+          ],
+          "contradictionTests": [
+            "Buffer release is too small",
+            "Import logistics are delayed"
+          ],
+          "killTests": [
+            "Effective intervention caps prices",
+            "Policy removes producer economics"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "IRRIGATION_DROUGHT_SHIELD",
+          "name": "Irrigation and groundwater drought shield",
+          "eventTypes": [
+            "HYDROLOGY",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Effective irrigation protection by crop geography",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "ACREAGE",
+            "YIELD",
+            "PUMP_DEMAND",
+            "POWER_COST"
+          ],
+          "companyArchetypes": [
+            "IRRIGATED_FARM_INPUT_COMPANY",
+            "IRRIGATION_EQUIPMENT_COMPANY",
+            "RURAL_LENDER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "CGWB_GROUNDWATER_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_IRRIGATION_DATA",
+            "NRSC_SOIL_MOISTURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "Headline storage masks basin deficit",
+            "Installed irrigation lacks water or power"
+          ],
+          "contradictionTests": [
+            "Reservoir and groundwater remain adequate",
+            "Irrigation coverage exceeds vulnerable acreage"
+          ],
+          "killTests": [
+            "Effective irrigation fully protects the crop",
+            "Water releases normalize"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        },
+        {
+          "indicatorId": "NUTRIENT_MIX_SUBSTITUTION",
+          "name": "Nutrient and product-mix substitution",
+          "eventTypes": [
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Urea, DAP, NPK, MOP, specialty and biological nutrient mix",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "PRODUCT_MIX",
+            "REALIZATION",
+            "MARGIN",
+            "IMPORT_REQUIREMENT"
+          ],
+          "companyArchetypes": [
+            "UREA_PRODUCER",
+            "DAP_PRODUCER",
+            "NPK_PRODUCER",
+            "SPECIALTY_NUTRIENT_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "FERTILIZER_SUBSIDY_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_PRODUCT_SALES",
+            "COMPANY_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 30,
+          "falsePositiveConditions": [
+            "Substitution is caused only by temporary shortage",
+            "Channel inventory distorts reported mix"
+          ],
+          "contradictionTests": [
+            "Product availability normalizes",
+            "Crop mix is unchanged"
+          ],
+          "killTests": [
+            "No persistent state-level mix change",
+            "Subsidy change reverses"
+          ],
+          "requiredUpstreamIndicators": [
+            "FERTILIZER_APPLICATION_TIMING"
+          ]
+        },
+        {
+          "indicatorId": "RABI_WATER_CARRYOVER",
+          "name": "Rabi water and soil-moisture carryover",
+          "eventTypes": [
+            "HYDROLOGY",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "Post-monsoon water available for rabi planting",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RABI_ACREAGE",
+            "RABI_YIELD",
+            "WINTER_INPUT_DEMAND"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "SEED_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "IMD_POST_MONSOON_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_SOWING_DATA",
+            "NRSC_SOIL_MOISTURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Reservoirs are outside crop basin",
+            "Stored water allocated away from agriculture"
+          ],
+          "contradictionTests": [
+            "Northeast monsoon replenishes water",
+            "Rabi sowing remains normal"
+          ],
+          "killTests": [
+            "Rabi water availability normalizes",
+            "Crop acreage is unaffected"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "IRRIGATION_DROUGHT_SHIELD"
+          ]
+        },
+        {
+          "indicatorId": "RAINFALL_FERTILIZER_RESPONSE_CURVE",
+          "name": "Rainfall-to-fertilizer response asymmetry",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Crop- and moisture-specific economically optimal fertilizer demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "MIX",
+            "REALIZATION",
+            "EBITDA",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "FERTILIZER_IMPORTER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "IMD_AGROMET_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "MNCFC_CROP_CONDITION",
+            "COMPANY_CHANNEL_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Rainfall headline used without crop exposure",
+            "Price rise mistaken for producer margin"
+          ],
+          "contradictionTests": [
+            "Irrigation offsets stress",
+            "Sales and application remain normal",
+            "Crop acreage shifts to different nutrient needs"
+          ],
+          "killTests": [
+            "Severe acreage loss",
+            "Government allocation or subsidy changes dominate",
+            "Raw-material shock removes margin benefit"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS",
+            "IRRIGATION_DROUGHT_SHIELD",
+            "FERTILIZER_APPLICATION_TIMING",
+            "NUTRIENT_MIX_SUBSTITUTION"
+          ]
+        },
+        {
+          "indicatorId": "RAINFALL_RURAL_DEMAND_TRANSMISSION",
+          "name": "Rainfall-to-rural-income and demand transmission",
+          "eventTypes": [
+            "RURAL_DEMAND",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Farm income, rural liquidity, credit quality, and non-farm demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RURAL_VOLUME",
+            "DELINQUENCY",
+            "CREDIT_DEMAND",
+            "DEALER_INVENTORY"
+          ],
+          "companyArchetypes": [
+            "TRACTOR_MAKER",
+            "TWO_WHEELER_MAKER",
+            "RURAL_FMCG",
+            "MICROFINANCE_LENDER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "RURAL_WAGE_AND_DEMAND_DATA",
+            "AGRICULTURE_OUTPUT_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "COMPANY_RURAL_CHANNEL_DISCLOSURE",
+            "CREDIT_BUREAU_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 60,
+          "falsePositiveConditions": [
+            "Government transfers offset income loss",
+            "Urban demand masks rural weakness"
+          ],
+          "contradictionTests": [
+            "Rural wages and sales remain firm",
+            "Credit stress does not rise"
+          ],
+          "killTests": [
+            "Income support fully offsets shock",
+            "Crop outcome recovers"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS"
+          ]
+        },
+        {
+          "indicatorId": "SATELLITE_CROP_HEALTH_DIVERGENCE",
+          "name": "Satellite crop-health divergence",
+          "eventTypes": [
+            "SATELLITE_CROP_CONDITION",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "NDVI, NDWI, VCI, VHI, soil moisture, acreage and forecast divergence",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "PRODUCTION_ESTIMATE",
+            "YIELD",
+            "PROCUREMENT",
+            "FOOD_INVENTORY"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "COMMODITY_USER",
+            "AGRI_INPUT_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "MNCFC_FASAL",
+            "NRSC_NDVI_NDWI"
+          ],
+          "corroboratingSourceTypes": [
+            "NISAR_SOIL_MOISTURE",
+            "STATE_GROUND_REPORT"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 30,
+          "falsePositiveConditions": [
+            "Cloud contamination",
+            "Normal seasonal phenology",
+            "Crop calendar mismatch"
+          ],
+          "contradictionTests": [
+            "Ground reports remain normal",
+            "Later imagery recovers"
+          ],
+          "killTests": [
+            "No persistent spectral divergence",
+            "Official acreage confirms normal crop"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        }
+      ]
+    },
+    {
+      "sectorId": "AGROCHEMICALS",
+      "indicatorCount": 13,
+      "indicators": [
+        {
+          "indicatorId": "AGRICULTURAL_DROUGHT_COMPOSITE",
+          "name": "Multi-dimensional agricultural drought",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "HYDROLOGY",
+            "CROP_PROGRESS",
+            "SATELLITE_CROP_CONDITION"
+          ],
+          "economicVariable": "Persistent crop-water stress by crop and geography",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "ACREAGE",
+            "YIELD",
+            "INPUT_DEMAND",
+            "FOOD_SUPPLY"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "SEED_COMPANY",
+            "AGROCHEMICAL_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "IMD_WEATHER_DATA",
+            "MNCFC_DROUGHT_ASSESSMENT",
+            "NRSC_EARTH_OBSERVATION"
+          ],
+          "corroboratingSourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "STATE_SOWING_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "All-India deficit hides normal crop districts",
+            "Short deficit followed by recovery",
+            "Rain outside crop areas"
+          ],
+          "contradictionTests": [
+            "Soil moisture normal",
+            "Vegetation condition normal",
+            "Sowing catches up"
+          ],
+          "killTests": [
+            "Rainfall and soil moisture recover",
+            "Irrigation fully offsets stress",
+            "Crop condition remains normal"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "AGRI_SUPPLY_CHAIN_AMPLIFICATION",
+          "name": "Agricultural supply-chain amplification",
+          "eventTypes": [
+            "AGRI_PRICE_SUPPLY_CHAIN",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Farm-gate to wholesale and retail price wedge",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RAW_MATERIAL_COST",
+            "GROSS_MARGIN",
+            "WASTAGE",
+            "REALIZATION"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "RETAILER",
+            "COLD_CHAIN_COMPANY",
+            "LOGISTICS_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "AGMARKNET_MANDI_DATA",
+            "CONSUMER_AFFAIRS_PRICE_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "RAIL_ROAD_MOVEMENT",
+            "COMPANY_PROCUREMENT_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 14,
+          "falsePositiveConditions": [
+            "Festival seasonality",
+            "Local transport event without production loss"
+          ],
+          "contradictionTests": [
+            "Market arrivals normalize",
+            "Retail-farm spread contracts"
+          ],
+          "killTests": [
+            "Government logistics intervention",
+            "Perishable supply recovers"
+          ],
+          "requiredUpstreamIndicators": [
+            "CROP_STAGE_WATER_STRESS",
+            "SATELLITE_CROP_HEALTH_DIVERGENCE"
+          ]
+        },
+        {
+          "indicatorId": "CROP_STAGE_WATER_STRESS",
+          "name": "Crop-stage water stress",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS",
+            "SATELLITE_CROP_CONDITION"
+          ],
+          "economicVariable": "Water stress at crop-specific sensitive growth stages",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "YIELD",
+            "QUALITY",
+            "HARVEST_TIMING"
+          ],
+          "companyArchetypes": [
+            "GRAIN_PRODUCER",
+            "FOOD_PROCESSOR",
+            "SEED_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "IMD_AGROMET_ADVISORY",
+            "MNCFC_CROP_FORECAST"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_CROP_REPORT",
+            "SATELLITE_CROP_HEALTH"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Stress occurs outside the sensitive stage",
+            "Short-duration variety escapes stress"
+          ],
+          "contradictionTests": [
+            "Crop stage unaffected",
+            "Late rain restores development"
+          ],
+          "killTests": [
+            "Crop condition recovers",
+            "Harvest is already complete"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        },
+        {
+          "indicatorId": "CROP_SWITCH_AND_INPUT_MIX",
+          "name": "Crop switching and agricultural input mix",
+          "eventTypes": [
+            "CROP_PROGRESS",
+            "AGRI_PRICE_SUPPLY_CHAIN",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Acreage migration among crops and varieties",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "SEED_VOLUME",
+            "FERTILIZER_MIX",
+            "PESTICIDE_MIX",
+            "CROP_SUPPLY"
+          ],
+          "companyArchetypes": [
+            "SEED_COMPANY",
+            "AGROCHEMICAL_COMPANY",
+            "FERTILIZER_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "MINISTRY_SOWING_DATA",
+            "MSP_PROCUREMENT_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "SATELLITE_ACREAGE",
+            "MANDI_PRICES"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "Temporary sowing delay mistaken for crop switch",
+            "Reported acreage revisions"
+          ],
+          "contradictionTests": [
+            "Original crop acreage catches up",
+            "Price incentives reverse"
+          ],
+          "killTests": [
+            "No confirmed acreage substitution",
+            "Seed availability prevents switching"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS"
+          ]
+        },
+        {
+          "indicatorId": "FERTILIZER_APPLICATION_TIMING",
+          "name": "Fertilizer purchase and application timing",
+          "eventTypes": [
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "Crop-stage fertilizer application and deferred demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "INVENTORY",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "UREA_PRODUCER",
+            "PHOSPHATIC_FERTILIZER_PRODUCER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "STATE_AGRICULTURE_INPUT_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "COMPANY_CHANNEL_DISCLOSURE",
+            "SOWING_PROGRESS"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Dealer stocking mistaken for farm application",
+            "Delayed sales mistaken for destroyed demand"
+          ],
+          "contradictionTests": [
+            "Sowing catches up",
+            "Application resumes after rain"
+          ],
+          "killTests": [
+            "Seasonal application volume normalizes",
+            "Crop abandonment becomes widespread"
+          ],
+          "requiredUpstreamIndicators": [
+            "CROP_STAGE_WATER_STRESS",
+            "IRRIGATION_DROUGHT_SHIELD"
+          ]
+        },
+        {
+          "indicatorId": "FERTILIZER_GLOBAL_INPUT_STRESS",
+          "name": "Global fertilizer input and logistics stress",
+          "eventTypes": [
+            "GLOBAL_INPUT_COST",
+            "FERTILIZER_MARKET",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Gas, ammonia, phosphate, potash, currency, freight, imports, and subsidy receivables",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "INPUT_COST",
+            "IMPORT_AVAILABILITY",
+            "MARGIN",
+            "SUBSIDY_RECEIVABLE",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "FERTILIZER_IMPORTER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CUSTOMS_IMPORT_DATA",
+            "GOVERNMENT_FERTILIZER_BULLETIN"
+          ],
+          "corroboratingSourceTypes": [
+            "GLOBAL_COMMODITY_DATA",
+            "SHIPPING_DATA",
+            "COMPANY_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Quoted spot price lacks traded volume",
+            "Currency move is temporary"
+          ],
+          "contradictionTests": [
+            "Long-term contracts protect cost",
+            "Subsidy adjustment offsets shock"
+          ],
+          "killTests": [
+            "Supply normalizes",
+            "Working-capital funding fails",
+            "Domestic price controls eliminate pass-through"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "FOOD_POLICY_INTERVENTION_SUPPRESSOR",
+          "name": "Food and fertilizer policy intervention suppressor",
+          "eventTypes": [
+            "FOOD_STOCK_POLICY",
+            "POLICY_REGULATION",
+            "FERTILIZER_MARKET"
+          ],
+          "economicVariable": "Government buffer, procurement, trade, stock-limit, allocation and subsidy response",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "MARKET_PRICE",
+            "PROCUREMENT",
+            "INVENTORY",
+            "MARGIN",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "GRAIN_TRADER",
+            "FERTILIZER_PRODUCER",
+            "SUGAR_MILL"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DFPD_FCI_STOCK_DATA",
+            "DGFT_TRADE_POLICY",
+            "FERTILIZER_SUBSIDY_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "CUSTOMS_TRADE_DATA",
+            "GOVERNMENT_PROCUREMENT_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 14,
+          "falsePositiveConditions": [
+            "Announcement without implementation",
+            "National stocks unavailable in deficit region"
+          ],
+          "contradictionTests": [
+            "Buffer release is too small",
+            "Import logistics are delayed"
+          ],
+          "killTests": [
+            "Effective intervention caps prices",
+            "Policy removes producer economics"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "IRRIGATION_DROUGHT_SHIELD",
+          "name": "Irrigation and groundwater drought shield",
+          "eventTypes": [
+            "HYDROLOGY",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Effective irrigation protection by crop geography",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "ACREAGE",
+            "YIELD",
+            "PUMP_DEMAND",
+            "POWER_COST"
+          ],
+          "companyArchetypes": [
+            "IRRIGATED_FARM_INPUT_COMPANY",
+            "IRRIGATION_EQUIPMENT_COMPANY",
+            "RURAL_LENDER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "CGWB_GROUNDWATER_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_IRRIGATION_DATA",
+            "NRSC_SOIL_MOISTURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "Headline storage masks basin deficit",
+            "Installed irrigation lacks water or power"
+          ],
+          "contradictionTests": [
+            "Reservoir and groundwater remain adequate",
+            "Irrigation coverage exceeds vulnerable acreage"
+          ],
+          "killTests": [
+            "Effective irrigation fully protects the crop",
+            "Water releases normalize"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        },
+        {
+          "indicatorId": "NUTRIENT_MIX_SUBSTITUTION",
+          "name": "Nutrient and product-mix substitution",
+          "eventTypes": [
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Urea, DAP, NPK, MOP, specialty and biological nutrient mix",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "PRODUCT_MIX",
+            "REALIZATION",
+            "MARGIN",
+            "IMPORT_REQUIREMENT"
+          ],
+          "companyArchetypes": [
+            "UREA_PRODUCER",
+            "DAP_PRODUCER",
+            "NPK_PRODUCER",
+            "SPECIALTY_NUTRIENT_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "FERTILIZER_SUBSIDY_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_PRODUCT_SALES",
+            "COMPANY_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 30,
+          "falsePositiveConditions": [
+            "Substitution is caused only by temporary shortage",
+            "Channel inventory distorts reported mix"
+          ],
+          "contradictionTests": [
+            "Product availability normalizes",
+            "Crop mix is unchanged"
+          ],
+          "killTests": [
+            "No persistent state-level mix change",
+            "Subsidy change reverses"
+          ],
+          "requiredUpstreamIndicators": [
+            "FERTILIZER_APPLICATION_TIMING"
+          ]
+        },
+        {
+          "indicatorId": "RABI_WATER_CARRYOVER",
+          "name": "Rabi water and soil-moisture carryover",
+          "eventTypes": [
+            "HYDROLOGY",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "Post-monsoon water available for rabi planting",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RABI_ACREAGE",
+            "RABI_YIELD",
+            "WINTER_INPUT_DEMAND"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "SEED_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "IMD_POST_MONSOON_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_SOWING_DATA",
+            "NRSC_SOIL_MOISTURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Reservoirs are outside crop basin",
+            "Stored water allocated away from agriculture"
+          ],
+          "contradictionTests": [
+            "Northeast monsoon replenishes water",
+            "Rabi sowing remains normal"
+          ],
+          "killTests": [
+            "Rabi water availability normalizes",
+            "Crop acreage is unaffected"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "IRRIGATION_DROUGHT_SHIELD"
+          ]
+        },
+        {
+          "indicatorId": "RAINFALL_FERTILIZER_RESPONSE_CURVE",
+          "name": "Rainfall-to-fertilizer response asymmetry",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Crop- and moisture-specific economically optimal fertilizer demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "MIX",
+            "REALIZATION",
+            "EBITDA",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "FERTILIZER_IMPORTER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "IMD_AGROMET_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "MNCFC_CROP_CONDITION",
+            "COMPANY_CHANNEL_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Rainfall headline used without crop exposure",
+            "Price rise mistaken for producer margin"
+          ],
+          "contradictionTests": [
+            "Irrigation offsets stress",
+            "Sales and application remain normal",
+            "Crop acreage shifts to different nutrient needs"
+          ],
+          "killTests": [
+            "Severe acreage loss",
+            "Government allocation or subsidy changes dominate",
+            "Raw-material shock removes margin benefit"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS",
+            "IRRIGATION_DROUGHT_SHIELD",
+            "FERTILIZER_APPLICATION_TIMING",
+            "NUTRIENT_MIX_SUBSTITUTION"
+          ]
+        },
+        {
+          "indicatorId": "RAINFALL_RURAL_DEMAND_TRANSMISSION",
+          "name": "Rainfall-to-rural-income and demand transmission",
+          "eventTypes": [
+            "RURAL_DEMAND",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Farm income, rural liquidity, credit quality, and non-farm demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RURAL_VOLUME",
+            "DELINQUENCY",
+            "CREDIT_DEMAND",
+            "DEALER_INVENTORY"
+          ],
+          "companyArchetypes": [
+            "TRACTOR_MAKER",
+            "TWO_WHEELER_MAKER",
+            "RURAL_FMCG",
+            "MICROFINANCE_LENDER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "RURAL_WAGE_AND_DEMAND_DATA",
+            "AGRICULTURE_OUTPUT_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "COMPANY_RURAL_CHANNEL_DISCLOSURE",
+            "CREDIT_BUREAU_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 60,
+          "falsePositiveConditions": [
+            "Government transfers offset income loss",
+            "Urban demand masks rural weakness"
+          ],
+          "contradictionTests": [
+            "Rural wages and sales remain firm",
+            "Credit stress does not rise"
+          ],
+          "killTests": [
+            "Income support fully offsets shock",
+            "Crop outcome recovers"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS"
+          ]
+        },
+        {
+          "indicatorId": "SATELLITE_CROP_HEALTH_DIVERGENCE",
+          "name": "Satellite crop-health divergence",
+          "eventTypes": [
+            "SATELLITE_CROP_CONDITION",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "NDVI, NDWI, VCI, VHI, soil moisture, acreage and forecast divergence",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "PRODUCTION_ESTIMATE",
+            "YIELD",
+            "PROCUREMENT",
+            "FOOD_INVENTORY"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "COMMODITY_USER",
+            "AGRI_INPUT_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "MNCFC_FASAL",
+            "NRSC_NDVI_NDWI"
+          ],
+          "corroboratingSourceTypes": [
+            "NISAR_SOIL_MOISTURE",
+            "STATE_GROUND_REPORT"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 30,
+          "falsePositiveConditions": [
+            "Cloud contamination",
+            "Normal seasonal phenology",
+            "Crop calendar mismatch"
+          ],
+          "contradictionTests": [
+            "Ground reports remain normal",
+            "Later imagery recovers"
+          ],
+          "killTests": [
+            "No persistent spectral divergence",
+            "Official acreage confirms normal crop"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        }
+      ]
+    },
+    {
+      "sectorId": "AUTOMOBILES",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "AUTO_RETAIL_INVENTORY_CYCLE",
+          "name": "Retail demand and channel inventory",
+          "eventTypes": [
+            "REGISTRATION_DATA",
+            "PRODUCTION_DISPATCH",
+            "PRICE_CHANGE"
+          ],
+          "economicVariable": "Registrations, wholesale dispatches, dealer stock and discounts",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            2
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "REALIZATION",
+            "MARGIN",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "VEHICLE_OEM",
+            "AUTO_COMPONENT_SUPPLIER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "VAHAN_REGISTRATION_DATA",
+            "COMPANY_FILING"
+          ],
+          "corroboratingSourceTypes": [
+            "DEALER_INVENTORY",
+            "FINANCING_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Festival stocking",
+            "Fleet order concentration"
+          ],
+          "contradictionTests": [
+            "Dealer stock rises",
+            "Discounting increases"
+          ],
+          "killTests": [
+            "Retail demand reverses",
+            "Financing availability contracts"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "AUTO_COMPONENTS",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "AUTO_RETAIL_INVENTORY_CYCLE",
+          "name": "Retail demand and channel inventory",
+          "eventTypes": [
+            "REGISTRATION_DATA",
+            "PRODUCTION_DISPATCH",
+            "PRICE_CHANGE"
+          ],
+          "economicVariable": "Registrations, wholesale dispatches, dealer stock and discounts",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            2
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "REALIZATION",
+            "MARGIN",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "VEHICLE_OEM",
+            "AUTO_COMPONENT_SUPPLIER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "VAHAN_REGISTRATION_DATA",
+            "COMPANY_FILING"
+          ],
+          "corroboratingSourceTypes": [
+            "DEALER_INVENTORY",
+            "FINANCING_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Festival stocking",
+            "Fleet order concentration"
+          ],
+          "contradictionTests": [
+            "Dealer stock rises",
+            "Discounting increases"
+          ],
+          "killTests": [
+            "Retail demand reverses",
+            "Financing availability contracts"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "BANKING",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "LENDER_EARLY_CREDIT_STRESS",
+          "name": "Early credit-stress migration",
+          "eventTypes": [
+            "POLICY_REGULATION",
+            "SUPPLIER_CUSTOMER"
+          ],
+          "economicVariable": "Borrower repayment stress before reported credit cost",
+          "expectedDirection": "ADVERSE",
+          "leadTimeQuarters": [
+            1,
+            3
+          ],
+          "earningsChannels": [
+            "CREDIT_COST",
+            "PROFIT",
+            "CAPITAL"
+          ],
+          "companyArchetypes": [
+            "RETAIL_LENDER",
+            "SME_LENDER",
+            "MICROFINANCE_LENDER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "REGULATORY_DATA",
+            "COMPANY_FILING"
+          ],
+          "corroboratingSourceTypes": [
+            "CREDIT_BUREAU",
+            "COLLECTION_CHANNEL"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 90,
+          "falsePositiveConditions": [
+            "Seasonal payment timing",
+            "Temporary operational collection disruption"
+          ],
+          "contradictionTests": [
+            "Collections normalize",
+            "Delinquency migration reverses"
+          ],
+          "killTests": [
+            "Capital adequacy breach",
+            "Liquidity access impairment"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "BUILDING_MATERIALS",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "BUILDING_MATERIAL_UTILISATION",
+          "name": "Utilisation and realization breadth",
+          "eventTypes": [
+            "CAPACITY_CHANGE",
+            "SUPPLIER_CUSTOMER"
+          ],
+          "economicVariable": "Regional volume, utilization, and realization",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            1,
+            4
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "REALIZATION",
+            "EBITDA_MARGIN"
+          ],
+          "companyArchetypes": [
+            "CEMENT_PRODUCER",
+            "CERAMICS_PRODUCER",
+            "BUILDING_PRODUCTS_MANUFACTURER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "COMPANY_FILING",
+            "GOVERNMENT_DISPATCH_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "DEALER_CHANNEL",
+            "COMPETITOR_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 120,
+          "falsePositiveConditions": [
+            "Restocking without end demand",
+            "Regional festival seasonality"
+          ],
+          "contradictionTests": [
+            "Price rollback",
+            "Inventory rebuild",
+            "New competing capacity"
+          ],
+          "killTests": [
+            "Sustained demand contraction",
+            "Input-cost shock",
+            "Balance-sheet stress"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "CDMO",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "PHARMA_REGULATORY_PIPELINE",
+          "name": "Regulatory and product pipeline conversion",
+          "eventTypes": [
+            "REGULATORY_APPROVAL",
+            "PRODUCT_LAUNCH",
+            "INSPECTION"
+          ],
+          "economicVariable": "Approvals, launch exclusivity, addressable market and compliant capacity",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            6
+          ],
+          "earningsChannels": [
+            "REVENUE",
+            "PRODUCT_MIX",
+            "MARGIN",
+            "CAPEX_RETURN"
+          ],
+          "companyArchetypes": [
+            "GENERIC_DRUG_MAKER",
+            "SPECIALTY_PHARMA",
+            "CDMO"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DRUG_REGULATOR",
+            "COMPANY_FILING"
+          ],
+          "corroboratingSourceTypes": [
+            "PATENT_DATABASE",
+            "CUSTOMS_EXPORT_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 120,
+          "falsePositiveConditions": [
+            "Tentative approval",
+            "Market size quoted before competition"
+          ],
+          "contradictionTests": [
+            "More competitors launch",
+            "Inspection observations remain open"
+          ],
+          "killTests": [
+            "Approval withdrawn",
+            "Import alert or plant shutdown"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "CHEMICALS",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "CHEMICAL_SPREAD_RECOVERY",
+          "name": "Product spread recovery",
+          "eventTypes": [
+            "POLICY_REGULATION",
+            "CAPACITY_CHANGE"
+          ],
+          "economicVariable": "Product realization less feedstock cost",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            1,
+            3
+          ],
+          "earningsChannels": [
+            "GROSS_MARGIN",
+            "EBITDA",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "COMMODITY_CHEMICAL_PRODUCER",
+            "SPECIALTY_CHEMICAL_PRODUCER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CUSTOMS_DATA",
+            "INDUSTRY_PRICE_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "COMPETITOR_DISCLOSURE",
+            "SUPPLIER_PRICING"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 3,
+          "expectedPersistenceDays": 90,
+          "falsePositiveConditions": [
+            "One-day price spike",
+            "Currency-only movement",
+            "Low-volume quoted price"
+          ],
+          "contradictionTests": [
+            "Feedstock cost catches up",
+            "Utilization falls",
+            "Inventory losses emerge"
+          ],
+          "killTests": [
+            "Structural demand destruction",
+            "Plant shutdown",
+            "Loss of key customer"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "CITY_GAS",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "OIL_GAS_CRACK_AND_POLICY",
+          "name": "Crude, product crack and policy transmission",
+          "eventTypes": [
+            "COMMODITY_PRICE",
+            "POLICY_REGULATION",
+            "PRODUCTION_UPDATE"
+          ],
+          "economicVariable": "Crude price, refining/marketing margin, gas allocation and fiscal intervention",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            3
+          ],
+          "earningsChannels": [
+            "REALIZATION",
+            "REFINING_MARGIN",
+            "MARKETING_MARGIN",
+            "INVENTORY_GAIN",
+            "SUBSIDY"
+          ],
+          "companyArchetypes": [
+            "UPSTREAM_PRODUCER",
+            "REFINER",
+            "FUEL_MARKETER",
+            "CITY_GAS_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "PETROLEUM_MINISTRY_DATA",
+            "COMPANY_FILING"
+          ],
+          "corroboratingSourceTypes": [
+            "CUSTOMS_DATA",
+            "GLOBAL_BENCHMARK_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 30,
+          "falsePositiveConditions": [
+            "Headline crude move applied identically to all archetypes",
+            "Temporary inventory gain"
+          ],
+          "contradictionTests": [
+            "Tax intervention",
+            "Hedge offsets exposure"
+          ],
+          "killTests": [
+            "Price controls block pass-through",
+            "Supply disruption stops volume"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "CONSUMER_DISCRETIONARY",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "CONSUMER_VOLUME_PRICE_MIX",
+          "name": "Consumer volume, pricing and distribution breadth",
+          "eventTypes": [
+            "PRICE_CHANGE",
+            "CHANNEL_DATA",
+            "INPUT_COST"
+          ],
+          "economicVariable": "Underlying volume, price/mix, distribution, promotions and commodity basket",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            3
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "REALIZATION",
+            "GROSS_MARGIN",
+            "AD_SPEND",
+            "INVENTORY"
+          ],
+          "companyArchetypes": [
+            "FMCG_COMPANY",
+            "APPAREL_BRAND",
+            "RETAILER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "COMPANY_FILING",
+            "GOVERNMENT_CONSUMPTION_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "CHANNEL_CHECK",
+            "COMMODITY_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 60,
+          "falsePositiveConditions": [
+            "Low-base growth",
+            "Trade loading before price increase"
+          ],
+          "contradictionTests": [
+            "Promotions rise",
+            "Distribution gains reverse"
+          ],
+          "killTests": [
+            "Volume contracts after pricing",
+            "Inventory write-down"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "CONSUMER_STAPLES",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "CONSUMER_VOLUME_PRICE_MIX",
+          "name": "Consumer volume, pricing and distribution breadth",
+          "eventTypes": [
+            "PRICE_CHANGE",
+            "CHANNEL_DATA",
+            "INPUT_COST"
+          ],
+          "economicVariable": "Underlying volume, price/mix, distribution, promotions and commodity basket",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            3
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "REALIZATION",
+            "GROSS_MARGIN",
+            "AD_SPEND",
+            "INVENTORY"
+          ],
+          "companyArchetypes": [
+            "FMCG_COMPANY",
+            "APPAREL_BRAND",
+            "RETAILER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "COMPANY_FILING",
+            "GOVERNMENT_CONSUMPTION_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "CHANNEL_CHECK",
+            "COMMODITY_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 60,
+          "falsePositiveConditions": [
+            "Low-base growth",
+            "Trade loading before price increase"
+          ],
+          "contradictionTests": [
+            "Promotions rise",
+            "Distribution gains reverse"
+          ],
+          "killTests": [
+            "Volume contracts after pricing",
+            "Inventory write-down"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "DEFENCE",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "DEFENCE_ORDER_EXECUTION_CASH",
+          "name": "Defence order execution and cash conversion",
+          "eventTypes": [
+            "TENDER",
+            "ORDER_CONTRACT",
+            "EXECUTION_UPDATE"
+          ],
+          "economicVariable": "Funded executable order, milestone delivery, indigenous content and customer advances",
+          "expectedDirection": "SUPPORTIVE",
+          "leadTimeQuarters": [
+            2,
+            12
+          ],
+          "earningsChannels": [
+            "ORDER_BOOK",
+            "REVENUE",
+            "MARGIN",
+            "WORKING_CAPITAL",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "DEFENCE_PRIME",
+            "ELECTRONICS_SUPPLIER",
+            "SHIPYARD"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEFENCE_MINISTRY_CONTRACT",
+            "EXCHANGE_FILING"
+          ],
+          "corroboratingSourceTypes": [
+            "BUDGET_DOCUMENT",
+            "CUSTOMER_ACCEPTANCE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 180,
+          "falsePositiveConditions": [
+            "Expression of interest",
+            "Framework value without funded quantity"
+          ],
+          "contradictionTests": [
+            "Acceptance delayed",
+            "Receivables rise"
+          ],
+          "killTests": [
+            "Contract cancelled",
+            "Security clearance or execution failure"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "FERTILIZERS",
+      "indicatorCount": 13,
+      "indicators": [
+        {
+          "indicatorId": "AGRICULTURAL_DROUGHT_COMPOSITE",
+          "name": "Multi-dimensional agricultural drought",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "HYDROLOGY",
+            "CROP_PROGRESS",
+            "SATELLITE_CROP_CONDITION"
+          ],
+          "economicVariable": "Persistent crop-water stress by crop and geography",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "ACREAGE",
+            "YIELD",
+            "INPUT_DEMAND",
+            "FOOD_SUPPLY"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "SEED_COMPANY",
+            "AGROCHEMICAL_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "IMD_WEATHER_DATA",
+            "MNCFC_DROUGHT_ASSESSMENT",
+            "NRSC_EARTH_OBSERVATION"
+          ],
+          "corroboratingSourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "STATE_SOWING_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "All-India deficit hides normal crop districts",
+            "Short deficit followed by recovery",
+            "Rain outside crop areas"
+          ],
+          "contradictionTests": [
+            "Soil moisture normal",
+            "Vegetation condition normal",
+            "Sowing catches up"
+          ],
+          "killTests": [
+            "Rainfall and soil moisture recover",
+            "Irrigation fully offsets stress",
+            "Crop condition remains normal"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "AGRI_SUPPLY_CHAIN_AMPLIFICATION",
+          "name": "Agricultural supply-chain amplification",
+          "eventTypes": [
+            "AGRI_PRICE_SUPPLY_CHAIN",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Farm-gate to wholesale and retail price wedge",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RAW_MATERIAL_COST",
+            "GROSS_MARGIN",
+            "WASTAGE",
+            "REALIZATION"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "RETAILER",
+            "COLD_CHAIN_COMPANY",
+            "LOGISTICS_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "AGMARKNET_MANDI_DATA",
+            "CONSUMER_AFFAIRS_PRICE_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "RAIL_ROAD_MOVEMENT",
+            "COMPANY_PROCUREMENT_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 14,
+          "falsePositiveConditions": [
+            "Festival seasonality",
+            "Local transport event without production loss"
+          ],
+          "contradictionTests": [
+            "Market arrivals normalize",
+            "Retail-farm spread contracts"
+          ],
+          "killTests": [
+            "Government logistics intervention",
+            "Perishable supply recovers"
+          ],
+          "requiredUpstreamIndicators": [
+            "CROP_STAGE_WATER_STRESS",
+            "SATELLITE_CROP_HEALTH_DIVERGENCE"
+          ]
+        },
+        {
+          "indicatorId": "CROP_STAGE_WATER_STRESS",
+          "name": "Crop-stage water stress",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS",
+            "SATELLITE_CROP_CONDITION"
+          ],
+          "economicVariable": "Water stress at crop-specific sensitive growth stages",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "YIELD",
+            "QUALITY",
+            "HARVEST_TIMING"
+          ],
+          "companyArchetypes": [
+            "GRAIN_PRODUCER",
+            "FOOD_PROCESSOR",
+            "SEED_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "IMD_AGROMET_ADVISORY",
+            "MNCFC_CROP_FORECAST"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_CROP_REPORT",
+            "SATELLITE_CROP_HEALTH"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Stress occurs outside the sensitive stage",
+            "Short-duration variety escapes stress"
+          ],
+          "contradictionTests": [
+            "Crop stage unaffected",
+            "Late rain restores development"
+          ],
+          "killTests": [
+            "Crop condition recovers",
+            "Harvest is already complete"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        },
+        {
+          "indicatorId": "CROP_SWITCH_AND_INPUT_MIX",
+          "name": "Crop switching and agricultural input mix",
+          "eventTypes": [
+            "CROP_PROGRESS",
+            "AGRI_PRICE_SUPPLY_CHAIN",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Acreage migration among crops and varieties",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "SEED_VOLUME",
+            "FERTILIZER_MIX",
+            "PESTICIDE_MIX",
+            "CROP_SUPPLY"
+          ],
+          "companyArchetypes": [
+            "SEED_COMPANY",
+            "AGROCHEMICAL_COMPANY",
+            "FERTILIZER_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "MINISTRY_SOWING_DATA",
+            "MSP_PROCUREMENT_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "SATELLITE_ACREAGE",
+            "MANDI_PRICES"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "Temporary sowing delay mistaken for crop switch",
+            "Reported acreage revisions"
+          ],
+          "contradictionTests": [
+            "Original crop acreage catches up",
+            "Price incentives reverse"
+          ],
+          "killTests": [
+            "No confirmed acreage substitution",
+            "Seed availability prevents switching"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS"
+          ]
+        },
+        {
+          "indicatorId": "FERTILIZER_APPLICATION_TIMING",
+          "name": "Fertilizer purchase and application timing",
+          "eventTypes": [
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "Crop-stage fertilizer application and deferred demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "INVENTORY",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "UREA_PRODUCER",
+            "PHOSPHATIC_FERTILIZER_PRODUCER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "STATE_AGRICULTURE_INPUT_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "COMPANY_CHANNEL_DISCLOSURE",
+            "SOWING_PROGRESS"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Dealer stocking mistaken for farm application",
+            "Delayed sales mistaken for destroyed demand"
+          ],
+          "contradictionTests": [
+            "Sowing catches up",
+            "Application resumes after rain"
+          ],
+          "killTests": [
+            "Seasonal application volume normalizes",
+            "Crop abandonment becomes widespread"
+          ],
+          "requiredUpstreamIndicators": [
+            "CROP_STAGE_WATER_STRESS",
+            "IRRIGATION_DROUGHT_SHIELD"
+          ]
+        },
+        {
+          "indicatorId": "FERTILIZER_GLOBAL_INPUT_STRESS",
+          "name": "Global fertilizer input and logistics stress",
+          "eventTypes": [
+            "GLOBAL_INPUT_COST",
+            "FERTILIZER_MARKET",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Gas, ammonia, phosphate, potash, currency, freight, imports, and subsidy receivables",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "INPUT_COST",
+            "IMPORT_AVAILABILITY",
+            "MARGIN",
+            "SUBSIDY_RECEIVABLE",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "FERTILIZER_IMPORTER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CUSTOMS_IMPORT_DATA",
+            "GOVERNMENT_FERTILIZER_BULLETIN"
+          ],
+          "corroboratingSourceTypes": [
+            "GLOBAL_COMMODITY_DATA",
+            "SHIPPING_DATA",
+            "COMPANY_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Quoted spot price lacks traded volume",
+            "Currency move is temporary"
+          ],
+          "contradictionTests": [
+            "Long-term contracts protect cost",
+            "Subsidy adjustment offsets shock"
+          ],
+          "killTests": [
+            "Supply normalizes",
+            "Working-capital funding fails",
+            "Domestic price controls eliminate pass-through"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "FOOD_POLICY_INTERVENTION_SUPPRESSOR",
+          "name": "Food and fertilizer policy intervention suppressor",
+          "eventTypes": [
+            "FOOD_STOCK_POLICY",
+            "POLICY_REGULATION",
+            "FERTILIZER_MARKET"
+          ],
+          "economicVariable": "Government buffer, procurement, trade, stock-limit, allocation and subsidy response",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "MARKET_PRICE",
+            "PROCUREMENT",
+            "INVENTORY",
+            "MARGIN",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "GRAIN_TRADER",
+            "FERTILIZER_PRODUCER",
+            "SUGAR_MILL"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DFPD_FCI_STOCK_DATA",
+            "DGFT_TRADE_POLICY",
+            "FERTILIZER_SUBSIDY_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "CUSTOMS_TRADE_DATA",
+            "GOVERNMENT_PROCUREMENT_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 14,
+          "falsePositiveConditions": [
+            "Announcement without implementation",
+            "National stocks unavailable in deficit region"
+          ],
+          "contradictionTests": [
+            "Buffer release is too small",
+            "Import logistics are delayed"
+          ],
+          "killTests": [
+            "Effective intervention caps prices",
+            "Policy removes producer economics"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "IRRIGATION_DROUGHT_SHIELD",
+          "name": "Irrigation and groundwater drought shield",
+          "eventTypes": [
+            "HYDROLOGY",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Effective irrigation protection by crop geography",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "ACREAGE",
+            "YIELD",
+            "PUMP_DEMAND",
+            "POWER_COST"
+          ],
+          "companyArchetypes": [
+            "IRRIGATED_FARM_INPUT_COMPANY",
+            "IRRIGATION_EQUIPMENT_COMPANY",
+            "RURAL_LENDER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "CGWB_GROUNDWATER_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_IRRIGATION_DATA",
+            "NRSC_SOIL_MOISTURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "Headline storage masks basin deficit",
+            "Installed irrigation lacks water or power"
+          ],
+          "contradictionTests": [
+            "Reservoir and groundwater remain adequate",
+            "Irrigation coverage exceeds vulnerable acreage"
+          ],
+          "killTests": [
+            "Effective irrigation fully protects the crop",
+            "Water releases normalize"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        },
+        {
+          "indicatorId": "NUTRIENT_MIX_SUBSTITUTION",
+          "name": "Nutrient and product-mix substitution",
+          "eventTypes": [
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Urea, DAP, NPK, MOP, specialty and biological nutrient mix",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "PRODUCT_MIX",
+            "REALIZATION",
+            "MARGIN",
+            "IMPORT_REQUIREMENT"
+          ],
+          "companyArchetypes": [
+            "UREA_PRODUCER",
+            "DAP_PRODUCER",
+            "NPK_PRODUCER",
+            "SPECIALTY_NUTRIENT_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "FERTILIZER_SUBSIDY_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_PRODUCT_SALES",
+            "COMPANY_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 30,
+          "falsePositiveConditions": [
+            "Substitution is caused only by temporary shortage",
+            "Channel inventory distorts reported mix"
+          ],
+          "contradictionTests": [
+            "Product availability normalizes",
+            "Crop mix is unchanged"
+          ],
+          "killTests": [
+            "No persistent state-level mix change",
+            "Subsidy change reverses"
+          ],
+          "requiredUpstreamIndicators": [
+            "FERTILIZER_APPLICATION_TIMING"
+          ]
+        },
+        {
+          "indicatorId": "RABI_WATER_CARRYOVER",
+          "name": "Rabi water and soil-moisture carryover",
+          "eventTypes": [
+            "HYDROLOGY",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "Post-monsoon water available for rabi planting",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RABI_ACREAGE",
+            "RABI_YIELD",
+            "WINTER_INPUT_DEMAND"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "SEED_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "IMD_POST_MONSOON_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_SOWING_DATA",
+            "NRSC_SOIL_MOISTURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Reservoirs are outside crop basin",
+            "Stored water allocated away from agriculture"
+          ],
+          "contradictionTests": [
+            "Northeast monsoon replenishes water",
+            "Rabi sowing remains normal"
+          ],
+          "killTests": [
+            "Rabi water availability normalizes",
+            "Crop acreage is unaffected"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "IRRIGATION_DROUGHT_SHIELD"
+          ]
+        },
+        {
+          "indicatorId": "RAINFALL_FERTILIZER_RESPONSE_CURVE",
+          "name": "Rainfall-to-fertilizer response asymmetry",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Crop- and moisture-specific economically optimal fertilizer demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "MIX",
+            "REALIZATION",
+            "EBITDA",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "FERTILIZER_IMPORTER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "IMD_AGROMET_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "MNCFC_CROP_CONDITION",
+            "COMPANY_CHANNEL_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Rainfall headline used without crop exposure",
+            "Price rise mistaken for producer margin"
+          ],
+          "contradictionTests": [
+            "Irrigation offsets stress",
+            "Sales and application remain normal",
+            "Crop acreage shifts to different nutrient needs"
+          ],
+          "killTests": [
+            "Severe acreage loss",
+            "Government allocation or subsidy changes dominate",
+            "Raw-material shock removes margin benefit"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS",
+            "IRRIGATION_DROUGHT_SHIELD",
+            "FERTILIZER_APPLICATION_TIMING",
+            "NUTRIENT_MIX_SUBSTITUTION"
+          ]
+        },
+        {
+          "indicatorId": "RAINFALL_RURAL_DEMAND_TRANSMISSION",
+          "name": "Rainfall-to-rural-income and demand transmission",
+          "eventTypes": [
+            "RURAL_DEMAND",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Farm income, rural liquidity, credit quality, and non-farm demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RURAL_VOLUME",
+            "DELINQUENCY",
+            "CREDIT_DEMAND",
+            "DEALER_INVENTORY"
+          ],
+          "companyArchetypes": [
+            "TRACTOR_MAKER",
+            "TWO_WHEELER_MAKER",
+            "RURAL_FMCG",
+            "MICROFINANCE_LENDER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "RURAL_WAGE_AND_DEMAND_DATA",
+            "AGRICULTURE_OUTPUT_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "COMPANY_RURAL_CHANNEL_DISCLOSURE",
+            "CREDIT_BUREAU_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 60,
+          "falsePositiveConditions": [
+            "Government transfers offset income loss",
+            "Urban demand masks rural weakness"
+          ],
+          "contradictionTests": [
+            "Rural wages and sales remain firm",
+            "Credit stress does not rise"
+          ],
+          "killTests": [
+            "Income support fully offsets shock",
+            "Crop outcome recovers"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS"
+          ]
+        },
+        {
+          "indicatorId": "SATELLITE_CROP_HEALTH_DIVERGENCE",
+          "name": "Satellite crop-health divergence",
+          "eventTypes": [
+            "SATELLITE_CROP_CONDITION",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "NDVI, NDWI, VCI, VHI, soil moisture, acreage and forecast divergence",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "PRODUCTION_ESTIMATE",
+            "YIELD",
+            "PROCUREMENT",
+            "FOOD_INVENTORY"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "COMMODITY_USER",
+            "AGRI_INPUT_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "MNCFC_FASAL",
+            "NRSC_NDVI_NDWI"
+          ],
+          "corroboratingSourceTypes": [
+            "NISAR_SOIL_MOISTURE",
+            "STATE_GROUND_REPORT"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 30,
+          "falsePositiveConditions": [
+            "Cloud contamination",
+            "Normal seasonal phenology",
+            "Crop calendar mismatch"
+          ],
+          "contradictionTests": [
+            "Ground reports remain normal",
+            "Later imagery recovers"
+          ],
+          "killTests": [
+            "No persistent spectral divergence",
+            "Official acreage confirms normal crop"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        }
+      ]
+    },
+    {
+      "sectorId": "FOOD",
+      "indicatorCount": 13,
+      "indicators": [
+        {
+          "indicatorId": "AGRICULTURAL_DROUGHT_COMPOSITE",
+          "name": "Multi-dimensional agricultural drought",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "HYDROLOGY",
+            "CROP_PROGRESS",
+            "SATELLITE_CROP_CONDITION"
+          ],
+          "economicVariable": "Persistent crop-water stress by crop and geography",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "ACREAGE",
+            "YIELD",
+            "INPUT_DEMAND",
+            "FOOD_SUPPLY"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "SEED_COMPANY",
+            "AGROCHEMICAL_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "IMD_WEATHER_DATA",
+            "MNCFC_DROUGHT_ASSESSMENT",
+            "NRSC_EARTH_OBSERVATION"
+          ],
+          "corroboratingSourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "STATE_SOWING_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "All-India deficit hides normal crop districts",
+            "Short deficit followed by recovery",
+            "Rain outside crop areas"
+          ],
+          "contradictionTests": [
+            "Soil moisture normal",
+            "Vegetation condition normal",
+            "Sowing catches up"
+          ],
+          "killTests": [
+            "Rainfall and soil moisture recover",
+            "Irrigation fully offsets stress",
+            "Crop condition remains normal"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "AGRI_SUPPLY_CHAIN_AMPLIFICATION",
+          "name": "Agricultural supply-chain amplification",
+          "eventTypes": [
+            "AGRI_PRICE_SUPPLY_CHAIN",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Farm-gate to wholesale and retail price wedge",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RAW_MATERIAL_COST",
+            "GROSS_MARGIN",
+            "WASTAGE",
+            "REALIZATION"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "RETAILER",
+            "COLD_CHAIN_COMPANY",
+            "LOGISTICS_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "AGMARKNET_MANDI_DATA",
+            "CONSUMER_AFFAIRS_PRICE_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "RAIL_ROAD_MOVEMENT",
+            "COMPANY_PROCUREMENT_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 14,
+          "falsePositiveConditions": [
+            "Festival seasonality",
+            "Local transport event without production loss"
+          ],
+          "contradictionTests": [
+            "Market arrivals normalize",
+            "Retail-farm spread contracts"
+          ],
+          "killTests": [
+            "Government logistics intervention",
+            "Perishable supply recovers"
+          ],
+          "requiredUpstreamIndicators": [
+            "CROP_STAGE_WATER_STRESS",
+            "SATELLITE_CROP_HEALTH_DIVERGENCE"
+          ]
+        },
+        {
+          "indicatorId": "CROP_STAGE_WATER_STRESS",
+          "name": "Crop-stage water stress",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS",
+            "SATELLITE_CROP_CONDITION"
+          ],
+          "economicVariable": "Water stress at crop-specific sensitive growth stages",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "YIELD",
+            "QUALITY",
+            "HARVEST_TIMING"
+          ],
+          "companyArchetypes": [
+            "GRAIN_PRODUCER",
+            "FOOD_PROCESSOR",
+            "SEED_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "IMD_AGROMET_ADVISORY",
+            "MNCFC_CROP_FORECAST"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_CROP_REPORT",
+            "SATELLITE_CROP_HEALTH"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Stress occurs outside the sensitive stage",
+            "Short-duration variety escapes stress"
+          ],
+          "contradictionTests": [
+            "Crop stage unaffected",
+            "Late rain restores development"
+          ],
+          "killTests": [
+            "Crop condition recovers",
+            "Harvest is already complete"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        },
+        {
+          "indicatorId": "CROP_SWITCH_AND_INPUT_MIX",
+          "name": "Crop switching and agricultural input mix",
+          "eventTypes": [
+            "CROP_PROGRESS",
+            "AGRI_PRICE_SUPPLY_CHAIN",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Acreage migration among crops and varieties",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "SEED_VOLUME",
+            "FERTILIZER_MIX",
+            "PESTICIDE_MIX",
+            "CROP_SUPPLY"
+          ],
+          "companyArchetypes": [
+            "SEED_COMPANY",
+            "AGROCHEMICAL_COMPANY",
+            "FERTILIZER_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "MINISTRY_SOWING_DATA",
+            "MSP_PROCUREMENT_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "SATELLITE_ACREAGE",
+            "MANDI_PRICES"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "Temporary sowing delay mistaken for crop switch",
+            "Reported acreage revisions"
+          ],
+          "contradictionTests": [
+            "Original crop acreage catches up",
+            "Price incentives reverse"
+          ],
+          "killTests": [
+            "No confirmed acreage substitution",
+            "Seed availability prevents switching"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS"
+          ]
+        },
+        {
+          "indicatorId": "FERTILIZER_APPLICATION_TIMING",
+          "name": "Fertilizer purchase and application timing",
+          "eventTypes": [
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "Crop-stage fertilizer application and deferred demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "INVENTORY",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "UREA_PRODUCER",
+            "PHOSPHATIC_FERTILIZER_PRODUCER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "STATE_AGRICULTURE_INPUT_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "COMPANY_CHANNEL_DISCLOSURE",
+            "SOWING_PROGRESS"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Dealer stocking mistaken for farm application",
+            "Delayed sales mistaken for destroyed demand"
+          ],
+          "contradictionTests": [
+            "Sowing catches up",
+            "Application resumes after rain"
+          ],
+          "killTests": [
+            "Seasonal application volume normalizes",
+            "Crop abandonment becomes widespread"
+          ],
+          "requiredUpstreamIndicators": [
+            "CROP_STAGE_WATER_STRESS",
+            "IRRIGATION_DROUGHT_SHIELD"
+          ]
+        },
+        {
+          "indicatorId": "FERTILIZER_GLOBAL_INPUT_STRESS",
+          "name": "Global fertilizer input and logistics stress",
+          "eventTypes": [
+            "GLOBAL_INPUT_COST",
+            "FERTILIZER_MARKET",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Gas, ammonia, phosphate, potash, currency, freight, imports, and subsidy receivables",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "INPUT_COST",
+            "IMPORT_AVAILABILITY",
+            "MARGIN",
+            "SUBSIDY_RECEIVABLE",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "FERTILIZER_IMPORTER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CUSTOMS_IMPORT_DATA",
+            "GOVERNMENT_FERTILIZER_BULLETIN"
+          ],
+          "corroboratingSourceTypes": [
+            "GLOBAL_COMMODITY_DATA",
+            "SHIPPING_DATA",
+            "COMPANY_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Quoted spot price lacks traded volume",
+            "Currency move is temporary"
+          ],
+          "contradictionTests": [
+            "Long-term contracts protect cost",
+            "Subsidy adjustment offsets shock"
+          ],
+          "killTests": [
+            "Supply normalizes",
+            "Working-capital funding fails",
+            "Domestic price controls eliminate pass-through"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "FOOD_POLICY_INTERVENTION_SUPPRESSOR",
+          "name": "Food and fertilizer policy intervention suppressor",
+          "eventTypes": [
+            "FOOD_STOCK_POLICY",
+            "POLICY_REGULATION",
+            "FERTILIZER_MARKET"
+          ],
+          "economicVariable": "Government buffer, procurement, trade, stock-limit, allocation and subsidy response",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "MARKET_PRICE",
+            "PROCUREMENT",
+            "INVENTORY",
+            "MARGIN",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "GRAIN_TRADER",
+            "FERTILIZER_PRODUCER",
+            "SUGAR_MILL"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DFPD_FCI_STOCK_DATA",
+            "DGFT_TRADE_POLICY",
+            "FERTILIZER_SUBSIDY_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "CUSTOMS_TRADE_DATA",
+            "GOVERNMENT_PROCUREMENT_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 14,
+          "falsePositiveConditions": [
+            "Announcement without implementation",
+            "National stocks unavailable in deficit region"
+          ],
+          "contradictionTests": [
+            "Buffer release is too small",
+            "Import logistics are delayed"
+          ],
+          "killTests": [
+            "Effective intervention caps prices",
+            "Policy removes producer economics"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "IRRIGATION_DROUGHT_SHIELD",
+          "name": "Irrigation and groundwater drought shield",
+          "eventTypes": [
+            "HYDROLOGY",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Effective irrigation protection by crop geography",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "ACREAGE",
+            "YIELD",
+            "PUMP_DEMAND",
+            "POWER_COST"
+          ],
+          "companyArchetypes": [
+            "IRRIGATED_FARM_INPUT_COMPANY",
+            "IRRIGATION_EQUIPMENT_COMPANY",
+            "RURAL_LENDER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "CGWB_GROUNDWATER_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_IRRIGATION_DATA",
+            "NRSC_SOIL_MOISTURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "Headline storage masks basin deficit",
+            "Installed irrigation lacks water or power"
+          ],
+          "contradictionTests": [
+            "Reservoir and groundwater remain adequate",
+            "Irrigation coverage exceeds vulnerable acreage"
+          ],
+          "killTests": [
+            "Effective irrigation fully protects the crop",
+            "Water releases normalize"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        },
+        {
+          "indicatorId": "NUTRIENT_MIX_SUBSTITUTION",
+          "name": "Nutrient and product-mix substitution",
+          "eventTypes": [
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Urea, DAP, NPK, MOP, specialty and biological nutrient mix",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "PRODUCT_MIX",
+            "REALIZATION",
+            "MARGIN",
+            "IMPORT_REQUIREMENT"
+          ],
+          "companyArchetypes": [
+            "UREA_PRODUCER",
+            "DAP_PRODUCER",
+            "NPK_PRODUCER",
+            "SPECIALTY_NUTRIENT_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "FERTILIZER_SUBSIDY_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_PRODUCT_SALES",
+            "COMPANY_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 30,
+          "falsePositiveConditions": [
+            "Substitution is caused only by temporary shortage",
+            "Channel inventory distorts reported mix"
+          ],
+          "contradictionTests": [
+            "Product availability normalizes",
+            "Crop mix is unchanged"
+          ],
+          "killTests": [
+            "No persistent state-level mix change",
+            "Subsidy change reverses"
+          ],
+          "requiredUpstreamIndicators": [
+            "FERTILIZER_APPLICATION_TIMING"
+          ]
+        },
+        {
+          "indicatorId": "RABI_WATER_CARRYOVER",
+          "name": "Rabi water and soil-moisture carryover",
+          "eventTypes": [
+            "HYDROLOGY",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "Post-monsoon water available for rabi planting",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RABI_ACREAGE",
+            "RABI_YIELD",
+            "WINTER_INPUT_DEMAND"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "SEED_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "IMD_POST_MONSOON_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_SOWING_DATA",
+            "NRSC_SOIL_MOISTURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Reservoirs are outside crop basin",
+            "Stored water allocated away from agriculture"
+          ],
+          "contradictionTests": [
+            "Northeast monsoon replenishes water",
+            "Rabi sowing remains normal"
+          ],
+          "killTests": [
+            "Rabi water availability normalizes",
+            "Crop acreage is unaffected"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "IRRIGATION_DROUGHT_SHIELD"
+          ]
+        },
+        {
+          "indicatorId": "RAINFALL_FERTILIZER_RESPONSE_CURVE",
+          "name": "Rainfall-to-fertilizer response asymmetry",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Crop- and moisture-specific economically optimal fertilizer demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "MIX",
+            "REALIZATION",
+            "EBITDA",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "FERTILIZER_IMPORTER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "IMD_AGROMET_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "MNCFC_CROP_CONDITION",
+            "COMPANY_CHANNEL_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Rainfall headline used without crop exposure",
+            "Price rise mistaken for producer margin"
+          ],
+          "contradictionTests": [
+            "Irrigation offsets stress",
+            "Sales and application remain normal",
+            "Crop acreage shifts to different nutrient needs"
+          ],
+          "killTests": [
+            "Severe acreage loss",
+            "Government allocation or subsidy changes dominate",
+            "Raw-material shock removes margin benefit"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS",
+            "IRRIGATION_DROUGHT_SHIELD",
+            "FERTILIZER_APPLICATION_TIMING",
+            "NUTRIENT_MIX_SUBSTITUTION"
+          ]
+        },
+        {
+          "indicatorId": "RAINFALL_RURAL_DEMAND_TRANSMISSION",
+          "name": "Rainfall-to-rural-income and demand transmission",
+          "eventTypes": [
+            "RURAL_DEMAND",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Farm income, rural liquidity, credit quality, and non-farm demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RURAL_VOLUME",
+            "DELINQUENCY",
+            "CREDIT_DEMAND",
+            "DEALER_INVENTORY"
+          ],
+          "companyArchetypes": [
+            "TRACTOR_MAKER",
+            "TWO_WHEELER_MAKER",
+            "RURAL_FMCG",
+            "MICROFINANCE_LENDER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "RURAL_WAGE_AND_DEMAND_DATA",
+            "AGRICULTURE_OUTPUT_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "COMPANY_RURAL_CHANNEL_DISCLOSURE",
+            "CREDIT_BUREAU_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 60,
+          "falsePositiveConditions": [
+            "Government transfers offset income loss",
+            "Urban demand masks rural weakness"
+          ],
+          "contradictionTests": [
+            "Rural wages and sales remain firm",
+            "Credit stress does not rise"
+          ],
+          "killTests": [
+            "Income support fully offsets shock",
+            "Crop outcome recovers"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS"
+          ]
+        },
+        {
+          "indicatorId": "SATELLITE_CROP_HEALTH_DIVERGENCE",
+          "name": "Satellite crop-health divergence",
+          "eventTypes": [
+            "SATELLITE_CROP_CONDITION",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "NDVI, NDWI, VCI, VHI, soil moisture, acreage and forecast divergence",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "PRODUCTION_ESTIMATE",
+            "YIELD",
+            "PROCUREMENT",
+            "FOOD_INVENTORY"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "COMMODITY_USER",
+            "AGRI_INPUT_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "MNCFC_FASAL",
+            "NRSC_NDVI_NDWI"
+          ],
+          "corroboratingSourceTypes": [
+            "NISAR_SOIL_MOISTURE",
+            "STATE_GROUND_REPORT"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 30,
+          "falsePositiveConditions": [
+            "Cloud contamination",
+            "Normal seasonal phenology",
+            "Crop calendar mismatch"
+          ],
+          "contradictionTests": [
+            "Ground reports remain normal",
+            "Later imagery recovers"
+          ],
+          "killTests": [
+            "No persistent spectral divergence",
+            "Official acreage confirms normal crop"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        }
+      ]
+    },
+    {
+      "sectorId": "INDUSTRIALS",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "INDUSTRIAL_ORDER_CONVERSION",
+          "name": "Tender-to-order conversion",
+          "eventTypes": [
+            "TENDER",
+            "ORDER_CONTRACT",
+            "EXECUTION_UPDATE"
+          ],
+          "economicVariable": "Executable demand backlog",
+          "expectedDirection": "SUPPORTIVE",
+          "leadTimeQuarters": [
+            1,
+            4
+          ],
+          "earningsChannels": [
+            "REVENUE",
+            "OPERATING_LEVERAGE",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "PROJECT_MANUFACTURER",
+            "EPC_CONTRACTOR",
+            "CAPITAL_GOODS_SUPPLIER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "EXCHANGE_FILING",
+            "GOVERNMENT_TENDER_PORTAL"
+          ],
+          "corroboratingSourceTypes": [
+            "CUSTOMER_DISCLOSURE",
+            "EXECUTION_UPDATE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 180,
+          "falsePositiveConditions": [
+            "Non-binding bid",
+            "Framework order without committed quantity",
+            "Repeated republication of one award"
+          ],
+          "contradictionTests": [
+            "Order cancellation",
+            "Execution delay",
+            "Customer funding unavailable"
+          ],
+          "killTests": [
+            "Material cancellation",
+            "Counterparty insolvency",
+            "Company lacks execution capacity"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "IT_SERVICES",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "IT_DEAL_CONVERSION_AND_HIRING",
+          "name": "Deal conversion, utilisation and hiring",
+          "eventTypes": [
+            "ORDER_CONTRACT",
+            "HIRING",
+            "MANAGEMENT_GUIDANCE"
+          ],
+          "economicVariable": "Signed deal value converting into revenue with utilization and headcount discipline",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            1,
+            6
+          ],
+          "earningsChannels": [
+            "REVENUE",
+            "UTILISATION",
+            "MARGIN",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "IT_SERVICES_EXPORTER",
+            "DIGITAL_ENGINEERING_PROVIDER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "COMPANY_FILING",
+            "CLIENT_FILING"
+          ],
+          "corroboratingSourceTypes": [
+            "HIRING_DATA",
+            "CLOUD_SPEND_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 90,
+          "falsePositiveConditions": [
+            "Renewal labelled as new deal",
+            "Bookings without committed spend"
+          ],
+          "contradictionTests": [
+            "Ramp delayed",
+            "Utilisation falls"
+          ],
+          "killTests": [
+            "Material cancellation",
+            "Client budget cuts"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "LOGISTICS",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "LOGISTICS_VOLUME_YIELD_UTILISATION",
+          "name": "Freight volume, yield and asset utilisation",
+          "eventTypes": [
+            "TRADE_DATA",
+            "FREIGHT_RATE",
+            "CAPACITY_CHANGE"
+          ],
+          "economicVariable": "Tonnage, yield, utilization, fuel cost and route mix",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            3
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "YIELD",
+            "UTILISATION",
+            "FUEL_COST",
+            "EBITDA"
+          ],
+          "companyArchetypes": [
+            "PORT_OPERATOR",
+            "ROAD_LOGISTICS",
+            "RAIL_LOGISTICS",
+            "SHIPPING_LINE"
+          ],
+          "preferredPrimarySourceTypes": [
+            "PORT_TRAFFIC_DATA",
+            "RAILWAY_DATA",
+            "CUSTOMS_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "FREIGHT_INDEX",
+            "COMPANY_FILING"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Congestion surcharge",
+            "Temporary route disruption"
+          ],
+          "contradictionTests": [
+            "Empty running rises",
+            "Fuel cost increases"
+          ],
+          "killTests": [
+            "Trade volume collapses",
+            "Capacity addition destroys rates"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "METALS",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "METALS_SPREAD_AND_INVENTORY",
+          "name": "Metal spread, inventory and utilization",
+          "eventTypes": [
+            "COMMODITY_PRICE",
+            "PRODUCTION_DISPATCH",
+            "TRADE_POLICY"
+          ],
+          "economicVariable": "Realized metal price less ore, energy and freight cost with inventory direction",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            3
+          ],
+          "earningsChannels": [
+            "REALIZATION",
+            "INPUT_COST",
+            "EBITDA",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "STEEL_PRODUCER",
+            "NONFERROUS_PRODUCER",
+            "MINER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "MINING_PRODUCTION_DATA",
+            "CUSTOMS_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "EXCHANGE_INVENTORY",
+            "COMPANY_FILING"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 60,
+          "falsePositiveConditions": [
+            "Futures spike without physical demand",
+            "Currency-only price move"
+          ],
+          "contradictionTests": [
+            "Inventories rise",
+            "Utilization falls"
+          ],
+          "killTests": [
+            "Trade protection removed",
+            "Energy cost overwhelms spread"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "MINING",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "METALS_SPREAD_AND_INVENTORY",
+          "name": "Metal spread, inventory and utilization",
+          "eventTypes": [
+            "COMMODITY_PRICE",
+            "PRODUCTION_DISPATCH",
+            "TRADE_POLICY"
+          ],
+          "economicVariable": "Realized metal price less ore, energy and freight cost with inventory direction",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            3
+          ],
+          "earningsChannels": [
+            "REALIZATION",
+            "INPUT_COST",
+            "EBITDA",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "STEEL_PRODUCER",
+            "NONFERROUS_PRODUCER",
+            "MINER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "MINING_PRODUCTION_DATA",
+            "CUSTOMS_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "EXCHANGE_INVENTORY",
+            "COMPANY_FILING"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 60,
+          "falsePositiveConditions": [
+            "Futures spike without physical demand",
+            "Currency-only price move"
+          ],
+          "contradictionTests": [
+            "Inventories rise",
+            "Utilization falls"
+          ],
+          "killTests": [
+            "Trade protection removed",
+            "Energy cost overwhelms spread"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "NBFC",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "LENDER_EARLY_CREDIT_STRESS",
+          "name": "Early credit-stress migration",
+          "eventTypes": [
+            "POLICY_REGULATION",
+            "SUPPLIER_CUSTOMER"
+          ],
+          "economicVariable": "Borrower repayment stress before reported credit cost",
+          "expectedDirection": "ADVERSE",
+          "leadTimeQuarters": [
+            1,
+            3
+          ],
+          "earningsChannels": [
+            "CREDIT_COST",
+            "PROFIT",
+            "CAPITAL"
+          ],
+          "companyArchetypes": [
+            "RETAIL_LENDER",
+            "SME_LENDER",
+            "MICROFINANCE_LENDER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "REGULATORY_DATA",
+            "COMPANY_FILING"
+          ],
+          "corroboratingSourceTypes": [
+            "CREDIT_BUREAU",
+            "COLLECTION_CHANNEL"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 90,
+          "falsePositiveConditions": [
+            "Seasonal payment timing",
+            "Temporary operational collection disruption"
+          ],
+          "contradictionTests": [
+            "Collections normalize",
+            "Delinquency migration reverses"
+          ],
+          "killTests": [
+            "Capital adequacy breach",
+            "Liquidity access impairment"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "OIL_GAS",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "OIL_GAS_CRACK_AND_POLICY",
+          "name": "Crude, product crack and policy transmission",
+          "eventTypes": [
+            "COMMODITY_PRICE",
+            "POLICY_REGULATION",
+            "PRODUCTION_UPDATE"
+          ],
+          "economicVariable": "Crude price, refining/marketing margin, gas allocation and fiscal intervention",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            3
+          ],
+          "earningsChannels": [
+            "REALIZATION",
+            "REFINING_MARGIN",
+            "MARKETING_MARGIN",
+            "INVENTORY_GAIN",
+            "SUBSIDY"
+          ],
+          "companyArchetypes": [
+            "UPSTREAM_PRODUCER",
+            "REFINER",
+            "FUEL_MARKETER",
+            "CITY_GAS_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "PETROLEUM_MINISTRY_DATA",
+            "COMPANY_FILING"
+          ],
+          "corroboratingSourceTypes": [
+            "CUSTOMS_DATA",
+            "GLOBAL_BENCHMARK_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 30,
+          "falsePositiveConditions": [
+            "Headline crude move applied identically to all archetypes",
+            "Temporary inventory gain"
+          ],
+          "contradictionTests": [
+            "Tax intervention",
+            "Hedge offsets exposure"
+          ],
+          "killTests": [
+            "Price controls block pass-through",
+            "Supply disruption stops volume"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "PHARMACEUTICALS",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "PHARMA_REGULATORY_PIPELINE",
+          "name": "Regulatory and product pipeline conversion",
+          "eventTypes": [
+            "REGULATORY_APPROVAL",
+            "PRODUCT_LAUNCH",
+            "INSPECTION"
+          ],
+          "economicVariable": "Approvals, launch exclusivity, addressable market and compliant capacity",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            6
+          ],
+          "earningsChannels": [
+            "REVENUE",
+            "PRODUCT_MIX",
+            "MARGIN",
+            "CAPEX_RETURN"
+          ],
+          "companyArchetypes": [
+            "GENERIC_DRUG_MAKER",
+            "SPECIALTY_PHARMA",
+            "CDMO"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DRUG_REGULATOR",
+            "COMPANY_FILING"
+          ],
+          "corroboratingSourceTypes": [
+            "PATENT_DATABASE",
+            "CUSTOMS_EXPORT_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 120,
+          "falsePositiveConditions": [
+            "Tentative approval",
+            "Market size quoted before competition"
+          ],
+          "contradictionTests": [
+            "More competitors launch",
+            "Inspection observations remain open"
+          ],
+          "killTests": [
+            "Approval withdrawn",
+            "Import alert or plant shutdown"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "PORTS",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "LOGISTICS_VOLUME_YIELD_UTILISATION",
+          "name": "Freight volume, yield and asset utilisation",
+          "eventTypes": [
+            "TRADE_DATA",
+            "FREIGHT_RATE",
+            "CAPACITY_CHANGE"
+          ],
+          "economicVariable": "Tonnage, yield, utilization, fuel cost and route mix",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            3
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "YIELD",
+            "UTILISATION",
+            "FUEL_COST",
+            "EBITDA"
+          ],
+          "companyArchetypes": [
+            "PORT_OPERATOR",
+            "ROAD_LOGISTICS",
+            "RAIL_LOGISTICS",
+            "SHIPPING_LINE"
+          ],
+          "preferredPrimarySourceTypes": [
+            "PORT_TRAFFIC_DATA",
+            "RAILWAY_DATA",
+            "CUSTOMS_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "FREIGHT_INDEX",
+            "COMPANY_FILING"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Congestion surcharge",
+            "Temporary route disruption"
+          ],
+          "contradictionTests": [
+            "Empty running rises",
+            "Fuel cost increases"
+          ],
+          "killTests": [
+            "Trade volume collapses",
+            "Capacity addition destroys rates"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "POWER_EQUIPMENT",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "RENEWABLE_AWARD_TO_COD",
+          "name": "Award-to-commissioning conversion",
+          "eventTypes": [
+            "TENDER",
+            "ORDER_CONTRACT",
+            "COMMISSIONING"
+          ],
+          "economicVariable": "Awarded capacity reaching financed construction and commercial operation",
+          "expectedDirection": "SUPPORTIVE",
+          "leadTimeQuarters": [
+            2,
+            12
+          ],
+          "earningsChannels": [
+            "ORDER_BOOK",
+            "REVENUE",
+            "CAPITAL_EMPLOYED",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "RENEWABLE_DEVELOPER",
+            "SOLAR_MANUFACTURER",
+            "WIND_EQUIPMENT_SUPPLIER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "GOVERNMENT_TENDER_PORTAL",
+            "POWER_REGULATOR"
+          ],
+          "corroboratingSourceTypes": [
+            "LENDER_DISCLOSURE",
+            "GRID_CONNECTION_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 180,
+          "falsePositiveConditions": [
+            "Lowest-bid award without PPA",
+            "Capacity double-counted across tenders"
+          ],
+          "contradictionTests": [
+            "Financial closure delayed",
+            "Grid connection slips"
+          ],
+          "killTests": [
+            "Award cancelled",
+            "Financing withdrawn"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "POWER_GENERATION",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "POWER_DEMAND_FUEL_SPREAD",
+          "name": "Power demand, availability and fuel spread",
+          "eventTypes": [
+            "POWER_DEMAND",
+            "FUEL_PRICE",
+            "REGULATORY_ORDER"
+          ],
+          "economicVariable": "Dispatch volume, merchant tariff, fuel cost and regulated recovery",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            3
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "TARIFF",
+            "FUEL_COST",
+            "RECEIVABLES"
+          ],
+          "companyArchetypes": [
+            "THERMAL_GENERATOR",
+            "POWER_UTILITY",
+            "POWER_TRADER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "GRID_OPERATION_DATA",
+            "POWER_REGULATOR"
+          ],
+          "corroboratingSourceTypes": [
+            "COAL_DISPATCH_DATA",
+            "COMPANY_FILING"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Weather-driven one-day peak",
+            "Unconstrained demand without supply"
+          ],
+          "contradictionTests": [
+            "Fuel cost rises faster",
+            "Receivables lengthen"
+          ],
+          "killTests": [
+            "Fuel unavailable",
+            "Adverse tariff order"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "POWER_UTILITIES",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "POWER_DEMAND_FUEL_SPREAD",
+          "name": "Power demand, availability and fuel spread",
+          "eventTypes": [
+            "POWER_DEMAND",
+            "FUEL_PRICE",
+            "REGULATORY_ORDER"
+          ],
+          "economicVariable": "Dispatch volume, merchant tariff, fuel cost and regulated recovery",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            3
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "TARIFF",
+            "FUEL_COST",
+            "RECEIVABLES"
+          ],
+          "companyArchetypes": [
+            "THERMAL_GENERATOR",
+            "POWER_UTILITY",
+            "POWER_TRADER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "GRID_OPERATION_DATA",
+            "POWER_REGULATOR"
+          ],
+          "corroboratingSourceTypes": [
+            "COAL_DISPATCH_DATA",
+            "COMPANY_FILING"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Weather-driven one-day peak",
+            "Unconstrained demand without supply"
+          ],
+          "contradictionTests": [
+            "Fuel cost rises faster",
+            "Receivables lengthen"
+          ],
+          "killTests": [
+            "Fuel unavailable",
+            "Adverse tariff order"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "REAL_ESTATE",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "REAL_ESTATE_PRE_SALES_CASH_CONVERSION",
+          "name": "Pre-sales to cash and delivery conversion",
+          "eventTypes": [
+            "PROJECT_LAUNCH",
+            "REGULATORY_APPROVAL",
+            "SALES_UPDATE"
+          ],
+          "economicVariable": "Bookings, collections, construction progress, inventory and land payments",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            1,
+            8
+          ],
+          "earningsChannels": [
+            "BOOKINGS",
+            "COLLECTIONS",
+            "REVENUE",
+            "NET_DEBT",
+            "ROCE"
+          ],
+          "companyArchetypes": [
+            "RESIDENTIAL_DEVELOPER",
+            "COMMERCIAL_DEVELOPER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "RERA_DATA",
+            "COMPANY_FILING"
+          ],
+          "corroboratingSourceTypes": [
+            "MORTGAGE_DATA",
+            "PROPERTY_REGISTRATION_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 120,
+          "falsePositiveConditions": [
+            "Launch-quarter booking concentration",
+            "Non-refundable expression of interest counted as sale"
+          ],
+          "contradictionTests": [
+            "Collections lag bookings",
+            "Unsold inventory rises"
+          ],
+          "killTests": [
+            "Approval withdrawn",
+            "Leverage covenant breached"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "REFINING",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "OIL_GAS_CRACK_AND_POLICY",
+          "name": "Crude, product crack and policy transmission",
+          "eventTypes": [
+            "COMMODITY_PRICE",
+            "POLICY_REGULATION",
+            "PRODUCTION_UPDATE"
+          ],
+          "economicVariable": "Crude price, refining/marketing margin, gas allocation and fiscal intervention",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            3
+          ],
+          "earningsChannels": [
+            "REALIZATION",
+            "REFINING_MARGIN",
+            "MARKETING_MARGIN",
+            "INVENTORY_GAIN",
+            "SUBSIDY"
+          ],
+          "companyArchetypes": [
+            "UPSTREAM_PRODUCER",
+            "REFINER",
+            "FUEL_MARKETER",
+            "CITY_GAS_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "PETROLEUM_MINISTRY_DATA",
+            "COMPANY_FILING"
+          ],
+          "corroboratingSourceTypes": [
+            "CUSTOMS_DATA",
+            "GLOBAL_BENCHMARK_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 30,
+          "falsePositiveConditions": [
+            "Headline crude move applied identically to all archetypes",
+            "Temporary inventory gain"
+          ],
+          "contradictionTests": [
+            "Tax intervention",
+            "Hedge offsets exposure"
+          ],
+          "killTests": [
+            "Price controls block pass-through",
+            "Supply disruption stops volume"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "RENEWABLE_ENERGY",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "RENEWABLE_AWARD_TO_COD",
+          "name": "Award-to-commissioning conversion",
+          "eventTypes": [
+            "TENDER",
+            "ORDER_CONTRACT",
+            "COMMISSIONING"
+          ],
+          "economicVariable": "Awarded capacity reaching financed construction and commercial operation",
+          "expectedDirection": "SUPPORTIVE",
+          "leadTimeQuarters": [
+            2,
+            12
+          ],
+          "earningsChannels": [
+            "ORDER_BOOK",
+            "REVENUE",
+            "CAPITAL_EMPLOYED",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "RENEWABLE_DEVELOPER",
+            "SOLAR_MANUFACTURER",
+            "WIND_EQUIPMENT_SUPPLIER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "GOVERNMENT_TENDER_PORTAL",
+            "POWER_REGULATOR"
+          ],
+          "corroboratingSourceTypes": [
+            "LENDER_DISCLOSURE",
+            "GRID_CONNECTION_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 180,
+          "falsePositiveConditions": [
+            "Lowest-bid award without PPA",
+            "Capacity double-counted across tenders"
+          ],
+          "contradictionTests": [
+            "Financial closure delayed",
+            "Grid connection slips"
+          ],
+          "killTests": [
+            "Award cancelled",
+            "Financing withdrawn"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "RETAIL",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "CONSUMER_VOLUME_PRICE_MIX",
+          "name": "Consumer volume, pricing and distribution breadth",
+          "eventTypes": [
+            "PRICE_CHANGE",
+            "CHANNEL_DATA",
+            "INPUT_COST"
+          ],
+          "economicVariable": "Underlying volume, price/mix, distribution, promotions and commodity basket",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            3
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "REALIZATION",
+            "GROSS_MARGIN",
+            "AD_SPEND",
+            "INVENTORY"
+          ],
+          "companyArchetypes": [
+            "FMCG_COMPANY",
+            "APPAREL_BRAND",
+            "RETAILER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "COMPANY_FILING",
+            "GOVERNMENT_CONSUMPTION_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "CHANNEL_CHECK",
+            "COMMODITY_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 60,
+          "falsePositiveConditions": [
+            "Low-base growth",
+            "Trade loading before price increase"
+          ],
+          "contradictionTests": [
+            "Promotions rise",
+            "Distribution gains reverse"
+          ],
+          "killTests": [
+            "Volume contracts after pricing",
+            "Inventory write-down"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "RURAL_CONSUMPTION",
+      "indicatorCount": 13,
+      "indicators": [
+        {
+          "indicatorId": "AGRICULTURAL_DROUGHT_COMPOSITE",
+          "name": "Multi-dimensional agricultural drought",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "HYDROLOGY",
+            "CROP_PROGRESS",
+            "SATELLITE_CROP_CONDITION"
+          ],
+          "economicVariable": "Persistent crop-water stress by crop and geography",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "ACREAGE",
+            "YIELD",
+            "INPUT_DEMAND",
+            "FOOD_SUPPLY"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "SEED_COMPANY",
+            "AGROCHEMICAL_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "IMD_WEATHER_DATA",
+            "MNCFC_DROUGHT_ASSESSMENT",
+            "NRSC_EARTH_OBSERVATION"
+          ],
+          "corroboratingSourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "STATE_SOWING_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "All-India deficit hides normal crop districts",
+            "Short deficit followed by recovery",
+            "Rain outside crop areas"
+          ],
+          "contradictionTests": [
+            "Soil moisture normal",
+            "Vegetation condition normal",
+            "Sowing catches up"
+          ],
+          "killTests": [
+            "Rainfall and soil moisture recover",
+            "Irrigation fully offsets stress",
+            "Crop condition remains normal"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "AGRI_SUPPLY_CHAIN_AMPLIFICATION",
+          "name": "Agricultural supply-chain amplification",
+          "eventTypes": [
+            "AGRI_PRICE_SUPPLY_CHAIN",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Farm-gate to wholesale and retail price wedge",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RAW_MATERIAL_COST",
+            "GROSS_MARGIN",
+            "WASTAGE",
+            "REALIZATION"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "RETAILER",
+            "COLD_CHAIN_COMPANY",
+            "LOGISTICS_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "AGMARKNET_MANDI_DATA",
+            "CONSUMER_AFFAIRS_PRICE_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "RAIL_ROAD_MOVEMENT",
+            "COMPANY_PROCUREMENT_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 14,
+          "falsePositiveConditions": [
+            "Festival seasonality",
+            "Local transport event without production loss"
+          ],
+          "contradictionTests": [
+            "Market arrivals normalize",
+            "Retail-farm spread contracts"
+          ],
+          "killTests": [
+            "Government logistics intervention",
+            "Perishable supply recovers"
+          ],
+          "requiredUpstreamIndicators": [
+            "CROP_STAGE_WATER_STRESS",
+            "SATELLITE_CROP_HEALTH_DIVERGENCE"
+          ]
+        },
+        {
+          "indicatorId": "CROP_STAGE_WATER_STRESS",
+          "name": "Crop-stage water stress",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS",
+            "SATELLITE_CROP_CONDITION"
+          ],
+          "economicVariable": "Water stress at crop-specific sensitive growth stages",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "YIELD",
+            "QUALITY",
+            "HARVEST_TIMING"
+          ],
+          "companyArchetypes": [
+            "GRAIN_PRODUCER",
+            "FOOD_PROCESSOR",
+            "SEED_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "IMD_AGROMET_ADVISORY",
+            "MNCFC_CROP_FORECAST"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_CROP_REPORT",
+            "SATELLITE_CROP_HEALTH"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Stress occurs outside the sensitive stage",
+            "Short-duration variety escapes stress"
+          ],
+          "contradictionTests": [
+            "Crop stage unaffected",
+            "Late rain restores development"
+          ],
+          "killTests": [
+            "Crop condition recovers",
+            "Harvest is already complete"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        },
+        {
+          "indicatorId": "CROP_SWITCH_AND_INPUT_MIX",
+          "name": "Crop switching and agricultural input mix",
+          "eventTypes": [
+            "CROP_PROGRESS",
+            "AGRI_PRICE_SUPPLY_CHAIN",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Acreage migration among crops and varieties",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "SEED_VOLUME",
+            "FERTILIZER_MIX",
+            "PESTICIDE_MIX",
+            "CROP_SUPPLY"
+          ],
+          "companyArchetypes": [
+            "SEED_COMPANY",
+            "AGROCHEMICAL_COMPANY",
+            "FERTILIZER_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "MINISTRY_SOWING_DATA",
+            "MSP_PROCUREMENT_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "SATELLITE_ACREAGE",
+            "MANDI_PRICES"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "Temporary sowing delay mistaken for crop switch",
+            "Reported acreage revisions"
+          ],
+          "contradictionTests": [
+            "Original crop acreage catches up",
+            "Price incentives reverse"
+          ],
+          "killTests": [
+            "No confirmed acreage substitution",
+            "Seed availability prevents switching"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS"
+          ]
+        },
+        {
+          "indicatorId": "FERTILIZER_APPLICATION_TIMING",
+          "name": "Fertilizer purchase and application timing",
+          "eventTypes": [
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "Crop-stage fertilizer application and deferred demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "INVENTORY",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "UREA_PRODUCER",
+            "PHOSPHATIC_FERTILIZER_PRODUCER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "STATE_AGRICULTURE_INPUT_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "COMPANY_CHANNEL_DISCLOSURE",
+            "SOWING_PROGRESS"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Dealer stocking mistaken for farm application",
+            "Delayed sales mistaken for destroyed demand"
+          ],
+          "contradictionTests": [
+            "Sowing catches up",
+            "Application resumes after rain"
+          ],
+          "killTests": [
+            "Seasonal application volume normalizes",
+            "Crop abandonment becomes widespread"
+          ],
+          "requiredUpstreamIndicators": [
+            "CROP_STAGE_WATER_STRESS",
+            "IRRIGATION_DROUGHT_SHIELD"
+          ]
+        },
+        {
+          "indicatorId": "FERTILIZER_GLOBAL_INPUT_STRESS",
+          "name": "Global fertilizer input and logistics stress",
+          "eventTypes": [
+            "GLOBAL_INPUT_COST",
+            "FERTILIZER_MARKET",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Gas, ammonia, phosphate, potash, currency, freight, imports, and subsidy receivables",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "INPUT_COST",
+            "IMPORT_AVAILABILITY",
+            "MARGIN",
+            "SUBSIDY_RECEIVABLE",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "FERTILIZER_IMPORTER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CUSTOMS_IMPORT_DATA",
+            "GOVERNMENT_FERTILIZER_BULLETIN"
+          ],
+          "corroboratingSourceTypes": [
+            "GLOBAL_COMMODITY_DATA",
+            "SHIPPING_DATA",
+            "COMPANY_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 21,
+          "falsePositiveConditions": [
+            "Quoted spot price lacks traded volume",
+            "Currency move is temporary"
+          ],
+          "contradictionTests": [
+            "Long-term contracts protect cost",
+            "Subsidy adjustment offsets shock"
+          ],
+          "killTests": [
+            "Supply normalizes",
+            "Working-capital funding fails",
+            "Domestic price controls eliminate pass-through"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "FOOD_POLICY_INTERVENTION_SUPPRESSOR",
+          "name": "Food and fertilizer policy intervention suppressor",
+          "eventTypes": [
+            "FOOD_STOCK_POLICY",
+            "POLICY_REGULATION",
+            "FERTILIZER_MARKET"
+          ],
+          "economicVariable": "Government buffer, procurement, trade, stock-limit, allocation and subsidy response",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "MARKET_PRICE",
+            "PROCUREMENT",
+            "INVENTORY",
+            "MARGIN",
+            "WORKING_CAPITAL"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "GRAIN_TRADER",
+            "FERTILIZER_PRODUCER",
+            "SUGAR_MILL"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DFPD_FCI_STOCK_DATA",
+            "DGFT_TRADE_POLICY",
+            "FERTILIZER_SUBSIDY_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "CUSTOMS_TRADE_DATA",
+            "GOVERNMENT_PROCUREMENT_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 14,
+          "falsePositiveConditions": [
+            "Announcement without implementation",
+            "National stocks unavailable in deficit region"
+          ],
+          "contradictionTests": [
+            "Buffer release is too small",
+            "Import logistics are delayed"
+          ],
+          "killTests": [
+            "Effective intervention caps prices",
+            "Policy removes producer economics"
+          ],
+          "requiredUpstreamIndicators": []
+        },
+        {
+          "indicatorId": "IRRIGATION_DROUGHT_SHIELD",
+          "name": "Irrigation and groundwater drought shield",
+          "eventTypes": [
+            "HYDROLOGY",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Effective irrigation protection by crop geography",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "ACREAGE",
+            "YIELD",
+            "PUMP_DEMAND",
+            "POWER_COST"
+          ],
+          "companyArchetypes": [
+            "IRRIGATED_FARM_INPUT_COMPANY",
+            "IRRIGATION_EQUIPMENT_COMPANY",
+            "RURAL_LENDER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "CGWB_GROUNDWATER_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_IRRIGATION_DATA",
+            "NRSC_SOIL_MOISTURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 28,
+          "falsePositiveConditions": [
+            "Headline storage masks basin deficit",
+            "Installed irrigation lacks water or power"
+          ],
+          "contradictionTests": [
+            "Reservoir and groundwater remain adequate",
+            "Irrigation coverage exceeds vulnerable acreage"
+          ],
+          "killTests": [
+            "Effective irrigation fully protects the crop",
+            "Water releases normalize"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        },
+        {
+          "indicatorId": "NUTRIENT_MIX_SUBSTITUTION",
+          "name": "Nutrient and product-mix substitution",
+          "eventTypes": [
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS",
+            "POLICY_REGULATION"
+          ],
+          "economicVariable": "Urea, DAP, NPK, MOP, specialty and biological nutrient mix",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "PRODUCT_MIX",
+            "REALIZATION",
+            "MARGIN",
+            "IMPORT_REQUIREMENT"
+          ],
+          "companyArchetypes": [
+            "UREA_PRODUCER",
+            "DAP_PRODUCER",
+            "NPK_PRODUCER",
+            "SPECIALTY_NUTRIENT_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "FERTILIZER_SUBSIDY_POLICY"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_PRODUCT_SALES",
+            "COMPANY_DISCLOSURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 30,
+          "falsePositiveConditions": [
+            "Substitution is caused only by temporary shortage",
+            "Channel inventory distorts reported mix"
+          ],
+          "contradictionTests": [
+            "Product availability normalizes",
+            "Crop mix is unchanged"
+          ],
+          "killTests": [
+            "No persistent state-level mix change",
+            "Subsidy change reverses"
+          ],
+          "requiredUpstreamIndicators": [
+            "FERTILIZER_APPLICATION_TIMING"
+          ]
+        },
+        {
+          "indicatorId": "RABI_WATER_CARRYOVER",
+          "name": "Rabi water and soil-moisture carryover",
+          "eventTypes": [
+            "HYDROLOGY",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "Post-monsoon water available for rabi planting",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RABI_ACREAGE",
+            "RABI_YIELD",
+            "WINTER_INPUT_DEMAND"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "SEED_COMPANY",
+            "FOOD_PROCESSOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "CWC_RESERVOIR_DATA",
+            "IMD_POST_MONSOON_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "STATE_SOWING_DATA",
+            "NRSC_SOIL_MOISTURE"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Reservoirs are outside crop basin",
+            "Stored water allocated away from agriculture"
+          ],
+          "contradictionTests": [
+            "Northeast monsoon replenishes water",
+            "Rabi sowing remains normal"
+          ],
+          "killTests": [
+            "Rabi water availability normalizes",
+            "Crop acreage is unaffected"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "IRRIGATION_DROUGHT_SHIELD"
+          ]
+        },
+        {
+          "indicatorId": "RAINFALL_FERTILIZER_RESPONSE_CURVE",
+          "name": "Rainfall-to-fertilizer response asymmetry",
+          "eventTypes": [
+            "WEATHER_ANOMALY",
+            "FERTILIZER_MARKET",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Crop- and moisture-specific economically optimal fertilizer demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "MIX",
+            "REALIZATION",
+            "EBITDA",
+            "CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "FERTILIZER_PRODUCER",
+            "FERTILIZER_IMPORTER",
+            "FERTILIZER_DISTRIBUTOR"
+          ],
+          "preferredPrimarySourceTypes": [
+            "DEPARTMENT_OF_FERTILIZERS_SALES",
+            "IMD_AGROMET_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "MNCFC_CROP_CONDITION",
+            "COMPANY_CHANNEL_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Rainfall headline used without crop exposure",
+            "Price rise mistaken for producer margin"
+          ],
+          "contradictionTests": [
+            "Irrigation offsets stress",
+            "Sales and application remain normal",
+            "Crop acreage shifts to different nutrient needs"
+          ],
+          "killTests": [
+            "Severe acreage loss",
+            "Government allocation or subsidy changes dominate",
+            "Raw-material shock removes margin benefit"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS",
+            "IRRIGATION_DROUGHT_SHIELD",
+            "FERTILIZER_APPLICATION_TIMING",
+            "NUTRIENT_MIX_SUBSTITUTION"
+          ]
+        },
+        {
+          "indicatorId": "RAINFALL_RURAL_DEMAND_TRANSMISSION",
+          "name": "Rainfall-to-rural-income and demand transmission",
+          "eventTypes": [
+            "RURAL_DEMAND",
+            "WEATHER_ANOMALY",
+            "CROP_PROGRESS"
+          ],
+          "economicVariable": "Farm income, rural liquidity, credit quality, and non-farm demand",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "RURAL_VOLUME",
+            "DELINQUENCY",
+            "CREDIT_DEMAND",
+            "DEALER_INVENTORY"
+          ],
+          "companyArchetypes": [
+            "TRACTOR_MAKER",
+            "TWO_WHEELER_MAKER",
+            "RURAL_FMCG",
+            "MICROFINANCE_LENDER"
+          ],
+          "preferredPrimarySourceTypes": [
+            "RURAL_WAGE_AND_DEMAND_DATA",
+            "AGRICULTURE_OUTPUT_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "COMPANY_RURAL_CHANNEL_DISCLOSURE",
+            "CREDIT_BUREAU_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 60,
+          "falsePositiveConditions": [
+            "Government transfers offset income loss",
+            "Urban demand masks rural weakness"
+          ],
+          "contradictionTests": [
+            "Rural wages and sales remain firm",
+            "Credit stress does not rise"
+          ],
+          "killTests": [
+            "Income support fully offsets shock",
+            "Crop outcome recovers"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE",
+            "CROP_STAGE_WATER_STRESS"
+          ]
+        },
+        {
+          "indicatorId": "SATELLITE_CROP_HEALTH_DIVERGENCE",
+          "name": "Satellite crop-health divergence",
+          "eventTypes": [
+            "SATELLITE_CROP_CONDITION",
+            "CROP_PROGRESS",
+            "WEATHER_ANOMALY"
+          ],
+          "economicVariable": "NDVI, NDWI, VCI, VHI, soil moisture, acreage and forecast divergence",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            4
+          ],
+          "earningsChannels": [
+            "PRODUCTION_ESTIMATE",
+            "YIELD",
+            "PROCUREMENT",
+            "FOOD_INVENTORY"
+          ],
+          "companyArchetypes": [
+            "FOOD_PROCESSOR",
+            "COMMODITY_USER",
+            "AGRI_INPUT_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "MNCFC_FASAL",
+            "NRSC_NDVI_NDWI"
+          ],
+          "corroboratingSourceTypes": [
+            "NISAR_SOIL_MOISTURE",
+            "STATE_GROUND_REPORT"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 30,
+          "falsePositiveConditions": [
+            "Cloud contamination",
+            "Normal seasonal phenology",
+            "Crop calendar mismatch"
+          ],
+          "contradictionTests": [
+            "Ground reports remain normal",
+            "Later imagery recovers"
+          ],
+          "killTests": [
+            "No persistent spectral divergence",
+            "Official acreage confirms normal crop"
+          ],
+          "requiredUpstreamIndicators": [
+            "AGRICULTURAL_DROUGHT_COMPOSITE"
+          ]
+        }
+      ]
+    },
+    {
+      "sectorId": "SHIPPING",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "LOGISTICS_VOLUME_YIELD_UTILISATION",
+          "name": "Freight volume, yield and asset utilisation",
+          "eventTypes": [
+            "TRADE_DATA",
+            "FREIGHT_RATE",
+            "CAPACITY_CHANGE"
+          ],
+          "economicVariable": "Tonnage, yield, utilization, fuel cost and route mix",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            0,
+            3
+          ],
+          "earningsChannels": [
+            "VOLUME",
+            "YIELD",
+            "UTILISATION",
+            "FUEL_COST",
+            "EBITDA"
+          ],
+          "companyArchetypes": [
+            "PORT_OPERATOR",
+            "ROAD_LOGISTICS",
+            "RAIL_LOGISTICS",
+            "SHIPPING_LINE"
+          ],
+          "preferredPrimarySourceTypes": [
+            "PORT_TRAFFIC_DATA",
+            "RAILWAY_DATA",
+            "CUSTOMS_DATA"
+          ],
+          "corroboratingSourceTypes": [
+            "FREIGHT_INDEX",
+            "COMPANY_FILING"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 45,
+          "falsePositiveConditions": [
+            "Congestion surcharge",
+            "Temporary route disruption"
+          ],
+          "contradictionTests": [
+            "Empty running rises",
+            "Fuel cost increases"
+          ],
+          "killTests": [
+            "Trade volume collapses",
+            "Capacity addition destroys rates"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    },
+    {
+      "sectorId": "TELECOM",
+      "indicatorCount": 1,
+      "indicators": [
+        {
+          "indicatorId": "TELECOM_ARPU_CAPEX_RETURNS",
+          "name": "ARPU, subscriber quality and network returns",
+          "eventTypes": [
+            "TARIFF_CHANGE",
+            "SUBSCRIBER_DATA",
+            "CAPACITY_CHANGE"
+          ],
+          "economicVariable": "ARPU net of churn, spectrum/network cost and incremental traffic monetization",
+          "expectedDirection": "CONTEXT_DEPENDENT",
+          "leadTimeQuarters": [
+            1,
+            6
+          ],
+          "earningsChannels": [
+            "ARPU",
+            "CHURN",
+            "EBITDA",
+            "CAPEX",
+            "FREE_CASH_FLOW"
+          ],
+          "companyArchetypes": [
+            "MOBILE_OPERATOR",
+            "TOWER_COMPANY"
+          ],
+          "preferredPrimarySourceTypes": [
+            "TELECOM_REGULATOR_DATA",
+            "COMPANY_FILING"
+          ],
+          "corroboratingSourceTypes": [
+            "APP_DOWNLOAD_DATA",
+            "NETWORK_QUALITY_DATA"
+          ],
+          "minimumIndependentGroups": 2,
+          "minimumPersistentObservations": 2,
+          "expectedPersistenceDays": 90,
+          "falsePositiveConditions": [
+            "Inactive subscriber cleanup",
+            "One-time spectrum accounting"
+          ],
+          "contradictionTests": [
+            "Churn rises",
+            "Capex remains elevated"
+          ],
+          "killTests": [
+            "Price war resumes",
+            "Regulatory charge increases"
+          ],
+          "requiredUpstreamIndicators": []
+        }
+      ]
+    }
+  ],
+  "createsCatalyst": false,
+  "changesVerdict": false,
+  "authorizesTrade": false
+}

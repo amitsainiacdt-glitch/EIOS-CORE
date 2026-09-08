@@ -32,6 +32,7 @@ from modules.external_intelligence.research_runtime_bootstrap import ResearchRun
 from scripts.build_coromandel_annual_report_study import main as build_coromandel_study
 from scripts.build_coromandel_company_intelligence_snapshot import main as build_coromandel_snapshot
 from scripts.sync_local_status_dashboard import main as sync_dashboard
+from scripts.build_sector_catalyst_coverage import main as build_sector_catalyst_coverage
 from scripts.check_financial_source_regression import run_check as check_financial_sources
 
 
@@ -131,6 +132,7 @@ def main() -> int:
         # they do not approve evidence or manufacture a verdict.
         build_coromandel_study()
         build_coromandel_snapshot()
+        build_sector_catalyst_coverage()
         status["status"] = "SUCCESS"
         return 0
     except Exception as exc:

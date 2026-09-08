@@ -2,6 +2,7 @@
 
 from modules.external_intelligence.sector_causal_indicator import CausalEffectDirection, SectorCausalIndicatorDefinition
 from modules.external_intelligence.agri_climate_indicator_library import agri_climate_indicators
+from modules.external_intelligence.cross_sector_indicator_library import cross_sector_indicators
 
 
 class SectorCausalIndicatorRegistry:
@@ -86,6 +87,7 @@ class SectorCausalIndicatorRegistry:
             SectorCausalIndicatorDefinition(1, "LENDER_EARLY_CREDIT_STRESS", 1, "Early credit-stress migration", ("BANKING", "NBFC"), ("POLICY_REGULATION", "SUPPLIER_CUSTOMER"), "Borrower repayment stress before reported credit cost", CausalEffectDirection.ADVERSE, 1, 3, "Persistent early delinquency and collection deterioration may precede higher slippages and credit costs.", ("CREDIT_COST", "PROFIT", "CAPITAL"), ("RETAIL_LENDER", "SME_LENDER", "MICROFINANCE_LENDER"), ("REGULATORY_DATA", "COMPANY_FILING"), ("CREDIT_BUREAU", "COLLECTION_CHANNEL"), "dataset_origin_and_borrower_cohort", 2, 2, 90, ("Seasonal payment timing", "Temporary operational collection disruption"), ("Collections normalize", "Delinquency migration reverses"), ("Capital adequacy breach", "Liquidity access impairment")),
             SectorCausalIndicatorDefinition(1, "CHEMICAL_SPREAD_RECOVERY", 1, "Product spread recovery", ("CHEMICALS",), ("POLICY_REGULATION", "CAPACITY_CHANGE"), "Product realization less feedstock cost", CausalEffectDirection.CONTEXT_DEPENDENT, 1, 3, "A persistent product-feedstock spread improvement may lead gross-margin recovery if volumes and utilization hold.", ("GROSS_MARGIN", "EBITDA", "CASH_FLOW"), ("COMMODITY_CHEMICAL_PRODUCER", "SPECIALTY_CHEMICAL_PRODUCER"), ("CUSTOMS_DATA", "INDUSTRY_PRICE_DATA"), ("COMPETITOR_DISCLOSURE", "SUPPLIER_PRICING"), "underlying_price_dataset", 2, 3, 90, ("One-day price spike", "Currency-only movement", "Low-volume quoted price"), ("Feedstock cost catches up", "Utilization falls", "Inventory losses emerge"), ("Structural demand destruction", "Plant shutdown", "Loss of key customer")),
             SectorCausalIndicatorDefinition(1, "BUILDING_MATERIAL_UTILISATION", 1, "Utilisation and realization breadth", ("BUILDING_MATERIALS",), ("CAPACITY_CHANGE", "SUPPLIER_CUSTOMER"), "Regional volume, utilization, and realization", CausalEffectDirection.CONTEXT_DEPENDENT, 1, 4, "Broad utilization and realization improvement may lead operating leverage when new supply and input costs remain controlled.", ("VOLUME", "REALIZATION", "EBITDA_MARGIN"), ("CEMENT_PRODUCER", "CERAMICS_PRODUCER", "BUILDING_PRODUCTS_MANUFACTURER"), ("COMPANY_FILING", "GOVERNMENT_DISPATCH_DATA"), ("DEALER_CHANNEL", "COMPETITOR_DISCLOSURE"), "producer_or_dataset_origin", 2, 2, 120, ("Restocking without end demand", "Regional festival seasonality"), ("Price rollback", "Inventory rebuild", "New competing capacity"), ("Sustained demand contraction", "Input-cost shock", "Balance-sheet stress")),
+            *cross_sector_indicators(),
             *agri_climate_indicators(),
         ))
         registry.validate_dependencies()

@@ -12,7 +12,7 @@ def main():
         "INDUSTRIAL_ORDER_CONVERSION", "LENDER_EARLY_CREDIT_STRESS",
         "CHEMICAL_SPREAD_RECOVERY", "BUILDING_MATERIAL_UTILISATION",
     }.issubset(indicator_ids)
-    assert len(indicator_ids) == 17
+    assert len(indicator_ids) == 29
     assert registry.validate_dependencies()
     fertilizer = registry.get("RAINFALL_FERTILIZER_RESPONSE_CURVE")
     assert "FERTILIZER_APPLICATION_TIMING" in fertilizer.required_upstream_indicator_ids
@@ -27,6 +27,11 @@ def main():
     assert industrial.minimum_independence_groups == 2
     assert registry.applicable(sector_id="INDUSTRIALS", event_type="ORDER_CONTRACT") == (industrial,)
     assert registry.applicable(sector_id="BANKING", event_type="ORDER_CONTRACT") == ()
+    assert registry.get("IT_DEAL_CONVERSION_AND_HIRING").minimum_persistent_observations == 2
+    assert registry.get("PHARMA_REGULATORY_PIPELINE").lead_time_quarters_max == 6
+    assert registry.get("RENEWABLE_AWARD_TO_COD").minimum_independence_groups == 2
+    assert registry.get("DEFENCE_ORDER_EXECUTION_CASH").kill_tests
+    assert registry.applicable(sector_id="TELECOM", event_type="TARIFF_CHANGE")
     try:
         registry.register(replace(industrial, indicator_id="BAD", lead_time_quarters_min=5, lead_time_quarters_max=2))
     except ValueError as exc:
