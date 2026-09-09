@@ -6173,3 +6173,14 @@ investment decision is created by this checkpoint.
 - Candidate evidence requires a SHA-256 identity, sectors must fall inside the declared universe, duplicate tickers/factors fail, and deterministic ticker ordering resolves equal objective priority without familiarity preference.
 - Tests prove that an unfamiliar company outranks a holding when its objective evidence priority is higher, and flipping all holding/watchlist/discussion flags leaves both selection and its fingerprint unchanged. The queue creates no Opportunity, recommendation or trade.
 - Validation: six focused neutral-discovery tests, 76 top-level external-intelligence regression tests and all 388 company-intelligence tests pass. The next checkpoint is auditable sector-indicator learning and timing calibration.
+
+## Controlled Intelligence Write Boundary — Checkpoint 1 (2026-09-09)
+
+- Preserved anti-anchoring discovery independently in commit `72d532f` before starting this checkpoint.
+- Added passive contracts for the four mutually exclusive information classes, actor/origin/authority, source references, write commands, classified records, validation lifecycle and immutable accepted/rejected receipts.
+- Added deterministic request, record and receipt SHA-256 fingerprints with receipt verification and declared-request tamper detection.
+- Added a deliberately in-memory, non-production reference service. Machine and AI facts are forced to `PROVISIONAL`; AI cannot verify facts; only an authorized decision orchestrator can write a Decision; stale prior-record fingerprints and authority violations fail closed.
+- Exact duplicates are idempotent. Conflicting Facts are both preserved, marked `CONFLICTED` and excluded from trusted reads. Verified restatements create a new version and mark the prior record `SUPERSEDED` without erasing it.
+- Recorded ADR-003 through ADR-008. Canonical dossier migration, EvidenceEvent implementation and Research Decision Packet extension remain explicitly deferred.
+- No Master Dossier, production writer, Observation, Temporal Evidence, EIP, collector, UI, portfolio, trading or AI-provider path is connected or changed by this checkpoint.
+- Validation at implementation time: 22 focused Controlled Write tests pass. Full regression results are recorded after the complete relevant suites run.
