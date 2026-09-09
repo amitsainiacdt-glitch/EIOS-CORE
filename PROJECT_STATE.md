@@ -6165,3 +6165,11 @@ investment decision is created by this checkpoint.
 - Two independent confirmation groups with no contradiction or unresolved uncertainty may produce `SCALE_REVIEW`; one or insufficient confirmation remains `WAIT_FOR_CONFIRMATION`; contradiction produces `HOLD`; and a triggered forward kill test produces `KILL_THESIS_REVIEW` with priority.
 - The lifecycle accepts only a governed EIP or Buy-Zone Candidate. Every output preserves the original EIP date and explicitly sets portfolio authorization to false; Scale and Kill remain human/governed review actions, not trades.
 - Validation: six focused lifecycle tests, 70 top-level external-intelligence regression tests and all 388 company-intelligence tests pass. The next checkpoint is anti-anchoring discovery governance across sectors and companies.
+
+## Anti-anchoring market discovery governance (2026-09-09)
+
+- Added an explicit public market-universe contract with declared target sectors and individual-company candidates. A sector named in the universe but lacking any candidate is reported as missing and holds universe readiness rather than disappearing from the scan.
+- Research priority may use only typed causal evidence freshness, causal coverage gap, expected information gain, contradiction value and primary-source availability. Portfolio ownership, watchlist presence and prior discussion are retained as context only and are structurally absent from priority calculation.
+- Candidate evidence requires a SHA-256 identity, sectors must fall inside the declared universe, duplicate tickers/factors fail, and deterministic ticker ordering resolves equal objective priority without familiarity preference.
+- Tests prove that an unfamiliar company outranks a holding when its objective evidence priority is higher, and flipping all holding/watchlist/discussion flags leaves both selection and its fingerprint unchanged. The queue creates no Opportunity, recommendation or trade.
+- Validation: six focused neutral-discovery tests, 76 top-level external-intelligence regression tests and all 388 company-intelligence tests pass. The next checkpoint is auditable sector-indicator learning and timing calibration.
