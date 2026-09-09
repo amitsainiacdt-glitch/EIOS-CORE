@@ -6211,3 +6211,12 @@ investment decision is created by this checkpoint.
 - Governed quarterly records now retain the controlled receipt ID. New records fail closed on reload when that receipt is missing; older records without this additive field remain readable.
 - The durable controlled journal reloads the quantitative record and receipt exactly after restart. The existing quarterly record continues to have no verdict, Catalyst or trade authority.
 - No annual, balance-sheet, cash-flow, Derived Metric, AI, UI, EIP, portfolio or trading writer is connected. The next checkpoint requires review.
+
+## Governed annual balance-sheet and cash-flow Fact gate (2026-09-09)
+
+- Added the missing approval boundary between annual-statement extraction and trusted storage. The existing Coromandel balance-sheet and cash-flow files remain review candidates; numerical reconciliation and META/AI inspection cannot approve them.
+- A named human must approve the deterministic fingerprint of the exact statement, with review identity, rationale, confidence and timestamp. Any later change to a value, period, basis, statement type or provenance invalidates that approval.
+- An approved balance sheet or cash-flow statement is retained atomically as one quantitative `FACT`, separated by company, period, standalone/consolidated basis and statement type. Every included figure must use INR crore and bind to the same source URL and SHA-256 document hash.
+- Mixed sources, fake approval-shaped data, invalid numbers and missing provenance fail closed. A competing value set is preserved as a controlled conflict and prevents annual-ledger materialization and trusted downstream use.
+- Governed annual records retain the permanent controlled receipt ID and fail closed on reload if the receipt is missing. They have no verdict or trade authority.
+- No current review candidate was migrated or promoted, and no UI, AI, collector, Derived Metric, EIP, portfolio or trading authority changed. The next operational step is explicit human approval of selected exact annual statements, followed by reader/UI projection from verified records.
