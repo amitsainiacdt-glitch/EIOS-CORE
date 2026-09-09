@@ -6125,3 +6125,11 @@ investment decision is created by this checkpoint.
 - The assessment declares whether higher or lower is economically favourable, and the service verifies that the stated positive/negative/no-clear-gap direction agrees with the actual figures. It also retains materiality rationale, assumptions, contradictions, uncertainty and forward invalidation conditions.
 - A positive gap must be moderate or high and the thesis-specific Price Recognition gate must allow review before the result can enter later EIP assembly. An immaterial, uncertain, negative or absent gap is held, and a `VETO_TOO_LATE` recognition decision cannot be bypassed.
 - This remains a research comparison, not an EIP, valuation conclusion, recommendation or trade. Validation: six focused Expectation Gap tests, 39 top-level external-intelligence regression tests and all 388 company-intelligence tests pass. The next checkpoint is explicit normalized valuation scenarios.
+
+## Explicit normalized valuation scenarios (2026-09-09)
+
+- Added three mandatory, ordered pre-EIP operating scenarios: current/trough, reasonable recovery and strong normalization. Each scenario states source-backed revenue, EBITDA margin, EV/EBITDA multiple and rationale; net debt, shares outstanding, current price and currency remain visible common inputs.
+- EIOS calculates normalized EBITDA, enterprise value, equity value, value per share and upside/downside for every case. Scenario probabilities are not invented, and the service makes no claim of intrinsic-value certainty.
+- Normalized EBITDA cannot decline as the cases become stronger. The optimistic case cannot establish valuation room by itself: the reasonable-recovery case must meet the governed minimum upside. An ineligible Expectation Gap blocks valuation assembly regardless of apparent upside.
+- Trailing P/E, distance from the 52-week high and the mere fact of a price decline are deliberately absent as proof of cheapness. Missing sources, invalid figures, reordered cases, non-public information and mismatched Expectation Gap identity fail closed.
+- Validation: six focused normalized-valuation tests, 45 top-level external-intelligence regression tests and all 388 company-intelligence tests pass. The next checkpoint is a separate survivability assessment and hard veto.
