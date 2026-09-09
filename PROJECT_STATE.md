@@ -6085,3 +6085,11 @@ investment decision is created by this checkpoint.
 - The factory now produces one checked `Q1-FY2027` standalone Anup candidate with twelve INR-crore metrics and passing income arithmetic. It remains `PENDING_REVIEW`: the four-core-reading review and reporting-notes review are still held, so no figure is published as approved and no catalyst, verdict, recommendation or trade changes.
 - Governed company plans now supersede legacy jobs for the same ticker. The live scheduler resolves 30 unique jobs, including the standard eight-job Anup plan, without the earlier duplicate-ID configuration failure.
 - Validation: all 388 company-intelligence tests pass and `git diff --check` passes. The remaining checkpoint is to resolve the source-reading and reporting-note holds through evidence-backed review, then publish the record only if Mandatory Meta approves it.
+
+## Causal-first / pre-operator architecture alignment (2026-09-09)
+
+- Inspected the new causal-first mandate against the existing Constitution, reasoning principles, approved Pre-Inflection/EIP architecture, Mandatory Meta, causal-indicator registry, Price Recognition, Expectation Gap, valuation, Opportunity and prospective-learning modules before changing implementation.
+- Confirmed that EIOS already owns most required responsibilities; no parallel Observation, Evidence, Meta, EIP or Opportunity architecture is authorized.
+- Made the permanent sequence constitutional: root-cause change, causal leading indicators, independent corroboration, inflection assessment, Price Recognition veto, Expectation Gap, EIP review, later operating/financial confirmation and Scale/Hold/Kill.
+- Recorded that reported revenue, EBITDA or PAT recovery, management or analyst upgrades, consensus revisions, price breakouts and widespread narrative recognition are not EIP prerequisites. Serious contradictions, excessive recognition, inadequate survivability and missing evidence may veto advancement, and no qualifying opportunity is valid.
+- Approved ADR-002 requires additive, fingerprint-bound integration of the existing modules. The next implementation checkpoint is a typed five-link causal-chain contract followed by explicit change-regime classification; engine logic remains unchanged at this documentation checkpoint.

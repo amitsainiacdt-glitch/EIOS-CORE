@@ -2,6 +2,8 @@
 
 Status: Approved architecture; implementation must proceed through governed checkpoints.
 
+Permanent interpretation approved 2026-09-09: this is EIOS's causal-first, pre-operator path. It extends the existing architecture and does not establish a parallel engine. Reported financial recovery and widespread market recognition are post-EIP confirmation evidence, never mandatory prerequisites for identifying a possible EIP.
+
 ## 1. Objective
 
 EIOS must detect credible changes in the causes of future earnings before those
@@ -360,6 +362,8 @@ The first code checkpoint is limited to the existing Observation spine:
 
 It explicitly excludes connectors, scraping, PDF/OCR, new event taxonomies,
 pre-inflection scoring, Price Recognition, EIP, alerts, UI, and portfolio logic.
+
+The original first checkpoint above is complete and retained as implementation history. The next additive sequence is: structured five-link causal chain; change-regime classification; thesis-specific Price Recognition veto; governed Expectation Gap binding; normalized valuation scenarios; survivability veto; unified fingerprint-bound EIP decision packet; reader-facing classification; post-EIP Scale/Hold/Kill monitoring; anti-anchoring discovery controls; and auditable indicator-performance learning.
 
 ## 16. Agriculture-climate transmission extension
 

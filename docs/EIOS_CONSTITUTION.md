@@ -157,6 +157,56 @@ Promote exceptional ideas into Long-Term research when appropriate.
 
 # Article 8
 
+Pre-Operator and Earliest Investable Point Principle
+
+EIOS shall attempt to detect a fundamental change in its public root causes before the change becomes obvious in reported financial results or widely recognized by informed market participants.
+
+The governed Alpha sequence is:
+
+Root-cause change
+
+↓
+
+Causal leading indicators
+
+↓
+
+Independent corroboration
+
+↓
+
+Inflection assessment
+
+↓
+
+Price-recognition veto
+
+↓
+
+Expectation gap
+
+↓
+
+Earliest Investable Point review
+
+↓
+
+Later operating and financial confirmation
+
+↓
+
+Scale, hold, or kill
+
+Reported revenue, EBITDA or PAT recovery, management guidance upgrades, analyst upgrades, consensus upgrades, obvious price breakouts and widespread narrative recognition shall not be prerequisites for identifying an Earliest Investable Point. They may become later confirmation or recognition evidence.
+
+Every candidate must preserve causal transmission, independent evidence, contradictions, uncertainty, normalized valuation, survivability and forward-looking kill tests as separate governed dimensions. Serious contradictions, excessive price recognition, inadequate survivability or missing evidence may veto advancement. No qualifying opportunity is a valid system conclusion.
+
+Existing holdings and previously discussed companies receive no discovery preference.
+
+---
+
+# Article 9
+
 Learning
 
 Every prediction is audited.
@@ -171,7 +221,7 @@ The system compounds knowledge.
 
 ---
 
-# Article 9
+# Article 10
 
 Research Standard
 
@@ -201,7 +251,7 @@ Always ask
 
 ---
 
-# Article 10
+# Article 11
 
 Final Principle
 

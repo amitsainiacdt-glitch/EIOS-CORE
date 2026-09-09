@@ -46,6 +46,30 @@ Portfolio
 ↓
 Monitoring
 
+For Alpha Pre-Inflection research, the existing workflow is entered through the following governed sequence; it does not replace or duplicate the core offices:
+
+Root-cause change
+↓
+Causal leading indicators
+↓
+Independent corroboration and Mandatory Meta
+↓
+Pre-Inflection strength and regime
+↓
+Price-recognition veto
+↓
+Expectation gap
+↓
+Normalized valuation and survivability
+↓
+Earliest Investable Point review
+↓
+Existing Catalyst, Mispricing, Asymmetry and Opportunity path
+↓
+Later confirmation and Scale / Hold / Kill monitoring
+
+Price recognition, serious contradictions and survivability are gates or vetoes, not minor scoring penalties. Reported earnings improvement is not an EIP prerequisite.
+
 ---
 
 # Core Offices
