@@ -6075,3 +6075,13 @@ investment decision is created by this checkpoint.
 - Expanded issuer-independent metric vocabulary to recognize `Profit for the period/year` as PAT and `Cost of materials consumed` as the material-cost line. These mappings are covered by tests and contain no Anup-specific figures.
 - The next gate correctly remains closed: the PDF's damaged unit glyphs need source-bound unit reconciliation, the first quarter column is omitted by the detected merged-header boundary, and standalone/consolidated basis appears above the ruled grid. No typed records are emitted until page-level basis, duration and unit evidence are bound without guessing.
 - Validation: all 376 company-intelligence tests and the trusted acquisition safety suite pass. No financial figure is approved and no verdict, catalyst or trade state changes.
+
+## Anup exchange corroboration and first checked quarterly candidate (2026-09-09)
+
+- Acquired and byte-preserved Anup's official NSE Q1 FY2027 iXBRL filing from the exact `nsearchives.nseindia.com` authority. The archived 37,016-byte HTML has SHA-256 `33b9e5fd424d6df3c6321dc31eebb064c1c913b70c46d25bddf3d485357a2015` and an append-only acquisition receipt.
+- Added an issuer-independent NSE iXBRL parser that binds company identity, ISIN, basis, reporting dates, currency and scale before reading financial values. It rejects non-official domains and ambiguous metadata.
+- Added a strict corroboration bridge between the issuer PDF and exchange filing. Exchange evidence may supply INR-lakh unit and current-quarter duration only when ticker, basis and one exact reporting date agree. Standalone evidence cannot corroborate a consolidated table.
+- Improved the generic statement reader for full month-name dates, page-title basis, cost-of-material labels, `Profit for the period/year`, tight column overlap and one malformed OCR/PDF cell that exactly reconciles to the official exchange value.
+- The factory now produces one checked `Q1-FY2027` standalone Anup candidate with twelve INR-crore metrics and passing income arithmetic. It remains `PENDING_REVIEW`: the four-core-reading review and reporting-notes review are still held, so no figure is published as approved and no catalyst, verdict, recommendation or trade changes.
+- Governed company plans now supersede legacy jobs for the same ticker. The live scheduler resolves 30 unique jobs, including the standard eight-job Anup plan, without the earlier duplicate-ID configuration failure.
+- Validation: all 388 company-intelligence tests pass and `git diff --check` passes. The remaining checkpoint is to resolve the source-reading and reporting-note holds through evidence-backed review, then publish the record only if Mandatory Meta approves it.

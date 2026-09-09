@@ -7,6 +7,10 @@ class DateComparisonTests(unittest.TestCase):
         for raw in ('30June2026', '30 June\n2026', '30 Jun 2026'):
             self.assertEqual(parse_date_cell(raw)['date'], '2026-06-30')
 
+    def test_month_first_filing_title_date(self):
+        for raw in ('June 30, 2026', 'Jun 30 2026'):
+            self.assertEqual(parse_date_cell(raw)['date'], '2026-06-30')
+
     def test_iso_and_day_first_agree(self):
         result = compare_date_cells('2026-03-31', '31.03.2026')
         self.assertEqual(result['status'], 'DATE_READINGS_AGREE_PENDING_REVIEW')

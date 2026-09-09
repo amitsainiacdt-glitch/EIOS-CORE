@@ -49,7 +49,13 @@ OFFICIAL_DOCUMENT_INBOX = ROOT / "data" / "runtime" / "official_document_inbox"
 
 
 def all_automatic_jobs():
-    jobs = [*ResearchJobConfiguration.all_jobs(), *load_company_coverage_jobs(), *load_quarterly_monitoring_jobs()]
+    governed = load_company_coverage_jobs()
+    governed_tickers = {job.ticker.upper() for job in governed}
+    # A governed company plan supersedes its older broad web-search jobs. Keep
+    # legacy jobs only for companies not yet onboarded into the standard plan.
+    legacy = [job for job in ResearchJobConfiguration.all_jobs()
+              if job.ticker.upper() not in governed_tickers]
+    jobs = [*legacy, *governed, *load_quarterly_monitoring_jobs()]
     ids = [job.job_id for job in jobs]
     if len(ids) != len(set(ids)):
         raise ValueError("automatic research job IDs must be unique")

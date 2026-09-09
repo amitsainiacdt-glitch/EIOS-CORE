@@ -34,6 +34,27 @@ def classify_table(words):
             'reason': 'Insufficient explicit statement labels; no financial mapping permitted.'}
 
 
+def statement_context(words):
+    """Retain explicit page-title evidence separately from ruled-grid headers."""
+    lines = [' '.join(w['text'] for w in row) for row in group_rows(words)]
+    first_revenue = next((i for i, line in enumerate(lines)
+                          if re.search(r'revenue from operations', line, re.I)), len(lines))
+    header = ' '.join(lines[:first_revenue])
+    basis = [value for value in ('STANDALONE', 'CONSOLIDATED')
+             if re.search(r'\b' + value + r'\b', header, re.I)]
+    quarter = re.search(
+        r'financial results for the quarter ended\s+([A-Za-z]+\s+\d{1,2},?\s+20\d{2})',
+        header, re.I,
+    )
+    return {
+        'raw_header_text': header,
+        'basis_candidates': basis,
+        'current_quarter_end_text': quarter.group(1) if quarter else None,
+        'status': 'PAGE_STATEMENT_CONTEXT_PENDING_REVIEW',
+        'creates_approved_facts': False,
+    }
+
+
 def column_candidates(words):
     rows = group_rows(words)
     revenue = next((row for row in rows if re.search(r'revenue from operations', ' '.join(w['text'] for w in row), re.I)), None)
@@ -137,6 +158,7 @@ def extract_pdf_layout(path):
                 classification = classify_table(words)
                 output.append({'pdf_page': number, 'rotation_normalized': rotation,
                                'table_classification': classification,
+                               'statement_context': statement_context(words),
                                'ruled_tables': ruled_table_geometry(document.pages[0]),
                                'company_mapping_columns': columns if classification['eligible_for_company_financial_mapping'] else [],
                                'page_words': words, 'columns': columns})

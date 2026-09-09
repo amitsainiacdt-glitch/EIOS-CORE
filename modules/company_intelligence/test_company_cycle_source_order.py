@@ -8,6 +8,16 @@ from scripts import run_automatic_company_cycle as cycle
 
 
 class CompanyCycleSourceOrderTests(unittest.TestCase):
+    def test_governed_company_plan_supersedes_legacy_jobs(self):
+        legacy = SimpleNamespace(job_id='ANUP-LEGACY', ticker='ANUP')
+        governed = SimpleNamespace(job_id='ANUP-GOVERNED', ticker='ANUP')
+        other = SimpleNamespace(job_id='OTHER-LEGACY', ticker='OTHER')
+        with patch.object(cycle.ResearchJobConfiguration, 'all_jobs', return_value=[legacy, other]), \
+             patch.object(cycle, 'load_company_coverage_jobs', return_value=[governed]), \
+             patch.object(cycle, 'load_quarterly_monitoring_jobs', return_value=[]):
+            self.assertEqual([job.job_id for job in cycle.all_automatic_jobs()],
+                             ['OTHER-LEGACY', 'ANUP-GOVERNED'])
+
     def test_search_failure_does_not_skip_saved_document_retry(self):
         for offline in (False, True):
             with self.subTest(offline=offline), TemporaryDirectory() as folder, ExitStack() as stack:

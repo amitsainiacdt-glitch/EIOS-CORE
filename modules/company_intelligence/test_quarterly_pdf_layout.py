@@ -1,5 +1,5 @@
 import unittest
-from modules.company_intelligence.quarterly_pdf_layout import column_candidates, classify_table, covered_columns
+from modules.company_intelligence.quarterly_pdf_layout import column_candidates, classify_table, covered_columns, statement_context
 
 
 def word(text, x, y, width=10):
@@ -56,3 +56,12 @@ class QuarterlyPdfLayoutTests(unittest.TestCase):
         columns = column_candidates(words)
         self.assertEqual(len(columns), 2)
         self.assertEqual(columns[0]['cells'][1]['row_label'], 'Profit for the period/year')
+
+    def test_statement_context_retains_explicit_basis_and_quarter_end(self):
+        words = [word(text, i * 40, 1, 35) for i, text in enumerate(
+            ('Statement', 'of', 'Consolidated', 'Unaudited', 'Financial', 'Results',
+             'for', 'the', 'Quarter', 'Ended', 'June', '30,', '2026'))]
+        words += [word('Revenue from operations', 5, 30, 65)]
+        context = statement_context(words)
+        self.assertEqual(context['basis_candidates'], ['CONSOLIDATED'])
+        self.assertEqual(context['current_quarter_end_text'], 'June 30, 2026')

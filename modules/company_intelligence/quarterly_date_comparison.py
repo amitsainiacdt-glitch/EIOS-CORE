@@ -18,11 +18,14 @@ def parse_date_cell(raw):
     iso = re.fullmatch(r'(\d{4})-(\d{2})-(\d{2})', text)
     numeric = re.fullmatch(r'(\d{1,2})([./-])(\d{1,2})\2(\d{4})', text)
     named = re.fullmatch(r'(\d{1,2})\s*([A-Za-z]+)\s*(\d{4})', text)
+    month_first = re.fullmatch(r'([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})', text)
     try:
         if iso:
             year, month, day = map(int, iso.groups())
         elif named and named[2].lower() in MONTHS:
             day, month, year = int(named[1]), MONTHS[named[2].lower()], int(named[3])
+        elif month_first and month_first[1].lower() in MONTHS:
+            month, day, year = MONTHS[month_first[1].lower()], int(month_first[2]), int(month_first[3])
         elif numeric:
             day, month, year = int(numeric[1]), int(numeric[3]), int(numeric[4])
             if day <= 12 and month <= 12 and day != month:

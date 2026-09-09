@@ -1,6 +1,7 @@
 """Join recognised headers to agreeing source cells and reconcile totals."""
 import re
 from decimal import Decimal
+from datetime import datetime
 from itertools import product
 from modules.company_intelligence.quarterly_column_reconciliation import reconcile_column
 from modules.company_intelligence.quarterly_ocr_comparison import numeric_reading
@@ -20,6 +21,7 @@ def metric_for_label(label):
         ('finance_costs', r'^finance costs'), ('depreciation_amortisation', r'^depreciation and amortisation'),
         ('freight_distribution', r'distribution expense$'), ('other_expenses', r'^other expenses$'),
         ('pbt_before_exceptional', r'^profit before exceptional items and tax'), ('profit_before_tax', r'^profit before tax'),
+        ('pat', r'^profit for the (?:period|quarter)(?:/year)?'),
     )
     return next((metric for metric, pattern in patterns if re.search(pattern, label)), None)
 
@@ -67,7 +69,28 @@ def _triangulate_expenses(cells, unresolved, document_hash, page, index):
                      'value':str(value),'source_reading':reading}
 
 
-def build_record_candidates(page, receipt, ticker, document_hash):
+def _column_geometry_agrees(first, second):
+    left, right = first
+    other_left, other_right = second
+    overlap = max(0, min(right, other_right) - max(left, other_left))
+    smaller = min(right - left, other_right - other_left)
+    return smaller > 0 and Decimal(str(overlap)) / Decimal(str(smaller)) >= Decimal('0.90')
+
+
+def _exchange_matched_reading(raw, target):
+    """Allow only conventional grouped spaces when an exchange value agrees exactly."""
+    if not isinstance(raw, str):
+        return None
+    text = raw.strip()
+    negative = text.startswith('(') and text.endswith(')')
+    token = text[1:-1].strip() if negative else text
+    if not re.fullmatch(r'\d{1,3}(?:[ ,]\d{3})+(?:\.\d+)?', token):
+        return None
+    value = Decimal(token.replace(',', '').replace(' ', '')) * (-1 if negative else 1)
+    return value if value == target else None
+
+
+def build_record_candidates(page, receipt, ticker, document_hash, exchange_corroboration=None):
     comparison = receipt.get('comparison', {})
     if (receipt.get('document_hash') != document_hash or receipt.get('pdf_page') != page['pdf_page']
             or comparison.get('document_hash') != document_hash
@@ -87,8 +110,8 @@ def build_record_candidates(page, receipt, ticker, document_hash):
             ruled = [c for c in source_tables[0]['columns'] if c['column_index'] == index]
             mapped = [c for c in page['company_mapping_columns'] if c['column_index'] == index]
             issues, supplemental_issues = [], []
-            if len(ruled) != 1 or len(mapped) != 1 or any(
-                    abs(a-b) > 1 for a,b in zip(ruled[0]['x_bounds'], mapped[0]['x_bounds'])):
+            if len(ruled) != 1 or len(mapped) != 1 or not _column_geometry_agrees(
+                    ruled[0]['x_bounds'], mapped[0]['x_bounds']):
                 issues.append('HEADER_VALUE_COLUMN_GEOMETRY_MISMATCH')
             cells, raw_readings, unresolved = {}, [], {}
             core_metrics = {'revenue', 'other_income', 'total_income', 'pat'}
@@ -133,6 +156,35 @@ def build_record_candidates(page, receipt, ticker, document_hash):
                         cells[name] = {'document_hash':document_hash, 'pdf_page':page['pdf_page'],
                                        'column_index':index, 'value':str(selected[1]), 'source_reading':reading}
             _triangulate_expenses(cells, unresolved, document_hash, page['pdf_page'], index)
+            exchange = exchange_corroboration or {}
+            metadata = exchange.get('metadata', {})
+            expected = exchange.get('values_inr_lakh', {})
+            if (exchange.get('status') == 'EXCHANGE_CORROBORATION_CANDIDATE'
+                    and metadata.get('ticker', '').upper() == ticker.upper()
+                    and metadata.get('basis', '').upper() == header.get('basis')
+                    and metadata.get('period_end') == datetime.strptime(
+                        header['period_end'], '%Y-%m-%d').strftime('%d-%m-%Y')):
+                for metric in list(unresolved):
+                    source_values = expected.get(metric, [])
+                    if not source_values:
+                        continue
+                    target = Decimal(source_values[0])
+                    cell, native, ocr = unresolved[metric]
+                    readings = [('NATIVE', native), ('OCR', ocr),
+                                ('NATIVE_GROUPING_NORMALIZED', _exchange_matched_reading(cell.get('native_text'), target)),
+                                ('OCR_GROUPING_NORMALIZED', _exchange_matched_reading(cell.get('ocr_text'), target))]
+                    matches = [(kind, value) for kind, value in readings
+                               if value is not None and value.is_finite() and value == target]
+                    if not matches:
+                        continue
+                    selected = matches[0]
+                    unresolved.pop(metric)
+                    reading = {**cell, 'status': 'EXCHANGE_TRIANGULATED_PENDING_REVIEW',
+                               'selected_reading': selected[0], 'selected_value': str(selected[1]),
+                               'exchange_document_hash': exchange['document_hash'],
+                               'exchange_source_url': exchange['source_url']}
+                    cells[metric] = {'document_hash':document_hash, 'pdf_page':page['pdf_page'],
+                                     'column_index':index, 'value':str(selected[1]), 'source_reading':reading}
             for metric in unresolved:
                 (issues if metric in core_metrics else supplemental_issues).append('UNRESOLVED_CELL:' + metric)
             source = {'ticker': ticker, 'document_hash': document_hash, 'pdf_page': page['pdf_page'],

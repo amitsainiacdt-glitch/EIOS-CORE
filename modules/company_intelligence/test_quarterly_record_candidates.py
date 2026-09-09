@@ -62,6 +62,25 @@ class RecordCandidateTests(unittest.TestCase):
         self.assertEqual(record['status'], 'HOLD')
         self.assertEqual(record['values_inr_crore'], {})
 
+    def test_small_boundary_detection_difference_is_not_a_column_mismatch(self):
+        args = self.fixture()
+        args[0]['company_mapping_columns'][0]['x_bounds'] = [12, 59]
+        self.assertNotIn('HEADER_VALUE_COLUMN_GEOMETRY_MISMATCH',
+                         build_record_candidates(*args)['records'][0]['issues'])
+
+    def test_grouped_space_is_used_only_when_exchange_value_matches(self):
+        page, receipt, ticker, digest = self.fixture()
+        total = next(c for c in receipt['comparison']['cells'] if c['row_label'] == 'Total income')
+        total.update(native_text='unreadable', ocr_text='0 102.00', status='HOLD_UNREADABLE_OR_MISSING')
+        exchange = {'status':'EXCHANGE_CORROBORATION_CANDIDATE', 'document_hash':'b' * 64,
+                    'source_url':'https://nsearchives.nseindia.com/report.html',
+                    'metadata':{'ticker':'EXAMPLE','basis':'STANDALONE','period_end':'30-06-2026'},
+                    'values_inr_lakh':{'total_income':['102.00']}}
+        record = build_record_candidates(page, receipt, ticker, digest, exchange)['records'][0]
+        self.assertEqual(record['values_inr_crore']['total_income'], '102.00')
+        total['ocr_text'] = '0 103.00'
+        self.assertEqual(build_record_candidates(page, receipt, ticker, digest, exchange)['records'][0]['status'], 'HOLD')
+
     def test_duplicate_metric_does_not_pick_first(self):
         args = self.fixture()
         cells = args[1]['comparison']['cells']
@@ -102,7 +121,7 @@ class RecordCandidateTests(unittest.TestCase):
             with self.subTest(label=label): self.assertEqual(metric_for_label(label), metric)
 
     def test_common_issuer_profit_and_material_labels_are_mapped(self):
-        self.assertEqual(metric_for_label('7 Profit for the period/year'), 'pat')
+        self.assertEqual(metric_for_label('7 Profit for the period/year (5-6)'), 'pat')
         self.assertEqual(metric_for_label('(a) Cost of materials consumed'), 'raw_materials')
 
     def test_unique_eight_line_expense_sum_recovers_disagreements(self):

@@ -4,6 +4,7 @@ from modules.company_intelligence.quarterly_shared_headers import resolve_shared
 from modules.company_intelligence.quarterly_heading_partition import propose_duration_partition
 from modules.company_intelligence.quarterly_date_comparison import compare_date_cells
 from modules.company_intelligence.quarterly_unit_reading import assess_unit_reading
+from modules.company_intelligence.quarterly_date_comparison import parse_date_cell
 
 
 def header_meaning(text):
@@ -44,6 +45,13 @@ def bind_page_headers(page, ocr, receipt, alignment):
     for table in page.get('ruled_tables', []):
         binding = {'document_hash': receipt['document_hash'], 'pdf_page': page['pdf_page'], 'table_id': table['table_id']}
         spans, readings, proposed_partitions = [], [], []
+        context = page.get('statement_context', {})
+        basis = context.get('basis_candidates', [])
+        if len(basis) == 1 and table.get('columns'):
+            spans.append({**binding, 'kind': 'basis', 'text': basis[0],
+                          'first_column': 0, 'last_column': len(table['columns']) - 1,
+                          'status': 'EXPLICIT_PAGE_TITLE_PENDING_REVIEW',
+                          'source_text': context.get('raw_header_text')})
         for cell in table['spanning_header_cells']:
             native, recognized = header_meaning(cell['raw_text']), header_meaning(read_box(cell['bbox']))
             entry = {'native_text': cell['raw_text'], 'ocr_text': read_box(cell['bbox']),
@@ -67,6 +75,19 @@ def bind_page_headers(page, ocr, receipt, alignment):
                                   'first_column': min(cell['covered_columns']), 'last_column': max(cell['covered_columns']),
                                   'source_readings': entry, 'status': 'HEADER_CANDIDATE_NOT_APPROVED'})
             readings.append(entry)
+        title_date = parse_date_cell((context.get('current_quarter_end_text') or '').replace(',', ''))
+        if title_date.get('date'):
+            matching = [column for column in table['columns']
+                        if parse_date_cell(column['date_header_text']).get('date') == title_date['date']]
+            if len(matching) == 1:
+                index = matching[0]['column_index']
+                covered = [span for span in spans if span.get('kind') == 'duration'
+                           and span['first_column'] <= index <= span['last_column']]
+                if not covered:
+                    spans.append({**binding, 'kind': 'duration', 'text': 'Quarter ended',
+                                  'first_column': index, 'last_column': index,
+                                  'status': 'EXPLICIT_PAGE_TITLE_DATE_MATCH_PENDING_REVIEW',
+                                  'source_text': context.get('raw_header_text')})
         # Currency/unit must be explicit in the narrow region above this table.
         box = table['bbox']
         unit_text = read_box([box[0], max(0, box[1] - 12), box[2], box[1]])
