@@ -9,7 +9,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, Mapping
 
-from .contracts import WriteCommand, WriteReceipt
+from .contracts import ClassifiedInformationRecord, WriteCommand, WriteReceipt
 
 
 def _canonical(value: Any) -> Any:
@@ -44,6 +44,17 @@ def record_fingerprint_payload(payload: Mapping[str, Any]) -> str:
     return _digest(payload)
 
 
+def record_fingerprint(record: ClassifiedInformationRecord) -> str:
+    if not isinstance(record, ClassifiedInformationRecord):
+        raise ValueError("record must be a ClassifiedInformationRecord")
+    payload = {field.name: getattr(record, field.name) for field in dataclasses.fields(record) if field.name != "record_fingerprint"}
+    return _digest(payload)
+
+
+def verify_record_fingerprint(record: ClassifiedInformationRecord) -> bool:
+    return isinstance(record, ClassifiedInformationRecord) and record.record_fingerprint == record_fingerprint(record)
+
+
 def receipt_fingerprint(receipt: WriteReceipt) -> str:
     if not isinstance(receipt, WriteReceipt):
         raise ValueError("receipt must be a WriteReceipt")
@@ -55,4 +66,7 @@ def verify_receipt_fingerprint(receipt: WriteReceipt) -> bool:
     return isinstance(receipt, WriteReceipt) and receipt.receipt_fingerprint == receipt_fingerprint(receipt)
 
 
-__all__ = ["command_fingerprint", "receipt_fingerprint", "record_fingerprint_payload", "verify_receipt_fingerprint"]
+__all__ = [
+    "command_fingerprint", "receipt_fingerprint", "record_fingerprint",
+    "record_fingerprint_payload", "verify_record_fingerprint", "verify_receipt_fingerprint",
+]

@@ -25,7 +25,7 @@ from modules.external_intelligence.reviewed_public_factual_observation_commit_se
 from modules.external_intelligence.public_factual_controlled_write_adapter import PublicFactualControlledWriteAdapter
 from modules.observation.observation_engine import ObservationEngine
 from modules.observation.observation_persistence import ObservationPersistence
-from modules.intelligence_write import ControlledIntelligenceWriteService, InformationClass, ValidationStatus, WriteReceiptStatus, verify_receipt_fingerprint
+from modules.intelligence_write import ControlledIntelligenceWriteJournal, ControlledIntelligenceWriteService, InformationClass, ValidationStatus, WriteReceiptStatus, verify_receipt_fingerprint
 
 
 def main():
@@ -115,6 +115,14 @@ def main():
         assert controlled_record.payload["statement"] == candidate.source_passage
         assert controlled_record.source_references[0].document_hash == receipt.document_hash
         assert reviewed_service.controlled_write_service.trusted_records() == (controlled_record,)
+        controlled_journal_path = root / "controlled-intelligence-write-journal.jsonl"
+        assert controlled_journal_path.is_file()
+        restored_controlled = ControlledIntelligenceWriteService(
+            clock=lambda: now + timedelta(minutes=3),
+            journal=ControlledIntelligenceWriteJournal(controlled_journal_path),
+        )
+        assert restored_controlled.get_record(controlled_record.record_id) == controlled_record
+        assert restored_controlled.receipts() == (committed.controlled_write_receipt,)
         audit_events = audit.read_all()
         assert [item.status.value for item in audit_events] == ["AUTHORIZED", "COMMITTED"]
         assert all(item.proposal_id == proposal.proposal_id and item.review_id == approved.review_id for item in audit_events)

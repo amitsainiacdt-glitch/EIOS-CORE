@@ -15,7 +15,7 @@ from modules.external_intelligence.public_observation_admission_gate import Publ
 from modules.external_intelligence.public_observation_commit_audit import PublicObservationCommitAuditLedger
 from modules.external_intelligence.public_observation_commit_service import PublicObservationCommitResult
 from modules.external_intelligence.public_factual_controlled_write_adapter import PublicFactualControlledWriteAdapter
-from modules.intelligence_write import ControlledIntelligenceWriteService, WriteReceiptStatus
+from modules.intelligence_write import ControlledIntelligenceWriteJournal, ControlledIntelligenceWriteService, WriteReceiptStatus
 from modules.observation.observation_engine import ObservationEngine
 
 
@@ -31,7 +31,12 @@ class ReviewedPublicFactualObservationCommitService:
         self.validator = validator or PublicFactualCandidateValidator()
         self.clock = clock or (lambda: datetime.now(timezone.utc))
         self.adapter = ExternalObservationAdapter(observation_engine)
-        self.controlled_write_service = controlled_write_service or ControlledIntelligenceWriteService(clock=self.clock)
+        self.controlled_write_service = controlled_write_service or ControlledIntelligenceWriteService(
+            clock=self.clock,
+            journal=ControlledIntelligenceWriteJournal(
+                self.audit_ledger.path.parent / "controlled-intelligence-write-journal.jsonl"
+            ),
+        )
         if not isinstance(self.controlled_write_service, ControlledIntelligenceWriteService):
             raise ValueError("controlled_write_service must be a ControlledIntelligenceWriteService")
         self.controlled_write_adapter = controlled_write_adapter or PublicFactualControlledWriteAdapter()

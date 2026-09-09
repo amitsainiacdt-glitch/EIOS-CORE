@@ -6193,3 +6193,12 @@ investment decision is created by this checkpoint.
 - The generic public Observation result gained an optional controlled-write receipt without changing existing call signatures or unreviewed commit behavior. Existing EIP packet structure and authority remain unchanged.
 - Controlled records and receipts remain in memory; the existing public Observation and audit ledgers remain the only durable production state. No second writer, dossier, UI, collector, AI, EIP, portfolio or trading path is connected.
 - Validation includes an end-to-end approved public Fact commit and an adversarial conflict that proves the Observation is not persisted when the controlled boundary refuses trusted admission. Full regression results are recorded after the complete relevant suites run.
+
+## Durable append-only Controlled Write journal (2026-09-09)
+
+- Added one JSONL journal for controlled receipts, newly created classified records and lifecycle-status snapshots. Each entry has a contiguous sequence, prior-entry fingerprint and its own SHA-256 identity; embedded receipt and record fingerprints are independently verified.
+- The Controlled Intelligence Write Service reloads records, receipts, idempotency identities, supersession state and conflict-based trusted-read blocks from the journal. Exact command replay remains idempotent after restart.
+- Changed content, truncated JSON, removed/reordered entries, broken hash chains, duplicate record identities, unknown status references and altered record/receipt fingerprints fail closed rather than loading partially trusted state.
+- The reviewed public factual Observation path now creates this journal beside its existing append-only commit audit. Existing Observation and audit persistence remain unchanged, and the controlled receipt remains visible in the commit result.
+- Restart testing found and corrected an ordering defect in supersession persistence: the prior record is now marked `SUPERSEDED` before the journal snapshot is appended, so restatement history reloads correctly.
+- No second writer, database migration, dossier, UI, collector, AI provider, EIP, portfolio or trading path is connected. The next checkpoint requires review.

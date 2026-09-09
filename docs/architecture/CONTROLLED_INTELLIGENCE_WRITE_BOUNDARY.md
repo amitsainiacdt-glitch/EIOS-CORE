@@ -56,6 +56,12 @@ validated and human-approved proposal to an event-shaped `FACT`. A rejected or
 conflicted controlled write blocks Observation creation. The existing admission,
 review, provenance, audit and novelty gates remain in force.
 
-Controlled records and receipts remain in memory and are returned with the
-commit result. Durable controlled-write persistence is not implemented.
+Controlled records and receipts are returned with the commit result and stored
+in a dedicated append-only JSONL journal beside the existing public commit audit
+ledger. Journal entries are sequence-checked and hash-chained; embedded receipt
+and record fingerprints are verified during reload. Corruption, truncation or a
+broken chain prevents the service from starting with untrusted state.
+
+This persistence is limited to the first reviewed public-Fact writer. Existing
+Observation and audit persistence remain unchanged.
 

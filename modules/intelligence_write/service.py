@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import dataclasses
 import hashlib
+import json
 import math
 import re
 from datetime import datetime, timezone
@@ -25,6 +26,7 @@ from .contracts import (
     WriteReceiptStatus,
 )
 from .fingerprints import command_fingerprint, receipt_fingerprint, record_fingerprint_payload
+from .persistence import ControlledIntelligenceWriteJournal
 
 
 class ControlledIntelligenceWriteService:
@@ -48,14 +50,19 @@ class ControlledIntelligenceWriteService:
         WriteOperation.SUPERSEDE_RECORD: AuthorityScope.SUPERSEDE_INFORMATION,
     }
 
-    def __init__(self, *, clock=None):
+    def __init__(self, *, clock=None, journal=None):
         self._clock = clock or (lambda: datetime.now(timezone.utc))
+        if journal is not None and not isinstance(journal, ControlledIntelligenceWriteJournal):
+            raise ValueError("journal must be a ControlledIntelligenceWriteJournal")
+        self._journal = journal
         self._records: dict[str, ClassifiedInformationRecord] = {}
         self._record_order: list[str] = []
         self._current_status: dict[str, ValidationStatus] = {}
         self._receipts: list[WriteReceipt] = []
         self._idempotency: dict[str, tuple[str, str | None]] = {}
         self._conflicted_keys: set[tuple[str, str, str]] = set()
+        if self._journal is not None:
+            self._rehydrate(self._journal.read_all())
 
     def submit(self, command: WriteCommand) -> WriteReceipt:
         recorded_at = self._clock()
@@ -127,12 +134,12 @@ class ControlledIntelligenceWriteService:
             )
         if command.operation == WriteOperation.SUPERSEDE_RECORD:
             prior = self._records[command.supersedes_record_id]
+            self._current_status[prior.record_id] = ValidationStatus.SUPERSEDED
             receipt = self._store(
                 command, request_fingerprint, recorded_at, ValidationStatus.VERIFIED,
                 record_version=prior.record_version + 1, previous_record_id=prior.record_id,
                 validation_codes=("RESTATEMENT_PRESERVES_SUPERSEDED_RECORD",),
             )
-            self._current_status[prior.record_id] = ValidationStatus.SUPERSEDED
             self._clear_conflict_if_resolved(command)
             return receipt
 
@@ -169,11 +176,12 @@ class ControlledIntelligenceWriteService:
     def _store(self, command, request_fingerprint, recorded_at, status, *, record_version,
                previous_record_id, validation_codes, receipt_status=WriteReceiptStatus.ACCEPTED):
         record_id = hashlib.sha256(f"record\n{request_fingerprint}".encode()).hexdigest()
+        normalized_payload = self._normalize_payload(command.payload)
         body = {
             "schema_version": 1, "record_id": record_id, "record_version": record_version,
             "company_id": command.company_id.strip(), "entity": command.entity.strip(),
             "information_class": command.information_class.value, "semantic_key": command.semantic_key.strip(),
-            "payload": command.payload, "source_references": command.source_references,
+            "payload": normalized_payload, "source_references": command.source_references,
             "confidence": command.confidence, "validation_status": status.value, "actor": command.actor,
             "created_at": recorded_at, "prior_record_id": command.prior_record_id,
             "supersedes_record_id": command.supersedes_record_id, "request_fingerprint": request_fingerprint,
@@ -181,7 +189,7 @@ class ControlledIntelligenceWriteService:
         result_fingerprint = record_fingerprint_payload(body)
         record = ClassifiedInformationRecord(
             1, record_id, record_version, command.company_id.strip(), command.entity.strip(),
-            command.information_class, command.semantic_key.strip(), dict(command.payload),
+            command.information_class, command.semantic_key.strip(), normalized_payload,
             command.source_references, command.confidence, status, command.actor, recorded_at,
             command.prior_record_id, command.supersedes_record_id, request_fingerprint, result_fingerprint,
         )
@@ -320,7 +328,7 @@ class ControlledIntelligenceWriteService:
                       and self._records[record_id].semantic_key.casefold() == command.semantic_key.casefold()
                       and self._current_status[record_id] != ValidationStatus.SUPERSEDED]
         for record in candidates:
-            if dict(record.payload) == dict(command.payload): return record, ()
+            if dict(record.payload) == self._normalize_payload(command.payload): return record, ()
         return None, tuple(candidates)
 
     def _clear_conflict_if_resolved(self, command):
@@ -332,6 +340,11 @@ class ControlledIntelligenceWriteService:
                   and self._current_status[record_id] != ValidationStatus.SUPERSEDED]
         if len(active) <= 1:
             self._conflicted_keys.discard(key)
+
+    @staticmethod
+    def _normalize_payload(payload):
+        """Use one JSON-safe shape so live and reloaded records are identical."""
+        return json.loads(json.dumps(payload, sort_keys=True, ensure_ascii=False, allow_nan=False))
 
     def _reject(self, command, *codes, recorded_at=None, request_fingerprint=None, fallback=None):
         recorded_at = recorded_at or self._clock()
@@ -350,8 +363,39 @@ class ControlledIntelligenceWriteService:
             tuple(validation_codes), tuple(rejection_codes), recorded_at, self.VERSION, "",
         )
         receipt = dataclasses.replace(provisional, receipt_fingerprint=receipt_fingerprint(provisional))
+        if self._journal is not None:
+            record = self._records.get(record_id) if result_fingerprint is not None else None
+            self._journal.append(
+                receipt=receipt, record=record,
+                status_snapshot=tuple(self._current_status.items()),
+            )
         self._receipts.append(receipt)
         return receipt
+
+    def _rehydrate(self, entries):
+        for entry in entries:
+            receipt = entry.receipt
+            if entry.record is not None:
+                if entry.record.record_id in self._records:
+                    raise ValueError("journal contains a duplicate controlled record")
+                self._records[entry.record.record_id] = entry.record
+                self._record_order.append(entry.record.record_id)
+            for record_id, status in entry.status_snapshot:
+                if record_id not in self._records:
+                    raise ValueError("journal status references an unknown controlled record")
+                self._current_status[record_id] = status
+            self._receipts.append(receipt)
+            self._idempotency.setdefault(
+                receipt.idempotency_key, (receipt.request_fingerprint, receipt.record_id)
+            )
+        grouped = {}
+        for record_id in self._record_order:
+            record = self._records[record_id]
+            if self._current_status.get(record_id) == ValidationStatus.CONFLICTED:
+                key = (record.company_id.casefold(), record.information_class.value, record.semantic_key.casefold())
+                grouped.setdefault(key, 0)
+                grouped[key] += 1
+        self._conflicted_keys = {key for key, count in grouped.items() if count >= 2}
 
 
 __all__ = ["ControlledIntelligenceWriteService"]
