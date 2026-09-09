@@ -62,6 +62,19 @@ ledger. Journal entries are sequence-checked and hash-chained; embedded receipt
 and record fingerprints are verified during reload. Corruption, truncation or a
 broken chain prevents the service from starting with untrusted state.
 
-This persistence is limited to the first reviewed public-Fact writer. Existing
-Observation and audit persistence remain unchanged.
+Existing Observation and audit persistence remain unchanged. Controlled-write
+persistence is currently used only by the explicitly connected reviewed public
+event and governed quarterly-financial paths.
 
+## First quantitative financial writer
+
+`GovernedQuarterlyFinancialRepository` now sends its fully reconciled,
+human-approved core income statement through the same durable boundary before
+materialization. Revenue, other income, total income and PAT remain one atomic
+source-table Fact keyed by ticker, period end and accounting basis. This avoids
+partial acceptance of a quarterly statement.
+
+The existing governed company Fact, six financial checks, reporting-note
+clearance, source hash/page binding and duplicate-candidate protection remain
+mandatory. A controlled conflict prevents the governed quarterly record from
+being written.

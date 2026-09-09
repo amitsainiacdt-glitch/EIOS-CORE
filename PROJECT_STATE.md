@@ -6202,3 +6202,12 @@ investment decision is created by this checkpoint.
 - The reviewed public factual Observation path now creates this journal beside its existing append-only commit audit. Existing Observation and audit persistence remain unchanged, and the controlled receipt remains visible in the commit result.
 - Restart testing found and corrected an ordering defect in supersession persistence: the prior record is now marked `SUPERSEDED` before the journal snapshot is appended, so restatement history reloads correctly.
 - No second writer, database migration, dossier, UI, collector, AI provider, EIP, portfolio or trading path is connected. The next checkpoint requires review.
+
+## Governed quarterly financial Facts use controlled writes (2026-09-09)
+
+- Connected the existing governed quarterly financial repository at its final materialization boundary. Staged extracts, incomplete reporting-note review and assessments missing any of the six required checks still stop before controlled writing.
+- The four reconciled core figures—revenue, other income, total income and PAT—are retained together as one quantitative source-table `FACT`. It binds ticker/company, quarter, period start/end, standalone/consolidated basis, INR-crore unit, PDF page, document hash, governed fact and human review.
+- One atomic statement Fact avoids partially accepting individual lines. A different value set for the same ticker, period and basis is preserved as a controlled conflict and blocks the governed quarterly ledger write and trusted reads.
+- Governed quarterly records now retain the controlled receipt ID. New records fail closed on reload when that receipt is missing; older records without this additive field remain readable.
+- The durable controlled journal reloads the quantitative record and receipt exactly after restart. The existing quarterly record continues to have no verdict, Catalyst or trade authority.
+- No annual, balance-sheet, cash-flow, Derived Metric, AI, UI, EIP, portfolio or trading writer is connected. The next checkpoint requires review.

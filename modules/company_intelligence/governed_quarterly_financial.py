@@ -9,6 +9,8 @@ from hashlib import sha256
 from pathlib import Path
 
 from modules.company_intelligence.governed_company_fact import GovernedCompanyFact
+from modules.company_intelligence.governed_quarterly_controlled_write_adapter import GovernedQuarterlyControlledWriteAdapter
+from modules.intelligence_write import ControlledIntelligenceWriteJournal, ControlledIntelligenceWriteService, WriteReceiptStatus
 
 
 @dataclass(frozen=True)
@@ -34,13 +36,24 @@ class GovernedQuarterlyFinancial:
     changes_verdict: bool = False
     creates_catalyst: bool = False
     authorizes_trade: bool = False
+    controlled_write_receipt_id: str | None = None
 
 
 class GovernedQuarterlyFinancialRepository:
     REQUIRED = ('revenue', 'other_income', 'total_income', 'pat')
 
-    def __init__(self, path: Path):
+    def __init__(self, path: Path, *, controlled_write_service=None, controlled_write_adapter=None):
         self.path = Path(path)
+        self.controlled_write_service = controlled_write_service or ControlledIntelligenceWriteService(
+            journal=ControlledIntelligenceWriteJournal(
+                self.path.parent / 'controlled-intelligence-write-journal.jsonl'
+            )
+        )
+        if not isinstance(self.controlled_write_service, ControlledIntelligenceWriteService):
+            raise ValueError('controlled_write_service must be a ControlledIntelligenceWriteService')
+        self.controlled_write_adapter = controlled_write_adapter or GovernedQuarterlyControlledWriteAdapter()
+        if not isinstance(self.controlled_write_adapter, GovernedQuarterlyControlledWriteAdapter):
+            raise ValueError('controlled_write_adapter must be a GovernedQuarterlyControlledWriteAdapter')
 
     def materialize(self, candidate, fact, evidence_record, assessment, *, created_at):
         if not isinstance(fact, GovernedCompanyFact) or fact.status != 'GOVERNED_FACT':
@@ -65,11 +78,22 @@ class GovernedQuarterlyFinancialRepository:
         if any(item.candidate_id == candidate.candidate_id for item in self.read_all()):
             raise ValueError('quarterly candidate is already materialized')
         record_id = sha256(f'{fact.fact_id}\n{assessment["record_fingerprint"]}\nGOVERNED_QUARTERLY_V1'.encode()).hexdigest()
+        controlled_command = self.controlled_write_adapter.build_command(
+            candidate=candidate, fact=fact, source=source, figures=normalized,
+            record_id=record_id, created_at=created_at,
+        )
+        controlled_receipt = self.controlled_write_service.submit(controlled_command)
+        if controlled_receipt.status not in {WriteReceiptStatus.ACCEPTED, WriteReceiptStatus.DUPLICATE_NO_CHANGE}:
+            raise ValueError(
+                'controlled quarterly Fact write blocked: '
+                + ', '.join(controlled_receipt.rejection_codes or controlled_receipt.validation_codes)
+            )
         item = GovernedQuarterlyFinancial(
             1, record_id, fact.fact_id, candidate.candidate_id, source['ticker'], fact.company,
             source['quarter'], source['period_start'], source['period_end'], source['basis'], normalized,
             fact.source_url, source['pdf_page'], fact.document_hash, assessment['record_fingerprint'],
-            fact.human_review_id, created_at)
+            fact.human_review_id, created_at,
+            controlled_write_receipt_id=controlled_receipt.receipt_id)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.path.open('a', encoding='utf-8') as stream:
             payload = asdict(item); payload['created_at'] = created_at.isoformat()
@@ -79,6 +103,7 @@ class GovernedQuarterlyFinancialRepository:
     def read_all(self):
         if not self.path.exists(): return ()
         result, ids, candidates = [], set(), set()
+        controlled_receipt_ids = {item.receipt_id for item in self.controlled_write_service.receipts()}
         for line_number, line in enumerate(self.path.read_text(encoding='utf-8').splitlines(), 1):
             if not line.strip(): continue
             try:
@@ -87,6 +112,8 @@ class GovernedQuarterlyFinancialRepository:
                 if item.schema_version != 1 or item.status != 'GOVERNED_QUARTERLY_FINANCIAL': raise ValueError('unsupported record')
                 if item.record_id in ids or item.candidate_id in candidates: raise ValueError('duplicate record identity')
                 if item.changes_verdict or item.creates_catalyst or item.authorizes_trade: raise ValueError('record exceeded its authority')
+                if item.controlled_write_receipt_id is not None and item.controlled_write_receipt_id not in controlled_receipt_ids:
+                    raise ValueError('controlled write receipt is missing')
                 for name in self.REQUIRED: self._number(item.figures_inr_crore.get(name), name)
                 ids.add(item.record_id); candidates.add(item.candidate_id); result.append(item)
             except (KeyError, TypeError, ValueError, InvalidOperation) as exc:
