@@ -6101,3 +6101,11 @@ investment decision is created by this checkpoint.
 - Added a validation service rather than a scoring engine. It rejects missing, duplicated or reordered stages; empty reasoning; unused or out-of-scope evidence; unknown or cross-sector causal indicators; invalid lead times; non-public inputs; and altered non-authority language.
 - The contract makes the reasoning inspectable but does not infer causation, estimate probability, create a Signal/Catalyst/EIP, recommend an investment or authorize a trade. Mandatory Meta remains the downstream authority gate.
 - Validation: all five focused causal-chain tests, 21 top-level external-intelligence regression tests and all 388 company-intelligence tests pass. The next checkpoint is explicit change-regime classification without fake numerical precision.
+
+## Explainable change-regime classification (2026-09-09)
+
+- Added explicit `STRUCTURAL`, `CYCLICAL`, `TEMPORARY_DISRUPTION`, `SEASONAL_EFFECT`, `STATISTICAL_NOISE` and `SPECULATIVE_NARRATIVE` classifications with ordinal low/moderate/high confidence rather than unsupported numerical probability.
+- Every regime assessment binds to one validated five-link causal chain and exactly the same governed Temporal Evidence. It retains the classification basis, competing explanations, tests that distinguish those explanations and an uncertainty statement.
+- Non-public inputs, stale chain identity, changed evidence, empty alternatives/tests, invalid enum values and altered non-authority language fail closed. Statistical noise and speculative narrative cannot enter Mandatory Meta review and cannot claim high causal confidence.
+- Reported revenue or PAT recovery is deliberately absent from the required contract. The regime layer classifies early causal change and creates no Signal, Catalyst, EIP, recommendation or trade action.
+- Validation: 11 combined causal-chain/regime tests, 27 top-level external-intelligence regression tests and all 388 company-intelligence tests pass. The next checkpoint is strengthening Price Recognition into a thesis-specific hard veto.
