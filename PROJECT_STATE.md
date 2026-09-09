@@ -6133,3 +6133,11 @@ investment decision is created by this checkpoint.
 - Normalized EBITDA cannot decline as the cases become stronger. The optimistic case cannot establish valuation room by itself: the reasonable-recovery case must meet the governed minimum upside. An ineligible Expectation Gap blocks valuation assembly regardless of apparent upside.
 - Trailing P/E, distance from the 52-week high and the mere fact of a price decline are deliberately absent as proof of cheapness. Missing sources, invalid figures, reordered cases, non-public information and mismatched Expectation Gap identity fail closed.
 - Validation: six focused normalized-valuation tests, 45 top-level external-intelligence regression tests and all 388 company-intelligence tests pass. The next checkpoint is a separate survivability assessment and hard veto.
+
+## Pre-EIP survivability assessment and hard veto (2026-09-09)
+
+- Added a source-backed survivability contract separate from the broad legacy risk score. It binds the same causal chain and normalized valuation and evaluates survival through the maximum expected causal lead-time horizon.
+- The service calculates available liquidity, debt maturities plus horizon cash burn, liquidity coverage, debt to normalized EBITDA, EBITDA to interest and potential dilution. It retains dated public sources, assumptions, currency and uncertainty.
+- Uncovered horizon funding needs, extreme leverage, inadequate interest coverage, non-positive EBITDA with debt, going-concern warnings, unresolved covenant breaches or critical governance threats create a hard `VETO_SURVIVABILITY_FAILURE`.
+- Thin but non-failing liquidity, elevated leverage, weak interest margin or dilution above the contained limit produces a hold rather than being hidden inside a score. Clear or contained survivability still cannot bypass an ineligible normalized valuation.
+- The result is not a credit rating, EIP, recommendation or trade instruction. Validation: six focused survivability tests, 51 top-level external-intelligence regression tests and all 388 company-intelligence tests pass. The next checkpoint is the unified fingerprint-bound causal-first EIP decision packet.
