@@ -6109,3 +6109,11 @@ investment decision is created by this checkpoint.
 - Non-public inputs, stale chain identity, changed evidence, empty alternatives/tests, invalid enum values and altered non-authority language fail closed. Statistical noise and speculative narrative cannot enter Mandatory Meta review and cannot claim high causal confidence.
 - Reported revenue or PAT recovery is deliberately absent from the required contract. The regime layer classifies early causal change and creates no Signal, Catalyst, EIP, recommendation or trade action.
 - Validation: 11 combined causal-chain/regime tests, 27 top-level external-intelligence regression tests and all 388 company-intelligence tests pass. The next checkpoint is strengthening Price Recognition into a thesis-specific hard veto.
+
+## Thesis-specific Price Recognition hard veto (2026-09-09)
+
+- Preserved the existing multi-dimensional public-market recognition service and added an additive thesis-specific layer rather than breaking stored snapshots or duplicating the Price Recognition architecture.
+- The new assessment binds one causal chain, change-regime assessment and market snapshot. It requires public, thesis-related source identities and identifies which recognition dimensions concern the same mechanism: catalyst price reaction, relative performance, valuation rerating, abnormal volume, analyst/consensus revisions, institutional attention, media narrative or management narrative.
+- Fundamental-change incorporation is ordinal: insufficient evidence, not recognized, limited, material, or most/all. A modest price rise is not automatically priced in, and distance from a historical high is not treated as proof of cheapness.
+- Insufficient evidence produces a hold. Most/all incorporation or an already fully recognized broad market state produces a hard `VETO_TOO_LATE`. Material but incomplete recognition remains available only for later human asymmetry review.
+- The service is explicitly non-authoritative and cannot create an EIP, recommendation, position or trade. Validation: six focused thesis-recognition tests, 33 top-level external-intelligence regression tests and all 388 company-intelligence tests pass. The next checkpoint is binding a governed Expectation Gap into the EIP path.
