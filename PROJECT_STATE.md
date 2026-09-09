@@ -6220,3 +6220,11 @@ investment decision is created by this checkpoint.
 - Mixed sources, fake approval-shaped data, invalid numbers and missing provenance fail closed. A competing value set is preserved as a controlled conflict and prevents annual-ledger materialization and trusted downstream use.
 - Governed annual records retain the permanent controlled receipt ID and fail closed on reload if the receipt is missing. They have no verdict or trade authority.
 - No current review candidate was migrated or promoted, and no UI, AI, collector, Derived Metric, EIP, portfolio or trading authority changed. The next operational step is explicit human approval of selected exact annual statements, followed by reader/UI projection from verified records.
+
+## Operational annual financial review workflow (2026-09-09)
+
+- Added a deterministic period-by-period human-review queue for extracted balance-sheet and cash-flow packs. Every item shows its company, period, basis, figure count, source URL, document hash, pages and exact statement fingerprint.
+- Human `APPROVE`, `HOLD` and `REJECT` decisions are stored in an append-only, fingerprint-verified ledger. There can be only one decision for an exact statement; altered receipts and duplicate decisions fail closed.
+- Approval invokes the governed annual Fact materialization path. Hold and Reject are preserved for audit but create no trusted financial record. No automatic component is allowed to choose or impersonate the human decision.
+- Receipt-bound governed annual records can now fill missing presentation cells with `VERIFIED_HUMAN_REVIEWED` status. They take precedence over amber pending candidates, never overwrite existing history and do not mutate the analysis engine's input data.
+- This is the operational domain workflow, not yet a desktop review screen. Existing Coromandel annual candidates remain pending and no verdict, EIP, portfolio or trading authority changed.

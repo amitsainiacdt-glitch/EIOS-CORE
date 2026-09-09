@@ -25,9 +25,83 @@ class AnnualFinancialHumanReview:
     reviewer: str
     statement_fingerprint: str
     decision: str
-    confidence: int
+    confidence: int | None
     rationale: str
     reviewed_at: datetime
+    receipt_fingerprint: str = ""
+
+
+class AnnualFinancialHumanReviewLedger:
+    """Append-only human decisions bound to one exact annual statement."""
+
+    def __init__(self, path: Path):
+        self.path = Path(path)
+
+    def record(self, statement: dict, *, review_id: str, reviewer: str, decision: str,
+               confidence: int | None, rationale: str, reviewed_at: datetime):
+        statement_fingerprint = GovernedAnnualFinancialRepository.fingerprint(statement)
+        if decision not in {"APPROVE", "REJECT", "HOLD"}:
+            raise ValueError("invalid annual financial review decision")
+        if not isinstance(reviewed_at, datetime):
+            raise ValueError("reviewed_at must be a datetime")
+        for name, value in (("review_id", review_id), ("reviewer", reviewer), ("rationale", rationale)):
+            if not isinstance(value, str) or not value.strip():
+                raise ValueError(f"{name} must not be empty")
+        if decision == "APPROVE":
+            if isinstance(confidence, bool) or not isinstance(confidence, int) or not 0 <= confidence <= 100:
+                raise ValueError("approval confidence must be an integer from 0 to 100")
+            GovernedAnnualFinancialRepository._validate_statement(statement)
+            if statement.get("review_status") != "PENDING_META_REVIEW" or statement.get("creates_evidence") is not False:
+                raise ValueError("only unchanged fail-closed extraction candidates may be approved")
+        elif confidence is not None:
+            raise ValueError("only approval may assign confidence")
+        existing = self.read_all()
+        if any(item.review_id == review_id for item in existing):
+            raise ValueError("duplicate annual review identity")
+        if any(item.statement_fingerprint == statement_fingerprint for item in existing):
+            raise ValueError("annual statement already has a human decision")
+        provisional = AnnualFinancialHumanReview(
+            review_id.strip(), reviewer.strip(), statement_fingerprint, decision,
+            confidence, rationale.strip(), reviewed_at)
+        item = AnnualFinancialHumanReview(**{
+            **asdict(provisional), "receipt_fingerprint": self.fingerprint(provisional)})
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        with self.path.open("a", encoding="utf-8") as stream:
+            payload = asdict(item); payload["reviewed_at"] = reviewed_at.isoformat()
+            stream.write(json.dumps(payload, sort_keys=True, separators=(",", ":")) + "\n")
+        return item
+
+    def read_all(self):
+        if not self.path.exists():
+            return ()
+        result, review_ids, statements = [], set(), set()
+        for number, line in enumerate(self.path.read_text(encoding="utf-8").splitlines(), 1):
+            try:
+                payload = json.loads(line); payload["reviewed_at"] = datetime.fromisoformat(payload["reviewed_at"])
+                item = AnnualFinancialHumanReview(**payload)
+                self.verify(item)
+                if item.review_id in review_ids or item.statement_fingerprint in statements:
+                    raise ValueError("duplicate annual review identity")
+                review_ids.add(item.review_id); statements.add(item.statement_fingerprint); result.append(item)
+            except (KeyError, TypeError, ValueError) as exc:
+                raise ValueError(f"invalid annual financial review at line {number}: {exc}") from exc
+        return tuple(result)
+
+    @classmethod
+    def verify(cls, review):
+        if not isinstance(review, AnnualFinancialHumanReview):
+            raise ValueError("annual statement requires a persisted human review receipt")
+        if review.decision not in {"APPROVE", "REJECT", "HOLD"}:
+            raise ValueError("invalid annual financial review decision")
+        if review.receipt_fingerprint != cls.fingerprint(review):
+            raise ValueError("annual financial review receipt fingerprint is invalid")
+        return True
+
+    @staticmethod
+    def fingerprint(review):
+        payload = asdict(review); payload.pop("receipt_fingerprint", None)
+        payload["reviewed_at"] = review.reviewed_at.isoformat()
+        return sha256(json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
 @dataclass(frozen=True)
@@ -67,11 +141,12 @@ class GovernedAnnualFinancialRepository:
                     ticker: str, company: str, created_at: datetime):
         normalized, document_hash, source_url = self._validate_statement(statement)
         fingerprint = self.fingerprint(statement)
-        if not isinstance(review, AnnualFinancialHumanReview):
-            raise ValueError("annual statement requires a human review")
+        AnnualFinancialHumanReviewLedger.verify(review)
         if review.decision != "APPROVE" or review.statement_fingerprint != fingerprint:
             raise ValueError("human approval does not bind to the current annual statement")
-        if not review.reviewer.strip() or not review.rationale.strip() or not 0 <= review.confidence <= 100:
+        if (not review.reviewer.strip() or not review.rationale.strip()
+                or not isinstance(review.confidence, int) or isinstance(review.confidence, bool)
+                or not 0 <= review.confidence <= 100):
             raise ValueError("human review identity, rationale and confidence are required")
         if statement.get("review_status") != "PENDING_META_REVIEW" or statement.get("creates_evidence") is not False:
             raise ValueError("only unchanged fail-closed extraction candidates may be reviewed")
@@ -173,4 +248,5 @@ class GovernedAnnualFinancialRepository:
         return normalized, document_hash, source_url
 
 
-__all__ = ["AnnualFinancialHumanReview", "GovernedAnnualFinancial", "GovernedAnnualFinancialRepository"]
+__all__ = ["AnnualFinancialHumanReview", "AnnualFinancialHumanReviewLedger",
+           "GovernedAnnualFinancial", "GovernedAnnualFinancialRepository"]

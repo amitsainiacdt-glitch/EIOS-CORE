@@ -17,7 +17,7 @@ REASONS = {
 }
 
 
-def add_display_cells(history, cash=None, balance=None):
+def add_display_cells(history, cash=None, balance=None, governed_annual=()):
     result = deepcopy(history)
     if balance:
         for metric in result.get("metrics", []):
@@ -25,6 +25,16 @@ def add_display_cells(history, cash=None, balance=None):
                 metric["label"] = "Borrowings (excluding leases)"
     sources = {name: {p["period"]: p for p in (pack or {}).get("periods", [])}
                for name, pack in (("cash", cash), ("balance", balance))}
+    governed = {}
+    for record in governed_annual:
+        if (getattr(record, "status", None) != "GOVERNED_ANNUAL_FINANCIAL"
+                or getattr(record, "controlled_write_receipt_id", None) is None
+                or getattr(record, "changes_verdict", True) or getattr(record, "authorizes_trade", True)):
+            raise ValueError("invalid governed annual display record")
+        identity = (record.period, record.statement_type)
+        if identity in governed:
+            raise ValueError("duplicate governed annual display record")
+        governed[identity] = record
     for period in result["periods"]:
         cells = {}
         for key, value in period["values"].items():
@@ -33,6 +43,23 @@ def add_display_cells(history, cash=None, balance=None):
                     "source": None, "section": None}
             if value is None and key in MAPPING:
                 pack, source_key, section = MAPPING[key]
+                statement_type = "CASH_FLOW" if pack == "cash" else "BALANCE_SHEET"
+                verified = governed.get((period["period"], statement_type))
+                verified_value = verified.figures_inr_crore.get(source_key) if verified else None
+                if verified_value is not None:
+                    try: verified_value = float(verified_value)
+                    except (TypeError, ValueError): raise ValueError("invalid governed annual display value")
+                    if not math.isfinite(verified_value): raise ValueError("invalid governed annual display value")
+                    cell.update(value=verified_value, status="VERIFIED_HUMAN_REVIEWED",
+                                source={"record_id": verified.record_id,
+                                        "receipt_id": verified.controlled_write_receipt_id,
+                                        "document_hash": verified.document_hash,
+                                        "source_url": verified.source_url,
+                                        "source_pages": verified.source_pages},
+                                section=section,
+                                reason="Verified from the exact annual statement after recorded human review.")
+                    cells[key] = cell
+                    continue
                 row = sources[pack].get(period["period"], {})
                 fact = row.get("facts", {}).get(source_key)
                 if (row.get("basis") == "STANDALONE" and row.get("review_status") == "PENDING_META_REVIEW"
@@ -42,5 +69,5 @@ def add_display_cells(history, cash=None, balance=None):
                                 reason="Extracted from a preserved report; pending META review. Display only, not an approved verdict input.")
             cells[key] = cell
         period["displayCells"] = cells
-    result["displayNote"] = "Amber figures fill display gaps from source-linked review records only. Original analysis inputs are unchanged. Missing is not zero."
+    result["displayNote"] = "Verified figures come from receipt-bound human review. Amber figures are pending review only. Original analysis inputs are unchanged. Missing is not zero."
     return result

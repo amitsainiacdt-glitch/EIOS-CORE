@@ -1,5 +1,7 @@
 import unittest
+from datetime import datetime, timezone
 from modules.company_intelligence.financial_display import add_display_cells
+from modules.company_intelligence.governed_annual_financial import GovernedAnnualFinancial
 
 class FinancialDisplayTests(unittest.TestCase):
     def setUp(self):
@@ -30,3 +32,21 @@ class FinancialDisplayTests(unittest.TestCase):
     def test_existing_values_not_overwritten(self):
         self.history["periods"][0]["values"]["operating_cash_flow"] = 9
         self.assertEqual(add_display_cells(self.history, self.pack)["periods"][0]["displayCells"]["operating_cash_flow"]["value"], 9)
+
+    def test_verified_annual_record_precedes_pending_display_candidate(self):
+        record = GovernedAnnualFinancial(
+            1, "record", "TEST", "Example", "CASH_FLOW", "FY2024-25", "STANDALONE",
+            {"operating_cash_flow": "44.25"}, "a" * 64, "https://issuer.example/ar.pdf", (9,),
+            "b" * 64, "H-1", datetime.now(timezone.utc), "receipt")
+        period = add_display_cells(self.history, self.pack, governed_annual=(record,))["periods"][0]
+        cell = period["displayCells"]["operating_cash_flow"]
+        self.assertEqual(cell["value"], 44.25)
+        self.assertEqual(cell["status"], "VERIFIED_HUMAN_REVIEWED")
+        self.assertEqual(cell["source"]["receipt_id"], "receipt")
+
+    def test_untrusted_object_cannot_claim_verified_display(self):
+        class Fake:
+            status = "GOVERNED_ANNUAL_FINANCIAL"; controlled_write_receipt_id = None
+            changes_verdict = False; authorizes_trade = False
+        with self.assertRaisesRegex(ValueError, "invalid governed"):
+            add_display_cells(self.history, self.pack, governed_annual=(Fake(),))
