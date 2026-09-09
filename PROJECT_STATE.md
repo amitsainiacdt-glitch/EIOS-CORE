@@ -6093,3 +6093,11 @@ investment decision is created by this checkpoint.
 - Made the permanent sequence constitutional: root-cause change, causal leading indicators, independent corroboration, inflection assessment, Price Recognition veto, Expectation Gap, EIP review, later operating/financial confirmation and Scale/Hold/Kill.
 - Recorded that reported revenue, EBITDA or PAT recovery, management or analyst upgrades, consensus revisions, price breakouts and widespread narrative recognition are not EIP prerequisites. Serious contradictions, excessive recognition, inadequate survivability and missing evidence may veto advancement, and no qualifying opportunity is valid.
 - Approved ADR-002 requires additive, fingerprint-bound integration of the existing modules. The next implementation checkpoint is a typed five-link causal-chain contract followed by explicit change-regime classification; engine logic remains unchanged at this documentation checkpoint.
+
+## Typed five-link causal-chain foundation (2026-09-09)
+
+- Added a passive, versioned causal-chain contract with exactly five ordered stages: root-cause change, intermediate transmission, company operating effect, financial effect and expected market effect.
+- Each stage preserves a separate human-readable statement, economic mechanism and governed Temporal Evidence references. The chain also retains entity, sector, causal-indicator identities, expected lead-time range, explicit assumptions, uncertainty, public-information-only status and non-authority.
+- Added a validation service rather than a scoring engine. It rejects missing, duplicated or reordered stages; empty reasoning; unused or out-of-scope evidence; unknown or cross-sector causal indicators; invalid lead times; non-public inputs; and altered non-authority language.
+- The contract makes the reasoning inspectable but does not infer causation, estimate probability, create a Signal/Catalyst/EIP, recommend an investment or authorize a trade. Mandatory Meta remains the downstream authority gate.
+- Validation: all five focused causal-chain tests, 21 top-level external-intelligence regression tests and all 388 company-intelligence tests pass. The next checkpoint is explicit change-regime classification without fake numerical precision.
