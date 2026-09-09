@@ -12,6 +12,7 @@ from modules.external_intelligence.eip_expectation_gap_service import EIPExpecta
 from modules.external_intelligence.mandatory_meta_analysis_gate import MandatoryMetaGateDecision, MandatoryMetaGateResult
 from modules.external_intelligence.normalized_valuation import *
 from modules.external_intelligence.normalized_valuation_service import NormalizedValuationService
+from modules.external_intelligence.pre_inflection_assessment import PreInflectionAssessmentPreview, PreInflectionStrength
 from modules.external_intelligence.survivability import *
 from modules.external_intelligence.survivability_service import SurvivabilityService
 from modules.external_intelligence.thesis_price_recognition import *
@@ -26,6 +27,13 @@ class CausalFirstEIPPacketServiceTests(unittest.TestCase):
                                       ("TE-1",) if index == 0 else ()) for index, stage in enumerate(CausalChainStage))
         self.chain = CausalChainAssessment(1, "CHAIN-1", "Example", "CHEMICALS", ("IND-1",), ("TE-1",), links,
                                             (2, 4), ("Assumption",), "Uncertain timing", True, CausalChainService.NON_AUTHORITY)
+        self.pre_inflection = PreInflectionAssessmentPreview(
+            1, "PRE-1", "META-1", "b" * 64, "META-REVIEW-1", ("Example",), ("CHEMICALS",),
+            ("IND-1",), PreInflectionStrength.CREDIBLE, 2, True, (2, 4), "LOW", (), (), (), (),
+            "Some timing uncertainty remains.", "Input economics are improving.", "Independent evidence now agrees.",
+            ("Margins respond later.",), ("Spread reverses.",), ("Liquidity remains adequate.",),
+            "NOT_ASSESSED", True,
+            "Research-stage Pre-Inflection preview; not a Signal, EIP state, Opportunity, recommendation, or trade decision.")
         self.regime = ChangeRegimeAssessment(1, "REGIME-1", "CHAIN-1", ChangeRegime.CYCLICAL, RegimeConfidence.MODERATE,
                                               ("TE-1",), ("Basis",), ("Alternative",), ("Test",), "Uncertain", True,
                                               ChangeRegimeService.NON_AUTHORITY)
@@ -59,7 +67,7 @@ class CausalFirstEIPPacketServiceTests(unittest.TestCase):
         self.service = CausalFirstEIPPacketService()
 
     def inputs(self, **changes):
-        values = dict(packet_id="PACKET-1", meta_gate=self.meta, causal_chain=self.chain,
+        values = dict(packet_id="PACKET-1", meta_gate=self.meta, pre_inflection=self.pre_inflection, causal_chain=self.chain,
             regime_assessment=self.regime, recognition_assessment=self.recognition_assessment,
             recognition_gate=self.recognition, expectation_gap_assessment=self.gap_assessment,
             expectation_gap=self.gap, normalized_valuation_assessment=self.valuation_assessment,
@@ -71,7 +79,7 @@ class CausalFirstEIPPacketServiceTests(unittest.TestCase):
     def test_ready_packet_keeps_separate_fingerprints_and_creates_no_eip(self):
         packet = self.service.assemble(**self.inputs())
         self.assertEqual(packet.decision, CausalFirstEIPPacketDecision.READY_FOR_GOVERNED_EIP_CLASSIFICATION)
-        self.assertEqual(len(packet.component_fingerprints), 11)
+        self.assertEqual(len(packet.component_fingerprints), 12)
         self.assertTrue(all(len(value) == 64 for _, value in packet.component_fingerprints))
         self.assertTrue(packet.all_components_ready)
         self.assertFalse(packet.creates_eip)

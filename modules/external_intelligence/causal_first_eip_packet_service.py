@@ -12,6 +12,7 @@ from modules.external_intelligence.change_regime import ChangeRegime, ChangeRegi
 from modules.external_intelligence.eip_expectation_gap import EIPExpectationGapAssessment, EIPExpectationGapResult
 from modules.external_intelligence.mandatory_meta_analysis_gate import MandatoryMetaGateDecision, MandatoryMetaGateResult
 from modules.external_intelligence.normalized_valuation import NormalizedValuationAssessment, NormalizedValuationResult, NormalizedValuationRoom
+from modules.external_intelligence.pre_inflection_assessment import PreInflectionAssessmentPreview
 from modules.external_intelligence.survivability import SurvivabilityAssessment, SurvivabilityDecision, SurvivabilityGateResult
 from modules.external_intelligence.thesis_price_recognition import ThesisPriceRecognitionAssessment, ThesisPriceRecognitionGateResult, ThesisRecognitionDecision
 
@@ -20,13 +21,14 @@ class CausalFirstEIPPacketService:
     NON_AUTHORITY = "Governed EIP input packet only; not an EIP classification, recommendation, position, or trade instruction."
 
     def assemble(
-        self, *, packet_id, meta_gate, causal_chain, regime_assessment,
+        self, *, packet_id, meta_gate, pre_inflection, causal_chain, regime_assessment,
         recognition_assessment, recognition_gate, expectation_gap_assessment,
         expectation_gap, normalized_valuation_assessment, normalized_valuation,
         survivability_assessment, survivability,
     ):
         self._text(packet_id, "packet_id")
         self._type(meta_gate, MandatoryMetaGateResult, "meta_gate")
+        self._type(pre_inflection, PreInflectionAssessmentPreview, "pre_inflection")
         self._type(causal_chain, CausalChainAssessment, "causal_chain")
         self._type(regime_assessment, ChangeRegimeAssessment, "regime_assessment")
         self._type(recognition_assessment, ThesisPriceRecognitionAssessment, "recognition_assessment")
@@ -39,6 +41,14 @@ class CausalFirstEIPPacketService:
         self._type(survivability, SurvivabilityGateResult, "survivability")
         if not meta_gate.assessment_id:
             raise ValueError("Mandatory Meta assessment identity is required")
+        if pre_inflection.meta_assessment_id != meta_gate.assessment_id:
+            raise ValueError("Pre-Inflection preview does not bind to Mandatory Meta")
+        if causal_chain.entity.casefold() not in {item.casefold() for item in pre_inflection.entity_scope}:
+            raise ValueError("causal-chain entity is outside Pre-Inflection scope")
+        if causal_chain.sector_id.casefold() not in {item.casefold() for item in pre_inflection.sector_scope}:
+            raise ValueError("causal-chain sector is outside Pre-Inflection scope")
+        if set(causal_chain.causal_indicator_ids) != set(pre_inflection.causal_indicator_ids):
+            raise ValueError("causal-chain indicators do not bind to Pre-Inflection preview")
         if set(meta_gate.expected_temporal_evidence_ids) != set(causal_chain.input_temporal_evidence_ids):
             raise ValueError("causal chain does not bind to Mandatory Meta evidence")
         bindings = (
@@ -84,7 +94,7 @@ class CausalFirstEIPPacketService:
                         CausalFirstEIPPacketDecision.READY_FOR_GOVERNED_EIP_CLASSIFICATION)
 
         components = (
-            ("mandatory_meta_gate", meta_gate), ("causal_chain", causal_chain),
+            ("mandatory_meta_gate", meta_gate), ("pre_inflection", pre_inflection), ("causal_chain", causal_chain),
             ("change_regime", regime_assessment), ("thesis_recognition_assessment", recognition_assessment),
             ("thesis_recognition_gate", recognition_gate), ("expectation_gap_assessment", expectation_gap_assessment),
             ("expectation_gap_result", expectation_gap), ("normalized_valuation_assessment", normalized_valuation_assessment),
@@ -94,7 +104,7 @@ class CausalFirstEIPPacketService:
         fingerprints = tuple((name, self.fingerprint(value)) for name, value in components)
         ready = decision == CausalFirstEIPPacketDecision.READY_FOR_GOVERNED_EIP_CLASSIFICATION
         return CausalFirstEIPDecisionPacket(
-            1, packet_id.strip(), meta_gate.assessment_id, causal_chain.chain_id, regime_assessment.assessment_id,
+            1, packet_id.strip(), meta_gate.assessment_id, pre_inflection.preview_id, causal_chain.chain_id, regime_assessment.assessment_id,
             recognition_assessment.assessment_id, expectation_gap_assessment.assessment_id,
             normalized_valuation_assessment.assessment_id, survivability_assessment.assessment_id,
             fingerprints, decision, tuple(reasons), ready, False, self.NON_AUTHORITY,

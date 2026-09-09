@@ -16,6 +16,7 @@ class CausalFirstEIPDecisionPacket:
     schema_version: int
     packet_id: str
     meta_assessment_id: str
+    pre_inflection_preview_id: str
     causal_chain_id: str
     regime_assessment_id: str
     recognition_assessment_id: str
