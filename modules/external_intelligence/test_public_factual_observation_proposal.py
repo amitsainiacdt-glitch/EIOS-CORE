@@ -22,8 +22,10 @@ from modules.external_intelligence.trusted_public_acquisition_adapter import Tru
 from modules.external_intelligence.trusted_public_document_extraction_adapter import TrustedPublicDocumentExtractionAdapter
 from modules.external_intelligence.trusted_public_source_registry import TrustedPublicSourceDefinition, TrustedPublicSourceRegistry
 from modules.external_intelligence.reviewed_public_factual_observation_commit_service import ReviewedPublicFactualObservationCommitService
+from modules.external_intelligence.public_factual_controlled_write_adapter import PublicFactualControlledWriteAdapter
 from modules.observation.observation_engine import ObservationEngine
 from modules.observation.observation_persistence import ObservationPersistence
+from modules.intelligence_write import ControlledIntelligenceWriteService, InformationClass, ValidationStatus, WriteReceiptStatus, verify_receipt_fingerprint
 
 
 def main():
@@ -86,11 +88,12 @@ def main():
         assert approved.approved_confidence == 82.0 and ledger.read_all() == (approved,)
         observation_path = root / "reviewed-observations.json"
         audit = PublicObservationCommitAuditLedger(root / "commit-audit.jsonl")
-        committed = ReviewedPublicFactualObservationCommitService(
+        reviewed_service = ReviewedPublicFactualObservationCommitService(
             PublicObservationAdmissionGate(registry),
             ObservationEngine(persistence=ObservationPersistence(observation_path)),
             audit, clock=lambda: now + timedelta(minutes=2),
-        ).commit(
+        )
+        committed = reviewed_service.commit(
             commit_id="COMMIT-PROP-1", proposal=proposal, review=approved,
             candidate=candidate, acquisition=acquisition, extraction=extraction,
             recorder="Reviewed Fact Commit",
@@ -104,10 +107,46 @@ def main():
         assert committed.observation.provenance.public_fact_statement_posture == "ASSERTED"
         assert committed.observation.provenance.public_fact_proposal_id == proposal.proposal_id
         assert committed.observation.provenance.public_fact_review_id == approved.review_id
+        assert committed.controlled_write_receipt.status == WriteReceiptStatus.ACCEPTED
+        assert verify_receipt_fingerprint(committed.controlled_write_receipt)
+        controlled_record = reviewed_service.controlled_write_service.get_record(committed.controlled_write_receipt.record_id)
+        assert controlled_record.information_class == InformationClass.FACT
+        assert controlled_record.validation_status == ValidationStatus.VERIFIED
+        assert controlled_record.payload["statement"] == candidate.source_passage
+        assert controlled_record.source_references[0].document_hash == receipt.document_hash
+        assert reviewed_service.controlled_write_service.trusted_records() == (controlled_record,)
         audit_events = audit.read_all()
         assert [item.status.value for item in audit_events] == ["AUTHORIZED", "COMMITTED"]
         assert all(item.proposal_id == proposal.proposal_id and item.review_id == approved.review_id for item in audit_events)
         assert len(ObservationPersistence(observation_path).load()) == 1
+        conflict_write_service = ControlledIntelligenceWriteService(clock=lambda: now + timedelta(minutes=2))
+        controlled_adapter = PublicFactualControlledWriteAdapter()
+        seed = controlled_adapter.build_command(
+            commit_id="SEED-CONFLICT", proposal=proposal, review=approved, candidate=candidate,
+            acquisition=acquisition, extraction=extraction,
+        )
+        seed = replace(
+            seed, command_id="seed-conflicting-fact", idempotency_key="seed-conflicting-fact",
+            payload={**seed.payload, "statement": seed.payload["statement"] + " conflicting"},
+        )
+        assert conflict_write_service.submit(seed).status == WriteReceiptStatus.ACCEPTED
+        conflict_observations = root / "controlled-conflict-observations.json"
+        conflict_audit = PublicObservationCommitAuditLedger(root / "controlled-conflict-audit.jsonl")
+        controlled_block = ReviewedPublicFactualObservationCommitService(
+            PublicObservationAdmissionGate(registry),
+            ObservationEngine(persistence=ObservationPersistence(conflict_observations)),
+            conflict_audit, clock=lambda: now + timedelta(minutes=3),
+            controlled_write_service=conflict_write_service,
+        ).commit(
+            commit_id="CONTROLLED-CONFLICT", proposal=proposal, review=approved,
+            candidate=candidate, acquisition=acquisition, extraction=extraction,
+            recorder="Reviewed Fact Commit",
+        )
+        assert not controlled_block.committed
+        assert controlled_block.status == "NOT_COMMITTED_CONTROLLED_WRITE_REJECTED"
+        assert controlled_block.controlled_write_receipt.status == WriteReceiptStatus.CONFLICT_RECORDED
+        assert not conflict_observations.exists()
+        assert [item.status.value for item in conflict_audit.read_all()] == ["BLOCKED"]
         deferred_review = replace(approved, decision=PublicFactualObservationReviewDecision.DEFER, approved_confidence=None)
         try:
             ReviewedPublicFactualObservationCommitService(

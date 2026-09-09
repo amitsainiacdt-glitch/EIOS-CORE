@@ -242,7 +242,6 @@ class ControlledIntelligenceWriteService:
             errors.append("INFORMATION_CLASS_OPERATION_MISMATCH")
         payload_keys = set(command.payload) if isinstance(command.payload, Mapping) else set()
         schemas = {
-            InformationClass.FACT: ({"metric", "value", "unit", "period", "basis"}, {"formula", "mechanism", "decision"}),
             InformationClass.DERIVED_METRIC: ({"metric", "value", "unit", "formula", "input_record_ids"}, {"decision", "source_assertion"}),
             InformationClass.INFERENCE: ({"statement", "supporting_record_ids", "mechanism", "uncertainty"}, {"value", "formula", "decision"}),
             InformationClass.DECISION: ({"decision", "input_packet_fingerprint", "reason_codes"}, {"value", "formula", "mechanism"}),
@@ -254,11 +253,24 @@ class ControlledIntelligenceWriteService:
         if command.information_class == InformationClass.FACT and not command.source_references:
             errors.append("FACT_SOURCE_REQUIRED")
         if command.information_class == InformationClass.FACT and isinstance(command.payload, Mapping):
-            scope_text = command.semantic_key.casefold()
-            period = str(command.payload.get("period", "")).casefold()
-            basis = str(command.payload.get("basis", "")).casefold()
-            if period not in scope_text or basis not in scope_text:
-                errors.append("FACT_SEMANTIC_KEY_SCOPE_MISMATCH")
+            forbidden = {"formula", "mechanism", "decision"}
+            if forbidden & payload_keys:
+                errors.append("INFORMATION_CLASS_MASQUERADE")
+            quantitative = {"metric", "value", "unit", "period", "basis"}.issubset(payload_keys)
+            event = {"statement", "event_type", "event_at", "statement_posture"}.issubset(payload_keys)
+            if quantitative == event:
+                errors.append("FACT_REQUIRES_EXACTLY_ONE_SUPPORTED_SHAPE")
+            elif quantitative:
+                scope_text = command.semantic_key.casefold()
+                period = str(command.payload.get("period", "")).casefold()
+                basis = str(command.payload.get("basis", "")).casefold()
+                if period not in scope_text or basis not in scope_text:
+                    errors.append("FACT_SEMANTIC_KEY_SCOPE_MISMATCH")
+            elif event:
+                scope_text = command.semantic_key.casefold()
+                event_type = str(command.payload.get("event_type", "")).casefold()
+                if event_type not in scope_text:
+                    errors.append("FACT_SEMANTIC_KEY_SCOPE_MISMATCH")
         if command.operation == WriteOperation.CREATE_DECISION_SNAPSHOT and command.actor.actor_type != ActorType.DECISION_ORCHESTRATOR:
             errors.append("DECISION_ORCHESTRATOR_REQUIRED")
         if command.operation == WriteOperation.VERIFY_RECORD:

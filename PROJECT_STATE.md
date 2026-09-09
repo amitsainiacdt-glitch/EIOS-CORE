@@ -6184,3 +6184,12 @@ investment decision is created by this checkpoint.
 - Recorded ADR-003 through ADR-008. Canonical dossier migration, EvidenceEvent implementation and Research Decision Packet extension remain explicitly deferred.
 - No Master Dossier, production writer, Observation, Temporal Evidence, EIP, collector, UI, portfolio, trading or AI-provider path is connected or changed by this checkpoint.
 - Validation at implementation time: 22 focused Controlled Write tests pass. Full regression results are recorded after the complete relevant suites run.
+
+## First governed writer connected to Controlled Intelligence Write Boundary (2026-09-09)
+
+- Connected only the existing human-approved public factual Observation path. Its source acquisition, extraction validation, exact proposal reconstruction, human review, admission, provenance, novelty and append-only commit-audit gates remain in force.
+- Added an adapter that maps the exact approved public event into an event-shaped `FACT` command containing the source passage, event type/time/posture, amounts/dates and acquisition/extraction/proposal/review identities. The source document hash is retained.
+- The human review identity supplies Fact verification authority. No extractor, research job or AI receives verification authority. A rejected or conflicting controlled write blocks Observation creation and exposes its immutable receipt.
+- The generic public Observation result gained an optional controlled-write receipt without changing existing call signatures or unreviewed commit behavior. Existing EIP packet structure and authority remain unchanged.
+- Controlled records and receipts remain in memory; the existing public Observation and audit ledgers remain the only durable production state. No second writer, dossier, UI, collector, AI, EIP, portfolio or trading path is connected.
+- Validation includes an end-to-end approved public Fact commit and an adversarial conflict that proves the Observation is not persisted when the controlled boundary refuses trusted admission. Full regression results are recorded after the complete relevant suites run.

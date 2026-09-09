@@ -48,9 +48,14 @@ The validation lifecycle is `PROVISIONAL`, `PENDING_REVIEW`, `VERIFIED`,
 It is not connected to the Master Dossier, Observations, Temporal Evidence,
 EIP, UI, collectors, portfolio, trading, or any AI provider.
 
-## Future integration boundary
+## First integrated writer
 
-The first eligible production integration is the existing reviewed public
-factual Observation commit path. That work requires a separate review and must
-preserve its current admission, review, provenance, audit, and novelty gates.
+The existing reviewed public factual Observation commit path is the first and
+only connected writer. `PublicFactualControlledWriteAdapter` maps the already
+validated and human-approved proposal to an event-shaped `FACT`. A rejected or
+conflicted controlled write blocks Observation creation. The existing admission,
+review, provenance, audit and novelty gates remain in force.
+
+Controlled records and receipts remain in memory and are returned with the
+commit result. Durable controlled-write persistence is not implemented.
 

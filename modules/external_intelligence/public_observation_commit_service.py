@@ -13,6 +13,7 @@ from modules.external_intelligence.trusted_public_acquisition_adapter import Tru
 from modules.external_intelligence.trusted_public_document_extraction_adapter import TrustedPublicDocumentExtractionResult
 from modules.observation.observation import Observation
 from modules.observation.observation_engine import ObservationEngine
+from modules.intelligence_write.contracts import WriteReceipt
 
 
 @dataclass(frozen=True)
@@ -21,6 +22,7 @@ class PublicObservationCommitResult:
     status: str
     admission: PublicObservationAdmissionPreview
     observation: Observation | None
+    controlled_write_receipt: WriteReceipt | None = None
 
 
 class PublicObservationCommitService:

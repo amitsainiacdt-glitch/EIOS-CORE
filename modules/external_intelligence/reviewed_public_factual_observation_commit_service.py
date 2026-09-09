@@ -14,13 +14,16 @@ from modules.external_intelligence.public_factual_observation_review_ledger impo
 from modules.external_intelligence.public_observation_admission_gate import PublicObservationAdmissionGate
 from modules.external_intelligence.public_observation_commit_audit import PublicObservationCommitAuditLedger
 from modules.external_intelligence.public_observation_commit_service import PublicObservationCommitResult
+from modules.external_intelligence.public_factual_controlled_write_adapter import PublicFactualControlledWriteAdapter
+from modules.intelligence_write import ControlledIntelligenceWriteService, WriteReceiptStatus
 from modules.observation.observation_engine import ObservationEngine
 
 
 class ReviewedPublicFactualObservationCommitService:
     """Commits exact reviewed fact text; never invokes downstream analysis."""
 
-    def __init__(self, gate, observation_engine, audit_ledger, *, validator=None, clock=None):
+    def __init__(self, gate, observation_engine, audit_ledger, *, validator=None, clock=None,
+                 controlled_write_service=None, controlled_write_adapter=None):
         if not isinstance(gate, PublicObservationAdmissionGate): raise ValueError("gate must be a PublicObservationAdmissionGate")
         if not isinstance(observation_engine, ObservationEngine): raise ValueError("observation_engine must be an ObservationEngine")
         if not isinstance(audit_ledger, PublicObservationCommitAuditLedger): raise ValueError("audit_ledger must be a PublicObservationCommitAuditLedger")
@@ -28,6 +31,12 @@ class ReviewedPublicFactualObservationCommitService:
         self.validator = validator or PublicFactualCandidateValidator()
         self.clock = clock or (lambda: datetime.now(timezone.utc))
         self.adapter = ExternalObservationAdapter(observation_engine)
+        self.controlled_write_service = controlled_write_service or ControlledIntelligenceWriteService(clock=self.clock)
+        if not isinstance(self.controlled_write_service, ControlledIntelligenceWriteService):
+            raise ValueError("controlled_write_service must be a ControlledIntelligenceWriteService")
+        self.controlled_write_adapter = controlled_write_adapter or PublicFactualControlledWriteAdapter()
+        if not isinstance(self.controlled_write_adapter, PublicFactualControlledWriteAdapter):
+            raise ValueError("controlled_write_adapter must be a PublicFactualControlledWriteAdapter")
 
     def commit(self, *, commit_id, proposal, review, candidate, acquisition, extraction, recorder, published_at=None, filing_at=None):
         if not isinstance(proposal, PublicFactualObservationProposal): raise ValueError("proposal must be a PublicFactualObservationProposal")
@@ -51,6 +60,20 @@ class ReviewedPublicFactualObservationCommitService:
         if not admission.admissible:
             self.audit_ledger.block(commit_id=commit_id, admission=admission, proposal=proposal, review=review, recorded_at=self.clock(), recorder=recorder)
             return PublicObservationCommitResult(False, f"NOT_COMMITTED_{admission.decision.value}", admission, None)
+        controlled_command = self.controlled_write_adapter.build_command(
+            commit_id=commit_id, proposal=proposal, review=review, candidate=candidate,
+            acquisition=acquisition, extraction=extraction,
+            published_at=published_at, filing_at=filing_at,
+        )
+        controlled_receipt = self.controlled_write_service.submit(controlled_command)
+        if controlled_receipt.status not in {WriteReceiptStatus.ACCEPTED, WriteReceiptStatus.DUPLICATE_NO_CHANGE}:
+            self.audit_ledger.block(
+                commit_id=commit_id, admission=admission, proposal=proposal, review=review,
+                recorded_at=self.clock(), recorder=recorder,
+            )
+            return PublicObservationCommitResult(
+                False, "NOT_COMMITTED_CONTROLLED_WRITE_REJECTED", admission, None, controlled_receipt,
+            )
         self.audit_ledger.begin(commit_id=commit_id, admission=admission, proposal=proposal, review=review, recorded_at=self.clock(), recorder=recorder)
         acquired = acquisition.receipt
         observation = self.adapter.ingest(
@@ -69,7 +92,11 @@ class ReviewedPublicFactualObservationCommitService:
         status = "COMMITTED" if observation is not None else "FINAL_NOVELTY_REJECTION"
         fingerprint = observation.provenance.observation_fingerprint if observation is not None else None
         self.audit_ledger.complete(commit_id=commit_id, status=status, admission=admission, proposal=proposal, review=review, observation_fingerprint=fingerprint, recorded_at=self.clock(), recorder=recorder)
-        return PublicObservationCommitResult(observation is not None, status if observation is not None else "NOT_COMMITTED_FINAL_NOVELTY_REJECTION", admission, observation)
+        return PublicObservationCommitResult(
+            observation is not None,
+            status if observation is not None else "NOT_COMMITTED_FINAL_NOVELTY_REJECTION",
+            admission, observation, controlled_receipt,
+        )
 
 
 __all__ = ["ReviewedPublicFactualObservationCommitService"]
