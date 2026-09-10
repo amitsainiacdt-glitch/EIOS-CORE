@@ -41,3 +41,13 @@ class ExchangeIxbrlFinancialTests(unittest.TestCase):
     def test_conflicting_identity_fails_closed(self):
         with self.assertRaises(ValueError):
             self.parse(self.html() + "<table><tr><td>NSE Symbol</td><td>OTHER</td></tr></table>")
+
+    def test_ixbrl_context_references_create_column_period_context(self):
+        contexts = ('<xbrli:context id="CURRENT"><xbrli:period><xbrli:startDate>2026-04-01</xbrli:startDate><xbrli:endDate>2026-06-30</xbrli:endDate></xbrli:period><xbrldi:explicitMember>Standalone</xbrldi:explicitMember></xbrli:context>'
+                    '<xbrli:context id="PRIOR"><xbrli:period><xbrli:startDate>2025-04-01</xbrli:startDate><xbrli:endDate>2025-06-30</xbrli:endDate></xbrli:period><xbrldi:explicitMember>Standalone</xbrldi:explicitMember></xbrli:context>')
+        rows = [('Revenue from operations','100.25','90'),('Other income','2','1'),('Total income','102.25','91'),('Cost of materials consumed','40','35'),('Total expenses','90','80'),('Total profit before tax','12.25','11'),('Total profit (loss) for period','10','9')]
+        base = self.html().split('<tr><td>Revenue from operations',1)[0]
+        tagged = ''.join(f'<tr><td>{label}</td><td><ix:nonFraction contextRef="CURRENT">{current}</ix:nonFraction></td><td><ix:nonFraction contextRef="PRIOR">{prior}</ix:nonFraction></td></tr>' for label,current,prior in rows)
+        result = self.parse(contexts + base + tagged + '</table>')
+        self.assertEqual(result['column_contexts'][0]['context_ref'],'CURRENT')
+        self.assertEqual(result['column_contexts'][0]['period_end'],'2026-06-30')

@@ -4,6 +4,14 @@ from __future__ import annotations
 from modules.company_intelligence.exchange_ixbrl_column_review import candidate_fingerprint, prepare_column_review
 
 
+def _date(value):
+    parts = str(value or "").strip().split("-")
+    if len(parts) != 3: return str(value or "").strip()
+    if len(parts[0]) == 4: return "-".join(parts)
+    if len(parts[2]) == 4: return "-".join(reversed(parts))
+    return str(value or "").strip()
+
+
 def assess_automatic_column_binding(candidate: dict) -> dict:
     preview = prepare_column_review(candidate)
     metadata = candidate["metadata"]
@@ -22,8 +30,8 @@ def assess_automatic_column_binding(candidate: dict) -> dict:
         for index, context in enumerate(contexts):
             if not isinstance(context, dict):
                 continue
-            if (context.get("period_start") == metadata["period_start"]
-                    and context.get("period_end") == metadata["period_end"]
+            if (_date(context.get("period_start")) == _date(metadata["period_start"])
+                    and _date(context.get("period_end")) == _date(metadata["period_end"])
                     and str(context.get("basis", "")).casefold() == str(metadata["basis"]).casefold()):
                 matches.append(index)
         if len(matches) == 1:

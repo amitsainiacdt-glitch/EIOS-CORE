@@ -6258,3 +6258,10 @@ investment decision is created by this checkpoint.
 - Automatic output remains `PROVISIONAL` and is fingerprint-bound. Any change to the candidate invalidates the saved assessment. It may corroborate the issuer-PDF review but cannot verify or approve a financial Fact.
 - Missing multi-column context, no period match, multiple matches and context-count disagreement route only the exception to the human column-review ledger. Human work is therefore reserved for ambiguity and conflict.
 - Automatic-cycle reporting now separates total iXBRL candidates, automatically bound candidates, human-review exceptions and parsing holds so scalability and failure rates remain visible.
+
+## Source-native iXBRL context lineage (2026-09-10)
+
+- Extended the NSE parser to read each numeric fact's native `contextRef` plus its XBRL start date, end date/instant and explicit reporting-basis member. Column meaning no longer depends on visual order when the filing supplies machine-readable context lineage.
+- Context-reference sequences must agree across all extracted financial metrics before EIOS emits column contexts. Missing or inconsistent lineage is withheld rather than guessed.
+- ISO XBRL dates and displayed filing dates are normalized for comparison. A unique match to the declared reporting period and standalone/consolidated basis enters the existing provisional automatic-binding path; duplicate or absent matches remain exceptions.
+- This improves automation coverage without granting approval. Source context establishes column identity only; issuer-PDF reconciliation, META checks and governed approval remain required.
