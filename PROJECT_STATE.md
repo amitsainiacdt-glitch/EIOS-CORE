@@ -6265,3 +6265,10 @@ investment decision is created by this checkpoint.
 - Context-reference sequences must agree across all extracted financial metrics before EIOS emits column contexts. Missing or inconsistent lineage is withheld rather than guessed.
 - ISO XBRL dates and displayed filing dates are normalized for comparison. A unique match to the declared reporting period and standalone/consolidated basis enters the existing provisional automatic-binding path; duplicate or absent matches remain exceptions.
 - This improves automation coverage without granting approval. Source context establishes column identity only; issuer-PDF reconciliation, META checks and governed approval remain required.
+
+## Automatic issuer-PDF/NSE reconciliation bridge (2026-09-10)
+
+- Added a fail-closed loader for automatically bound NSE candidates. It reloads the original candidate, deterministic assessment and bound output, recalculates the binding and rejects missing, changed or duplicate lineage.
+- The quarterly issuer-PDF intake now selects an exchange candidate only when ticker, exact reporting-period end and standalone/consolidated basis agree with the PDF table. Missing matches add no corroboration; duplicate matches stop unattended processing.
+- The matched NSE candidate feeds the existing exchange unit/header and source-reading reconciliation logic rather than creating a parallel quarterly financial path.
+- This bridge operates automatically when a saved NSE candidate already exists; a later company cycle/retry can pair a PDF collected earlier. NSE corroboration remains provisional and cannot bypass META or human Fact approval.

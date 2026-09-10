@@ -182,6 +182,8 @@ class AutomaticOfficialDocumentPipeline:
                             if runner is None:
                                 from modules.company_intelligence.quarterly_pdf_intake import run_quarterly_intake
                                 runner = run_quarterly_intake
+                            from modules.company_intelligence.bound_exchange_corroboration_store import load_bound_exchange_corroborations
+                            exchange_reports = load_bound_exchange_corroborations(self.review_queue_root, job.ticker)
                             delivery = getattr(acquisition, "delivery_provenance", None)
                             source_check = {
                                 "status": "ACQUISITION_RECEIPT_PRESERVED_PENDING_REVIEW",
@@ -191,7 +193,8 @@ class AutomaticOfficialDocumentPipeline:
                             }
                             report = runner(self.archive.root / version.archive_path, workspace=Path(__file__).resolve().parents[2],
                                 ticker=job.ticker, company=job.company, source_url=url,
-                                source_verification_override=source_check)
+                                source_verification_override=source_check,
+                                exchange_corroborations=exchange_reports)
                             review = report.get("review_queue", {})
                             counts["quarterly_intakes"] += 1
                             quarterly_candidates = int(review.get("candidate_count", 0))

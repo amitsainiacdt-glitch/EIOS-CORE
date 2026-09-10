@@ -43,7 +43,8 @@ def plan_ocr(layout, limit=3):
 
 
 def run_quarterly_intake(path, *, workspace, ticker, company=None, source_url=None,
-                         source_verification_override=None, exchange_corroboration=None):
+                         source_verification_override=None, exchange_corroboration=None,
+                         exchange_corroborations=()):
     from pypdf import PdfReader, PdfWriter
     import pdfplumber
     workspace = Path(workspace).resolve()
@@ -114,13 +115,17 @@ def run_quarterly_intake(path, *, workspace, ticker, company=None, source_url=No
             item['comparison'] = compare_page(candidate, ocr, item, digest, item['alignment_diagnostics'])
             item['header_binding'] = bind_page_headers(candidate, ocr, item, item['alignment_diagnostics'])
             item['header_binding'] = apply_unit_reviews(item['header_binding'], candidate, unit_reviews, digest)
-            if exchange_corroboration is not None:
+            selected_exchange = exchange_corroboration
+            if selected_exchange is None and exchange_corroborations:
+                from modules.company_intelligence.quarterly_exchange_match import select_exchange_corroboration
+                selected_exchange = select_exchange_corroboration(candidate, exchange_corroborations, ticker=ticker)
+            if selected_exchange is not None:
                 from modules.company_intelligence.quarterly_exchange_corroboration import apply_exchange_unit_corroboration
                 item['header_binding'] = apply_exchange_unit_corroboration(
-                    item['header_binding'], candidate, exchange_corroboration,
+                    item['header_binding'], candidate, selected_exchange,
                     ticker=ticker, pdf_document_hash=digest)
             item['record_candidates'] = build_record_candidates(
-                candidate, item, ticker, digest, exchange_corroboration=exchange_corroboration)
+                candidate, item, ticker, digest, exchange_corroboration=selected_exchange)
             item['status'] = 'COMPARED_PENDING_REVIEW'
         except (OSError, RuntimeError, ValueError, KeyError, subprocess.TimeoutExpired) as exc:
             item.update(status='OCR_FAILED_HOLD', error=str(exc))
