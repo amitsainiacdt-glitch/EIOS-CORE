@@ -6272,3 +6272,10 @@ investment decision is created by this checkpoint.
 - The quarterly issuer-PDF intake now selects an exchange candidate only when ticker, exact reporting-period end and standalone/consolidated basis agree with the PDF table. Missing matches add no corroboration; duplicate matches stop unattended processing.
 - The matched NSE candidate feeds the existing exchange unit/header and source-reading reconciliation logic rather than creating a parallel quarterly financial path.
 - This bridge operates automatically when a saved NSE candidate already exists; a later company cycle/retry can pair a PDF collected earlier. NSE corroboration remains provisional and cannot bypass META or human Fact approval.
+
+## Delayed exchange reconciliation retry queue (2026-09-10)
+
+- Issuer quarterly PDFs without an exact NSE match now enter an append-only retry ledger bound to ticker, company, official source URL, workspace-contained archive path and PDF SHA-256. Repeated scheduling of the same document is idempotent.
+- When a newly bound NSE filing arrives, EIOS immediately retries pending PDFs for that ticker rather than waiting for another ordinary collection cycle. Both the saved NSE lineage and preserved issuer PDF hash are verified again.
+- A request becomes `RECONCILED` only when the quarterly intake produces at least one exact ticker/period/basis match. No match remains waiting; processing failures are held. Every transition preserves attempt count, timestamp and a tamper-evident receipt fingerprint.
+- Automatic-cycle status reports retry scheduling, attempts, completions and holds. Reconciliation still does not approve a Fact or bypass META/human governance.

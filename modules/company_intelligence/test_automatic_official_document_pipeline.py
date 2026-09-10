@@ -154,10 +154,15 @@ class AutomaticOfficialDocumentPipelineTests(unittest.TestCase):
             def acquire(self, **kwargs):
                 return SimpleNamespace(document_bytes=body, url=url, change_status='FIRST_SEEN',
                     receipt=SimpleNamespace(source_url=url, content_type='text/html', document_hash=sha256(body).hexdigest()))
+        class RetryService:
+            calls=[]
+            def retry_for(self,ticker,reports,**kwargs):
+                self.calls.append((ticker,reports));return (SimpleNamespace(status='RECONCILED'),)
         with TemporaryDirectory() as directory:
+            retry=RetryService()
             summary = AutomaticOfficialDocumentPipeline(
                 FakeArchive(), object(), adapter_factory=IxbrlAdapter,
-                extraction_ledger=object(), review_queue_root=Path(directory)).run(
+                extraction_ledger=object(), review_queue_root=Path(directory),exchange_retry_service=retry).run(
                     [job('EXCHANGE_DISCLOSURES')],
                     [SimpleNamespace(selected_sources=[SimpleNamespace(result=SimpleNamespace(url=url))])],
                     cycle_id='CYCLE-1', acquired_at=datetime.now(timezone.utc))
@@ -165,6 +170,8 @@ class AutomaticOfficialDocumentPipelineTests(unittest.TestCase):
             self.assertEqual(summary.exchange_ixbrl_holds, 0)
             self.assertEqual(summary.exchange_ixbrl_auto_bound, 1)
             self.assertEqual(summary.exchange_ixbrl_human_review_required, 0)
+            self.assertEqual(summary.exchange_retries_attempted,1);self.assertEqual(summary.exchange_retries_completed,1)
+            self.assertEqual(retry.calls[0][0],'COROMANDEL')
             self.assertEqual(len(list(Path(directory).rglob('exchange-ixbrl-candidate.json'))), 1)
 
 

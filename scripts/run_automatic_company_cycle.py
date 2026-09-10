@@ -25,6 +25,7 @@ from modules.company_intelligence.local_document_fallback_provider import LocalD
 from modules.company_intelligence.browser_capture_fallback_provider import BrowserCaptureFallbackProvider
 from modules.company_intelligence.official_document_fallback import ChainedOfficialDocumentFallback
 from modules.company_intelligence.company_document_archive import CompanyDocumentArchive
+from modules.company_intelligence.quarterly_exchange_retry import QuarterlyExchangeRetryService
 from modules.external_intelligence.public_source_acquisition_ledger import PublicSourceAcquisitionLedger
 from modules.external_intelligence.public_document_extraction_ledger import PublicDocumentExtractionLedger
 from modules.external_intelligence.research_job_configuration import ResearchJobConfiguration
@@ -46,6 +47,7 @@ DOCUMENT_ACQUISITION_LEDGER = ROOT / "data" / "company_intelligence" / "company_
 DOCUMENT_EXTRACTION_LEDGER = ROOT / "data" / "company_intelligence" / "company_document_extraction_ledger.jsonl"
 FACT_REVIEW_QUEUE_ROOT = ROOT / "data" / "company_intelligence" / "fact_review_queue"
 OFFICIAL_DOCUMENT_INBOX = ROOT / "data" / "runtime" / "official_document_inbox"
+QUARTERLY_EXCHANGE_RETRY_LEDGER = ROOT / "data" / "company_intelligence" / "quarterly_exchange_retries.jsonl"
 
 
 def all_automatic_jobs():
@@ -131,6 +133,8 @@ def main() -> int:
                 BrowserCaptureFallbackProvider(RUNTIME_DIR / "browser_source_capture", workspace=ROOT, ledger=acquisition_ledger),
                 LocalDocumentFallbackProvider(OFFICIAL_DOCUMENT_INBOX, workspace=ROOT, ledger=acquisition_ledger),
             ),
+            exchange_retry_service=QuarterlyExchangeRetryService(
+                QUARTERLY_EXCHANGE_RETRY_LEDGER, workspace=ROOT),
         ).run(result.executed_jobs, result.results, cycle_id=started_at.isoformat(), acquired_at=started_at)
         status["official_documents"] = document_summary.__dict__
         status["collection_outcome"] = describe_document_collection(status["official_documents"])

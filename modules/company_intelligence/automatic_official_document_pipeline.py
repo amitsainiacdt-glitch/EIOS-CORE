@@ -15,6 +15,7 @@ from modules.company_intelligence.company_candidate_meta_review import CompanyCa
 from modules.company_intelligence.official_report_discovery import discover_official_reports
 from modules.company_intelligence.official_document_fallback import validate_fallback_delivery
 from modules.company_intelligence.automatic_exchange_ixbrl_intake import is_nse_ixbrl_candidate, stage_exchange_ixbrl_candidate
+from modules.company_intelligence.bound_exchange_corroboration_store import load_bound_exchange_corroborations
 from modules.external_intelligence.public_document_extraction_ledger import PublicDocumentExtractionLedger
 from modules.external_intelligence.public_observation_admission_gate import PublicObservationAdmissionGate
 from modules.external_intelligence.public_source_acquisition_ledger import PublicSourceAcquisitionLedger
@@ -55,10 +56,14 @@ class OfficialDocumentCycleSummary:
     exchange_ixbrl_holds: int = 0
     exchange_ixbrl_auto_bound: int = 0
     exchange_ixbrl_human_review_required: int = 0
+    exchange_retries_scheduled: int = 0
+    exchange_retries_attempted: int = 0
+    exchange_retries_completed: int = 0
+    exchange_retries_held: int = 0
 
 
 class AutomaticOfficialDocumentPipeline:
-    def __init__(self, archive: CompanyDocumentArchive, acquisition_ledger: PublicSourceAcquisitionLedger, *, extraction_ledger: PublicDocumentExtractionLedger | None = None, review_queue_root=None, adapter_factory=TrustedPublicAcquisitionAdapter, source_manifest=None, fallback_provider=None, quarterly_intake_runner=None):
+    def __init__(self, archive: CompanyDocumentArchive, acquisition_ledger: PublicSourceAcquisitionLedger, *, extraction_ledger: PublicDocumentExtractionLedger | None = None, review_queue_root=None, adapter_factory=TrustedPublicAcquisitionAdapter, source_manifest=None, fallback_provider=None, quarterly_intake_runner=None, exchange_retry_service=None):
         self.archive = archive
         self.acquisition_ledger = acquisition_ledger
         self.adapter_factory = adapter_factory
@@ -67,6 +72,7 @@ class AutomaticOfficialDocumentPipeline:
         self.source_manifest = source_manifest
         self.fallback_provider = fallback_provider
         self.quarterly_intake_runner = quarterly_intake_runner
+        self.exchange_retry_service = exchange_retry_service
 
     def run(self, executed_jobs, results, *, cycle_id: str, acquired_at: datetime) -> OfficialDocumentCycleSummary:
         counts = {"candidates_seen": 0, "approved_urls": 0, "archived": 0, "unchanged": 0, "new_versions": 0, "failed": 0, "extracted": 0, "fact_candidates_queued": 0, "extraction_holds": 0, "meta_reviewed": 0, "human_review_ready": 0, "meta_holds": 0}
@@ -75,6 +81,8 @@ class AutomaticOfficialDocumentPipeline:
         counts.update(quarterly_intakes=0, quarterly_candidates=0, quarterly_holds=0)
         counts.update(exchange_ixbrl_candidates=0, exchange_ixbrl_holds=0)
         counts.update(exchange_ixbrl_auto_bound=0, exchange_ixbrl_human_review_required=0)
+        counts.update(exchange_retries_scheduled=0, exchange_retries_attempted=0,
+                      exchange_retries_completed=0, exchange_retries_held=0)
         for job, result in zip(executed_jobs, results, strict=True):
             if job.intent not in OFFICIAL_INTENTS or not job.entity_domain:
                 continue
@@ -166,6 +174,12 @@ class AutomaticOfficialDocumentPipeline:
                                     counts["exchange_ixbrl_auto_bound"] += 1
                                 else:
                                     counts["exchange_ixbrl_human_review_required"] += 1
+                                if self.exchange_retry_service is not None:
+                                    exchange_reports = load_bound_exchange_corroborations(self.review_queue_root, job.ticker)
+                                    retried = self.exchange_retry_service.retry_for(job.ticker, exchange_reports, recorded_at=acquired_at)
+                                    counts["exchange_retries_attempted"] += len(retried)
+                                    counts["exchange_retries_completed"] += sum(item.status == "RECONCILED" for item in retried)
+                                    counts["exchange_retries_held"] += sum(item.status != "RECONCILED" for item in retried)
                             except (UnicodeDecodeError, ValueError, TypeError, KeyError):
                                 counts["exchange_ixbrl_holds"] += 1
                             continue
@@ -182,7 +196,6 @@ class AutomaticOfficialDocumentPipeline:
                             if runner is None:
                                 from modules.company_intelligence.quarterly_pdf_intake import run_quarterly_intake
                                 runner = run_quarterly_intake
-                            from modules.company_intelligence.bound_exchange_corroboration_store import load_bound_exchange_corroborations
                             exchange_reports = load_bound_exchange_corroborations(self.review_queue_root, job.ticker)
                             delivery = getattr(acquisition, "delivery_provenance", None)
                             source_check = {
@@ -195,6 +208,12 @@ class AutomaticOfficialDocumentPipeline:
                                 ticker=job.ticker, company=job.company, source_url=url,
                                 source_verification_override=source_check,
                                 exchange_corroborations=exchange_reports)
+                            if report.get('exchange_corroboration_matches', 0) == 0 and self.exchange_retry_service is not None:
+                                self.exchange_retry_service.schedule(
+                                    ticker=job.ticker, company=job.company,
+                                    pdf_path=self.archive.root / version.archive_path,
+                                    pdf_hash=version.document_hash, source_url=url, recorded_at=acquired_at)
+                                counts["exchange_retries_scheduled"] += 1
                             review = report.get("review_queue", {})
                             counts["quarterly_intakes"] += 1
                             quarterly_candidates = int(review.get("candidate_count", 0))

@@ -70,6 +70,7 @@ def run_quarterly_intake(path, *, workspace, ticker, company=None, source_url=No
               'created_at': datetime.now(timezone.utc).isoformat(), 'run_directory': str(folder),
               'status': 'RESEARCH_HOLD', 'ocr_pages': [], 'deferred_pages': deferred,
               'creates_approved_facts': False, 'changes_verdict': False}
+    report['exchange_corroboration_matches'] = 0
     report['reporting_notes'] = reporting_notes
     for candidate in selected:
         number = candidate['pdf_page']
@@ -124,6 +125,8 @@ def run_quarterly_intake(path, *, workspace, ticker, company=None, source_url=No
                 item['header_binding'] = apply_exchange_unit_corroboration(
                     item['header_binding'], candidate, selected_exchange,
                     ticker=ticker, pdf_document_hash=digest)
+                if any('exchange_unit_corroboration' in table for table in item['header_binding'].get('tables', [])):
+                    report['exchange_corroboration_matches'] += 1
             item['record_candidates'] = build_record_candidates(
                 candidate, item, ticker, digest, exchange_corroboration=selected_exchange)
             item['status'] = 'COMPARED_PENDING_REVIEW'
