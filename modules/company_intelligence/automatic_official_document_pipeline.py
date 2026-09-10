@@ -82,7 +82,7 @@ class AutomaticOfficialDocumentPipeline:
                 screened = assess_quarterly_search_results([s.result for s in selected_sources], plan)
                 selected_sources = [s for s, assessment in zip(selected_sources, screened['results'])
                                     if assessment['status'] == 'TARGET_QUARTER_CANDIDATE']
-            if not target_period and job.intent == "OFFICIAL_DOCUMENT_DISCOVERY" and self.source_manifest:
+            if not target_period and job.intent in OFFICIAL_INTENTS and self.source_manifest:
                 discovered = discover_official_reports(job, self.source_manifest, adapter,
                     acquired_at=acquired_at, cycle_id=cycle_id)
                 counts["discovery_pages_checked"] += discovered['pages_checked']

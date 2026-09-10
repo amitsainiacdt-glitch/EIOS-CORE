@@ -108,3 +108,30 @@ class OfficialReportDiscoveryTests(unittest.TestCase):
         pipeline.run([self.job], [result], cycle_id='TEST', acquired_at=datetime.now(timezone.utc))
 
         self.assertEqual(acquisitions, [configured])
+
+    def test_exchange_job_checks_configured_nse_page_without_search_dependency(self):
+        exchange_job = job('EXCHANGE_DISCLOSURES')
+        seed = 'https://www.nseindia.com/companies-listing/corporate-filings-financial-results?symbol=COROMANDEL'
+        filing = 'https://nsearchives.nseindia.com/corporate/COROMANDEL_result.pdf'
+        manifest = {'companies': {'COROMANDEL': {'sources': [{
+            'url': seed, 'source_type': 'EXCHANGE_FINANCIAL_FILING',
+            'authority': 'EXCHANGE_OFFICIAL'}]}}}
+        acquisitions = []
+        def acquire(**kwargs):
+            acquisitions.append(kwargs['url'])
+            if kwargs['recorder'] == 'EIOS_OFFICIAL_PAGE_DISCOVERY':
+                return SimpleNamespace(document_bytes=f'<a href="{filing}">Result</a>'.encode(),
+                    receipt=SimpleNamespace(source_url=seed),
+                    retrieved_content=SimpleNamespace(content_type='text/html'))
+            return SimpleNamespace(document_bytes=None, receipt=SimpleNamespace(error_code='HTTP_403'))
+        pipeline = AutomaticOfficialDocumentPipeline(
+            archive=SimpleNamespace(), acquisition_ledger=SimpleNamespace(),
+            adapter_factory=lambda registry, ledger: SimpleNamespace(registry=registry, acquire=acquire),
+            source_manifest=manifest)
+        empty_search = SimpleNamespace(selected_sources=[])
+        summary = pipeline.run([exchange_job], [empty_search], cycle_id='TEST',
+                               acquired_at=datetime.now(timezone.utc))
+        self.assertEqual(acquisitions, [seed, filing])
+        self.assertEqual(summary.discovery_pages_checked, 1)
+        self.assertEqual(summary.discovery_pdf_links_found, 1)
+        self.assertEqual(summary.approved_urls, 1)

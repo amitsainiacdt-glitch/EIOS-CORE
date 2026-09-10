@@ -6228,3 +6228,11 @@ investment decision is created by this checkpoint.
 - Approval invokes the governed annual Fact materialization path. Hold and Reject are preserved for audit but create no trusted financial record. No automatic component is allowed to choose or impersonate the human decision.
 - Receipt-bound governed annual records can now fill missing presentation cells with `VERIFIED_HUMAN_REVIEWED` status. They take precedence over amber pending candidates, never overwrite existing history and do not mutate the analysis engine's input data.
 - This is the operational domain workflow, not yet a desktop review screen. Existing Coromandel annual candidates remain pending and no verdict, EIP, portfolio or trading authority changed.
+
+## Configured official-exchange disclosure discovery (2026-09-09)
+
+- Extended the existing automatic official-document pipeline so `EXCHANGE_DISCLOSURES` jobs directly inspect explicitly configured exchange pages even when general search returns nothing. This removes search-provider dependence for the initial official-exchange vertical slice.
+- Only manifest entries classified as `EXCHANGE_OFFICIAL` and typed as an exchange disclosure or financial filing are eligible. Retrieved links must still pass the existing NSE/BSE trusted-domain registry before acquisition.
+- Official documents follow the existing immutable acquisition receipt, archive, duplicate/version, extraction and review pipeline. Exchange origin proves provenance only; it does not approve company content or financial figures.
+- Blocked pages, untrusted links, non-document responses and extraction failures remain visible as failure/hold counts. The pipeline never converts failed access into apparent success.
+- Current direct coverage is configuration-bound: ANUP has a governed NSE financial-results page in the source manifest. This checkpoint does not invent missing exchange identifiers and is not a whole-market NSE/BSE collector.

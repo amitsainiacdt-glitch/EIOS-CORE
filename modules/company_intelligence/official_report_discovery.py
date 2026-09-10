@@ -32,10 +32,16 @@ def discover_official_reports(job, manifest, adapter, *, acquired_at, cycle_id, 
         raise ValueError('max_documents must be between 1 and 5')
     outcome = {'pages_checked': 0, 'pages_failed': 0, 'pdf_links_found': 0, 'selected_sources': [], 'errors': []}
     company = manifest.get('companies', {}).get(job.ticker.upper(), {})
-    # Annual and quarterly issuer pages are bounded; this is not a crawl of every PDF.
+    # Both modes are bounded configured-source checks, never broad crawling.
+    if job.intent == 'EXCHANGE_DISCLOSURES':
+        allowed_types = {'EXCHANGE_DISCLOSURE', 'EXCHANGE_FINANCIAL_FILING'}
+        allowed_authority = 'EXCHANGE_OFFICIAL'
+    else:
+        allowed_types = {'ANNUAL_REPORT', 'QUARTERLY_RESULTS', 'INVESTOR_PRESENTATION'}
+        allowed_authority = 'ISSUER_OFFICIAL'
     report_sources = [source for source in company.get('sources', [])
-             if source.get('source_type') in {'ANNUAL_REPORT', 'QUARTERLY_RESULTS', 'INVESTOR_PRESENTATION'}
-             and source.get('authority') == 'ISSUER_OFFICIAL']
+             if source.get('source_type') in allowed_types
+             and source.get('authority') == allowed_authority]
     # Check quarterly results before presentations or annual indexes. A known
     # annual URL must not suppress discovery when there is capacity remaining.
     report_sources.sort(key=lambda source: source.get('source_type') != 'QUARTERLY_RESULTS')
@@ -46,7 +52,7 @@ def discover_official_reports(job, manifest, adapter, *, acquired_at, cycle_id, 
             adapter.registry.resolve(url)
             outcome['selected_sources'].append(SelectedSource(
                 ExternalSearchResult(title=f'{job.company} configured official report', url=url,
-                    snippet='Direct report URL configured by the issuer source manifest; contents not yet verified.', source='EIOS_SOURCE_MANIFEST'),
+                    snippet=f'Direct document URL configured by the {allowed_authority.lower()} source manifest; contents not yet verified.', source='EIOS_SOURCE_MANIFEST'),
                 selection_reason='CONFIGURED_OFFICIAL_DOCUMENT_URL'))
         except ValueError as exc:
             outcome['errors'].append(str(exc))
@@ -80,7 +86,7 @@ def discover_official_reports(job, manifest, adapter, *, acquired_at, cycle_id, 
                     continue
                 outcome['selected_sources'].append(SelectedSource(
                     ExternalSearchResult(title=f'{job.company} official report link', url=url,
-                        snippet='Discovered on a configured issuer report page; contents not yet verified.', source=seed),
+                        snippet=f'Discovered on a configured {allowed_authority.lower()} page; contents not yet verified.', source=seed),
                     selection_reason='CONFIGURED_OFFICIAL_PAGE_LINK'))
         except (ValueError, TypeError, AttributeError, KeyError) as exc:
             outcome['pages_failed'] += 1
