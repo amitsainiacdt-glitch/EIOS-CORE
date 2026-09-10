@@ -6251,3 +6251,10 @@ investment decision is created by this checkpoint.
 - A human must explicitly select one column or record Hold/Reject. The decision retains reviewer, rationale, time and an immutable receipt fingerprint in an append-only ledger.
 - Duplicate decisions, altered receipts, changed candidates, inconsistent column counts and out-of-range selection fail closed. Hold and Reject cannot produce financial corroboration.
 - A valid selection reduces each metric to the chosen column for use by the existing issuer-PDF quarterly reconciliation path. It remains an `EXCHANGE_CORROBORATION_CANDIDATE`, not a trusted Fact or independent financial approval.
+
+## Deterministic iXBRL automatic binding with exception routing (2026-09-10)
+
+- Replaced manual-by-default column selection with deterministic automatic binding. A one-column filing is bound automatically; a multi-column filing is bound only when exactly one explicit column context matches the declared period start, period end and standalone/consolidated basis.
+- Automatic output remains `PROVISIONAL` and is fingerprint-bound. Any change to the candidate invalidates the saved assessment. It may corroborate the issuer-PDF review but cannot verify or approve a financial Fact.
+- Missing multi-column context, no period match, multiple matches and context-count disagreement route only the exception to the human column-review ledger. Human work is therefore reserved for ambiguity and conflict.
+- Automatic-cycle reporting now separates total iXBRL candidates, automatically bound candidates, human-review exceptions and parsing holds so scalability and failure rates remain visible.

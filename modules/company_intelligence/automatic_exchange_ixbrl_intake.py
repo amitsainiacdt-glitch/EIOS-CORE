@@ -8,6 +8,7 @@ from urllib.parse import urlsplit
 
 from modules.company_intelligence.exchange_ixbrl_financial import parse_exchange_ixbrl_financial
 from modules.company_intelligence.exchange_ixbrl_column_review import prepare_column_review
+from modules.company_intelligence.exchange_ixbrl_auto_binding import assess_automatic_column_binding, apply_automatic_column_binding
 
 
 def is_nse_ixbrl_candidate(acquisition) -> bool:
@@ -47,7 +48,19 @@ def stage_exchange_ixbrl_candidate(acquisition, *, ticker: str, company: str, ou
         raise ValueError("saved NSE iXBRL column review has been altered")
     if not preview_path.exists():
         preview_path.write_text(preview_payload, encoding="utf-8")
-    return result, output
+    automatic = assess_automatic_column_binding(result)
+    automatic_path = output.with_name("exchange-ixbrl-auto-binding.json")
+    automatic_payload = json.dumps(automatic, sort_keys=True, separators=(",", ":")) + "\n"
+    if automatic_path.exists() and automatic_path.read_text(encoding="utf-8") != automatic_payload:
+        raise ValueError("saved NSE iXBRL automatic binding has been altered")
+    if not automatic_path.exists(): automatic_path.write_text(automatic_payload, encoding="utf-8")
+    if automatic["status"] == "AUTO_BOUND_PROVISIONAL":
+        bound_path = output.with_name("exchange-ixbrl-bound-corroboration.json")
+        bound_payload = json.dumps(apply_automatic_column_binding(result, automatic), sort_keys=True, separators=(",", ":")) + "\n"
+        if bound_path.exists() and bound_path.read_text(encoding="utf-8") != bound_payload:
+            raise ValueError("saved NSE iXBRL bound corroboration has been altered")
+        if not bound_path.exists(): bound_path.write_text(bound_payload, encoding="utf-8")
+    return result, output, automatic
 
 
 __all__ = ["is_nse_ixbrl_candidate", "stage_exchange_ixbrl_candidate"]

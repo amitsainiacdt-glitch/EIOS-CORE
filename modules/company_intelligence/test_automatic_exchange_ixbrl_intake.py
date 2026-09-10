@@ -34,12 +34,15 @@ class AutomaticExchangeIxbrlIntakeTests(unittest.TestCase):
         with TemporaryDirectory() as directory:
             acquisition = self.acquisition()
             self.assertTrue(is_nse_ixbrl_candidate(acquisition))
-            result, path = stage_exchange_ixbrl_candidate(
+            result, path, automatic = stage_exchange_ixbrl_candidate(
                 acquisition, ticker="TEST", company="Test Limited", output_root=Path(directory))
             self.assertTrue(path.is_file())
             self.assertTrue(path.with_name("exchange-ixbrl-column-review.json").is_file())
+            self.assertTrue(path.with_name("exchange-ixbrl-auto-binding.json").is_file())
+            self.assertTrue(path.with_name("exchange-ixbrl-bound-corroboration.json").is_file())
             self.assertEqual(result["status"], "EXCHANGE_CORROBORATION_CANDIDATE")
             self.assertFalse(result["creates_approved_facts"])
+            self.assertEqual(automatic["status"], "AUTO_BOUND_PROVISIONAL")
             self.assertEqual(stage_exchange_ixbrl_candidate(
                 acquisition, ticker="TEST", company="Test Limited", output_root=Path(directory))[1], path)
 

@@ -53,6 +53,8 @@ class OfficialDocumentCycleSummary:
     quarterly_holds: int = 0
     exchange_ixbrl_candidates: int = 0
     exchange_ixbrl_holds: int = 0
+    exchange_ixbrl_auto_bound: int = 0
+    exchange_ixbrl_human_review_required: int = 0
 
 
 class AutomaticOfficialDocumentPipeline:
@@ -72,6 +74,7 @@ class AutomaticOfficialDocumentPipeline:
         counts.update(fallback_attempted=0, fallback_retrieved=0, fallback_unavailable=0, fallback_providers={})
         counts.update(quarterly_intakes=0, quarterly_candidates=0, quarterly_holds=0)
         counts.update(exchange_ixbrl_candidates=0, exchange_ixbrl_holds=0)
+        counts.update(exchange_ixbrl_auto_bound=0, exchange_ixbrl_human_review_required=0)
         for job, result in zip(executed_jobs, results, strict=True):
             if job.intent not in OFFICIAL_INTENTS or not job.entity_domain:
                 continue
@@ -155,10 +158,14 @@ class AutomaticOfficialDocumentPipeline:
                     try:
                         if job.intent == "EXCHANGE_DISCLOSURES" and is_nse_ixbrl_candidate(acquisition):
                             try:
-                                stage_exchange_ixbrl_candidate(
+                                _, _, automatic_binding = stage_exchange_ixbrl_candidate(
                                     acquisition, ticker=job.ticker, company=job.company,
                                     output_root=self.review_queue_root)
                                 counts["exchange_ixbrl_candidates"] += 1
+                                if automatic_binding["status"] == "AUTO_BOUND_PROVISIONAL":
+                                    counts["exchange_ixbrl_auto_bound"] += 1
+                                else:
+                                    counts["exchange_ixbrl_human_review_required"] += 1
                             except (UnicodeDecodeError, ValueError, TypeError, KeyError):
                                 counts["exchange_ixbrl_holds"] += 1
                             continue

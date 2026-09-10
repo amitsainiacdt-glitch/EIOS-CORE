@@ -163,6 +163,8 @@ class AutomaticOfficialDocumentPipelineTests(unittest.TestCase):
                     cycle_id='CYCLE-1', acquired_at=datetime.now(timezone.utc))
             self.assertEqual(summary.exchange_ixbrl_candidates, 1)
             self.assertEqual(summary.exchange_ixbrl_holds, 0)
+            self.assertEqual(summary.exchange_ixbrl_auto_bound, 1)
+            self.assertEqual(summary.exchange_ixbrl_human_review_required, 0)
             self.assertEqual(len(list(Path(directory).rglob('exchange-ixbrl-candidate.json'))), 1)
 
 
