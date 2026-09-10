@@ -37,6 +37,7 @@ class AutomaticExchangeIxbrlIntakeTests(unittest.TestCase):
             result, path = stage_exchange_ixbrl_candidate(
                 acquisition, ticker="TEST", company="Test Limited", output_root=Path(directory))
             self.assertTrue(path.is_file())
+            self.assertTrue(path.with_name("exchange-ixbrl-column-review.json").is_file())
             self.assertEqual(result["status"], "EXCHANGE_CORROBORATION_CANDIDATE")
             self.assertFalse(result["creates_approved_facts"])
             self.assertEqual(stage_exchange_ixbrl_candidate(

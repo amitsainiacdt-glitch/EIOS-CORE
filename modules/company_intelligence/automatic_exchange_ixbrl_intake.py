@@ -7,6 +7,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 from modules.company_intelligence.exchange_ixbrl_financial import parse_exchange_ixbrl_financial
+from modules.company_intelligence.exchange_ixbrl_column_review import prepare_column_review
 
 
 def is_nse_ixbrl_candidate(acquisition) -> bool:
@@ -40,6 +41,12 @@ def stage_exchange_ixbrl_candidate(acquisition, *, ticker: str, company: str, ou
         raise ValueError("saved NSE iXBRL candidate has been altered")
     if not output.exists():
         output.write_text(payload, encoding="utf-8")
+    preview_path = output.with_name("exchange-ixbrl-column-review.json")
+    preview_payload = json.dumps(prepare_column_review(result), sort_keys=True, separators=(",", ":")) + "\n"
+    if preview_path.exists() and preview_path.read_text(encoding="utf-8") != preview_payload:
+        raise ValueError("saved NSE iXBRL column review has been altered")
+    if not preview_path.exists():
+        preview_path.write_text(preview_payload, encoding="utf-8")
     return result, output
 
 

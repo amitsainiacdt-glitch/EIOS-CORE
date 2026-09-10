@@ -6244,3 +6244,10 @@ investment decision is created by this checkpoint.
 - Configured ticker and company identity must agree with the filing. Wrong-company results, conflicting fields, changed bytes, invalid encodings and unsupported units are held rather than silently accepted.
 - Valid outputs are stored content-addressed in the existing company review-queue area and remain `EXCHANGE_CORROBORATION_CANDIDATE`. Reprocessing the same bytes is idempotent; altered saved candidates fail closed.
 - Automatic-cycle status now distinguishes successful iXBRL candidates from iXBRL holds. The output still requires META and human review and has no Fact, Evidence, verdict, EIP, portfolio or trading authority.
+
+## Human-reviewed NSE iXBRL column binding (2026-09-10)
+
+- EIOS no longer risks treating the first iXBRL numeric column as the current quarter. Every staged NSE result now creates a reader-facing column-review document containing all extracted metric vectors and the exact filing identity, period, basis and candidate fingerprint.
+- A human must explicitly select one column or record Hold/Reject. The decision retains reviewer, rationale, time and an immutable receipt fingerprint in an append-only ledger.
+- Duplicate decisions, altered receipts, changed candidates, inconsistent column counts and out-of-range selection fail closed. Hold and Reject cannot produce financial corroboration.
+- A valid selection reduces each metric to the chosen column for use by the existing issuer-PDF quarterly reconciliation path. It remains an `EXCHANGE_CORROBORATION_CANDIDATE`, not a trusted Fact or independent financial approval.
