@@ -6236,3 +6236,11 @@ investment decision is created by this checkpoint.
 - Official documents follow the existing immutable acquisition receipt, archive, duplicate/version, extraction and review pipeline. Exchange origin proves provenance only; it does not approve company content or financial figures.
 - Blocked pages, untrusted links, non-document responses and extraction failures remain visible as failure/hold counts. The pipeline never converts failed access into apparent success.
 - Current direct coverage is configuration-bound: ANUP has a governed NSE financial-results page in the source manifest. This checkpoint does not invent missing exchange identifiers and is not a whole-market NSE/BSE collector.
+
+## Automatic official NSE iXBRL review intake (2026-09-10)
+
+- Exchange discovery now recognizes official NSE archive HTML/iXBRL links as documents in addition to PDFs. Only the exact `nsearchives.nseindia.com` host is eligible; lookalike domains are rejected.
+- Retrieved iXBRL bytes must match their acquisition receipt. EIOS validates the NSE symbol, company name, ISIN, INR currency, lakh rounding, reporting type, quarter, standalone/consolidated basis, reporting period and selected income-statement rows.
+- Configured ticker and company identity must agree with the filing. Wrong-company results, conflicting fields, changed bytes, invalid encodings and unsupported units are held rather than silently accepted.
+- Valid outputs are stored content-addressed in the existing company review-queue area and remain `EXCHANGE_CORROBORATION_CANDIDATE`. Reprocessing the same bytes is idempotent; altered saved candidates fail closed.
+- Automatic-cycle status now distinguishes successful iXBRL candidates from iXBRL holds. The output still requires META and human review and has no Fact, Evidence, verdict, EIP, portfolio or trading authority.

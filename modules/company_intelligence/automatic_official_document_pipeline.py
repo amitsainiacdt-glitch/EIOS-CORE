@@ -14,6 +14,7 @@ from modules.company_intelligence.company_fact_review_queue import CompanyFactRe
 from modules.company_intelligence.company_candidate_meta_review import CompanyCandidateMetaReviewWriter
 from modules.company_intelligence.official_report_discovery import discover_official_reports
 from modules.company_intelligence.official_document_fallback import validate_fallback_delivery
+from modules.company_intelligence.automatic_exchange_ixbrl_intake import is_nse_ixbrl_candidate, stage_exchange_ixbrl_candidate
 from modules.external_intelligence.public_document_extraction_ledger import PublicDocumentExtractionLedger
 from modules.external_intelligence.public_observation_admission_gate import PublicObservationAdmissionGate
 from modules.external_intelligence.public_source_acquisition_ledger import PublicSourceAcquisitionLedger
@@ -50,6 +51,8 @@ class OfficialDocumentCycleSummary:
     quarterly_intakes: int = 0
     quarterly_candidates: int = 0
     quarterly_holds: int = 0
+    exchange_ixbrl_candidates: int = 0
+    exchange_ixbrl_holds: int = 0
 
 
 class AutomaticOfficialDocumentPipeline:
@@ -68,6 +71,7 @@ class AutomaticOfficialDocumentPipeline:
         counts.update(discovery_pages_checked=0, discovery_pages_failed=0, discovery_pdf_links_found=0)
         counts.update(fallback_attempted=0, fallback_retrieved=0, fallback_unavailable=0, fallback_providers={})
         counts.update(quarterly_intakes=0, quarterly_candidates=0, quarterly_holds=0)
+        counts.update(exchange_ixbrl_candidates=0, exchange_ixbrl_holds=0)
         for job, result in zip(executed_jobs, results, strict=True):
             if job.intent not in OFFICIAL_INTENTS or not job.entity_domain:
                 continue
@@ -149,6 +153,15 @@ class AutomaticOfficialDocumentPipeline:
                     counts["new_versions"] += 1
                 if version.change_status != "UNCHANGED" and self.extraction_ledger is not None and self.review_queue_root is not None:
                     try:
+                        if job.intent == "EXCHANGE_DISCLOSURES" and is_nse_ixbrl_candidate(acquisition):
+                            try:
+                                stage_exchange_ixbrl_candidate(
+                                    acquisition, ticker=job.ticker, company=job.company,
+                                    output_root=self.review_queue_root)
+                                counts["exchange_ixbrl_candidates"] += 1
+                            except (UnicodeDecodeError, ValueError, TypeError, KeyError):
+                                counts["exchange_ixbrl_holds"] += 1
+                            continue
                         extraction_id = f"COMPANY-EXT-{token}"
                         extraction = TrustedPublicDocumentExtractionAdapter(self.extraction_ledger).extract(
                             acquisition, extraction_id=extraction_id, recorder="EIOS_AUTOMATION",

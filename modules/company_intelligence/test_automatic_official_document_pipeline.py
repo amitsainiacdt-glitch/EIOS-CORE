@@ -1,6 +1,8 @@
 from datetime import datetime, timezone
 from hashlib import sha256
 from types import SimpleNamespace
+from pathlib import Path
+from tempfile import TemporaryDirectory
 import unittest
 
 from modules.company_intelligence.automatic_official_document_pipeline import AutomaticOfficialDocumentPipeline
@@ -135,6 +137,33 @@ class AutomaticOfficialDocumentPipelineTests(unittest.TestCase):
         self.assertEqual(summary.failed, 1)
         self.assertEqual(summary.fallback_attempted, 1)
         self.assertEqual(summary.fallback_unavailable, 1)
+
+    def test_new_official_nse_ixbrl_is_staged_for_review(self):
+        rows = [
+            ('NSE Symbol','COROMANDEL'),('ISIN','INE169A01031'),('Name of company','Coromandel International'),
+            ('Description of presentation currency','INR'),('Level of rounding used in financial results','Lakhs'),
+            ('Reporting Type','Quarterly'),('Reporting Quarter','First quarter'),
+            ('Nature of report standalone or consolidated','Standalone'),
+            ('Date of start of reporting period','01-04-2026'),('Date of end of reporting period','30-06-2026'),
+            ('Revenue from operations','100'),('Other income','2'),('Total income','102'),
+            ('Cost of materials consumed','40'),('Total expenses','90'),('Total profit before tax','12'),
+            ('Total profit (loss) for period','10')]
+        body = ('<table>'+''.join('<tr>'+''.join(f'<td>{v}</td>' for v in row)+'</tr>' for row in rows)+'</table>').encode()
+        url = 'https://nsearchives.nseindia.com/corporate/result.html'
+        class IxbrlAdapter(FakeAdapter):
+            def acquire(self, **kwargs):
+                return SimpleNamespace(document_bytes=body, url=url, change_status='FIRST_SEEN',
+                    receipt=SimpleNamespace(source_url=url, content_type='text/html', document_hash=sha256(body).hexdigest()))
+        with TemporaryDirectory() as directory:
+            summary = AutomaticOfficialDocumentPipeline(
+                FakeArchive(), object(), adapter_factory=IxbrlAdapter,
+                extraction_ledger=object(), review_queue_root=Path(directory)).run(
+                    [job('EXCHANGE_DISCLOSURES')],
+                    [SimpleNamespace(selected_sources=[SimpleNamespace(result=SimpleNamespace(url=url))])],
+                    cycle_id='CYCLE-1', acquired_at=datetime.now(timezone.utc))
+            self.assertEqual(summary.exchange_ixbrl_candidates, 1)
+            self.assertEqual(summary.exchange_ixbrl_holds, 0)
+            self.assertEqual(len(list(Path(directory).rglob('exchange-ixbrl-candidate.json'))), 1)
 
 
 if __name__ == "__main__":

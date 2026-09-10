@@ -8,9 +8,10 @@ from modules.external_intelligence.source_selection import SelectedSource
 
 
 class ReportLinks(HTMLParser):
-    def __init__(self, base_url, registry):
+    def __init__(self, base_url, registry, *, allowed_suffixes=(".pdf",)):
         super().__init__(convert_charrefs=True)
         self.base_url, self.registry, self.links = base_url, registry, []
+        self.allowed_suffixes = tuple(allowed_suffixes)
 
     def handle_starttag(self, tag, attrs):
         if tag.lower() != 'a':
@@ -21,7 +22,7 @@ class ReportLinks(HTMLParser):
         url = urldefrag(urljoin(self.base_url, href))[0]
         try:
             self.registry.resolve(url)
-            if urlsplit(url).path.lower().endswith('.pdf') and url not in self.links:
+            if urlsplit(url).path.lower().endswith(self.allowed_suffixes) and url not in self.links:
                 self.links.append(url)
         except ValueError:
             return
@@ -74,7 +75,8 @@ def discover_official_reports(job, manifest, adapter, *, acquired_at, cycle_id, 
             else:
                 if 'html' not in acquired.retrieved_content.content_type.lower():
                     raise ValueError('Expected HTML investor page')
-                parser = ReportLinks(final_url, adapter.registry)
+                suffixes = ('.pdf', '.html', '.htm') if job.intent == 'EXCHANGE_DISCLOSURES' else ('.pdf',)
+                parser = ReportLinks(final_url, adapter.registry, allowed_suffixes=suffixes)
                 parser.feed(acquired.document_bytes.decode('utf-8', errors='replace'))
                 links = parser.links
             outcome['pdf_links_found'] += len(links)
