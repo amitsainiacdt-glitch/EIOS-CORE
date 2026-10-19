@@ -40,3 +40,16 @@ Note: this checklist is the operating specification, not proof that live daily c
 - Keep **research registry changes** traceable with date, source and reason. “NO CHANGE” means no new qualifying evidence was established; it does not assert a freshly verified review of every company.
 - After the scan, use a final checklist: (a) fresh independent discoveries, (b) leading cause and 2–4-quarter cash bridge, (c) price-recognition gate, (d) contradiction/kill test, (e) both-folder ADD/UPGRADE/DOWNGRADE/REMOVE/NO CHANGE, (f) separate capital verdict, (g) explicit no-fresh-qualifier statement if applicable.
 - This checklist is durable repository documentation. It does not itself schedule or run research; automatic daily execution requires an independently deployed scheduler and verified data ingestion.
+
+## EIOS 3.0 earnings-multiplication extension (2026-10-19)
+For daily research, add a *parallel, independent* structural-discovery pass without replacing steps 1–15:
+1. Map verifiable customer–supplier relationships, qualifications and customer capex programmes. Reject inferred links without source evidence.
+2. For candidate businesses, model bear/base/bull changes to sales, operating margin, depreciation, interest, tax, capex, incremental working capital and fully diluted shares. Track owner cash per share, not just PAT or EBITDA.
+3. Compare expected forward scale against current valuation and expectations, with point-in-time price-recognition checks. High earnings multiplication potential does not itself indicate a high share-price return probability.
+4. Test company size, liquidity, debt, dilution, customer concentration, governance and the economics of new capital; permit explained temporary flaws without ignoring thesis-breaking risks.
+5. Keep earnings-multiplication potential distinct from near-term EIP, 10x research-folder membership and portfolio deployment.
+6. Keep research records and dated outcome reviews to calibrate false positives and missed successes.
+
+Reference module: `modules/discovery/earnings_multiplication.py`.
+Tests: `modules/discovery/test_earnings_multiplication.py`.
+**Implementation boundary:** research calculations and supplier-link validation are present. Automated filings ingestion, customer–supplier graph construction, complete-universe processing, calibrated backtesting and dashboard connection are **not yet deployed**.
