@@ -1,5 +1,5 @@
 # EIOS DAILY RESEARCH SEQUENCE — CANONICAL OPERATING CHECKLIST
-Version: 1.0 | Adopted: 2026-10-19 | Applies to each requested EIOS daily scan.
+Version: 1.1 | Adopted: 2026-10-19 | Applies to each requested EIOS daily scan.
 
 ## Mission and boundary
 Find overlooked Indian listed companies where independently verified leading changes imply materially higher per-share cash earnings in approximately 2–4 quarters, before earnings, consensus or price fully reflect them. No quotas, no forced candidates, no automatic capital deployment. The complete NSE/BSE listed universe is the intended discovery universe; do not claim exhaustive coverage unless coverage logs prove it.
@@ -32,3 +32,11 @@ Never limit the universe to these themes.
 Each run ends with a dated summary, documented coverage, research-folder changes (or NO CHANGE), and explicit capital-deployment separation. **If nothing passes, say so.** 
 Reference implementation: `modules/discovery/pre_inflection.py`.
 Note: this checklist is the operating specification, not proof that live daily crawling or automated execution is deployed.
+
+## Mandatory invocation protocol (v1.1 — 2026-10-19)
+- For **every user-requested EIOS daily scan or full-scan continuation**, read this file first and follow steps 1–15 in order. This applies even if the user only says “run EIOS” or “daily research”.
+- Start by confirming source/data availability. When live crawling, exhaustive universe scanning, or market prices are unavailable, disclose exactly what was and was not checked; never invent run counts, independent verification or registry updates.
+- Keep **discovery results** distinct from **existing-holding reviews**, **EIP timing**, **10x structural potential**, and **capital deployment**. A decision in one lane never silently changes another.
+- Keep **research registry changes** traceable with date, source and reason. “NO CHANGE” means no new qualifying evidence was established; it does not assert a freshly verified review of every company.
+- After the scan, use a final checklist: (a) fresh independent discoveries, (b) leading cause and 2–4-quarter cash bridge, (c) price-recognition gate, (d) contradiction/kill test, (e) both-folder ADD/UPGRADE/DOWNGRADE/REMOVE/NO CHANGE, (f) separate capital verdict, (g) explicit no-fresh-qualifier statement if applicable.
+- This checklist is durable repository documentation. It does not itself schedule or run research; automatic daily execution requires an independently deployed scheduler and verified data ingestion.
