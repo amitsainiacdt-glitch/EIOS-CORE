@@ -63,3 +63,42 @@ Before enabling production, assert:
 - one filing = one new event despite multiple vendors;
 - WAIT has triggers and date, REJECT has material restart condition;
 - no automatic position, cockpit or capital changes.
+
+
+## Remediation package R1–R5 — observed shortcomings (23 October 2026)
+These controls are **mandatory acceptance criteria**, not claims that a scanning service currently exists.
+
+### R1. Proactive causal discovery rather than backward-looking ratios
+- Build dated sector-first event feeds for tenders awarded/cancelled, commissioning, dispatches, new customer approvals, government procurement, inventories, pricing spreads, rating triggers, export/import data and supplier/customer disclosures.
+- Derive the candidate universe **from events**, then join to company identifiers; run an independent valuation-dislocation track separately. An opportunity discovered from an old watchlist must be marked 'portfolio-sourced' and cannot count toward the independent-discovery hit rate.
+- For each causal signal record a 2–4-quarter time-to-P&L bridge and leading KPI; distinguish signed order from LOI, commissioned from commercially utilized, and installed capacity from delivered revenue.
+- Test: synthetic dated commissioning event identifies an otherwise unscreened listed company; a press announcement without corroboration is flagged unverified.
+
+### R2. Independent corroboration and contradictions
+- A research ADD must have primary documentation AND independent corroboration for its key business inflection, or an explicit documented exception reviewed by a human committee.
+- Triangulate customer, supplier, rating, regulator, industry and trade sources. Store negative and contradictory data with original evidence timestamp. Do not count two articles copying one company announcement as independent evidence.
+- Test: duplicated syndicated media cannot raise evidence confidence; a subsequent order cancellation automatically opens a high-priority thesis review without silently changing the verdict.
+
+### R3. Probability-weighted upside/downside and capital efficiency
+- Require scenario drivers (volume, realizations, contribution margin, working-capital intensity, interest, tax, diluted shares), explicit probabilities adding to 100%, bear-case financing runway and per-share outcomes.
+- Compare expected upside to probability-weighted downside and realistic failure/illiquidity loss; stress margins and multiple together under a market selloff. Show impact of all SPV/JV ownership and capital calls.
+- Test: a high-ROCE low-P/E firm with poor downside-adjusted asymmetry is never auto-ADD; missing diluted share count or current quote blocks an ADD.
+
+### R4. Temporary versus structural weakness adjudication
+- For every adverse cash-flow, margin, leverage or utilization measure, require: mechanical driver, historical comparables, independently verifiable reversal catalyst, timing, funding need, threshold and thesis kill test.
+- Report two separate outcomes: 'operating impairment' and 'temporary investment/working-capital absorption'. Do not reject purely on two years negative CFO; equally, do not assume every receivable is collectible.
+- Test: healthy milestone receivables with customer-backed payment terms may remain eligible for ADD; undisputed aged unbilled revenue without a collectible milestone path blocks ADD.
+
+### R5. Real outcome tracking and anti-self-congratulation
+- Freeze each research call's company, timestamped price, methodology version, causal thesis, expected financial KPI, downside scenarios and benchmark before future information is available.
+- At 3/6/12 months compute sector/Nifty 500-adjusted returns, forecast KPI attainment, hit rate, false ADD, missed-winner rate, and drawdown; include delisted names and adjust for corporate actions.
+- Publish a quarterly calibration report including number screened, independently found, rejected, promoted and later falsified. No claims of superior performance without out-of-sample evidence.
+- Test: evaluation cannot update the original verdict or read a filing dated after the decision; aggregate performance includes failures.
+
+### Mandatory adversarial review (red team)
+Before *every* proposed research ADD, construct the strongest plausible bear case and request evidence that could disprove the thesis. Require an independent contradiction review on competitive response, execution funding, promoter/governance, accounting, market recognition and hidden customer concentration. Log both bull and bear evidence, sign-off and next invalidation trigger. Research committee approval is needed for overrides; a machine-generated ADD does not affect deployed cockpits or portfolios.
+
+### Implementation / release guardrails
+Implementation should be staged after the repository's Release 3 prerequisite: event collectors -> provenance/normalization -> contradiction engine -> probabilistic bridge -> decision gates -> evaluation ledger -> shadow run. New collectors need licensing/rate-limit compliance and missing-data failure behavior. Live automation must not be claimed until connectors, scheduled ingestion, replay tests, and operational monitoring have actually passed acceptance.
+
+**Capital Deployment State: NO NEW CAPITAL DEPLOYMENT**
