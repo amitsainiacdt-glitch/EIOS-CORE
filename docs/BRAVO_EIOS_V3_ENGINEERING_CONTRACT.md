@@ -102,3 +102,24 @@ Before *every* proposed research ADD, construct the strongest plausible bear cas
 Implementation should be staged after the repository's Release 3 prerequisite: event collectors -> provenance/normalization -> contradiction engine -> probabilistic bridge -> decision gates -> evaluation ledger -> shadow run. New collectors need licensing/rate-limit compliance and missing-data failure behavior. Live automation must not be claimed until connectors, scheduled ingestion, replay tests, and operational monitoring have actually passed acceptance.
 
 **Capital Deployment State: NO NEW CAPITAL DEPLOYMENT**
+
+
+## BRAVO v3.1 — evidence-completeness gate and error learning
+Audit trigger: prior Viviana research treated headline order book as executable before checking on-hold/cancelled contracts in a contemporary credit-rating rationale.
+
+Before ADD, require a *source inventory* rather than relying only on the facts retrieved:
+- Official exchange-filings window, latest annual/quarterly statements, credit-rating rationale, order modifications/cancellations, litigation/regulatory actions, promoter encumbrance and funding commitments.
+- Log each category as VERIFIED / CONTRADICTED / NOT FOUND / NOT CHECKED, with as-of date, retrieval method and document URL. **NOT FOUND is not VERIFIED ABSENT**.
+- Material categories marked NOT CHECKED or CONTRADICTED block ADD pending review; other missing nonmaterial items receive graded uncertainty and a scheduled revisit.
+- Gross contracted value -> executable unexecuted value -> attributable share -> expected cash collections must be a visible calculation, not a narrative leap.
+- A contrary source published before discovery time must be included in historical replay; failure to retrieve it is a recorded *coverage miss*, not a retrospective research win.
+- Every material research miss creates immutable error_record {thesis_id, detection_date, missing_source, original_claim, correction, root_cause, affected_candidates, regression_test_id, reviewer}.
+- Monthly QA sample includes random REJECTs/WAITs as well as ADDs to reveal missed winners; audit is not limited to selected picks.
+
+Acceptance fixtures:
+1. Headline ₹1,263.6cr orders with ₹508cr on hold must produce effective executable orders around ₹755.6cr, not the gross amount.
+2. A rating report older than decision date disclosing on-hold contracts blocks unqualified order-based ADD.
+3. No rating document found is classified NOT FOUND, not 'no credit risk'.
+4. Nonmaterial missing metadata does not automatically force permanent WAIT.
+5. Backtest cannot use the corrected current report before its published date.
+6. Replay logs coverage miss and preserves the original erroneous verdict for calibration.
