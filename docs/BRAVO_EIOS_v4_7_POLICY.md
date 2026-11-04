@@ -41,3 +41,37 @@ Permanent candidate record fields: ticker, lanes, EIP/10x class, thesis, exact a
 
 ## Deployment
 This document is a versioned spec. Runtime integration, unit tests, scheduled prompts and website/backend integration must be independently verified; do not claim a spec file alone changes the deployed EIOS app.
+
+
+## Discovery amendment — 2026-11-04: Distressed Quality & Repairable Recovery
+This amendment changes **discovery prioritisation only**. It does not loosen ADD approval gates, supersede v4.7 valuation rules, erase v4.6 registry, or alter portfolio/BESS surveillance.
+
+### Separate discovery from investability
+Every independent scan must have **two stages**:
+1. **Discovery / INVESTIGATE:** Surface earlier signals despite weak recent PAT, margins, underutilisation, productive debt or currently imperfect FCF; label unknowns and contradictions. A new investigation lead requires a dated observation and a falsifiable recovery mechanism, **not** a precompleted BUY valuation.
+2. **Decision / ADD-WAIT-REJECT:** Apply the existing primary-source, fully diluted, cash/financing, governance, bear-case and price-asymmetry checks. Distinguish `RESEARCH PRIORITY` from an executable `EIP ADD`, `VALUE ADD` or `SPECIAL SITUATION ADD`. Never convert a price fall alone to ADD.
+
+### Three independent search lanes — report before anchored watchlist
+- **Quality at distressed prices:** Systematically inspect stocks down roughly 30–60% from an appropriately corporate-action-adjusted historical reference, seeking durable franchise, survivable balance sheet, and an identifiable temporary earnings shock. The drawdown is a *search filter*, never proof of undervaluation.
+- **Repairable operating recovery:** Scan margins, order-to-dispatch conversion, customer acceptance/repeat sales, price-cost spread, capacity use, inventory, early delinquencies, receivables and physically verified capex. Look for causal changes before reported PAT, tolerating explainable 2–4-quarter imperfections.
+- **Balance-sheet and special-situation recovery:** Verify asset sale *completion and cash proceeds*, escrow/claims, net recourse debt, refinancing tenor, funding gap, pledged assets, NCD/QIP/warrant impact and project-level cash economics.
+
+For each lane, include at least **one independently sourced unfamiliar name** when available; if none qualifies for investigation, say so. Do not default to holdings, current favorites or only headline order wins. Prioritize a diversified opportunity universe over recycled WAIT lists.
+
+### Repairable-problem case card
+Each lead must include:
+- `what_broke` and the precise mechanism of repair;
+- `as_of_date`, original filing timestamp and source, reported facts separated from hypotheses;
+- `leading_repair_signal`, `independent_confirmation`, expected 2–4-quarter timeframe;
+- `funding_survival` including debt, liquidity, cash burn, receivables and dilution; `fatal_contradictions`;
+- price-implied old economics vs normalised FY27–FY29 economics; bear/base/bull and downside **when decision-ready**, otherwise `UNVERIFIED — NO ADD ZONE`;
+- `what_would_change_our_mind`, dated next trigger, review owner/status, missed/false-positive outcome tracking.
+
+### Anti-perfection and non-negotiable red flags
+Temporary margin weakness, commissioning losses, manageable working capital, productive leverage and a single weak quarter may qualify for INVESTIGATE if the repair mechanism is independently testable. Governance red flags with credible evidence, circular/RPT flows, unfinanceable debt, opaque material dilution and unexplained persistent cash deficits still block a confirmed ADD. Avoid false certainty about wrongdoing.
+
+### Required reporting change
+Start with a **Fresh Distressed/Recovery Discovery Table** containing unfamiliar companies, the specific repair hypothesis, early signal, price/drawdown date, missing verification, and `INVESTIGATE / WAIT / REJECT`. Only then reassess known names. Report number screened, number rejected early, number elevated to a full model, actual new ADDs, false positives and missed historic opportunities; never imply a comprehensive market screen without one. Preserve all existing v4.7 market, portfolio, registry, superinvestor, BESS and zero-deployment requirements.
+
+### Experimental Recovery Intelligence Engine
+The experimental RIE scorer and historical replay protocol remain separate from production. Use its hypotheses in research with explicit `UNVALIDATED` marking until the timestamp-safe historical outcomes and prospective tests have passed. No claim of deployed application code or trained predictive model.
