@@ -75,3 +75,16 @@ Start with a **Fresh Distressed/Recovery Discovery Table** containing unfamiliar
 
 ### Experimental Recovery Intelligence Engine
 The experimental RIE scorer and historical replay protocol remain separate from production. Use its hypotheses in research with explicit `UNVALIDATED` marking until the timestamp-safe historical outcomes and prospective tests have passed. No claim of deployed application code or trained predictive model.
+
+
+## Decision Calibration Patch — 2026-11-05
+
+Objective: prevent generic WAIT outcomes and score-based vetoes while preserving evidence and permanent-capital-loss discipline.
+
+- The old `modules/decision/decision_engine.py` uses a generic weighted score and five-year return via `decision_office.py`; it does NOT by itself implement this policy. Do not equate its BUY/WATCH labels with BRAVO EIP/VALUE/SPECIAL SITUATION ADD.
+- The new `modules/decision/bravo_v47_calibration.py` provides a **research-only**, explicit gate: dated primary filings, at least two corroborated forward signals, verified diluted-equity basis, cash/financing review, governance review, bounded permanent loss, and complete bear/base/bull valuation. An explainable temporary cash-flow or earnings weakness is **not** an automatic veto when the repair mechanism is documented.
+- Baseline economic gates: base CAGR >=18% over 2–3 years and base upside / bear downside >=2:1. No arbitrary reductions in these thresholds to force ADD. Evidence gaps must be individually named; no default WATCH/WAIT.
+- Fatal capital-loss risks directly REJECT. Missing decision-critical evidence results in WAIT with explicit blockers. Passing evidence and economic gates produces a **research** EIP ADD, VALUE ADD or SPECIAL SITUATION ADD, never a trade order.
+- `approval_to_trade` is deliberately ignored by the research evaluator: capital deployment is always ₹0. Execution remains outside the research engine and requires a separately authorised workflow.
+- Regression tests: `modules/decision/test_bravo_v47_calibration.py`. Run and verify them prior to runtime integration. The existence of this module and these tests is **not** proof that any dashboard, scheduled automation, API, or production backend uses it.
+- Maintain every existing v4.6 candidate record, active holdings, BESS surveillance, the 2026-11-04 distressed-quality discovery amendment, and the ninth superinvestor evidence checks. No retroactive classification changes without full evidence.
