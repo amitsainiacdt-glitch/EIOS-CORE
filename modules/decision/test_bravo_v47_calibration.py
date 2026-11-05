@@ -51,6 +51,18 @@ class BravoCalibrationTests(unittest.TestCase):
                                (AddLane.SPECIAL_SITUATION, BravoAction.SPECIAL_SITUATION_ADD)):
             self.assertEqual(evaluate_bravo(case(lane=lane)).action, expected)
 
+    def test_malformed_url_blocks(self):
+        self.assertEqual(evaluate_bravo(case(filing_urls=("not a url",))).action, BravoAction.WAIT)
+
+    def test_reversed_scenario_blocks(self):
+        self.assertEqual(evaluate_bravo(case(bear_value=220, base_value=200, bull_value=180)).action, BravoAction.WAIT)
+
+    def test_duplicate_signals_block(self):
+        self.assertEqual(evaluate_bravo(case(causal_indicators=("Orders", "orders"))).action, BravoAction.WAIT)
+
+    def test_future_date_blocks(self):
+        self.assertEqual(evaluate_bravo(case(as_of_date="2099-01-01")).action, BravoAction.WAIT)
+
     def test_research_never_deploys_capital(self):
         self.assertEqual(evaluate_bravo(case(approval_to_trade=True)).capital_deployment_rupees, 0)
 
