@@ -7,6 +7,8 @@ No orders, target positions, or capital deployment originate from this module.
 from dataclasses import dataclass, field
 from enum import Enum
 from math import isfinite
+from datetime import date
+from urllib.parse import urlparse
 from typing import Optional, Tuple
 
 
@@ -65,9 +67,15 @@ def evaluate_bravo(e: BravoEvidence) -> BravoDecision:
     if e.fatal_risk:
         return BravoDecision(BravoAction.REJECT, "high", (e.fatal_risk_reason or "Fatal risk",),
                              None, None, None, None)
-    if not e.as_of_date or len(e.filing_urls) == 0:
-        blockers.append("Missing dated primary-source filing evidence")
-    if len(e.causal_indicators) < 2:
+    try:
+        filing_date = date.fromisoformat(e.as_of_date)
+        if filing_date > date.today():
+            blockers.append("As-of date is in the future")
+    except (ValueError, TypeError):
+        blockers.append("Missing or invalid ISO as-of date")
+    if not e.filing_urls or any(urlparse(u).scheme not in ("https", "http") or not urlparse(u).netloc for u in e.filing_urls):
+        blockers.append("Missing or malformed primary-source filing URL")
+    if len({v.strip().lower() for v in e.causal_indicators if v.strip()}) < 2:
         blockers.append("Fewer than two corroborated leading indicators")
     if not e.diluted_basis_verified:
         blockers.append("Fully diluted shareholder basis unverified")
@@ -84,6 +92,8 @@ def evaluate_bravo(e: BravoEvidence) -> BravoDecision:
         blockers.append("Complete positive dated scenario valuation required")
         return BravoDecision(BravoAction.WAIT, "low", tuple(blockers), None, None, None, None)
     price, base, bear, bull = values
+    if not (bear <= base <= bull):
+        blockers.append("Scenario values must satisfy bear <= base <= bull")
     base_upside = (base / price - 1) * 100
     downside = max(0.0, (1 - bear / price) * 100)
     base_cagr = ((base / price) ** (1 / e.horizon_years) - 1) * 100
