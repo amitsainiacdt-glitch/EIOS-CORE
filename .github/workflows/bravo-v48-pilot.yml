@@ -4,6 +4,7 @@ on:
     paths:
       - 'modules/discovery/bravo_v48_pilot.py'
       - 'modules/discovery/test_bravo_v48_pilot.py'
+      - 'modules/discovery/test_bravo_v48_real_screen_20261109.py'
       - 'modules/decision/bravo_v47_calibration.py'
       - 'modules/decision/test_bravo_v47_calibration.py'
       - '.github/workflows/bravo-v48-pilot.yml'
@@ -18,4 +19,4 @@ jobs:
         with:
           python-version: '3.11'
       - name: Pilot and baseline decision tests
-        run: python -m unittest modules.discovery.test_bravo_v48_pilot modules.decision.test_bravo_v47_calibration -v
+        run: python -m unittest modules.discovery.test_bravo_v48_pilot modules.discovery.test_bravo_v48_real_screen_20261109 modules.decision.test_bravo_v47_calibration -v
