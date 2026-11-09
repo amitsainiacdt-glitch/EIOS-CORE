@@ -1,0 +1,21 @@
+name: BRAVO v4.8 pilot tests
+on:
+  pull_request:
+    paths:
+      - 'modules/discovery/bravo_v48_pilot.py'
+      - 'modules/discovery/test_bravo_v48_pilot.py'
+      - 'modules/decision/bravo_v47_calibration.py'
+      - 'modules/decision/test_bravo_v47_calibration.py'
+      - '.github/workflows/bravo-v48-pilot.yml'
+  workflow_dispatch:
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pilot and baseline decision tests
+        run: python -m unittest modules.discovery.test_bravo_v48_pilot modules.decision.test_bravo_v47_calibration -v
