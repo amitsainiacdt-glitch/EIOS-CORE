@@ -6,7 +6,7 @@ from modules.validation.fox_multiday_collect import collect
 
 def fixture(url):
     import re
-    ds=re.search(r"(20\\d{6})",url).group(1)
+    ds=re.search(r"(20\d{6})",url).group(1)
     d=f"{ds[:4]}-{ds[4:6]}-{ds[6:]}"
     fields="TckrSymb,SctySrs,TradDt,OpnPric,ClsPric,ISIN\n"
     rows="".join(f"SYM{i},EQ,{d},100,101,INE{i:09d}\n" for i in range(110))
