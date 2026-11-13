@@ -50,6 +50,13 @@ class InflectionTests(unittest.TestCase):
         self.assertEqual(r.action,InflectionAction.INVESTIGATE)
         self.assertEqual(r.capital_deployment_rupees,0)
 
+    def test_missing_dated_zone_blocks_add_but_not_investigation(self):
+        r=detect_inflection(case(fixed_zone_exists=False,
+                                 verified_diluted_valuation=False))
+        self.assertEqual(r.action,InflectionAction.INVESTIGATE)
+        self.assertTrue(any("Fixed dated research valuation zone" in b for b in r.blockers))
+        self.assertEqual(r.capital_deployment_rupees,0)
+
     def test_network_expansion_alone_not_enough(self):
         r=detect_inflection(case(order_intake_growth_yoy_pct=None,
                                 sequential_revenue_growth_pct=None,
