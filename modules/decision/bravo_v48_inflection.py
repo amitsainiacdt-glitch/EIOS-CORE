@@ -24,6 +24,8 @@ class InflectionEvidence:
     price: Optional[float]
     source_urls: Tuple[str, ...] = ()
     order_intake_growth_yoy_pct: Optional[float] = None
+    operating_volume_growth_yoy_pct: Optional[float] = None
+    distribution_network_growth_yoy_pct: Optional[float] = None
     orderbook_to_ttm_revenue: Optional[float] = None
     sequential_revenue_growth_pct: Optional[float] = None
     sequential_unit_margin_change_pct: Optional[float] = None
@@ -67,6 +69,10 @@ def detect_inflection(e: InflectionEvidence) -> InflectionResult:
         return InflectionResult(InflectionAction.REJECT, (), (e.fatal_reason or "Thesis-breaking risk",))
     if _number(e.order_intake_growth_yoy_pct) and e.order_intake_growth_yoy_pct >= 25:
         signals.append("Accelerating order intake")
+    if _number(e.operating_volume_growth_yoy_pct) and e.operating_volume_growth_yoy_pct >= 15:
+        signals.append("Accelerating operating volumes")
+    if _number(e.distribution_network_growth_yoy_pct) and e.distribution_network_growth_yoy_pct >= 15:
+        signals.append("Network expansion")
     if _number(e.orderbook_to_ttm_revenue) and e.orderbook_to_ttm_revenue >= 1:
         signals.append("Order book exceeds trailing revenue")
     if _number(e.sequential_revenue_growth_pct) and e.sequential_revenue_growth_pct >= 15:
@@ -78,6 +84,8 @@ def detect_inflection(e: InflectionEvidence) -> InflectionResult:
     if _number(e.share_drawdown_adjusted_pct) and e.share_drawdown_adjusted_pct <= -30:
         signals.append("Distressed adjusted share price (discovery only)")
     causal = [s for s in signals if not s.startswith("Distressed")]
+    # Related volume and footprint metrics can trigger investigation, not ADD;
+    # actual economic independence, profitability and capex returns remain unverified.
     if len(causal) < 2:
         blockers.append("Fewer than two independent causal signals; drawdown is not a catalyst")
     if not e.funding_survival_reviewed:
