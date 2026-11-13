@@ -1,0 +1,29 @@
+name: FOX NSE Raw Archive Collection
+
+on:
+  workflow_dispatch:
+    inputs:
+      trade_date:
+        description: 'NSE trading date YYYY-MM-DD (UDiFF only, 2024-07-08 onward)'
+        required: true
+        type: string
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download and validate unadjusted NSE archive
+        run: python -m modules.validation.fox_archive_collect --date "${{ inputs.trade_date }}" --output "$RUNNER_TEMP/fox_nse"
+      - name: Upload raw archive and provenance manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: fox-nse-raw-${{ inputs.trade_date }}
+          path: ${{ runner.temp }}/fox_nse/
+          if-no-files-found: error
+          retention-days: 30
