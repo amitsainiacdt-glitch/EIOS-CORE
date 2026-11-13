@@ -1,0 +1,35 @@
+name: FOX NSE October 2024 Historical Pilot
+on:
+  push:
+    paths:
+      - '.github/workflows/fox-nse-month-pilot.yml'
+  workflow_dispatch:
+    inputs:
+      sessions:
+        description: 'Explicit comma-separated NSE trading sessions'
+        required: true
+        type: string
+
+jobs:
+  october-history:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Collect source-authenticated raw trading sessions
+        env:
+          FOX_SESSIONS: ${{ inputs.sessions || '2024-10-01,2024-10-03,2024-10-04,2024-10-07,2024-10-08,2024-10-09,2024-10-10,2024-10-11,2024-10-14,2024-10-15,2024-10-16,2024-10-17,2024-10-18,2024-10-21,2024-10-22,2024-10-23,2024-10-24,2024-10-25,2024-10-28,2024-10-29,2024-10-30' }}
+        run: python -m modules.validation.fox_history_collect --dates "$FOX_SESSIONS" --output "$RUNNER_TEMP/fox_history"
+      - name: Preserve raw archives, manifest, and coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fox-october-2024-raw-history
+          path: ${{ runner.temp }}/fox_history/
+          if-no-files-found: warn
+          retention-days: 30
