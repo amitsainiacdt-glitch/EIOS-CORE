@@ -1,0 +1,5 @@
+event_id,ticker,published_at_ist,source_url,source_timestamp_verified,evidence_cutoff_ist,case_type,action,sector,price_adjustments_verified
+ANUP_20261106,ANUP,2026-11-06T12:02:38+05:30,https://nsearchives.nseindia.com/corporate/ANUP_06112026120238_OutcomeofBM.pdf,no,2026-11-06T12:02:38+05:30,candidate,INVESTIGATE,Capital Goods,no
+IRM_20261030,IRMENERGY,2026-10-30T21:28:32+05:30,https://nsearchives.nseindia.com/corporate/IRMENERGY_30102026212832_Pressreleasedisclosure.pdf,no,2026-10-30T21:28:32+05:30,candidate,INVESTIGATE,City Gas Distribution,no
+SUPRIYA_20261106,SUPRIYA,2026-11-06T19:07:30+05:30,https://nsearchives.nseindia.com/corporate/SUPRIYA_06112026190730_PressRelease061126.pdf,no,2026-11-06T19:07:30+05:30,negative_control,NO NEW INFLECTION,Pharmaceuticals,no
+PIIND_202611,PIIND,,,,,negative_control,NO NEW INFLECTION,Agrochemicals,no
