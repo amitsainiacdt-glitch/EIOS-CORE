@@ -1,0 +1,21 @@
+pilot_slot,ticker,sector,hypothesis_lane,search_window_start,search_window_end,filing_event_date,filing_url,publication_timestamp_verified,adjusted_price_history_verified,fox_action_at_time,forward_63_126_252_available,validation_status
+01,ANUP,Capital Goods,Existing portfolio,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+02,IRMENERGY,City Gas,Fresh FOX lead,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+03,PIIND,Agrochemicals,Distressed quality,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+04,SUPRIYA,Pharmaceuticals,Negative-control search,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+05,TIMETECHNO,Industrial Materials,Structural rerating,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+06,APTUS,Housing Finance,Credit-risk recovery,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+07,TANLA,Enterprise Software,Business model repair,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+08,DCBBANK,Banking,Credit cycle,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+09,J&KBANK,Banking,Credit cycle,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+10,ASHOKA,Infrastructure,Asset sale/debt repair,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+11,NCC,Infrastructure,Order conversion,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+12,KEC,Power T&D,Margin/working capital,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+13,BLS,Consumer Services,Margin/customer,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+14,CLEAN,Specialty Chemicals,Product cycle,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+15,SHARDACROP,Agrochemicals,Product/margin recovery,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+16,CYIENTDLM,Electronics Manufacturing,Capacity/order conversion,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+17,ELECON,Industrial Machinery,Exports/order acceleration,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+18,CCL,Consumer Staples,Capacity/new products,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+19,V2RETAIL,Retail,Store-unit economics,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+20,GANDHAR,Specialty Chemicals,Spread/working capital,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
