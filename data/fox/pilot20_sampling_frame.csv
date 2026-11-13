@@ -1,5 +1,5 @@
 pilot_slot,ticker,sector,hypothesis_lane,search_window_start,search_window_end,filing_event_date,filing_url,publication_timestamp_verified,adjusted_price_history_verified,fox_action_at_time,forward_63_126_252_available,validation_status
-01,ANUP,Capital Goods,Existing portfolio,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
+01,ANUP,Capital Goods,Existing portfolio,2023-01-01,2024-10-31,2024-10-26,https://nsearchives.nseindia.com/corporate/ANUP_26102024153807_Q2FY25IP.pdf,no,no,UNVALIDATED_INVESTIGATE_CANDIDATE,no,UNVERIFIED_RESEARCH_SLOT
 02,IRMENERGY,City Gas,Fresh FOX lead,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
 03,PIIND,Agrochemicals,Distressed quality,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
 04,SUPRIYA,Pharmaceuticals,Negative-control search,2023-01-01,2024-10-31,,,no,no,,no,UNVERIFIED_RESEARCH_SLOT
