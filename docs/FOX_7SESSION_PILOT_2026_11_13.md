@@ -16,5 +16,5 @@ These 140 are **raw** prices, not individually certified corporate-action-adjust
 ## Code/test status
 - Multi-session importer updated for EQ and BE, saving trading series explicitly.
 - BE-series regression case added, and literal-newline syntax fix committed.
-- GitHub CI validation run https://github.com/amitsainiacdt-glitch/EIOS-CORE/actions/runs/43456053693 succeeded; new regression case is included in later run https://github.com/amitsainiacdt-glitch/EIOS-CORE/actions/runs/43456053693 if executed there; inspect exact test log before asserting test count. 
+- GitHub CI validation run https://github.com/amitsainiacdt-glitch/EIOS-CORE/actions/runs/43456053693 succeeded: **56 tests passed**, including the new V2RETAIL BE-series regression case (confirmed from job logs). 
 - No production deployment and no trading authority. Capital deployment ₹0.
