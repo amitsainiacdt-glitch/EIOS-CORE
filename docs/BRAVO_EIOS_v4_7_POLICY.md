@@ -130,3 +130,13 @@ Implement an experimental, pure deterministic `modules/decision/bravo_v48_inflec
 ## FOX — BRAVO EIOS v4.8 Inflection Engine (name adopted 2026-11-13)
 
 **FOX** is the user-facing name for the v4.8 early-inflection discovery and bounded-risk research layer. This is a naming designation, not a declaration of production deployment. The parent research framework remains BRAVO EIOS; retain all candidate registry, portfolio, EIP/10x, BESS, dated valuation zones, decision safety, and zero-capital-deployment rules. Do not rename tickers or change research classifications merely because of the new name.
+
+## FOX ADD-or-Explain correction — 2026-11-13
+
+The locked valuation entry zone is a **price ceiling, not a floor**. If a stock trades below the originally locked lower boundary, do not issue WAIT solely because it fell beneath the band. Recalculate base/bear/bull expected returns at the verified cheaper price, retain the original dated fundamental assumptions and locked ceiling, and issue the classification warranted by causal evidence, financing survival, downside and governance. Below-zone price does not independently supply new causal evidence or waive missing investment-critical checks.
+
+Distinguish in the output: **(a) evidence gaps** (e.g. unreconciled diluted shares, funding bridge, governance exposure), **(b) established economic failures** (weak return/asymmetry, price above zone ceiling), and **(c) fatal thesis-breaking risks** (REJECT). Every WAIT must identify which category and the falsifiable missing threshold, never a generic lack-of-perfect-fundamentals objection.
+
+Implementation: `modules/decision/fox_add_engine.py`; regression cases for below-zone ADD, missing evidence, fatal risk, and poor economics in `modules/decision/test_fox_add_engine.py`. GitHub Actions run 43479886489: 84 tests passed. The tests are synthetic functional checks, not portfolio-performance validation. Policy changes do not establish deployment into dashboard or /api/daily.
+
+Do not silently revise locked zones for price changes alone, force an ADD quota, or place trades. Permanent holdings, EIP/10x, BESS and superinvestor registries remain preserved. **Capital deployment ₹0** until explicit user instruction.
