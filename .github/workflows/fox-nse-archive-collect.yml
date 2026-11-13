@@ -19,7 +19,9 @@ jobs:
         with:
           python-version: '3.11'
       - name: Download and validate unadjusted NSE archive
-        run: python -m modules.validation.fox_archive_collect --date "${{ inputs.trade_date }}" --output "$RUNNER_TEMP/fox_nse"
+        env:
+          FOX_TRADE_DATE: ${{ inputs.trade_date }}
+        run: python -m modules.validation.fox_archive_collect --date "$FOX_TRADE_DATE" --output "$RUNNER_TEMP/fox_nse"
       - name: Upload raw archive and provenance manifest
         uses: actions/upload-artifact@v4
         with:
