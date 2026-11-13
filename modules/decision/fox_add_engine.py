@@ -88,6 +88,8 @@ class FoxDecision:
     weighted_value: Optional[float] = None
     research_risk_budget_pct: float = 0.0
     capital_deployment_rupees: int = 0
+    evidence_gaps: Tuple[str, ...] = ()
+    economic_failures: Tuple[str, ...] = ()
 
 
 def _valid_num(value):
@@ -97,6 +99,23 @@ def _valid_num(value):
 def _url_ok(url):
     p = urlparse(url)
     return p.scheme == "https" and bool(p.netloc)
+
+
+# Explicitly separate unavailable decision-critical facts from known poor economics.
+# No missing-evidence flag by itself implies a worsening underlying business.
+ECONOMIC_BLOCKERS = frozenset({
+    "Base annualised return below 18%",
+    "Base upside/bear downside below 2:1",
+    "Base equity value does not exceed price",
+    "Probability-weighted value does not exceed price",
+    "Price above locked research zone ceiling",
+})
+
+def _wait(blockers, confidence, *metrics):
+    evidence = tuple(b for b in blockers if b not in ECONOMIC_BLOCKERS)
+    economics = tuple(b for b in blockers if b in ECONOMIC_BLOCKERS)
+    return FoxDecision(FoxAction.WAIT, tuple(blockers), confidence, *metrics,
+                       evidence_gaps=evidence, economic_failures=economics)
 
 
 def evaluate_fox(e: FoxUnderwriting) -> FoxDecision:
@@ -162,7 +181,7 @@ def evaluate_fox(e: FoxUnderwriting) -> FoxDecision:
     vals = (e.price, e.bear_value, e.base_value, e.bull_value, e.horizon_years)
     if not all(_valid_num(v) and v > 0 for v in vals):
         blockers.append("Incomplete positive dated bear/base/bull valuation")
-        return FoxDecision(FoxAction.WAIT, tuple(blockers), "low")
+        return _wait(blockers, "low")
     price, bear, base, bull, years = vals
     if not bear <= base <= bull:
         blockers.append("Scenario ordering invalid")
@@ -184,8 +203,12 @@ def evaluate_fox(e: FoxUnderwriting) -> FoxDecision:
         blockers.append("Base equity value does not exceed price")
     if weighted is not None and weighted <= price:
         blockers.append("Probability-weighted value does not exceed price")
-    if e.research_zone is not None and not(e.research_zone.low <= price <= e.research_zone.high):
-        blockers.append("Price outside dated conditional research zone")
+    # Original zone is a MAXIMUM admissible price, not a two-sided trap.
+    # Falling beneath its lower edge improves price asymmetry if the
+    # independently verified business thesis and funding risks remain intact.
+    # All economic/evidence gates still apply; no price-only ADD upgrade.
+    if e.research_zone is not None and price > e.research_zone.high:
+        blockers.append("Price above locked research zone ceiling")
     if any(r.category == RiskClass.BOUNDED_UNRESOLVED and (
             not _valid_num(r.estimated_downside_rupees_per_share)
             or r.estimated_downside_rupees_per_share < 0
@@ -193,8 +216,8 @@ def evaluate_fox(e: FoxUnderwriting) -> FoxDecision:
         blockers.append("Bounded unresolved risks lack quantified downside or kill tests")
     metrics = (round(upside,2),round(downside,2),round(ratio,2),round(cagr,2))
     if blockers:
-        return FoxDecision(FoxAction.WAIT,tuple(blockers),"low" if len(blockers)>2 else "moderate",
-                           *metrics,round(weighted,2) if weighted is not None else None)
+        return _wait(blockers,"low" if len(blockers)>2 else "moderate",
+                 *metrics,round(weighted,2) if weighted is not None else None)
     conditional = any(r.category == RiskClass.BOUNDED_UNRESOLVED for r in e.risk_items)
     risk_budget = 1.0 if conditional else 2.0
     action = {"EIP":FoxAction.EIP_ADD,"VALUE":FoxAction.VALUE_ADD,
