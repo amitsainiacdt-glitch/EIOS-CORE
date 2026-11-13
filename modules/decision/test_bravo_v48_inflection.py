@@ -42,6 +42,20 @@ class InflectionTests(unittest.TestCase):
         self.assertEqual(r.action,InflectionAction.INVESTIGATE)
         self.assertEqual(r.capital_deployment_rupees,0)
 
+    def test_volume_led_recovery_detected(self):
+        r=detect_inflection(case(order_intake_growth_yoy_pct=None,
+                                sequential_revenue_growth_pct=None,
+                                operating_volume_growth_yoy_pct=24.58,
+                                distribution_network_growth_yoy_pct=34))
+        self.assertEqual(r.action,InflectionAction.INVESTIGATE)
+        self.assertEqual(r.capital_deployment_rupees,0)
+
+    def test_network_expansion_alone_not_enough(self):
+        r=detect_inflection(case(order_intake_growth_yoy_pct=None,
+                                sequential_revenue_growth_pct=None,
+                                distribution_network_growth_yoy_pct=34))
+        self.assertEqual(r.action,InflectionAction.NO_NEW_INFLECTION)
+
     def test_sequential_signal_can_pair_with_milestone(self):
         r=detect_inflection(case(order_intake_growth_yoy_pct=None,
                                 verified_capacity_or_customer_milestone=True))
