@@ -1,0 +1,34 @@
+name: FOX NSE Multi-session Pilot
+on:
+  push:
+    paths:
+      - '.github/workflows/fox-nse-multiday-pilot.yml'
+  workflow_dispatch:
+    inputs:
+      sessions:
+        description: 'Comma-separated NSE trading dates, max 7, YYYY-MM-DD'
+        type: string
+        required: true
+
+jobs:
+  collect-pilot:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Acquire raw official prices and pilot ISIN continuity
+        env:
+          FOX_SESSIONS: ${{ inputs.sessions || '2024-10-28,2024-10-29,2024-10-30' }}
+        run: python -m modules.validation.fox_multiday_collect --dates "$FOX_SESSIONS" --output "$RUNNER_TEMP/fox_multiday"
+      - name: Preserve raw archives and audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fox-nse-multiday-pilot
+          path: ${{ runner.temp }}/fox_multiday/
+          if-no-files-found: warn
+          retention-days: 30
