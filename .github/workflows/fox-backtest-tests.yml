@@ -1,4 +1,4 @@
-name: FOX Backtest Regression
+name: FOX Backtest and Multi-session Validation
 on:
   push:
     paths:
