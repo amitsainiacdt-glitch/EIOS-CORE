@@ -1,6 +1,9 @@
 name: FOX NSE Raw Archive Collection
 
 on:
+  push:
+    paths:
+      - '.github/workflows/fox-nse-archive-collect.yml'
   workflow_dispatch:
     inputs:
       trade_date:
@@ -20,7 +23,7 @@ jobs:
           python-version: '3.11'
       - name: Download and validate unadjusted NSE archive
         env:
-          FOX_TRADE_DATE: ${{ inputs.trade_date }}
+          FOX_TRADE_DATE: ${{ inputs.trade_date || '2024-10-30' }}
         run: python -m modules.validation.fox_archive_collect --date "$FOX_TRADE_DATE" --output "$RUNNER_TEMP/fox_nse"
       - name: Upload raw archive and provenance manifest
         uses: actions/upload-artifact@v4
