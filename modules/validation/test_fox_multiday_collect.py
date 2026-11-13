@@ -22,6 +22,24 @@ class MultiDayTests(unittest.TestCase):
             self.assertEqual(len(r["collected_sessions"]),2)
             self.assertEqual(r["rows"],2)
             self.assertFalse(r["backtest_admissible"])
+    def test_be_series_v2_retail_recognised(self):
+        def with_be(url):
+            import re
+            ds=re.search(r"(20\d{6})",url).group(1)
+            d=f"{ds[:4]}-{ds[4:6]}-{ds[6:]}"
+            fields="TckrSymb,SctySrs,TradDt,OpnPric,ClsPric,ISIN\n"
+            rows="".join(f"SYM{i},EQ,{d},100,101,INE{i:09d}\n" for i in range(110))
+            rows+=f"V2RETAIL,BE,{d},123,125,INE945H01013\n"
+            z=io.BytesIO()
+            with zipfile.ZipFile(z,"w") as f:f.writestr("bhav.csv",fields+rows)
+            return z.getvalue()
+        with tempfile.TemporaryDirectory() as t:
+            r=collect(["2024-10-29"],t,fetch=with_be)
+            self.assertEqual(r["rows"],1)
+            self.assertEqual(r["distinct_tickers"],1)
+            self.assertEqual(r["non_EQ_series"],["V2RETAIL:BE"])
+            self.assertNotIn("V2RETAIL",r["missing_pilot_tickers"])
+            self.assertFalse(r["backtest_admissible"])
     def test_too_many_dates(self):
         with self.assertRaises(ValueError):
             collect([f"2024-10-{i:02d}" for i in range(20,28)],"/tmp/ignore",fetch=fixture)
