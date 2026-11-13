@@ -11,7 +11,7 @@ from pathlib import Path
 from modules.validation.fox_archive_collect import download,udiff_url
 from modules.validation.fox_nse_import import parse_udiff_zip
 
-PILOT=("ANUP","IRMENERGY","PIIND","SUPRIYA","TIMETECHNO","APTUS",
+ALLOWED_SERIES=("EQ","BE")  # BE is reported separately; not equivalent to regular EQ liquidity.\nPILOT=("ANUP","IRMENERGY","PIIND","SUPRIYA","TIMETECHNO","APTUS",
        "TANLA","DCBBANK","J&KBANK","ASHOKA","NCC","KEC","BLS","CLEAN",
        "SHARDACROP","CYIENTDLM","ELECON","CCL","V2RETAIL","GANDHAR")
 MAX_DAYS=7
@@ -26,10 +26,10 @@ def _isin_rows(data):
                 raise ValueError("ISIN column not present: cannot certify identifier continuity")
             rows={}
             for r in rd:
-                if r["SctySrs"].strip()!="EQ":continue
+                if r["SctySrs"].strip() not in ALLOWED_SERIES:continue
                 ticker=r["TckrSymb"].strip()
                 if ticker in PILOT:
-                    rows[ticker]=r[isin_col].strip()
+                    rows[(ticker,r["SctySrs"].strip())]=r[isin_col].strip()
             return rows
 
 def collect(days,output,fetch=None):
@@ -45,13 +45,13 @@ def collect(days,output,fetch=None):
             metadata=download(d,day_dir,tries=1,fetch=fetch)
             archive_file=day_dir/Path(udiff_url(d)).name
             archive=archive_file.read_bytes()
-            bars=parse_udiff_zip(archive,metadata["source_url"],tickers=PILOT)
+            bars=[bar for s in ALLOWED_SERIES for bar in parse_udiff_zip(archive,metadata["source_url"],series=s,tickers=PILOT)]
             isins=_isin_rows(archive)
             for b in bars:
-                identifier=isins.get(b.ticker,"")
+                identifier=isins.get((b.ticker,b.series),"")
                 if not identifier:raise ValueError("Missing ISIN for "+b.ticker)
                 seen_isins[b.ticker].add(identifier)
-                records.append({"ticker":b.ticker,"isin":identifier,"session":b.session,
+                records.append({"ticker":b.ticker,"isin":identifier,"series":b.series,"session":b.session,
                                 "raw_open":b.open,"raw_close":b.close,"zip_sha256":metadata["sha256"],
                                 "source_url":metadata["source_url"],"verified_adjusted":"no",
                                 "backtest_admissible":"no"})
@@ -59,14 +59,14 @@ def collect(days,output,fetch=None):
         except Exception as exc:
             errors.append({"date":d.isoformat(),"error":str(exc)})
     with (output/"pilot_raw_prices.csv").open("w",newline="",encoding="utf-8") as f:
-        fields=("ticker","isin","session","raw_open","raw_close","zip_sha256",
+        fields=("ticker","isin","series","session","raw_open","raw_close","zip_sha256",
                 "source_url","verified_adjusted","backtest_admissible")
         writer=csv.DictWriter(f,fieldnames=fields);writer.writeheader();writer.writerows(records)
     summary={"requested_dates":[x.isoformat() for x in requested],
              "collected_sessions":collected,"failed_dates":errors,
              "rows":len(records),"distinct_tickers":len({x["ticker"] for x in records}),
              "missing_pilot_tickers":sorted(set(PILOT)-{x["ticker"] for x in records}),
-             "identifier_conflicts":{k:sorted(v) for k,v in seen_isins.items() if len(v)>1},
+             "identifier_conflicts":{k:sorted(v) for k,v in seen_isins.items() if len(v)>1},\n             "non_EQ_series":sorted({x["ticker"]+":"+x["series"] for x in records if x["series"]!="EQ"}),
              "corporate_action_adjusted":False,"backtest_admissible":False}
     (output/"collection_summary.json").write_text(json.dumps(summary,indent=2)+"\n",encoding="utf-8")
     return summary
