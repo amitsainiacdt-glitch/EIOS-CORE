@@ -96,6 +96,8 @@ def detect_inflection(e: InflectionEvidence) -> InflectionResult:
         blockers.append("Diluted valuation not verified: cannot issue ADD")
     if not e.fixed_zone_exists:
         blockers.append("Fixed dated research valuation zone not established")
-    # Only evidence-integrity failures veto investigation. Incomplete valuation\n    # or an unvalidated dated zone must block ADD, not investigative triage.\n    critical = any(b.startswith(("Price observation postdates", "Missing or invalid ISO",\n                                 "Verified positive dated price unavailable",\n                                 "Dated primary source URLs missing")) for b in blockers)
+    # Only evidence-integrity failures veto investigation. Incomplete valuation
+    # or an unvalidated dated zone must block ADD, not investigative triage.
+    critical = any(b.startswith(("Price observation postdates", "Missing or invalid ISO",\n                                 "Verified positive dated price unavailable",\n                                 "Dated primary source URLs missing")) for b in blockers)
     action = InflectionAction.INVESTIGATE if len(causal) >= 2 and not critical else InflectionAction.NO_NEW_INFLECTION
     return InflectionResult(action, tuple(signals), tuple(blockers))
