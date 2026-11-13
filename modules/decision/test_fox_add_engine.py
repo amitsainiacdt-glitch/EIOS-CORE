@@ -48,6 +48,26 @@ class FOXAddTests(unittest.TestCase):
   y=evaluate_fox(case(price=95))
   self.assertGreater(y.upside_downside_ratio,x.upside_downside_ratio)
   self.assertEqual(y.action,FoxAction.EIP_ADD)
+ def test_below_fixed_zone_with_intact_thesis_can_add(self):
+  d=evaluate_fox(case(price=80))
+  self.assertEqual(d.action,FoxAction.EIP_ADD)
+  self.assertEqual(d.capital_deployment_rupees,0)
+ def test_below_zone_with_missing_evidence_still_waits(self):
+  d=evaluate_fox(case(price=80,financing_survival_verified=False))
+  self.assertEqual(d.action,FoxAction.WAIT)
+  self.assertIn("Financing / survival bridge unverified",d.evidence_gaps)
+ def test_evidence_and_economics_reported_separately(self):
+  d=evaluate_fox(case(price=120,diluted_share_count_verified=False))
+  self.assertEqual(d.action,FoxAction.WAIT)
+  self.assertIn("Fully diluted equity denominator unverified",d.evidence_gaps)
+  self.assertIn("Price above locked research zone ceiling",d.economic_failures)
+ def test_below_zone_cannot_override_fatal_risk(self):
+  r=RiskItem("Unbounded financing",RiskClass.THESIS_BREAKING)
+  self.assertEqual(evaluate_fox(case(price=80,risk_items=(r,))).action,FoxAction.REJECT)
+ def test_below_zone_poor_base_case_still_waits(self):
+  d=evaluate_fox(case(price=80,bear_value=50,base_value=100,bull_value=130))
+  self.assertEqual(d.action,FoxAction.WAIT)
+  self.assertTrue(d.economic_failures)
  def test_outside_fixed_zone_wait(self):
   d=evaluate_fox(case(price=120))
   self.assertEqual(d.action,FoxAction.WAIT)
