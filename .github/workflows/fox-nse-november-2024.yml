@@ -1,0 +1,29 @@
+name: FOX NSE November 2024 History Pilot
+on:
+  push:
+    paths:
+      - '.github/workflows/fox-nse-november-2024.yml'
+  workflow_dispatch:
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Collect actual November NSE CM sessions
+        env:
+          FOX_SESSIONS: '2024-11-01,2024-11-04,2024-11-05,2024-11-06,2024-11-07,2024-11-08,2024-11-11,2024-11-12,2024-11-13,2024-11-14,2024-11-18,2024-11-19,2024-11-21,2024-11-22,2024-11-25,2024-11-26,2024-11-27,2024-11-28,2024-11-29'
+        run: python -m modules.validation.fox_history_collect --dates "$FOX_SESSIONS" --output "$RUNNER_TEMP/fox_november"
+      - name: Preserve full source archives and manifests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fox-november-2024-nse-raw
+          path: ${{ runner.temp }}/fox_november/
+          if-no-files-found: warn
+          retention-days: 30
