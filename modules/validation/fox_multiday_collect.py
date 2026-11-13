@@ -11,7 +11,8 @@ from pathlib import Path
 from modules.validation.fox_archive_collect import download,udiff_url
 from modules.validation.fox_nse_import import parse_udiff_zip
 
-ALLOWED_SERIES=("EQ","BE")  # BE is reported separately; not equivalent to regular EQ liquidity.\nPILOT=("ANUP","IRMENERGY","PIIND","SUPRIYA","TIMETECHNO","APTUS",
+ALLOWED_SERIES=("EQ","BE")  # BE is reported separately; not equivalent to regular EQ liquidity.
+PILOT=("ANUP","IRMENERGY","PIIND","SUPRIYA","TIMETECHNO","APTUS",
        "TANLA","DCBBANK","J&KBANK","ASHOKA","NCC","KEC","BLS","CLEAN",
        "SHARDACROP","CYIENTDLM","ELECON","CCL","V2RETAIL","GANDHAR")
 MAX_DAYS=7
@@ -66,7 +67,8 @@ def collect(days,output,fetch=None):
              "collected_sessions":collected,"failed_dates":errors,
              "rows":len(records),"distinct_tickers":len({x["ticker"] for x in records}),
              "missing_pilot_tickers":sorted(set(PILOT)-{x["ticker"] for x in records}),
-             "identifier_conflicts":{k:sorted(v) for k,v in seen_isins.items() if len(v)>1},\n             "non_EQ_series":sorted({x["ticker"]+":"+x["series"] for x in records if x["series"]!="EQ"}),
+             "identifier_conflicts":{k:sorted(v) for k,v in seen_isins.items() if len(v)>1},
+             "non_EQ_series":sorted({x["ticker"]+":"+x["series"] for x in records if x["series"]!="EQ"}),
              "corporate_action_adjusted":False,"backtest_admissible":False}
     (output/"collection_summary.json").write_text(json.dumps(summary,indent=2)+"\n",encoding="utf-8")
     return summary
