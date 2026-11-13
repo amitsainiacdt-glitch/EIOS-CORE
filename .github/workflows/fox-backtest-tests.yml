@@ -1,0 +1,25 @@
+name: FOX Backtest Regression
+on:
+  push:
+    paths:
+      - 'modules/validation/fox_backtest.py'
+      - 'modules/validation/test_fox_backtest.py'
+      - '.github/workflows/fox-backtest-tests.yml'
+  pull_request:
+    paths:
+      - 'modules/validation/**'
+      - '.github/workflows/fox-backtest-tests.yml'
+  workflow_dispatch:
+
+jobs:
+  fox-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run FOX point-in-time regression tests
+        run: python -m unittest modules.validation.test_fox_backtest -v
