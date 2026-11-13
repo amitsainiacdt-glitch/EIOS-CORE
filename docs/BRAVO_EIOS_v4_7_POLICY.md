@@ -126,3 +126,7 @@ Implementation: Morning/evening scheduled research prompts must apply this patch
 
 ### Integration and verification
 Implement an experimental, pure deterministic `modules/decision/bravo_v48_inflection.py` screening helper with unit tests. It must return INVESTIGATE or NO NEW INFLECTION instead of silently issuing BUY. Connecting the scorer to `/api/daily`, background market ingestion, dashboards, scheduling pipelines and live paper-trading requires separate integration and end-to-end tests; no claim of production deployment until proven.
+
+## FOX — BRAVO EIOS v4.8 Inflection Engine (name adopted 2026-11-13)
+
+**FOX** is the user-facing name for the v4.8 early-inflection discovery and bounded-risk research layer. This is a naming designation, not a declaration of production deployment. The parent research framework remains BRAVO EIOS; retain all candidate registry, portfolio, EIP/10x, BESS, dated valuation zones, decision safety, and zero-capital-deployment rules. Do not rename tickers or change research classifications merely because of the new name.
