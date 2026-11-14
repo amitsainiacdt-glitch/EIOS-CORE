@@ -37,6 +37,8 @@ class InflectionEvidence:
     fatal_reason: str = ""
     verified_diluted_valuation: bool = False
     fixed_zone_exists: bool = False
+    exceptional_signal_verified: bool = False
+    independent_exceptional_source_url: str = ""
 
 
 @dataclass(frozen=True)
@@ -86,8 +88,11 @@ def detect_inflection(e: InflectionEvidence) -> InflectionResult:
     causal = [s for s in signals if not s.startswith("Distressed")]
     # Related volume and footprint metrics can trigger investigation, not ADD;
     # actual economic independence, profitability and capex returns remain unverified.
-    if len(causal) < 2:
-        blockers.append("Fewer than two independent causal signals; drawdown is not a catalyst")
+    exceptional = bool(len(causal) == 1 and e.exceptional_signal_verified
+                       and e.independent_exceptional_source_url.startswith("https://")
+                       and e.independent_exceptional_source_url not in e.source_urls)
+    if len(causal) < 2 and not exceptional:
+        blockers.append("Fewer than two independent causal signals and no independently verified exceptional signal")
     if not e.funding_survival_reviewed:
         blockers.append("Funding survival unreviewed")
     if not e.downside_bounded:
@@ -99,5 +104,5 @@ def detect_inflection(e: InflectionEvidence) -> InflectionResult:
     # Only evidence-integrity failures veto investigation. Incomplete valuation
     # or an unvalidated dated zone must block ADD, not investigative triage.
     critical = any(b.startswith(("Price observation postdates", "Missing or invalid ISO",\n                                 "Verified positive dated price unavailable",\n                                 "Dated primary source URLs missing")) for b in blockers)
-    action = InflectionAction.INVESTIGATE if len(causal) >= 2 and not critical else InflectionAction.NO_NEW_INFLECTION
+    action = InflectionAction.INVESTIGATE if (len(causal) >= 2 or exceptional) and not critical else InflectionAction.NO_NEW_INFLECTION
     return InflectionResult(action, tuple(signals), tuple(blockers))
