@@ -87,6 +87,35 @@ class FOXAddTests(unittest.TestCase):
   self.assertEqual(evaluate_fox(case(lane="SPECIAL SITUATION")).action,FoxAction.SPECIAL_SITUATION_ADD)
  def test_low_return_gate(self):
   self.assertEqual(evaluate_fox(case(base_value=125,bull_value=160)).action,FoxAction.WAIT)
+ def test_derived_ceiling_removes_circular_zone_requirement(self):
+  d=evaluate_fox(case(research_zone=None))
+  self.assertEqual(d.action,FoxAction.EIP_ADD)
+  self.assertEqual(d.review_state,"RESEARCH_ADD")
+  self.assertIsNotNone(d.derived_research_ceiling)
+  self.assertEqual(d.capital_deployment_rupees,0)
+ def test_missing_zone_and_weak_economics_cannot_add(self):
+  d=evaluate_fox(case(research_zone=None,base_value=110,bull_value=120))
+  self.assertEqual(d.action,FoxAction.WAIT)
+  self.assertEqual(d.review_state,"ECONOMIC_FAILURE")
+ def test_missing_financing_is_incomplete_not_rejection(self):
+  d=evaluate_fox(case(research_zone=None,financing_survival_verified=False))
+  self.assertEqual(d.action,FoxAction.WAIT)
+  self.assertEqual(d.review_state,"UNDERWRITING_INCOMPLETE")
+  self.assertFalse(d.economic_failures)
+ def test_exceptional_signal_requires_distinct_corroboration(self):
+  d=evaluate_fox(case(causal_signals=("Major contracted customer order",),
+      exceptional_signal="Documented customer order verified independently",
+      independent_exceptional_source_url="https://www.crisil.com/research/order.pdf"))
+  self.assertEqual(d.action,FoxAction.EIP_ADD)
+ def test_exceptional_signal_same_source_cannot_pass(self):
+  d=evaluate_fox(case(causal_signals=("Major contracted customer order",),
+      exceptional_signal="Claim made in same filing",
+      independent_exceptional_source_url=case().primary_urls[0]))
+  self.assertEqual(d.action,FoxAction.WAIT)
+ def test_scenarios_must_be_verified_even_without_zone(self):
+  d=evaluate_fox(case(research_zone=None,valuation_evidence_verified=False))
+  self.assertEqual(d.action,FoxAction.WAIT)
+  self.assertIn("Scenario valuation inputs unverified",d.evidence_gaps)
  def test_missing_price_never_add(self):
   self.assertEqual(evaluate_fox(case(price=None)).action,FoxAction.WAIT)
 
