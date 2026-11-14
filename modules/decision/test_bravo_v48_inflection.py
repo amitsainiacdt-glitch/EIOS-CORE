@@ -57,6 +57,21 @@ class InflectionTests(unittest.TestCase):
         self.assertTrue(any("Fixed dated research valuation zone" in b for b in r.blockers))
         self.assertEqual(r.capital_deployment_rupees,0)
 
+    def test_exceptional_single_signal_triggers_investigation(self):
+        r=detect_inflection(case(order_intake_growth_yoy_pct=35,
+                sequential_revenue_growth_pct=None,
+                exceptional_signal_verified=True,
+                independent_exceptional_source_url="https://www.crisil.com/research/order-verified.pdf"))
+        self.assertEqual(r.action,InflectionAction.INVESTIGATE)
+        self.assertEqual(r.capital_deployment_rupees,0)
+
+    def test_single_signal_without_distinct_source_does_not_trigger(self):
+        r=detect_inflection(case(order_intake_growth_yoy_pct=35,
+                sequential_revenue_growth_pct=None,
+                exceptional_signal_verified=True,
+                independent_exceptional_source_url="https://nsearchives.nseindia.com/test.pdf"))
+        self.assertEqual(r.action,InflectionAction.NO_NEW_INFLECTION)
+
     def test_network_expansion_alone_not_enough(self):
         r=detect_inflection(case(order_intake_growth_yoy_pct=None,
                                 sequential_revenue_growth_pct=None,
