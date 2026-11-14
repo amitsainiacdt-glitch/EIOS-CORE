@@ -18,6 +18,8 @@ on:
       - 'modules/validation/test_fox_history_collect.py'
       - 'modules/validation/fox_history_quality.py'
       - 'modules/validation/test_fox_history_quality.py'
+      - 'modules/decision/bravo_v48_inflection.py'
+      - 'modules/decision/test_bravo_v48_inflection.py'
       - 'modules/decision/fox_add_engine.py'
       - 'modules/decision/test_fox_add_engine.py'
       - '.github/workflows/fox-backtest-tests.yml'
@@ -40,4 +42,4 @@ jobs:
         with:
           python-version: '3.11'
       - name: Run FOX point-in-time regression tests
-        run: python -m unittest modules.validation.test_fox_backtest modules.validation.test_fox_data_audit modules.validation.test_fox_nse_import modules.decision.test_fox_add_engine modules.validation.test_fox_archive_collect modules.validation.test_fox_multiday_collect modules.validation.test_fox_corporate_actions modules.validation.test_fox_history_collect modules.validation.test_fox_history_quality -v
+        run: python -m unittest modules.validation.test_fox_backtest modules.validation.test_fox_data_audit modules.validation.test_fox_nse_import modules.decision.test_fox_add_engine modules.decision.test_bravo_v48_inflection modules.validation.test_fox_archive_collect modules.validation.test_fox_multiday_collect modules.validation.test_fox_corporate_actions modules.validation.test_fox_history_collect modules.validation.test_fox_history_quality -v
