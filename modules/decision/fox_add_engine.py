@@ -74,6 +74,8 @@ class FoxUnderwriting:
     previous_zone: Optional[ValuationZone] = None
     catalyst_date: str = ""
     next_kill_test: str = ""
+    exceptional_signal: str = ""
+    independent_exceptional_source_url: str = ""
 
 
 @dataclass(frozen=True)
@@ -90,6 +92,8 @@ class FoxDecision:
     capital_deployment_rupees: int = 0
     evidence_gaps: Tuple[str, ...] = ()
     economic_failures: Tuple[str, ...] = ()
+    review_state: str = "NOT_EVALUATED"
+    derived_research_ceiling: Optional[float] = None
 
 
 def _valid_num(value):
@@ -111,18 +115,33 @@ ECONOMIC_BLOCKERS = frozenset({
     "Price above locked research zone ceiling",
 })
 
-def _wait(blockers, confidence, *metrics):
+def _wait(blockers, confidence, *metrics, derived_research_ceiling=None):
     evidence = tuple(b for b in blockers if b not in ECONOMIC_BLOCKERS)
     economics = tuple(b for b in blockers if b in ECONOMIC_BLOCKERS)
+    state = "ECONOMIC_FAILURE" if economics else "UNDERWRITING_INCOMPLETE"
     return FoxDecision(FoxAction.WAIT, tuple(blockers), confidence, *metrics,
-                       evidence_gaps=evidence, economic_failures=economics)
+                       evidence_gaps=evidence, economic_failures=economics,
+                       review_state=state,
+                       derived_research_ceiling=derived_research_ceiling)
+
+
+def _derived_ceiling(base, bear, weighted, years):
+    """An auditable sensitivity ceiling, NOT an independently verified locked zone.
+
+    At this price, base CAGR >=18%, base/bear ratio >=2 and weighted value
+    exceeds price (strictly checked during evaluation). The caller must
+    independently verify scenario assumptions and point-in-time sources.
+    """
+    return min(base / (1.18 ** years), (base + 2*bear)/3, weighted)
+
+
 
 
 def evaluate_fox(e: FoxUnderwriting) -> FoxDecision:
     blockers = []
     fatal = [r.description for r in e.risk_items if r.category == RiskClass.THESIS_BREAKING]
     if fatal:
-        return FoxDecision(FoxAction.REJECT, tuple(fatal), "high")
+        return FoxDecision(FoxAction.REJECT, tuple(fatal), "high",review_state="FATAL_RISK")
     try:
         as_of, price_day = date.fromisoformat(e.as_of), date.fromisoformat(e.price_as_of)
         if price_day > as_of:
@@ -133,8 +152,12 @@ def evaluate_fox(e: FoxUnderwriting) -> FoxDecision:
         blockers.append("Invalid point-in-time date")
     if not e.primary_urls or not all(_url_ok(u) for u in e.primary_urls):
         blockers.append("Verified primary filings missing")
-    if len({s.strip().casefold() for s in e.causal_signals if s.strip()}) < 2:
-        blockers.append("Fewer than two corroborated leading causal signals")
+    causal_count = len({s.strip().casefold() for s in e.causal_signals if s.strip()})
+    exceptional = bool(e.exceptional_signal.strip()
+                       and _url_ok(e.independent_exceptional_source_url)
+                       and e.independent_exceptional_source_url not in e.primary_urls)
+    if causal_count < 2 and not (causal_count == 1 and exceptional):
+        blockers.append("Fewer than two corroborated leading causal signals; no independently sourced exceptional signal")
     if not e.recovery_mechanism.strip():
         blockers.append("No testable recovery mechanism")
     if not e.diluted_share_count_verified:
@@ -158,9 +181,10 @@ def evaluate_fox(e: FoxUnderwriting) -> FoxDecision:
             blockers.append("Invalid catalyst date")
     if e.lane not in ("EIP", "VALUE", "SPECIAL SITUATION"):
         blockers.append("Unsupported ADD lane")
-    if not e.research_zone:
-        blockers.append("No dated, locked valuation band")
-    else:
+    # A zone is an output of valuation work, never a prerequisite for it.
+    # Existing locked zones still impose immutable version/ceiling discipline.
+    if e.research_zone:
+
         z = e.research_zone
         try:
             date.fromisoformat(z.locked_on)
@@ -207,6 +231,7 @@ def evaluate_fox(e: FoxUnderwriting) -> FoxDecision:
     # Falling beneath its lower edge improves price asymmetry if the
     # independently verified business thesis and funding risks remain intact.
     # All economic/evidence gates still apply; no price-only ADD upgrade.
+    derived_ceiling = _derived_ceiling(base,bear,weighted,years) if weighted is not None and bear <= base <= bull else None
     if e.research_zone is not None and price > e.research_zone.high:
         blockers.append("Price above locked research zone ceiling")
     if any(r.category == RiskClass.BOUNDED_UNRESOLVED and (
@@ -217,10 +242,13 @@ def evaluate_fox(e: FoxUnderwriting) -> FoxDecision:
     metrics = (round(upside,2),round(downside,2),round(ratio,2),round(cagr,2))
     if blockers:
         return _wait(blockers,"low" if len(blockers)>2 else "moderate",
-                 *metrics,round(weighted,2) if weighted is not None else None)
+                 *metrics,round(weighted,2) if weighted is not None else None,
+                 derived_research_ceiling=round(derived_ceiling,2) if derived_ceiling is not None else None)
     conditional = any(r.category == RiskClass.BOUNDED_UNRESOLVED for r in e.risk_items)
     risk_budget = 1.0 if conditional else 2.0
     action = {"EIP":FoxAction.EIP_ADD,"VALUE":FoxAction.VALUE_ADD,
               "SPECIAL SITUATION":FoxAction.SPECIAL_SITUATION_ADD}[e.lane]
     return FoxDecision(action,(),"conditional" if conditional else "moderate",
-                       *metrics,round(weighted,2),risk_budget)
+                       *metrics,round(weighted,2),risk_budget,
+                       review_state="RESEARCH_ADD",
+                       derived_research_ceiling=round(derived_ceiling,2) if derived_ceiling is not None else None)
