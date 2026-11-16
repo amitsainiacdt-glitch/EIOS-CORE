@@ -11,6 +11,7 @@ def case(**kw):
   ticker="TEST",lane="EIP",as_of="2026-11-10",price_as_of="2026-11-09",
   price=100,primary_urls=("https://nsearchives.nseindia.com/corporate/example.pdf",),
   causal_signals=("Orders rising","Sequential margins recovering"),
+  causal_signal_source_urls=("https://nsearchives.nseindia.com/corporate/example.pdf","https://www.crisil.com/research/independent.pdf"),
   horizon_years=2.5,bear_value=70,base_value=200,bull_value=260,
   diluted_share_count_verified=True,financing_survival_verified=True,
   governance_evaluated=True,cash_conversion_evaluated=True,
@@ -104,11 +105,13 @@ class FOXAddTests(unittest.TestCase):
   self.assertFalse(d.economic_failures)
  def test_exceptional_signal_requires_distinct_corroboration(self):
   d=evaluate_fox(case(causal_signals=("Major contracted customer order",),
+      causal_signal_source_urls=("https://nsearchives.nseindia.com/corporate/example.pdf",),
       exceptional_signal="Documented customer order verified independently",
       independent_exceptional_source_url="https://www.crisil.com/research/order.pdf"))
   self.assertEqual(d.action,FoxAction.EIP_ADD)
  def test_exceptional_signal_same_source_cannot_pass(self):
   d=evaluate_fox(case(causal_signals=("Major contracted customer order",),
+      causal_signal_source_urls=("https://nsearchives.nseindia.com/corporate/example.pdf",),
       exceptional_signal="Claim made in same filing",
       independent_exceptional_source_url=case().primary_urls[0]))
   self.assertEqual(d.action,FoxAction.WAIT)
@@ -121,6 +124,20 @@ class FOXAddTests(unittest.TestCase):
   self.assertEqual(d.review_state,"UNDERWRITING_INCOMPLETE")
   self.assertTrue(d.evidence_gaps)
   self.assertTrue(d.economic_failures)
+ def test_duplicate_filing_cannot_validate_two_signals(self):
+  same="https://nsearchives.nseindia.com/corporate/example.pdf"
+  d=evaluate_fox(case(causal_signal_source_urls=(same,same)))
+  self.assertEqual(d.action,FoxAction.WAIT)
+  self.assertIn("Multiple signals lack independent source provenance",d.evidence_gaps)
+ def test_missing_signal_sources_not_add(self):
+  d=evaluate_fox(case(causal_signal_source_urls=()))
+  self.assertEqual(d.action,FoxAction.WAIT)
+  self.assertIn("Missing per-signal source provenance",d.evidence_gaps)
+ def test_future_zone_lock_rejected(self):
+  old=case().research_zone
+  d=evaluate_fox(case(research_zone=replace(old,locked_on="2026-12-01")))
+  self.assertEqual(d.action,FoxAction.WAIT)
+  self.assertIn("Research zone locked after decision date",d.evidence_gaps)
  def test_missing_price_never_add(self):
   self.assertEqual(evaluate_fox(case(price=None)).action,FoxAction.WAIT)
 
