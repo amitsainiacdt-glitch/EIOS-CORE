@@ -93,3 +93,17 @@ class DecisionOffice:
             confidence=final.score,
             summary=final.summary,
         )
+    def evaluate_fox_research(self, underwriting):
+        """Explicit FOX evidence-first research route; NEVER a trading action.
+
+        Existing evaluate() retains legacy semantics for compatibility.
+        Callers must supply verified dated filings, scenario inputs and risk reviews.
+        This does not fetch market data or automatically connect the website.
+        """
+        from .fox_add_engine import evaluate_fox
+        return evaluate_fox(underwriting)
+
+    def audit_fox_research_queue(self, cases, as_of):
+        """Expose outstanding-case audit through the existing research facade."""
+        from .fox_completion_audit import audit
+        return audit(tuple(cases), as_of)
