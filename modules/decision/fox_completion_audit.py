@@ -4,6 +4,8 @@ from datetime import date
 from typing import Tuple
 
 PENDING = frozenset(("INVESTIGATE", "UNDERWRITING_INCOMPLETE"))
+CLOSED = frozenset(("RESEARCH_ADD", "ECONOMIC_FAILURE", "FATAL_RISK"))
+VALID_DECISIONS = PENDING | CLOSED
 
 @dataclass(frozen=True)
 class Case:
@@ -25,6 +27,8 @@ def audit(cases: Tuple[Case, ...], as_of: str):
     output, seen = [], set()
     for c in cases:
         start, reviewed = date.fromisoformat(c.discovered), date.fromisoformat(c.last_review)
+        if c.decision not in VALID_DECISIONS:
+            raise ValueError("Unknown FOX decision: cannot silently close case")
         if not c.ticker or c.ticker in seen or start > reviewed or reviewed > today:
             raise ValueError("duplicate/invalid case or dates")
         seen.add(c.ticker)
