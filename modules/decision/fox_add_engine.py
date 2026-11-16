@@ -155,7 +155,7 @@ def evaluate_fox(e: FoxUnderwriting) -> FoxDecision:
         blockers.append("Verified primary filings missing")
     causal_count = len({s.strip().casefold() for s in e.causal_signals if s.strip()})
     provenance_ok = (len(e.causal_signal_source_urls) == len(e.causal_signals)
-                     and all(_url_ok(u) for u in e.causal_signal_source_urls))
+                     and all(_url_ok(u) and u in e.primary_urls for u in e.causal_signal_source_urls))
     if not provenance_ok:
         blockers.append("Missing per-signal source provenance")
     if causal_count >= 2 and (not provenance_ok or len(set(e.causal_signal_source_urls)) < 2):
