@@ -116,6 +116,11 @@ class FOXAddTests(unittest.TestCase):
   d=evaluate_fox(case(research_zone=None,valuation_evidence_verified=False))
   self.assertEqual(d.action,FoxAction.WAIT)
   self.assertIn("Scenario valuation inputs unverified",d.evidence_gaps)
+ def test_mixed_missing_evidence_and_bad_economics_stays_incomplete(self):
+  d=evaluate_fox(case(price=120,diluted_share_count_verified=False))
+  self.assertEqual(d.review_state,"UNDERWRITING_INCOMPLETE")
+  self.assertTrue(d.evidence_gaps)
+  self.assertTrue(d.economic_failures)
  def test_missing_price_never_add(self):
   self.assertEqual(evaluate_fox(case(price=None)).action,FoxAction.WAIT)
 
