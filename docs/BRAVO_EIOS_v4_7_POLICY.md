@@ -173,3 +173,12 @@ Daily: actual issuers screened (not hypothetical), new unfamiliar names investig
 
 ### Test and rollout limitations
 Research-only helper: `modules/decision/fox_completion_audit.py`, synthetic regression file `modules/decision/test_fox_completion_audit.py`. These do not crawl the exchange, prove investment alpha, or establish deployment. Verify CI and /api/daily integration separately before reporting them as operational.
+
+
+## FOX v5.1 — Provenance and Staleness Hardening (2026-11-16)
+
+- An ADD requires every causal leading indicator to have a cited source within the case's source record. Two claims from the same URL do not count as two independently corroborated indicators. One exceptional signal can qualify only with a second genuinely separate source. Web URLs in an input payload are **not proof** those documents were accessed; every real decision still requires source retrieval and dated inspection.
+- Disallow look-ahead when a purported locked valuation zone is dated after the decision date. Preserve historical immutable ceilings and only revise on documented economic evidence.
+- Distinguish **case age** (>7/>14 days since first discovery) from **review neglect** (>7/>14 days since last actual review). Both must be published with counts; recent superficial re-review must not erase first-discovery age.
+- Evidence gaps and economics that fail simultaneously remain UNDERWRITING_INCOMPLETE until the critical missing sources are verified, while retaining the numerical economic failures in the record. An independently completed valuation with failing economics is ECONOMIC_FAILURE.
+- Tests and modules in EIOS-CORE are repository helpers, not evidence of a live website, exchange feed, independent audit or validated positive alpha. No trades and capital deployment ₹0.
