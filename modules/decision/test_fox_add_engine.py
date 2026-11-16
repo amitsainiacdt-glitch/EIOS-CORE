@@ -9,7 +9,7 @@ def case(**kw):
                  "https://nsearchives.nseindia.com/corporate/example.pdf")
  e=FoxUnderwriting(
   ticker="TEST",lane="EIP",as_of="2026-11-10",price_as_of="2026-11-09",
-  price=100,primary_urls=("https://nsearchives.nseindia.com/corporate/example.pdf",),
+  price=100,primary_urls=("https://nsearchives.nseindia.com/corporate/example.pdf","https://www.crisil.com/research/independent.pdf"),
   causal_signals=("Orders rising","Sequential margins recovering"),
   causal_signal_source_urls=("https://nsearchives.nseindia.com/corporate/example.pdf","https://www.crisil.com/research/independent.pdf"),
   horizon_years=2.5,bear_value=70,base_value=200,bull_value=260,
@@ -107,7 +107,7 @@ class FOXAddTests(unittest.TestCase):
   d=evaluate_fox(case(causal_signals=("Major contracted customer order",),
       causal_signal_source_urls=("https://nsearchives.nseindia.com/corporate/example.pdf",),
       exceptional_signal="Documented customer order verified independently",
-      independent_exceptional_source_url="https://www.crisil.com/research/order.pdf"))
+      independent_exceptional_source_url="https://www.icra.in/research/order.pdf"))
   self.assertEqual(d.action,FoxAction.EIP_ADD)
  def test_exceptional_signal_same_source_cannot_pass(self):
   d=evaluate_fox(case(causal_signals=("Major contracted customer order",),
@@ -129,6 +129,10 @@ class FOXAddTests(unittest.TestCase):
   d=evaluate_fox(case(causal_signal_source_urls=(same,same)))
   self.assertEqual(d.action,FoxAction.WAIT)
   self.assertIn("Multiple signals lack independent source provenance",d.evidence_gaps)
+ def test_unrecorded_independent_source_not_add(self):
+  d=evaluate_fox(case(causal_signal_source_urls=("https://nsearchives.nseindia.com/corporate/example.pdf","https://unlisted.example.org/file.pdf")))
+  self.assertEqual(d.action,FoxAction.WAIT)
+  self.assertIn("Missing per-signal source provenance",d.evidence_gaps)
  def test_missing_signal_sources_not_add(self):
   d=evaluate_fox(case(causal_signal_source_urls=()))
   self.assertEqual(d.action,FoxAction.WAIT)
