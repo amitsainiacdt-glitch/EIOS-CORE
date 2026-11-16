@@ -22,4 +22,4 @@ jobs:
           python-version: '3.11'
       - name: Run FOX decision, discovery, and completion regression tests
         run: |
-          python -m unittest -v modules.decision.test_fox_add_engine modules.decision.test_bravo_v48_inflection modules.decision.test_fox_completion_audit modules.decision.test_fox_decision_office_bridge
+          python -m unittest -v modules.decision.test_fox_add_engine modules.decision.test_bravo_v48_inflection modules.decision.test_fox_completion_audit modules.decision.test_fox_decision_office_bridge modules.decision.test_fox_valuation_worksheet
