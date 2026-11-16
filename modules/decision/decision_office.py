@@ -103,6 +103,11 @@ class DecisionOffice:
         from .fox_add_engine import evaluate_fox
         return evaluate_fox(underwriting)
 
+    def evaluate_fox_valuation(self, worksheet):
+        """Build a sourced valuation sensitivity; NOT a standalone research ADD."""
+        from .fox_valuation_worksheet import evaluate_worksheet
+        return evaluate_worksheet(worksheet)
+
     def audit_fox_research_queue(self, cases, as_of):
         """Expose outstanding-case audit through the existing research facade."""
         from .fox_completion_audit import audit
