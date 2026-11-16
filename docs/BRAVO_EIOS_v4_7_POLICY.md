@@ -156,3 +156,20 @@ Do not silently revise locked zones for price changes alone, force an ADD quota,
 - **Not deployment:** Modules and tests are repository research helpers; code commits do not prove app/API integration, a real marketwide data feed, production research completeness or any positive research ADD. **No trades or capital deployment without user approval (₹0).**
 
 Regressions live in `modules/decision/test_fox_add_engine.py` and `modules/decision/test_bravo_v48_inflection.py`; CI runs both alongside the history tests.
+
+
+## FOX v5.0 — Completion Enforcement (2026-11-16)
+
+**Failure being corrected:** repeatedly naming familiar stocks and repeating incomplete WAITs without undertaking bounded-risk valuation, while treating zero ADDs from incomplete coverage as if the market had no opportunities. This patch is append-only and does not imply a forced quota, live deployment, or trade permission.
+
+### Active research queue must have an owner and deadline
+For every INVESTIGATE/UNDERWRITING_INCOMPLETE ticker, publish ticker, first-seen date, last review date, actual primary filing URL and publication date, explicit missing decision-critical data, named next observable evidence event, due date for completion, scenario model completion status and review owner. An overdue case is an urgent *research task*, not a negative investment verdict. Every daily scan must publish open cases older than 7 and 14 days, number of cases valued, and exact unchecked issuer counts. Audit via experimental `modules/decision/fox_completion_audit.py` and tests, but DO NOT claim production integration without verifying actual call sites and end-to-end dataflow.
+
+### Anti-recycling discovery and forced conclusion
+Each independent discovery pass must name its actual universe and issuer count. First examine unrelated companies across distressed durable earnings, order-to-delivery and balance-sheet/credit repair; distinguish familiar names and all holdings from new sourced issuers. Price drawdown alone does not validate anything. Select up to five highest-quality evidence leads for complete fully diluted bear/base/bull models, including financing, downside, governance and 2–4 quarter events. Reduce the active unfinished queue with every run. Output one of: EIP/VALUE/SPECIAL SITUATION RESEARCH_ADD, quantified ECONOMIC_FAILURE, evidenced FATAL_RISK, or date-owned UNDERWRITING_INCOMPLETE with no unsupported 'no opportunities' claim. The only numerical thresholds are those already versioned; do not fabricate evidence or valuations to force ADDs. If primary data prevents completion, precisely state the blocker and source and move to the next independent candidate rather than recycling the same name as the sole finding.
+
+### Accountability scoreboard
+Daily: actual issuers screened (not hypothetical), new unfamiliar names investigated, completed valuation models, legitimate research ADDs, economic failures, fatal risks, overdue incomplete >7d and >14d, missed-move and false-positive audit status; separate portfolio 14+2 history, full EIP, full 10x, 11 near-ADD and BESS checks. Report checked/not checked for every name, do not inflate 'checked' from registry presence or copied prior outputs. Preserve all prior zones, original evidence and action history with version/date; default current capital deployment ₹0, no orders without explicit user action. Do not put private holdings/position sizes in public GitHub.
+
+### Test and rollout limitations
+Research-only helper: `modules/decision/fox_completion_audit.py`, synthetic regression file `modules/decision/test_fox_completion_audit.py`. These do not crawl the exchange, prove investment alpha, or establish deployment. Verify CI and /api/daily integration separately before reporting them as operational.
