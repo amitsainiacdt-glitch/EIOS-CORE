@@ -28,6 +28,9 @@ class Tests(unittest.TestCase):
         self.assertEqual(len(r["cases"][0]["missing"]),5)
     def test_duplicate_rejected(self):
         with self.assertRaises(ValueError): audit((self.case(),self.case()),"2026-11-16")
+    def test_unknown_decision_does_not_silently_close(self):
+        with self.assertRaisesRegex(ValueError,"Unknown FOX decision"):
+            audit((self.case(decision="WATCH"),),"2026-11-16")
     def test_closed_without_valuation_flagged(self):
         r=audit((self.case(decision="RESEARCH_ADD"),),"2026-11-16")
         self.assertIn("closed without valuation",r["cases"][0]["missing"])
