@@ -118,7 +118,7 @@ ECONOMIC_BLOCKERS = frozenset({
 def _wait(blockers, confidence, *metrics, derived_research_ceiling=None):
     evidence = tuple(b for b in blockers if b not in ECONOMIC_BLOCKERS)
     economics = tuple(b for b in blockers if b in ECONOMIC_BLOCKERS)
-    state = "ECONOMIC_FAILURE" if economics else "UNDERWRITING_INCOMPLETE"
+    state = "UNDERWRITING_INCOMPLETE" if evidence else ("ECONOMIC_FAILURE" if economics else "UNDERWRITING_INCOMPLETE")
     return FoxDecision(FoxAction.WAIT, tuple(blockers), confidence, *metrics,
                        evidence_gaps=evidence, economic_failures=economics,
                        review_state=state,
