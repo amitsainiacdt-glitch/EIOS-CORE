@@ -182,3 +182,14 @@ Research-only helper: `modules/decision/fox_completion_audit.py`, synthetic regr
 - Distinguish **case age** (>7/>14 days since first discovery) from **review neglect** (>7/>14 days since last actual review). Both must be published with counts; recent superficial re-review must not erase first-discovery age.
 - Evidence gaps and economics that fail simultaneously remain UNDERWRITING_INCOMPLETE until the critical missing sources are verified, while retaining the numerical economic failures in the record. An independently completed valuation with failing economics is ECONOMIC_FAILURE.
 - Tests and modules in EIOS-CORE are repository helpers, not evidence of a live website, exchange feed, independent audit or validated positive alpha. No trades and capital deployment ₹0.
+
+
+## FOX v5.2 — Real-company valuation completion repair (2026-11-16)
+
+**Problem:** three real companies were screened for operating improvement but conclusions were left with unsourced illustrative price targets and no attributable, diluted model. Do not imply a completed ADD or a validated valuation from a scenario guess.
+
+- Build `modules/decision/fox_valuation_worksheet.py` records with original source publication dates, quoted price date, company attributable forward profits, diluted equity denominator, cash conversion, funding/governance bridge, documented scenario probabilities/terminal multiples and tested no-lookahead inputs.
+- The worksheet returns UNDERWRITING_INCOMPLETE if its core dated evidence or economic assumptions are absent. It computes bear/base/bull sensitivities only when declared inputs are complete and verified. A numeric screen pass is labelled SCENARIO_SCREEN_PASSED_NOT_ADD and does **not** imply a final ADD; complete independent FOX underwriting gates still apply. All research capital deployment remains ₹0.
+- For CMS Info Systems, TVS Supply Chain Solutions and Ceigall India, use their filings for attributable profits, minority interests, diluted denominator, funding and cash bridge before publishing credible valuation ceilings. Do not re-use the old illustrative bear/base/bull figures as verified targets. Name and date missing data and review deadlines. Treat any published research finding as issuer-specific, not exhaustive market evidence.
+- Follow up from research to definitive bounded-risk EIP/VALUE/SPECIAL SITUATION ADD, numeric ECONOMIC_FAILURE, FATAL_RISK or tracked UNDERWRITING_INCOMPLETE; preserve EIP/10x/portfolio/BESS registries and locked zones.
+- Code repository and scheduled research instructions were updated. CI and live Site/API wiring must be independently verified before claiming deployed capabilities or investment alpha.
