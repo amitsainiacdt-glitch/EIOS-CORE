@@ -76,6 +76,7 @@ class FoxUnderwriting:
     next_kill_test: str = ""
     exceptional_signal: str = ""
     independent_exceptional_source_url: str = ""
+    causal_signal_source_urls: Tuple[str, ...] = ()  # Distinct sources, one per signal
 
 
 @dataclass(frozen=True)
@@ -153,10 +154,16 @@ def evaluate_fox(e: FoxUnderwriting) -> FoxDecision:
     if not e.primary_urls or not all(_url_ok(u) for u in e.primary_urls):
         blockers.append("Verified primary filings missing")
     causal_count = len({s.strip().casefold() for s in e.causal_signals if s.strip()})
+    provenance_ok = (len(e.causal_signal_source_urls) == len(e.causal_signals)
+                     and all(_url_ok(u) for u in e.causal_signal_source_urls))
+    if not provenance_ok:
+        blockers.append("Missing per-signal source provenance")
+    if causal_count >= 2 and (not provenance_ok or len(set(e.causal_signal_source_urls)) < 2):
+        blockers.append("Multiple signals lack independent source provenance")
     exceptional = bool(e.exceptional_signal.strip()
                        and _url_ok(e.independent_exceptional_source_url)
                        and e.independent_exceptional_source_url not in e.primary_urls)
-    if causal_count < 2 and not (causal_count == 1 and exceptional):
+    if causal_count < 2 and not (causal_count == 1 and exceptional and provenance_ok):
         blockers.append("Fewer than two corroborated leading causal signals; no independently sourced exceptional signal")
     if not e.recovery_mechanism.strip():
         blockers.append("No testable recovery mechanism")
@@ -195,6 +202,11 @@ def evaluate_fox(e: FoxUnderwriting) -> FoxDecision:
                 and _valid_num(z.reference_price) and z.reference_price > 0
                 and z.thesis_fingerprint and _url_ok(z.primary_source_url)):
             blockers.append("Research zone lacks auditable valuation provenance")
+        try:
+            if date.fromisoformat(z.locked_on) > date.fromisoformat(e.as_of):
+                blockers.append("Research zone locked after decision date")
+        except (TypeError, ValueError):
+            pass
         if e.previous_zone:
             p = e.previous_zone
             if z.version <= p.version:
