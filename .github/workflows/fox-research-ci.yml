@@ -1,0 +1,25 @@
+name: FOX research regression tests
+on:
+  push:
+    paths:
+      - 'modules/decision/**'
+      - 'docs/BRAVO_EIOS_v4_7_POLICY.md'
+      - '.github/workflows/fox-research-ci.yml'
+  pull_request:
+    paths:
+      - 'modules/decision/**'
+      - '.github/workflows/fox-research-ci.yml'
+  workflow_dispatch:
+jobs:
+  fox-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run FOX decision, discovery, and completion regression tests
+        run: |
+          python -m unittest -v modules.decision.test_fox_add_engine modules.decision.test_bravo_v48_inflection modules.decision.test_fox_completion_audit
